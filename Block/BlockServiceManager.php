@@ -17,7 +17,7 @@ use Sonata\BlockBundle\Block\BlockManagerAwareInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
-class BlockManagerService implements BlockManagerServiceInterface
+class BlockServiceManager implements BlockServiceManagerInterface
 {
     protected $logger;
 

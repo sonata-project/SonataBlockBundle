@@ -13,7 +13,7 @@ namespace Sonata\BlockBundle\Block;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 
-interface BlockManagerServiceInterface
+interface BlockServiceManagerInterface
 {
 
     /**
