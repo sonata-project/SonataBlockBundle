@@ -11,7 +11,7 @@
 
 namespace Sonata\BlockBundle\Twig\Extension;
 
-use Sonata\BlockBundle\Model\BlockManagerInterface;
+use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 
 class BlockExtension extends \Twig_Extension
 {
@@ -20,11 +20,11 @@ class BlockExtension extends \Twig_Extension
     private $environment;
 
     /**
-     * @param \Sonata\BlockBundle\Model\BlockManagerInterface $blockManagerService
+     * @param \Sonata\BlockBundle\Model\BlockManagerInterface $blockServiceManager
      */
-    public function __construct(BlockManagerInterface $blockManagerService)
+    public function __construct(BlockServiceManagerInterface $blockServiceManager)
     {
-        $this->blockServiceManager = $blockManagerService;
+        $this->blockServiceManager = $blockServiceManager;
     }
 
     /**
