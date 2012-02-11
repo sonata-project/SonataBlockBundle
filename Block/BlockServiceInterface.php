@@ -78,4 +78,10 @@ interface BlockServiceInterface
      * @return array
      */
     function getStylesheets($media);
+
+    /**
+     * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     * @return array
+     */
+    function getCacheKeys(BlockInterface $block);
 }

@@ -8,15 +8,13 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\BlockBundle\Block;
 
 interface BlockManagerAwareInterface
 {
     /**
-     * @abstract
-     * @param BlockManagerServiceInterface $service
+     * @param BlockServiceManagerInterface $service
      * @return void
      */
-    function setBlockManager(BlockManagerServiceInterface $service);
+    function setBlockManager(BlockServiceManagerInterface $service);
 }

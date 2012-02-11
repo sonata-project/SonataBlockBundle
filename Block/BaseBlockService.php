@@ -34,17 +34,12 @@ abstract class BaseBlockService implements BlockServiceInterface
      */
     public function __construct($name, EngineInterface $templating)
     {
-        $this->name = $name;
+        $this->name       = $name;
         $this->templating = $templating;
     }
 
     /**
-     * Render a view
-     *
-     * @param string $view
-     * @param array $parameters
-     * @param \Symfony\Component\HttpFoundation\Response $response
-     * @return string
+     * {@inheritdoc}
      */
     public function renderResponse($view, array $parameters = array(), Response $response = null)
     {
@@ -52,19 +47,15 @@ abstract class BaseBlockService implements BlockServiceInterface
     }
 
     /**
-     * Get name
-     *
-     * @return string name
+     * {@inheritdoc}
      */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * Get templating
-     *
-     * @return \Symfony\Component\Templating\EngineInterface
+     /**
+     * {@inheritdoc}
      */
     public function getTemplating()
     {
@@ -72,11 +63,7 @@ abstract class BaseBlockService implements BlockServiceInterface
     }
 
     /**
-     * Build form
-     *
-     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @return void
+     * {@inheritdoc}
      */
     public function buildCreateForm(FormMapper $formMapper, BlockInterface $block)
     {
@@ -84,73 +71,85 @@ abstract class BaseBlockService implements BlockServiceInterface
     }
 
     /**
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @return void
+     * {@inheritdoc}
+     */
+    public function getCacheKeys(BlockInterface $block)
+    {
+        return array(
+            'name'     => $this->getName(),
+            'block_id' => $block->getId(),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function prePersist(BlockInterface $block)
     {
     }
 
     /**
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @return void
+     * {@inheritdoc}
      */
     public function postPersist(BlockInterface $block)
     {
     }
 
     /**
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @return void
+     * {@inheritdoc}
      */
     public function preUpdate(BlockInterface $block)
     {
     }
 
     /**
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @return void
+     * {@inheritdoc}
      */
     public function postUpdate(BlockInterface $block)
     {
     }
 
     /**
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @return void
+     * {@inheritdoc}
      */
     public function preDelete(BlockInterface $block)
     {
     }
 
     /**
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @return void
+     * {@inheritdoc}
      */
     public function postDelete(BlockInterface $block)
     {
     }
 
     /**
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @return void
+     * {@inheritdoc}
      */
     public function load(BlockInterface $block)
     {
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
-    function getJavacripts($media)
+    public function getJavacripts($media)
     {
         return array();
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
-    function getStylesheets($media)
+    public function getStylesheets($media)
+    {
+        return array();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaultSettings()
     {
         return array();
     }

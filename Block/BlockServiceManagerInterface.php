@@ -15,9 +15,7 @@ use Sonata\BlockBundle\Model\BlockInterface;
 
 interface BlockServiceManagerInterface
 {
-
     /**
-     * @abstract
      * @param $name
      * @param BlockServiceInterface $service
      * @return void

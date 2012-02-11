@@ -15,7 +15,7 @@ interface BlockManagerInterface
     /**
      * Creates an empty block instance
      *
-     * @return Block
+     * @return BlockInterface
      */
     function create();
 

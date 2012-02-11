@@ -14,6 +14,8 @@ namespace Sonata\BlockBundle\Block;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BlockManagerAwareInterface;
 
+use Sonata\AdminBundle\Validator\ErrorElement;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
@@ -140,5 +142,20 @@ class BlockServiceManager implements BlockServiceManagerInterface
     public function getBlockServices()
     {
         return $this->blockServices;
+    }
+
+    /**
+     * @param \Sonata\AdminBundle\Validator\ErrorElement $errorElement
+     * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     * @return
+     */
+    public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
+    {
+        if (!$block->getId() && !$block->getType()) {
+            return;
+        }
+
+        $service = $this->getBlockService($block);
+        $service->validateBlock($this, $errorElement, $block);
     }
 }
