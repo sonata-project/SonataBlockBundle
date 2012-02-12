@@ -18,6 +18,7 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class BlockServiceManager implements BlockServiceManagerInterface
 {
@@ -27,15 +28,19 @@ class BlockServiceManager implements BlockServiceManagerInterface
 
     protected $debug;
 
+    protected $container;
+
     /**
+     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      * @param $debug
      * @param null|\Symfony\Component\HttpKernel\Log\LoggerInterface $logger
      */
-    public function __construct($debug, LoggerInterface $logger = null)
+    public function __construct(ContainerInterface $container, $debug, LoggerInterface $logger = null)
     {
         $this->debug         = $debug;
         $this->logger        = $logger;
         $this->blockServices = array();
+        $this->container     = $container;
     }
 
     /**
@@ -84,6 +89,28 @@ class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
+     * @throws \RuntimeException
+     * @param $type
+     * @return \Sonata\BlockBundle\Block\BlockServiceInterface
+     */
+    private function loadService($type)
+    {
+        if (!$this->hasBlockService($type)) {
+            throw new \RuntimeException(sprintf('The block service `%s` does not exists', $type));
+        }
+
+        if (!$this->blockServices[$type] instanceof BlockServiceInterface) {
+            $this->blockServices[$type] = $this->container->get($type);
+        }
+
+        if (!$this->blockServices[$type] instanceof BlockServiceInterface) {
+            throw new \RuntimeException(sprintf('The service %s does not implement BlockServiceInterface', $type));
+        }
+
+        return $this->blockServices[$type];
+    }
+
+    /**
      * Return the block service linked to the link
      *
      * @throws \RuntimeException
@@ -92,17 +119,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
      */
     public function getBlockService(BlockInterface $block)
     {
-        if (!$this->hasBlockService($block->getType())) {
-            if ($this->debug) {
-                throw new \RuntimeException(sprintf('The block service `%s` referenced in the block `%s` does not exists', $block->getType(), $block->getId()));
-            }
-
-            if ($this->logger){
-                $this->logger->crit(sprintf('[cms::getBlockService] block.id=%d - service:%s does not exists', $block->getId(), $block->getType()));
-            }
-
-            return false;
-        }
+        $this->loadService($block->getType());
 
         return $this->blockServices[$block->getType()];
     }
@@ -118,11 +135,11 @@ class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
-     * @param $name
-     * @param \Sonata\BlockBundle\Block\BlockServiceInterface $service
+     * @param string $name
+     * @param string $service
      * @return void
      */
-    public function addBlockService($name, BlockServiceInterface $service)
+    public function addBlockService($name, $service)
     {
         $this->blockServices[$name] = $service;
     }
@@ -141,7 +158,29 @@ class BlockServiceManager implements BlockServiceManagerInterface
      */
     public function getBlockServices()
     {
+        foreach ($this->blockServices as $name => $id) {
+            $this->loadService($id);
+        }
+
         return $this->blockServices;
+    }
+
+    /**
+     * @return array
+     */
+    public function getLoadedBlockServices()
+    {
+        $services = array();
+
+        foreach ($this->blockServices as $service) {
+            if (!$service instanceof BlockServiceInterface) {
+                continue;
+            }
+
+            $services[] = $service;
+        }
+
+        return $services;
     }
 
     /**

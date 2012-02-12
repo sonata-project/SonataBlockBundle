@@ -36,6 +36,8 @@ class BlockExtension extends \Twig_Extension
     {
         return array(
             'sonata_block_render'  => new \Twig_Function_Method($this, 'renderBlock', array('is_safe' => array('html'))),
+            'sonata_block_include_javascripts'  => new \Twig_Function_Method($this, 'includeJavascripts', array('is_safe' => array('html'))),
+            'sonata_block_include_stylesheets'  => new \Twig_Function_Method($this, 'includeStylesheets', array('is_safe' => array('html'))),
         );
     }
 
@@ -65,7 +67,7 @@ class BlockExtension extends \Twig_Extension
     {
         $javascripts = array();
 
-        foreach ($this->blockServiceManager->getBlockServices() as $service) {
+        foreach ($this->blockServiceManager->getLoadedBlockServices() as $service) {
             $javascripts = array_merge($javascripts, $service->getJavacripts($media));
         }
 
@@ -82,22 +84,6 @@ class BlockExtension extends \Twig_Extension
     }
 
     /**
-     * @return array
-     */
-    private function getServicesType()
-    {
-        $services = array();
-
-        $blocks = $this->blockServiceManager->getBlocks();
-
-        foreach ($blocks as $block) {
-            $services[] = $block->getType();
-        }
-
-        return array_unique($services);
-    }
-
-    /**
      * @param $media
      * @return array|string
      */
@@ -105,7 +91,7 @@ class BlockExtension extends \Twig_Extension
     {
         $stylesheets = array();
 
-        foreach ($this->blockServiceManager->getBlockServices() as $service) {
+        foreach ($this->blockServiceManager->getLoadedBlockServices() as $service) {
             $stylesheets = array_merge($stylesheets, $service->getStylesheets($media));
         }
 

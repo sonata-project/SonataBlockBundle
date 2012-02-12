@@ -32,7 +32,7 @@ class TweakCompilerPass implements CompilerPassInterface
         $manager = $container->getDefinition('sonata.block.manager');
 
         foreach ($container->findTaggedServiceIds('sonata.block') as $id => $attributes) {
-            $manager->addMethodCall('addBlockService', array($id, new Reference($id)));
+            $manager->addMethodCall('addBlockService', array($id, $id));
         }
     }
 }

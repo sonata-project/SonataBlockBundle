@@ -16,17 +16,17 @@ use Sonata\BlockBundle\Model\BlockInterface;
 interface BlockServiceManagerInterface
 {
     /**
-     * @param $name
-     * @param BlockServiceInterface $service
+     * @param string $name
+     * @param string $service
      * @return void
      */
-    function addBlockService($name, BlockServiceInterface $service);
+    function addBlockService($name, $service);
 
     /**
      * Render a specialize block
      *
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     function renderBlock(BlockInterface $block);
 
@@ -34,7 +34,7 @@ interface BlockServiceManagerInterface
      * Return the block service linked to the link
      *
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @return void
+     * @return BlockServiceInterface
      */
     function getBlockService(BlockInterface $block);
 

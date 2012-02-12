@@ -6,6 +6,7 @@
 
     <services>
         <service id="sonata.block.manager" class="Sonata\BlockBundle\Block\BlockServiceManager" public="false">
+            <argument type="service" id="service_container" />
             <argument>%kernel.debug%</argument>
             <argument type="service" id="logger"  on-invalid="ignore"  />
         </service>
