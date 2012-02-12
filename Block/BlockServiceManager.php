@@ -159,7 +159,9 @@ class BlockServiceManager implements BlockServiceManagerInterface
     public function getBlockServices()
     {
         foreach ($this->blockServices as $name => $id) {
-            $this->loadService($id);
+            if (is_string($id)) {
+                $this->loadService($id);
+            }
         }
 
         return $this->blockServices;
@@ -195,6 +197,6 @@ class BlockServiceManager implements BlockServiceManagerInterface
         }
 
         $service = $this->getBlockService($block);
-        $service->validateBlock($this, $errorElement, $block);
+        $service->validateBlock($errorElement, $block);
     }
 }
