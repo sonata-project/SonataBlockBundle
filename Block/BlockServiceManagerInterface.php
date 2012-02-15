@@ -12,6 +12,7 @@
 namespace Sonata\BlockBundle\Block;
 
 use Sonata\BlockBundle\Model\BlockInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 interface BlockServiceManagerInterface
 {
@@ -26,9 +27,10 @@ interface BlockServiceManagerInterface
      * Render a specialize block
      *
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     * @param null|\Symfony\Component\HttpFoundation\Response $response
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    function renderBlock(BlockInterface $block);
+    function renderBlock(BlockInterface $block, Response $response = null);
 
     /**
      * Return the block service linked to the link

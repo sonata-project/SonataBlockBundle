@@ -12,7 +12,7 @@
 namespace Sonata\BlockBundle\Block;
 
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Templating\EngineInterface;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 
@@ -76,8 +76,9 @@ abstract class BaseBlockService implements BlockServiceInterface
     public function getCacheKeys(BlockInterface $block)
     {
         return array(
-            'name'     => $this->getName(),
-            'block_id' => $block->getId(),
+            'name'       => $this->getName(),
+            'block_id'   => $block->getId(),
+            'updated_at' => $block->getUpdatedAt()->format('U'),
         );
     }
 

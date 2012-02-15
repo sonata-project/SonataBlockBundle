@@ -12,7 +12,6 @@
 namespace Sonata\BlockBundle\Block;
 
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\BlockBundle\Block\BlockManagerAwareInterface;
 
 use Sonata\AdminBundle\Validator\ErrorElement;
 
@@ -44,26 +43,16 @@ class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
-     * Render a specialize block
-     *
-     * @throws \Exception|\RuntimeException
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @return \Symfony\Component\HttpFoundation\Response|void
+     * {@inheritdoc}
      */
-    public function renderBlock(BlockInterface $block)
+    public function renderBlock(BlockInterface $block, Response $response = null)
     {
         if ($this->logger) {
             $this->logger->info(sprintf('[cms::renderBlock] block.id=%d, block.type=%s ', $block->getId(), $block->getType()));
         }
 
-        $response = new Response;
-
         try {
             $service = $this->getBlockService($block);
-
-            if ($service instanceof BlockManagerAwareInterface) {
-                $service->setBlockManager($this);
-            }
 
             $service->load($block); // load the block
 
@@ -82,6 +71,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
                 throw $e;
             }
 
+            $response = new Response;
             $response->setPrivate();
         }
 
@@ -111,11 +101,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
-     * Return the block service linked to the link
-     *
-     * @throws \RuntimeException
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @return \Sonata\BlockBundle\Block\BlockServiceInterface
+     * {@inheritdoc}
      */
     public function getBlockService(BlockInterface $block)
     {
@@ -125,9 +111,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
-     *
-     * @param sring $id
-     * @return boolean
+     * {@inheritdoc}
      */
     public function hasBlockService($id)
     {
@@ -135,9 +119,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
-     * @param string $name
-     * @param string $service
-     * @return void
+     * {@inheritdoc}
      */
     public function addBlockService($name, $service)
     {
@@ -145,8 +127,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
-     * @param array $blockServices
-     * @return void
+     * {@inheritdoc}
      */
     public function setBlockServices(array $blockServices)
     {
@@ -154,7 +135,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getBlockServices()
     {
@@ -168,7 +149,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getLoadedBlockServices()
     {
@@ -186,9 +167,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
-     * @param \Sonata\AdminBundle\Validator\ErrorElement $errorElement
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @return
+     * {@inheritdoc}
      */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
