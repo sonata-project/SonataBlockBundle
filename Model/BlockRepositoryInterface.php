@@ -10,7 +10,7 @@
 
 namespace Sonata\BlockBundle\Model;
 
-interface BlockManagerInterface
+interface BlockRepositoryInterface
 {
     /**
      * Creates an empty block instance
