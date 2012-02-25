@@ -12,19 +12,23 @@
 namespace Sonata\BlockBundle\Twig\Extension;
 
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
+use Sonata\BlockBundle\Model\BlockRepositoryInterface;
 
 class BlockExtension extends \Twig_Extension
 {
     private $blockServiceManager;
+    private $blockRepository;
 
     private $environment;
 
     /**
      * @param \Sonata\BlockBundle\Model\BlockManagerInterface $blockServiceManager
+     * @param \Sonata\BlockBundle\Model\BlockRepositoryInterface $blockRepository
      */
-    public function __construct(BlockServiceManagerInterface $blockServiceManager)
+    public function __construct(BlockServiceManagerInterface $blockServiceManager, BlockRepositoryInterface $blockRepository)
     {
         $this->blockServiceManager = $blockServiceManager;
+        $this->blockRepository = $blockRepository;
     }
 
     /**
@@ -116,7 +120,12 @@ class BlockExtension extends \Twig_Extension
      */
     public function renderBlock($name)
     {
-        return $this->blockServiceManager->renderBlock($name);
+        $block = $this->blockRepository->findOneBy(array('name' => $name));
+        if ($block) {
+            return $this->blockServiceManager->renderBlock($block);
+        } else {
+            return '';
+        }
     }
 }
 
