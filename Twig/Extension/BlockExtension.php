@@ -122,7 +122,7 @@ class BlockExtension extends \Twig_Extension
     {
         $block = $this->blockRepository->findOneBy(array('name' => $name));
         if ($block) {
-            return $this->blockServiceManager->renderBlock($block);
+            return $this->blockServiceManager->renderBlock($block)->getContent();
         } else {
             return '';
         }
