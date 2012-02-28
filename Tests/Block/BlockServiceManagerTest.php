@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\PageBundle\Tests\Page;
+namespace Sonata\BlockBundle\Tests\Page;
 
 use Sonata\BlockBundle\Block\BlockServiceManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;

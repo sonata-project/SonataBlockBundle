@@ -30,3 +30,23 @@ Update the ``autoload.php`` to add new namespaces:
 
         // ... other declarations
     ));
+
+Configuration
+-------------
+
+To use the ``BlockBundle``, add the following lines to your application configuration
+file.
+
+.. code-block:: yaml
+
+    # app/config/config.yml
+    sonata_block:
+        blocks:
+            sonata.block.service.text:
+            sonata.block.service.action:
+            sonata.block.service.rss:
+
+            # Some specific block from the SonataMediaBundle
+            #sonata.media.block.media:
+            #sonata.media.block.gallery:
+            #sonata.media.block.feature_media:

@@ -12,19 +12,30 @@
 namespace Sonata\BlockBundle\Twig\Extension;
 
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
+
+use Sonata\CacheBundle\Cache\CacheManagerInterface;
 
 class BlockExtension extends \Twig_Extension
 {
     private $blockServiceManager;
 
+    private $cacheManager;
+
     private $environment;
 
+    private $cacheBlocks;
+
     /**
-     * @param \Sonata\BlockBundle\Model\BlockManagerInterface $blockServiceManager
+     * @param \Sonata\BlockBundle\Block\BlockServiceManagerInterface $blockServiceManager
+     * @param \Sonata\CacheBundle\Cache\CacheManagerInterface $cacheManager
+     * @param array $cacheBlocks
      */
-    public function __construct(BlockServiceManagerInterface $blockServiceManager)
+    public function __construct(BlockServiceManagerInterface $blockServiceManager, CacheManagerInterface $cacheManager, array $cacheBlocks)
     {
         $this->blockServiceManager = $blockServiceManager;
+        $this->cacheManager        = $cacheManager;
+        $this->cacheBlocks         = $cacheBlocks;
     }
 
     /**
@@ -111,12 +122,65 @@ class BlockExtension extends \Twig_Extension
     }
 
     /**
-     * @param $name
+     * @throws \RuntimeException
+     * @param $block
+     * @param bool $useCache
+     * @param array $extraCacheKeys
      * @return string
      */
-    public function renderBlock($name)
+    public function renderBlock($block, $useCache = true, array $extraCacheKeys = array())
     {
-        return $this->blockServiceManager->renderBlock($name);
+        if (!$block instanceof BlockInterface) {
+            throw new \RuntimeException('Not Implemented, need to implement a Block Loader');
+        }
+
+        $cacheService = $cacheKeys = false;
+
+        if ($useCache && ($cacheService = $this->getCacheService($block))) {
+            $cacheKeys = array_merge(
+                $extraCacheKeys,
+                $this->blockServiceManager->getBlockService($block)->getCacheKeys($block)
+            );
+
+            if ($cacheService->has($cacheKeys)) {
+                $cacheElement = $cacheService->get($cacheKeys);
+
+                if (!$cacheElement->isExpired() && $cacheElement->getData() instanceof Response) {
+                    return $cacheElement->getData()->getContent();
+                }
+            }
+        }
+
+        $recorder = $this->cacheManager->getRecorder();
+
+        if ($recorder) {
+            $recorder->push();
+        }
+
+        $response = $this->blockServiceManager->renderBlock($block);
+
+        $contextualKeys = $recorder ? $recorder->pop() : array();
+
+        if ($response->isCacheable() && $useCache && $cacheKeys && $cacheService) {
+            $cacheService->set($cacheKeys, $response, $block->getTtl(), $contextualKeys);
+        }
+
+        return $response->getContent();
+    }
+
+    /**
+     * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     * @return \Sonata\CacheBundle\Cache\CacheInterface;
+     */
+    protected function getCacheService(BlockInterface $block)
+    {
+        $type = isset($this->cacheBlocks[$block->getType()]) ? $this->cacheBlocks[$block->getType()] : false;
+
+        if (!$type) {
+            return false;
+        }
+
+        return $this->cacheManager->getCacheService($type);
     }
 }
 

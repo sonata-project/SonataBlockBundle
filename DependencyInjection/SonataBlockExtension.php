@@ -42,5 +42,23 @@ class SonataBlockExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('block.xml');
         $loader->load('form.xml');
+        $loader->load('core.xml');
+
+        $this->configureCache($container, $config);
+    }
+
+    /**
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array $config
+     * @return void
+     */
+    public function configureCache(ContainerBuilder $container, array $config)
+    {
+        $cacheBlocks = array();
+        foreach ($config['blocks'] as $service => $settings) {
+            $cacheBlocks[$service] = $settings['cache'];
+        }
+
+        $container->getDefinition('sonata.block.twig.extension')->replaceArgument(2, $cacheBlocks);
     }
 }

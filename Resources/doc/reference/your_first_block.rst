@@ -20,8 +20,10 @@ by the interface and remaining methods.
     namespace Sonata\BlockBundle\Block;
 
     use Symfony\Component\HttpFoundation\Response;
-    use Sonata\AdminBundle\Form\FormMapper;
+
     use Sonata\BlockBundle\Model\BlockInterface;
+
+    use Sonata\AdminBundle\Form\FormMapper;
     use Sonata\AdminBundle\Validator\ErrorElement;
 
 Default settings
@@ -123,7 +125,7 @@ object is used to render the block.
             }
         }
 
-        return $this->renderResponse('SonataPageBundle:Block:block_core_rss.html.twig', array(
+        return $this->renderResponse('SonataBlockBundle:Block:block_core_rss.html.twig', array(
             'feeds'     => $feeds,
             'block'     => $block,
             'settings'  => $settings
@@ -162,9 +164,9 @@ We are almost done! Now just declare the block as a service
 
 .. code-block:: xml
 
-    <service id="sonata.page.block.rss" class="Sonata\PageBundle\Block\RssBlockService" public="false">
+    <service id="sonata.block.service.rss" class="Sonata\BlockBundle\Block\Service\RssBlockService" public="false">
         <tag name="sonata.block" />
-        <argument>sonata.page.block.rss</argument>
+        <argument>sonata.block.service.rss</argument>
         <argument type="service" id="templating" />
     </service>
 
@@ -173,9 +175,9 @@ and add it to sonata configuration
 .. code-block:: yaml
 
     #config.yml
-    sonata_page:
-        services:
-            sonata.page.block.rss:
-    #           cache: sonata.page.cache.memcached
+    sonata_block:
+        blocks:
+            sonata.block.service.rss:
+    #           cache: sonata.cache.memcached
 
 

@@ -28,6 +28,20 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $node = $treeBuilder->root('sonata_block')->children();
 
+        $node->arrayNode('blocks')
+            ->useAttributeAsKey('id')
+            ->addDefaultsIfNotSet()
+            ->prototype('array')
+                ->children()
+                    ->scalarNode('cache')->defaultValue('sonata.cache.noop')->end()
+                    ->arrayNode('settings')
+                        ->useAttributeAsKey('id')
+                        ->prototype('scalar')->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 }
