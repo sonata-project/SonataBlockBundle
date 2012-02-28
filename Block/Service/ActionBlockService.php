@@ -20,10 +20,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BaseBlockService;
 
-use Sonata\PageBundle\Model\PageInterface;
-use Sonata\PageBundle\Generator\Mustache;
 use Sonata\AdminBundle\Validator\ErrorElement;
-use Sonata\PageBundle\CmsManager\CmsManagerInterface;
 
 /**
  *
@@ -60,7 +57,7 @@ class ActionBlockService extends BaseBlockService
             throw $e;
         }
 
-        $content = Mustache::replace($block->getSetting('layout'), array(
+        $content = self::mustache($block->getSetting('layout'), array(
             'CONTENT' => $actionContent
         ));
 
@@ -90,6 +87,21 @@ class ActionBlockService extends BaseBlockService
                 array('parameters', 'text', array()),
             )
         ));
+    }
+
+    /**
+     * @static
+     * @param $string
+     * @param array $parameters
+     * @return mixed
+     */
+    static public function mustache($string, array $parameters)
+    {
+        $replacer = function ($match) use ($parameters) {
+            return isset($parameters[$match[1]]) ? $parameters[$match[1]] : $match[0];
+        };
+
+        return preg_replace_callback('/{{\s*(.+?)\s*}}/', $replacer, $string);
     }
 
     /**

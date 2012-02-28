@@ -19,9 +19,6 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BaseBlockService;
 
-use Sonata\PageBundle\Model\PageInterface;
-use Sonata\PageBundle\CmsManager\CmsManagerInterface;
-
 /**
  *
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
