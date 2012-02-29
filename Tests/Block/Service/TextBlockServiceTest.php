@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\BlockBundle\Tests\Block;
+namespace Sonata\BlockBundle\Tests\Block\Service;
 
 use Sonata\BlockBundle\Tests\Model\Block;
 use Sonata\BlockBundle\Block\Service\TextBlockService;

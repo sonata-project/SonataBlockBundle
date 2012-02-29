@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\BlockBundle\Tests\Block;
+namespace Sonata\BlockBundle\Tests\Block\Service;
 
 class BaseTestBlockService extends \PHPUnit_Framework_TestCase
 {

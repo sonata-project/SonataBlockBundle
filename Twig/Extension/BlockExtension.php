@@ -13,8 +13,10 @@ namespace Sonata\BlockBundle\Twig\Extension;
 
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\BlockBundle\Block\BlockLoaderInterface;
 
 use Sonata\CacheBundle\Cache\CacheManagerInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 class BlockExtension extends \Twig_Extension
 {
@@ -26,16 +28,19 @@ class BlockExtension extends \Twig_Extension
 
     private $cacheBlocks;
 
+    private $blockLoader;
+
     /**
      * @param \Sonata\BlockBundle\Block\BlockServiceManagerInterface $blockServiceManager
      * @param \Sonata\CacheBundle\Cache\CacheManagerInterface $cacheManager
      * @param array $cacheBlocks
      */
-    public function __construct(BlockServiceManagerInterface $blockServiceManager, CacheManagerInterface $cacheManager, array $cacheBlocks)
+    public function __construct(BlockServiceManagerInterface $blockServiceManager, CacheManagerInterface $cacheManager, array $cacheBlocks, BlockLoaderInterface $blockLoader)
     {
         $this->blockServiceManager = $blockServiceManager;
         $this->cacheManager        = $cacheManager;
         $this->cacheBlocks         = $cacheBlocks;
+        $this->blockLoader         = $blockLoader;
     }
 
     /**
@@ -131,7 +136,7 @@ class BlockExtension extends \Twig_Extension
     public function renderBlock($block, $useCache = true, array $extraCacheKeys = array())
     {
         if (!$block instanceof BlockInterface) {
-            throw new \RuntimeException('Not Implemented, need to implement a Block Loader');
+            $block = $this->blockLoader->load($block);
         }
 
         $cacheService = $cacheKeys = false;

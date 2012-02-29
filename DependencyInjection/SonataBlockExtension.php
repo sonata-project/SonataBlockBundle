@@ -44,6 +44,7 @@ class SonataBlockExtension extends Extension
         $loader->load('form.xml');
         $loader->load('core.xml');
 
+        $this->configureLoaderChain($container, $config);
         $this->configureCache($container, $config);
     }
 
@@ -60,5 +61,20 @@ class SonataBlockExtension extends Extension
         }
 
         $container->getDefinition('sonata.block.twig.extension')->replaceArgument(2, $cacheBlocks);
+    }
+
+    /**
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array $config
+     * @return void
+     */
+    public function configureLoaderChain(ContainerBuilder $container, array $config)
+    {
+        $configs = array();
+        foreach ($config['blocks'] as $service => $settings) {
+            $configs[$service] = $settings['settings'];
+        }
+
+        $container->getDefinition('sonata.block.loader.service')->replaceArgument(0, $configs);
     }
 }

@@ -13,9 +13,15 @@ namespace Sonata\BlockBundle\Model;
 
 interface BlockInterface
 {
-
+    /**
+     * @param mixed $id
+     * @return void
+     */
     function setId($id);
 
+    /**
+     * @return mixed void
+     */
     function getId();
 
     /**
@@ -103,7 +109,6 @@ interface BlockInterface
     function getChildren();
 
     /**
-     * @abstract
      * @return bool
      */
     function hasChildren();
@@ -123,20 +128,45 @@ interface BlockInterface
     function getParent();
 
     /**
-     * @abstract
      * @return void
      */
     function hasParent();
 
     /**
-     * @abstract
      * @return integer
      */
     function getTtl();
 
     /**
-     * @abstract
      * @return string
      */
     function __toString();
+
+    /**
+     * Set settings
+     *
+     * @param array $settings
+     */
+    function setSettings(array $settings = array());
+
+    /**
+     * Get settings
+     *
+     * @return array $settings
+     */
+    function getSettings();
+
+    /**
+     * @param $name
+     * @param $value
+     * @return void
+     */
+    function setSetting($name, $value);
+
+    /**
+     * @param $name
+     * @param null $default
+     * @return null
+     */
+    function getSetting($name, $default = null);
 }

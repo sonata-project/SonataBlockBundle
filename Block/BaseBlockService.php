@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -7,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 
 namespace Sonata\BlockBundle\Block;
 
@@ -29,7 +29,7 @@ abstract class BaseBlockService implements BlockServiceInterface
     protected $templating;
 
     /**
-     * @param $name
+     * @param string $name
      * @param \Symfony\Component\Templating\EngineInterface $templating
      */
     public function __construct($name, EngineInterface $templating)

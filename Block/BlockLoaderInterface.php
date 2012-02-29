@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -8,25 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\BlockBundle\Model;
+namespace Sonata\BlockBundle\Block;
 
-class Block extends BaseBlock
+interface BlockLoaderInterface
 {
-    protected $id;
+    /**
+     * @param mixed $name
+     * @return BlockLoaderInterface
+     */
+    function load($name);
 
     /**
-     * {@inheritdoc}
+     * @param mixed $block
+     * @return boolean
      */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+    function support($name);
 }

@@ -1,4 +1,6 @@
 <?php
+
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,26 +10,26 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\BlockBundle\Tests\Block;
+namespace Sonata\BlockBundle\Tests\Block\Service;
 
-use Sonata\BlockBundle\Block\Service\ActionBlockService;
 use Sonata\BlockBundle\Tests\Model\Block;
 
-class ActionBlockServiceTest extends BaseTestBlockService
+use Sonata\BlockBundle\Block\Service\RssBlockService;
+
+class RssBlockServiceTest extends BaseTestBlockService
 {
+    /*
+     * only test if the API is not broken
+     */
     public function testService()
     {
-        $kernel = $this->getMock('Symfony\Component\HttpKernel\HttpKernelInterface', array('render', 'handle'));
-
-        $kernel->expects($this->exactly(1))->method('render');
-
         $templating = new FakeTemplating;
-        $service = new ActionBlockService('sonata.page.block.action', $templating, $kernel);
+        $service    = new RssBlockService('sonata.page.block.rss', $templating);
 
         $block = new Block;
-        $block->setType('core.action');
+        $block->setType('core.text');
         $block->setSettings(array(
-            'action' => 'SonataBlockBundle:Page:blockPreview'
+            'content' => 'my text'
         ));
 
         $formMapper = $this->getMock('Sonata\\AdminBundle\\Form\\FormMapper', array(), array(), '', false);
@@ -37,7 +39,5 @@ class ActionBlockServiceTest extends BaseTestBlockService
         $service->buildEditForm($formMapper, $block);
 
         $service->execute($block);
-
-        $this->assertEquals('SonataBlockBundle:Page:blockPreview', $templating->parameters['block']->getSetting('action'));
     }
 }
