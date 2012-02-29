@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -7,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 
 namespace Sonata\BlockBundle\Block;
 
@@ -21,61 +21,22 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class BlockServiceManager implements BlockServiceManagerInterface
 {
-    protected $logger;
-
     protected $blockServices;
 
-    protected $debug;
-
     protected $container;
+
+    protected $contexts;
 
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      * @param $debug
      * @param null|\Symfony\Component\HttpKernel\Log\LoggerInterface $logger
      */
-    public function __construct(ContainerInterface $container, $debug, LoggerInterface $logger = null)
+    public function __construct(ContainerInterface $container, $debug, LoggerInterface $logger = null, array $contexts = array())
     {
-        $this->debug         = $debug;
-        $this->logger        = $logger;
         $this->blockServices = array();
         $this->container     = $container;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function renderBlock(BlockInterface $block, Response $response = null)
-    {
-        if ($this->logger) {
-            $this->logger->info(sprintf('[cms::renderBlock] block.id=%d, block.type=%s ', $block->getId(), $block->getType()));
-        }
-
-        try {
-            $service = $this->getBlockService($block);
-
-            $service->load($block); // load the block
-
-            $response = $service->execute($block, $response);
-
-            if (!$response instanceof Response) {
-                throw new \RuntimeException('A block service must return a Response object');
-            }
-
-        } catch (\Exception $e) {
-            if ($this->logger) {
-                $this->logger->crit(sprintf('[cms::renderBlock] block.id=%d - error while rendering block - %s', $block->getId(), $e->getMessage()));
-            }
-
-            if ($this->debug) {
-                throw $e;
-            }
-
-            $response = new Response;
-            $response->setPrivate();
-        }
-
-        return $response;
+        $this->contexts      = $contexts;
     }
 
     /**

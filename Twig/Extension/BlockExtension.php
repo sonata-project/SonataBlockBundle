@@ -14,6 +14,7 @@ namespace Sonata\BlockBundle\Twig\Extension;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BlockLoaderInterface;
+use Sonata\BlockBundle\Block\BlockRendererInterface;
 
 use Sonata\CacheBundle\Cache\CacheManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,17 +31,20 @@ class BlockExtension extends \Twig_Extension
 
     private $blockLoader;
 
+    private $blockRenderer;
+
     /**
      * @param \Sonata\BlockBundle\Block\BlockServiceManagerInterface $blockServiceManager
      * @param \Sonata\CacheBundle\Cache\CacheManagerInterface $cacheManager
      * @param array $cacheBlocks
      */
-    public function __construct(BlockServiceManagerInterface $blockServiceManager, CacheManagerInterface $cacheManager, array $cacheBlocks, BlockLoaderInterface $blockLoader)
+    public function __construct(BlockServiceManagerInterface $blockServiceManager, CacheManagerInterface $cacheManager, array $cacheBlocks, BlockLoaderInterface $blockLoader, BlockRendererInterface $blockRenderer)
     {
         $this->blockServiceManager = $blockServiceManager;
         $this->cacheManager        = $cacheManager;
         $this->cacheBlocks         = $cacheBlocks;
         $this->blockLoader         = $blockLoader;
+        $this->blockRenderer       = $blockRenderer;
     }
 
     /**
@@ -162,7 +166,7 @@ class BlockExtension extends \Twig_Extension
             $recorder->push();
         }
 
-        $response = $this->blockServiceManager->renderBlock($block);
+        $response = $this->blockRenderer->render($block);
 
         $contextualKeys = $recorder ? $recorder->pop() : array();
 

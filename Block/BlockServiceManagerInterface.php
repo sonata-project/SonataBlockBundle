@@ -24,19 +24,10 @@ interface BlockServiceManagerInterface
     function addBlockService($name, $service);
 
     /**
-     * Render a specialize block
-     *
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @param null|\Symfony\Component\HttpFoundation\Response $response
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    function renderBlock(BlockInterface $block, Response $response = null);
-
-    /**
      * Return the block service linked to the link
      *
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @return BlockServiceInterface
+     * @return \Sonata\BlockBundle\Block\BlockServiceInterface
      */
     function getBlockService(BlockInterface $block);
 
