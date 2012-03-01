@@ -72,7 +72,7 @@ class ServiceLoader implements BlockLoaderInterface
 
         return array_merge(
             $this->settings[$block['type']],
-            isset($block['settings']) ? (array) $block['settings'] : array()
+            isset($block['settings']) && is_array($block['settings']) ? $block['settings'] : array()
         );
     }
 }
