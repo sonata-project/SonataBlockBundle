@@ -11,7 +11,7 @@
 namespace Sonata\BlockBundle\Tests\Block\Service;
 
 use Sonata\BlockBundle\Block\Service\ActionBlockService;
-use Sonata\BlockBundle\Tests\Model\Block;
+use Sonata\BlockBundle\Model\Block;
 
 class ActionBlockServiceTest extends BaseTestBlockService
 {

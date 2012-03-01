@@ -12,7 +12,7 @@
 
 namespace Sonata\BlockBundle\Tests\Block\Service;
 
-use Sonata\BlockBundle\Tests\Model\Block;
+use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Block\Service\TextBlockService;
 
 class TextBlockServiceTest extends BaseTestBlockService
