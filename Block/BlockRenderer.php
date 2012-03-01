@@ -45,7 +45,7 @@ class BlockRenderer implements BlockRendererInterface
         }
 
         try {
-            $service = $this->blockServiceManager->getBlockService($block);
+            $service = $this->blockServiceManager->get($block);
 
             $service->load($block); // load the block
 

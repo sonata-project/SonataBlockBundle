@@ -28,7 +28,7 @@ class DebugBlocksCommand extends BaseCommand
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        foreach ($this->getBlockServiceManager()->getBlockServices() as $code => $service) {
+        foreach ($this->getBlockServiceManager()->getServices() as $code => $service) {
             $settings = $service->getDefaultSettings();
 
             $output->writeln('');

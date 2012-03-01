@@ -46,6 +46,7 @@ class SonataBlockExtension extends Extension
 
         $this->configureLoaderChain($container, $config);
         $this->configureCache($container, $config);
+        $this->configureForm($container, $config);
     }
 
     /**
@@ -76,5 +77,34 @@ class SonataBlockExtension extends Extension
         }
 
         $container->getDefinition('sonata.block.loader.service')->replaceArgument(0, $configs);
+    }
+
+    /**
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array $config
+     * @return void
+     */
+    public function configureForm(ContainerBuilder $container, array $config)
+    {
+        $defaults = $config['default_contexts'];
+
+        $contexts = array();
+
+        foreach ($config['blocks'] as $service => $settings) {
+            if (count($settings['contexts']) == 0) {
+                $settings['contexts'] = $defaults;
+            }
+
+            foreach ($settings['contexts'] as $context) {
+                if (!isset($contexts[$context])) {
+                    $contexts[$context] = array();
+                }
+
+                $contexts[$context][] = $service;
+            }
+        }
+
+        $container->getDefinition('sonata.block.form.type.block')
+            ->replaceArgument(1, $contexts);
     }
 }

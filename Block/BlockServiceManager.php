@@ -21,22 +21,19 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class BlockServiceManager implements BlockServiceManagerInterface
 {
-    protected $blockServices;
+    protected $services;
 
     protected $container;
-
-    protected $contexts;
 
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      * @param $debug
      * @param null|\Symfony\Component\HttpKernel\Log\LoggerInterface $logger
      */
-    public function __construct(ContainerInterface $container, $debug, LoggerInterface $logger = null, array $contexts = array())
+    public function __construct(ContainerInterface $container, $debug, LoggerInterface $logger = null)
     {
-        $this->blockServices = array();
-        $this->container     = $container;
-        $this->contexts      = $contexts;
+        $this->services  = array();
+        $this->container = $container;
     }
 
     /**
@@ -44,79 +41,87 @@ class BlockServiceManager implements BlockServiceManagerInterface
      * @param $type
      * @return \Sonata\BlockBundle\Block\BlockServiceInterface
      */
-    private function loadService($type)
+    private function load($type)
     {
-        if (!$this->hasBlockService($type)) {
+        if (!$this->has($type)) {
             throw new \RuntimeException(sprintf('The block service `%s` does not exists', $type));
         }
 
-        if (!$this->blockServices[$type] instanceof BlockServiceInterface) {
-            $this->blockServices[$type] = $this->container->get($type);
+        if (!$this->services[$type] instanceof BlockServiceInterface) {
+            $this->services[$type] = $this->container->get($type);
         }
 
-        if (!$this->blockServices[$type] instanceof BlockServiceInterface) {
+        if (!$this->services[$type] instanceof BlockServiceInterface) {
             throw new \RuntimeException(sprintf('The service %s does not implement BlockServiceInterface', $type));
         }
 
-        return $this->blockServices[$type];
+        return $this->services[$type];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getBlockService(BlockInterface $block)
+    public function get(BlockInterface $block)
     {
-        $this->loadService($block->getType());
+        $this->load($block->getType());
 
-        return $this->blockServices[$block->getType()];
+        return $this->services[$block->getType()];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasBlockService($id)
+    public function getService($id)
     {
-        return isset($this->blockServices[$id]) ? true : false;
+        return $this->load($id);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addBlockService($name, $service)
+    public function has($id)
     {
-        $this->blockServices[$name] = $service;
+        return isset($this->services[$id]) ? true : false;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setBlockServices(array $blockServices)
+    public function add($name, $service)
     {
-        $this->blockServices = $blockServices;
+        $this->services[$name] = $service;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getBlockServices()
+    public function setServices(array $blockServices)
     {
-        foreach ($this->blockServices as $name => $id) {
+        $this->services = $blockServices;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getServices()
+    {
+        foreach ($this->services as $name => $id) {
             if (is_string($id)) {
-                $this->loadService($id);
+                $this->load($id);
             }
         }
 
-        return $this->blockServices;
+        return $this->services;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getLoadedBlockServices()
+    public function getLoadedServices()
     {
         $services = array();
 
-        foreach ($this->blockServices as $service) {
+        foreach ($this->services as $service) {
             if (!$service instanceof BlockServiceInterface) {
                 continue;
             }
@@ -130,13 +135,12 @@ class BlockServiceManager implements BlockServiceManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
+    public function validate(ErrorElement $errorElement, BlockInterface $block)
     {
         if (!$block->getId() && !$block->getType()) {
             return;
         }
 
-        $service = $this->getBlockService($block);
-        $service->validateBlock($errorElement, $block);
+        $this->get($block)->validateBlock($errorElement, $block);
     }
 }

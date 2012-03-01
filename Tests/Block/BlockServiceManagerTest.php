@@ -25,12 +25,12 @@ class BlockServiceManagerTest extends \PHPUnit_Framework_TestCase
 
         $manager = new BlockServiceManager($container, true);
 
-        $manager->addBlockService('test', 'test');
+        $manager->add('test', 'test');
 
         $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())->method('getType')->will($this->returnValue('test'));
 
-        $this->assertInstanceOf(get_class($service), $manager->getBlockService($block));
+        $this->assertInstanceOf(get_class($service), $manager->get($block));
     }
 
     /**
@@ -45,12 +45,12 @@ class BlockServiceManagerTest extends \PHPUnit_Framework_TestCase
 
         $manager = new BlockServiceManager($container, true);
 
-        $manager->addBlockService('test', 'test');
+        $manager->add('test', 'test');
 
         $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())->method('getType')->will($this->returnValue('test'));
 
-        $this->assertInstanceOf(get_class($service), $manager->getBlockService($block));
+        $this->assertInstanceOf(get_class($service), $manager->get($block));
     }
 
     /**
@@ -65,6 +65,6 @@ class BlockServiceManagerTest extends \PHPUnit_Framework_TestCase
         $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())->method('getType')->will($this->returnValue('fakse'));
 
-        $manager->getBlockService($block);
+        $manager->get($block);
     }
 }

@@ -11,8 +11,8 @@
 
 namespace Sonata\BlockBundle\Block;
 
+use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Symfony\Component\HttpFoundation\Response;
 
 interface BlockServiceManagerInterface
 {
@@ -21,7 +21,7 @@ interface BlockServiceManagerInterface
      * @param string $service
      * @return void
      */
-    function addBlockService($name, $service);
+    function add($name, $service);
 
     /**
      * Return the block service linked to the link
@@ -29,23 +29,41 @@ interface BlockServiceManagerInterface
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
      * @return \Sonata\BlockBundle\Block\BlockServiceInterface
      */
-    function getBlockService(BlockInterface $block);
+    function get(BlockInterface $block);
 
     /**
      * @param array $blockServices
      * @return void
      */
-    function setBlockServices(array $blockServices);
+    function setServices(array $blockServices);
 
     /**
      * @return array
      */
-    function getBlockServices();
+    function getServices();
 
     /**
      *
      * @param string $name
      * @return boolean
      */
-    function hasBlockService($name);
+    function has($name);
+
+    /**
+     * @param $name
+     * @return void
+     */
+    function getService($name);
+
+    /**
+     * @return array
+     */
+    function getLoadedServices();
+
+    /**
+     * @param \Sonata\AdminBundle\Validator\ErrorElement $errorElement
+     * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     * @return void
+     */
+    function validate(ErrorElement $errorElement, BlockInterface $block);
 }

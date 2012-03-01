@@ -37,6 +37,8 @@ class BlockExtension extends \Twig_Extension
      * @param \Sonata\BlockBundle\Block\BlockServiceManagerInterface $blockServiceManager
      * @param \Sonata\CacheBundle\Cache\CacheManagerInterface $cacheManager
      * @param array $cacheBlocks
+     * @param \Sonata\BlockBundle\Block\BlockLoaderInterface $blockLoader
+     * @param \Sonata\BlockBundle\Block\BlockRendererInterface $blockRenderer
      */
     public function __construct(BlockServiceManagerInterface $blockServiceManager, CacheManagerInterface $cacheManager, array $cacheBlocks, BlockLoaderInterface $blockLoader, BlockRendererInterface $blockRenderer)
     {
@@ -87,7 +89,7 @@ class BlockExtension extends \Twig_Extension
     {
         $javascripts = array();
 
-        foreach ($this->blockServiceManager->getLoadedBlockServices() as $service) {
+        foreach ($this->blockServiceManager->getLoadedServices() as $service) {
             $javascripts = array_merge($javascripts, $service->getJavacripts($media));
         }
 
@@ -111,7 +113,7 @@ class BlockExtension extends \Twig_Extension
     {
         $stylesheets = array();
 
-        foreach ($this->blockServiceManager->getLoadedBlockServices() as $service) {
+        foreach ($this->blockServiceManager->getLoadedServices() as $service) {
             $stylesheets = array_merge($stylesheets, $service->getStylesheets($media));
         }
 
@@ -148,7 +150,7 @@ class BlockExtension extends \Twig_Extension
         if ($useCache && ($cacheService = $this->getCacheService($block))) {
             $cacheKeys = array_merge(
                 $extraCacheKeys,
-                $this->blockServiceManager->getBlockService($block)->getCacheKeys($block)
+                $this->blockServiceManager->get($block)->getCacheKeys($block)
             );
 
             if ($cacheService->has($cacheKeys)) {
