@@ -41,7 +41,14 @@ file.
 
     # app/config/config.yml
     sonata_block:
+        default_contexts: [cms]
         blocks:
+            sonata.admin.block.admin_list:
+                contexts:   [admin]
+
+            #sonata.admin_doctrine_orm.block.audit:
+            #    contexts:   [admin]
+
             sonata.block.service.text:
             sonata.block.service.action:
             sonata.block.service.rss:
