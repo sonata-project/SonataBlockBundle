@@ -1,0 +1,25 @@
+{
+    "name": "sonata-project/block-bundle",
+    "description": "This bundle provides a block management solution",
+    "keywords": ["block"],
+    "homepage": "https://github.com/sonata-project/SonataBlockBundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas Rabaix",
+            "email": "thomas.rabaix@gmail.com",
+            "homepage": "http://sonata-project.org/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "suggest": {
+	"sonata-project/block-bundle": "*"
+    },
+    "autoload": {
+        "psr-0": { "Sonata\\BlockBundle": "" }
+    },
+    "target-dir": "Sonata/BlockBundle"
+}
