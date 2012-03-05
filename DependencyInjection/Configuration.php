@@ -36,7 +36,6 @@ class Configuration implements ConfigurationInterface
 
             ->arrayNode('blocks')
                 ->useAttributeAsKey('id')
-                ->addDefaultsIfNotSet()
                 ->prototype('array')
                     ->children()
                         ->arrayNode('contexts')
