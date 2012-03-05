@@ -1,5 +1,5 @@
 {
-    "name": "sonata/block-bundle",
+    "name": "sonata-project/block-bundle",
     "type": "symfony-bundle",
     "description": "Symfony SonataBlockBundle",
     "keywords": ["sonata", "block"],
@@ -18,7 +18,7 @@
     "require": {
         "php": ">=5.3.2",
         "symfony/framework-bundle": "2.*",
-        "sonata/cache-bundle": "master-dev"
+        "sonata-project/cache-bundle": "master-dev"
     },
     "autoload": {
         "psr-0": { "Sonata\\BlockBundle": "" }
