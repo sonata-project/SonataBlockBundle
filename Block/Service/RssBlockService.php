@@ -40,8 +40,9 @@ class RssBlockService extends BaseBlockService
     public function getDefaultSettings()
     {
         return array(
+            'type'    => 'rss',
             'url'     => false,
-            'title'   => 'Insert the rss title'
+            'title'   => 'Insert the feed title'
         );
     }
 
@@ -52,6 +53,10 @@ class RssBlockService extends BaseBlockService
     {
         $formMapper->add('settings', 'sonata_type_immutable_array', array(
             'keys' => array(
+                array('type', 'choice', array('choices' => array(
+                    'rss',
+                    'atom',
+                ), 'required' => false)),
                 array('url', 'url', array('required' => false)),
                 array('title', 'text', array('required' => false)),
             )
@@ -64,6 +69,11 @@ class RssBlockService extends BaseBlockService
     function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
         $errorElement
+            ->with('settings.type')
+                ->assertNotNull(array())
+                ->assertNotBlank()
+                ->assertChoice(array('choices' => array('rss', 'atom')))
+            ->end()
             ->with('settings.url')
                 ->assertNotNull(array())
                 ->assertNotBlank()
@@ -99,14 +109,13 @@ class RssBlockService extends BaseBlockService
                 // generate a simple xml element
                 try {
                     $feeds = new \SimpleXMLElement($content);
-                    $feeds = $feeds->channel->item;
                 } catch(\Exception $e) {
                     // silently fail error
                 }
             }
         }
 
-        return $this->renderResponse('SonataBlockBundle:Block:block_core_rss.html.twig', array(
+        return $this->renderResponse(sprintf('SonataBlockBundle:Block:block_core_%s.html.twig', $settings['type']), array(
             'feeds'     => $feeds,
             'block'     => $block,
             'settings'  => $settings

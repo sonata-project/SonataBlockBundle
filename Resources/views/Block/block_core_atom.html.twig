@@ -14,10 +14,10 @@ file that was distributed with this source code.
     <h3 class="sonata-feed-title">{{ settings.title }}</h3>
 
     <div class="sonata-feeds-container">
-        {% for feed in feeds.channel.item %}
+        {% for feed in feeds.entry %}
             <div>
                 <strong><a href="{{ feed.link}}" rel="nofollow" title="{{ feed.title }}">{{ feed.title }}</a></strong>
-                <div>{{ feed.description|raw }}</div>
+                <div>{{ feed.content|raw }}</div>
             </div>
         {% else %}
                 No feeds available.
