@@ -37,7 +37,7 @@ class ServiceListType extends ChoiceType
      * @param array $options
      * @return array
      */
-    public function getDefaultOptions(array $options)
+    public function getDefaultOptions()
     {
         return array(
             'context'           => false,
