@@ -6,6 +6,7 @@ To begin, add the dependent bundles to the vendor/bundles directory. Add the fol
     [SonataBlockBundle]
         git=http://github.com/sonata-project/SonataBlockBundle.git
         target=/bundles/Sonata/BlockBundle
+        version=origin/2.0
 
 Now, add the bundle to the kernel
 
