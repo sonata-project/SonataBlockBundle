@@ -66,6 +66,10 @@ class ServiceLoader implements BlockLoaderInterface
      */
     private function getSettings($block)
     {
+        if (!is_array($block) || !isset($block['type'])) {
+            throw new \RuntimeException('Invalid bloc type, expected array');
+        }
+
         if (!isset($this->settings[$block['type']])) {
             throw new \RuntimeException(sprintf('The block type %s does not exist', $block['type']));
         }
