@@ -27,7 +27,6 @@ class ServiceLoaderTest extends \PHPUnit_Framework_TestCase
 
     public function testLoader()
     {
-
         $loader = new ServiceLoader(array('foo.bar' => array('option1' => 42)));
 
         $definition = array(

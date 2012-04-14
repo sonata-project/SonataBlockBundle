@@ -32,10 +32,14 @@ class ServiceLoader implements BlockLoaderInterface
      */
     public function load($configuration)
     {
+        if (!$this->support($configuration)) {
+            throw new \RuntimeException('Invalid block type, expected array');
+        }
+
         $block = new Block;
         $block->setId(uniqid());
-        $block->setType($configuration['type']);
         $block->setSettings($this->getSettings($configuration));
+        $block->setType($configuration['type']);
         $block->setEnabled(true);
         $block->setCreatedAt(new \DateTime);
         $block->setUpdatedAt(new \DateTime);
@@ -67,7 +71,7 @@ class ServiceLoader implements BlockLoaderInterface
     private function getSettings($block)
     {
         if (!is_array($block) || !isset($block['type'])) {
-            throw new \RuntimeException('Invalid bloc type, expected array');
+            throw new \RuntimeException('Invalid block type, expected array');
         }
 
         if (!isset($this->settings[$block['type']])) {
