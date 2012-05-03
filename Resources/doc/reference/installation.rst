@@ -1,7 +1,10 @@
 Installation
 ============
 
-To begin, add the dependent bundles to the vendor/bundles directory. Add the following lines to the file deps::
+To begin, add the dependent bundles to the vendor/bundles directory. Add the 
+following lines to the deps file :
+
+.. code-block:: ini
 
     [SonataBlockBundle]
         git=http://github.com/sonata-project/SonataBlockBundle.git
@@ -27,7 +30,7 @@ Update the ``autoload.php`` to add new namespaces:
 
     <?php
     $loader->registerNamespaces(array(
-        'Sonata'                             => __DIR__,
+        'Sonata'  => __DIR__.'/../vendor/bundles',
 
         // ... other declarations
     ));
@@ -35,8 +38,8 @@ Update the ``autoload.php`` to add new namespaces:
 Configuration
 -------------
 
-To use the ``BlockBundle``, add the following lines to your application configuration
-file.
+To use the ``BlockBundle``, add the following lines to your application 
+configuration file.
 
 .. code-block:: yaml
 
@@ -54,7 +57,7 @@ file.
             sonata.block.service.action:
             sonata.block.service.rss:
 
-            # Some specific block from the SonataMediaBundle
+            # Some specific blocks from the SonataMediaBundle
             #sonata.media.block.media:
             #sonata.media.block.gallery:
             #sonata.media.block.feature_media:
