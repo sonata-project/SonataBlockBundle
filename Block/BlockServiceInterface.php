@@ -22,29 +22,33 @@ use Symfony\Component\HttpFoundation\Response;
 interface BlockServiceInterface
 {
     /**
-     * @param \Sonata\AdminBundle\Form\FormMapper $form
+     * @param \Sonata\AdminBundle\Form\FormMapper      $form
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     *
      * @return void
      */
     function buildEditForm(FormMapper $form, BlockInterface $block);
 
     /**
-     * @param \Sonata\AdminBundle\Form\FormMapper $form
+     * @param \Sonata\AdminBundle\Form\FormMapper      $form
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     *
      * @return void
      */
     function buildCreateForm(FormMapper $form, BlockInterface $block);
 
     /**
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     * @param \Sonata\BlockBundle\Model\BlockInterface        $block
      * @param null|\Symfony\Component\HttpFoundation\Response $response
+     *
      * @return void
      */
     function execute(BlockInterface $block, Response $response = null);
 
     /**
      * @param \Sonata\AdminBundle\Validator\ErrorElement $errorElement
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     * @param \Sonata\BlockBundle\Model\BlockInterface   $block
+     *
      * @return void
      */
     function validateBlock(ErrorElement $errorElement, BlockInterface $block);
@@ -63,24 +67,28 @@ interface BlockServiceInterface
 
     /**
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     *
      * @return void
      */
     function load(BlockInterface $block);
 
     /**
-     * @param $media
+     * @param string $media
+     *
      * @return array
      */
     function getJavacripts($media);
 
     /**
-     * @param $media
+     * @param string $media
+     *
      * @return array
      */
     function getStylesheets($media);
 
     /**
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     *
      * @return array
      */
     function getCacheKeys(BlockInterface $block);

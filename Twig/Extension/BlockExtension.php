@@ -35,10 +35,10 @@ class BlockExtension extends \Twig_Extension
 
     /**
      * @param \Sonata\BlockBundle\Block\BlockServiceManagerInterface $blockServiceManager
-     * @param \Sonata\CacheBundle\Cache\CacheManagerInterface $cacheManager
-     * @param array $cacheBlocks
-     * @param \Sonata\BlockBundle\Block\BlockLoaderInterface $blockLoader
-     * @param \Sonata\BlockBundle\Block\BlockRendererInterface $blockRenderer
+     * @param \Sonata\CacheBundle\Cache\CacheManagerInterface        $cacheManager
+     * @param array                                                  $cacheBlocks
+     * @param \Sonata\BlockBundle\Block\BlockLoaderInterface         $blockLoader
+     * @param \Sonata\BlockBundle\Block\BlockRendererInterface       $blockRenderer
      */
     public function __construct(BlockServiceManagerInterface $blockServiceManager, CacheManagerInterface $cacheManager, array $cacheBlocks, BlockLoaderInterface $blockLoader, BlockRendererInterface $blockRenderer)
     {
@@ -57,7 +57,7 @@ class BlockExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'sonata_block_render'  => new \Twig_Function_Method($this, 'renderBlock', array('is_safe' => array('html'))),
+            'sonata_block_render'               => new \Twig_Function_Method($this, 'renderBlock', array('is_safe' => array('html'))),
             'sonata_block_include_javascripts'  => new \Twig_Function_Method($this, 'includeJavascripts', array('is_safe' => array('html'))),
             'sonata_block_include_stylesheets'  => new \Twig_Function_Method($this, 'includeStylesheets', array('is_safe' => array('html'))),
         );
@@ -82,7 +82,8 @@ class BlockExtension extends \Twig_Extension
     }
 
     /**
-     * @param $media screen|all ....
+     * @param string $media screen|all ....
+     *
      * @return array|string
      */
     public function includeJavascripts($media)
@@ -106,7 +107,8 @@ class BlockExtension extends \Twig_Extension
     }
 
     /**
-     * @param $media
+     * @param array $media
+     *
      * @return array|string
      */
     public function includeStylesheets($media)
@@ -134,9 +136,11 @@ class BlockExtension extends \Twig_Extension
 
     /**
      * @throws \RuntimeException
-     * @param $block
-     * @param bool $useCache
+     *
+     * @param mixed $block
+     * @param bool  $useCache
      * @param array $extraCacheKeys
+     *
      * @return string
      */
     public function renderBlock($block, $useCache = true, array $extraCacheKeys = array())
@@ -181,6 +185,7 @@ class BlockExtension extends \Twig_Extension
 
     /**
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     *
      * @return \Sonata\CacheBundle\Cache\CacheInterface;
      */
     protected function getCacheService(BlockInterface $block)

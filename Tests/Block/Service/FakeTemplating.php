@@ -26,13 +26,13 @@ class FakeTemplating implements EngineInterface
 
     public function render($name, array $parameters = array())
     {
-        $this->name  = $name;
+        $this->name       = $name;
         $this->parameters = $parameters;
     }
 
     public function renderResponse($view, array $parameters = array(), Response $response = null)
     {
-        $this->view   = $view;
+        $this->view       = $view;
         $this->parameters = $parameters;
 
         if ($response) {

@@ -15,6 +15,7 @@ interface BlockInterface
 {
     /**
      * @param mixed $id
+     *
      * @return void
      */
     function setId($id);
@@ -157,15 +158,17 @@ interface BlockInterface
     function getSettings();
 
     /**
-     * @param $name
-     * @param $value
+     * @param string $name
+     * @param string $value
+     *
      * @return void
      */
     function setSetting($name, $value);
 
     /**
-     * @param $name
-     * @param null $default
+     * @param string $name
+     * @param null   $default
+     *
      * @return null
      */
     function getSetting($name, $default = null);

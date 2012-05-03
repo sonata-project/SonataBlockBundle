@@ -31,8 +31,8 @@ class ActionBlockService extends BaseBlockService
     private $kernel;
 
     /**
-     * @param $name
-     * @param \Symfony\Component\Templating\EngineInterface $templating
+     * @param string                                            $name
+     * @param \Symfony\Component\Templating\EngineInterface     $templating
      * @param \Symfony\Component\HttpKernel\HttpKernelInterface $kernel
      */
     public function __construct($name, EngineInterface $templating, HttpKernelInterface $kernel)

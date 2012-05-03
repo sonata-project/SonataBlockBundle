@@ -27,8 +27,8 @@ class BlockServiceManager implements BlockServiceManagerInterface
 
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-     * @param $debug
-     * @param null|\Symfony\Component\HttpKernel\Log\LoggerInterface $logger
+     * @param boolean                                                   $debug
+     * @param null|\Symfony\Component\HttpKernel\Log\LoggerInterface    $logger
      */
     public function __construct(ContainerInterface $container, $debug, LoggerInterface $logger = null)
     {
@@ -38,7 +38,9 @@ class BlockServiceManager implements BlockServiceManagerInterface
 
     /**
      * @throws \RuntimeException
-     * @param $type
+     *
+     * @param string $type
+     *
      * @return \Sonata\BlockBundle\Block\BlockServiceInterface
      */
     private function load($type)

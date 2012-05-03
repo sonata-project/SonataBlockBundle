@@ -195,7 +195,7 @@ abstract class BaseBlock implements BlockInterface
      */
     public function __toString()
     {
-        return 'block (id:'.$this->getId().')';
+        return 'block (id:' . $this->getId() . ')';
     }
 
     /**

@@ -24,14 +24,14 @@ class BlockRenderer implements BlockRendererInterface
     protected $blockServiceManager;
 
     /**
-     * @param BlockServiceManagerInterface $blockServiceManager
+     * @param BlockServiceManagerInterface                      $blockServiceManager
      * @param \Symfony\Component\HttpKernel\Log\LoggerInterface $logger
-     * @param $debug
+     * @param boolean                                           $debug
      */
     public function __construct(BlockServiceManagerInterface $blockServiceManager, LoggerInterface $logger, $debug)
     {
-        $this->debug  = $debug;
-        $this->logger = $logger;
+        $this->debug               = $debug;
+        $this->logger              = $logger;
         $this->blockServiceManager = $blockServiceManager;
     }
 

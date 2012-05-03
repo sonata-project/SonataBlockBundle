@@ -29,7 +29,7 @@ abstract class BaseBlockService implements BlockServiceInterface
     protected $templating;
 
     /**
-     * @param string $name
+     * @param string                                        $name
      * @param \Symfony\Component\Templating\EngineInterface $templating
      */
     public function __construct($name, EngineInterface $templating)
@@ -54,7 +54,7 @@ abstract class BaseBlockService implements BlockServiceInterface
         return $this->name;
     }
 
-     /**
+    /**
      * {@inheritdoc}
      */
     public function getTemplating()

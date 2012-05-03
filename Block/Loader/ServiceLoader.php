@@ -65,7 +65,9 @@ class ServiceLoader implements BlockLoaderInterface
 
     /**
      * @throws \RuntimeException
-     * @param $block
+     *
+     * @param array $block
+     *
      * @return array
      */
     private function getSettings($block)

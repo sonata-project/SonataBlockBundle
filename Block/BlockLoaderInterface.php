@@ -15,12 +15,14 @@ interface BlockLoaderInterface
 {
     /**
      * @param mixed $name
+     *
      * @return BlockLoaderInterface
      */
     function load($name);
 
     /**
      * @param mixed $block
+     *
      * @return boolean
      */
     function support($name);

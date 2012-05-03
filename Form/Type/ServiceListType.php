@@ -24,7 +24,7 @@ class ServiceListType extends ChoiceType
 
     /**
      * @param \Sonata\BlockBundle\Block\BlockServiceManagerInterface $manager
-     * @param array $contexts
+     * @param array                                                  $contexts
      */
     public function __construct(BlockServiceManagerInterface $manager, array $contexts = array())
     {
@@ -34,6 +34,7 @@ class ServiceListType extends ChoiceType
 
     /**
      * @param array $options
+     *
      * @return array
      */
     public function getDefaultOptions(array $options)

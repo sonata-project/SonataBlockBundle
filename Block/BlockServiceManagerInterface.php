@@ -19,6 +19,7 @@ interface BlockServiceManagerInterface
     /**
      * @param string $name
      * @param string $service
+     *
      * @return void
      */
     function add($name, $service);
@@ -27,12 +28,14 @@ interface BlockServiceManagerInterface
      * Return the block service linked to the link
      *
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     *
      * @return \Sonata\BlockBundle\Block\BlockServiceInterface
      */
     function get(BlockInterface $block);
 
     /**
      * @param array $blockServices
+     *
      * @return void
      */
     function setServices(array $blockServices);
@@ -45,12 +48,14 @@ interface BlockServiceManagerInterface
     /**
      *
      * @param string $name
+     *
      * @return boolean
      */
     function has($name);
 
     /**
-     * @param $name
+     * @param string $name
+     *
      * @return void
      */
     function getService($name);
@@ -62,7 +67,8 @@ interface BlockServiceManagerInterface
 
     /**
      * @param \Sonata\AdminBundle\Validator\ErrorElement $errorElement
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     * @param \Sonata\BlockBundle\Model\BlockInterface   $block
+     *
      * @return void
      */
     function validate(ErrorElement $errorElement, BlockInterface $block);

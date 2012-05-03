@@ -17,8 +17,9 @@ use Symfony\Component\HttpFoundation\Response;
 interface BlockRendererInterface
 {
     /**
-     * @param \Sonata\BlockBundle\Model\BlockInterface $name
+     * @param \Sonata\BlockBundle\Model\BlockInterface        $name
      * @param null|\Symfony\Component\HttpFoundation\Response $response
+     *
      * @return void
      */
     function render(BlockInterface $name, Response $response = null);
