@@ -1,18 +1,18 @@
-You first block
-===============
+Your first block
+================
 
 This quick tutorial explains how to create a RSS reader block.
 
-A block service is just a service which must implements the ``BlockServiceInterface``
-interface. There is only one instance of a block service, however there are many block
-instances.
+A block service is just a service which must implements the 
+``BlockServiceInterface`` interface. There is only one instance of a block 
+service, however there are many block instances.
 
 First namespaces
 ----------------
 
 The ``BaseBlockService`` implements some basic methods defined by the interface.
-The current Rss block will extend this base class. The others `use` statements are required
-by the interface and remaining methods.
+The current Rss block will extend this base class. The others `use` statements 
+are required by the interface and remaining methods.
 
 .. code-block:: php
 
@@ -29,11 +29,12 @@ by the interface and remaining methods.
 Default settings
 ----------------
 
-A block service needs settings to work properly, so to ensure consistency, the service should
-define a ``getDefaultSettings`` method. In the current tutorial, the default settings are:
+A block service needs settings to work properly, so to ensure consistency, the 
+service should define a ``getDefaultSettings`` method. In the current tutorial, 
+the default settings are:
 
-    - url : the feed url
-    - title : the block title
+    - **url :** the feed url
+    - **title :** the block title
 
 .. code-block:: php
 
@@ -65,8 +66,8 @@ a good consistency.
         ));
     }
 
-The validation is done at runtime through a ``validateBlock`` method. You can call any
-Symfony2 assertions, like :
+The validation is done at runtime through a ``validateBlock`` method. You can 
+call any Symfony2 assertions, like :
 
 .. code-block:: php
 
@@ -85,14 +86,14 @@ Symfony2 assertions, like :
             ->end();
     }
 
-The ``sonata_type_immutable_array`` type is a specific form type which allows to edit
-an array.
+The ``sonata_type_immutable_array`` type is a specific form type which allows to
+edit an array.
 
 Execute
 -------
 
-The next step is the execute method, this method must return a ``Response`` object, this
-object is used to render the block.
+The next step is the execute method, this method must return a ``Response`` 
+object, this object is used to render the block.
 
 .. code-block:: php
 
@@ -135,10 +136,10 @@ object is used to render the block.
 Template
 --------
 
-A block template is very simple, in the current tutorial, we are looping on feeds or if not
-defined, a error message is displayed.
+A block template is very simple, in the current tutorial, we are looping on feeds
+or if not defined, a error message is displayed.
 
-.. code-block:: jinja
+.. code-block:: html+jinja
 
     {% extends 'SonataBlockBundle:Block:block_base.html.twig' %}
 
@@ -178,6 +179,6 @@ and add it to sonata configuration
     sonata_block:
         blocks:
             sonata.block.service.rss:
-    #           cache: sonata.cache.memcached
+                #cache: sonata.cache.memcached
 
 
