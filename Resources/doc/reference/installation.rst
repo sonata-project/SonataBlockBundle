@@ -50,7 +50,6 @@ file.
             #    contexts:   [admin]
 
             sonata.block.service.text:
-            sonata.block.service.action:
             sonata.block.service.rss:
 
             # Some specific block from the SonataMediaBundle
