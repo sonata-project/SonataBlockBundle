@@ -16,11 +16,12 @@
             <argument type="service" id="templating" />
         </service>
 
-        <service id="sonata.block.service.action" class="%sonata.block.service.action.class%">
+        <service id="sonata.block.service.action" class="%sonata.block.service.action.class%" scope="request">
             <tag name="sonata.block" />
             <argument>sonata.block.action</argument>
             <argument type="service" id="templating" />
             <argument type="service" id="http_kernel" />
+            <argument type="service" id="request" />
         </service>
 
         <service id="sonata.block.service.rss" class="%sonata.block.service.rss.class%">

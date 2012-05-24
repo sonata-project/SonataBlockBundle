@@ -17,12 +17,14 @@ class ActionBlockServiceTest extends BaseTestBlockService
 {
     public function testService()
     {
-        $kernel = $this->getMock('Symfony\Component\HttpKernel\HttpKernelInterface', array('render', 'handle'));
+        $kernel = $this->getMock('Symfony\Component\HttpKernel\HttpKernelInterface', array('forward', 'handle'));
+        $request = $this->getMock('Symfony\Component\HttpFoundation\Request', array());
+        $response = $this->getMock('Symfony\Component\HttpFoundation\Response', array('getContent'));
 
-        $kernel->expects($this->exactly(1))->method('render');
+        $kernel->expects($this->exactly(1))->method('forward')->will($this->returnValue($response));
 
         $templating = new FakeTemplating;
-        $service = new ActionBlockService('sonata.page.block.action', $templating, $kernel);
+        $service = new ActionBlockService('sonata.page.block.action', $templating, $kernel, $request);
 
         $block = new Block;
         $block->setType('core.action');

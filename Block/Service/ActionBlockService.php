@@ -12,6 +12,7 @@
 namespace Sonata\BlockBundle\Block\Service;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Templating\EngineInterface;
@@ -30,16 +31,20 @@ class ActionBlockService extends BaseBlockService
 {
     private $kernel;
 
+    private $request;
+
     /**
      * @param $name
      * @param \Symfony\Component\Templating\EngineInterface $templating
      * @param \Symfony\Component\HttpKernel\HttpKernelInterface $kernel
+     * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function __construct($name, EngineInterface $templating, HttpKernelInterface $kernel)
+    public function __construct($name, EngineInterface $templating, HttpKernelInterface $kernel, Request $request)
     {
         parent::__construct($name, $templating);
 
         $this->kernel = $kernel;
+        $this->request = $request;
     }
 
     /**
@@ -47,18 +52,15 @@ class ActionBlockService extends BaseBlockService
      */
     public function execute(BlockInterface $block, Response $response = null)
     {
-        $parameters = (array)json_decode($block->getSetting('parameters'), true);
-        $parameters = array_merge($parameters, array('_block' => $block));
-
         $settings = array_merge($this->getDefaultSettings(), (array)$block->getSettings());
         try {
-            $actionContent = $this->kernel->render($settings['action'], $parameters);
+            $actionContent = $this->kernel->forward($settings['action'], array('request' => $this->request));
         } catch (\Exception $e) {
             throw $e;
         }
 
         $content = self::mustache($block->getSetting('layout'), array(
-            'CONTENT' => $actionContent
+            'CONTENT' => $actionContent->getContent(),
         ));
 
         return $this->renderResponse('SonataBlockBundle:Block:block_core_action.html.twig', array(
@@ -120,7 +122,6 @@ class ActionBlockService extends BaseBlockService
         return array(
             'layout'      => '{{ CONTENT }}',
             'action'      => 'SonataBlockBundle:Block:empty',
-            'parameters'  => '{}'
         );
     }
 }
