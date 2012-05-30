@@ -5,7 +5,6 @@
 
     <parameters>
         <parameter key="sonata.block.service.text.class">Sonata\BlockBundle\Block\Service\TextBlockService</parameter>
-        <parameter key="sonata.block.service.action.class">Sonata\BlockBundle\Block\Service\ActionBlockService</parameter>
         <parameter key="sonata.block.service.rss.class">Sonata\BlockBundle\Block\Service\RssBlockService</parameter>
     </parameters>
 
@@ -14,13 +13,6 @@
             <tag name="sonata.block" />
             <argument>sonata.block.text</argument>
             <argument type="service" id="templating" />
-        </service>
-
-        <service id="sonata.block.service.action" class="%sonata.block.service.action.class%">
-            <tag name="sonata.block" />
-            <argument>sonata.block.action</argument>
-            <argument type="service" id="templating" />
-            <argument type="service" id="http_kernel" />
         </service>
 
         <service id="sonata.block.service.rss" class="%sonata.block.service.rss.class%">
