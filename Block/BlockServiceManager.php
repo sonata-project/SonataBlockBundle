@@ -21,14 +21,20 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class BlockServiceManager implements BlockServiceManagerInterface
 {
+    /**
+     * @var array
+     */
     protected $services;
 
+    /**
+     * @var ContainerInterface
+     */
     protected $container;
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+     * @param ContainerInterface $container
      * @param $debug
-     * @param null|\Symfony\Component\HttpKernel\Log\LoggerInterface $logger
+     * @param null|LoggerInterface $logger
      */
     public function __construct(ContainerInterface $container, $debug, LoggerInterface $logger = null)
     {
@@ -38,8 +44,10 @@ class BlockServiceManager implements BlockServiceManagerInterface
 
     /**
      * @throws \RuntimeException
+     *
      * @param $type
-     * @return \Sonata\BlockBundle\Block\BlockServiceInterface
+     *
+     * @return BlockServiceInterface
      */
     private function load($type)
     {
