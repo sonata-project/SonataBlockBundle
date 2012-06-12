@@ -50,8 +50,9 @@ class SonataBlockExtension extends Extension
     }
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param ContainerBuilder $container
      * @param array $config
+     *
      * @return void
      */
     public function configureCache(ContainerBuilder $container, array $config)
@@ -65,8 +66,9 @@ class SonataBlockExtension extends Extension
     }
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param ContainerBuilder $container
      * @param array $config
+     *
      * @return void
      */
     public function configureLoaderChain(ContainerBuilder $container, array $config)
@@ -80,8 +82,9 @@ class SonataBlockExtension extends Extension
     }
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param ContainerBuilder $container
      * @param array $config
+     *
      * @return void
      */
     public function configureForm(ContainerBuilder $container, array $config)

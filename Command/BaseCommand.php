@@ -12,13 +12,6 @@
 namespace Sonata\BlockBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Output\Output;
-
-use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 
 abstract class BaseCommand extends ContainerAwareCommand
 {
