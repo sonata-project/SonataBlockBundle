@@ -34,11 +34,11 @@ class BlockExtension extends \Twig_Extension
     private $blockRenderer;
 
     /**
-     * @param \Sonata\BlockBundle\Block\BlockServiceManagerInterface $blockServiceManager
-     * @param \Sonata\CacheBundle\Cache\CacheManagerInterface $cacheManager
+     * @param BlockServiceManagerInterface $blockServiceManager
+     * @param CacheManagerInterface $cacheManager
      * @param array $cacheBlocks
-     * @param \Sonata\BlockBundle\Block\BlockLoaderInterface $blockLoader
-     * @param \Sonata\BlockBundle\Block\BlockRendererInterface $blockRenderer
+     * @param BlockLoaderInterface $blockLoader
+     * @param BlockRendererInterface $blockRenderer
      */
     public function __construct(BlockServiceManagerInterface $blockServiceManager, CacheManagerInterface $cacheManager, array $cacheBlocks, BlockLoaderInterface $blockLoader, BlockRendererInterface $blockRenderer)
     {
@@ -107,6 +107,7 @@ class BlockExtension extends \Twig_Extension
 
     /**
      * @param $media
+     *
      * @return array|string
      */
     public function includeStylesheets($media)
@@ -134,9 +135,11 @@ class BlockExtension extends \Twig_Extension
 
     /**
      * @throws \RuntimeException
+     *
      * @param $block
      * @param bool $useCache
      * @param array $extraCacheKeys
+     *
      * @return string
      */
     public function renderBlock($block, $useCache = true, array $extraCacheKeys = array())
@@ -180,7 +183,8 @@ class BlockExtension extends \Twig_Extension
     }
 
     /**
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     * @param BlockInterface $block
+     *
      * @return \Sonata\CacheBundle\Cache\CacheInterface;
      */
     protected function getCacheService(BlockInterface $block)

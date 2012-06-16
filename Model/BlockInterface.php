@@ -104,7 +104,7 @@ interface BlockInterface
     /**
      * Get children
      *
-     * @return Doctrine\Common\Collections\Collection $children
+     * @return \Doctrine\Common\Collections\Collection $children
      */
     function getChildren();
 

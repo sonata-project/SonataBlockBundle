@@ -22,29 +22,29 @@ use Symfony\Component\HttpFoundation\Response;
 interface BlockServiceInterface
 {
     /**
-     * @param \Sonata\AdminBundle\Form\FormMapper $form
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     * @param FormMapper $form
+     * @param BlockInterface $block
      * @return void
      */
     function buildEditForm(FormMapper $form, BlockInterface $block);
 
     /**
-     * @param \Sonata\AdminBundle\Form\FormMapper $form
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     * @param FormMapper $form
+     * @param BlockInterface $block
      * @return void
      */
     function buildCreateForm(FormMapper $form, BlockInterface $block);
 
     /**
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
-     * @param null|\Symfony\Component\HttpFoundation\Response $response
-     * @return void
+     * @param BlockInterface $block
+     * @param null|Response $response
+     * @return Response
      */
     function execute(BlockInterface $block, Response $response = null);
 
     /**
-     * @param \Sonata\AdminBundle\Validator\ErrorElement $errorElement
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     * @param ErrorElement $errorElement
+     * @param BlockInterface $block
      * @return void
      */
     function validateBlock(ErrorElement $errorElement, BlockInterface $block);
@@ -62,7 +62,7 @@ interface BlockServiceInterface
     function getDefaultSettings();
 
     /**
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     * @param BlockInterface $block
      * @return void
      */
     function load(BlockInterface $block);
@@ -80,7 +80,7 @@ interface BlockServiceInterface
     function getStylesheets($media);
 
     /**
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     * @param BlockInterface $block
      * @return array
      */
     function getCacheKeys(BlockInterface $block);

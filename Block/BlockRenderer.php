@@ -17,16 +17,25 @@ use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 class BlockRenderer implements BlockRendererInterface
 {
+    /**
+     * @var LoggerInterface
+     */
     protected $logger;
 
+    /**
+     * @var boolean
+     */
     protected $debug;
 
+    /**
+     * @var BlockServiceManagerInterface
+     */
     protected $blockServiceManager;
 
     /**
      * @param BlockServiceManagerInterface $blockServiceManager
-     * @param \Symfony\Component\HttpKernel\Log\LoggerInterface $logger
-     * @param $debug
+     * @param LoggerInterface $logger
+     * @param boolean $debug
      */
     public function __construct(BlockServiceManagerInterface $blockServiceManager, LoggerInterface $logger, $debug)
     {
