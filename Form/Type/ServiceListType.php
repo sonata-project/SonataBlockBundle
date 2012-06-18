@@ -13,7 +13,8 @@ namespace Sonata\BlockBundle\Form\Type;
 
 use Symfony\Component\Form\Exception\FormException;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Options;
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 
@@ -24,7 +25,7 @@ class ServiceListType extends ChoiceType
     protected $contexts;
 
     /**
-     * @param BlockServiceManagerInterface $manager
+     * @param \Sonata\BlockBundle\Block\BlockServiceManagerInterface $manager
      * @param array $contexts
      */
     public function __construct(BlockServiceManagerInterface $manager, array $contexts = array())
@@ -34,17 +35,18 @@ class ServiceListType extends ChoiceType
     }
 
     /**
-     * @param array $options
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function getDefaultOptions()
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $contexts = $this->contexts;
+        $manager = $this->manager;
+        parent::setDefaultOptions($resolver);
+
+        $resolver->setDefaults(array(
             'context'           => false,
             'multiple'          => false,
             'expanded'          => false,
-            'choice_list'       => null,
             'choices'           => function (Options $options, $previousValue) use ($contexts, $manager) {
                 if (!isset($options['context'])) {
                     throw new FormException('Please define a context option');
@@ -55,7 +57,7 @@ class ServiceListType extends ChoiceType
                 }
 
                 $types = array();
-                foreach ($contexts[$previousValue] as $service) {
+                foreach ($contexts[$options['context']] as $service) {
                     $types[$service] = sprintf('%s - %s', $manager->getService($service)->getName(), $service);
                 }
 
@@ -68,13 +70,13 @@ class ServiceListType extends ChoiceType
 
                 return $multiple || $expanded ? array() : '';
             },
-            'empty_value'       => function (Options $options) {
+            'empty_value'       => function (Options $options, $previousValue) {
                 $multiple = isset($options['multiple']) && $options['multiple'];
                 $expanded = isset($options['expanded']) && $options['expanded'];
 
-                return $multiple || $expanded || !isset($options['empty_value']) ? null : '';
+                return $multiple || $expanded || !isset($previousValue) ? null : '';
             },
             'error_bubbling'    => false,
-        );
+        ));
     }
 }
