@@ -18,12 +18,12 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 
 use Symfony\Component\HttpFoundation\Response;
 
-
 interface BlockServiceInterface
 {
     /**
      * @param FormMapper $form
      * @param BlockInterface $block
+     *
      * @return void
      */
     function buildEditForm(FormMapper $form, BlockInterface $block);
@@ -31,6 +31,7 @@ interface BlockServiceInterface
     /**
      * @param FormMapper $form
      * @param BlockInterface $block
+     *
      * @return void
      */
     function buildCreateForm(FormMapper $form, BlockInterface $block);
@@ -38,6 +39,7 @@ interface BlockServiceInterface
     /**
      * @param BlockInterface $block
      * @param null|Response $response
+     *
      * @return Response
      */
     function execute(BlockInterface $block, Response $response = null);
@@ -45,6 +47,7 @@ interface BlockServiceInterface
     /**
      * @param ErrorElement $errorElement
      * @param BlockInterface $block
+     *
      * @return void
      */
     function validateBlock(ErrorElement $errorElement, BlockInterface $block);
@@ -63,24 +66,28 @@ interface BlockServiceInterface
 
     /**
      * @param BlockInterface $block
+     *
      * @return void
      */
     function load(BlockInterface $block);
 
     /**
      * @param $media
+     *
      * @return array
      */
     function getJavacripts($media);
 
     /**
      * @param $media
+     *
      * @return array
      */
     function getStylesheets($media);
 
     /**
      * @param BlockInterface $block
+     *
      * @return array
      */
     function getCacheKeys(BlockInterface $block);

@@ -12,13 +12,13 @@
 namespace Sonata\BlockBundle\Form\Type;
 
 use Symfony\Component\Form\Exception\FormException;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 
-class ServiceListType extends ChoiceType
+class ServiceListType extends AbstractType
 {
     protected $manager;
 
@@ -37,11 +37,26 @@ class ServiceListType extends ChoiceType
     /**
      * {@inheritdoc}
      */
+    public function getName()
+    {
+        return 'sonata_block_service_choice';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return 'choice';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $contexts = $this->contexts;
         $manager = $this->manager;
-        parent::setDefaultOptions($resolver);
 
         $resolver->setDefaults(array(
             'context'           => false,
