@@ -16,6 +16,7 @@
             "homepage": "https://github.com/sonata-project/SonataBlockBundle/contributors"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "sonata-project/cache-bundle": "dev-master"
     },
