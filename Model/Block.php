@@ -10,12 +10,18 @@
 
 namespace Sonata\BlockBundle\Model;
 
+/**
+ * Block model with concrete implementation of BlockInterface
+ */
 class Block extends BaseBlock
 {
+    /**
+     * @var mixed
+     */
     protected $id;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function setId($id)
     {
@@ -23,7 +29,7 @@ class Block extends BaseBlock
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getId()
     {
