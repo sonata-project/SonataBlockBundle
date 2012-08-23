@@ -11,162 +11,196 @@
 
 namespace Sonata\BlockBundle\Model;
 
+/**
+ * Interface of Block
+ */
 interface BlockInterface
 {
     /**
+     * Sets the block Id
+     *
      * @param mixed $id
+     *
      * @return void
      */
     function setId($id);
 
     /**
+     * Returns the block id
+     *
      * @return mixed void
      */
     function getId();
 
     /**
-     * Set type
+     * Sets the name
+     *
+     * @param string $name
+     */
+    function setName($name);
+
+    /**
+     * Returns the name
+     *
+     * @return string
+     */
+    function getName();
+
+    /**
+     * Sets the type
      *
      * @param string $type
      */
     function setType($type);
 
     /**
-     * Get type
+     * Returns the type
      *
      * @return string $type
      */
     function getType();
 
     /**
-     * Set enabled
+     * Sets whether or not this block is enabled
      *
      * @param boolean $enabled
      */
     function setEnabled($enabled);
 
     /**
-     * Get enabled
+     * Returns whether or not this block is enabled
      *
      * @return boolean $enabled
      */
     function getEnabled();
 
     /**
-     * Set position
+     * Set the block ordered position
      *
      * @param integer $position
      */
     function setPosition($position);
 
     /**
-     * Get position
+     * Returns the block ordered position
      *
      * @return integer $position
      */
     function getPosition();
 
     /**
-     * Set createdAt
+     * Sets the creation date and time
      *
      * @param \Datetime $createdAt
      */
     function setCreatedAt(\DateTime $createdAt = null);
 
     /**
-     * Get createdAt
+     * Returns the creation date and time
      *
      * @return \Datetime $createdAt
      */
     function getCreatedAt();
 
     /**
-     * Set updatedAt
+     * Set the last update date and time
      *
      * @param \Datetime $updatedAt
      */
     function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
-     * Get updatedAt
+     * Returns the last update date and time
      *
      * @return \Datetime $updatedAt
      */
     function getUpdatedAt();
 
     /**
-     * Add children
+     * Add one child block
      *
      * @param BlockInterface $children
      */
     function addChildren(BlockInterface $children);
 
     /**
-     * Get children
+     * Returns child blocks
      *
      * @return \Doctrine\Common\Collections\Collection $children
      */
     function getChildren();
 
     /**
-     * @return bool
+     * Returns whether or not this block has children
+     *
+     * @return boolean
      */
     function hasChildren();
 
     /**
-     * Set parent
+     * Set the parent block
      *
-     * @param BlockInterface $parent
+     * @param BlockInterface|null $parent
      */
-    function setParent(BlockInterface $parent);
+    function setParent(BlockInterface $parent = null);
 
     /**
-     * Get parent
+     * Returns the parent block
      *
      * @return BlockInterface $parent
      */
     function getParent();
 
     /**
+     * Returns whether or not this block has a parent
+     *
      * @return void
      */
     function hasParent();
 
     /**
+     * Returns the block cache TTL
+     *
      * @return integer
      */
     function getTtl();
 
     /**
+     * Returns a string representation of the block
+     *
      * @return string
      */
     function __toString();
 
     /**
-     * Set settings
+     * Sets the block settings
      *
-     * @param array $settings
+     * @param array $settings An array of key/value
      */
     function setSettings(array $settings = array());
 
     /**
-     * Get settings
+     * Returns the block settings
      *
-     * @return array $settings
+     * @return array $settings An array of key/value
      */
     function getSettings();
 
     /**
-     * @param $name
-     * @param $value
-     * @return void
+     * Sets one block setting
+     *
+     * @param string $name  Key name
+     * @param mixed  $value Value
      */
     function setSetting($name, $value);
 
     /**
-     * @param $name
-     * @param null $default
-     * @return null
+     * Returns one block setting or the given default value if no value is found
+     *
+     * @param string     $name    Key name
+     * @param mixed|null $default Default value
+     *
+     * @return mixed
      */
     function getSetting($name, $default = null);
 }

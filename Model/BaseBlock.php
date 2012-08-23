@@ -10,26 +10,64 @@
 
 namespace Sonata\BlockBundle\Model;
 
+/**
+ * Base abstract Block class that provides a default implementation of the block interface
+ */
 abstract class BaseBlock implements BlockInterface
 {
+    /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @var array
+     */
     protected $settings;
 
+    /**
+     * @var boolean
+     */
     protected $enabled;
 
+    /**
+     * @var integer
+     */
     protected $position;
 
+    /**
+     * @var BlockInterface
+     */
     protected $parent;
 
+    /**
+     * @var array
+     */
     protected $children;
 
+    /**
+     * @var \DateTime
+     */
     protected $createdAt;
 
+    /**
+     * @var \DateTime
+     */
     protected $updatedAt;
 
+    /**
+     * @var string
+     */
     protected $type;
 
+    /**
+     * @var integer
+     */
     protected $ttl;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->settings = array();
@@ -37,7 +75,23 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * {@inheritDoc}
      */
     public function setType($type)
     {
@@ -45,7 +99,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getType()
     {
@@ -53,7 +107,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function setSettings(array $settings = array())
     {
@@ -61,7 +115,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getSettings()
     {
@@ -69,7 +123,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function setSetting($name, $value)
     {
@@ -77,7 +131,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getSetting($name, $default = null)
     {
@@ -85,7 +139,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function setEnabled($enabled)
     {
@@ -93,7 +147,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getEnabled()
     {
@@ -101,7 +155,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function setPosition($position)
     {
@@ -109,7 +163,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getPosition()
     {
@@ -117,7 +171,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
@@ -125,7 +179,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getCreatedAt()
     {
@@ -133,7 +187,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
@@ -141,7 +195,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getUpdatedAt()
     {
@@ -149,7 +203,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function addChildren(BlockInterface $child)
     {
@@ -159,7 +213,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getChildren()
     {
@@ -167,7 +221,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function setParent(BlockInterface $parent = null)
     {
@@ -175,7 +229,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getParent()
     {
@@ -183,7 +237,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function hasParent()
     {
@@ -191,15 +245,15 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function __toString()
     {
-        return 'block (id:'.$this->getId().')';
+        return sprintf('block %d : "%s"', $this->getId(), $this->getname());
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getTtl()
     {
@@ -219,7 +273,7 @@ abstract class BaseBlock implements BlockInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function hasChildren()
     {
