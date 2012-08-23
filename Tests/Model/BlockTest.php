@@ -14,7 +14,6 @@ use Sonata\BlockBundle\Model\Block;
 
 class BlockTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testGetTtl()
     {
         $block = new Block;
@@ -46,6 +45,7 @@ class BlockTest extends \PHPUnit_Framework_TestCase
 
         $block = new Block;
 
+        $block->setName('my.block.name');
         $block->setCreatedAt($time);
         $block->setUpdatedAt($time);
         $block->setEnabled(true);
@@ -53,6 +53,7 @@ class BlockTest extends \PHPUnit_Framework_TestCase
         $block->setType('foo.bar');
         $block->setParent($parent);
 
+        $this->assertEquals('my.block.name', $block->getName());
         $this->assertEquals($time, $block->getCreatedAt());
         $this->assertEquals($time, $block->getUpdatedAt());
         $this->assertTrue($block->getEnabled());
