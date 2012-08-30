@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 interface BlockServiceInterface
 {
     /**
-     * @param FormMapper $form
+     * @param FormMapper     $form
      * @param BlockInterface $block
      *
      * @return void
@@ -29,7 +29,7 @@ interface BlockServiceInterface
     function buildEditForm(FormMapper $form, BlockInterface $block);
 
     /**
-     * @param FormMapper $form
+     * @param FormMapper     $form
      * @param BlockInterface $block
      *
      * @return void
@@ -38,14 +38,14 @@ interface BlockServiceInterface
 
     /**
      * @param BlockInterface $block
-     * @param null|Response $response
+     * @param null|Response  $response
      *
      * @return Response
      */
     function execute(BlockInterface $block, Response $response = null);
 
     /**
-     * @param ErrorElement $errorElement
+     * @param ErrorElement   $errorElement
      * @param BlockInterface $block
      *
      * @return void
