@@ -6,4 +6,10 @@ php:
 env:
   - SYMFONY_VERSION=origin/master
 
-before_script: php Tests/tests/vendors.php
+before_script:
+  - composer install --dev
+
+script: phpunit
+
+notifications:
+    webhooks: http://sonata-project.org/bundles/admin/master/travis
