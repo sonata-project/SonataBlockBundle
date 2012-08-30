@@ -18,7 +18,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "sonata-project/cache-bundle": "dev-master"
+        "sonata-project/cache-bundle": "dev-master",
+        "sonata-project/admin-bundle": "dev-master"
     },
     "autoload": {
         "psr-0": { "Sonata\\BlockBundle": "" }
