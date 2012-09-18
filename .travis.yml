@@ -7,6 +7,7 @@ env:
   - SYMFONY_VERSION=origin/master
 
 before_script:
+  - export COMPOSER_ROOT_VERSION=dev-master
   - composer install --dev
 
 script: phpunit
