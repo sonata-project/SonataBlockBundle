@@ -18,6 +18,10 @@ Now, add the bundle to the kernel
         );
     }
 
+Some featured provided by this Bundle require the SonataAdminBundle. Please add an explicit
+required dependency to your projects composer.json to the SonataAdminBundle with the version
+listed in the suggestion of this Bundle.
+
 Configuration
 -------------
 
