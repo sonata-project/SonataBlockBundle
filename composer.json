@@ -18,7 +18,12 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "sonata-project/cache-bundle": "dev-master",
+        "sonata-project/cache-bundle": "dev-master"
+    },
+    "require-dev": {
+        "sonata-project/admin-bundle": "dev-master"
+    },
+    "suggest": {
         "sonata-project/admin-bundle": "dev-master"
     },
     "autoload": {
