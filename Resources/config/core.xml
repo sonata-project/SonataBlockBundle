@@ -21,10 +21,10 @@
             <tag name="twig.extension" />
 
             <argument type="service" id="sonata.block.manager" />
-            <argument type="service" id="sonata.cache.manager" />
             <argument />
             <argument type="service" id="sonata.block.loader.chain" />
             <argument type="service" id="sonata.block.renderer" />
+            <argument type="service" id="sonata.cache.manager" on-invalid="ignore" />
         </service>
 
         <service id="sonata.block.loader.chain" class="Sonata\BlockBundle\Block\BlockLoaderChain">
