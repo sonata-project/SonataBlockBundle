@@ -192,7 +192,7 @@ class BlockExtension extends \Twig_Extension
      */
     protected function getCacheService(BlockInterface $block)
     {
-        if ($this->cacheManager) {
+        if (!$this->cacheManager) {
             return false;
         }
 
