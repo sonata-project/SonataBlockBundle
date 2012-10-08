@@ -62,7 +62,7 @@ class SonataBlockExtension extends Extension
             $cacheBlocks[$service] = $settings['cache'];
         }
 
-        $container->getDefinition('sonata.block.twig.extension')->replaceArgument(2, $cacheBlocks);
+        $container->getDefinition('sonata.block.twig.extension')->replaceArgument(1, $cacheBlocks);
     }
 
     /**

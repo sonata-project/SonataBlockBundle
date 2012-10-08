@@ -40,13 +40,13 @@ class BlockExtension extends \Twig_Extension
      * @param BlockLoaderInterface $blockLoader
      * @param BlockRendererInterface $blockRenderer
      */
-    public function __construct(BlockServiceManagerInterface $blockServiceManager, CacheManagerInterface $cacheManager, array $cacheBlocks, BlockLoaderInterface $blockLoader, BlockRendererInterface $blockRenderer)
+    public function __construct(BlockServiceManagerInterface $blockServiceManager, array $cacheBlocks, BlockLoaderInterface $blockLoader, BlockRendererInterface $blockRenderer, CacheManagerInterface $cacheManager = null)
     {
         $this->blockServiceManager = $blockServiceManager;
-        $this->cacheManager        = $cacheManager;
         $this->cacheBlocks         = $cacheBlocks;
         $this->blockLoader         = $blockLoader;
         $this->blockRenderer       = $blockRenderer;
+        $this->cacheManager        = $cacheManager;
     }
 
     /**
@@ -165,10 +165,13 @@ class BlockExtension extends \Twig_Extension
             }
         }
 
-        $recorder = $this->cacheManager->getRecorder();
+        $recorder = null;
+        if ($this->cacheManager) {
+            $recorder = $this->cacheManager->getRecorder();
 
-        if ($recorder) {
-            $recorder->push();
+            if ($recorder) {
+                $recorder->push();
+            }
         }
 
         $response = $this->blockRenderer->render($block);
@@ -189,6 +192,10 @@ class BlockExtension extends \Twig_Extension
      */
     protected function getCacheService(BlockInterface $block)
     {
+        if ($this->cacheManager) {
+            return false;
+        }
+
         $type = isset($this->cacheBlocks[$block->getType()]) ? $this->cacheBlocks[$block->getType()] : false;
 
         if (!$type) {
