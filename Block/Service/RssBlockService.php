@@ -64,11 +64,11 @@ class RssBlockService extends BaseBlockService
     function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
         $errorElement
-            ->with('settings.url')
+            ->with('settings[url]')
                 ->assertNotNull(array())
                 ->assertNotBlank()
             ->end()
-            ->with('settings.title')
+            ->with('settings[title]')
                 ->assertNotNull(array())
                 ->assertNotBlank()
                 ->assertMaxLength(array('limit' => 50))
