@@ -76,7 +76,6 @@ abstract class BaseBlockService implements BlockServiceInterface
     public function getCacheKeys(BlockInterface $block)
     {
         return array(
-            'name'       => $this->getName(),
             'block_id'   => $block->getId(),
             'updated_at' => $block->getUpdatedAt()->format('U'),
         );
