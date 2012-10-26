@@ -17,6 +17,10 @@
         }
     ],
     "minimum-stability": "dev",
+    "require": {
+        "symfony/http-foundation": ">=2.1,<2.3-dev",
+        "symfony/form": ">=2.1,<2.3-dev"
+    },
     "require-dev": {
         "sonata-project/cache-bundle": "dev-master",
         "sonata-project/admin-bundle": "dev-master"
