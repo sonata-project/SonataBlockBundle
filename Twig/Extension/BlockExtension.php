@@ -148,9 +148,9 @@ class BlockExtension extends \Twig_Extension
             $block = $this->blockLoader->load($block);
         }
 
-        $cacheService = $cacheKeys = false;
-
-        if ($useCache && ($cacheService = $this->getCacheService($block))) {
+        $cacheKeys = false;
+        $cacheService = $useCache ? $this->getCacheService($block) : false;
+        if ($cacheService) {
             $cacheKeys = array_merge(
                 $extraCacheKeys,
                 $this->blockServiceManager->get($block)->getCacheKeys($block)
@@ -158,7 +158,6 @@ class BlockExtension extends \Twig_Extension
 
             if ($cacheService->has($cacheKeys)) {
                 $cacheElement = $cacheService->get($cacheKeys);
-
                 if (!$cacheElement->isExpired() && $cacheElement->getData() instanceof Response) {
                     return $cacheElement->getData()->getContent();
                 }
@@ -175,10 +174,8 @@ class BlockExtension extends \Twig_Extension
         }
 
         $response = $this->blockRenderer->render($block);
-
         $contextualKeys = $recorder ? $recorder->pop() : array();
-
-        if ($response->isCacheable() && $useCache && $cacheKeys && $cacheService) {
+        if ($response->isCacheable() && $cacheKeys && $cacheService) {
             $cacheService->set($cacheKeys, $response, $block->getTtl(), $contextualKeys);
         }
 
