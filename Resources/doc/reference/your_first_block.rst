@@ -140,7 +140,7 @@ defined, a error message is displayed.
 
 .. code-block:: jinja
 
-    {% extends 'SonataBlockBundle:Block:block_base.html.twig' %}
+    {% extends sonata_block.templates.block_base %}
 
     {% block block %}
         <h3>{{ settings.title }}</h3>

@@ -34,6 +34,13 @@ class Configuration implements ConfigurationInterface
                 ->prototype('scalar')->end()
             ->end()
 
+            ->arrayNode('templates')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->scalarNode('block_base')->defaultValue(null)->end()
+                ->end()
+            ->end()
+
             ->arrayNode('blocks')
                 ->useAttributeAsKey('id')
                 ->prototype('array')

@@ -47,6 +47,18 @@ class SonataBlockExtension extends Extension
         $this->configureLoaderChain($container, $config);
         $this->configureCache($container, $config);
         $this->configureForm($container, $config);
+
+        $bundles = $container->getParameter('kernel.bundles');
+        if ($config['templates']['block_base'] === null) {
+            if (isset($bundles['SonataPageBundle'])) {
+                $config['templates']['block_base'] = 'SonataPageBundle:Block:block_base.html.twig';
+            } else {
+                $config['templates']['block_base'] = 'SonataBlockBundle:Block:block_base.html.twig';
+            }
+        }
+
+        $container->getDefinition('sonata.block.twig.global')
+            ->replaceArgument(1, $config['templates']);
     }
 
     /**

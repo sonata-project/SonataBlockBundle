@@ -13,11 +13,13 @@ namespace Sonata\BlockBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Sonata\BlockBundle\DependencyInjection\Compiler\TweakCompilerPass;
+use Sonata\BlockBundle\DependencyInjection\Compiler\GlobalVariablesCompilerPass;
 
 class SonataBlockBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new TweakCompilerPass());
+        $container->addCompilerPass(new GlobalVariablesCompilerPass());
     }
 }
