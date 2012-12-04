@@ -76,7 +76,7 @@ interface BlockServiceInterface
      *
      * @return array
      */
-    function getJavacripts($media);
+    function getJavascripts($media);
 
     /**
      * @param $media

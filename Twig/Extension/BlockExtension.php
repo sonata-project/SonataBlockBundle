@@ -90,7 +90,7 @@ class BlockExtension extends \Twig_Extension
         $javascripts = array();
 
         foreach ($this->blockServiceManager->getLoadedServices() as $service) {
-            $javascripts = array_merge($javascripts, $service->getJavacripts($media));
+            $javascripts = array_merge($javascripts, $service->getJavascripts($media));
         }
 
         if (count($javascripts) == 0) {
