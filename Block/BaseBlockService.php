@@ -133,7 +133,7 @@ abstract class BaseBlockService implements BlockServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function getJavacripts($media)
+    public function getJavascripts($media)
     {
         return array();
     }
