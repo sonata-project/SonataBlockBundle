@@ -47,6 +47,7 @@ class SonataBlockExtension extends Extension
         $this->configureLoaderChain($container, $config);
         $this->configureCache($container, $config);
         $this->configureForm($container, $config);
+        $this->configureProfiler($container, $config);
 
         $bundles = $container->getParameter('kernel.bundles');
         if ($config['templates']['block_base'] === null) {
@@ -121,5 +122,28 @@ class SonataBlockExtension extends Extension
 
         $container->getDefinition('sonata.block.form.type.block')
             ->replaceArgument(1, $contexts);
+    }
+
+    /**
+     * Configures the block profiler
+     *
+     * @param ContainerBuilder $container Container
+     * @param array            $config    Configuration
+     */
+    public function configureProfiler(ContainerBuilder $container, array $config)
+    {
+        if (!$config['profiler']['enabled']) {
+            return;
+        }
+
+        // replace renderer with a traceable renderer
+        $renderer = $container->getDefinition('sonata.block.renderer');
+        $renderer->setClass($config['profiler']['renderer_class']);
+
+        // add the block data collector
+        $definition = new Definition('Sonata\BlockBundle\Profiler\DataCollector\BlockDataCollector');
+        $definition->addTag('data_collector', array('id' => 'block', 'template' => $config['profiler']['template']));
+        $definition->addArgument(new Reference('sonata.block.renderer'));
+        $container->addDefinitions(array($definition));
     }
 }

@@ -29,6 +29,15 @@ class Configuration implements ConfigurationInterface
         $node = $treeBuilder->root('sonata_block')->children();
 
         $node
+            ->arrayNode('profiler')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->scalarNode('enabled')->defaultValue('%kernel.debug%')->end()
+                    ->scalarNode('renderer_class')->defaultValue('Sonata\BlockBundle\Block\TraceableBlockRenderer')->end()
+                    ->scalarNode('template')->defaultValue('SonataBlockBundle:Profiler:block.html.twig')->end()
+                ->end()
+            ->end()
+
             ->arrayNode('default_contexts')
                 ->isRequired()
                 ->prototype('scalar')->end()

@@ -1,0 +1,70 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    <div class="sf-toolbar-block">
+        <div class="sf-toolbar-icon">
+            <a href="{{ path('_profiler', { 'token': token, 'panel': name }) }}">
+                {# fake image span #}<span style="width:0px; height: 28px; vertical-align: middle;"></span>
+                <span class="sf-toolbar-status">{{ collector.blocks|length }}</span> blocks
+            </a>
+        </div>
+        <div class="sf-toolbar-info">
+            <div class="sf-toolbar-info-piece">
+                <b>Real Blocks</b>
+                <span>{{ collector.realBlocks|length }}</span>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <b>Containers</b>
+                <span>{{ collector.containers|length }}</span>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <b>Total Blocks</b>
+                <span>{{ collector.blocks|length }}</span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block menu %}
+    <span class="label">
+        <strong>Blocks</strong>
+        <span class="count">
+            <span>{{ collector.blocks|length }}</span>
+        </span>
+    </span>
+{% endblock %}
+
+{% block panel %}
+    <h2>Real Blocks</h2>
+    {% set blocks = collector.realBlocks %}
+    {{ block('table') }}
+
+    <h2>Containers Blocks</h2>
+    {% set blocks = collector.containers %}
+    {{ block('table') }}
+
+    {{ block('javascript') }}
+{% endblock %}
+
+{% block table %}
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Memory (diff)</th>
+            <th>Memory (peak)</th>
+            <th>Duration</th>
+        </tr>
+        {% for id, block in blocks %}
+            <tr>
+                <th>{{ id }}</th>
+                <td>{{ block.name }}</td>
+                <td>{{ block.type }}</td>
+                <td>{{ ((block.memory_end-block.memory_start)/1000)|number_format(0) }} Kb</td>
+                <td>{{ (block.memory_peak/1000)|number_format(0) }} Kb</td>
+                <td>{{ ((block.time_end-block.time_start)*1000)|number_format(2) }} ms</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
