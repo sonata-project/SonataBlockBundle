@@ -11,3 +11,4 @@ Reference Guide
    reference/installation
    reference/twig_helpers
    reference/your_first_block
+   reference/profiler
