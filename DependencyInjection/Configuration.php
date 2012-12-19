@@ -62,6 +62,45 @@ class Configuration implements ConfigurationInterface
                             ->useAttributeAsKey('id')
                             ->prototype('scalar')->end()
                         ->end()
+                        ->arrayNode('exception')
+                            ->children()
+                                ->scalarNode('filter')  ->defaultValue(null)->end()
+                                ->scalarNode('renderer')->defaultValue(null)->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+
+            ->arrayNode('exception')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->arrayNode('default')
+                        ->addDefaultsIfNotSet()
+                        ->children()
+                            ->scalarNode('filter')  ->defaultValue('debug_only')->end()
+                            ->scalarNode('renderer')->defaultValue('throw')->end()
+                        ->end()
+                    ->end()
+
+                    ->arrayNode('filters')
+                        ->useAttributeAsKey('id')
+                        ->prototype('scalar')->end()
+                        ->defaultValue(array(
+                            'debug_only'             => 'sonata.block.exception.filter.debug_only',
+                            'ignore_block_exception' => 'sonata.block.exception.filter.ignore_block_exception',
+                            'keep_all'               => 'sonata.block.exception.filter.keep_all',
+                            'keep_none'              => 'sonata.block.exception.filter.keep_none',
+                        ))
+                    ->end()
+                    ->arrayNode('renderers')
+                        ->useAttributeAsKey('id')
+                        ->prototype('scalar')->end()
+                        ->defaultValue(array(
+                            'inline'                 => 'sonata.block.exception.renderer.inline',
+                            'inline_debug'           => 'sonata.block.exception.renderer.inline_debug',
+                            'throw'                  => 'sonata.block.exception.renderer.throw',
+                        ))
                     ->end()
                 ->end()
             ->end()

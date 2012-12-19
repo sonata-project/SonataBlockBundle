@@ -13,6 +13,7 @@
 
         <service id="sonata.block.renderer" class="Sonata\BlockBundle\Block\BlockRenderer">
             <argument type="service" id="sonata.block.manager" />
+            <argument type="service" id="sonata.block.exception.strategy.manager" />
             <argument type="service" id="logger"  on-invalid="ignore"  />
             <argument>%kernel.debug%</argument>
         </service>

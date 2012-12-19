@@ -15,10 +15,25 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
+use Sonata\BlockBundle\Exception\Strategy\StrategyManagerInterface;
+
+/**
+ * Handles the execution and rendering of a block
+ */
 class BlockRenderer implements BlockRendererInterface
 {
     /**
-     * @var LoggerInterface
+     * @var BlockServiceManagerInterface
+     */
+    protected $blockServiceManager;
+
+    /**
+     * @var StrategyManagerInterface
+     */
+    protected $exceptionStrategyManager;
+
+    /**
+     * @var LoggerInterface|null
      */
     protected $logger;
 
@@ -28,20 +43,19 @@ class BlockRenderer implements BlockRendererInterface
     protected $debug;
 
     /**
-     * @var BlockServiceManagerInterface
+     * Constructor
+     *
+     * @param BlockServiceManagerInterface $blockServiceManager      Block service manager
+     * @param StrategyManagerInterface     $exceptionStrategyManager Exception strategy manager
+     * @param LoggerInterface              $logger                   Logger class
+     * @param boolean                      $debug                    Whether in debug mode or not
      */
-    protected $blockServiceManager;
-
-    /**
-     * @param BlockServiceManagerInterface $blockServiceManager
-     * @param LoggerInterface $logger
-     * @param boolean $debug
-     */
-    public function __construct(BlockServiceManagerInterface $blockServiceManager, LoggerInterface $logger, $debug)
+    public function __construct(BlockServiceManagerInterface $blockServiceManager, StrategyManagerInterface $exceptionStrategyManager, LoggerInterface $logger = null, $debug = false)
     {
-        $this->debug  = $debug;
-        $this->logger = $logger;
-        $this->blockServiceManager = $blockServiceManager;
+        $this->blockServiceManager      = $blockServiceManager;
+        $this->exceptionStrategyManager = $exceptionStrategyManager;
+        $this->logger                   = $logger;
+        $this->debug                    = $debug;
     }
 
     /**
@@ -55,28 +69,20 @@ class BlockRenderer implements BlockRendererInterface
 
         try {
             $service = $this->blockServiceManager->get($block);
+            $service->load($block);
+            $newResponse = $service->execute($block, $response);
 
-            $service->load($block); // load the block
-
-            $response = $service->execute($block, $response);
-
-            if (!$response instanceof Response) {
+            if (!$newResponse instanceof Response) {
                 throw new \RuntimeException('A block service must return a Response object');
             }
 
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
             if ($this->logger) {
-                $this->logger->crit(sprintf('[cms::renderBlock] block.id=%d - error while rendering block - %s', $block->getId(), $e->getMessage()));
+                $this->logger->crit(sprintf('[cms::renderBlock] block.id=%d - error while rendering block - %s', $block->getId(), $exception->getMessage()));
             }
-
-            if ($this->debug) {
-                throw $e;
-            }
-
-            $response = new Response;
-            $response->setPrivate();
+            $newResponse = $this->exceptionStrategyManager->handleException($exception, $block, $response);
         }
 
-        return $response;
+        return $newResponse;
     }
 }
