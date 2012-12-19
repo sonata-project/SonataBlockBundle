@@ -43,11 +43,13 @@ class SonataBlockExtension extends Extension
         $loader->load('block.xml');
         $loader->load('form.xml');
         $loader->load('core.xml');
+        $loader->load('exception.xml');
 
         $this->configureLoaderChain($container, $config);
         $this->configureCache($container, $config);
         $this->configureForm($container, $config);
         $this->configureProfiler($container, $config);
+        $this->configureException($container, $config);
 
         $bundles = $container->getParameter('kernel.bundles');
         if ($config['templates']['block_base'] === null) {
@@ -145,5 +147,52 @@ class SonataBlockExtension extends Extension
         $definition->addTag('data_collector', array('id' => 'block', 'template' => $config['profiler']['template']));
         $definition->addArgument(new Reference('sonata.block.renderer'));
         $container->addDefinitions(array($definition));
+    }
+
+    /**
+     * Configure the exception parameters
+     *
+     * @param ContainerBuilder $container Container builder
+     * @param array            $config    An array of configuration
+     *
+     * @return void
+     */
+    public function configureException(ContainerBuilder $container, array $config)
+    {
+        // retrieve available filters
+        $filters = array();
+        foreach ($config['exception']['filters'] as $name => $filter) {
+            $filters[$name] = $filter;
+        }
+
+        // retrieve available renderers
+        $renderers = array();
+        foreach ($config['exception']['renderers'] as $name => $renderer) {
+            $renderers[$name] = $renderer;
+        }
+
+        // retrieve block customization
+        $blockFilters = array();
+        $blockRenderers = array();
+        foreach ($config['blocks'] as $service => $settings) {
+            if (isset($settings['exception']) && isset($settings['exception']['filter'])) {
+                $blockFilters[$service] = $settings['exception']['filter'];
+            }
+            if (isset($settings['exception']) && isset($settings['exception']['renderer'])) {
+                $blockRenderers[$service] = $settings['exception']['renderer'];
+            }
+        }
+
+        $definition = $container->getDefinition('sonata.block.exception.strategy.manager');
+        $definition->replaceArgument(1, $filters);
+        $definition->replaceArgument(2, $renderers);
+        $definition->replaceArgument(3, $blockFilters);
+        $definition->replaceArgument(4, $blockRenderers);
+
+        // retrieve default values
+        $defaultFilter = $config['exception']['default']['filter'];
+        $defaultRenderer = $config['exception']['default']['renderer'];
+        $definition->addMethodCall('setDefaultFilter', array($defaultFilter));
+        $definition->addMethodCall('setDefaultRenderer', array($defaultRenderer));
     }
 }
