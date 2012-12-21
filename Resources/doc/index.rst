@@ -12,3 +12,4 @@ Reference Guide
    reference/twig_helpers
    reference/your_first_block
    reference/profiler
+   reference/exceptions
