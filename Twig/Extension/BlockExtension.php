@@ -146,6 +146,11 @@ class BlockExtension extends \Twig_Extension
     {
         if (!$block instanceof BlockInterface) {
             $block = $this->blockLoader->load($block);
+
+            // The loader match the block, but cannot find it
+            if (!$block instanceof BlockInterface) {
+                return '';
+            }
         }
 
         $cacheKeys = false;
