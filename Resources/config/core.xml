@@ -11,11 +11,15 @@
             <argument type="service" id="logger"  on-invalid="ignore"  />
         </service>
 
-        <service id="sonata.block.renderer" class="Sonata\BlockBundle\Block\BlockRenderer">
+        <service id="sonata.block.renderer.default" class="Sonata\BlockBundle\Block\BlockRenderer">
             <argument type="service" id="sonata.block.manager" />
             <argument type="service" id="sonata.block.exception.strategy.manager" />
             <argument type="service" id="logger"  on-invalid="ignore"  />
             <argument>%kernel.debug%</argument>
+        </service>
+
+        <service id="sonata.block.renderer.traceable" class="Sonata\BlockBundle\Block\TraceableBlockRenderer">
+            <argument />
         </service>
 
         <service id="sonata.block.twig.extension" class="Sonata\BlockBundle\Twig\Extension\BlockExtension" public="false">

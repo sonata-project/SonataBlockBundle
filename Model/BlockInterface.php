@@ -117,48 +117,6 @@ interface BlockInterface
     function getUpdatedAt();
 
     /**
-     * Add one child block
-     *
-     * @param BlockInterface $children
-     */
-    function addChildren(BlockInterface $children);
-
-    /**
-     * Returns child blocks
-     *
-     * @return \Doctrine\Common\Collections\Collection $children
-     */
-    function getChildren();
-
-    /**
-     * Returns whether or not this block has children
-     *
-     * @return boolean
-     */
-    function hasChildren();
-
-    /**
-     * Set the parent block
-     *
-     * @param BlockInterface|null $parent
-     */
-    function setParent(BlockInterface $parent = null);
-
-    /**
-     * Returns the parent block
-     *
-     * @return BlockInterface $parent
-     */
-    function getParent();
-
-    /**
-     * Returns whether or not this block has a parent
-     *
-     * @return void
-     */
-    function hasParent();
-
-    /**
      * Returns the block cache TTL
      *
      * @return integer
@@ -203,4 +161,46 @@ interface BlockInterface
      * @return mixed
      */
     function getSetting($name, $default = null);
+
+    /**
+     * Add one child block
+     *
+     * @param BlockInterface $children
+     */
+    function addChildren(BlockInterface $children);
+
+    /**
+     * Returns child blocks
+     *
+     * @return \Doctrine\Common\Collections\Collection $children
+     */
+    function getChildren();
+
+    /**
+     * Returns whether or not this block has children
+     *
+     * @return boolean
+     */
+    function hasChildren();
+
+    /**
+     * Set the parent block
+     *
+     * @param BlockInterface|null $parent
+     */
+    function setParent(BlockInterface $parent = null);
+
+    /**
+     * Returns the parent block
+     *
+     * @return BlockInterface $parent
+     */
+    function getParent();
+
+    /**
+     * Returns whether or not this block has a parent
+     *
+     * @return void
+     */
+    function hasParent();
 }

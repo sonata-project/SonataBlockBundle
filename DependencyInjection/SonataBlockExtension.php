@@ -135,18 +135,24 @@ class SonataBlockExtension extends Extension
     public function configureProfiler(ContainerBuilder $container, array $config)
     {
         if (!$config['profiler']['enabled']) {
+            $container->setAlias('sonata.block.renderer', 'sonata.block.renderer.default');
+
+            $container->removeDefinition('sonata.block.renderer.traceable');
             return;
         }
 
-        // replace renderer with a traceable renderer
-        $renderer = $container->getDefinition('sonata.block.renderer');
-        $renderer->setClass($config['profiler']['renderer_class']);
+        $container->setAlias('sonata.block.renderer', 'sonata.block.renderer.traceable');
+        $container
+            ->getDefinition('sonata.block.renderer.traceable')
+            ->replaceArgument(0, new Reference('sonata.block.renderer.default'));
 
         // add the block data collector
         $definition = new Definition('Sonata\BlockBundle\Profiler\DataCollector\BlockDataCollector');
+        $definition->setPublic(false);
         $definition->addTag('data_collector', array('id' => 'block', 'template' => $config['profiler']['template']));
-        $definition->addArgument(new Reference('sonata.block.renderer'));
-        $container->addDefinitions(array($definition));
+        $definition->addArgument(new Reference('sonata.block.renderer.traceable'));
+        $definition->addArgument($config['profiler']['container_types']);
+        $container->setDefinition('sonata.block.data_collector', $definition);
     }
 
     /**

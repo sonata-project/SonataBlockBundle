@@ -33,8 +33,13 @@ class Configuration implements ConfigurationInterface
                 ->addDefaultsIfNotSet()
                 ->children()
                     ->scalarNode('enabled')->defaultValue('%kernel.debug%')->end()
-                    ->scalarNode('renderer_class')->defaultValue('Sonata\BlockBundle\Block\TraceableBlockRenderer')->end()
                     ->scalarNode('template')->defaultValue('SonataBlockBundle:Profiler:block.html.twig')->end()
+                    ->arrayNode('container_types')
+                        ->isRequired()
+                        // add default value to well know users of BlockBundle
+                        ->defaultValue(array('sonata.page.block.container', 'symfony_cmf.block.container'))
+                        ->prototype('scalar')->end()
+                    ->end()
                 ->end()
             ->end()
 

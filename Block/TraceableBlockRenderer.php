@@ -13,18 +13,30 @@ namespace Sonata\BlockBundle\Block;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Sonata\BlockBundle\Block\BlockRendererInterface;
 
 /**
  * Renders a block using a block service and traces the block rendering
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
+ * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class TraceableBlockRenderer extends BlockRenderer
+class TraceableBlockRenderer implements BlockRendererInterface
 {
     /**
      * @var array
      */
     protected $traces = array();
+
+    protected $blockRenderer;
+
+    /**
+     * @param BlockRendererInterface $blockRender The block renderer to trace
+     */
+    public function __construct(BlockRendererInterface $blockRender)
+    {
+        $this->blockRenderer = $blockRender;
+    }
 
     /**
      * Renders a block and analyze metrics before and after the rendering
@@ -36,15 +48,11 @@ class TraceableBlockRenderer extends BlockRenderer
      */
     public function render(BlockInterface $block, Response $response = null)
     {
-        if ($this->debug) {
-            $this->startTracing($block);
-        }
+        $this->startTracing($block);
 
-        $response = parent::render($block, $response);
+        $response = $this->blockRenderer->render($block, $response);
 
-        if ($this->debug) {
-            $this->endTracing($block);
-        }
+        $this->endTracing($block);
 
         return $response;
     }
@@ -54,13 +62,16 @@ class TraceableBlockRenderer extends BlockRenderer
      *
      * @param BlockInterface $block
      */
-    public function startTracing(BlockInterface $block)
+    protected function startTracing(BlockInterface $block)
     {
         $this->traces[$block->getId()] = array(
-            'name'          => $block->getName(),
-            'type'          => $block->getType(),
+            'name'         => $block->getName(),
+            'type'         => $block->getType(),
             'time_start'    => microtime(true),
             'memory_start'  => memory_get_usage(true),
+            'time_end'      => false,
+            'memory_end'    => false,
+            'memory_peak'   => false,
         );
     }
 
@@ -69,11 +80,9 @@ class TraceableBlockRenderer extends BlockRenderer
      *
      * @param BlockInterface $block
      */
-    public function endTracing(BlockInterface $block)
+    protected function endTracing(BlockInterface $block)
     {
-        $trace =& $this->traces[$block->getId()];
-
-        $trace = array_merge($trace, array(
+        $this->traces[$block->getId()] = array_merge($this->traces[$block->getId()], array(
             'time_end'      => microtime(true),
             'memory_end'    => memory_get_usage(true),
             'memory_peak'   => memory_get_peak_usage(true),

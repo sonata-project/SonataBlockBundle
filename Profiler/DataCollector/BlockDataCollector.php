@@ -42,14 +42,18 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
      */
     protected $realBlocks = array();
 
+    protected $containerTypes = array();
+
     /**
      * Constructor
      *
-     * @param TraceableBlockRenderer $renderer Block renderer
+     * @param TraceableBlockRenderer $renderer       Block renderer
+     * @param array                  $containerTypes array of container types
      */
-    public function __construct(TraceableBlockRenderer $renderer)
+    public function __construct(TraceableBlockRenderer $renderer, array $containerTypes)
     {
         $this->renderer = $renderer;
+        $this->containerTypes = $containerTypes;
     }
 
     /**
@@ -65,7 +69,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
 
         // split into containers & real blocks
         foreach ($this->blocks as $block) {
-            if ($block['type'] === 'sonata.page.block.container') {
+            if (in_array($block['type'], $this->containerTypes)) {
                 $this->containers[] = $block;
             } else {
                 $this->realBlocks[] = $block;
