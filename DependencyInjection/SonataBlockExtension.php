@@ -93,7 +93,7 @@ class SonataBlockExtension extends Extension
             $configs[$service] = $settings['settings'];
         }
 
-        $container->getDefinition('sonata.block.loader.service')->replaceArgument(0, $configs);
+        $container->getDefinition('sonata.block.loader.chain')->replaceArgument(1, $configs);
     }
 
     /**
