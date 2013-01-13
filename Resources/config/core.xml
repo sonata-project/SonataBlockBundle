@@ -34,12 +34,11 @@
 
         <service id="sonata.block.loader.chain" class="Sonata\BlockBundle\Block\BlockLoaderChain">
             <argument />
+            <argument />
         </service>
 
         <service id="sonata.block.loader.service" class="Sonata\BlockBundle\Block\Loader\ServiceLoader">
             <tag name="sonata.block.loader" />
-
-            <argument />
         </service>
 
         <service id="sonata.block.twig.global" class="Sonata\BlockBundle\Twig\GlobalVariables" >

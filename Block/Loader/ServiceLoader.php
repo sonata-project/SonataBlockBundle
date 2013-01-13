@@ -12,21 +12,10 @@
 namespace Sonata\BlockBundle\Block\Loader;
 
 use Sonata\BlockBundle\Block\BlockLoaderInterface;
-use Sonata\BlockBundle\Model\BlockManagerInterface;
 use Sonata\BlockBundle\Model\Block;
 
 class ServiceLoader implements BlockLoaderInterface
 {
-    protected $settings;
-
-    /**
-     * @param array $settings
-     */
-    public function __construct(array $settings)
-    {
-        $this->settings     = $settings;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -35,10 +24,15 @@ class ServiceLoader implements BlockLoaderInterface
         $block = new Block;
         $block->setId(uniqid());
         $block->setType($configuration['type']);
-        $block->setSettings($this->getSettings($configuration));
         $block->setEnabled(true);
         $block->setCreatedAt(new \DateTime);
         $block->setUpdatedAt(new \DateTime);
+
+        // merge settings
+        $block->setSettings(array_merge(
+            isset($configuration['settings']) && is_array($configuration['settings']) ? $configuration['settings'] : array(),
+            is_array($block->getSettings()) ? $block->getSettings() : array()
+        ));
 
         return $block;
     }
@@ -57,22 +51,5 @@ class ServiceLoader implements BlockLoaderInterface
         }
 
         return true;
-    }
-
-    /**
-     * @throws \RuntimeException
-     * @param $block
-     * @return array
-     */
-    private function getSettings($block)
-    {
-        if (!isset($this->settings[$block['type']])) {
-            throw new \RuntimeException(sprintf('The block type %s does not exist', $block['type']));
-        }
-
-        return array_merge(
-            $this->settings[$block['type']],
-            isset($block['settings']) && is_array($block['settings']) ? $block['settings'] : array()
-        );
     }
 }

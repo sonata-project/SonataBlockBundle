@@ -15,19 +15,8 @@ use Sonata\BlockBundle\Block\Loader\ServiceLoader;
 
 class ServiceLoaderTest extends \PHPUnit_Framework_TestCase
 {
-
-    /**
-     * @expectedException \RuntimeException
-     */
-    public function testBlockNotFoundException()
-    {
-        $loader = new ServiceLoader(array());
-        $loader->load('foo');
-    }
-
     public function testLoader()
     {
-
         $loader = new ServiceLoader(array('foo.bar' => array('option1' => 42)));
 
         $definition = array(
