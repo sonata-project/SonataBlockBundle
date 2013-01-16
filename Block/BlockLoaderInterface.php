@@ -16,7 +16,7 @@ interface BlockLoaderInterface
     /**
      * @param mixed $name
      *
-     * @return BlockLoaderInterface
+     * @return BlockLoaderInterface|null the block with that name or null if not found
      */
     function load($name);
 
