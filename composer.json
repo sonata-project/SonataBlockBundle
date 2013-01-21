@@ -18,7 +18,7 @@
     ],
     "require": {
         "symfony/framework-bundle": "2.*",
-        "sonata-project/cache-bundle": "2.0.*"
+        "sonata-project/cache-bundle": "2.0.x-dev"
     },
     "minimum-stability": "dev",
     "autoload": {
