@@ -12,13 +12,12 @@
 namespace Sonata\BlockBundle\Block\Service;
 
 use Symfony\Component\HttpFoundation\Response;
-use Sonata\BlockBundle\Block\BlockServiceInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Block\BaseBlockService;
 
-class EmptyBlockService extends BaseBlockService implements BlockServiceInterface
+class EmptyBlockService extends BaseBlockService
 {
     /**
      * {@inheritdoc}
