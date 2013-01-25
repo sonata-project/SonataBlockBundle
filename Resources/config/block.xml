@@ -4,11 +4,18 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sonata.block.service.empty.class">Sonata\BlockBundle\Block\Service\EmptyBlockService</parameter>
         <parameter key="sonata.block.service.text.class">Sonata\BlockBundle\Block\Service\TextBlockService</parameter>
         <parameter key="sonata.block.service.rss.class">Sonata\BlockBundle\Block\Service\RssBlockService</parameter>
     </parameters>
 
     <services>
+        <service id="sonata.block.service.empty" class="%sonata.block.service.empty.class%">
+            <tag name="sonata.block" />
+            <argument>sonata.block.empty</argument>
+            <argument type="service" id="templating" />
+        </service>
+
         <service id="sonata.block.service.text" class="%sonata.block.service.text.class%">
             <tag name="sonata.block" />
             <argument>sonata.block.text</argument>
