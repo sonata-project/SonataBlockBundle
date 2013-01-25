@@ -13,3 +13,4 @@ Reference Guide
    reference/your_first_block
    reference/profiler
    reference/exceptions
+   reference/advanched_usage
