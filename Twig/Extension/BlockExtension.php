@@ -174,6 +174,7 @@ class BlockExtension extends \Twig_Extension
             $recorder = $this->cacheManager->getRecorder();
 
             if ($recorder) {
+                $recorder->add($block);
                 $recorder->push();
             }
         }
