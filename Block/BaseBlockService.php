@@ -30,7 +30,7 @@ abstract class BaseBlockService implements BlockServiceInterface
 
     /**
      * @param string $name
-     * @param \Symfony\Component\Templating\EngineInterface $templating
+     * @param \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface $templating
      */
     public function __construct($name, EngineInterface $templating)
     {
