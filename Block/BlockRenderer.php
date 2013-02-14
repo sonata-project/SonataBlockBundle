@@ -70,6 +70,13 @@ class BlockRenderer implements BlockRendererInterface
         try {
             $service = $this->blockServiceManager->get($block);
             $service->load($block);
+
+            if (null === $response) {
+                // In order to have the block's response's isCacheable() to true
+                $response = new Response();
+                $response->setTtl($block->getTtl());
+            }
+
             $newResponse = $service->execute($block, $response);
 
             if (!$newResponse instanceof Response) {
