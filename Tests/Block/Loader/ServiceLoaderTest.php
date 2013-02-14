@@ -21,8 +21,8 @@ class ServiceLoaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testBlockNotFoundException()
     {
-        $loader = new ServiceLoader(array());
-        $loader->load('foo');
+        $loader = new ServiceLoader(array('type' => 'foo'));
+        $loader->load(array('type' => 'foo'));
     }
 
     public function testLoader()
