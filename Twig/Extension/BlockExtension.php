@@ -182,7 +182,7 @@ class BlockExtension extends \Twig_Extension
         $response = $this->blockRenderer->render($block);
         $contextualKeys = $recorder ? $recorder->pop() : array();
         if ($response->isCacheable() && $cacheKeys && $cacheService) {
-            $cacheService->set($cacheKeys, $response, $block->getTtl(), $contextualKeys);
+            $cacheService->set($cacheKeys, $response, $response->getTtl(), $contextualKeys);
         }
 
         return $response->getContent();
