@@ -15,7 +15,6 @@ use Sonata\BlockBundle\Model\BlockInterface;
 
 use Sonata\AdminBundle\Validator\ErrorElement;
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -160,7 +159,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
             $this->inValidate = true;
             $this->get($block)->validateBlock($errorElement, $block);
             $this->inValidate = false;
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->inValidate = false;
         }
     }

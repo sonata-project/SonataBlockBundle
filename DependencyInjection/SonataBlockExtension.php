@@ -11,7 +11,6 @@
 namespace Sonata\BlockBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
@@ -30,7 +29,7 @@ class SonataBlockExtension extends Extension
     /**
      * Loads the url shortener configuration.
      *
-     * @param array            $configs    An array of configuration settings
+     * @param array            $configs   An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
     public function load(array $configs, ContainerBuilder $container)
@@ -66,7 +65,7 @@ class SonataBlockExtension extends Extension
 
     /**
      * @param ContainerBuilder $container
-     * @param array $config
+     * @param array            $config
      *
      * @return void
      */
@@ -82,7 +81,7 @@ class SonataBlockExtension extends Extension
 
     /**
      * @param ContainerBuilder $container
-     * @param array $config
+     * @param array            $config
      *
      * @return void
      */
@@ -98,7 +97,7 @@ class SonataBlockExtension extends Extension
 
     /**
      * @param ContainerBuilder $container
-     * @param array $config
+     * @param array            $config
      *
      * @return void
      */
@@ -138,6 +137,7 @@ class SonataBlockExtension extends Extension
             $container->setAlias('sonata.block.renderer', 'sonata.block.renderer.default');
 
             $container->removeDefinition('sonata.block.renderer.traceable');
+
             return;
         }
 

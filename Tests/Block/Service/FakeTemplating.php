@@ -42,12 +42,12 @@ class FakeTemplating implements EngineInterface
         return new Response;
     }
 
-    function supports($name)
+    public function supports($name)
     {
         return true;
     }
 
-    function exists($name)
+    public function exists($name)
     {
         return true;
     }

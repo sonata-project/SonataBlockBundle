@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\BlockBundle\Block;
 
 use Sonata\AdminBundle\Validator\ErrorElement;
@@ -22,7 +21,7 @@ interface BlockServiceManagerInterface
      *
      * @return void
      */
-    function add($name, $service);
+    public function add($name, $service);
 
     /**
      * Return the block service linked to the link
@@ -31,19 +30,19 @@ interface BlockServiceManagerInterface
      *
      * @return BlockServiceInterface
      */
-    function get(BlockInterface $block);
+    public function get(BlockInterface $block);
 
     /**
      * @param array $blockServices
      *
      * @return void
      */
-    function setServices(array $blockServices);
+    public function setServices(array $blockServices);
 
     /**
      * @return array
      */
-    function getServices();
+    public function getServices();
 
     /**
      *
@@ -51,25 +50,25 @@ interface BlockServiceManagerInterface
      *
      * @return boolean
      */
-    function has($name);
+    public function has($name);
 
     /**
      * @param $name
      *
      * @return void
      */
-    function getService($name);
+    public function getService($name);
 
     /**
      * @return array
      */
-    function getLoadedServices();
+    public function getLoadedServices();
 
     /**
-     * @param ErrorElement $errorElement
+     * @param ErrorElement   $errorElement
      * @param BlockInterface $block
      *
      * @return void
      */
-    function validate(ErrorElement $errorElement, BlockInterface $block);
+    public function validate(ErrorElement $errorElement, BlockInterface $block);
 }

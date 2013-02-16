@@ -10,7 +10,6 @@
 
 namespace Sonata\BlockBundle\Exception\Filter;
 
-use Symfony\Component\HttpFoundation\Response;
 use Sonata\BlockBundle\Model\BlockInterface;
 
 /**

@@ -69,7 +69,7 @@ class TextBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    function getDefaultSettings()
+    public function getDefaultSettings()
     {
         return array(
             'content' => 'Insert your custom content here',

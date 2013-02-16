@@ -36,9 +36,9 @@ class EmptyBlockService extends BaseBlockService
     }
 
     /**
-     * @param \Sonata\BlockBundle\Model\BlockInterface $block
+     * @param \Sonata\BlockBundle\Model\BlockInterface        $block
      * @param null|\Symfony\Component\HttpFoundation\Response $response
-     * @param \Symfony\Component\HttpFoundation\Response $response
+     * @param \Symfony\Component\HttpFoundation\Response      $response
      */
     public function execute(BlockInterface $block, Response $response = null)
     {

@@ -18,9 +18,9 @@ interface BlockRendererInterface
 {
     /**
      * @param BlockInterface $name
-     * @param null|Response $response
+     * @param null|Response  $response
      *
      * @return Response
      */
-    function render(BlockInterface $name, Response $response = null);
+    public function render(BlockInterface $name, Response $response = null);
 }

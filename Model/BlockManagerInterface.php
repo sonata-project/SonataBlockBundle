@@ -17,7 +17,7 @@ interface BlockManagerInterface
      *
      * @return BlockInterface
      */
-    function create();
+    public function create();
 
     /**
      * Deletes a block
@@ -26,7 +26,7 @@ interface BlockManagerInterface
      *
      * @return void
      */
-    function delete(BlockInterface $block);
+    public function delete(BlockInterface $block);
 
     /**
      * Finds one block by the given criteria
@@ -35,7 +35,7 @@ interface BlockManagerInterface
      *
      * @return BlockInterface
      */
-    function findOneBy(array $criteria);
+    public function findOneBy(array $criteria);
 
     /**
      * Finds one block by the given criteria
@@ -44,14 +44,14 @@ interface BlockManagerInterface
      *
      * @return BlockInterface
      */
-    function findBy(array $criteria);
+    public function findBy(array $criteria);
 
     /**
      * Returns the block's fully qualified class name
      *
      * @return string
      */
-    function getClass();
+    public function getClass();
 
     /**
      * Save a block
@@ -60,5 +60,5 @@ interface BlockManagerInterface
      *
      * @return void
      */
-    function save(BlockInterface $block);
+    public function save(BlockInterface $block);
 }

@@ -12,7 +12,6 @@
 namespace Sonata\BlockBundle\Block\Loader;
 
 use Sonata\BlockBundle\Block\BlockLoaderInterface;
-use Sonata\BlockBundle\Model\BlockManagerInterface;
 use Sonata\BlockBundle\Model\Block;
 
 class ServiceLoader implements BlockLoaderInterface

@@ -17,15 +17,15 @@ interface BlockLoaderInterface
      * @param mixed $name
      *
      * @return BlockLoaderInterface
-     * 
+     *
      * @throws \Sonata\BlockBundle\Exception\BlockNotFoundException if no block with that name is found
      */
-    function load($name);
+    public function load($name);
 
     /**
      * @param mixed $name
      *
      * @return boolean
      */
-    function support($name);
+    public function support($name);
 }

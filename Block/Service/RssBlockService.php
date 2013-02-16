@@ -61,7 +61,7 @@ class RssBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    function validateBlock(ErrorElement $errorElement, BlockInterface $block)
+    public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
         $errorElement
             ->with('settings[url]')
@@ -100,7 +100,7 @@ class RssBlockService extends BaseBlockService
                 try {
                     $feeds = new \SimpleXMLElement($content);
                     $feeds = $feeds->channel->item;
-                } catch(\Exception $e) {
+                } catch (\Exception $e) {
                     // silently fail error
                 }
             }

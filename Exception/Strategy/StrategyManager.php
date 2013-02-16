@@ -201,7 +201,7 @@ class StrategyManager implements StrategyManagerInterface
      *
      * @throws \RuntimeException
      */
-    protected  function getRendererService($name)
+    protected function getRendererService($name)
     {
         if (!isset($this->renderers[$name])) {
             throw new \RuntimeException('The renderer "%s" does not exists.');

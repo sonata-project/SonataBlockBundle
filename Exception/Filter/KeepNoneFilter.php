@@ -11,7 +11,6 @@
 namespace Sonata\BlockBundle\Exception\Filter;
 
 use Sonata\BlockBundle\Model\BlockInterface;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * This filters will ignore all exceptions.
