@@ -22,15 +22,21 @@
         "symfony/form": ">=2.1,<2.3-dev"
     },
     "require-dev": {
-        "sonata-project/cache-bundle": "dev-master",
+        "sonata-project/cache-bundle": "2.1.*",
         "sonata-project/admin-bundle": "dev-master"
     },
     "suggest": {
-        "sonata-project/cache-bundle": "dev-master",
+        "sonata-project/cache-bundle": "2.1.*",
         "sonata-project/admin-bundle": "dev-master"
     },
     "autoload": {
         "psr-0": { "Sonata\\BlockBundle": "" }
     },
-    "target-dir": "Sonata/BlockBundle"
+    "target-dir": "Sonata/BlockBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-2.0": "2.0.x-dev",
+            "dev-master": "2.1.x-dev"
+        }
+    }
 }
