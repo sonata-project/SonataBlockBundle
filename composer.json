@@ -16,18 +16,17 @@
             "homepage": "https://github.com/sonata-project/SonataBlockBundle/contributors"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "symfony/http-foundation": ">=2.1,<2.3-dev",
         "symfony/form": ">=2.1,<2.3-dev"
     },
     "require-dev": {
         "sonata-project/cache-bundle": "2.1.*",
-        "sonata-project/admin-bundle": "2.1.x-dev"
+        "sonata-project/admin-bundle": "2.1.*@dev"
     },
     "suggest": {
         "sonata-project/cache-bundle": "2.1.*",
-        "sonata-project/admin-bundle": "2.1.x-dev"
+        "sonata-project/admin-bundle": "2.1.*@dev"
     },
     "autoload": {
         "psr-0": { "Sonata\\BlockBundle": "" }
