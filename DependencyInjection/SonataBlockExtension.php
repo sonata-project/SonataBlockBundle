@@ -49,6 +49,7 @@ class SonataBlockExtension extends Extension
         $this->configureForm($container, $config);
         $this->configureProfiler($container, $config);
         $this->configureException($container, $config);
+        $this->configureClassesToCompile();
 
         $bundles = $container->getParameter('kernel.bundles');
         if ($config['templates']['block_base'] === null) {
@@ -200,5 +201,26 @@ class SonataBlockExtension extends Extension
         $defaultRenderer = $config['exception']['default']['renderer'];
         $definition->addMethodCall('setDefaultFilter', array($defaultFilter));
         $definition->addMethodCall('setDefaultRenderer', array($defaultRenderer));
+    }
+
+
+    /**
+     * Add class to compile
+     */
+    public function configureClassesToCompile()
+    {
+        $this->addClassesToCompile(array(
+            'Sonata\BlockBundle\Twig\Extension\BlockExtension',
+            'Sonata\BlockBundle\Block\BlockServiceManagerInterface',
+            'Sonata\BlockBundle\Block\BlockServiceManager',
+            'Sonata\BlockBundle\Block\BlockLoaderInterface',
+            'Sonata\BlockBundle\Block\BlockLoaderChain',
+            'Sonata\BlockBundle\Block\Loader\ServiceLoader',
+            'Sonata\BlockBundle\Block\BlockRendererInterface',
+            'Sonata\BlockBundle\Block\BlockRenderer',
+            'Sonata\BlockBundle\Exception\Strategy\StrategyManagerInterface',
+            'Sonata\BlockBundle\Exception\Strategy\StrategyManager',
+            'Sonata\BlockBundle\Twig\GlobalVariables',
+        ));
     }
 }
