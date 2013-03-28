@@ -57,17 +57,14 @@ class BlockContextManager implements BlockContextManagerInterface
             'use_cache'        => true,
             'extra_cache_keys' => array(),
             'attr'             => array(),
+            'template'         => false,
         ));
 
         $optionsResolver->addAllowedTypes(array(
             'use_cache'         => array('bool'),
             'extra_cache_keys'  => array('array'),
             'attr'              => array('array'),
-            'template'          => array('string'),
-        ));
-
-        $optionsResolver->setRequired(array(
-            'template'
+            'template'          => array('string', 'bool'),
         ));
 
         $service = $this->blockService->get($block);
