@@ -62,18 +62,20 @@ class BlockRenderer implements BlockRendererInterface
      */
     public function render(BlockExecutionContextInterface $blockContext, Response $response = null)
     {
+        $block = $blockContext->getBlock();
+
         if ($this->logger) {
-            $this->logger->info(sprintf('[cms::renderBlock] block.id=%d, block.type=%s ', $blockContext->getId(), $blockContext->getType()));
+            $this->logger->info(sprintf('[cms::renderBlock] block.id=%d, block.type=%s ', $block->getId(), $block->getType()));
         }
 
         try {
-            $service = $this->blockServiceManager->get($blockContext->getBlock());
-            $service->load($blockContext->getBlock());
+            $service = $this->blockServiceManager->get($block);
+            $service->load($block);
 
             if (null === $response) {
                 // In order to have the block's response's isCacheable() to true
                 $response = new Response();
-                $response->setTtl($blockContext->getTtl());
+                $response->setTtl($block->getTtl());
             }
 
             $newResponse = $service->execute($blockContext, $response);
@@ -84,7 +86,7 @@ class BlockRenderer implements BlockRendererInterface
 
         } catch (\Exception $exception) {
             if ($this->logger) {
-                $this->logger->crit(sprintf('[cms::renderBlock] block.id=%d - error while rendering block - %s', $blockContext->getId(), $exception->getMessage()));
+                $this->logger->critical(sprintf('[cms::renderBlock] block.id=%d - error while rendering block - %s', $block->getId(), $exception->getMessage()));
             }
             $newResponse = $this->exceptionStrategyManager->handleException($exception, $blockContext->getBlock(), $response);
         }

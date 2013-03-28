@@ -13,6 +13,7 @@ namespace Sonata\BlockBundle\Tests\Block;
 
 use Sonata\BlockBundle\Block\TraceableBlockRenderer;
 use Symfony\Component\HttpFoundation\Response;
+use Sonata\BlockBundle\Block\BlockExecutionContext;
 
 class TraceableBlockRendererTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,7 +28,9 @@ class TraceableBlockRendererTest extends \PHPUnit_Framework_TestCase
         $block->expects($this->any())->method('getId')->will($this->returnValue(42));
         $block->expects($this->any())->method('getType')->will($this->returnValue('mytype'));
 
-        $traceable->render($block);
+        $blockContext = new BlockExecutionContext($block);
+
+        $traceable->render($blockContext);
 
         $traces = $traceable->getTraces();
 

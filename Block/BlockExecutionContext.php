@@ -26,7 +26,7 @@ class BlockExecutionContext implements BlockExecutionContextInterface
      * @param BlockInterface $block
      * @param array          $settings
      */
-    public function __constuct(BlockInterface $block, array $settings = array())
+    public function __construct(BlockInterface $block, array $settings = array())
     {
         $this->block = $block;
         $this->settings = $settings;
