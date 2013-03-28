@@ -11,14 +11,15 @@
 
 namespace Sonata\BlockBundle\Block\Service;
 
+use Sonata\BlockBundle\Block\BlockExecutionContextInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Form\Form;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BaseBlockService;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  *
@@ -37,12 +38,13 @@ class RssBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function getDefaultSettings()
+    public function setDefaultSetttings(OptionsResolverInterface $resolver)
     {
-        return array(
-            'url'     => false,
-            'title'   => 'Insert the rss title'
-        );
+        $resolver->setDefaults(array(
+            'url'      => false,
+            'title'    => 'Insert the rss title',
+            'template' => 'SonataBlockBundle:Block:block_core_rss.html.twig',
+        ));
     }
 
     /**
@@ -78,10 +80,10 @@ class RssBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function execute(BlockInterface $block, Response $response = null)
+    public function execute(BlockExecutionContextInterface $blockContext, Response $response = null)
     {
         // merge settings
-        $settings = array_merge($this->getDefaultSettings(), $block->getSettings());
+        $settings = $blockContext->getSettings();
 
         $feeds = false;
         if ($settings['url']) {
@@ -106,9 +108,9 @@ class RssBlockService extends BaseBlockService
             }
         }
 
-        return $this->renderResponse('SonataBlockBundle:Block:block_core_rss.html.twig', array(
+        return $this->renderResponse($blockContext->getTemplate(), array(
             'feeds'     => $feeds,
-            'block'     => $block,
+            'block'     => $blockContext->getBlock(),
             'settings'  => $settings
         ), $response);
     }

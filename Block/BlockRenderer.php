@@ -11,7 +11,6 @@
 
 namespace Sonata\BlockBundle\Block;
 
-use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
@@ -61,23 +60,23 @@ class BlockRenderer implements BlockRendererInterface
     /**
      * {@inheritdoc}
      */
-    public function render(BlockInterface $block, Response $response = null)
+    public function render(BlockExecutionContextInterface $blockContext, Response $response = null)
     {
         if ($this->logger) {
-            $this->logger->info(sprintf('[cms::renderBlock] block.id=%d, block.type=%s ', $block->getId(), $block->getType()));
+            $this->logger->info(sprintf('[cms::renderBlock] block.id=%d, block.type=%s ', $blockContext->getId(), $blockContext->getType()));
         }
 
         try {
-            $service = $this->blockServiceManager->get($block);
-            $service->load($block);
+            $service = $this->blockServiceManager->get($blockContext->getBlock());
+            $service->load($blockContext->getBlock());
 
             if (null === $response) {
                 // In order to have the block's response's isCacheable() to true
                 $response = new Response();
-                $response->setTtl($block->getTtl());
+                $response->setTtl($blockContext->getTtl());
             }
 
-            $newResponse = $service->execute($block, $response);
+            $newResponse = $service->execute($blockContext, $response);
 
             if (!$newResponse instanceof Response) {
                 throw new \RuntimeException('A block service must return a Response object');
@@ -85,9 +84,9 @@ class BlockRenderer implements BlockRendererInterface
 
         } catch (\Exception $exception) {
             if ($this->logger) {
-                $this->logger->crit(sprintf('[cms::renderBlock] block.id=%d - error while rendering block - %s', $block->getId(), $exception->getMessage()));
+                $this->logger->crit(sprintf('[cms::renderBlock] block.id=%d - error while rendering block - %s', $blockContext->getId(), $exception->getMessage()));
             }
-            $newResponse = $this->exceptionStrategyManager->handleException($exception, $block, $response);
+            $newResponse = $this->exceptionStrategyManager->handleException($exception, $blockContext->getBlock(), $response);
         }
 
         return $newResponse;

@@ -11,6 +11,7 @@
 
 namespace Sonata\BlockBundle\Block\Service;
 
+use Sonata\BlockBundle\Block\BlockExecutionContextInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -36,11 +37,9 @@ class EmptyBlockService extends BaseBlockService
     }
 
     /**
-     * @param \Sonata\BlockBundle\Model\BlockInterface        $block
-     * @param null|\Symfony\Component\HttpFoundation\Response $response
-     * @param \Symfony\Component\HttpFoundation\Response      $response
+     * {@inheritdoc}
      */
-    public function execute(BlockInterface $block, Response $response = null)
+    public function execute(BlockExecutionContextInterface $blockContext, Response $response = null)
     {
         return new Response();
     }
