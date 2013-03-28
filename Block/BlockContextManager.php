@@ -15,6 +15,7 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
 use Sonata\BlockBundle\Exception\BlockOptionsException;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class BlockContextManager implements BlockContextManagerInterface
 {
@@ -53,19 +54,8 @@ class BlockContextManager implements BlockContextManagerInterface
         }
 
         $optionsResolver = new OptionsResolver();
-        $optionsResolver->setDefaults(array(
-            'use_cache'        => true,
-            'extra_cache_keys' => array(),
-            'attr'             => array(),
-            'template'         => false,
-        ));
 
-        $optionsResolver->addAllowedTypes(array(
-            'use_cache'         => array('bool'),
-            'extra_cache_keys'  => array('array'),
-            'attr'              => array('array'),
-            'template'          => array('string', 'bool'),
-        ));
+        $this->setDefaultSettings($optionsResolver, $block);
 
         $service = $this->blockService->get($block);
         $service->setDefaultSettings($optionsResolver, $block);
@@ -78,5 +68,28 @@ class BlockContextManager implements BlockContextManagerInterface
         }
 
         return new BlockContext($block, $settings);
+    }
+
+    /**
+     * @param OptionsResolverInterface $optionsResolver
+     * @param BlockInterface           $block
+     */
+    protected function setDefaultSettings(OptionsResolverInterface $optionsResolver, BlockInterface $block)
+    {
+        $optionsResolver->setDefaults(array(
+            'use_cache'        => true,
+            'extra_cache_keys' => array(),
+            'attr'             => array(),
+            'template'         => false,
+            'ttl'              => $block->getTtl(),
+        ));
+
+        $optionsResolver->addAllowedTypes(array(
+            'use_cache'         => array('bool'),
+            'extra_cache_keys'  => array('array'),
+            'attr'              => array('array'),
+            'ttl'               => array('int'),
+            'template'          => array('string', 'bool'),
+        ));
     }
 }

@@ -55,3 +55,8 @@ UPGRADE FROM 2.1 to 2.2
 
             => sonata_block_render(block, {'use_cache': use_cache, 'extra_cache_key': extra_cache_key})
 
+
+    If you are using the page bundle you need to configure the ``context_manager`` section
+
+        sonata_block:
+            context_manager: sonata.page.block.context_manager

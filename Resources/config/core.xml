@@ -11,7 +11,7 @@
             <argument type="service" id="logger"  on-invalid="ignore"  />
         </service>
 
-        <service id="sonata.block.context_manager" class="Sonata\BlockBundle\Block\BlockContextManager">
+        <service id="sonata.block.context_manager.default" class="Sonata\BlockBundle\Block\BlockContextManager">
             <argument type="service" id="sonata.block.loader.service" />
             <argument type="service" id="sonata.block.manager" />
         </service>
