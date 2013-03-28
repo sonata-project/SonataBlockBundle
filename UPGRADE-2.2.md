@@ -13,13 +13,13 @@ UPGRADE FROM 2.1 to 2.2
         +     * @param OptionsResolverInterface $resolver
               */
         -    public function getDefaultSettings();
-        +    public function setDefaultSetttings(OptionsResolverInterface $resolver);
+        +    public function setDefaultSettings(OptionsResolverInterface $resolver);
 
 
     So to update, just use the ``OptionsResolverInterface`` API as the Form Component:
 
         -    public function getDefaultSettings()
-        +    public function setDefaultSetttings(OptionsResolverInterface $resolver)
+        +    public function setDefaultSettings(OptionsResolverInterface $resolver)
              {
         -        return array(
         -            'url'     => false,
@@ -35,7 +35,7 @@ UPGRADE FROM 2.1 to 2.2
     The template is now a mandatory parameter (which can be set to false), so the ``execute`` method should like:
 
         -    public function execute(BlockInterface $block, Response $response = null)
-        +    public function execute(BlockExecutionContextInterface $blockContext, Response $response = null)
+        +    public function execute(BlockContextInterface $blockContext, Response $response = null)
              {
         -        $settings = array_merge($this->getDefaultSettings(), $block->getSettings());
         -
@@ -48,4 +48,10 @@ UPGRADE FROM 2.1 to 2.2
                  ), $response);
              }
 
+
+    The twig template helper sonata_block_render has been updated:
+
+        sonata_block_render(block, use_cache, extra_cache_key)
+
+            => sonata_block_render(block, {'use_cache': use_cache, 'extra_cache_key': extra_cache_key})
 

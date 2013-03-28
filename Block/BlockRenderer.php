@@ -60,7 +60,7 @@ class BlockRenderer implements BlockRendererInterface
     /**
      * {@inheritdoc}
      */
-    public function render(BlockExecutionContextInterface $blockContext, Response $response = null)
+    public function render(BlockContextInterface $blockContext, Response $response = null)
     {
         $block = $blockContext->getBlock();
 

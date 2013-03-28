@@ -11,7 +11,7 @@
 
 namespace Sonata\BlockBundle\Tests\Block\Service;
 
-use Sonata\BlockBundle\Block\BlockExecutionContext;
+use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Model\Block;
 
 use Sonata\BlockBundle\Block\Service\RssBlockService;
@@ -34,9 +34,9 @@ class RssBlockServiceTest extends BaseTestBlockService
         ));
 
         $optionResolver = new OptionsResolver();
-        $service->setDefaultSetttings($optionResolver);
+        $service->setDefaultSettings($optionResolver);
 
-        $blockContext = new BlockExecutionContext($block, $optionResolver->resolve());
+        $blockContext = new BlockContext($block, $optionResolver->resolve());
 
         $formMapper = $this->getMock('Sonata\\AdminBundle\\Form\\FormMapper', array(), array(), '', false);
         $formMapper->expects($this->exactly(2))->method('add');

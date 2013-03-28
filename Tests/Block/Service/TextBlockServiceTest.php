@@ -14,7 +14,7 @@ namespace Sonata\BlockBundle\Tests\Block\Service;
 use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Block\Service\TextBlockService;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Sonata\BlockBundle\Block\BlockExecutionContext;
+use Sonata\BlockBundle\Block\BlockContext;
 
 class TextBlockServiceTest extends BaseTestBlockService
 {
@@ -33,7 +33,7 @@ class TextBlockServiceTest extends BaseTestBlockService
         $optionResolver = new OptionsResolver();
         $service->setDefaultSettings($optionResolver);
 
-        $blockContext = new BlockExecutionContext($block, $optionResolver->resolve($block->getSettings()));
+        $blockContext = new BlockContext($block, $optionResolver->resolve($block->getSettings()));
 
         $formMapper = $this->getMock('Sonata\\AdminBundle\\Form\\FormMapper', array(), array(), '', false);
         $formMapper->expects($this->exactly(2))->method('add');

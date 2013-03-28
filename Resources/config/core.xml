@@ -11,6 +11,11 @@
             <argument type="service" id="logger"  on-invalid="ignore"  />
         </service>
 
+        <service id="sonata.block.context_manager" class="Sonata\BlockBundle\Block\BlockContextManager">
+            <argument type="service" id="sonata.block.loader.service" />
+            <argument type="service" id="sonata.block.manager" />
+        </service>
+
         <service id="sonata.block.renderer.default" class="Sonata\BlockBundle\Block\BlockRenderer">
             <argument type="service" id="sonata.block.manager" />
             <argument type="service" id="sonata.block.exception.strategy.manager" />
@@ -27,8 +32,8 @@
 
             <argument type="service" id="sonata.block.manager" />
             <argument />
-            <argument type="service" id="sonata.block.loader.chain" />
             <argument type="service" id="sonata.block.renderer" />
+            <argument type="service" id="sonata.block.context_manager" />
             <argument type="service" id="sonata.cache.manager" on-invalid="ignore" />
         </service>
 

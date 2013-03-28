@@ -36,7 +36,7 @@ class BlockContextManager implements BlockContextManagerInterface
      * @param mixed $meta
      * @param array $settings
      *
-     * @return BlockExecutionContextInterface
+     * @return BlockContextInterface
      *
      * @thrown BlockOptionsException
      */
@@ -68,7 +68,7 @@ class BlockContextManager implements BlockContextManagerInterface
         ));
 
         $service = $this->blockService->get($block);
-        $service->setDefaultSetttings($optionsResolver, $block);
+        $service->setDefaultSettings($optionsResolver, $block);
 
         try {
             // inline options overwrite model one
@@ -77,6 +77,6 @@ class BlockContextManager implements BlockContextManagerInterface
             throw new BlockOptionsException($e);
         }
 
-        return new BlockExecutionContext($block, $settings);
+        return new BlockContext($block, $settings);
     }
 }

@@ -13,7 +13,7 @@ namespace Sonata\BlockBundle\Block;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 
-class BlockExecutionContext implements BlockExecutionContextInterface
+class BlockContext implements BlockContextInterface
 {
     /**
      * @var BlockInterface
@@ -54,7 +54,7 @@ class BlockExecutionContext implements BlockExecutionContextInterface
     public function getSetting($name)
     {
         if (!isset($this->settings[$name])) {
-            throw new \RuntimeException(sprintf('Unable to find the option %s - define the option in the related BlockServiceInterface', $name));
+            throw new \RuntimeException(sprintf('Unable to find the option `%s` (%s) - define the option in the related BlockServiceInterface', $name, $this->block->getType()));
         }
 
         return $this->settings[$name];

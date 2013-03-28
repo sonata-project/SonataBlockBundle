@@ -11,7 +11,7 @@
 
 namespace Sonata\BlockBundle\Tests\Block;
 
-use Sonata\BlockBundle\Block\BlockExecutionContext;
+use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Block\BlockRenderer;
 
 /**
@@ -67,7 +67,7 @@ class BlockRendererTest extends \PHPUnit_Framework_TestCase
 
         // mock a block object
         $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
-        $blockContext = new BlockExecutionContext($block);
+        $blockContext = new BlockContext($block);
 
         // WHEN
         $result = $this->renderer->render($blockContext);
@@ -104,7 +104,7 @@ class BlockRendererTest extends \PHPUnit_Framework_TestCase
 
         // mock a block object
         $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
-        $blockContext = new BlockExecutionContext($block);
+        $blockContext = new BlockContext($block);
 
         // WHEN
         $this->renderer->render($blockContext);
@@ -145,7 +145,7 @@ class BlockRendererTest extends \PHPUnit_Framework_TestCase
 
         // mock a block object
         $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
-        $blockContext = new BlockExecutionContext($block);
+        $blockContext = new BlockContext($block);
 
         // WHEN
         $result = $this->renderer->render($blockContext);

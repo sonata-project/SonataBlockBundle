@@ -37,12 +37,12 @@ interface BlockServiceInterface
     public function buildCreateForm(FormMapper $form, BlockInterface $block);
 
     /**
-     * @param BlockExecutionContextInterface $blockContext
+     * @param BlockContextInterface $blockContext
      * @param null|Response                  $response
      *
      * @return Response
      */
-    public function execute(BlockExecutionContextInterface $blockContext, Response $response = null);
+    public function execute(BlockContextInterface $blockContext, Response $response = null);
 
     /**
      * @param ErrorElement   $errorElement
@@ -62,7 +62,7 @@ interface BlockServiceInterface
      *
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultSetttings(OptionsResolverInterface $resolver);
+    public function setDefaultSettings(OptionsResolverInterface $resolver);
 
     /**
      * @param BlockInterface $block

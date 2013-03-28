@@ -17,7 +17,7 @@ interface BlockContextManagerInterface
      * @param $meta
      * @param array $settings
      *
-     * @return BlockExecutionContextInterface
+     * @return BlockContextInterface
      */
     public function get($meta, array $settings = array());
 }

@@ -148,23 +148,21 @@ abstract class BaseBlockService implements BlockServiceInterface
     }
 
     /**
-     * @return array
-     *
-     * @deprecated
+     * {@inheritdoc}
      */
-    public function getDefaultSettings()
+    public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
-        return array();
+
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultSetttings(OptionsResolverInterface $resolver)
+    public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        // @bc code
-        if (method_exists($this, 'getDefaultSettings')) {
-            $resolver->setDefaults($this->getDefaultSettings());
-        }
+        return $this->renderResponse($blockContext->getTemplate(), array(
+            'block_context'  => $blockContext,
+            'block'          => $blockContext->getBlock(),
+        ), $response);
     }
 }

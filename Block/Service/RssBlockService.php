@@ -11,7 +11,7 @@
 
 namespace Sonata\BlockBundle\Block\Service;
 
-use Sonata\BlockBundle\Block\BlockExecutionContextInterface;
+use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 use Sonata\AdminBundle\Form\FormMapper;
@@ -38,7 +38,7 @@ class RssBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function setDefaultSetttings(OptionsResolverInterface $resolver)
+    public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'url'      => false,
@@ -80,7 +80,7 @@ class RssBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function execute(BlockExecutionContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         // merge settings
         $settings = $blockContext->getSettings();

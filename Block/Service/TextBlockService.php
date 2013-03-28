@@ -11,7 +11,7 @@
 
 namespace Sonata\BlockBundle\Block\Service;
 
-use Sonata\BlockBundle\Block\BlockExecutionContextInterface;
+use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 use Sonata\AdminBundle\Form\FormMapper;
@@ -19,7 +19,7 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BaseBlockService;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  *
@@ -30,7 +30,7 @@ class TextBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function execute(BlockExecutionContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         return $this->renderResponse($blockContext->getTemplate(), array(
             'block'     => $blockContext->getBlock(),
@@ -69,7 +69,7 @@ class TextBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function setDefaultSettings(OptionsResolver $resolver)
+    public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'content'  => 'Insert your custom content here',
