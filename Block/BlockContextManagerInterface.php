@@ -14,7 +14,7 @@ namespace Sonata\BlockBundle\Block;
 interface BlockContextManagerInterface
 {
     /**
-     * @param $meta
+     * @param mixed $meta     Data send to the loader to load a block, can be anything...
      * @param array $settings
      *
      * @return BlockContextInterface
