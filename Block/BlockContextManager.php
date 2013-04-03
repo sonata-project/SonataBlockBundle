@@ -81,7 +81,7 @@ class BlockContextManager implements BlockContextManagerInterface
             'extra_cache_keys' => array(),
             'attr'             => array(),
             'template'         => false,
-            'ttl'              => $block->getTtl(),
+            'ttl'              => (int)$block->getTtl(),
         ));
 
         $optionsResolver->addAllowedTypes(array(

@@ -38,7 +38,8 @@ class BlockContextManagerTest extends \PHPUnit_Framework_TestCase
             'use_cache' => true,
             'extra_cache_keys' => array(),
             'attr' => array(),
-            'template' => false
+            'template' => false,
+            'ttl' => 0
         ), $blockContext->getSettings());
     }
 
