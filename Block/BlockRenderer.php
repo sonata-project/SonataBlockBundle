@@ -73,6 +73,9 @@ class BlockRenderer implements BlockRendererInterface
 
             if (null === $response) {
                 // In order to have the block's response's isCacheable() to true
+                $defaultSettings = $service->getDefaultSettings();
+                $block->setSetting('ttl', isset($defaultSettings['ttl']) ? $defaultSettings['ttl'] : $block->getTtl());
+
                 $response = new Response();
                 $response->setTtl($block->getTtl());
             }

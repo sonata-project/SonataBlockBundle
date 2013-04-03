@@ -258,17 +258,15 @@ abstract class BaseBlock implements BlockInterface
      */
     public function getTtl()
     {
-        if ($this->ttl === null) {
-            $ttl = $this->getSetting('ttl', 84600);
+        $ttl = $this->getSetting('ttl', 84600);
 
-            foreach ($this->getChildren() as $block) {
-                $blockTtl = $block->getTtl();
+        foreach ($this->getChildren() as $block) {
+            $blockTtl = $block->getTtl();
 
-                $ttl = ($blockTtl < $ttl) ? $blockTtl : $ttl;
-            }
-
-            $this->ttl = $ttl;
+            $ttl = ($blockTtl < $ttl) ? $blockTtl : $ttl;
         }
+
+        $this->ttl = $ttl;
 
         return $this->ttl;
     }
