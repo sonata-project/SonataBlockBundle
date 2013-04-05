@@ -200,7 +200,7 @@ interface BlockInterface
     /**
      * Returns whether or not this block has a parent
      *
-     * @return void
+     * @return boolean
      */
     public function hasParent();
 }

@@ -11,6 +11,7 @@
 
 namespace Sonata\BlockBundle\Block\Service;
 
+use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 use Sonata\AdminBundle\Form\FormMapper;
@@ -18,6 +19,7 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BaseBlockService;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  *
@@ -28,13 +30,11 @@ class TextBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function execute(BlockInterface $block, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        $settings = array_merge($this->getDefaultSettings(), $block->getSettings());
-
-        return $this->renderResponse('SonataBlockBundle:Block:block_core_text.html.twig', array(
-            'block'     => $block,
-            'settings'  => $settings
+        return $this->renderResponse($blockContext->getTemplate(), array(
+            'block'     => $blockContext->getBlock(),
+            'settings'  => $blockContext->getSettings()
         ), $response);
     }
 
@@ -69,10 +69,11 @@ class TextBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function getDefaultSettings()
+    public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
-        return array(
-            'content' => 'Insert your custom content here',
-        );
+        $resolver->setDefaults(array(
+            'content'  => 'Insert your custom content here',
+            'template' => 'SonataBlockBundle:Block:block_core_text.html.twig'
+        ));
     }
 }
