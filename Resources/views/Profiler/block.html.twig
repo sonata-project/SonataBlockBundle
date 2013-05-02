@@ -64,7 +64,7 @@
                 <td>{{ block.type }}</td>
                 <td>{{ ((block.memory_end-block.memory_start)/1000)|number_format(0) }} Kb</td>
                 <td>{{ (block.memory_peak/1000)|number_format(0) }} Kb</td>
-                <td>{{ ((block.time_end-block.time_start)*1000)|number_format(2) }} ms</td>
+                <td>{{ block.duration|number_format(2) }} ms</td>
             </tr>
         {% endfor %}
     </table>
