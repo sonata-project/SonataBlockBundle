@@ -38,7 +38,7 @@ class TraceableBlockRenderer implements BlockRendererInterface
      * @param BlockRendererInterface $blockRender The block renderer to trace
      * @param Stopwatch              $stopwatch   A Stopwatch instance
      */
-    public function __construct(BlockRendererInterface $blockRender, Stopwatch $stopwatch)
+    public function __construct(BlockRendererInterface $blockRender, Stopwatch $stopwatch = null)
     {
         $this->blockRenderer = $blockRender;
         $this->stopwatch = $stopwatch;
@@ -54,11 +54,15 @@ class TraceableBlockRenderer implements BlockRendererInterface
      */
     public function render(BlockInterface $block, Response $response = null)
     {
-        $e = $this->startTracing($block);
+        if ($this->stopwatch instanceof Stopwatch) {
+            $e = $this->startTracing($block);
 
-        $response = $this->blockRenderer->render($block, $response);
+            $response = $this->blockRenderer->render($block, $response);
 
-        $this->endTracing($block, $e);
+            $this->endTracing($block, $e);
+        } else {
+            $response = $this->blockRenderer->render($block, $response);
+        }
 
         return $response;
     }

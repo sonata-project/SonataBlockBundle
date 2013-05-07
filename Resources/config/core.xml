@@ -20,7 +20,7 @@
 
         <service id="sonata.block.renderer.traceable" class="Sonata\BlockBundle\Block\TraceableBlockRenderer">
             <argument />
-            <argument type="service" id="debug.stopwatch" />
+            <argument type="service" id="debug.stopwatch" on-invalid="ignore" />
         </service>
 
         <service id="sonata.block.twig.extension" class="Sonata\BlockBundle\Twig\Extension\BlockExtension" public="false">
