@@ -53,7 +53,7 @@ class TraceableBlockRenderer implements BlockRendererInterface
 
         $response = $this->blockRenderer->render($blockContext, $response);
 
-        $this->endTracing(($blockContext->getBlock(), $e);
+        $this->endTracing($blockContext->getBlock(), $e);
 
         return $response;
     }
