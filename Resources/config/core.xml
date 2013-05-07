@@ -12,7 +12,7 @@
         </service>
 
         <service id="sonata.block.context_manager.default" class="Sonata\BlockBundle\Block\BlockContextManager">
-            <argument type="service" id="sonata.block.loader.service" />
+            <argument type="service" id="sonata.block.loader.chain" />
             <argument type="service" id="sonata.block.manager" />
         </service>
 
