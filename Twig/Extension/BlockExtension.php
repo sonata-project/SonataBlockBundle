@@ -143,20 +143,20 @@ class BlockExtension extends \Twig_Extension
      */
     public function renderBlock($block, array $options = array())
     {
-        $blockContextExecution = $this->blockContextManager->get($block, $options);
+        $blockContext = $this->blockContextManager->get($block, $options);
 
-        if (!$blockContextExecution) {
+        if (!$blockContext) {
             return '';
         }
 
-        $useCache = $blockContextExecution->getSetting('use_cache');
+        $useCache = $blockContext->getSetting('use_cache');
 
         $cacheKeys = false;
-        $cacheService = $useCache ? $this->getCacheService($blockContextExecution->getBlock()) : false;
+        $cacheService = $useCache ? $this->getCacheService($blockContext->getBlock()) : false;
         if ($cacheService) {
             $cacheKeys = array_merge(
-                $this->blockServiceManager->get($blockContextExecution->getBlock())->getCacheKeys($blockContextExecution->getBlock()),
-                $blockContextExecution->getSetting('extra_cache_keys')
+                $this->blockServiceManager->get($blockContext->getBlock())->getCacheKeys($blockContext->getBlock()),
+                $blockContext->getSetting('extra_cache_keys')
             );
 
             if ($cacheService->has($cacheKeys)) {
@@ -172,12 +172,12 @@ class BlockExtension extends \Twig_Extension
             $recorder = $this->cacheManager->getRecorder();
 
             if ($recorder) {
-                $recorder->add($blockContextExecution->getBlock());
+                $recorder->add($blockContext->getBlock());
                 $recorder->push();
             }
         }
 
-        $response = $this->blockRenderer->render($blockContextExecution);
+        $response = $this->blockRenderer->render($blockContext);
         $contextualKeys = $recorder ? $recorder->pop() : array();
         if ($response->isCacheable() && $cacheKeys && $cacheService) {
             $cacheService->set($cacheKeys, $response, $response->getTtl(), $contextualKeys);

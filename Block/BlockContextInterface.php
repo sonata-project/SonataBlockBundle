@@ -33,6 +33,14 @@ interface BlockContextInterface
     public function getSetting($name);
 
     /**
+     * @param string $name
+     * @param mixed  $value
+     *
+     * @return BlockContextInterface
+     */
+    public function setSetting($name, $value);
+
+    /**
      * @return string
      */
     public function getTemplate();

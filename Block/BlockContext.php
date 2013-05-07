@@ -63,6 +63,20 @@ class BlockContext implements BlockContextInterface
     /**
      * {@inheritdoc}
      */
+    public function setSetting($name, $value)
+    {
+        if (!array_key_exists($name, $this->settings)) {
+            throw new \RuntimeException('It\'s not possible add non existing settings');
+        }
+
+        $this->settings[$name] = $value;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getTemplate()
     {
         return $this->getSetting('template');

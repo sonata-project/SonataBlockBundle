@@ -38,7 +38,7 @@ interface BlockServiceInterface
 
     /**
      * @param BlockContextInterface $blockContext
-     * @param null|Response                  $response
+     * @param Response              $response
      *
      * @return Response
      */

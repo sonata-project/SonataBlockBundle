@@ -61,7 +61,6 @@ class BlockContextManager implements BlockContextManagerInterface
         $service->setDefaultSettings($optionsResolver, $block);
 
         try {
-            // inline options overwrite model one
             $settings = $optionsResolver->resolve(array_merge($block->getSettings(), $settings));
         } catch (ExceptionInterface $e) {
             throw new BlockOptionsException($e);
