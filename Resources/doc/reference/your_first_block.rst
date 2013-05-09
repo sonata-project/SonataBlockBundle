@@ -20,8 +20,10 @@ by the interface and remaining methods.
     namespace Sonata\BlockBundle\Block;
 
     use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
     use Sonata\BlockBundle\Model\BlockInterface;
+    use Sonata\BlockBundle\Block\BlockContextInterface;
 
     use Sonata\AdminBundle\Form\FormMapper;
     use Sonata\AdminBundle\Validator\ErrorElement;
@@ -30,20 +32,22 @@ Default settings
 ----------------
 
 A block service needs settings to work properly, so to ensure consistency, the service should
-define a ``getDefaultSettings`` method. In the current tutorial, the default settings are:
+define a ``setDefaultSettings`` method. In the current tutorial, the default settings are:
 
     - url : the feed url
     - title : the block title
+    - template : the template to render the block
 
 .. code-block:: php
 
     <?php
-    function getDefaultSettings()
+    function setDefaultSettings(OptionsResolverInterface $resolver)
     {
-        return array(
-            'url'     => false,
-            'title'   => 'Insert the rss title'
-        );
+        $resolver->setDefaults(array(
+            'url'      => false,
+            'title'    => 'Insert the rss title',
+            'template' => 'SonataBlockBundle:Block:block_core_rss.html.twig',
+        ));
     }
 
 Form Edition
@@ -97,10 +101,10 @@ object is used to render the block.
 .. code-block:: php
 
     <?php
-    public function execute(BlockInterface $block, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         // merge settings
-        $settings = array_merge($this->getDefaultSettings(), $block->getSettings());
+        $settings = $blockContext->getSettings();
 
         $feeds = false;
         if ($settings['url']) {
@@ -119,15 +123,15 @@ object is used to render the block.
                 try {
                     $feeds = new \SimpleXMLElement($content);
                     $feeds = $feeds->channel->item;
-                } catch(\Exception $e) {
+                } catch (\Exception $e) {
                     // silently fail error
                 }
             }
         }
 
-        return $this->renderResponse('SonataBlockBundle:Block:block_core_rss.html.twig', array(
+        return $this->renderResponse($blockContext->getTemplate(), array(
             'feeds'     => $feeds,
-            'block'     => $block,
+            'block'     => $blockContext->getBlock(),
             'settings'  => $settings
         ), $response);
     }
@@ -143,7 +147,7 @@ defined, a error message is displayed.
     {% extends sonata_block.templates.block_base %}
 
     {% block block %}
-        <h3>{{ settings.title }}</h3>
+        <h3 class="sonata-feed-title">{{ settings.title }}</h3>
 
         <div class="sonata-feeds-container">
             {% for feed in feeds %}
@@ -151,8 +155,8 @@ defined, a error message is displayed.
                     <strong><a href="{{ feed.link}}" rel="nofollow" title="{{ feed.title }}">{{ feed.title }}</a></strong>
                     <div>{{ feed.description|raw }}</div>
                 </div>
-            {% elsefor %}
-                No feeds available.
+            {% else %}
+                    No feeds available.
             {% endfor %}
         </div>
     {% endblock %}
