@@ -11,10 +11,10 @@
 
 namespace Sonata\BlockBundle\Block;
 
-use Sonata\BlockBundle\Model\BlockInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
 use Sonata\BlockBundle\Exception\BlockOptionsException;
+use Sonata\BlockBundle\Model\BlockInterface;
+use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class BlockContextManager implements BlockContextManagerInterface
@@ -22,6 +22,10 @@ class BlockContextManager implements BlockContextManagerInterface
     protected $blockLoader;
 
     protected $blockService;
+
+    protected $bundleSettingsByType;
+
+    protected $bundleSettingsByClass;
 
     /**
      * @param BlockLoaderInterface         $blockLoader
@@ -34,17 +38,41 @@ class BlockContextManager implements BlockContextManagerInterface
     }
 
     /**
-     * @param mixed $meta
-     * @param array $settings
-     *
-     * @return BlockContextInterface
-     *
-     * @throws BlockOptionsException
+     * {@inheritdoc}
+     */
+    public function addBundleSettingsByType($type, array $settings, $replace = false)
+    {
+        if ($replace) {
+            $this->bundleSettingsByType[$type] = array_merge(isset($this->bundleSettingsByType[$type]) ? $this->bundleSettingsByType[$type] : array(), $settings);
+        } else {
+            $this->bundleSettingsByType[$type] = array_merge($settings, isset($this->bundleSettingsByType[$type]) ? $this->bundleSettingsByType[$type] : array());
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addBundleSettingsByClass($class, array $settings, $replace = false)
+    {
+        if ($replace) {
+            $this->bundleSettingsByClass[$class] = array_merge(isset($this->bundleSettingsByClass[$class]) ? $this->bundleSettingsByClass[$class] : array(), $settings);
+        } else {
+            $this->bundleSettingsByClass[$class] = array_merge($settings, isset($this->bundleSettingsByClass[$class]) ? $this->bundleSettingsByClass[$class] : array());
+        }
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function get($meta, array $settings = array())
     {
         if (!$meta instanceof BlockInterface) {
             $block = $this->blockLoader->load($meta);
+
+            if (is_array($meta) && isset($meta['settings'])) {
+                // merge user settings
+                $settings = array_merge($meta['settings'], $settings);
+            }
         } else {
             $block = $meta;
         }
@@ -70,11 +98,20 @@ class BlockContextManager implements BlockContextManagerInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getClass(BlockInterface $block)
+    {
+        return get_class($block);
+    }
+
+    /**
      * @param OptionsResolverInterface $optionsResolver
      * @param BlockInterface           $block
      */
     protected function setDefaultSettings(OptionsResolverInterface $optionsResolver, BlockInterface $block)
     {
+        // defaults for all blocks
         $optionsResolver->setDefaults(array(
             'use_cache'        => true,
             'extra_cache_keys' => array(),
@@ -90,5 +127,11 @@ class BlockContextManager implements BlockContextManagerInterface
             'ttl'               => array('int'),
             'template'          => array('string', 'bool'),
         ));
+
+        // add bundle settings for block
+        $class = $this->getClass($block);
+        $bundleSettingsByType = isset($this->bundleSettingsByType[$block->getType()]) ? $this->bundleSettingsByType[$block->getType()] : array();
+        $bundleSettingsByClass = isset($this->bundleSettingsByClass[$class]) ? $this->bundleSettingsByClass[$class] : array();
+        $optionsResolver->setDefaults(array_merge($bundleSettingsByType, $bundleSettingsByClass));
     }
 }
