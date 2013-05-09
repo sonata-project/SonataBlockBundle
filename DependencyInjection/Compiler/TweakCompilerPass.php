@@ -39,5 +39,28 @@ class TweakCompilerPass implements CompilerPassInterface
         }
 
         $container->getDefinition('sonata.block.loader.chain')->replaceArgument(0, $services);
+
+        $this->applyContext($container);
+    }
+
+    /**
+     * Apply configurations to the context manager
+     *
+     * @param ContainerBuilder $container
+     */
+    public function applyContext(ContainerBuilder $container)
+    {
+        $definition = $container->findDefinition('sonata.block.context_manager');
+
+        foreach ($container->getParameter('sonata_block.blocks') as $service => $settings) {
+            if (count($settings['settings']) > 0) {
+                $definition->addMethodCall('addBundleSettingsByType', array($service, $settings['settings'], true));
+            }
+        }
+        foreach ($container->getParameter('sonata_block.blocks_by_class') as $class => $settings) {
+            if (count($settings['settings']) > 0) {
+                $definition->addMethodCall('addBundleSettingsByClass', array($class, $settings['settings'], true));
+            }
+        }
     }
 }
