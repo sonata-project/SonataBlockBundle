@@ -71,6 +71,9 @@ class SonataBlockExtension extends Extension
      */
     public function configureContext(ContainerBuilder $container, array $config)
     {
+        $container->setParameter($this->getAlias() . '.blocks', $config['blocks']);
+        $container->setParameter($this->getAlias() . '.blocks_by_class', $config['blocks_by_class']);
+
         $container->setAlias('sonata.block.context_manager', $config['context_manager']);
     }
 
@@ -84,7 +87,10 @@ class SonataBlockExtension extends Extension
     {
         $cacheBlocks = array();
         foreach ($config['blocks'] as $service => $settings) {
-            $cacheBlocks[$service] = $settings['cache'];
+            $cacheBlocks['by_type'][$service] = $settings['cache'];
+        }
+        foreach ($config['blocks_by_class'] as $class => $settings) {
+            $cacheBlocks['by_class'][$class] = $settings['cache'];
         }
 
         $container->getDefinition('sonata.block.twig.extension')->replaceArgument(1, $cacheBlocks);
@@ -98,12 +104,12 @@ class SonataBlockExtension extends Extension
      */
     public function configureLoaderChain(ContainerBuilder $container, array $config)
     {
-        $configs = array();
+        $types = array();
         foreach ($config['blocks'] as $service => $settings) {
-            $configs[$service] = $settings['settings'];
+            $types[] = $service;
         }
 
-        $container->getDefinition('sonata.block.loader.service')->replaceArgument(0, $configs);
+        $container->getDefinition('sonata.block.loader.service')->replaceArgument(0, $types);
     }
 
     /**
