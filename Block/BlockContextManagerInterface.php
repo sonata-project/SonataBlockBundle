@@ -43,13 +43,4 @@ interface BlockContextManagerInterface
      * @thrown BlockOptionsException
      */
     public function get($meta, array $settings = array());
-
-    /**
-     * Returns the block's fully qualified class name
-     *
-     * @param BlockInterface $block
-     *
-     * @return string
-     */
-    public function getClass(BlockInterface $block);
 }

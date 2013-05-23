@@ -16,6 +16,7 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\Common\Util\ClassUtils;
 
 class BlockContextManager implements BlockContextManagerInterface
 {
@@ -100,14 +101,6 @@ class BlockContextManager implements BlockContextManagerInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getClass(BlockInterface $block)
-    {
-        return get_class($block);
-    }
-
-    /**
      * @param OptionsResolverInterface $optionsResolver
      * @param BlockInterface           $block
      */
@@ -131,7 +124,7 @@ class BlockContextManager implements BlockContextManagerInterface
         ));
 
         // add type and class settings for block
-        $class = $this->getClass($block);
+        $class = ClassUtils::getClass($block);
         $settingsByType = isset($this->settingsByType[$block->getType()]) ? $this->settingsByType[$block->getType()] : array();
         $settingsByClass = isset($this->settingsByClass[$class]) ? $this->settingsByClass[$class] : array();
         $optionsResolver->setDefaults(array_merge($settingsByType, $settingsByClass));

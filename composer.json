@@ -18,7 +18,8 @@
     ],
     "require": {
         "symfony/http-foundation": ">=2.2,<2.4-dev",
-        "symfony/form": ">=2.2,<2.4-dev"
+        "symfony/form": ">=2.2,<2.4-dev",
+        "doctrine/common": ">=2.3,<2.5-dev"
     },
     "require-dev": {
         "sonata-project/cache-bundle": "2.1.*",
