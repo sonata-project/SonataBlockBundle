@@ -23,9 +23,9 @@ class BlockContextManager implements BlockContextManagerInterface
 
     protected $blockService;
 
-    protected $bundleSettingsByType;
+    protected $settingsByType;
 
-    protected $bundleSettingsByClass;
+    protected $settingsByClass;
 
     /**
      * @param BlockLoaderInterface         $blockLoader
@@ -40,24 +40,26 @@ class BlockContextManager implements BlockContextManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function addBundleSettingsByType($type, array $settings, $replace = false)
+    public function addSettingsByType($type, array $settings, $replace = false)
     {
+        $typeSettings = isset($this->settingsByType[$type]) ? $this->settingsByType[$type] : array();
         if ($replace) {
-            $this->bundleSettingsByType[$type] = array_merge(isset($this->bundleSettingsByType[$type]) ? $this->bundleSettingsByType[$type] : array(), $settings);
+            $this->settingsByType[$type] = array_merge($typeSettings, $settings);
         } else {
-            $this->bundleSettingsByType[$type] = array_merge($settings, isset($this->bundleSettingsByType[$type]) ? $this->bundleSettingsByType[$type] : array());
+            $this->settingsByType[$type] = array_merge($settings, $typeSettings);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addBundleSettingsByClass($class, array $settings, $replace = false)
+    public function addSettingsByClass($class, array $settings, $replace = false)
     {
+        $classSettings = isset($this->settingsByClass[$class]) ? $this->settingsByClass[$class] : array();
         if ($replace) {
-            $this->bundleSettingsByClass[$class] = array_merge(isset($this->bundleSettingsByClass[$class]) ? $this->bundleSettingsByClass[$class] : array(), $settings);
+            $this->settingsByClass[$class] = array_merge($classSettings, $settings);
         } else {
-            $this->bundleSettingsByClass[$class] = array_merge($settings, isset($this->bundleSettingsByClass[$class]) ? $this->bundleSettingsByClass[$class] : array());
+            $this->settingsByClass[$class] = array_merge($settings, $classSettings);
         }
     }
 
@@ -128,10 +130,10 @@ class BlockContextManager implements BlockContextManagerInterface
             'template'          => array('string', 'bool'),
         ));
 
-        // add bundle settings for block
+        // add type and class settings for block
         $class = $this->getClass($block);
-        $bundleSettingsByType = isset($this->bundleSettingsByType[$block->getType()]) ? $this->bundleSettingsByType[$block->getType()] : array();
-        $bundleSettingsByClass = isset($this->bundleSettingsByClass[$class]) ? $this->bundleSettingsByClass[$class] : array();
-        $optionsResolver->setDefaults(array_merge($bundleSettingsByType, $bundleSettingsByClass));
+        $settingsByType = isset($this->settingsByType[$block->getType()]) ? $this->settingsByType[$block->getType()] : array();
+        $settingsByClass = isset($this->settingsByClass[$class]) ? $this->settingsByClass[$class] : array();
+        $optionsResolver->setDefaults(array_merge($settingsByType, $settingsByClass));
     }
 }
