@@ -21,14 +21,13 @@ class ServiceLoaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testBlockNotFoundException()
     {
-        $loader = new ServiceLoader(array('type' => 'foo'));
+        $loader = new ServiceLoader(array('bar'));
         $loader->load(array('type' => 'foo'));
     }
 
     public function testLoader()
     {
-
-        $loader = new ServiceLoader(array('foo.bar' => array('option1' => 42)));
+        $loader = new ServiceLoader(array('foo.bar'));
 
         $definition = array(
             'type' => 'foo.bar',
