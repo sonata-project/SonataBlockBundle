@@ -18,6 +18,7 @@ use Sonata\BlockBundle\Block\BlockRendererInterface;
 
 use Sonata\CacheBundle\Cache\CacheManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Doctrine\Common\Util\ClassUtils;
 
 class BlockExtension extends \Twig_Extension
 {
@@ -197,12 +198,19 @@ class BlockExtension extends \Twig_Extension
             return false;
         }
 
-        $type = isset($this->cacheBlocks[$block->getType()]) ? $this->cacheBlocks[$block->getType()] : false;
+        // type by block class
+        $class = ClassUtils::getClass($block);
+        $cacheServiceId = isset($this->cacheBlocks['by_class'][$class]) ? $this->cacheBlocks['by_class'][$class] : false;
 
-        if (!$type) {
+        // type by block service
+        if (!$cacheServiceId) {
+            $cacheServiceId = isset($this->cacheBlocks['by_type'][$block->getType()]) ? $this->cacheBlocks['by_type'][$block->getType()] : false;
+        }
+
+        if (!$cacheServiceId) {
             return false;
         }
 
-        return $this->cacheManager->getCacheService($type);
+        return $this->cacheManager->getCacheService($cacheServiceId);
     }
 }
