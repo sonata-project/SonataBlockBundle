@@ -113,14 +113,14 @@ abstract class BaseBlockService implements BlockServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function preDelete(BlockInterface $block)
+    public function preRemove(BlockInterface $block)
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function postDelete(BlockInterface $block)
+    public function postRemove(BlockInterface $block)
     {
     }
 
