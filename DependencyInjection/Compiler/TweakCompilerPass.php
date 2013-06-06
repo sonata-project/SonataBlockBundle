@@ -54,7 +54,7 @@ class TweakCompilerPass implements CompilerPassInterface
 
         foreach ($container->getParameter('sonata_block.blocks') as $service => $settings) {
             if (count($settings['settings']) > 0) {
-                $definition->addMethodCall('addsettingsByType', array($service, $settings['settings'], true));
+                $definition->addMethodCall('addSettingsByType', array($service, $settings['settings'], true));
             }
         }
         foreach ($container->getParameter('sonata_block.blocks_by_class') as $class => $settings) {
