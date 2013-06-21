@@ -26,8 +26,6 @@ class BlockExtension extends \Twig_Extension
 
     private $cacheManager;
 
-    private $environment;
-
     private $cacheBlocks;
 
     private $blockRenderer;
@@ -62,14 +60,6 @@ class BlockExtension extends \Twig_Extension
             'sonata_block_include_javascripts'  => new \Twig_Function_Method($this, 'includeJavascripts', array('is_safe' => array('html'))),
             'sonata_block_include_stylesheets'  => new \Twig_Function_Method($this, 'includeStylesheets', array('is_safe' => array('html'))),
         );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function initRuntime(\Twig_Environment $environment)
-    {
-        $this->environment = $environment;
     }
 
     /**
