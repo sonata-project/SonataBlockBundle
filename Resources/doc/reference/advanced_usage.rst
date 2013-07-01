@@ -9,6 +9,12 @@ This happens when a block is rendered:
         - it calls a template
         - the result is a Response object
 
+Block Context Manager
+---------------------
+
+The default BlockContextManager automatically adds settings passed from the template to the
+``extra_cache_keys`` with the key ``context``. This allows cache adapters to rebuild a BlockContext
+if implemented.
 
 Block loading
 -------------
