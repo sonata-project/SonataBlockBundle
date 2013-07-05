@@ -11,45 +11,10 @@
 
 namespace Sonata\BlockBundle\Twig\Extension;
 
-use Sonata\BlockBundle\Block\BlockContextManagerInterface;
-use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
-use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\BlockBundle\Block\BlockRendererInterface;
+use Sonata\BlockBundle\Templating\Helper\BlockHelper;
 
-use Sonata\CacheBundle\Cache\CacheManagerInterface;
-use Symfony\Component\HttpFoundation\Response;
-use Doctrine\Common\Util\ClassUtils;
-
-class BlockExtension extends \Twig_Extension
+class BlockExtension extends BlockHelper implements \Twig_ExtensionInterface
 {
-    private $blockServiceManager;
-
-    private $cacheManager;
-
-    private $environment;
-
-    private $cacheBlocks;
-
-    private $blockRenderer;
-
-    private $blockContextManager;
-
-    /**
-     * @param BlockServiceManagerInterface $blockServiceManager
-     * @param array                        $cacheBlocks
-     * @param BlockRendererInterface       $blockRenderer
-     * @param BlockContextManagerInterface $blockContextManager
-     * @param CacheManagerInterface        $cacheManager
-     */
-    public function __construct(BlockServiceManagerInterface $blockServiceManager, array $cacheBlocks, BlockRendererInterface $blockRenderer, BlockContextManagerInterface $blockContextManager, CacheManagerInterface $cacheManager = null)
-    {
-        $this->blockServiceManager = $blockServiceManager;
-        $this->cacheBlocks         = $cacheBlocks;
-        $this->blockRenderer       = $blockRenderer;
-        $this->cacheManager        = $cacheManager;
-        $this->blockContextManager = $blockContextManager;
-    }
-
     /**
      * Returns a list of functions to add to the existing list.
      *
@@ -64,153 +29,76 @@ class BlockExtension extends \Twig_Extension
         );
     }
 
+    // twig functions
+
     /**
-     * {@inheritdoc}
+     * Initializes the runtime environment.
+     *
+     * This is where you can load some file that contains filter functions for instance.
+     *
+     * @param Twig_Environment $environment The current Twig_Environment instance
      */
     public function initRuntime(\Twig_Environment $environment)
     {
-        $this->environment = $environment;
     }
 
     /**
-     * Returns the name of the extension.
+     * Returns the token parser instances to add to the existing list.
      *
-     * @return string The extension name
+     * @return array An array of Twig_TokenParserInterface or Twig_TokenParserBrokerInterface instances
      */
-    public function getName()
+    public function getTokenParsers()
     {
-        return 'sonata_block';
+        return array();
     }
 
     /**
-     * @param $media screen|all ....
-     * @return array|string
+     * Returns the node visitor instances to add to the existing list.
+     *
+     * @return array An array of Twig_NodeVisitorInterface instances
      */
-    public function includeJavascripts($media)
+    public function getNodeVisitors()
     {
-        $javascripts = array();
-
-        foreach ($this->blockServiceManager->getLoadedServices() as $service) {
-            $javascripts = array_merge($javascripts, $service->getJavascripts($media));
-        }
-
-        if (count($javascripts) == 0) {
-            return '';
-        }
-
-        $html = "";
-        foreach ($javascripts as $javascript) {
-            $html .= "\n" . sprintf('<script src="%s" type="text/javascript"></script>', $javascript);
-        }
-
-        return $html;
+        return array();
     }
 
     /**
-     * @param $media
+     * Returns a list of filters to add to the existing list.
      *
-     * @return array|string
+     * @return array An array of filters
      */
-    public function includeStylesheets($media)
+    public function getFilters()
     {
-        $stylesheets = array();
-
-        foreach ($this->blockServiceManager->getLoadedServices() as $service) {
-            $stylesheets = array_merge($stylesheets, $service->getStylesheets($media));
-        }
-
-        if (count($stylesheets) == 0) {
-            return '';
-        }
-
-        $html = sprintf("<style type='text/css' media='%s'>", $media);
-
-        foreach ($stylesheets as $stylesheet) {
-            $html .= "\n" . sprintf('@import url(%s);', $stylesheet, $media);
-        }
-
-        $html .= "\n</style>";
-
-        return $html;
+        return array();
     }
 
     /**
-     * @throws \RuntimeException
+     * Returns a list of tests to add to the existing list.
      *
-     * @param mixed $block
-     * @param array $options
-     *
-     * @return string
+     * @return array An array of tests
      */
-    public function renderBlock($block, array $options = array())
+    public function getTests()
     {
-        $blockContext = $this->blockContextManager->get($block, $options);
-
-        if (!$blockContext) {
-            return '';
-        }
-
-        $useCache = $blockContext->getSetting('use_cache');
-
-        $cacheKeys = false;
-        $cacheService = $useCache ? $this->getCacheService($blockContext->getBlock()) : false;
-        if ($cacheService) {
-            $cacheKeys = array_merge(
-                $this->blockServiceManager->get($blockContext->getBlock())->getCacheKeys($blockContext->getBlock()),
-                $blockContext->getSetting('extra_cache_keys')
-            );
-
-            if ($cacheService->has($cacheKeys)) {
-                $cacheElement = $cacheService->get($cacheKeys);
-                if (!$cacheElement->isExpired() && $cacheElement->getData() instanceof Response) {
-                    return $cacheElement->getData()->getContent();
-                }
-            }
-        }
-
-        $recorder = null;
-        if ($this->cacheManager) {
-            $recorder = $this->cacheManager->getRecorder();
-
-            if ($recorder) {
-                $recorder->add($blockContext->getBlock());
-                $recorder->push();
-            }
-        }
-
-        $response = $this->blockRenderer->render($blockContext);
-        $contextualKeys = $recorder ? $recorder->pop() : array();
-        if ($response->isCacheable() && $cacheKeys && $cacheService) {
-            $cacheService->set($cacheKeys, $response, $response->getTtl(), $contextualKeys);
-        }
-
-        return $response->getContent();
+        return array();
     }
 
     /**
-     * @param BlockInterface $block
+     * Returns a list of operators to add to the existing list.
      *
-     * @return \Sonata\CacheBundle\Cache\CacheInterface;
+     * @return array An array of operators
      */
-    protected function getCacheService(BlockInterface $block)
+    public function getOperators()
     {
-        if (!$this->cacheManager) {
-            return false;
-        }
+        return array();
+    }
 
-        // type by block class
-        $class = ClassUtils::getClass($block);
-        $cacheServiceId = isset($this->cacheBlocks['by_class'][$class]) ? $this->cacheBlocks['by_class'][$class] : false;
-
-        // type by block service
-        if (!$cacheServiceId) {
-            $cacheServiceId = isset($this->cacheBlocks['by_type'][$block->getType()]) ? $this->cacheBlocks['by_type'][$block->getType()] : false;
-        }
-
-        if (!$cacheServiceId) {
-            return false;
-        }
-
-        return $this->cacheManager->getCacheService($cacheServiceId);
+    /**
+     * Returns a list of global variables to add to the existing list.
+     *
+     * @return array An array of global variables
+     */
+    public function getGlobals()
+    {
+        return array();
     }
 }
