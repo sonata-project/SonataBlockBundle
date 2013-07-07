@@ -116,7 +116,7 @@ class BlockHelper extends Helper
      *
      * @return string
      */
-    public function renderBlock($block, array $options = array())
+    public function render($block, array $options = array())
     {
         $blockContext = $this->blockContextManager->get($block, $options);
 
