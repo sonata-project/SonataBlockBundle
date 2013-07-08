@@ -28,14 +28,18 @@ class BlockContextManager implements BlockContextManagerInterface
 
     protected $settingsByClass;
 
+    protected $cacheBlocks;
+
     /**
      * @param BlockLoaderInterface         $blockLoader
      * @param BlockServiceManagerInterface $blockService
+     * @param array                        $cacheBlocks
      */
-    public function __construct(BlockLoaderInterface $blockLoader, BlockServiceManagerInterface $blockService)
+    public function __construct(BlockLoaderInterface $blockLoader, BlockServiceManagerInterface $blockService, array $cacheBlocks = array())
     {
         $this->blockLoader = $blockLoader;
         $this->blockService = $blockService;
+        $this->cacheBlocks = $cacheBlocks;
     }
 
     /**
@@ -92,12 +96,16 @@ class BlockContextManager implements BlockContextManagerInterface
         $service->setDefaultSettings($optionsResolver, $block);
 
         try {
+            $originalSettings = $settings;
             $settings = $optionsResolver->resolve(array_merge($block->getSettings(), $settings));
         } catch (ExceptionInterface $e) {
             throw new BlockOptionsException($e);
         }
 
-        return new BlockContext($block, $settings);
+        $blockContext = new BlockContext($block, $settings);
+        $this->setDefaultExtraCacheKeys($blockContext, $originalSettings);
+
+        return $blockContext;
     }
 
     /**
@@ -128,5 +136,46 @@ class BlockContextManager implements BlockContextManagerInterface
         $settingsByType = isset($this->settingsByType[$block->getType()]) ? $this->settingsByType[$block->getType()] : array();
         $settingsByClass = isset($this->settingsByClass[$class]) ? $this->settingsByClass[$class] : array();
         $optionsResolver->setDefaults(array_merge($settingsByType, $settingsByClass));
+    }
+
+    /**
+     * Adds context settings, to be able to rebuild a block context, to the
+     * extra_cache_keys
+     *
+     * @param BlockContextInterface $blockContext
+     * @param array $settings
+     */
+    protected function setDefaultExtraCacheKeys(BlockContextInterface $blockContext, array $settings)
+    {
+        if (!$blockContext->getSetting('use_cache') || $blockContext->getSetting('ttl') <= 0) {
+            return;
+        }
+
+        $block = $blockContext->getBlock();
+
+        // type by block class
+        $class = ClassUtils::getClass($block);
+        $cacheServiceId = isset($this->cacheBlocks['by_class'][$class]) ? $this->cacheBlocks['by_class'][$class] : false;
+
+        // type by block service
+        if (!$cacheServiceId) {
+            $cacheServiceId = isset($this->cacheBlocks['by_type'][$block->getType()]) ? $this->cacheBlocks['by_type'][$block->getType()] : false;
+        }
+
+        if (!$cacheServiceId) {
+            // no context cache needed
+            return;
+        }
+
+        // do not add cache settings to extra_cache_keys
+        unset($settings['use_cache'], $settings['extra_cache_keys'], $settings['ttl']);
+
+        $extraCacheKeys = $blockContext->getSetting('extra_cache_keys');
+
+        // add context settings to extra_cache_keys
+        if (!isset($extraCacheKeys[self::CACHE_KEY])) {
+            $extraCacheKeys[self::CACHE_KEY] = $settings;
+            $blockContext->setSetting('extra_cache_keys', $extraCacheKeys);
+        }
     }
 }
