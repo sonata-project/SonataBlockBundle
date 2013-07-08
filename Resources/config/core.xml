@@ -14,6 +14,7 @@
         <service id="sonata.block.context_manager.default" class="Sonata\BlockBundle\Block\BlockContextManager">
             <argument type="service" id="sonata.block.loader.chain" />
             <argument type="service" id="sonata.block.manager" />
+            <argument>%sonata_block.cache_blocks%</argument>
         </service>
 
         <service id="sonata.block.renderer.default" class="Sonata\BlockBundle\Block\BlockRenderer">
@@ -32,7 +33,7 @@
             <tag name="twig.extension" />
 
             <argument type="service" id="sonata.block.manager" />
-            <argument />
+            <argument>%sonata_block.cache_blocks%</argument>
             <argument type="service" id="sonata.block.renderer" />
             <argument type="service" id="sonata.block.context_manager" />
             <argument type="service" id="sonata.cache.manager" on-invalid="ignore" />
