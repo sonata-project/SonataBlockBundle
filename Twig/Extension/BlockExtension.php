@@ -23,7 +23,7 @@ class BlockExtension extends BlockHelper implements \Twig_ExtensionInterface
     public function getFunctions()
     {
         return array(
-            'sonata_block_render'  => new \Twig_Function_Method($this, 'renderBlock', array('is_safe' => array('html'))),
+            'sonata_block_render'  => new \Twig_Function_Method($this, 'render', array('is_safe' => array('html'))),
             'sonata_block_include_javascripts'  => new \Twig_Function_Method($this, 'includeJavascripts', array('is_safe' => array('html'))),
             'sonata_block_include_stylesheets'  => new \Twig_Function_Method($this, 'includeStylesheets', array('is_safe' => array('html'))),
         );
