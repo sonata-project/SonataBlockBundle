@@ -113,19 +113,4 @@ class BlockExtension implements \Twig_ExtensionInterface
     {
         return 'sonata_block';
     }
-
-    public function renderBlock($block, array $options = array())
-    {
-        return $this->blockHelper->renderBlock($block, $options);
-    }
-
-    public function includeJavascripts($media)
-    {
-        return $this->blockHelper->includeJavascripts($media);
-    }
-
-    public function includeStylesheets($media)
-    {
-        return $this->blockHelper->includeStylesheets($media);
-    }
 }
