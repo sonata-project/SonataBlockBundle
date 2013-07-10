@@ -30,9 +30,18 @@ class BlockExtension implements \Twig_ExtensionInterface
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('sonata_block_render', array($this->blockHelper, 'render')),
-            new \Twig_SimpleFunction('sonata_block_include_javascripts', array($this->blockHelper, 'includeJavascripts')),
-            new \Twig_SimpleFunction('sonata_block_include_stylesheets', array($this->blockHelper, 'includeStylesheets')),
+            new \Twig_SimpleFunction('sonata_block_render', 
+                array($this->blockHelper, 'render'), 
+                array('is_safe' => array('html'))
+            ),
+            new \Twig_SimpleFunction('sonata_block_include_javascripts', 
+                array($this->blockHelper, 'includeJavascripts'),
+                array('is_safe' => array('html'))
+            ),
+            new \Twig_SimpleFunction('sonata_block_include_stylesheets', 
+                array($this->blockHelper, 'includeStylesheets'),
+                array('is_safe' => array('html'))
+            ),
         );
     }
 
