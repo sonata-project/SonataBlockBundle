@@ -13,8 +13,15 @@ namespace Sonata\BlockBundle\Twig\Extension;
 
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
 
-class BlockExtension extends BlockHelper implements \Twig_ExtensionInterface
+class BlockExtension implements \Twig_ExtensionInterface
 {
+    protected $blockHelper;
+
+    public function __construct(BlockHelper $blockHelper)
+    {
+        $this->blockHelper = $blockHelper;
+    }
+
     /**
      * Returns a list of functions to add to the existing list.
      *
@@ -23,9 +30,9 @@ class BlockExtension extends BlockHelper implements \Twig_ExtensionInterface
     public function getFunctions()
     {
         return array(
-            'sonata_block_render'  => new \Twig_Function_Method($this, 'render', array('is_safe' => array('html'))),
-            'sonata_block_include_javascripts'  => new \Twig_Function_Method($this, 'includeJavascripts', array('is_safe' => array('html'))),
-            'sonata_block_include_stylesheets'  => new \Twig_Function_Method($this, 'includeStylesheets', array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('sonata_block_render', array($this->blockHelper, 'render')),
+            new \Twig_SimpleFunction('sonata_block_include_javascripts', array($this->blockHelper, 'includeJavascripts')),
+            new \Twig_SimpleFunction('sonata_block_include_stylesheets', array($this->blockHelper, 'includeStylesheets')),
         );
     }
 
@@ -100,5 +107,25 @@ class BlockExtension extends BlockHelper implements \Twig_ExtensionInterface
     public function getGlobals()
     {
         return array();
+    }
+
+    public function getName()
+    {
+        return 'sonata_block';
+    }
+
+    public function renderBlock($block, array $options = array())
+    {
+        return $this->blockHelper->renderBlock($block, $options);
+    }
+
+    public function includeJavascripts($media)
+    {
+        return $this->blockHelper->includeJavascripts($media);
+    }
+
+    public function includeStylesheets($media)
+    {
+        return $this->blockHelper->includeStylesheets($media);
     }
 }

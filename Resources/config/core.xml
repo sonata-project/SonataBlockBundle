@@ -32,18 +32,14 @@
         <service id="sonata.block.twig.extension" class="Sonata\BlockBundle\Twig\Extension\BlockExtension" public="false">
             <tag name="twig.extension" />
 
-            <argument type="service" id="sonata.block.manager" />
-            <argument>%sonata_block.cache_blocks%</argument>
-            <argument type="service" id="sonata.block.renderer" />
-            <argument type="service" id="sonata.block.context_manager" />
-            <argument type="service" id="sonata.cache.manager" on-invalid="ignore" />
+            <argument type="service" id="sonata.block.templating.helper" />
         </service>
 
         <service id="sonata.block.templating.helper" class="Sonata\BlockBundle\Templating\Helper\BlockHelper" public="false">
             <tag name="templating.helper" alias="sonata_block" />
 
             <argument type="service" id="sonata.block.manager" />
-            <argument />
+            <argument>%sonata_block.cache_blocks%</argument>
             <argument type="service" id="sonata.block.renderer" />
             <argument type="service" id="sonata.block.context_manager" />
             <argument type="service" id="sonata.cache.manager" on-invalid="ignore" />
