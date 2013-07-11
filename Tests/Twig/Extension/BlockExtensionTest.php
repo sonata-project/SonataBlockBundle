@@ -22,7 +22,7 @@ class BlockExtensionTest extends \PHPUnit_Framework_TestCase
         return array(
             array('sonata_block_render', array(
                 'foobar', array('bar' => 'foo')
-            ), 'renderBlock'),
+            ), 'render'),
             array('sonata_block_include_javascripts', array(
                 'screen',
             ), 'includeJavascripts'),
