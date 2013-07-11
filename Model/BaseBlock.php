@@ -250,7 +250,7 @@ abstract class BaseBlock implements BlockInterface
      */
     public function __toString()
     {
-        return sprintf('block %d : "%s"', $this->getId(), $this->getname());
+        return sprintf("%s ~ #%s", $this->getname(), $this->getId());
     }
 
     /**
