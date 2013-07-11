@@ -6,6 +6,10 @@ use Sonata\BlockBundle\Twig\Extension\BlockExtension;
 
 class BlockExtensionTest extends \PHPUnit_Framework_TestCase
 {
+    protected $blockHelper;
+    protected $blockExtension;
+    protected $env;
+
     public function setUp()
     {
         $this->blockHelper = $this->getMockBuilder(
@@ -42,6 +46,6 @@ class BlockExtensionTest extends \PHPUnit_Framework_TestCase
 
         $func = $this->env->getFunction($name);
         $this->assertInstanceOf('Twig_SimpleFunction', $func);
-        $res = call_user_func_array($func->getCallable(), $args);
+        call_user_func_array($func->getCallable(), $args);
     }
 }
