@@ -43,7 +43,7 @@
             <tag name="templating.helper" alias="sonata_block" />
 
             <argument type="service" id="sonata.block.manager" />
-            <argument />
+            <argument>%sonata_block.cache_blocks%</argument>
             <argument type="service" id="sonata.block.renderer" />
             <argument type="service" id="sonata.block.context_manager" />
             <argument type="service" id="sonata.cache.manager" on-invalid="ignore" />
