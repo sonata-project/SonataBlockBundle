@@ -11,7 +11,7 @@
 
 namespace Sonata\BlockBundle\Form\Type;
 
-use Symfony\Component\Form\Exception\FormException;
+use Symfony\Component\Form\Exception\InvalidArgumentException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -64,11 +64,11 @@ class ServiceListType extends AbstractType
             'expanded'          => false,
             'choices'           => function (Options $options, $previousValue) use ($contexts, $manager) {
                 if (!isset($options['context'])) {
-                    throw new FormException('Please define a context option');
+                    throw new InvalidArgumentException('Please define a context option');
                 }
 
                 if (!isset($contexts[$options['context']])) {
-                    throw new FormException('Invalid context');
+                    throw new InvalidArgumentException('Invalid context');
                 }
 
                 $types = array();
