@@ -14,9 +14,11 @@ namespace Sonata\BlockBundle\Block;
 use Sonata\BlockBundle\Exception\BlockOptionsException;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\Common\Util\ClassUtils;
+use Symfony\Component\Security\Acl\Exception\Exception;
 
 class BlockContextManager implements BlockContextManagerInterface
 {
@@ -99,7 +101,16 @@ class BlockContextManager implements BlockContextManagerInterface
             $originalSettings = $settings;
             $settings = $optionsResolver->resolve(array_merge($block->getSettings(), $settings));
         } catch (ExceptionInterface $e) {
-            throw new BlockOptionsException($e);
+            // @TODO: add a logger here
+            $optionsResolver = new OptionsResolver();
+
+            $this->setDefaultSettings($optionsResolver, $block);
+
+            $service = $this->blockService->get($block);
+            $service->setDefaultSettings($optionsResolver, $block);
+
+            $originalSettings = $settings;
+            $settings = $optionsResolver->resolve($settings);
         }
 
         $blockContext = new BlockContext($block, $settings);
