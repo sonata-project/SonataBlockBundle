@@ -87,7 +87,7 @@ class StrategyManager implements StrategyManagerInterface
     public function setDefaultFilter($name)
     {
         if (!array_key_exists($name, $this->filters)) {
-            throw new \InvalidArgumentException(sprintf('Cannot set default exception filter "%s". It does not exists.', $name));
+            throw new \InvalidArgumentException(sprintf('Cannot set default exception filter "%s". It does not exist.', $name));
         }
 
         $this->defaultFilter = $name;
@@ -103,7 +103,7 @@ class StrategyManager implements StrategyManagerInterface
     public function setDefaultRenderer($name)
     {
         if (!array_key_exists($name, $this->renderers)) {
-            throw new \InvalidArgumentException(sprintf('Cannot set default exception renderer "%s". It does not exists.', $name));
+            throw new \InvalidArgumentException(sprintf('Cannot set default exception renderer "%s". It does not exist.', $name));
         }
 
         $this->defaultRenderer = $name;
@@ -186,7 +186,7 @@ class StrategyManager implements StrategyManagerInterface
     protected function getFilterService($name)
     {
         if (!isset($this->filters[$name])) {
-            throw new \RuntimeException('The filter "%s" does not exists.');
+            throw new \RuntimeException('The filter "%s" does not exist.');
         }
 
         return $this->container->get($this->filters[$name]);
@@ -204,7 +204,7 @@ class StrategyManager implements StrategyManagerInterface
     protected function getRendererService($name)
     {
         if (!isset($this->renderers[$name])) {
-            throw new \RuntimeException('The renderer "%s" does not exists.');
+            throw new \RuntimeException('The renderer "%s" does not exist.');
         }
 
         return $this->container->get($this->renderers[$name]);
