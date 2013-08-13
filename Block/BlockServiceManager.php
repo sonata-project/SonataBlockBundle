@@ -53,7 +53,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
     private function load($type)
     {
         if (!$this->has($type)) {
-            throw new \RuntimeException(sprintf('The block service `%s` does not exists', $type));
+            throw new \RuntimeException(sprintf('The block service `%s` does not exist', $type));
         }
 
         if (!$this->services[$type] instanceof BlockServiceInterface) {
