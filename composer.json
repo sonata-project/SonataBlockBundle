@@ -17,17 +17,17 @@
         }
     ],
     "require": {
-        "symfony/http-foundation": ">=2.2,<2.4-dev",
-        "symfony/form": ">=2.2,<2.4-dev",
-        "doctrine/common": ">=2.3,<2.5-dev"
+        "symfony/http-foundation": "~2.2",
+        "symfony/form": "~2.2",
+        "doctrine/common": "~2.3"
     },
     "require-dev": {
-        "sonata-project/cache-bundle": "2.1.*",
-        "sonata-project/admin-bundle": "2.2.*@dev"
+        "sonata-project/cache-bundle": "~2.1",
+        "sonata-project/admin-bundle": "~2.2@dev"
     },
     "suggest": {
-        "sonata-project/cache-bundle": "2.1.*",
-        "sonata-project/admin-bundle": "2.2.*@dev"
+        "sonata-project/cache-bundle": "~2.1",
+        "sonata-project/admin-bundle": "~2.2@dev"
     },
     "autoload": {
         "psr-0": { "Sonata\\BlockBundle": "" }
@@ -35,8 +35,6 @@
     "target-dir": "Sonata/BlockBundle",
     "extra": {
         "branch-alias": {
-            "dev-2.0": "2.0.x-dev",
-            "dev-2.1": "2.1.x-dev",
             "dev-master": "2.2.x-dev"
         }
     }
