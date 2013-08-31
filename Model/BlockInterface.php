@@ -124,13 +124,6 @@ interface BlockInterface
     public function getTtl();
 
     /**
-     * Returns a string representation of the block
-     *
-     * @return string
-     */
-    public function __toString();
-
-    /**
      * Sets the block settings
      *
      * @param array $settings An array of key/value
