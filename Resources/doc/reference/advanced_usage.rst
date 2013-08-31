@@ -1,5 +1,5 @@
-Advanched usage
-===============
+Advanced usage
+==============
 
 This happens when a block is rendered:
     - a block is loaded based on the configuration passed to
