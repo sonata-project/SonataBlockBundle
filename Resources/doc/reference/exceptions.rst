@@ -49,7 +49,7 @@ Renderers
 ---------
 
 The role of an exception renderer is to define what to do with the exceptions that have passed
-the filter. There are currently 2 renderers available:
+the filter. There are currently 3 renderers available:
 
     - inline: renders a twig template within the rendering workflow with minimal information regarding the exception.
     - inline_debug: renders a twig template with the full debug exception information from symfony.
