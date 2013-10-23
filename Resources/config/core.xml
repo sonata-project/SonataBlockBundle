@@ -62,5 +62,6 @@
         </service>
 
         <service id="sonata.block.cache.handler.default" class="Sonata\BlockBundle\Cache\HttpCacheHandler" />
+        <service id="sonata.block.cache.handler.noop" class="Sonata\BlockBundle\Cache\NoopHttpCacheHandler" />
     </services>
 </container>

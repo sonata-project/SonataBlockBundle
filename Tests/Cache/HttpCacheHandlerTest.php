@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\BlockBundle\Tests\Page;
+namespace Sonata\BlockBundle\Tests\Cache;
 
 use Sonata\BlockBundle\Cache\HttpCacheHandler;
 use Symfony\Component\HttpFoundation\Response;

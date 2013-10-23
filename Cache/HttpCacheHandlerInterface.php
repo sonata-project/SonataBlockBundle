@@ -17,7 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
 interface HttpCacheHandlerInterface
 {
     /**
-     * Add valid http cache information based on the PageInterface
+     * Add valid http cache information
+     *
      * The Response object is the final object returned to the client
      *
      * @param Response $response
