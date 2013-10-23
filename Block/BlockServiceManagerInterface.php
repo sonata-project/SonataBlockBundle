@@ -55,7 +55,7 @@ interface BlockServiceManagerInterface
     /**
      * @param $name
      *
-     * @return void
+     * @return BlockServiceInterface
      */
     public function getService($name);
 
@@ -67,8 +67,6 @@ interface BlockServiceManagerInterface
     /**
      * @param ErrorElement   $errorElement
      * @param BlockInterface $block
-     *
-     * @return void
      */
     public function validate(ErrorElement $errorElement, BlockInterface $block);
 }

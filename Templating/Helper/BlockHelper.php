@@ -11,6 +11,7 @@
 
 namespace Sonata\BlockBundle\Templating\Helper;
 
+use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\BlockContextManagerInterface;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -26,8 +27,6 @@ class BlockHelper extends Helper
     private $blockServiceManager;
 
     private $cacheManager;
-
-    private $environment;
 
     private $cacheBlocks;
 
@@ -49,6 +48,8 @@ class BlockHelper extends Helper
         $this->blockRenderer       = $blockRenderer;
         $this->cacheManager        = $cacheManager;
         $this->blockContextManager = $blockContextManager;
+
+        $this->responseStack = array();
     }
 
     public function getName()
@@ -58,6 +59,7 @@ class BlockHelper extends Helper
 
     /**
      * @param $media screen|all ....
+     *
      * @return array|string
      */
     public function includeJavascripts($media)
@@ -118,10 +120,38 @@ class BlockHelper extends Helper
      */
     public function render($block, array $options = array())
     {
-        $blockContext = $this->blockContextManager->get($block, $options);
+        $response = $this->renderResponse($block, $options);
 
-        if (!$blockContext) {
-            return '';
+        return $response ? $response->getContent() : '';
+    }
+
+    /**
+     * @param mixed $block
+     * @param array $options
+     *
+     * @return BlockContextInterface
+     */
+    public function getBlockContext($block, $options)
+    {
+        return $this->blockContextManager->get($block, $options);
+    }
+
+    /**
+     * @param mixed $block
+     * @param array $options
+     *
+     * @return null|Response
+     */
+    public function renderResponse($block, array $options = array())
+    {
+        if ($block instanceof BlockContextInterface) {
+            $blockContext = $block;
+        } else {
+            $blockContext = $this->getBlockContext($block, $options);
+        }
+
+        if (!$blockContext instanceof BlockContextInterface) {
+            return null;
         }
 
         $useCache = $blockContext->getSetting('use_cache');
@@ -136,8 +166,10 @@ class BlockHelper extends Helper
 
             if ($cacheService->has($cacheKeys)) {
                 $cacheElement = $cacheService->get($cacheKeys);
-                if (!$cacheElement->isExpired() && $cacheElement->getData() instanceof Response) {
-                    return $cacheElement->getData()->getContent();
+                $response = $cacheElement->getData();
+
+                if (!$cacheElement->isExpired() && $response instanceof Response) {
+                    return $cacheElement->getData();
                 }
             }
         }
@@ -154,11 +186,12 @@ class BlockHelper extends Helper
 
         $response = $this->blockRenderer->render($blockContext);
         $contextualKeys = $recorder ? $recorder->pop() : array();
+
         if ($response->isCacheable() && $cacheKeys && $cacheService) {
             $cacheService->set($cacheKeys, $response, $response->getTtl(), $contextualKeys);
         }
 
-        return $response->getContent();
+        return $response;
     }
 
     /**
