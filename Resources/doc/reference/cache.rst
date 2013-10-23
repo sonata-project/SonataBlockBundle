@@ -16,6 +16,50 @@ will be stored. The default ttl is 84600 seconds. Now, there are many way to con
 * set a ``use_cache`` settings to ``false`` or ``true``, if the variable is set to ``false`` then no cache will be avaible for the block and its parents
 * no cache backend by default! by default there is no cache backend setup, you should focus on raw performance before adding cache layers
 
+If you are extending the ``BaseBlockService`` you can use the method ``renderPrivateResponse`` to return a private Response.
+
+.. code-block:: php
+
+    <?php
+    // Private response as the block response depends on the connected user
+    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    {
+        $user = false;
+        if ($this->securityContext->getToken()) {
+            $user = $this->securityContext->getToken()->getUser();
+        }
+
+        if (!$user instanceof UserInterface) {
+            $user = false;
+        }
+
+        return $this->renderPrivateResponse($blockContext->getTemplate(), array(
+            'user'    => $user,
+            'block'   => $blockContext->getBlock(),
+            'context' => $blockContext
+        ));
+    }
+
+or you can use the Response object:
+
+.. code-block:: php
+
+    <?php
+    // Private response as the block response depends on the connected user
+    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    {
+        $user = false;
+        if ($this->securityContext->getToken()) {
+            $user = $this->securityContext->getToken()->getUser();
+        }
+
+        if (!$user instanceof UserInterface) {
+            $user = false;
+        }
+
+        return Response::create(sprintf("your name is %s", $user->getUsername()))->setTtl(0)->setPrivate();
+    }
+
 Block TTL computation
 ~~~~~~~~~~~~~~~~~~~~~
 
