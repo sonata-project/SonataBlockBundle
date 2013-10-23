@@ -14,3 +14,4 @@ Reference Guide
    reference/profiler
    reference/exceptions
    reference/advanced_usage
+   reference/cache
