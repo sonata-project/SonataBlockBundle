@@ -14,5 +14,4 @@ configuration file:
     sonata_block:
         profiler:
             enabled:        %kernel.debug%
-            renderer_class: Sonata\BlockBundle\Block\TraceableBlockRenderer
             template:       SonataBlockBundle:Profiler:block.html.twig

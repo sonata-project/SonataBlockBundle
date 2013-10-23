@@ -24,11 +24,6 @@
             <argument>%kernel.debug%</argument>
         </service>
 
-        <service id="sonata.block.renderer.traceable" class="Sonata\BlockBundle\Block\TraceableBlockRenderer">
-            <argument />
-            <argument type="service" id="debug.stopwatch" on-invalid="ignore" />
-        </service>
-
         <service id="sonata.block.twig.extension" class="Sonata\BlockBundle\Twig\Extension\BlockExtension" public="false">
             <tag name="twig.extension" />
 
@@ -44,6 +39,7 @@
             <argument type="service" id="sonata.block.context_manager" />
             <argument type="service" id="sonata.cache.manager" on-invalid="ignore" />
             <argument type="service" id="sonata.block.cache.handler.default" on-invalid="ignore" />
+            <argument type="service" id="debug.stopwatch" on-invalid="ignore" />
         </service>
 
         <service id="sonata.block.loader.chain" class="Sonata\BlockBundle\Block\BlockLoaderChain">

@@ -9,6 +9,7 @@
  */
 namespace Sonata\BlockBundle\Profiler\DataCollector;
 
+use Sonata\BlockBundle\Templating\Helper\BlockHelper;
 use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,9 +24,9 @@ use Sonata\BlockBundle\Block\TraceableBlockRenderer;
 class BlockDataCollector implements DataCollectorInterface, \Serializable
 {
     /**
-     * @var TraceableBlockRenderer
+     * @var BlockHelper
      */
-    protected $renderer;
+    protected $blocksHelper;
 
     /**
      * @var array
@@ -47,12 +48,12 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
     /**
      * Constructor
      *
-     * @param TraceableBlockRenderer $renderer       Block renderer
-     * @param array                  $containerTypes array of container types
+     * @param BlockHelper $renderer       Block renderer
+     * @param array       $containerTypes array of container types
      */
-    public function __construct(TraceableBlockRenderer $renderer, array $containerTypes)
+    public function __construct(BlockHelper $blockHelper, array $containerTypes)
     {
-        $this->renderer = $renderer;
+        $this->blocksHelper = $blockHelper;
         $this->containerTypes = $containerTypes;
     }
 
@@ -65,10 +66,13 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        $this->blocks = $this->renderer->getTraces();
+        $this->blocks = $this->blocksHelper->getTraces();
 
         // split into containers & real blocks
         foreach ($this->blocks as $block) {
+            if (!is_array($block)) {
+                return; // something went wrong while collecting information
+            }
             if (in_array($block['type'], $this->containerTypes)) {
                 $this->containers[] = $block;
             } else {

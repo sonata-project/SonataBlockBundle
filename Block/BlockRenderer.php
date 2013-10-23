@@ -91,7 +91,7 @@ class BlockRenderer implements BlockRendererInterface
                 throw new \RuntimeException('A block service must return a Response object');
             }
 
-            $response = $this->handleCacheInformation($response, $blockContext);
+            $response = $this->addMetaInformation($response, $blockContext, $service);
 
         } catch (\Exception $exception) {
             if ($this->logger) {
@@ -132,10 +132,11 @@ class BlockRenderer implements BlockRendererInterface
      *
      * @param Response              $response
      * @param BlockContextInterface $blockContext
+     * @param BlockServiceInterface $service
      *
      * @return Response
      */
-    protected function handleCacheInformation(Response $response, BlockContextInterface $blockContext)
+    protected function addMetaInformation(Response $response, BlockContextInterface $blockContext, BlockServiceInterface $service)
     {
         // a response exists, use it
         if ($this->lastResponse && $this->lastResponse->isCacheable()) {

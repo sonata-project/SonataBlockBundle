@@ -20,6 +20,7 @@ use Sonata\BlockBundle\Block\BlockRendererInterface;
 
 use Sonata\BlockBundle\Util\RecursiveBlockIterator;
 use Sonata\CacheBundle\Cache\CacheManagerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Templating\Helper\Helper;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Common\Util\ClassUtils;
@@ -46,6 +47,10 @@ class BlockHelper extends Helper
      */
     private $assets;
 
+    private $traces;
+
+    private $stopwatch;
+
     /**
      * @param BlockServiceManagerInterface $blockServiceManager
      * @param array                        $cacheBlocks
@@ -53,8 +58,9 @@ class BlockHelper extends Helper
      * @param BlockContextManagerInterface $blockContextManager
      * @param CacheManagerInterface        $cacheManager
      * @param HttpCacheHandlerInterface    $cacheHandler
+     * @param Stopwatch                    $stopwatch
      */
-    public function __construct(BlockServiceManagerInterface $blockServiceManager, array $cacheBlocks, BlockRendererInterface $blockRenderer, BlockContextManagerInterface $blockContextManager, CacheManagerInterface $cacheManager = null, HttpCacheHandlerInterface $cacheHandler = null)
+    public function __construct(BlockServiceManagerInterface $blockServiceManager, array $cacheBlocks, BlockRendererInterface $blockRenderer, BlockContextManagerInterface $blockContextManager, CacheManagerInterface $cacheManager = null, HttpCacheHandlerInterface $cacheHandler = null, Stopwatch $stopwatch= null)
     {
         $this->blockServiceManager = $blockServiceManager;
         $this->cacheBlocks         = $cacheBlocks;
@@ -62,13 +68,19 @@ class BlockHelper extends Helper
         $this->cacheManager        = $cacheManager;
         $this->blockContextManager = $blockContextManager;
         $this->cacheHandler        = $cacheHandler;
+        $this->stopwatch           = $stopwatch;
 
         $this->assets = array(
             'js'  => array(),
             'css' => array()
         );
+
+        $this->traces = array();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sonata_block';
@@ -112,7 +124,7 @@ class BlockHelper extends Helper
      *
      * @param BlockContextInterface $blockContext
      */
-    protected function computeAssets(BlockContextInterface $blockContext)
+    protected function computeAssets(BlockContextInterface $blockContext, array &$stats = null)
     {
         if ($blockContext->getBlock()->hasParent()) {
             return;
@@ -120,21 +132,80 @@ class BlockHelper extends Helper
 
         $service = $this->blockServiceManager->get($blockContext->getBlock());
 
-        $this->assets = array(
-            'js'  => array_unique(array_merge($service->getJavascripts('all'), $this->assets['js'])),
-            'css' => array_unique(array_merge($service->getStylesheets('all'), $this->assets['css'])),
+        $assets = array(
+            'js'  => $service->getJavascripts('all'),
+            'css' => $service->getStylesheets('all')
         );
 
         if ($blockContext->getBlock()->hasChildren()) {
             $iterator = new \RecursiveIteratorIterator(new RecursiveBlockIterator($blockContext->getBlock()->getChildren()));
 
             foreach ($iterator as $block) {
-                $this->assets = array(
-                    'js'  => array_unique(array_merge($this->blockServiceManager->get($block)->getJavascripts('all'), $this->assets['js'])),
-                    'css' => array_unique(array_merge($this->blockServiceManager->get($block)->getStylesheets('all'), $this->assets['css'])),
+                $assets = array(
+                    'js'  => array_merge($this->blockServiceManager->get($block)->getJavascripts('all'), $assets['js']),
+                    'css' => array_merge($this->blockServiceManager->get($block)->getStylesheets('all'), $assets['css']),
                 );
             }
         }
+
+        if ($this->stopwatch) {
+            $stats['assets'] = $assets;
+        }
+
+        $this->assets = array(
+            'js'  => array_unique(array_merge($assets['js'], $this->assets['js'])),
+            'css' => array_unique(array_merge($assets['css'], $this->assets['css'])),
+        );
+    }
+
+    /**
+     * @param BlockInterface $block
+     *
+     * @return array
+     */
+    public function startTracing(BlockInterface $block)
+    {
+        $this->traces[$block->getId()] = $this->stopwatch->start(sprintf('%s (id: %s, type: %s)', $block->getName(), $block->getId(), $block->getType()));
+
+        return array(
+            'name'          => $block->getName(),
+            'type'          => $block->getType(),
+            'duration'      => false,
+            'memory_start'  => memory_get_usage(true),
+            'memory_end'    => false,
+            'memory_peak'   => false,
+            'cache'         => array(
+                'keys'            => array(),
+                'contextual_keys' => array(),
+                'handler'         => false,
+                'from_cache'      => false,
+                'ttl'             => 0,
+                'created_at'      => false,
+                'lifetime'        => 0,
+                'age'             => 0,
+            ),
+            'assets'        => array(
+                'js'  => array(),
+                'css' => array(),
+            ),
+        );
+    }
+
+    /**
+     * @param BlockInterface $block
+     * @param array $stats
+     */
+    public function stopTracing(BlockInterface $block, array $stats)
+    {
+        $e = $this->traces[$block->getId()]->stop();
+
+        $this->traces[$block->getId()] = array_merge($stats, array(
+            'duration'      => $e->getDuration(),
+            'memory_end'    => memory_get_usage(true),
+            'memory_peak'   => memory_get_peak_usage(true),
+        ));
+
+        $this->traces[$block->getId()]['cache']['lifetime'] = $this->traces[$block->getId()]['cache']['age'] + $this->traces[$block->getId()]['cache']['ttl'];
     }
 
     /**
@@ -151,19 +222,29 @@ class BlockHelper extends Helper
             return '';
         }
 
+        $stats = array();
+
+        if ($this->stopwatch) {
+            $stats = $this->startTracing($blockContext->getBlock());
+        }
+
         $service = $this->blockServiceManager->get($blockContext->getBlock());
 
-        $this->computeAssets($blockContext);
+        $this->computeAssets($blockContext, $stats);
 
         $useCache = $blockContext->getSetting('use_cache');
 
         $cacheKeys = $response = false;
-        $cacheService = $useCache ? $this->getCacheService($blockContext->getBlock()) : false;
+        $cacheService = $useCache ? $this->getCacheService($blockContext->getBlock(), $stats) : false;
         if ($cacheService) {
             $cacheKeys = array_merge(
                 $service->getCacheKeys($blockContext->getBlock()),
                 $blockContext->getSetting('extra_cache_keys')
             );
+
+            if ($this->stopwatch) {
+                $stats['cache']['keys'] = $cacheKeys;
+            }
 
             // Please note, some cache handler will always return true (js for instance)
             // This will allows to have a non cacheable block, but the global page can still be cached by
@@ -171,7 +252,18 @@ class BlockHelper extends Helper
             if ($cacheService->has($cacheKeys)) {
                 $cacheElement = $cacheService->get($cacheKeys);
 
+                if ($this->stopwatch) {
+                    $stats['cache']['from_cache'] = false;
+                }
+
                 if (!$cacheElement->isExpired() && $cacheElement->getData() instanceof Response) {
+
+                    /** @var Response $response */
+
+                    if ($this->stopwatch) {
+                        $stats['cache']['from_cache'] = true;
+                    }
+
                     $response = $cacheElement->getData();
                 }
             }
@@ -191,9 +283,19 @@ class BlockHelper extends Helper
             $response = $this->blockRenderer->render($blockContext);
             $contextualKeys = $recorder ? $recorder->pop() : array();
 
+            if ($this->stopwatch) {
+                $stats['cache']['contextual_keys'] = $contextualKeys;
+            }
+
             if ($response->isCacheable() && $cacheKeys && $cacheService) {
                 $cacheService->set($cacheKeys, $response, $response->getTtl(), $contextualKeys);
             }
+        }
+
+        if ($this->stopwatch) {
+            $stats['cache']['created_at'] = $response->getDate();
+            $stats['cache']['ttl'] = $response->getTtl() ?: 0;
+            $stats['cache']['age'] = $response->getAge();
         }
 
         // update final ttl for the whole Response
@@ -201,15 +303,20 @@ class BlockHelper extends Helper
             $this->cacheHandler->updateMetadata($response, $blockContext);
         }
 
+        if ($this->stopwatch) {
+            $this->stopTracing($blockContext->getBlock(), $stats);
+        }
+
         return $response->getContent();
     }
 
     /**
      * @param BlockInterface $block
+     * @param array          $stats
      *
      * @return \Sonata\CacheBundle\Cache\CacheInterface;
      */
-    protected function getCacheService(BlockInterface $block)
+    protected function getCacheService(BlockInterface $block, array &$stats = null)
     {
         if (!$this->cacheManager) {
             return false;
@@ -228,6 +335,20 @@ class BlockHelper extends Helper
             return false;
         }
 
+        if ($this->stopwatch) {
+            $stats['cache']['handler'] = $cacheServiceId;
+        }
+
         return $this->cacheManager->getCacheService($cacheServiceId);
+    }
+
+    /**
+     * Returns the rendering traces
+     *
+     * @return array
+     */
+    public function getTraces()
+    {
+        return $this->traces;
     }
 }
