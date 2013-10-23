@@ -18,6 +18,7 @@ use Sonata\BlockBundle\Cache\HttpCacheHandlerInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BlockRendererInterface;
 
+use Sonata\BlockBundle\Util\RecursiveBlockIterator;
 use Sonata\CacheBundle\Cache\CacheManagerInterface;
 use Symfony\Component\Templating\Helper\Helper;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,6 +39,14 @@ class BlockHelper extends Helper
     private $cacheHandler;
 
     /**
+     * This property is a state variable holdings all assets used by the block for the current PHP request
+     * It is used to correctly render the javascripts and stylesheets tags on the main layout
+     *
+     * @var array
+     */
+    private $assets;
+
+    /**
      * @param BlockServiceManagerInterface $blockServiceManager
      * @param array                        $cacheBlocks
      * @param BlockRendererInterface       $blockRenderer
@@ -53,6 +62,11 @@ class BlockHelper extends Helper
         $this->cacheManager        = $cacheManager;
         $this->blockContextManager = $blockContextManager;
         $this->cacheHandler        = $cacheHandler;
+
+        $this->assets = array(
+            'js'  => array(),
+            'css' => array()
+        );
     }
 
     public function getName()
@@ -67,18 +81,8 @@ class BlockHelper extends Helper
      */
     public function includeJavascripts($media)
     {
-        $javascripts = array();
-
-        foreach ($this->blockServiceManager->getLoadedServices() as $service) {
-            $javascripts = array_merge($javascripts, $service->getJavascripts($media));
-        }
-
-        if (count($javascripts) == 0) {
-            return '';
-        }
-
         $html = "";
-        foreach ($javascripts as $javascript) {
+        foreach ($this->assets['js'] as $javascript) {
             $html .= "\n" . sprintf('<script src="%s" type="text/javascript"></script>', $javascript);
         }
 
@@ -92,25 +96,45 @@ class BlockHelper extends Helper
      */
     public function includeStylesheets($media)
     {
-        $stylesheets = array();
-
-        foreach ($this->blockServiceManager->getLoadedServices() as $service) {
-            $stylesheets = array_merge($stylesheets, $service->getStylesheets($media));
-        }
-
-        if (count($stylesheets) == 0) {
-            return '';
-        }
-
         $html = sprintf("<style type='text/css' media='%s'>", $media);
 
-        foreach ($stylesheets as $stylesheet) {
+        foreach ($this->assets['css'] as $stylesheet) {
             $html .= "\n" . sprintf('@import url(%s);', $stylesheet, $media);
         }
 
         $html .= "\n</style>";
 
         return $html;
+    }
+
+    /**
+     * Traverse the parent block and its children to retrieve the correct list css and javascript only for main block
+     *
+     * @param BlockContextInterface $blockContext
+     */
+    protected function computeAssets(BlockContextInterface $blockContext)
+    {
+        if ($blockContext->getBlock()->hasParent()) {
+            return;
+        }
+
+        $service = $this->blockServiceManager->get($blockContext->getBlock());
+
+        $this->assets = array(
+            'js'  => array_unique(array_merge($service->getJavascripts('all'), $this->assets['js'])),
+            'css' => array_unique(array_merge($service->getStylesheets('all'), $this->assets['css'])),
+        );
+
+        if ($blockContext->getBlock()->hasChildren()) {
+            $iterator = new \RecursiveIteratorIterator(new RecursiveBlockIterator($blockContext->getBlock()->getChildren()));
+
+            foreach ($iterator as $block) {
+                $this->assets = array(
+                    'js'  => array_unique(array_merge($this->blockServiceManager->get($block)->getJavascripts('all'), $this->assets['js'])),
+                    'css' => array_unique(array_merge($this->blockServiceManager->get($block)->getStylesheets('all'), $this->assets['css'])),
+                );
+            }
+        }
     }
 
     /**
@@ -127,13 +151,17 @@ class BlockHelper extends Helper
             return '';
         }
 
+        $service = $this->blockServiceManager->get($blockContext->getBlock());
+
+        $this->computeAssets($blockContext);
+
         $useCache = $blockContext->getSetting('use_cache');
 
         $cacheKeys = $response = false;
         $cacheService = $useCache ? $this->getCacheService($blockContext->getBlock()) : false;
         if ($cacheService) {
             $cacheKeys = array_merge(
-                $this->blockServiceManager->get($blockContext->getBlock())->getCacheKeys($blockContext->getBlock()),
+                $service->getCacheKeys($blockContext->getBlock()),
                 $blockContext->getSetting('extra_cache_keys')
             );
 
