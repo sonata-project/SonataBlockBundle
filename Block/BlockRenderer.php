@@ -12,7 +12,7 @@
 namespace Sonata\BlockBundle\Block;
 
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
 
 use Sonata\BlockBundle\Exception\Strategy\StrategyManagerInterface;
 
@@ -36,7 +36,7 @@ class BlockRenderer implements BlockRendererInterface
     protected $exceptionStrategyManager;
 
     /**
-     * @var LoggerInterface|null
+     * @var LoggerInterface
      */
     protected $logger;
 
@@ -87,6 +87,7 @@ class BlockRenderer implements BlockRendererInterface
             $response = $service->execute($blockContext, $this->createResponse($blockContext, $response));
 
             if (!$response instanceof Response) {
+                $response = null;
                 throw new \RuntimeException('A block service must return a Response object');
             }
 
