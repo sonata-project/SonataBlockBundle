@@ -43,6 +43,7 @@
             <argument type="service" id="sonata.block.renderer" />
             <argument type="service" id="sonata.block.context_manager" />
             <argument type="service" id="sonata.cache.manager" on-invalid="ignore" />
+            <argument type="service" id="sonata.block.cache.handler.default" on-invalid="ignore" />
         </service>
 
         <service id="sonata.block.loader.chain" class="Sonata\BlockBundle\Block\BlockLoaderChain">
@@ -59,5 +60,7 @@
             <argument type="service" id="service_container" />
             <argument />
         </service>
+
+        <service id="sonata.block.cache.handler.default" class="Sonata\BlockBundle\Cache\HttpCacheHandler" />
     </services>
 </container>

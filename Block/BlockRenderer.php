@@ -126,7 +126,10 @@ class BlockRenderer implements BlockRendererInterface
 
         return $response;
     }
+
     /**
+     * This method is responsible to cascade ttl to the parent block
+     *
      * @param Response              $response
      * @param BlockContextInterface $blockContext
      *

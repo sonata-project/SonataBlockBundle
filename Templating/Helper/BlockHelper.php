@@ -14,6 +14,7 @@ namespace Sonata\BlockBundle\Templating\Helper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\BlockContextManagerInterface;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
+use Sonata\BlockBundle\Cache\HttpCacheHandlerInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BlockRendererInterface;
 
@@ -34,22 +35,24 @@ class BlockHelper extends Helper
 
     private $blockContextManager;
 
+    private $cacheHandler;
+
     /**
      * @param BlockServiceManagerInterface $blockServiceManager
      * @param array                        $cacheBlocks
      * @param BlockRendererInterface       $blockRenderer
      * @param BlockContextManagerInterface $blockContextManager
      * @param CacheManagerInterface        $cacheManager
+     * @param HttpCacheHandlerInterface    $cacheHandler
      */
-    public function __construct(BlockServiceManagerInterface $blockServiceManager, array $cacheBlocks, BlockRendererInterface $blockRenderer, BlockContextManagerInterface $blockContextManager, CacheManagerInterface $cacheManager = null)
+    public function __construct(BlockServiceManagerInterface $blockServiceManager, array $cacheBlocks, BlockRendererInterface $blockRenderer, BlockContextManagerInterface $blockContextManager, CacheManagerInterface $cacheManager = null, HttpCacheHandlerInterface $cacheHandler = null)
     {
         $this->blockServiceManager = $blockServiceManager;
         $this->cacheBlocks         = $cacheBlocks;
         $this->blockRenderer       = $blockRenderer;
         $this->cacheManager        = $cacheManager;
         $this->blockContextManager = $blockContextManager;
-
-        $this->responseStack = array();
+        $this->cacheHandler        = $cacheHandler;
     }
 
     public function getName()
@@ -111,52 +114,22 @@ class BlockHelper extends Helper
     }
 
     /**
-     * @throws \RuntimeException
-     *
-     * @param mixed $block
-     * @param array $options
-     *
-     * @return string
-     */
-    public function render($block, array $options = array())
-    {
-        $response = $this->renderResponse($block, $options);
-
-        return $response ? $response->getContent() : '';
-    }
-
-    /**
-     * @param mixed $block
-     * @param array $options
-     *
-     * @return BlockContextInterface
-     */
-    public function getBlockContext($block, $options)
-    {
-        return $this->blockContextManager->get($block, $options);
-    }
-
-    /**
      * @param mixed $block
      * @param array $options
      *
      * @return null|Response
      */
-    public function renderResponse($block, array $options = array())
+    public function render($block, array $options = array())
     {
-        if ($block instanceof BlockContextInterface) {
-            $blockContext = $block;
-        } else {
-            $blockContext = $this->getBlockContext($block, $options);
-        }
+        $blockContext = $this->blockContextManager->get($block, $options);
 
         if (!$blockContext instanceof BlockContextInterface) {
-            return null;
+            return '';
         }
 
         $useCache = $blockContext->getSetting('use_cache');
 
-        $cacheKeys = false;
+        $cacheKeys = $response = false;
         $cacheService = $useCache ? $this->getCacheService($blockContext->getBlock()) : false;
         if ($cacheService) {
             $cacheKeys = array_merge(
@@ -164,34 +137,43 @@ class BlockHelper extends Helper
                 $blockContext->getSetting('extra_cache_keys')
             );
 
+            // Please note, some cache handler will always return true (js for instance)
+            // This will allows to have a non cacheable block, but the global page can still be cached by
+            // a reverse proxy, as the generated page will never get the generated Response from the block.
             if ($cacheService->has($cacheKeys)) {
                 $cacheElement = $cacheService->get($cacheKeys);
-                $response = $cacheElement->getData();
 
-                if (!$cacheElement->isExpired() && $response instanceof Response) {
-                    return $cacheElement->getData();
+                if (!$cacheElement->isExpired() && $cacheElement->getData() instanceof Response) {
+                    $response = $cacheElement->getData();
                 }
             }
         }
 
-        $recorder = null;
-        if ($this->cacheManager) {
-            $recorder = $this->cacheManager->getRecorder();
+        if (!$response) {
+            $recorder = null;
+            if ($this->cacheManager) {
+                $recorder = $this->cacheManager->getRecorder();
 
-            if ($recorder) {
-                $recorder->add($blockContext->getBlock());
-                $recorder->push();
+                if ($recorder) {
+                    $recorder->add($blockContext->getBlock());
+                    $recorder->push();
+                }
+            }
+
+            $response = $this->blockRenderer->render($blockContext);
+            $contextualKeys = $recorder ? $recorder->pop() : array();
+
+            if ($response->isCacheable() && $cacheKeys && $cacheService) {
+                $cacheService->set($cacheKeys, $response, $response->getTtl(), $contextualKeys);
             }
         }
 
-        $response = $this->blockRenderer->render($blockContext);
-        $contextualKeys = $recorder ? $recorder->pop() : array();
-
-        if ($response->isCacheable() && $cacheKeys && $cacheService) {
-            $cacheService->set($cacheKeys, $response, $response->getTtl(), $contextualKeys);
+        // update final ttl for the whole Response
+        if ($this->cacheHandler) {
+            $this->cacheHandler->updateMetadata($response, $blockContext);
         }
 
-        return $response;
+        return $response->getContent();
     }
 
     /**

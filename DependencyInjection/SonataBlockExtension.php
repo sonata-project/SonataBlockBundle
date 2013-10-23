@@ -85,6 +85,8 @@ class SonataBlockExtension extends Extension
      */
     public function configureCache(ContainerBuilder $container, array $config)
     {
+        $container->setAlias('sonata.block.cache.handler', $config['http_cache_handler']);
+
         $cacheBlocks = array();
         foreach ($config['blocks'] as $service => $settings) {
             $cacheBlocks['by_type'][$service] = $settings['cache'];
