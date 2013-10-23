@@ -55,8 +55,13 @@ class Configuration implements ConfigurationInterface
                 ->end()
 
                 ->scalarNode('context_manager')->defaultValue('sonata.block.context_manager.default')->end()
-                ->scalarNode('http_cache_handler')->defaultValue('sonata.block.cache.handler.default')->end()
-
+                ->arrayNode('http_cache')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('handler')->defaultValue('sonata.block.cache.handler.default')->end()
+                        ->booleanNode('listener')->defaultValue(true)->end()
+                    ->end()
+                ->end()
                 ->arrayNode('templates')
                     ->addDefaultsIfNotSet()
                     ->children()

@@ -45,8 +45,10 @@ The service can be configured using the ``http_cache_handler`` key.
 .. code-block:: yaml
 
     sonata_block:
-        http_cache_handler: sonata.block.cache.handler.noop    # no cache alteration
-        http_cache_handler: sonata.block.cache.handler.default # default value
+        http_cache:
+            handler: sonata.block.cache.handler.noop    # no cache alteration
+            handler: sonata.block.cache.handler.default # default value
+            listener: true|false                        # default to true, register or not the event listener to alter the final response
 
 Cache Backends
 ~~~~~~~~~~~~~~

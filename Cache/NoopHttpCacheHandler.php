@@ -13,6 +13,7 @@ namespace Sonata\BlockBundle\Cache;
 
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class NoopHttpCacheHandler implements HttpCacheHandlerInterface
 {
@@ -26,5 +27,11 @@ class NoopHttpCacheHandler implements HttpCacheHandlerInterface
      * {@inheritdoc}
      */
     public function updateMetadata(Response $response, BlockContextInterface $blockContext = null)
+    {}
+
+    /**
+     * {@inheritdoc}
+     */
+    public function onKernelResponse(FilterResponseEvent $event)
     {}
 }

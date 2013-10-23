@@ -13,6 +13,7 @@ namespace Sonata\BlockBundle\Cache;
 
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class HttpCacheHandler implements HttpCacheHandlerInterface
 {
@@ -50,5 +51,13 @@ class HttpCacheHandler implements HttpCacheHandlerInterface
         if ($response->isCacheable() !== null && $response->getTtl() < $this->currentTtl) {
             $this->currentTtl = $response->getTtl();
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function onKernelResponse(FilterResponseEvent $event)
+    {
+        $this->alterResponse($event->getResponse());
     }
 }
