@@ -43,7 +43,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('container_types')
                             ->isRequired()
                             // add default value to well know users of BlockBundle
-                            ->defaultValue(array('sonata.page.block.container', 'symfony_cmf.block.container'))
+                            ->defaultValue(array('sonata.page.block.container', 'cmf.block.container', 'cmf.block.slideshow'))
                             ->prototype('scalar')->end()
                         ->end()
                     ->end()
