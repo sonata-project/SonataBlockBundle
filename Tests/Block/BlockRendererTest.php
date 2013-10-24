@@ -46,7 +46,7 @@ class BlockRendererTest extends \PHPUnit_Framework_TestCase
     {
         $this->blockServiceManager = $this->getMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
         $this->exceptionStrategyManager = $this->getMock('Sonata\BlockBundle\Exception\Strategy\StrategyManagerInterface');
-        $this->logger = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
         $this->renderer = new BlockRenderer($this->blockServiceManager, $this->exceptionStrategyManager, $this->logger);
     }
@@ -90,6 +90,7 @@ class BlockRendererTest extends \PHPUnit_Framework_TestCase
         $service = $this->getMock('Sonata\BlockBundle\Block\BlockServiceInterface');
         $service->expects($this->once())->method('load');
         $service->expects($this->once())->method('execute')->will($this->returnValue('wrong response'));
+
         $this->blockServiceManager->expects($this->once())->method('get')->will($this->returnValue($service));
 
         // mock the exception strategy manager to rethrow the exception

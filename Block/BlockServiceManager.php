@@ -15,7 +15,7 @@ use Sonata\BlockBundle\Model\BlockInterface;
 
 use Sonata\AdminBundle\Validator\ErrorElement;
 
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class BlockServiceManager implements BlockServiceManagerInterface

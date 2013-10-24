@@ -85,6 +85,13 @@ class SonataBlockExtension extends Extension
      */
     public function configureCache(ContainerBuilder $container, array $config)
     {
+        $container->setAlias('sonata.block.cache.handler', $config['http_cache']['handler']);
+
+        if ($config['http_cache']['listener']) {
+            $container->getDefinition($config['http_cache']['handler'])
+                ->addTag('kernel.event_listener', array('event' => 'kernel.response', 'method' => 'onKernelResponse'));
+        }
+
         $cacheBlocks = array();
         foreach ($config['blocks'] as $service => $settings) {
             $cacheBlocks['by_type'][$service] = $settings['cache'];
@@ -150,24 +157,17 @@ class SonataBlockExtension extends Extension
      */
     public function configureProfiler(ContainerBuilder $container, array $config)
     {
+        $container->setAlias('sonata.block.renderer', 'sonata.block.renderer.default');
+
         if (!$config['profiler']['enabled']) {
-            $container->setAlias('sonata.block.renderer', 'sonata.block.renderer.default');
-
-            $container->removeDefinition('sonata.block.renderer.traceable');
-
             return;
         }
-
-        $container->setAlias('sonata.block.renderer', 'sonata.block.renderer.traceable');
-        $container
-            ->getDefinition('sonata.block.renderer.traceable')
-            ->replaceArgument(0, new Reference('sonata.block.renderer.default'));
 
         // add the block data collector
         $definition = new Definition('Sonata\BlockBundle\Profiler\DataCollector\BlockDataCollector');
         $definition->setPublic(false);
         $definition->addTag('data_collector', array('id' => 'block', 'template' => $config['profiler']['template']));
-        $definition->addArgument(new Reference('sonata.block.renderer.traceable'));
+        $definition->addArgument(new Reference('sonata.block.templating.helper'));
         $definition->addArgument($config['profiler']['container_types']);
         $container->setDefinition('sonata.block.data_collector', $definition);
     }

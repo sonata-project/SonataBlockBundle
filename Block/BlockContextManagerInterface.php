@@ -30,8 +30,8 @@ interface BlockContextManagerInterface
     /**
      * Add settings for a block class
      *
-     * @param string $class    block class
-     * @param array  $settings
+     * @param string  $class    block class
+     * @param array   $settings
      * @param boolean $replace replace existing settings
      */
     public function addSettingsByClass($class, array $settings, $replace = false);

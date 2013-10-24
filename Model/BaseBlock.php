@@ -242,7 +242,7 @@ abstract class BaseBlock implements BlockInterface
      */
     public function hasParent()
     {
-        return $this->getParent() != null;
+        return $this->getParent() instanceof self;
     }
 
     /**
@@ -258,6 +258,10 @@ abstract class BaseBlock implements BlockInterface
      */
     public function getTtl()
     {
+        if (!$this->getSetting('use_cache', true)) {
+            return 0;
+        }
+
         $ttl = $this->getSetting('ttl', 84600);
 
         foreach ($this->getChildren() as $block) {

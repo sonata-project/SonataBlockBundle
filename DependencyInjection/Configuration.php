@@ -43,7 +43,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('container_types')
                             ->isRequired()
                             // add default value to well know users of BlockBundle
-                            ->defaultValue(array('sonata.page.block.container', 'symfony_cmf.block.container'))
+                            ->defaultValue(array('sonata.page.block.container', 'cmf.block.container', 'cmf.block.slideshow'))
                             ->prototype('scalar')->end()
                         ->end()
                     ->end()
@@ -55,7 +55,13 @@ class Configuration implements ConfigurationInterface
                 ->end()
 
                 ->scalarNode('context_manager')->defaultValue('sonata.block.context_manager.default')->end()
-
+                ->arrayNode('http_cache')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('handler')->defaultValue('sonata.block.cache.handler.default')->end()
+                        ->booleanNode('listener')->defaultValue(true)->end()
+                    ->end()
+                ->end()
                 ->arrayNode('templates')
                     ->addDefaultsIfNotSet()
                     ->children()

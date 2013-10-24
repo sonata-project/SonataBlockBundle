@@ -12,12 +12,16 @@
 namespace Sonata\BlockBundle\Block;
 
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
 
 use Sonata\BlockBundle\Exception\Strategy\StrategyManagerInterface;
 
 /**
  * Handles the execution and rendering of a block
+ *
+ * This function render a block and make sure the cacheable information are correctly retrieved
+ * and set to the upper response (container can have child blocks, so the smallest ttl from a child
+ * must be used in the container).
  */
 class BlockRenderer implements BlockRendererInterface
 {
@@ -32,7 +36,7 @@ class BlockRenderer implements BlockRendererInterface
     protected $exceptionStrategyManager;
 
     /**
-     * @var LoggerInterface|null
+     * @var LoggerInterface
      */
     protected $logger;
 
@@ -40,6 +44,14 @@ class BlockRenderer implements BlockRendererInterface
      * @var boolean
      */
     protected $debug;
+
+    /**
+     * This property hold the last response available from the child or sibling block
+     * The cacheable attributes must be cascaded to the parent
+     *
+     * @var Response
+     */
+    private $lastResponse;
 
     /**
      * Constructor
@@ -72,24 +84,78 @@ class BlockRenderer implements BlockRendererInterface
             $service = $this->blockServiceManager->get($block);
             $service->load($block);
 
-            if (null === $response) {
-                $response = new Response();
-                $response->setTtl($block->getTtl());
-            }
+            $response = $service->execute($blockContext, $this->createResponse($blockContext, $response));
 
-            $newResponse = $service->execute($blockContext, $response);
-
-            if (!$newResponse instanceof Response) {
+            if (!$response instanceof Response) {
+                $response = null;
                 throw new \RuntimeException('A block service must return a Response object');
             }
+
+            $response = $this->addMetaInformation($response, $blockContext, $service);
 
         } catch (\Exception $exception) {
             if ($this->logger) {
                 $this->logger->critical(sprintf('[cms::renderBlock] block.id=%d - error while rendering block - %s', $block->getId(), $exception->getMessage()));
             }
-            $newResponse = $this->exceptionStrategyManager->handleException($exception, $blockContext->getBlock(), $response);
+
+            // reseting the state object
+            $this->lastResponse = null;
+
+            $response = $this->exceptionStrategyManager->handleException($exception, $blockContext->getBlock(), $response);
         }
 
-        return $newResponse;
+        return $response;
+    }
+
+    /**
+     * @param BlockContextInterface $blockContext
+     * @param Response              $response
+     *
+     * @return Response
+     */
+    protected function createResponse(BlockContextInterface $blockContext, Response $response = null)
+    {
+        if (null === $response) {
+            $response = new Response();
+        }
+
+        // set the ttl from the block instance, this can be changed by the BlockService
+        if (($ttl = $blockContext->getBlock()->getTtl()) > 0) {
+            $response->setTtl($ttl);
+        }
+
+        return $response;
+    }
+
+    /**
+     * This method is responsible to cascade ttl to the parent block
+     *
+     * @param Response              $response
+     * @param BlockContextInterface $blockContext
+     * @param BlockServiceInterface $service
+     *
+     * @return Response
+     */
+    protected function addMetaInformation(Response $response, BlockContextInterface $blockContext, BlockServiceInterface $service)
+    {
+        // a response exists, use it
+        if ($this->lastResponse && $this->lastResponse->isCacheable()) {
+            $response->setTtl($this->lastResponse->getTtl());
+            $response->setPublic();
+        } else if ($this->lastResponse) { // not cacheable
+            $response->setPrivate();
+            $response->setTtl(0);
+            $response->headers->removeCacheControlDirective('s-maxage');
+            $response->headers->removeCacheControlDirective('maxage');
+        }
+
+        // no more children available in the stack, reseting the state object
+        if (!$blockContext->getBlock()->hasParent()) {
+            $this->lastResponse = null;
+        } else { // contains a parent so storing the response
+            $this->lastResponse = $response;
+        }
+
+        return $response;
     }
 }
