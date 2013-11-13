@@ -95,6 +95,12 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
 
+                ->arrayNode('menus')
+                    ->info('KNP Menus available in sonata.block.menu block configuration')
+                    ->useAttributeAsKey('id')
+                    ->prototype('scalar')->end()
+                ->end()
+
                 ->arrayNode('blocks_by_class')
                     ->info('configuration per block class')
                     ->useAttributeAsKey('class')

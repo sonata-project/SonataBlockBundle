@@ -37,17 +37,24 @@ class MenuBlockService extends BaseBlockService
     protected $menuProvider;
 
     /**
+     * @var array
+     */
+    protected $menus;
+
+    /**
      * Constructor
      *
      * @param string                $name
      * @param EngineInterface       $templating
      * @param MenuProviderInterface $menuProvider
+     * @param array                 $menus
      */
-    public function __construct($name, EngineInterface $templating, MenuProviderInterface $menuProvider)
+    public function __construct($name, EngineInterface $templating, MenuProviderInterface $menuProvider, array $menus = array())
     {
         parent::__construct($name, $templating);
 
         $this->menuProvider = $menuProvider;
+        $this->menus        = $menus;
     }
 
     /**
@@ -55,12 +62,18 @@ class MenuBlockService extends BaseBlockService
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        return $this->renderPrivateResponse($blockContext->getTemplate(), array(
+        $responseSettings = array(
             'menu'         => $this->getMenu($blockContext->getSettings()),
             'menu_options' => $this->getMenuOptions($blockContext->getSettings()),
             'block'        => $blockContext->getBlock(),
             'context'      => $blockContext
-        ));
+        );
+
+        if ('private' === $blockContext->getSettings('cache_policy')) {
+            return $this->renderPrivateResponse($blockContext->getTemplate(), $responseSettings);
+        }
+
+        return $this->renderResponse($blockContext->getTemplate(), $responseSettings);
     }
 
     /**
@@ -69,14 +82,7 @@ class MenuBlockService extends BaseBlockService
     public function buildEditForm(FormMapper $form, BlockInterface $block)
     {
         $form->add('settings', 'sonata_type_immutable_array', array(
-            'keys' => array(
-                array('title', 'text', array('required' => false)),
-                array('menu_name', 'string', array('required' => false)),
-                array('menu_class'), 'string', array('required' => false),
-                array('current_class', 'string', array('required' => false)),
-                array('first_class', 'string', array('required' => false)),
-                array('last_class', 'string', array('required' => false)),
-            )
+            'keys' => $this->getFormSettingsKeys()
         ));
     }
 
@@ -100,9 +106,10 @@ class MenuBlockService extends BaseBlockService
     {
         $resolver->setDefaults(array(
             'title'         => $this->getName(),
+            'cache_policy'  => 'public',
             'template'      => 'SonataBlockBundle:Block:block_core_menu.html.twig',
             'menu_name'     => "",
-            'menu_class'    => "nav nav-list",
+            'safe_labels'   => false,
             'current_class' => 'active',
             'first_class'   => false,
             'last_class'    => false,
@@ -116,6 +123,22 @@ class MenuBlockService extends BaseBlockService
     public function getName()
     {
         return 'Menu';
+    }
+
+    /**
+     * @return array
+     */
+    protected function getFormSettingsKeys()
+    {
+        return array(
+            array('title', 'text', array('required' => false)),
+            array('cache_policy', 'choice', array('choices' => array('public', 'private'))),
+            array('menu_name', 'choice', array('choices' => $this->menus, 'required' => false)),
+            array('safe_labels', 'checkbox', array('required' => false)),
+            array('current_class', 'text', array('required' => false)),
+            array('first_class', 'text', array('required' => false)),
+            array('last_class', 'text', array('required' => false)),
+        );
     }
 
     /**
@@ -140,7 +163,8 @@ class MenuBlockService extends BaseBlockService
         $mapping = array(
             'current_class' => 'currentClass',
             'first_class'   => 'firstClass',
-            'last_class'    => 'lastClass'
+            'last_class'    => 'lastClass',
+            'safe_labels'   => 'allow_safe_labels',
         );
 
         $options = array();
