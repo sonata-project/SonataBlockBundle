@@ -50,6 +50,7 @@ class SonataBlockExtension extends Extension
         $this->configureForm($container, $config);
         $this->configureProfiler($container, $config);
         $this->configureException($container, $config);
+        $this->configureMenus($container, $config);
         $this->configureClassesToCompile();
 
         $bundles = $container->getParameter('kernel.bundles');
@@ -63,6 +64,15 @@ class SonataBlockExtension extends Extension
 
         $container->getDefinition('sonata.block.twig.global')
             ->replaceArgument(1, $config['templates']);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param array            $config
+     */
+    public function configureMenus(ContainerBuilder $container, array $config)
+    {
+        $container->getDefinition('sonata.block.service.menu')->replaceArgument(3, $config['menus']);
     }
 
     /**
@@ -237,6 +247,7 @@ class SonataBlockExtension extends Extension
             "Sonata\\BlockBundle\\Block\\Loader\\ServiceLoader",
             "Sonata\\BlockBundle\\Block\\Service\\EmptyBlockService",
             "Sonata\\BlockBundle\\Block\\Service\\RssBlockService",
+            "Sonata\\BlockBundle\\Block\\Service\\MenuBlockService",
             "Sonata\\BlockBundle\\Block\\Service\\TextBlockService",
             "Sonata\\BlockBundle\\Exception\\BlockExceptionInterface",
             "Sonata\\BlockBundle\\Exception\\BlockNotFoundException",
