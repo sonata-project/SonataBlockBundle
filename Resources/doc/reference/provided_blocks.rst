@@ -6,7 +6,7 @@ Some block services are already provided. You may use them or check out the code
 EmptyBlockService
 -----------------
 
-#TODO
+The purpose of this block is to always return content, even on exceptions (``Sonata\BlockBundle\Exception\BlockNotFoundException``). See :doc:`Advanced Usage <advanced_usage>`.
 
 TextBlockService
 ----------------
