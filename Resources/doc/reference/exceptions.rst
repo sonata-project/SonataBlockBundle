@@ -33,7 +33,7 @@ These filters may be modified or completed with others filters in the configurat
                 keep_all:               sonata.block.exception.filter.keep_all
                 keep_none:              sonata.block.exception.filter.keep_none
 
-A default filter may be configure to apply, by default, to all block types. If you wish to
+A default filter may be configured to apply, by default, to all block types. If you wish to
 customize a filter on a particular block type, you may also add the following option in the
 configuration file:
 
@@ -55,7 +55,7 @@ the filter. There are currently 3 renderers available:
     - inline_debug: renders a twig template with the full debug exception information from symfony.
     - throw: throws the exception to let the framework handle the exception.
 
-These filters may be modified or completed with others filters in the configuration file:
+These filters may be modified or completed with other filters in the configuration file:
 
 .. code-block:: yaml
 
@@ -70,7 +70,7 @@ These filters may be modified or completed with others filters in the configurat
                 throw:                  sonata.block.exception.renderer.throw
 
 
-A default renderer may be configure to apply, by default, to all block types. If you wish to
+A default renderer may be configured to apply, by default, to all block types. If you wish to
 customize a renderer on a particular block type, you may also add the following option in the
 configuration file:
 
