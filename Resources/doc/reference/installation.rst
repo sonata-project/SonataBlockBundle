@@ -47,3 +47,9 @@ file.
             #sonata.media.block.media:
             #sonata.media.block.gallery:
             #sonata.media.block.feature_media:
+
+            # Facebook Social Plugins blocks
+            sonata.block.service.facebook.like_box:
+            sonata.block.service.facebook.like_button:
+            sonata.block.service.facebook.send_button:
+            sonata.block.service.facebook.share_button:

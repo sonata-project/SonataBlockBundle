@@ -8,6 +8,10 @@
         <parameter key="sonata.block.service.text.class">Sonata\BlockBundle\Block\Service\TextBlockService</parameter>
         <parameter key="sonata.block.service.rss.class">Sonata\BlockBundle\Block\Service\RssBlockService</parameter>
         <parameter key="sonata.block.service.menu.class">Sonata\BlockBundle\Block\Service\MenuBlockService</parameter>
+        <parameter key="sonata.block.service.facebook.like_box.class">Sonata\BlockBundle\Block\Service\FacebookSocialPlugins\FacebookLikeBoxBlockService</parameter>
+        <parameter key="sonata.block.service.facebook.like_button.class">Sonata\BlockBundle\Block\Service\FacebookSocialPlugins\FacebookLikeButtonBlockService</parameter>
+        <parameter key="sonata.block.service.facebook.send_button.class">Sonata\BlockBundle\Block\Service\FacebookSocialPlugins\FacebookSendButtonBlockService</parameter>
+        <parameter key="sonata.block.service.facebook.share_button.class">Sonata\BlockBundle\Block\Service\FacebookSocialPlugins\FacebookShareButtonBlockService</parameter>
     </parameters>
 
     <services>
@@ -36,5 +40,28 @@
             <argument type="service" id="knp_menu.menu_provider" />
             <argument type="collection"></argument>
         </service>
+
+        <!-- Facebook Social Plugins -->
+        <service id="sonata.block.service.facebook.like_box" class="%sonata.block.service.facebook.like_box.class%">
+            <tag name="sonata.block" />
+            <argument>sonata.block.facebook.like_box</argument>
+            <argument type="service" id="templating" />
+        </service>
+        <service id="sonata.block.service.facebook.like_button" class="%sonata.block.service.facebook.like_button.class%">
+            <tag name="sonata.block" />
+            <argument>sonata.block.facebook.like_button</argument>
+            <argument type="service" id="templating" />
+        </service>
+        <service id="sonata.block.service.facebook.send_button" class="%sonata.block.service.facebook.send_button.class%">
+            <tag name="sonata.block" />
+            <argument>sonata.block.facebook.send_button</argument>
+            <argument type="service" id="templating" />
+        </service>
+        <service id="sonata.block.service.facebook.share_button" class="%sonata.block.service.facebook.share_button.class%">
+            <tag name="sonata.block" />
+            <argument>sonata.block.facebook.share_button</argument>
+            <argument type="service" id="templating" />
+        </service>
+        <!-- Facebook Social Plugins -->
     </services>
 </container>

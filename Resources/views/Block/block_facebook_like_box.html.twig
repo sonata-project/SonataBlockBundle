@@ -1,0 +1,32 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+{% spaceless %}
+
+    {% if include_sdk %}
+        {% include 'SonataBlockBundle:Block:_facebook_sdk.html.twig' %}
+    {% endif %}
+
+    <div class="fb-like-box"
+        {% if settings.url %}data-href="{{ settings.url }}"{% endif %}
+        data-show-faces="{% if settings.show_faces %}true{% else %}false{% endif %}"
+        data-header="{% if settings.show_header %}true{% else %}false{% endif %}"
+        data-stream="{% if settings.show_posts %}true{% else %}false{% endif %}"
+        data-show-border="{% if settings.show_border %}true{% else %}false{% endif %}"
+        {% if settings.width %}data-width="{{ settings.width }}"{% endif %}
+        {% if settings.height %}data-height="{{ settings.height }}"{% endif %}
+        data-colorscheme="{{ settings.colorscheme }}">
+    </div>
+
+{% endspaceless %}
+{% endblock %}
