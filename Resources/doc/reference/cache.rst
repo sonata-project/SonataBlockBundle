@@ -10,10 +10,10 @@ Cache Behavior
 ~~~~~~~~~~~~~~
 
 The BlockBundle assumes that a block can be cached by default, so if a cache backend is configured, the block response
-will be stored. The default ttl is 84600 seconds. Now, there are many way to control this behavior:
+will be stored. The default ttl is 84600 seconds. Now, there are many ways to control this behavior:
 
-* set a ``ttl`` settings inside the block, so if ``ttl`` = 0, then no cache will be available for the block and its parents
-* set a ``use_cache`` settings to ``false`` or ``true``, if the variable is set to ``false`` then no cache will be avaible for the block and its parents
+* set a ``ttl`` setting inside the block, so if ``ttl`` = 0, then no cache will be available for the block and its parents
+* set a ``use_cache`` setting to ``false`` or ``true``, if the variable is set to ``false`` then no cache will be avaible for the block and its parents
 * no cache backend by default! by default there is no cache backend setup, you should focus on raw performance before adding cache layers
 
 If you are extending the ``BaseBlockService`` you can use the method ``renderPrivateResponse`` to return a private Response.
@@ -65,7 +65,7 @@ Block TTL computation
 
 The BlockBundle uses the TTL value from the Response object to compute the final TTL value. As block can have children, the
 smallest ttl need to be used in parent block responses. This job is done by the ``BlockRenderer`` class, this service stores
-a state with the last response and compare the ttl with the current response. The state is reseted when the block does not have
+a state with the last response and compares the ttl with the current response. The state is reset when the block does not have
 any parent.
 
 The cache mechanism will use the TTL to set a valid value when the response is stored into the cache backend.
@@ -79,7 +79,7 @@ Final Response TTL computation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``BlockRendered`` stores a global states for the smallest ttl available, there is another service used to store the smallest
-``ttl`` for the page: ``HttpCacheHandler``. Why two services ? This has been done to add an extra layers of control.
+``ttl`` for the page: ``HttpCacheHandler``. Why two services ? This has been done to add an extra layer of control.
 
 The ``HttpCacheHandler::updateMetadata`` is called by the templating helper when the response is retrieved, then an event
 listener is registered to alter the final Response.
@@ -98,7 +98,7 @@ Cache Backends
 ~~~~~~~~~~~~~~
 
 * ``sonata.cache.mongo``: use mongodb to store cache element, this is a nice backend as you can remove some cache element by
-only one value. (remove all block where profile.media.id == 3 is used.)
+  only one value. (remove all block where profile.media.id == 3 is used.)
 * ``sonata.cache.memcached``: use memcached as a backend, shared accross multiple hosts
 * ``sonata.cache.apc``: use apc from PHP runtime, cannot be shared accross multiple hosts, and it is not suitable to store high volume of data
 * ``sonata.cache.esi``: use a ESI compatible backend to store the cache, like Varnish
