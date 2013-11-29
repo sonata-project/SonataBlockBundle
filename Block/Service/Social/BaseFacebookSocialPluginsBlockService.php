@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\BlockBundle\Block\Service\FacebookSocialPlugins;
+namespace Sonata\BlockBundle\Block\Service\Social;
 
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;

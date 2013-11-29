@@ -8,10 +8,10 @@
         <parameter key="sonata.block.service.text.class">Sonata\BlockBundle\Block\Service\TextBlockService</parameter>
         <parameter key="sonata.block.service.rss.class">Sonata\BlockBundle\Block\Service\RssBlockService</parameter>
         <parameter key="sonata.block.service.menu.class">Sonata\BlockBundle\Block\Service\MenuBlockService</parameter>
-        <parameter key="sonata.block.service.facebook.like_box.class">Sonata\BlockBundle\Block\Service\FacebookSocialPlugins\FacebookLikeBoxBlockService</parameter>
-        <parameter key="sonata.block.service.facebook.like_button.class">Sonata\BlockBundle\Block\Service\FacebookSocialPlugins\FacebookLikeButtonBlockService</parameter>
-        <parameter key="sonata.block.service.facebook.send_button.class">Sonata\BlockBundle\Block\Service\FacebookSocialPlugins\FacebookSendButtonBlockService</parameter>
-        <parameter key="sonata.block.service.facebook.share_button.class">Sonata\BlockBundle\Block\Service\FacebookSocialPlugins\FacebookShareButtonBlockService</parameter>
+        <parameter key="sonata.block.service.facebook.like_box.class">Sonata\BlockBundle\Block\Service\Social\FacebookLikeBoxBlockService</parameter>
+        <parameter key="sonata.block.service.facebook.like_button.class">Sonata\BlockBundle\Block\Service\Social\FacebookLikeButtonBlockService</parameter>
+        <parameter key="sonata.block.service.facebook.send_button.class">Sonata\BlockBundle\Block\Service\Social\FacebookSendButtonBlockService</parameter>
+        <parameter key="sonata.block.service.facebook.share_button.class">Sonata\BlockBundle\Block\Service\Social\FacebookShareButtonBlockService</parameter>
     </parameters>
 
     <services>

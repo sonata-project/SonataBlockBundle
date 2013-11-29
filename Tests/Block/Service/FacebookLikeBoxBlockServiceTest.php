@@ -12,7 +12,7 @@
 namespace Sonata\BlockBundle\Tests\Block\Service;
 
 use Sonata\BlockBundle\Model\Block;
-use Sonata\BlockBundle\Block\Service\FacebookSocialPlugins\FacebookLikeBoxBlockService;
+use Sonata\BlockBundle\Block\Service\Social\FacebookLikeBoxBlockService;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sonata\BlockBundle\Block\BlockContext;
 

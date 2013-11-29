@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\BlockBundle\Block\Service\FacebookSocialPlugins;
+namespace Sonata\BlockBundle\Block\Service\Social;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -17,14 +17,26 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Facebook like box integration.
+ * Facebook like button integration.
  *
- * @see https://developers.facebook.com/docs/plugins/like-box-for-pages/
+ * @see https://developers.facebook.com/docs/plugins/like-button/
  *
  * @author Sylvain Deloux <sylvain.deloux@fullsix.com>
  */
-class FacebookLikeBoxBlockService extends BaseFacebookSocialPluginsBlockService
+class FacebookLikeButtonBlockService extends BaseFacebookSocialPluginsBlockService
 {
+    protected $layoutList = array(
+        'standard'     => 'standard',
+        'box_count'    => 'box_count',
+        'button_count' => 'button_count',
+        'button'       => 'button',
+    );
+
+    protected $actionTypes = array(
+        'like'      => 'like',
+        'recommend' => 'recommend',
+    );
+
     /**
      * {@inheritdoc}
      */
@@ -32,15 +44,14 @@ class FacebookLikeBoxBlockService extends BaseFacebookSocialPluginsBlockService
     {
         $resolver->setDefaults(array(
             'include_sdk' => true,
-            'template'    => 'SonataBlockBundle:Block:block_facebook_like_box.html.twig',
+            'template'    => 'SonataBlockBundle:Block:block_facebook_like_button.html.twig',
             'url'         => null,
             'width'       => null,
-            'height'      => null,
-            'colorscheme' => $this->colorschemeList['light'],
             'show_faces'  => true,
-            'show_header' => true,
-            'show_posts'  => false,
-            'show_border' => true,
+            'share'       => true,
+            'layout'      => $this->layoutList['standard'],
+            'colorscheme' => $this->colorschemeList['light'],
+            'action'      => $this->actionTypes['like'],
         ));
     }
 
@@ -54,12 +65,11 @@ class FacebookLikeBoxBlockService extends BaseFacebookSocialPluginsBlockService
                 array('include_sdk', 'checkbok', array('required' => false)),
                 array('url',         'url',      array('required' => false)),
                 array('width',       'integer',  array('required' => false)),
-                array('height',      'integer',  array('required' => false)),
-                array('colorscheme', 'choice',   array('required' => true, 'choices' => $this->colorschemeList)),
                 array('show_faces',  'checkbox', array('required' => false)),
-                array('show_header', 'checkbox', array('required' => false)),
-                array('show_posts',  'checkbox', array('required' => false)),
-                array('show_border', 'checkbox', array('required' => false)),
+                array('share',       'checkbox', array('required' => false)),
+                array('layout',      'choice',   array('required' => true, 'choices' => $this->layoutList)),
+                array('colorscheme', 'choice',   array('required' => true, 'choices' => $this->colorschemeList)),
+                array('action',      'choice',   array('required' => true, 'choices' => $this->actionTypes)),
             )
         ));
     }
@@ -76,6 +86,6 @@ class FacebookLikeBoxBlockService extends BaseFacebookSocialPluginsBlockService
      */
     public function getName()
     {
-        return 'Facebook Social Plugin - Like box';
+        return 'Facebook Social Plugin - Like button';
     }
 }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\BlockBundle\Block\Service\FacebookSocialPlugins;
+namespace Sonata\BlockBundle\Block\Service\Social;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -17,13 +17,13 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Facebook send button integration.
+ * Facebook like box integration.
  *
- * @see https://developers.facebook.com/docs/plugins/send-button/
+ * @see https://developers.facebook.com/docs/plugins/like-box-for-pages/
  *
  * @author Sylvain Deloux <sylvain.deloux@fullsix.com>
  */
-class FacebookSendButtonBlockService extends BaseFacebookSocialPluginsBlockService
+class FacebookLikeBoxBlockService extends BaseFacebookSocialPluginsBlockService
 {
     /**
      * {@inheritdoc}
@@ -32,11 +32,15 @@ class FacebookSendButtonBlockService extends BaseFacebookSocialPluginsBlockServi
     {
         $resolver->setDefaults(array(
             'include_sdk' => true,
-            'template'    => 'SonataBlockBundle:Block:block_facebook_send_button.html.twig',
+            'template'    => 'SonataBlockBundle:Block:block_facebook_like_box.html.twig',
             'url'         => null,
             'width'       => null,
             'height'      => null,
             'colorscheme' => $this->colorschemeList['light'],
+            'show_faces'  => true,
+            'show_header' => true,
+            'show_posts'  => false,
+            'show_border' => true,
         ));
     }
 
@@ -52,6 +56,10 @@ class FacebookSendButtonBlockService extends BaseFacebookSocialPluginsBlockServi
                 array('width',       'integer',  array('required' => false)),
                 array('height',      'integer',  array('required' => false)),
                 array('colorscheme', 'choice',   array('required' => true, 'choices' => $this->colorschemeList)),
+                array('show_faces',  'checkbox', array('required' => false)),
+                array('show_header', 'checkbox', array('required' => false)),
+                array('show_posts',  'checkbox', array('required' => false)),
+                array('show_border', 'checkbox', array('required' => false)),
             )
         ));
     }
@@ -68,6 +76,6 @@ class FacebookSendButtonBlockService extends BaseFacebookSocialPluginsBlockServi
      */
     public function getName()
     {
-        return 'Facebook Social Plugin - Send button';
+        return 'Facebook Social Plugin - Like box';
     }
 }

@@ -12,7 +12,7 @@
 namespace Sonata\BlockBundle\Tests\Block\Service;
 
 use Sonata\BlockBundle\Model\Block;
-use Sonata\BlockBundle\Block\Service\FacebookSocialPlugins\FacebookSendButtonBlockService;
+use Sonata\BlockBundle\Block\Service\Social\FacebookSendButtonBlockService;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sonata\BlockBundle\Block\BlockContext;
 
