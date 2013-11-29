@@ -226,11 +226,13 @@ class BlockHelper extends Helper
     {
         $this->eventDispatcher->dispatch($name, $event = new BlockEvent($options));
 
-        if (!$event->getBlock()) {
-            return "";
+        $content = "";
+
+        foreach ($event->getBlocks() as $block) {
+            $content .= $this->render($event->getBlock());
         }
 
-        return $this->render($event->getBlock());
+        return $content;
     }
 
     /**

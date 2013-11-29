@@ -18,7 +18,7 @@ class BlockEvent extends Event
 {
     protected $settings;
 
-    protected $block;
+    protected $blocks = array();
 
     /**
      * @param array  $settings
@@ -31,9 +31,9 @@ class BlockEvent extends Event
     /**
      * @param BlockInterface $block
      */
-    public function setBlock(BlockInterface $block)
+    public function addBlock(BlockInterface $block)
     {
-        $this->block = $block;
+        $this->blocks[] = $block;
     }
 
     /**
@@ -47,8 +47,8 @@ class BlockEvent extends Event
     /**
      * @return mixed
      */
-    public function getBlock()
+    public function getBlocks()
     {
-        return $this->block;
+        return $this->blocks;
     }
 }
