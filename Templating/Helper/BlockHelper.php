@@ -224,12 +224,12 @@ class BlockHelper extends Helper
      */
     public function renderEvent($name, array $options = array())
     {
-        $this->eventDispatcher->dispatch($name, $event = new BlockEvent($options));
+        $event = $this->eventDispatcher->dispatch($name, new BlockEvent($options));
 
         $content = "";
 
         foreach ($event->getBlocks() as $block) {
-            $content .= $this->render($event->getBlock());
+            $content .= $this->render($block);
         }
 
         return $content;
@@ -295,6 +295,7 @@ class BlockHelper extends Helper
                 }
             }
         }
+
 
         if (!$response) {
             $recorder = null;
