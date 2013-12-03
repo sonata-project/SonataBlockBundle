@@ -51,4 +51,13 @@ class BlockEvent extends Event
     {
         return $this->blocks;
     }
+
+    /**
+     * @param string $name
+     * @param mixed  $default
+     */
+    public function getSetting($name, $default = null)
+    {
+        return isset($this->settings[$name]) ? $this->settings[$name] : $default;
+    }
 }

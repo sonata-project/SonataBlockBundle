@@ -67,7 +67,7 @@ class BlockHelper extends Helper
      */
     public function __construct(BlockServiceManagerInterface $blockServiceManager, array $cacheBlocks, BlockRendererInterface $blockRenderer,
                                 BlockContextManagerInterface $blockContextManager, EventDispatcherInterface $eventDispatcher,
-                                CacheManagerInterface $cacheManager = null, HttpCacheHandlerInterface $cacheHandler = null, Stopwatch $stopwatch= null)
+                                CacheManagerInterface $cacheManager = null, HttpCacheHandlerInterface $cacheHandler = null, Stopwatch $stopwatch = null)
     {
         $this->blockServiceManager = $blockServiceManager;
         $this->cacheBlocks         = $cacheBlocks;
@@ -83,7 +83,9 @@ class BlockHelper extends Helper
             'css' => array()
         );
 
-        $this->traces = array();
+        $this->traces = array(
+            '_events' => array()
+        );
     }
 
     /**
@@ -195,7 +197,7 @@ class BlockHelper extends Helper
             'assets'        => array(
                 'js'  => array(),
                 'css' => array(),
-            ),
+            )
         );
     }
 
@@ -224,7 +226,9 @@ class BlockHelper extends Helper
      */
     public function renderEvent($name, array $options = array())
     {
-        $event = $this->eventDispatcher->dispatch($name, new BlockEvent($options));
+        $eventName = sprintf('sonata.block.event.%s', $name);
+
+        $event = $this->eventDispatcher->dispatch($eventName, new BlockEvent($options));
 
         $content = "";
 
@@ -232,7 +236,57 @@ class BlockHelper extends Helper
             $content .= $this->render($block);
         }
 
+        if ($this->stopwatch) {
+            $this->traces['_events'][uniqid()] = array(
+                'template_code' => $name,
+                'event_name'    => $eventName,
+                'blocks'        => $this->getEventBlocks($event),
+                'listeners'     => $this->getEventListeners($event),
+            );
+        }
+
         return $content;
+    }
+
+    /**
+     * @param BlockEvent $event
+     *
+     * @return array
+     */
+    protected function getEventBlocks(BlockEvent $event)
+    {
+        $results = array();
+
+        foreach ($event->getBlocks() as $block) {
+            $results[] = array($block->getId(), $block->getType());
+        }
+
+        return $results;
+    }
+
+    /**
+     * @param BlockEvent $event
+     *
+     * @return array
+     */
+    protected function getEventListeners(BlockEvent $event)
+    {
+        $results = array();
+
+        foreach ($this->eventDispatcher->getListeners($event->getName()) as $listener) {
+            if (is_object($listener[0])) {
+                $results[] = get_class($listener[0]);
+            } else if (is_string($listener[0])) {
+                $results[] = $listener[0];
+            } else if ($listener instanceof \Closure) {
+                $results[] = '{closure}()';
+            } else {
+                $results[] = 'Unkown type!';
+            }
+        }
+
+        return $results;
+
     }
 
     /**

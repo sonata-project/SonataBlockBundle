@@ -102,7 +102,7 @@ abstract class BaseBlockService implements BlockServiceInterface
     {
         return array(
             'block_id'   => $block->getId(),
-            'updated_at' => $block->getUpdatedAt()->format('U'),
+            'updated_at' => $block->getUpdatedAt() ? $block->getUpdatedAt()->format('U') : strtotime('now'),
         );
     }
 

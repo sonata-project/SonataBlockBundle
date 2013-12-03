@@ -43,7 +43,15 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
      */
     protected $realBlocks = array();
 
+    /**
+     * @var array
+     */
     protected $containerTypes = array();
+
+    /**
+     * @var array
+     */
+    protected $events = array();
 
     /**
      * Constructor
@@ -69,16 +77,45 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
         $this->blocks = $this->blocksHelper->getTraces();
 
         // split into containers & real blocks
-        foreach ($this->blocks as $block) {
+        foreach ($this->blocks as $id => $block) {
             if (!is_array($block)) {
                 return; // something went wrong while collecting information
             }
+
+            if ($id == '_events') {
+                foreach ($block as $uniqid => $event) {
+                    $this->events[$uniqid] = $event;
+                }
+
+                continue;
+            }
+
             if (in_array($block['type'], $this->containerTypes)) {
-                $this->containers[] = $block;
+                $this->containers[$id] = $block;
             } else {
-                $this->realBlocks[] = $block;
+                $this->realBlocks[$id] = $block;
             }
         }
+    }
+
+    /**
+     * Returns the number of block used
+     *
+     * @return int
+     */
+    public function getTotalBlock()
+    {
+        return count($this->realBlocks) + count($this->containers);
+    }
+
+    /**
+     * Return the events used on the current page
+     *
+     * @return array
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 
     /**
@@ -122,6 +159,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
             'blocks'     => $this->blocks,
             'containers' => $this->containers,
             'realBlocks' => $this->realBlocks,
+            'events'     => $this->events,
         );
 
         return serialize($data);
@@ -141,6 +179,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
         $this->blocks     = $merged['blocks'];
         $this->containers = $merged['containers'];
         $this->realBlocks = $merged['realBlocks'];
+        $this->events     = $merged['events'];
     }
 
     /**
