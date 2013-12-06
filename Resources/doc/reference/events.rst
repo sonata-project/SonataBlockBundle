@@ -1,8 +1,12 @@
 Events
 ======
 
-Sometime, you might want to create an area where a block can be added. This block cannot be managed into a database,
-or might be related to an entity. Let's take a blog post and the comments area.
+Sometime, you might want to create an area where a block can be added depends on some external settings. A good example is
+a Comment mechanism, you might want to create a CommentBundle to render a comment thread on different pages. The
+comment area can used disqus or your own solution. As part of a full stack solution, you don't know which solution
+is going to be used. However, you know where the comment area will be located.
+
+The Event mechanism implemented in the ``SonataBlockBundle`` try to address this situation, and to provide a clean syntax:
 
 .. code-block:: jinja
 
@@ -12,8 +16,14 @@ or might be related to an entity. Let's take a blog post and the comments area.
 
     {{ sonata_block_render_event('blog.comment', { 'target': post }) }}
 
-Now, you can register a service to listen to the service ``blog.comment``. The actual name for the ``EventDispatcher``
-must be prefixed by ``sonata.block.``. So in the current the name will be ``sonata.block.blog.comment``.
+The twig helper will dispatch a ``BlockEvent`` object where services can add ``BlockInterface``. Once the event is processed
+the helper will render the available blocks. If there is no block, then the helper will return an empty string.
+
+Implementation
+~~~~~~~~~~~~~~
+
+You can register a service to listen to the service ``blog.comment``. The actual name for the ``EventDispatcher``
+must be prefixed by ``sonata.block.event``. So the current the name will be ``sonata.block.event.blog.comment``.
 
 .. configuration-block::
 
@@ -63,6 +73,28 @@ The event listener must return a ``BlockInterface`` so the rendering workflow wi
             $block->setSettings($event->getSettings());
             $block->setName('sonata.comment.block.discus');
 
-            return $block;
+            $event->addBlock($block);
         }
     }
+
+And that's it! Of course this example suppose that you have a ``BlockServiceInterface`` which can handle the type ``sonata.comment.block.discus``.
+
+Profiler Information
+~~~~~~~~~~~~~~~~~~~~
+
+If an event is available in the current page, a ``*`` will appear next to the ``blocks`` label in the profiler toolbar. In the
+following schema, you have 3 events and 1 generated block.
+
+.. figure:: ../images/block_profiler.png
+   :align: center
+   :alt: Block profiler with events
+   :width: 500
+
+You can retrieve event's name in the block panel, the panel include the event's name and the different listeners availables and
+the generated blocks (if any).
+
+   .. figure:: ../images/block_profiler_event.png
+      :align: center
+      :alt: Block profiler with events
+      :width: 500
+
