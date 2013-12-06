@@ -24,3 +24,13 @@ Render by providing the block's cache options
         'use_cache': use_cache,
         'extra_cache_key': extra_cache_key
     }) }}
+
+Render a block by calling an event
+
+.. code-block:: jinja
+
+    {{ sonata_block_render_event('node.comment', {
+        'target': post
+    }) }}
+
+review the events section for more information: :doc:`events`

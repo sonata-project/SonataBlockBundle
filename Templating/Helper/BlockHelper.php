@@ -15,11 +15,13 @@ use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\BlockContextManagerInterface;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Cache\HttpCacheHandlerInterface;
+use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BlockRendererInterface;
 
 use Sonata\BlockBundle\Util\RecursiveBlockIterator;
 use Sonata\CacheBundle\Cache\CacheManagerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Templating\Helper\Helper;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,6 +41,8 @@ class BlockHelper extends Helper
 
     private $cacheHandler;
 
+    private $eventDispatcher;
+
     /**
      * This property is a state variable holdings all assets used by the block for the current PHP request
      * It is used to correctly render the javascripts and stylesheets tags on the main layout
@@ -56,15 +60,19 @@ class BlockHelper extends Helper
      * @param array                        $cacheBlocks
      * @param BlockRendererInterface       $blockRenderer
      * @param BlockContextManagerInterface $blockContextManager
+     * @param EventDispatcherInterface     $eventDispatcher
      * @param CacheManagerInterface        $cacheManager
      * @param HttpCacheHandlerInterface    $cacheHandler
      * @param Stopwatch                    $stopwatch
      */
-    public function __construct(BlockServiceManagerInterface $blockServiceManager, array $cacheBlocks, BlockRendererInterface $blockRenderer, BlockContextManagerInterface $blockContextManager, CacheManagerInterface $cacheManager = null, HttpCacheHandlerInterface $cacheHandler = null, Stopwatch $stopwatch= null)
+    public function __construct(BlockServiceManagerInterface $blockServiceManager, array $cacheBlocks, BlockRendererInterface $blockRenderer,
+                                BlockContextManagerInterface $blockContextManager, EventDispatcherInterface $eventDispatcher,
+                                CacheManagerInterface $cacheManager = null, HttpCacheHandlerInterface $cacheHandler = null, Stopwatch $stopwatch = null)
     {
         $this->blockServiceManager = $blockServiceManager;
         $this->cacheBlocks         = $cacheBlocks;
         $this->blockRenderer       = $blockRenderer;
+        $this->eventDispatcher     = $eventDispatcher;
         $this->cacheManager        = $cacheManager;
         $this->blockContextManager = $blockContextManager;
         $this->cacheHandler        = $cacheHandler;
@@ -75,7 +83,9 @@ class BlockHelper extends Helper
             'css' => array()
         );
 
-        $this->traces = array();
+        $this->traces = array(
+            '_events' => array()
+        );
     }
 
     /**
@@ -163,7 +173,7 @@ class BlockHelper extends Helper
      *
      * @return array
      */
-    public function startTracing(BlockInterface $block)
+    protected function startTracing(BlockInterface $block)
     {
         $this->traces[$block->getId()] = $this->stopwatch->start(sprintf('%s (id: %s, type: %s)', $block->getName(), $block->getId(), $block->getType()));
 
@@ -187,15 +197,15 @@ class BlockHelper extends Helper
             'assets'        => array(
                 'js'  => array(),
                 'css' => array(),
-            ),
+            )
         );
     }
 
     /**
      * @param BlockInterface $block
-     * @param array $stats
+     * @param array          $stats
      */
-    public function stopTracing(BlockInterface $block, array $stats)
+    protected function stopTracing(BlockInterface $block, array $stats)
     {
         $e = $this->traces[$block->getId()]->stop();
 
@@ -206,6 +216,77 @@ class BlockHelper extends Helper
         ));
 
         $this->traces[$block->getId()]['cache']['lifetime'] = $this->traces[$block->getId()]['cache']['age'] + $this->traces[$block->getId()]['cache']['ttl'];
+    }
+
+    /**
+     * @param string $name
+     * @param array  $options
+     *
+     * @return string
+     */
+    public function renderEvent($name, array $options = array())
+    {
+        $eventName = sprintf('sonata.block.event.%s', $name);
+
+        $event = $this->eventDispatcher->dispatch($eventName, new BlockEvent($options));
+
+        $content = "";
+
+        foreach ($event->getBlocks() as $block) {
+            $content .= $this->render($block);
+        }
+
+        if ($this->stopwatch) {
+            $this->traces['_events'][uniqid()] = array(
+                'template_code' => $name,
+                'event_name'    => $eventName,
+                'blocks'        => $this->getEventBlocks($event),
+                'listeners'     => $this->getEventListeners($event),
+            );
+        }
+
+        return $content;
+    }
+
+    /**
+     * @param BlockEvent $event
+     *
+     * @return array
+     */
+    protected function getEventBlocks(BlockEvent $event)
+    {
+        $results = array();
+
+        foreach ($event->getBlocks() as $block) {
+            $results[] = array($block->getId(), $block->getType());
+        }
+
+        return $results;
+    }
+
+    /**
+     * @param BlockEvent $event
+     *
+     * @return array
+     */
+    protected function getEventListeners(BlockEvent $event)
+    {
+        $results = array();
+
+        foreach ($this->eventDispatcher->getListeners($event->getName()) as $listener) {
+            if (is_object($listener[0])) {
+                $results[] = get_class($listener[0]);
+            } else if (is_string($listener[0])) {
+                $results[] = $listener[0];
+            } else if ($listener instanceof \Closure) {
+                $results[] = '{closure}()';
+            } else {
+                $results[] = 'Unkown type!';
+            }
+        }
+
+        return $results;
+
     }
 
     /**
@@ -268,6 +349,7 @@ class BlockHelper extends Helper
                 }
             }
         }
+
 
         if (!$response) {
             $recorder = null;
