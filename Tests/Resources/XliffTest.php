@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\AdminBundle\Tests\Resources;
+namespace Sonata\BlockBundle\Tests\Resources;
 
 
 use Sonata\CoreBundle\Test\XliffValidatorTestCase;
