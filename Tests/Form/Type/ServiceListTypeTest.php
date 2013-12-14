@@ -11,6 +11,7 @@
 namespace Sonata\BlockBundle\Tests\Form\Type;
 
 use Sonata\BlockBundle\Form\Type\ServiceListType;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ServiceListTypeTest extends \PHPUnit_Framework_TestCase
@@ -26,12 +27,14 @@ class ServiceListTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('choice', $type->getParent());
     }
 
-    /**
-     *
-     * @expectedException \Symfony\Component\Form\Exception\InvalidArgumentException
-     */
     public function testOptionsWithInvalidContext()
     {
+        if (Kernel::MINOR_VERSION < 3) {
+            $this->setExpectedException('RuntimeException');
+        } else {
+            $this->setExpectedException('\Symfony\Component\Form\Exception\InvalidArgumentException');
+        }
+
         $blockServiceManager = $this->getMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
 
         $type = new ServiceListType($blockServiceManager);
