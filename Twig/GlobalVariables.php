@@ -11,8 +11,6 @@
 
 namespace Sonata\BlockBundle\Twig;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
 /**
  * GlobalVariables
  *
@@ -20,18 +18,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class GlobalVariables
 {
-    protected $container;
-
     protected $templates;
 
     /**
      *
-     * @param ContainerInterface $container
      * @param array              $templates
      */
-    public function __construct(ContainerInterface $container, array $templates)
+    public function __construct(array $templates)
     {
-        $this->container = $container;
         $this->templates = $templates;
     }
 

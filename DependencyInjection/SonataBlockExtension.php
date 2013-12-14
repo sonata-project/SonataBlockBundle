@@ -62,8 +62,7 @@ class SonataBlockExtension extends Extension
             }
         }
 
-        $container->getDefinition('sonata.block.twig.global')
-            ->replaceArgument(1, $config['templates']);
+        $container->getDefinition('sonata.block.twig.global')->replaceArgument(0, $config['templates']);
     }
 
     /**
