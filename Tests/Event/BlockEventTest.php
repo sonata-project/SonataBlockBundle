@@ -13,8 +13,6 @@ namespace Sonata\BlockBundle\Tests;
 
 use Sonata\BlockBundle\Event\BlockEvent;
 
-use Symfony\Component\Config\Definition\Processor;
-
 class BlockEventTest extends \PHPUnit_Framework_TestCase
 {
 
