@@ -104,17 +104,22 @@ class MenuBlockService extends BaseBlockService
      */
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'title'         => $this->getName(),
-            'cache_policy'  => 'public',
-            'template'      => 'SonataBlockBundle:Block:block_core_menu.html.twig',
-            'menu_name'     => "",
-            'safe_labels'   => false,
-            'current_class' => 'active',
-            'first_class'   => false,
-            'last_class'    => false,
-            'current_uri'   => null
-        ));
+        $resolver->setDefaults(
+            array(
+                'title'          => $this->getName(),
+                'cache_policy'   => 'public',
+                'template'       => 'SonataBlockBundle:Block:block_core_menu.html.twig',
+                'menu_name'      => "",
+                'safe_labels'    => false,
+                'current_class'  => 'active',
+                'first_class'    => false,
+                'last_class'     => false,
+                'current_uri'    => null,
+                'menu_class'     => "list-group",
+                'children_class' => "list-group-item",
+                'menu_template'  => null,
+            )
+        );
     }
 
     /**
@@ -138,6 +143,9 @@ class MenuBlockService extends BaseBlockService
             array('current_class', 'text', array('required' => false)),
             array('first_class', 'text', array('required' => false)),
             array('last_class', 'text', array('required' => false)),
+            array('menu_class', 'text', array('required' => false)),
+            array('children_class', 'text', array('required' => false)),
+            array('menu_template', 'text', array('required' => false)),
         );
     }
 
@@ -165,12 +173,13 @@ class MenuBlockService extends BaseBlockService
             'first_class'   => 'firstClass',
             'last_class'    => 'lastClass',
             'safe_labels'   => 'allow_safe_labels',
+            'menu_template' => 'template',
         );
 
         $options = array();
 
         foreach ($settings as $key => $value) {
-            if (array_key_exists($key, $mapping)) {
+            if (array_key_exists($key, $mapping) && null !== $value) {
                 $options[$mapping[$key]] = $value;
             }
         }
