@@ -20,14 +20,15 @@
         "symfony/http-kernel": "~2.2",
         "symfony/form": "~2.2",
         "doctrine/common": "~2.3",
-        "knplabs/knp-menu-bundle": "~1.1",
         "sonata-project/core-bundle": "~2.2"
     },
     "require-dev": {
+        "knplabs/knp-menu-bundle": "~1.1",
         "sonata-project/cache-bundle": "~2.1",
         "sonata-project/admin-bundle": "~2.2"
     },
     "suggest": {
+        "knplabs/knp-menu-bundle": "~1.1",
         "sonata-project/cache-bundle": "~2.1",
         "sonata-project/admin-bundle": "~2.2"
     },
