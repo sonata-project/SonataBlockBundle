@@ -63,7 +63,7 @@ class MenuBlockService extends BaseBlockService
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         $responseSettings = array(
-            'menu'         => $this->getMenu($blockContext->getSettings()),
+            'menu'         => $this->getMenu($blockContext),
             'menu_options' => $this->getMenuOptions($blockContext->getSettings()),
             'block'        => $blockContext->getBlock(),
             'context'      => $blockContext
@@ -156,8 +156,10 @@ class MenuBlockService extends BaseBlockService
      *
      * @return ItemInterface|string
      */
-    protected function getMenu(array $settings)
+    protected function getMenu(BlockContextInterface $blockContext)
     {
+        $settings = $blockContext->getSettings();
+
         return $settings['menu_name'];
     }
 
