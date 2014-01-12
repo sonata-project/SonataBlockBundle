@@ -10,7 +10,7 @@
 
 namespace Sonata\BlockBundle\Model;
 
-use Sonata\CoreBundle\Entity\ManagerInterface;
+use Sonata\CoreBundle\Model\ManagerInterface;
 
 interface BlockManagerInterface extends ManagerInterface
 {
