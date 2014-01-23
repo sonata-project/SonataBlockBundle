@@ -37,7 +37,7 @@ class DebugBlocksCommand extends BaseCommand
             $output->writeln(sprintf('<info>>> %s</info> (<comment>%s</comment>)', $service->getName(), $code));
 
             foreach ($settings as $key => $val) {
-                $output->writeln(sprintf('%s:%s%-30s', $key, json_encode($val)));
+                $output->writeln(sprintf("    %-30s%s", $key, json_encode($val)));
             }
         }
 
