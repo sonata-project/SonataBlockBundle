@@ -33,9 +33,10 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 'enabled' => '%kernel.debug%',
                 'template' => 'SonataBlockBundle:Profiler:block.html.twig',
                 'container_types' => array(
-                    0 => 'sonata.page.block.container',
-                    1 => 'cmf.block.container',
-                    2 => 'cmf.block.slideshow',
+                    0 => 'sonata.block.service.container',
+                    1 => 'sonata.page.block.container',
+                    2 => 'cmf.block.container',
+                    3 => 'cmf.block.slideshow',
                 ),
             ),
             'context_manager' => 'sonata.block.context_manager.default',
