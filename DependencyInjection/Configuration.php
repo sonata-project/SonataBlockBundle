@@ -66,6 +66,7 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('block_base')->defaultValue(null)->end()
+                        ->scalarNode('block_container')->defaultValue(null)->end()
                     ->end()
                 ->end()
 
