@@ -73,6 +73,12 @@ class SonataBlockExtension extends Extension
      */
     public function configureMenus(ContainerBuilder $container, array $config)
     {
+        $bundles = $container->getParameter('kernel.bundles');
+        if (!isset($bundles['KnpMenuBundle'])) {
+            $container->removeDefinition('sonata.block.service.menu');
+            return;
+        }
+
         $container->getDefinition('sonata.block.service.menu')->replaceArgument(3, $config['menus']);
     }
 
