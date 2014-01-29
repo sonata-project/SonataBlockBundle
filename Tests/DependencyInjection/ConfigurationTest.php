@@ -46,6 +46,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             ),
             'templates' => array(
                 'block_base' => NULL,
+                'block_container' => NULL,
             ),
             'blocks' => array(),
             'menus' => array(),
