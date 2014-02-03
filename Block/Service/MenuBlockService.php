@@ -70,10 +70,10 @@ class MenuBlockService extends BaseBlockService
         );
 
         if ('private' === $blockContext->getSettings('cache_policy')) {
-            return $this->renderPrivateResponse($blockContext->getTemplate(), $responseSettings);
+            return $this->renderPrivateResponse($blockContext->getTemplate(), $responseSettings, $response);
         }
 
-        return $this->renderResponse($blockContext->getTemplate(), $responseSettings);
+        return $this->renderResponse($blockContext->getTemplate(), $responseSettings, $response);
     }
 
     /**

@@ -41,6 +41,7 @@ class ServiceLoader implements BlockLoaderInterface
         $block->setEnabled(true);
         $block->setCreatedAt(new \DateTime);
         $block->setUpdatedAt(new \DateTime);
+        $block->setSettings(isset($configuration['settings']) ? $configuration['settings'] : array());
 
         return $block;
     }
