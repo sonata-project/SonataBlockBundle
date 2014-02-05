@@ -18,13 +18,14 @@ use Sonata\BlockBundle\Cache\HttpCacheHandlerInterface;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BlockRendererInterface;
-
 use Sonata\BlockBundle\Util\RecursiveBlockIterator;
-use Sonata\CacheBundle\Cache\CacheManagerInterface;
+use Sonata\Cache\CacheManagerInterface;
+
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Templating\Helper\Helper;
 use Symfony\Component\HttpFoundation\Response;
+
 use Doctrine\Common\Util\ClassUtils;
 
 class BlockHelper extends Helper
@@ -396,7 +397,7 @@ class BlockHelper extends Helper
      * @param BlockInterface $block
      * @param array          $stats
      *
-     * @return \Sonata\CacheBundle\Cache\CacheInterface;
+     * @return \Sonata\Cache\CacheInterface;
      */
     protected function getCacheService(BlockInterface $block, array &$stats = null)
     {
