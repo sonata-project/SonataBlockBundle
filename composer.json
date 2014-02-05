@@ -24,7 +24,7 @@
     },
     "require-dev": {
         "knplabs/knp-menu-bundle": "~1.1",
-        "sonata-project/cache-bundle": "~2.1",
+        "sonata-project/cache": "~1.0@dev",
         "sonata-project/admin-bundle": "~2.2"
     },
     "suggest": {
