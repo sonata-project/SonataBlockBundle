@@ -71,4 +71,49 @@ class BlockHelperTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('<span>test</span>', $helper->renderEvent('my.event'));
     }
+    public function testRenderEventWithNoListener_cache_Get_returns_false()
+    {
+        $blockService = $this->getMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $blockService->expects($this->once())->method('getJavascripts')->will($this->returnValue(array()));
+        $blockService->expects($this->once())->method('getStylesheets')->will($this->returnValue(array()));
+        $blockService->expects($this->once())->method('getCacheKeys')->will($this->returnValue(array()));
+
+        $blockServiceManager = $this->getMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
+        $blockServiceManager->expects($this->any())->method('get')->will($this->returnValue($blockService));
+
+        $blockRenderer = $this->getMock('Sonata\BlockBundle\Block\BlockRendererInterface');
+        $blockRenderer->expects($this->once())->method('render')->will($this->returnValue(new Response('<span>test</span>')));
+
+        $blockContextManager = $this->getMock('Sonata\BlockBundle\Block\BlockContextManagerInterface');
+        $blockContextManager->expects($this->once())->method('get')->will($this->returnCallback(function(BlockInterface $block) {
+            $context = new BlockContext($block, $block->getSettings());
+
+            return $context;
+          }));
+
+        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $eventDispatcher->expects($this->once())->method('dispatch')->will($this->returnCallback(function($name, BlockEvent $event) {
+            $block = new Block();
+            $block->setId(1);
+            $block->setSettings(array(
+               'use_cache' => true,
+               'extra_cache_keys' => array()
+            ));
+            $block->setType('test');
+
+            $event->addBlock($block);
+
+                                                                                   return $event;
+                                                                               }));
+        $cacheServiceManager = $this->getMock('Sonata\Cache\CacheManagerInterface');
+        $cacheService = $this->getMock('Sonata\Cache\CacheAdapterInterface');
+        $cacheServiceManager->expects($this->once())->method('getCacheService')->will($this->returnValue($cacheService));
+
+        $cacheService->expects($this->once())->method('has')->will($this->returnValue(true));
+        $cacheService->expects($this->once())->method('get')->will($this->returnValue(false));
+        $helper = new BlockHelper($blockServiceManager, array('by_type'=>array('test'=>'test')), $blockRenderer, $blockContextManager, $eventDispatcher, $cacheServiceManager);
+
+        $this->assertEquals('<span>test</span>', $helper->renderEvent('my.event'));
+
+    }
 }
