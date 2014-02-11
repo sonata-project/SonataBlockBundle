@@ -338,7 +338,7 @@ class BlockHelper extends Helper
                     $stats['cache']['from_cache'] = false;
                 }
 
-                if (!$cacheElement->isExpired() && $cacheElement->getData() instanceof Response) {
+                if ($cacheElement && !$cacheElement->isExpired() && $cacheElement->getData() instanceof Response) {
 
                     /** @var Response $response */
 
