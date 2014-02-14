@@ -21,11 +21,10 @@
         "symfony/form": "~2.2",
         "doctrine/common": "~2.3",
         "sonata-project/core-bundle": "~2.2",
-        "sonata-project/cache": "~1.0@dev"
+        "sonata-project/cache": "~1.0"
     },
     "require-dev": {
         "knplabs/knp-menu-bundle": "~1.1",
-        "sonata-project/cache": "~1.0@dev",
         "sonata-project/admin-bundle": "~2.2"
     },
     "suggest": {
@@ -34,9 +33,8 @@
         "sonata-project/admin-bundle": "~2.2"
     },
     "autoload": {
-        "psr-0": { "Sonata\\BlockBundle": "" }
+        "psr-4": { "Sonata\\BlockBundle\\": "" }
     },
-    "target-dir": "Sonata/BlockBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "2.2.x-dev"
