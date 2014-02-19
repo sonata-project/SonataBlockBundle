@@ -8,19 +8,20 @@
         <service id="sonata.block.manager" class="Sonata\BlockBundle\Block\BlockServiceManager" public="false">
             <argument type="service" id="service_container" />
             <argument>%kernel.debug%</argument>
-            <argument type="service" id="logger"  on-invalid="ignore"  />
+            <argument type="service" id="logger" on-invalid="ignore" />
         </service>
 
         <service id="sonata.block.context_manager.default" class="Sonata\BlockBundle\Block\BlockContextManager">
             <argument type="service" id="sonata.block.loader.chain" />
             <argument type="service" id="sonata.block.manager" />
+            <argument type="service" id="logger" on-invalid="ignore" />
             <argument>%sonata_block.cache_blocks%</argument>
         </service>
 
         <service id="sonata.block.renderer.default" class="Sonata\BlockBundle\Block\BlockRenderer">
             <argument type="service" id="sonata.block.manager" />
             <argument type="service" id="sonata.block.exception.strategy.manager" />
-            <argument type="service" id="logger"  on-invalid="ignore"  />
+            <argument type="service" id="logger" on-invalid="ignore" />
             <argument>%kernel.debug%</argument>
         </service>
 
