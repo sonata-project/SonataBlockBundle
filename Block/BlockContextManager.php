@@ -13,13 +13,10 @@ namespace Sonata\BlockBundle\Block;
 
 use Doctrine\Common\Util\ClassUtils;
 use Psr\Log\LoggerInterface;
-use Sonata\BlockBundle\Exception\BlockOptionsException;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Security\Acl\Exception\Exception;
 
 class BlockContextManager implements BlockContextManagerInterface
 {
@@ -41,11 +38,11 @@ class BlockContextManager implements BlockContextManagerInterface
     /**
      * @param BlockLoaderInterface         $blockLoader
      * @param BlockServiceManagerInterface $blockService
-     * @param LoggerInterface|null         $logger
      * @param array                        $cacheBlocks
+     * @param LoggerInterface|null         $logger
      */
     public function __construct(BlockLoaderInterface $blockLoader, BlockServiceManagerInterface $blockService,
-        LoggerInterface $logger = null, array $cacheBlocks = array()
+        array $cacheBlocks = array(), LoggerInterface $logger = null
     ) {
         $this->blockLoader  = $blockLoader;
         $this->blockService = $blockService;
