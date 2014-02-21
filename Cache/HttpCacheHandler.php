@@ -24,17 +24,14 @@ class HttpCacheHandler implements HttpCacheHandlerInterface
      */
     public function alterResponse(Response $response)
     {
-        if ($response->getTtl() !== null) {
+        if (!$response->isCacheable()) {
+            // the controller flags the response as private so we keep it private!
             return;
         }
 
-        if ($this->currentTtl === null) {
-            return;
-        }
-
-        if ($this->currentTtl === 0) {
-            $response->setPrivate();
-        } else {
+        // a block has a lower ttl that the current response, so we update the ttl to match
+        // the one provided in the block
+        if ($this->currentTtl < $response->getTtl()) {
             $response->setTtl($this->currentTtl);
         }
     }

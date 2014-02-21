@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class HttpCacheHandlerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testComputeTtl()
+    public function testComputeTtlWithPrivateResponse()
     {
         $handler = new HttpCacheHandler();
         $handler->updateMetadata(Response::create()->setTtl(60));
@@ -28,6 +28,19 @@ class HttpCacheHandlerTest extends \PHPUnit_Framework_TestCase
         $handler->updateMetadata(Response::create()->setTtl(55));
 
         $handler->alterResponse($response = Response::create());
+
+        $this->assertEquals(0, $response->getTtl());
+    }
+
+    public function testComputeTtlWithPublicResponse()
+    {
+        $handler = new HttpCacheHandler();
+        $handler->updateMetadata(Response::create()->setTtl(60));
+        $handler->updateMetadata(Response::create()->setTtl(55));
+        $handler->updateMetadata(Response::create()->setTtl(42));
+        $handler->updateMetadata(Response::create()->setTtl(55));
+
+        $handler->alterResponse($response = Response::create()->setTtl(84));
 
         $this->assertEquals(42, $response->getTtl());
     }
