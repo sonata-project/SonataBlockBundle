@@ -16,3 +16,4 @@ Reference Guide
    reference/exceptions
    reference/advanced_usage
    reference/cache
+   reference/events

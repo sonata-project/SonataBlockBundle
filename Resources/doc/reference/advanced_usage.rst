@@ -8,9 +8,10 @@ This happens when a block is rendered:
       if found
     - each block model also has a block service, the execute method of it is
       called:
-        - you can put here logic like in a controller
-        - it calls a template
-        - the result is a Response object
+
+          - you can put here logic like in a controller
+          - it calls a template
+          - the result is a Response object
 
 Cache
 -----
