@@ -186,6 +186,9 @@ class SonataBlockExtension extends Extension
         $definition->addTag('data_collector', array('id' => 'block', 'template' => $config['profiler']['template']));
         $definition->addArgument(new Reference('sonata.block.templating.helper'));
         $definition->addArgument($config['profiler']['container_types']);
+
+        $container->setParameter('sonata.block.container_types', $config['profiler']['container_types']);
+
         $container->setDefinition('sonata.block.data_collector', $definition);
     }
 
