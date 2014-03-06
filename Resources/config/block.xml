@@ -41,7 +41,7 @@
             <argument>sonata.block.menu</argument>
             <argument type="service" id="templating" />
             <argument type="service" id="knp_menu.menu_provider" />
-            <argument type="collection"></argument>
+            <argument type="collection" />
         </service>
     </services>
 </container>

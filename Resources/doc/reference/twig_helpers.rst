@@ -39,8 +39,8 @@ Render related javascripts and stylesheets for the current page. The helpers cal
 
 .. code-block:: jinja
 
-    {{ sonata_block_include_stylesheets() }}
-    {{ sonata_block_include_javascripts() }}
+    {{ sonata_block_include_stylesheets('screen', app.request.basePath) }}
+    {{ sonata_block_include_javascripts('screen', app.request.basePath) }}
 
-
+The ``app.request.basePath`` must be provided if your application is stored in a sub-folder.
 

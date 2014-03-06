@@ -98,31 +98,34 @@ class BlockHelper extends Helper
     }
 
     /**
-     * @param $media screen|all ....
+     * @param string $media
+     * @param string $basePath
      *
      * @return array|string
      */
-    public function includeJavascripts($media)
+    public function includeJavascripts($media, $basePath = '')
     {
         $html = "";
         foreach ($this->assets['js'] as $javascript) {
-            $html .= "\n" . sprintf('<script src="%s" type="text/javascript"></script>', $javascript);
+            $html .= "\n" . sprintf('<script src="(%s%s" type="text/javascript"></script>', $basePath, $javascript);
         }
 
         return $html;
     }
 
     /**
-     * @param $media
+     * @param string $media
+     * @param string $basePath
      *
      * @return array|string
      */
-    public function includeStylesheets($media)
+    public function includeStylesheets($media, $basePath = '')
     {
+
         $html = sprintf("<style type='text/css' media='%s'>", $media);
 
         foreach ($this->assets['css'] as $stylesheet) {
-            $html .= "\n" . sprintf('@import url(%s);', $stylesheet, $media);
+            $html .= "\n" . sprintf('@import url(%s%s);', $basePath, $stylesheet);
         }
 
         $html .= "\n</style>";
@@ -134,6 +137,7 @@ class BlockHelper extends Helper
      * Traverse the parent block and its children to retrieve the correct list css and javascript only for main block
      *
      * @param BlockContextInterface $blockContext
+     * @param array                 $stats
      */
     protected function computeAssets(BlockContextInterface $blockContext, array &$stats = null)
     {
@@ -397,7 +401,7 @@ class BlockHelper extends Helper
      * @param BlockInterface $block
      * @param array          $stats
      *
-     * @return \Sonata\Cache\CacheInterface;
+     * @return \Sonata\Cache\CacheAdapterInterface;
      */
     protected function getCacheService(BlockInterface $block, array &$stats = null)
     {
