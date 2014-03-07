@@ -74,8 +74,8 @@ class BlockHelperTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('<span>test</span>', $helper->renderEvent('my.event'));
 
-        $this->assertEquals(trim($helper->includeJavascripts('screen', '/application')), '<script src="(/application/js/base.js" type="text/javascript"></script>');
-        $this->assertEquals(trim($helper->includeJavascripts('screen', '')), '<script src="(/js/base.js" type="text/javascript"></script>');
+        $this->assertEquals(trim($helper->includeJavascripts('screen', '/application')), '<script src="/application/js/base.js" type="text/javascript"></script>');
+        $this->assertEquals(trim($helper->includeJavascripts('screen', '')), '<script src="/js/base.js" type="text/javascript"></script>');
 
         $this->assertEquals($helper->includeStylesheets('screen', '/application'), <<<EXPECTED
 <style type='text/css' media='screen'>

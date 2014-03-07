@@ -107,7 +107,7 @@ class BlockHelper extends Helper
     {
         $html = "";
         foreach ($this->assets['js'] as $javascript) {
-            $html .= "\n" . sprintf('<script src="(%s%s" type="text/javascript"></script>', $basePath, $javascript);
+            $html .= "\n" . sprintf('<script src="%s%s" type="text/javascript"></script>', $basePath, $javascript);
         }
 
         return $html;
