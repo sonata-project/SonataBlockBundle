@@ -44,6 +44,9 @@ class SonataBlockExtension extends Extension
         $loader->load('core.xml');
         $loader->load('exception.xml');
 
+        $this->fixConfigurationDeprecation($config);
+
+        $this->configureBlockContainers($container, $config);
         $this->configureContext($container, $config);
         $this->configureLoaderChain($container, $config);
         $this->configureCache($container, $config);
@@ -65,6 +68,27 @@ class SonataBlockExtension extends Extension
         }
 
         $container->getDefinition('sonata.block.twig.global')->replaceArgument(0, $config['templates']);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param array            $config
+     */
+    public function configureBlockContainers(ContainerBuilder $container, array $config)
+    {
+        $container->setParameter('sonata.block.container.types', $config['container']['types']);
+
+        $container->getDefinition('sonata.block.form.type.container_template')->replaceArgument(0, $config['container']['templates']);
+    }
+
+    /**
+     * @param array $config
+     */
+    public function fixConfigurationDeprecation(array &$config)
+    {
+        if (count(array_diff($config['profiler']['container_types'], $config['container']['types']))) {
+            $config['container']['types'] = array_merge($config['profiler']['container_types'], $config['container']['types']);
+        }
     }
 
     /**
@@ -185,9 +209,7 @@ class SonataBlockExtension extends Extension
         $definition->setPublic(false);
         $definition->addTag('data_collector', array('id' => 'block', 'template' => $config['profiler']['template']));
         $definition->addArgument(new Reference('sonata.block.templating.helper'));
-        $definition->addArgument($config['profiler']['container_types']);
-
-        $container->setParameter('sonata.block.container_types', $config['profiler']['container_types']);
+        $definition->addArgument($config['container']['types']);
 
         $container->setDefinition('sonata.block.data_collector', $definition);
     }

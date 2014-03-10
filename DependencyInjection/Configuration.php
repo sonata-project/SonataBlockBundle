@@ -33,6 +33,16 @@ class Configuration implements ConfigurationInterface
             ->fixXmlConfig('template')
             ->fixXmlConfig('block')
             ->fixXmlConfig('block_by_class')
+            ->validate()
+            ->ifTrue(function ($v) {
+                    if (isset($v['profiler']['container_types']) && !empty($v['profiler']['container_types'])
+                        && isset($v['container']['types']) && !empty($v['container']['types'])) {
+                        return 0 !== count(array_diff($v['profiler']['container_types'], $v['container']['types']));
+                    }
+                    return false;
+                })
+                ->thenInvalid("You cannot have different config options for sonata_block.profiler.container_types and sonata_block.container.types; the first one is deprecated, in case of doubt use the latter")
+            ->end()
             ->children()
                 ->arrayNode('profiler')
                     ->addDefaultsIfNotSet()
@@ -67,6 +77,29 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('block_base')->defaultValue(null)->end()
                         ->scalarNode('block_container')->defaultValue(null)->end()
+                    ->end()
+                ->end()
+
+                ->arrayNode('container')
+                    ->info('block container configuration')
+                    ->addDefaultsIfNotSet()
+                    ->fixXmlConfig('type', 'types')
+                    ->fixXmlConfig('template', 'templates')
+                    ->children()
+                        ->arrayNode('types')
+                            ->info('container service ids')
+                            ->isRequired()
+                            // add default value to well know users of BlockBundle
+                            ->defaultValue(array('sonata.block.service.container', 'sonata.page.block.container', 'cmf.block.container', 'cmf.block.slideshow'))
+                            ->prototype('scalar')->end()
+                        ->end()
+                        ->arrayNode('templates')
+                            ->info('container templates')
+                            ->isRequired()
+                            ->defaultValue(array("SonataBlockBundle:Block:block_container.html.twig" => "Base block template", "SonataPageBundle:Block:block_container.html.twig" => "SonataPageBundle template", "SonataSeoBundle:Block:block_social_container.html.twig" => "SonataSeoBundle (to contain social buttons)"))
+                            ->prototype('scalar')->end()
+                        ->end()
+
                     ->end()
                 ->end()
 
