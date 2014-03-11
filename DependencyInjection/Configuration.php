@@ -21,6 +21,19 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class Configuration implements ConfigurationInterface
 {
     /**
+     * @var array
+     */
+    protected $defaultContainerTemplates;
+
+    /**
+     * @param array $defaultContainerTemplates
+     */
+    public function __construct(array $defaultContainerTemplates)
+    {
+        $this->defaultContainerTemplates = $defaultContainerTemplates;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function getConfigTreeBuilder()
@@ -96,7 +109,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('templates')
                             ->info('container templates')
                             ->isRequired()
-                            ->defaultValue(array("SonataBlockBundle:Block:block_container.html.twig" => "Base block template", "SonataPageBundle:Block:block_container.html.twig" => "SonataPageBundle template", "SonataSeoBundle:Block:block_social_container.html.twig" => "SonataSeoBundle (to contain social buttons)"))
+                            ->defaultValue($this->defaultContainerTemplates)
                             ->prototype('scalar')->end()
                         ->end()
 

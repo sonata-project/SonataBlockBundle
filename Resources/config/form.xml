@@ -14,7 +14,6 @@
         <service id="sonata.block.form.type.container_template" class="Sonata\BlockBundle\Form\Type\ContainerTemplateType">
             <tag name="form.type" alias="sonata_type_container_template_choice" />
             <argument />
-            <argument>%kernel.bundles%</argument>
         </service>
     </services>
 

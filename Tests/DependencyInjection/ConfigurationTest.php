@@ -18,9 +18,14 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     public function testOptions()
     {
+        $defaultTemplates = array(
+            "SonataPageBundle:Block:block_container.html.twig"       => "SonataPageBundle template",
+            "SonataSeoBundle:Block:block_social_container.html.twig" => "SonataSeoBundle (to contain social buttons)"
+        );
+
         $processor = new Processor();
 
-        $config = $processor->processConfiguration(new Configuration(), array(array(
+        $config = $processor->processConfiguration(new Configuration($defaultTemplates), array(array(
             'default_contexts' => array('cms')
         )));
 
@@ -55,11 +60,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                     2 => 'cmf.block.container',
                     3 => 'cmf.block.slideshow',
                 ),
-                'templates' => array(
-                    "SonataBlockBundle:Block:block_container.html.twig"      => "Base block template",
-                    "SonataPageBundle:Block:block_container.html.twig"       => "SonataPageBundle template",
-                    "SonataSeoBundle:Block:block_social_container.html.twig" => "SonataSeoBundle (to contain social buttons)"
-                )
+                'templates' => $defaultTemplates,
             ),
             'blocks' => array(),
             'menus' => array(),
@@ -92,9 +93,13 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function testOptionsDuplicated()
     {
-        $processor = new Processor();
+        $defaultTemplates = array(
+            "SonataPageBundle:Block:block_container.html.twig"       => "SonataPageBundle template",
+            "SonataSeoBundle:Block:block_social_container.html.twig" => "SonataSeoBundle (to contain social buttons)"
+        );
 
-        $processor->processConfiguration(new Configuration(), array(array(
+        $processor = new Processor();
+        $processor->processConfiguration(new Configuration($defaultTemplates), array(array(
             'default_contexts' => array('cms'),
             'profiler' => array('container_types' => array('test_type')),
             'container' => array('types' => array('test_type2'), 'templates' => array()),

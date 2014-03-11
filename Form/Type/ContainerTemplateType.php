@@ -32,18 +32,11 @@ class ContainerTemplateType extends AbstractType
     protected $templateChoices;
 
     /**
-     * @var array
-     */
-    protected $bundles;
-
-    /**
      * @param array $templateChoices
-     * @param array $bundles
      */
-    public function __construct(array $templateChoices, array $bundles)
+    public function __construct(array $templateChoices)
     {
         $this->templateChoices = $templateChoices;
-        $this->bundles         = $bundles;
     }
 
     /**
@@ -67,22 +60,11 @@ class ContainerTemplateType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $templateChoices = $this->templateChoices;
-        $bundles         = $this->bundles;
-
         $resolver->setDefaults(array(
             'context'           => false,
             'multiple'          => false,
             'expanded'          => false,
-            'choices'           => function (Options $options, $previousValue) use ($templateChoices, $bundles) {
-                if (isset($bundles['SonataPageBundle']) && isset($templateChoices['SonataBlockBundle:Block:block_container.html.twig'])) {
-                    unset($templateChoices['SonataBlockBundle:Block:block_container.html.twig']);
-                } else if (isset($templateChoices['SonataPagekBundle:Block:block_container.html.twig'])) {
-                    unset($templateChoices['SonataPageBundle:Block:block_container.html.twig']);
-                }
-
-                return $templateChoices;
-            },
+            'choices'           => $this->templateChoices,
             'preferred_choices' => array(),
             'empty_data'        => function (Options $options) {
                     $multiple = isset($options['multiple']) && $options['multiple'];

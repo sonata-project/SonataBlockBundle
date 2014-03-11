@@ -34,8 +34,21 @@ class SonataBlockExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+        $bundles = $container->getParameter('kernel.bundles');
+
+        $defaultTemplates = array();
+        if (isset($bundles['SonataPageBundle'])) {
+            $defaultTemplates['SonataPageBundle:Block:block_container.html.twig'] = "SonataPageBundle default template";
+        } else {
+            $defaultTemplates['SonataBlockBundle:Block:block_container.html.twig'] = "SonataBlockBundle default template";
+        }
+
+        if (isset($bundles['SonataSeoBundle'])) {
+            $defaultTemplates['SonataSeoBundle:Block:block_social_container.html.twig'] = "SonataSeoBundle (to contain social buttons)";
+        }
+
         $processor = new Processor();
-        $configuration = new Configuration();
+        $configuration = new Configuration($defaultTemplates);
         $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -56,7 +69,6 @@ class SonataBlockExtension extends Extension
         $this->configureMenus($container, $config);
         $this->configureClassesToCompile();
 
-        $bundles = $container->getParameter('kernel.bundles');
         if ($config['templates']['block_base'] === null) {
             if (isset($bundles['SonataPageBundle'])) {
                 $config['templates']['block_base']      = 'SonataPageBundle:Block:block_base.html.twig';
