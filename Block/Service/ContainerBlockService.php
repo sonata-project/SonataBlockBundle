@@ -38,6 +38,7 @@ class ContainerBlockService extends BaseBlockService
             'keys' => array(
                 array('layout', 'textarea', array()),
                 array('class', 'text', array('required' => false)),
+                array('template', 'sonata_type_container_template_choice', array())
             )
         ));
 
