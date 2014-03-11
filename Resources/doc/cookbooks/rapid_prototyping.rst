@@ -6,7 +6,7 @@ Before starting to code a project, some time you need to integrate HTML into val
 The Symfony Template Controller
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The TemplateController_ is a native Symfony controller that can be used to render a template from a route definition, this is a pretty nice feature when you start a project from templates. You can then generates all routes for your application without having the need to generates all the required controllers.
+The TemplateController_ is a native Symfony controller that can be used to render a template from a route definition, this is a pretty nice feature when you start a project from templates. You can then generate all routes for your application without having the need to generate all the required controllers.
 
 .. code-block:: yaml
 
@@ -19,7 +19,7 @@ The TemplateController_ is a native Symfony controller that can be used to rende
 The Template Block Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-At some point, you might want to reuse some elements inside different templates. You can use native twig features: ``block``, ``use`` or ``include``. You can also use the ``render`` function from the Symfony2 framework. The first solution is not very good on the long run as some elements might required some extra datas to be rendered, so you will need a dedicated controller to render these elements (the latter solution). Using the ``render`` function comes with a cost: a sub request is generated and all related events are notified and you are limited in the caching strategy.
+At this point, you might want to reuse some elements inside different templates. You can use native twig features: ``block``, ``use`` or ``include``. You can also use the ``render`` function from the Symfony2 framework. The first solution is not very good on the long run as some elements might required some extra datas to be rendered, so you will need a dedicated controller to render these elements (the latter solution). Using the ``render`` function comes with a cost: a sub request is generated and all related events are notified and you are limited in the caching strategy.
 
 This overhead is not always required just to render an area and you might want to have a fine control over the caching strategy. It is where the ``TemplateBlockService`` can be an excelent complement to the TemplateController_.
 
