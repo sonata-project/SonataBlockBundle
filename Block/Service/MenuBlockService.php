@@ -94,7 +94,7 @@ class MenuBlockService extends BaseBlockService
         if (($name = $block->getSetting('menu_name')) && $name !== "" && !$this->menuProvider->has($name)) {
             // If we specified a menu_name, check that it exists
             $errorElement->with('menu_name')
-                ->addViolation('soanta.block.menu.not_existing', array('name' => $name))
+                ->addViolation('sonata.block.menu.not_existing', array('name' => $name))
             ->end();
         }
     }

@@ -48,13 +48,13 @@ class Configuration implements ConfigurationInterface
             ->fixXmlConfig('block_by_class')
             ->validate()
             ->ifTrue(function ($v) {
-                    if (isset($v['profiler']['container_types']) && !empty($v['profiler']['container_types'])
-                        && isset($v['container']['types']) && !empty($v['container']['types'])) {
-                        return 0 !== count(array_diff($v['profiler']['container_types'], $v['container']['types']));
-                    }
-                    return false;
-                })
-                ->thenInvalid("You cannot have different config options for sonata_block.profiler.container_types and sonata_block.container.types; the first one is deprecated, in case of doubt use the latter")
+                if (isset($v['profiler']['container_types']) && !empty($v['profiler']['container_types'])
+                    && isset($v['container']['types']) && !empty($v['container']['types'])) {
+                    return 0 !== count(array_diff($v['profiler']['container_types'], $v['container']['types']));
+                }
+                return false;
+            })
+            ->thenInvalid("You cannot have different config options for sonata_block.profiler.container_types and sonata_block.container.types; the first one is deprecated, in case of doubt use the latter")
             ->end()
             ->children()
                 ->arrayNode('profiler')

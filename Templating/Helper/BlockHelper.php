@@ -286,7 +286,7 @@ class BlockHelper extends Helper
             } else if ($listener instanceof \Closure) {
                 $results[] = '{closure}()';
             } else {
-                $results[] = 'Unkown type!';
+                $results[] = 'Unknown type!';
             }
         }
 

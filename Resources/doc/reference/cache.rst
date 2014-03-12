@@ -13,7 +13,7 @@ The BlockBundle assumes that a block can be cached by default, so if a cache bac
 will be stored. The default ttl is 84600 seconds. Now, there are many ways to control this behavior:
 
 * set a ``ttl`` setting inside the block, so if ``ttl`` = 0, then no cache will be available for the block and its parents
-* set a ``use_cache`` setting to ``false`` or ``true``, if the variable is set to ``false`` then no cache will be avaible for the block and its parents
+* set a ``use_cache`` setting to ``false`` or ``true``, if the variable is set to ``false`` then no cache will be available for the block and its parents
 * no cache backend by default! by default there is no cache backend setup, you should focus on raw performance before adding cache layers
 
 If you are extending the ``BaseBlockService`` you can use the method ``renderPrivateResponse`` to return a private Response.
@@ -72,7 +72,7 @@ The cache mechanism will use the TTL to set a valid value when the response is s
 
 .. note::
 
-    If a ttl is set into a block container, the ttl value is not applyed to the final Response object send to the client.
+    If a ttl is set into a block container, the ttl value is not applied to the final Response object send to the client.
     This can be done by using a different mechanism
 
 Final Response TTL computation
@@ -99,8 +99,8 @@ Cache Backends
 
 * ``sonata.cache.mongo``: use mongodb to store cache element, this is a nice backend as you can remove some cache element by
   only one value. (remove all block where profile.media.id == 3 is used.)
-* ``sonata.cache.memcached``: use memcached as a backend, shared accross multiple hosts
-* ``sonata.cache.apc``: use apc from PHP runtime, cannot be shared accross multiple hosts, and it is not suitable to store high volume of data
+* ``sonata.cache.memcached``: use memcached as a backend, shared across multiple hosts
+* ``sonata.cache.apc``: use apc from PHP runtime, cannot be shared across multiple hosts, and it is not suitable to store high volume of data
 * ``sonata.cache.esi``: use a ESI compatible backend to store the cache, like Varnish
 * ``sonata.cache.ssi``: use a SSI compatible backend to store the cache, like Apache or Nginx
 
