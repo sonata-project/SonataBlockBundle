@@ -90,7 +90,7 @@ following schema, you have 3 events and 1 generated block.
    :alt: Block profiler with events
    :width: 500
 
-You can retrieve event's name in the block panel, the panel include the event's name and the different listeners availables and
+You can retrieve event's name in the block panel, the panel include the event's name and the different listeners available and
 the generated blocks (if any).
 
    .. figure:: ../images/block_profiler_event.png
