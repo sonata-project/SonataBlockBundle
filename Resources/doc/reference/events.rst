@@ -51,16 +51,6 @@ The event listener must return a ``BlockInterface`` so the rendering workflow wi
 
     class Discus
     {
-        protected $account;
-
-        /**
-         * @param string $account
-         */
-        public function __construct($account)
-        {
-            $this->account = $account;
-        }
-
         /**
          * @param  BlockEvent
          *
