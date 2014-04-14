@@ -11,6 +11,14 @@ To begin, add the dependent bundles to the vendor/bundles directory. Add the fol
 
     php composer.phar require sonata-project/block-bundle
 
+You’ll be asked to type in a version constraint. 'dev-master' will get you the latest
+version, compatible with the latest Symfony2 version. Check `packagist <https://packagist.org/packages/sonata-project/block-bundle>`_
+for older versions:
+
+.. code-block:: bash
+
+    Please provide a version constraint for the sonata-project/block-bundle requirement: dev-master
+
 Now, add the bundle to the kernel:
 
 .. code-block:: php
