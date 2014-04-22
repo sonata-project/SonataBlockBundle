@@ -26,7 +26,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $processor = new Processor();
 
         $config = $processor->processConfiguration(new Configuration($defaultTemplates), array(array(
-            'default_contexts' => array('cms')
+            'default_contexts' => array('cms'),
+            'blocks' => array('my.block.type' => array())
         )));
 
 
@@ -62,7 +63,13 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 ),
                 'templates' => $defaultTemplates,
             ),
-            'blocks' => array(),
+            'blocks' => array(
+                'my.block.type' => array(
+                    'contexts' => array('cms'),
+                    'cache' => 'sonata.cache.noop',
+                    'settings' => array ()
+                )
+            ),
             'menus' => array(),
             'blocks_by_class' => array(),
             'exception' => array(

@@ -197,9 +197,6 @@ class SonataBlockExtension extends Extension
                 $contexts[$context][] = $service;
             }
         }
-
-        $container->getDefinition('sonata.block.form.type.block')
-            ->replaceArgument(1, $contexts);
     }
 
     /**

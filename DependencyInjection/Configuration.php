@@ -47,14 +47,21 @@ class Configuration implements ConfigurationInterface
             ->fixXmlConfig('block')
             ->fixXmlConfig('block_by_class')
             ->validate()
-            ->ifTrue(function ($v) {
-                if (isset($v['profiler']['container_types']) && !empty($v['profiler']['container_types'])
-                    && isset($v['container']['types']) && !empty($v['container']['types'])) {
-                    return 0 !== count(array_diff($v['profiler']['container_types'], $v['container']['types']));
-                }
-                return false;
-            })
-            ->thenInvalid("You cannot have different config options for sonata_block.profiler.container_types and sonata_block.container.types; the first one is deprecated, in case of doubt use the latter")
+                ->always(function($value) {
+                    foreach ($value['blocks'] as $name => &$block) {
+                        if (count($block['contexts']) == 0) {
+                            $block['contexts'] = $value['default_contexts'];
+                        }
+                    }
+
+                    if (isset($value['profiler']['container_types']) && !empty($value['profiler']['container_types'])
+                        && isset($value['container']['types']) && !empty($value['container']['types'])
+                        && 0 !== count(array_diff($value['profiler']['container_types'], $value['container']['types']))) {
+                        throw new \RuntimeException("You cannot have different config options for sonata_block.profiler.container_types and sonata_block.container.types; the first one is deprecated, in case of doubt use the latter");
+                    }
+
+                    return $value;
+                })
             ->end()
             ->children()
                 ->arrayNode('profiler')
