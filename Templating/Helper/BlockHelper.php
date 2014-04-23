@@ -128,7 +128,7 @@ class BlockHelper extends Helper
         $html = sprintf("<style type='text/css' media='%s'>", $media);
 
         foreach ($this->assets['css'] as $stylesheet) {
-            $html .= "\n" . sprintf('@import url(%s%s);', $stylesheet, $media);
+            $html .= "\n" . sprintf('@import url(%s%s);', $basePath, $stylesheet);
         }
 
         $html .= "\n</style>";
