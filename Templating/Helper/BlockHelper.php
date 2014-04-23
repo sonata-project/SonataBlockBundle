@@ -121,16 +121,19 @@ class BlockHelper extends Helper
      */
     public function includeStylesheets($media, $basePath = '')
     {
-        if(0 < count($this->assets['css'])) {
-            $html = sprintf("<style type='text/css' media='%s'>", $media);
-    
-            foreach ($this->assets['css'] as $stylesheet) {
-                $html .= "\n" . sprintf('@import url(%s);', $stylesheet, $media);
-            }
-    
-            $html .= "\n</style>";
+        if(0 === count($this->assets['css'])) {
+            return "";
         }
-        return isset($html) ? $html : "";
+        
+        $html = sprintf("<style type='text/css' media='%s'>", $media);
+
+        foreach ($this->assets['css'] as $stylesheet) {
+            $html .= "\n" . sprintf('@import url(%s);', $stylesheet, $media);
+        }
+
+        $html .= "\n</style>";
+
+        return $html;
     }
 
     /**
