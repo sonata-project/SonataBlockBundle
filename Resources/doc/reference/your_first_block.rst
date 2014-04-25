@@ -44,7 +44,7 @@ In the current tutorial, the default settings are:
 .. code-block:: php
 
     <?php
-    function setDefaultSettings(OptionsResolverInterface $resolver)
+    public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'url'      => false,
@@ -76,7 +76,7 @@ The validation is done at runtime through a ``validateBlock`` method. You can ca
 .. code-block:: php
 
     <?php
-    function validateBlock(ErrorElement $errorElement, BlockInterface $block)
+    public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
         $errorElement
             ->with('settings.url')
