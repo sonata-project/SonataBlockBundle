@@ -54,18 +54,18 @@ The main template might look like:
 
             <div class="container">
                 {{ sonata_block_render({ 'type': 'sonata.block.service.template' }, {
-                    'MyMenuBundle:Block:menu.twig.html'
+                    'template': 'MyMenuBundle:Block:menu.twig.html'
                 }) }}
 
                 <div class="col-4">
                     {{ sonata_block_render({ 'type': 'sonata.block.service.template' }, {
-                        'MyMenuBundle:Block:navigation.twig.html'
+                        'template': 'MyMenuBundle:Block:navigation.twig.html'
                     }) }}
                 </div>
 
                 <div class="col-6">
                     {{ sonata_block_render({ 'type': 'sonata.block.service.template' }, {
-                        'MyMenuBundle:Block:content.twig.html'
+                        'template': 'MyMenuBundle:Block:content.twig.html'
                     }) }}
                 </div>
             </div>
