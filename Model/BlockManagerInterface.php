@@ -10,8 +10,9 @@
 
 namespace Sonata\BlockBundle\Model;
 
+use Sonata\CoreBundle\Model\ManagerInterface;
 use Sonata\CoreBundle\Model\PageableManagerInterface;
 
-interface BlockManagerInterface extends PageableManagerInterface
+interface BlockManagerInterface extends ManagerInterface, PageableManagerInterface
 {
 }
