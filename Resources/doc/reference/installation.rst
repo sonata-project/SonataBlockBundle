@@ -5,7 +5,7 @@
 Installation
 ============
 
-To begin, add the dependent bundles to the vendor/bundles directory. Add the following lines to the file deps:
+To begin, add the dependent bundles to the vendor/bundles directory. Add the following lines to the deps file:
 
 .. code-block:: bash
 
