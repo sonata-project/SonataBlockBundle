@@ -124,7 +124,7 @@ class BlockHelper extends Helper
         if(0 === count($this->assets['css'])) {
             return "";
         }
-        
+
         $html = sprintf("<style type='text/css' media='%s'>", $media);
 
         foreach ($this->assets['css'] as $stylesheet) {
