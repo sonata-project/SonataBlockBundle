@@ -16,7 +16,7 @@ Cache Behavior
 The ``BlockBundle`` assumes that a block can be cached by default, so if a cache backend is configured, the block response will be stored.
 The default `TTL` is `86400` seconds. Now, there are many ways to control this behavior:
 
-* set a ``TTL`` setting inside the block, so if ``ttl`` = 0, then no cache will be available for the block and its parents,
+* set a ``TTL`` setting inside the block, so if ``ttl`` equals 0, then no cache will be available for the block and its parents,
 * set a ``use_cache`` setting to ``false`` or ``true``, if the variable is set to ``false`` then no cache will be available for the block and its parents,
 * no cache backend by default! By default, there is no cache backend setup, you should focus on raw performance before adding cache layers.
 
