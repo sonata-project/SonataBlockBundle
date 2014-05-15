@@ -7,7 +7,7 @@ Cache
 =====
 
 ``BlockBundle`` integrates the CacheBundle to handle block cache. The cache unit stored in the backend is a Response object from the ``HttpFoundation`` Component.
-Why a `Response` object ? It is a simple element, which contents the data (the body) and some metadata (the headers).
+Why a `Response` object ? It is a simple element, which contains the data (the body) and some metadata (the headers).
 As the block returns a `Response` object, it is possible to send it to the client, this use case can be quite useful for some cache backend (esi, ssi or js).
 
 Cache Behavior
