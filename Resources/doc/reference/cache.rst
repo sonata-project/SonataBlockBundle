@@ -8,7 +8,7 @@ Cache
 
 ``BlockBundle`` integrates the CacheBundle to handle block cache. The cache unit stored in the backend is a Response object from the ``HttpFoundation`` Component.
 Why a `Response` object ? It is a simple element, which contains the data (the body) and some metadata (the headers).
-As the block returns a `Response` object, it is possible to send it to the client, this use case can be quite useful for some cache backend (esi, ssi or js).
+As the block returns a `Response` object, it is possible to send it to the client, this use case can be quite useful for some cache backends (esi, ssi or js).
 
 Cache Behavior
 ~~~~~~~~~~~~~~
@@ -75,13 +75,13 @@ The cache mechanism will use the `TTL` to set a valid value when the response is
 
 .. note::
 
-    If a `TTL` is set into a block container, the `TTL` value is not applied to the final Response object send to the client.
-    This can be done by using a different mechanism
+    If a `TTL` is set into a block container, the `TTL` value is not applied to the final Response object sent to the client.
+    This can be done by using a different mechanism.
 
 Final Response TTL computation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``BlockRendered`` stores a global states for the smallest ttl available, there is another service used to store the smallest
+The ``BlockRendered`` stores a global state for the smallest ttl available, there is another service used to store the smallest
 ``ttl`` for the page: ``HttpCacheHandler``. Why two services ? This has been done to add an extra layer of control.
 
 The ``HttpCacheHandler::updateMetadata`` is called by the templating helper when the response is retrieved, then an event listener is registered to alter the final Response.
