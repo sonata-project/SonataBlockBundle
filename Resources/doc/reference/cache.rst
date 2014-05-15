@@ -103,8 +103,8 @@ Cache Backends
   only one value. (remove all block where profile.media.id == 3 is used.)
 * ``sonata.cache.memcached``: use memcached as a backend, shared across multiple hosts
 * ``sonata.cache.apc``: use apc from PHP runtime, cannot be shared across multiple hosts, and it is not suitable to store high volume of data
-* ``sonata.cache.esi``: use a ESI compatible backend to store the cache, like Varnish
-* ``sonata.cache.ssi``: use a SSI compatible backend to store the cache, like Apache or Nginx
+* ``sonata.cache.esi``: use an ESI compatible backend to store the cache, like Varnish
+* ``sonata.cache.ssi``: use an SSI compatible backend to store the cache, like Apache or Nginx
 
 Cache configuration
 ~~~~~~~~~~~~~~~~~~~
