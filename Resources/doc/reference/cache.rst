@@ -7,8 +7,8 @@ Cache
 =====
 
 ``BlockBundle`` integrates the CacheBundle to handle block cache. The cache unit stored in the backend is a Response object from the ``HttpFoundation`` Component.
-Why a `Response` object ? It is a simple element, which contents the data (the body) and some metadata (the headers).
-As the block returns a `Response` object, it is possible to send it to the client, this use case can be quite useful for some cache backend (esi, ssi or js).
+Why a `Response` object ? It is a simple element, which contains the data (the body) and some metadata (the headers).
+As the block returns a `Response` object, it is possible to send it to the client, this use case can be quite useful for some cache backends (esi, ssi or js).
 
 Cache Behavior
 ~~~~~~~~~~~~~~
@@ -16,7 +16,7 @@ Cache Behavior
 The ``BlockBundle`` assumes that a block can be cached by default, so if a cache backend is configured, the block response will be stored.
 The default `TTL` is `86400` seconds. Now, there are many ways to control this behavior:
 
-* set a ``TTL`` setting inside the block, so if ``ttl`` = 0, then no cache will be available for the block and its parents,
+* set a ``TTL`` setting inside the block, so if ``ttl`` equals 0, then no cache will be available for the block and its parents,
 * set a ``use_cache`` setting to ``false`` or ``true``, if the variable is set to ``false`` then no cache will be available for the block and its parents,
 * no cache backend by default! By default, there is no cache backend setup, you should focus on raw performance before adding cache layers.
 
@@ -75,13 +75,13 @@ The cache mechanism will use the `TTL` to set a valid value when the response is
 
 .. note::
 
-    If a `TTL` is set into a block container, the `TTL` value is not applied to the final Response object send to the client.
-    This can be done by using a different mechanism
+    If a `TTL` is set into a block container, the `TTL` value is not applied to the final Response object sent to the client.
+    This can be done by using a different mechanism.
 
 Final Response TTL computation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``BlockRendered`` stores a global states for the smallest ttl available, there is another service used to store the smallest
+The ``BlockRendered`` stores a global state for the smallest ttl available, there is another service used to store the smallest
 ``ttl`` for the page: ``HttpCacheHandler``. Why two services ? This has been done to add an extra layer of control.
 
 The ``HttpCacheHandler::updateMetadata`` is called by the templating helper when the response is retrieved, then an event listener is registered to alter the final Response.
@@ -103,8 +103,8 @@ Cache Backends
   only one value. (remove all block where profile.media.id == 3 is used.)
 * ``sonata.cache.memcached``: use memcached as a backend, shared across multiple hosts
 * ``sonata.cache.apc``: use apc from PHP runtime, cannot be shared across multiple hosts, and it is not suitable to store high volume of data
-* ``sonata.cache.esi``: use a ESI compatible backend to store the cache, like Varnish
-* ``sonata.cache.ssi``: use a SSI compatible backend to store the cache, like Apache or Nginx
+* ``sonata.cache.esi``: use an ESI compatible backend to store the cache, like Varnish
+* ``sonata.cache.ssi``: use an SSI compatible backend to store the cache, like Apache or Nginx
 
 Cache configuration
 ~~~~~~~~~~~~~~~~~~~
