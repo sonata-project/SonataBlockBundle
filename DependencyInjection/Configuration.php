@@ -210,4 +210,9 @@ class Configuration implements ConfigurationInterface
 
         return $treeBuilder;
     }
+
+    public function getConfiguration(array $config, ContainerBuilder $container)
+    {
+        return new Configuration(array());
+    }
 }
