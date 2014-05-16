@@ -25,7 +25,11 @@
     },
     "require-dev": {
         "knplabs/knp-menu-bundle": "~1.1",
-        "sonata-project/admin-bundle": "~2.2"
+        "sonata-project/admin-bundle": "~2.2",
+        "phpunit/phpunit": "~4.0"
+    },
+    "config": {
+        "bin-dir": "bin"
     },
     "suggest": {
         "knplabs/knp-menu-bundle": "~1.1",
