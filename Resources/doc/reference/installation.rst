@@ -44,7 +44,7 @@ To use the ``BlockBundle``, add the following lines to your application configur
     # app/config/config.yml
 
     sonata_block:
-        default_contexts: [cms]
+        default_contexts: [sonata_page_bundle]
         blocks:
             sonata.admin.block.admin_list:
                 contexts:   [admin]
