@@ -60,5 +60,13 @@
 
         <service id="sonata.block.cache.handler.default" class="Sonata\BlockBundle\Cache\HttpCacheHandler" />
         <service id="sonata.block.cache.handler.noop" class="Sonata\BlockBundle\Cache\NoopHttpCacheHandler" />
+
+        <service id="sonata.block.cache_manager" class="Sonata\BlockBundle\Cache\BlockCacheManager">
+            <argument>%sonata_block.cache_blocks%</argument>
+            <argument type="service" id="sonata.block.context_manager" />
+            <call method="setCacheManager">
+                <argument type="service" id="sonata.cache.manager" on-invalid="ignore" />
+            </call>
+        </service>
     </services>
 </container>
