@@ -35,7 +35,7 @@ class BlockCacheManager implements BlockCacheManagerInterface
     /** {@inheritdoc} */
     public function getBlockFromCache($blockName, array $cacheKeys)
     {
-        $blockContext = $this->blockContextManager->get(['type' => $blockName]);
+        $blockContext = $this->blockContextManager->get(array('type' => $blockName));
         $block = $blockContext->getBlock();
 
         $cacheService = $this->getCacheService($block);
