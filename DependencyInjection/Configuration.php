@@ -71,7 +71,6 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('enabled')->defaultValue('%kernel.debug%')->end()
                         ->scalarNode('template')->defaultValue('SonataBlockBundle:Profiler:block.html.twig')->end()
                         ->arrayNode('container_types')
-                            ->isRequired()
                             // add default value to well know users of BlockBundle
                             ->defaultValue(array('sonata.block.service.container', 'sonata.page.block.container', 'cmf.block.container', 'cmf.block.slideshow'))
                             ->prototype('scalar')->end()
