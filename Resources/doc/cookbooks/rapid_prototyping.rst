@@ -24,7 +24,7 @@ The Template Block Service
 
 At this point, you might want to reuse some elements inside different templates. You can use native `Twig` features: ``block``, ``use`` or ``include``. You can also use the ``render`` function from the ``Symfony2`` framework. The first solution is not very good on the long run as some elements might require some extra data to be rendered, so you will need a dedicated controller to render these elements (the latter solution). Using the ``render`` function comes with a cost: a sub request is generated, all related events are notified and you are limited in the caching strategy.
 
-This overhead is not always required just to render an area and you might want to have a fine control over the caching strategy. Ihis is where the ``TemplateBlockService`` can be an excellent complement to the TemplateController_.
+This overhead is not always required just to render an area and you might want to have a fine control over the caching strategy. This is where the ``TemplateBlockService`` can be an excellent complement to the TemplateController_.
 
 You start integrating your HTML with the ``sonata.block.service.template`` block and once you need to use the block you can just update the ``sonata_block_render`` call with the correct service name and the valid settings.
 
