@@ -22,7 +22,7 @@ Now, add the bundle to the kernel:
     public function registerbundles()
     {
         return array(
-            // Dependency (check that you don't have already this line)
+            // Dependency (check that you don't already have this line)
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             // Vendor specifics bundles
             new Sonata\CoreBundle\SonataCoreBundle(),
