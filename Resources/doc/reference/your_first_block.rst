@@ -139,7 +139,7 @@ The next step is the `Execute` method. This method must return a ``Response`` ob
 Template
 --------
 
-A block template is very simple, in the current tutorial. Indeed, we are looping on feeds or if not defined, a error message is displayed.
+In this tutorial, the block template is very simple. We loop through feeds, or if none are available, an error message is displayed.
 
 .. code-block:: jinja
 
