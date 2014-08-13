@@ -24,11 +24,11 @@
         "sonata-project/cache": "~1.0"
     },
     "require-dev": {
-        "knplabs/knp-menu-bundle": "~1.1",
+        "knplabs/knp-menu-bundle": "~2.0",
         "sonata-project/admin-bundle": "~2.2"
     },
     "suggest": {
-        "knplabs/knp-menu-bundle": "~1.1",
+        "knplabs/knp-menu-bundle": "~2.0",
         "sonata-project/cache-bundle": "~2.1",
         "sonata-project/admin-bundle": "~2.2"
     },
