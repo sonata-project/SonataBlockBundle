@@ -6,7 +6,7 @@
 Your first block
 ================
 
-This quick tutorial explains how to create a `RSS reader` block.
+This quick tutorial explains how to create an `RSS reader` block.
 
 A `block service` is just a service which must implement the ``BlockServiceInterface`` interface. There is only one instance of a block service, however there are many block instances.
 
