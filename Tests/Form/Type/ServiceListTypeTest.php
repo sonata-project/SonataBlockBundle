@@ -65,7 +65,7 @@ class ServiceListTypeTest extends \PHPUnit_Framework_TestCase
         $type->setDefaultOptions($resolver);
 
         $options = $resolver->resolve(array(
-            'context' => 'cms'
+            'context'            => 'cms',
         ));
 
         $expected = array(
@@ -79,6 +79,7 @@ class ServiceListTypeTest extends \PHPUnit_Framework_TestCase
             'empty_value'       => NULL,
             'error_bubbling'    => false,
             'context'           => 'cms',
+            'include_containers' => false
         );
 
         $this->assertEquals($expected, $options);
