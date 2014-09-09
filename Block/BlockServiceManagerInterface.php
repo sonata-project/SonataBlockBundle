@@ -48,11 +48,12 @@ interface BlockServiceManagerInterface
     public function getServices();
 
     /**
-     * @param string $name
+     * @param string  $name
+     * @param boolean $includeContainers
      *
      * @return array
      */
-    public function getServicesByContext($name);
+    public function getServicesByContext($name, $includeContainers = true);
 
     /**
      * @param string $name
