@@ -64,7 +64,7 @@ The `event listener` must return a ``BlockInterface`` so the rendering workflow 
             $block = new Block();
             $block->setId(uniqid()); // set a fake id
             $block->setSettings($event->getSettings());
-            $block->setName('sonata.comment.block.discus');
+            $block->setType('sonata.comment.block.discus');
 
             $event->addBlock($block);
         }
