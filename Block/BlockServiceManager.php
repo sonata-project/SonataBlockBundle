@@ -133,7 +133,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
             }
         }
 
-        return $this->services;
+        return $this->sortServices($this->services);
     }
 
     /**
@@ -157,7 +157,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
             $services[$name] = $this->getService($name);
         }
 
-        return $services;
+        return $this->sortServices($services);
     }
 
     /**
@@ -201,5 +201,25 @@ class BlockServiceManager implements BlockServiceManagerInterface
         } catch (\Exception $e) {
             $this->inValidate = false;
         }
+    }
+
+    /**
+     * Sort alphabetically services
+     *
+     * @param array $services
+     *
+     * @return array
+     */
+    private function sortServices($services)
+    {
+        uasort($services, function($a, $b) {
+            if ($a->getName() == $b->getName()) {
+                return 0;
+            }
+
+            return ($a->getName() < $b->getName()) ? -1 : 1;
+        });
+
+        return $services;
     }
 }

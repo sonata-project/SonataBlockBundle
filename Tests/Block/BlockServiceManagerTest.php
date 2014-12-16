@@ -91,4 +91,28 @@ class BlockServiceManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNotEmpty($manager->getServicesByContext('fake'));
     }
+
+    public function  testOrderServices()
+    {
+        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $manager   = new BlockServiceManager($container, true);
+
+        $serviceAbc = $this->getMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $serviceAbc->expects($this->any())->method('getName')->will($this->returnValue('GHI'));
+        $manager->add('ghi', $serviceAbc);
+
+        $serviceAbc = $this->getMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $serviceAbc->expects($this->any())->method('getName')->will($this->returnValue('ABC'));
+        $manager->add('abc', $serviceAbc);
+
+        $serviceAbc = $this->getMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $serviceAbc->expects($this->any())->method('getName')->will($this->returnValue('DEF'));
+        $manager->add('def', $serviceAbc);
+
+        $services = array_keys($manager->getServices());
+
+        $this->assertEquals('abc', $services[0], 'After order, the first service should be "ABC"');
+        $this->assertEquals('def', $services[1], 'After order, the second service should be "DEF"');
+        $this->assertEquals('ghi', $services[2], 'After order, the third service should be "GHI"');
+    }
 }
