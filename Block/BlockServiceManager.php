@@ -212,7 +212,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
      */
     private function sortServices($services)
     {
-        usort($services, function($a, $b) {
+        uasort($services, function($a, $b) {
             if ($a->getName() == $b->getName()) {
                 return 0;
             }
