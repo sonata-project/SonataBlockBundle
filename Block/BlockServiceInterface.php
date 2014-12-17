@@ -21,36 +21,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 interface BlockServiceInterface
 {
     /**
-     * @param FormMapper     $form
-     * @param BlockInterface $block
-     *
-     * @return void
-     */
-    public function buildEditForm(FormMapper $form, BlockInterface $block);
-
-    /**
-     * @param FormMapper     $form
-     * @param BlockInterface $block
-     *
-     * @return void
-     */
-    public function buildCreateForm(FormMapper $form, BlockInterface $block);
-
-    /**
      * @param BlockContextInterface $blockContext
      * @param Response              $response
      *
      * @return Response
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null);
-
-    /**
-     * @param ErrorElement   $errorElement
-     * @param BlockInterface $block
-     *
-     * @return void
-     */
-    public function validateBlock(ErrorElement $errorElement, BlockInterface $block);
 
     /**
      * @return string
