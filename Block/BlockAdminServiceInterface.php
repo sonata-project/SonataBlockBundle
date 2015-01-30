@@ -13,7 +13,7 @@ namespace Sonata\BlockBundle\Block;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\AdminBundle\Validator\ErrorElement;
+use Sonata\CoreBundle\Validator\ErrorElement;
 
 interface BlockAdminServiceInterface
 {
@@ -43,7 +43,7 @@ interface BlockAdminServiceInterface
 
     /**
      * @param null $code
-     * 
+     *
      * @return MetadataInterface
      */
     public function getBlockMetadata($code = null);
