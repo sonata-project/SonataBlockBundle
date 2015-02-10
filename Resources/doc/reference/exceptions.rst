@@ -17,19 +17,16 @@ Filters
 
 The role of an `exception filter` is to define which exceptions should be handled and which should be ignored silently. There are currently 4 filters available:
 
-* `Debug only`: only handle exceptions when in debug mode (default),
-* `Ignore block exception`: only handle exceptions that don't implement ``BlockExceptionInterface``,
-* `Keep all`: handle all exceptions,
-* `Keep none`: ignore all exceptions.
-
-.. note::
-    `Debug only` is the `default` filter.
+* ``debug_only``: only handle exceptions when in debug mode (default),
+* ``ignore_block_exception``: only handle exceptions that don't implement ``BlockExceptionInterface``,
+* ``keep_all``: handle all exceptions,
+* ``keep__none``: ignore all exceptions.
 
 .. warning::
 
-    Use the last filter ``Keep none`` with care!
+    Use the ``keep__none`` filter with care!
 
-These filters may be modified or completed with others filters in the configuration file:
+These filters may be modified or combined with other filters in the configuration file:
 
 .. code-block:: yaml
 
@@ -61,9 +58,9 @@ Renderers
 
 The role of an `exception renderer` is to define what to do with the exceptions that have passed the filter. There are currently 3 kind of renderer available:
 
-* `inline`: renders a `Twig` template within the rendering workflow with minimal information regarding the exception,
-* `inline_debug`: renders a twig template with the full debug exception information from Symfony,
-* `throw`: throws the exception to let the framework handle the exception.
+* ``inline``: renders a `Twig` template within the rendering workflow with minimal information regarding the exception,
+* ``inline_debug``: renders a twig template with the full debug exception information from Symfony,
+* ``throw``: throws the exception to let the framework handle the exception.
 
 These filters may be modified or completed with other filters in the configuration file:
 
@@ -80,7 +77,7 @@ These filters may be modified or completed with other filters in the configurati
                 throw:                  sonata.block.exception.renderer.throw
 
 
-A `default renderer` may be configured to apply, by default, to all block types. If you wish to customize a renderer on a particular block type, you may also add the following option in the configuration file:
+A `default renderer` will be applied to all block types. If you wish to use a different renderer on a particular block type, you should add the following option in the configuration file:
 
 .. code-block:: yaml
 

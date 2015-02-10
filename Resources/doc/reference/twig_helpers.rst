@@ -7,6 +7,8 @@
 Twig Helpers
 ============
 
+``SonataBlockBundle`` provides several Twig helper functions to allow easier interaction with blocks:
+
 Render a block from its instance:
 
 .. code-block:: jinja
@@ -43,7 +45,7 @@ Render a block by calling an event:
 
     Review the `Events` section for more information: :doc:`events`
 
-Render a block related to javascripts and stylesheets for the current page implies the helpers to be called at the end of the page:
+Rendering a block related to javascripts and stylesheets for the current page implies the helpers to be called at the end of the page:
 
 .. code-block:: jinja
 
