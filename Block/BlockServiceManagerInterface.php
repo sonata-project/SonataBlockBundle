@@ -10,7 +10,7 @@
 
 namespace Sonata\BlockBundle\Block;
 
-use Sonata\AdminBundle\Validator\ErrorElement;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Model\BlockInterface;
 
 interface BlockServiceManagerInterface

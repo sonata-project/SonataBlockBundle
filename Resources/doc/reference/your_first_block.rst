@@ -29,7 +29,7 @@ The current RSS block will extend this base class. The other `use` statements ar
     use Sonata\BlockBundle\Block\BlockContextInterface;
 
     use Sonata\AdminBundle\Form\FormMapper;
-    use Sonata\AdminBundle\Validator\ErrorElement;
+    use Sonata\CoreBundle\Validator\ErrorElement;
     use Sonata\BlockBundle\Block\BaseBlockService;
 
 Default settings
@@ -176,14 +176,14 @@ We are almost done! Now, just declare the block as a service:
 Or using YAML:
 
 .. code-block: yaml
-    
+
     services:
         sonata.block.service.rss:
             class: Sonata\BlockBundle\Block\Service\RssBlockService
             arguments:
                 - sonata.block.service.rss
                 - @templating
-            tags: 
+            tags:
                 - { name: sonata.block }
 
 Then, add the service to Sonata configuration:
