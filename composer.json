@@ -29,8 +29,7 @@
     },
     "suggest": {
         "knplabs/knp-menu-bundle": "~2.0",
-        "sonata-project/cache-bundle": "~2.1",
-        "sonata-project/admin-bundle": "~2.2"
+        "sonata-project/cache-bundle": "~2.1"
     },
     "autoload": {
         "psr-4": { "Sonata\\BlockBundle\\": "" }
