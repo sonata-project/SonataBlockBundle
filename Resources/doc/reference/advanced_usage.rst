@@ -33,7 +33,7 @@ When using ``Varnish``, ``Ssi`` or `Js``` cache, the settings passed here are lo
 
     {{ sonata_block_render({ 'type': 'sonata.block.service.rss' }, {
         'title': 'Sonata Project\'s Feeds',
-        'url': 'http://sonata-project.org/blog/archive.rss'
+        'url': 'https://sonata-project.org/blog/archive.rss'
     }) }}
 
 Taking ``Js`` as example, a URL is generated and added to some javascript. This javascript is injected into the page. When the page is loaded, the javascript calls the URL to retrieve the block content.

@@ -5,7 +5,7 @@ Sonata Block Bundle
 
 This bundle provides a block management solution.
 
-Check out the documentation on [http://sonata-project.org/bundles/block/master/doc/index.html](http://sonata-project.org/bundles/block/master/doc/index.html)
+Check out the documentation on [https://sonata-project.org/bundles/block/master/doc/index.html](https://sonata-project.org/bundles/block/master/doc/index.html)
 
 **Google Groups**: For questions and proposals you can post on this google groups
 

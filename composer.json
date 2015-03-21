@@ -3,13 +3,13 @@
     "type": "symfony-bundle",
     "description": "Symfony SonataBlockBundle",
     "keywords": ["sonata", "block"],
-    "homepage": "http://sonata-project.org/bundles/block",
+    "homepage": "https://sonata-project.org/bundles/block",
     "license": "MIT",
     "authors": [
         {
             "name": "Thomas Rabaix",
             "email": "thomas.rabaix@sonata-project.org",
-            "homepage": "http://sonata-project.org"
+            "homepage": "https://sonata-project.org"
         },
         {
             "name": "Sonata Community",

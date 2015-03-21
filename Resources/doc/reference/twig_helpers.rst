@@ -21,7 +21,7 @@ Render a block  by providing the block's type and options:
 
     {{ sonata_block_render({ 'type': 'sonata.block.service.rss' }, {
         'title': 'Sonata Project\'s Feeds',
-        'url': 'http://sonata-project.org/blog/archive.rss'
+        'url': 'https://sonata-project.org/blog/archive.rss'
     }) }}
 
 Render a block by providing the block's cache options:
