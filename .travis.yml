@@ -38,7 +38,3 @@ script: phpunit && cd Resources/doc && sphinx-build -W -b html -d _build/doctree
 
 notifications:
     webhooks: https://sonata-project.org/bundles/block/master/travis
-
-matrix:
-  allow_failures:
-    - php: hhvm
