@@ -14,14 +14,15 @@ The easiest way to install ``SonataBlockBundle`` is to require it with Composer:
 Alternatively, you could add a dependency into your `composer.json` file:
 
 .. code-block:: json
-{
-    ...
 
-    "require": {
+    {
         ...
-        "sonata-project/block-bundle": "~2.2"
+
+        "require": {
+            ...
+            "sonata-project/block-bundle": "~2.2"
+        }
     }
-}   
 
 Now, add the bundle to the kernel:
 
