@@ -48,18 +48,16 @@ interface BlockServiceInterface
     public function load(BlockInterface $block);
 
     /**
-     * @param $media
      *
      * @return array
      */
-    public function getJavascripts($media);
+    public function getJavascripts();
 
     /**
-     * @param $media
      *
      * @return array
      */
-    public function getStylesheets($media);
+    public function getStylesheets();
 
     /**
      * @param BlockInterface $block
