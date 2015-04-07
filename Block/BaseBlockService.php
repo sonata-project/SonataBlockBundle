@@ -160,7 +160,7 @@ abstract class BaseBlockService implements BlockServiceInterface, BlockAdminServ
     /**
      * {@inheritdoc}
      */
-    public function getJavascripts($media)
+    public function getJavascripts()
     {
         return array();
     }
@@ -168,7 +168,7 @@ abstract class BaseBlockService implements BlockServiceInterface, BlockAdminServ
     /**
      * {@inheritdoc}
      */
-    public function getStylesheets($media)
+    public function getStylesheets()
     {
         return array();
     }
