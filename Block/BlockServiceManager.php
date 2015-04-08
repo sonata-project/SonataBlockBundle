@@ -13,7 +13,7 @@ namespace Sonata\BlockBundle\Block;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 
-use Sonata\AdminBundle\Validator\ErrorElement;
+use Sonata\CoreBundle\Validator\ErrorElement;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
