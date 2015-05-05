@@ -7,6 +7,10 @@ A [BC BREAK] means the update will break the project for many reasons:
 * new dependencies
 * class refactoring
 
+### 2015-05-05
+
+* Symfony 2.2 is not supported anymore.
+
 ### 2014-04-23
 
 * [BC BREAK] Complete support for context, add new method in BlockServiceManager (getServicesByContext)

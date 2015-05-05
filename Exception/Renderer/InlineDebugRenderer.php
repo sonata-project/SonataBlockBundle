@@ -10,11 +10,10 @@
 
 namespace Sonata\BlockBundle\Exception\Renderer;
 
+use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Templating\EngineInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
-
-use Symfony\Component\HttpKernel\Exception\FlattenException;
 
 /**
  * This renderer uses a template to display an error message at the block position with extensive debug information.
