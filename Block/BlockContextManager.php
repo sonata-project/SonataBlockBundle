@@ -14,6 +14,7 @@ namespace Sonata\BlockBundle\Block;
 use Doctrine\Common\Util\ClassUtils;
 use Psr\Log\LoggerInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -147,13 +148,24 @@ class BlockContextManager implements BlockContextManagerInterface
             'ttl'              => (int)$block->getTtl(),
         ));
 
-        $optionsResolver->addAllowedTypes(array(
-            'use_cache'         => array('bool'),
-            'extra_cache_keys'  => array('array'),
-            'attr'              => array('array'),
-            'ttl'               => array('int'),
-            'template'          => array('string', 'bool'),
-        ));
+        // TODO: Remove it when bumping requirements to SF 2.6+
+        if (version_compare(Kernel::VERSION, '2.6', '>=')) {
+            $optionsResolver
+                ->addAllowedTypes('use_cache', 'bool')
+                ->addAllowedTypes('extra_cache_keys', 'array')
+                ->addAllowedTypes('attr', 'array')
+                ->addAllowedTypes('ttl', 'int')
+                ->addAllowedTypes('template', array('string', 'bool'))
+            ;
+        } else {
+            $optionsResolver->addAllowedTypes(array(
+                'use_cache'         => array('bool'),
+                'extra_cache_keys'  => array('array'),
+                'attr'              => array('array'),
+                'ttl'               => array('int'),
+                'template'          => array('string', 'bool'),
+            ));
+        }
 
         // add type and class settings for block
         $class = ClassUtils::getClass($block);
