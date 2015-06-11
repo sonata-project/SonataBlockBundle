@@ -12,10 +12,8 @@
 namespace Sonata\BlockBundle\Block;
 
 use Sonata\BlockBundle\Exception\BlockOptionsException;
+use Sonata\BlockBundle\Model\BlockInterface;
 
-/**
- * Interface BlockContextManagerInterface
- */
 interface BlockContextManagerInterface
 {
     const CACHE_KEY = 'context';
