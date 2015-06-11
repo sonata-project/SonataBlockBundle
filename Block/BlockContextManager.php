@@ -149,7 +149,7 @@ class BlockContextManager implements BlockContextManagerInterface
         ));
 
         // TODO: Remove it when bumping requirements to SF 2.6+
-        if (version_compare(Kernel::VERSION, '2.6', '>=')) {
+        if (method_exists($optionsResolver, 'setDefined')) {
             $optionsResolver
                 ->addAllowedTypes('use_cache', 'bool')
                 ->addAllowedTypes('extra_cache_keys', 'array')
