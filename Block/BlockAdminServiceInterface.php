@@ -20,24 +20,18 @@ interface BlockAdminServiceInterface
     /**
      * @param FormMapper     $form
      * @param BlockInterface $block
-     *
-     * @return void
      */
     public function buildEditForm(FormMapper $form, BlockInterface $block);
 
     /**
      * @param FormMapper     $form
      * @param BlockInterface $block
-     *
-     * @return void
      */
     public function buildCreateForm(FormMapper $form, BlockInterface $block);
 
     /**
      * @param ErrorElement   $errorElement
      * @param BlockInterface $block
-     *
-     * @return void
      */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block);
 

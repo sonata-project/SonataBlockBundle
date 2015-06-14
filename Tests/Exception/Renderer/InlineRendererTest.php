@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -13,14 +14,14 @@ namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 use Sonata\BlockBundle\Exception\Renderer\InlineRenderer;
 
 /**
- * Test the inline exception renderer
+ * Test the inline exception renderer.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 class InlineRendererTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * test the render() method
+     * test the render() method.
      */
     public function testRender()
     {
@@ -41,7 +42,7 @@ class InlineRendererTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo($template),
                 $this->equalTo(array(
                     'exception' => $exception,
-                    'block' => $block))
+                    'block'     => $block, ))
             )
             ->will($this->returnValue('html'));
 

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -10,11 +11,11 @@
 
 namespace Sonata\BlockBundle\Exception\Renderer;
 
-use Symfony\Component\HttpFoundation\Response;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
- * This renderer re-throws the exception and lets the framework handle the exception
+ * This renderer re-throws the exception and lets the framework handle the exception.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */

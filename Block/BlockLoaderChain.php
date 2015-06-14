@@ -36,7 +36,7 @@ class BlockLoaderChain implements BlockLoaderInterface
             }
         }
 
-        throw new BlockNotFoundException;
+        throw new BlockNotFoundException();
     }
 
     /**

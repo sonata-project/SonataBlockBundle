@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -16,7 +17,7 @@ class BlockTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetTtl()
     {
-        $block = new Block;
+        $block = new Block();
 
         $this->assertFalse($block->hasChildren());
 
@@ -40,10 +41,10 @@ class BlockTest extends \PHPUnit_Framework_TestCase
 
     public function testSetterGetter()
     {
-        $time = new \DateTime;
+        $time = new \DateTime();
         $parent = $this->getMockBuilder('Sonata\BlockBundle\Model\Block')->getMock();
 
-        $block = new Block;
+        $block = new Block();
 
         $block->setName('my.block.name');
         $block->setCreatedAt($time);
@@ -60,7 +61,6 @@ class BlockTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $block->getPosition());
         $this->assertEquals('foo.bar', $block->getType());
         $this->assertEquals($parent, $block->getParent());
-
     }
 
     public function testSetting()

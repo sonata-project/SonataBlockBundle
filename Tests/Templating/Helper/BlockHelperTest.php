@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -25,7 +26,7 @@ class BlockHelperTest extends \PHPUnit_Framework_TestCase
         $blockRenderer = $this->getMock('Sonata\BlockBundle\Block\BlockRendererInterface');
         $blockContextManager = $this->getMock('Sonata\BlockBundle\Block\BlockContextManagerInterface');
         $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
-        $eventDispatcher->expects($this->once())->method('dispatch')->will($this->returnCallback(function($name, BlockEvent $event) {
+        $eventDispatcher->expects($this->once())->method('dispatch')->will($this->returnCallback(function ($name, BlockEvent $event) {
             return $event;
         }));
 
@@ -38,10 +39,10 @@ class BlockHelperTest extends \PHPUnit_Framework_TestCase
     {
         $blockService = $this->getMock('Sonata\BlockBundle\Block\BlockServiceInterface');
         $blockService->expects($this->once())->method('getJavascripts')->will($this->returnValue(array(
-            '/js/base.js'
+            '/js/base.js',
         )));
         $blockService->expects($this->once())->method('getStylesheets')->will($this->returnValue(array(
-            '/css/base.css'
+            '/css/base.css',
         )));
 
         $blockServiceManager = $this->getMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
@@ -51,18 +52,18 @@ class BlockHelperTest extends \PHPUnit_Framework_TestCase
         $blockRenderer->expects($this->once())->method('render')->will($this->returnValue(new Response('<span>test</span>')));
 
         $blockContextManager = $this->getMock('Sonata\BlockBundle\Block\BlockContextManagerInterface');
-        $blockContextManager->expects($this->once())->method('get')->will($this->returnCallback(function(BlockInterface $block) {
+        $blockContextManager->expects($this->once())->method('get')->will($this->returnCallback(function (BlockInterface $block) {
             $context = new BlockContext($block, $block->getSettings());
 
             return $context;
         }));
 
         $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
-        $eventDispatcher->expects($this->once())->method('dispatch')->will($this->returnCallback(function($name, BlockEvent $event) {
+        $eventDispatcher->expects($this->once())->method('dispatch')->will($this->returnCallback(function ($name, BlockEvent $event) {
             $block = new Block();
             $block->setId(1);
             $block->setSettings(array(
-                'use_cache' => false
+                'use_cache' => false,
             ));
             $block->setType('test');
             $event->addBlock($block);

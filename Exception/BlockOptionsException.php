@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -14,5 +15,4 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BlockOptionsException extends NotFoundHttpException
 {
-
 }

@@ -14,13 +14,12 @@ namespace Sonata\BlockBundle\Block;
 use Doctrine\Common\Util\ClassUtils;
 use Psr\Log\LoggerInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class BlockContextManager
+ * Class BlockContextManager.
  */
 class BlockContextManager implements BlockContextManagerInterface
 {
@@ -152,7 +151,7 @@ class BlockContextManager implements BlockContextManagerInterface
             'extra_cache_keys' => array(),
             'attr'             => array(),
             'template'         => false,
-            'ttl'              => (int)$block->getTtl(),
+            'ttl'              => (int) $block->getTtl(),
         ));
 
         // TODO: Remove it when bumping requirements to SF 2.6+
@@ -183,10 +182,10 @@ class BlockContextManager implements BlockContextManagerInterface
 
     /**
      * Adds context settings, to be able to rebuild a block context, to the
-     * extra_cache_keys
+     * extra_cache_keys.
      *
      * @param BlockContextInterface $blockContext
-     * @param array $settings
+     * @param array                 $settings
      */
     protected function setDefaultExtraCacheKeys(BlockContextInterface $blockContext, array $settings)
     {

@@ -15,7 +15,6 @@ use Sonata\BlockBundle\Block\Loader\ServiceLoader;
 
 class ServiceLoaderTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @expectedException \RuntimeException
      */
@@ -30,8 +29,8 @@ class ServiceLoaderTest extends \PHPUnit_Framework_TestCase
         $loader = new ServiceLoader(array('foo.bar'));
 
         $definition = array(
-            'type' => 'foo.bar',
-            'settings' => array('option2' => 23)
+            'type'     => 'foo.bar',
+            'settings' => array('option2' => 23),
         );
 
         $this->assertTrue($loader->support($definition));

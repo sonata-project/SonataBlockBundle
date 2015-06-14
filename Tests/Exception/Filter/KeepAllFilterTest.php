@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -13,14 +14,14 @@ namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 use Sonata\BlockBundle\Exception\Filter\KeepAllFilter;
 
 /**
- * Test the keep all exception filter
+ * Test the keep all exception filter.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 class KeepAllFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * test the filter with an exception
+     * test the filter with an exception.
      *
      * @param \Exception $exception
      *
@@ -40,7 +41,7 @@ class KeepAllFilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Returns exceptions to test
+     * Returns exceptions to test.
      *
      * @return array
      */
@@ -48,7 +49,7 @@ class KeepAllFilterTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array($this->getMock('\Exception')),
-            array($this->getMock('\RuntimeException'))
+            array($this->getMock('\RuntimeException')),
         );
     }
 }

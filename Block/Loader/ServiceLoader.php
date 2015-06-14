@@ -38,12 +38,12 @@ class ServiceLoader implements BlockLoaderInterface
             ));
         }
 
-        $block = new Block;
+        $block = new Block();
         $block->setId(uniqid());
         $block->setType($configuration['type']);
         $block->setEnabled(true);
-        $block->setCreatedAt(new \DateTime);
-        $block->setUpdatedAt(new \DateTime);
+        $block->setCreatedAt(new \DateTime());
+        $block->setUpdatedAt(new \DateTime());
         $block->setSettings(isset($configuration['settings']) ? $configuration['settings'] : array());
 
         return $block;

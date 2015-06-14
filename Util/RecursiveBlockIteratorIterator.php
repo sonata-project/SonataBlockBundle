@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -11,7 +12,7 @@
 namespace Sonata\BlockBundle\Util;
 
 /**
- * RecursiveBlockIteratorIterator
+ * RecursiveBlockIteratorIterator.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */

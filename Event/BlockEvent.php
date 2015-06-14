@@ -21,7 +21,7 @@ class BlockEvent extends Event
     protected $blocks = array();
 
     /**
-     * @param array  $settings
+     * @param array $settings
      */
     public function __construct(array $settings = array())
     {

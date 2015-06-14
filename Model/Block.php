@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -11,7 +12,7 @@
 namespace Sonata\BlockBundle\Model;
 
 /**
- * Block model with concrete implementation of BlockInterface
+ * Block model with concrete implementation of BlockInterface.
  */
 class Block extends BaseBlock
 {

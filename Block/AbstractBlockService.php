@@ -15,7 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class AbstractBlockService
+ * Class AbstractBlockService.
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
@@ -30,7 +30,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
     }
 
     /**
-     * Define the default options for the block
+     * Define the default options for the block.
      *
      * @param OptionsResolver $resolver
      */

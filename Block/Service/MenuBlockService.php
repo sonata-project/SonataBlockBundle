@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,24 +9,22 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\BlockBundle\Block\Service;
 
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\CoreBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class MenuBlockService
+ * Class MenuBlockService.
  *
- * @package Sonata\BlockBundle\Block\Service
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -42,7 +41,7 @@ class MenuBlockService extends BaseBlockService
     protected $menus;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string                $name
      * @param EngineInterface       $templating
@@ -66,7 +65,7 @@ class MenuBlockService extends BaseBlockService
             'menu'         => $this->getMenu($blockContext),
             'menu_options' => $this->getMenuOptions($blockContext->getSettings()),
             'block'        => $blockContext->getBlock(),
-            'context'      => $blockContext
+            'context'      => $blockContext,
         );
 
         if ('private' === $blockContext->getSettings('cache_policy')) {
@@ -82,7 +81,7 @@ class MenuBlockService extends BaseBlockService
     public function buildEditForm(FormMapper $form, BlockInterface $block)
     {
         $form->add('settings', 'sonata_type_immutable_array', array(
-            'keys' => $this->getFormSettingsKeys()
+            'keys' => $this->getFormSettingsKeys(),
         ));
     }
 
@@ -91,7 +90,7 @@ class MenuBlockService extends BaseBlockService
      */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
-        if (($name = $block->getSetting('menu_name')) && $name !== "" && !$this->menuProvider->has($name)) {
+        if (($name = $block->getSetting('menu_name')) && $name !== '' && !$this->menuProvider->has($name)) {
             // If we specified a menu_name, check that it exists
             $errorElement->with('menu_name')
                 ->addViolation('sonata.block.menu.not_existing', array('name' => $name))
@@ -108,14 +107,14 @@ class MenuBlockService extends BaseBlockService
             'title'          => $this->getName(),
             'cache_policy'   => 'public',
             'template'       => 'SonataBlockBundle:Block:block_core_menu.html.twig',
-            'menu_name'      => "",
+            'menu_name'      => '',
             'safe_labels'    => false,
             'current_class'  => 'active',
             'first_class'    => false,
             'last_class'     => false,
             'current_uri'    => null,
-            'menu_class'     => "list-group",
-            'children_class' => "list-group-item",
+            'menu_class'     => 'list-group',
+            'children_class' => 'list-group-item',
             'menu_template'  => null,
         ));
     }
@@ -148,7 +147,7 @@ class MenuBlockService extends BaseBlockService
     }
 
     /**
-     * Gets the menu to render
+     * Gets the menu to render.
      *
      * @param BlockContextInterface $blockContext
      *
@@ -162,7 +161,7 @@ class MenuBlockService extends BaseBlockService
     }
 
     /**
-     * Replaces setting keys with knp menu item options keys
+     * Replaces setting keys with knp menu item options keys.
      *
      * @param array $settings
      *

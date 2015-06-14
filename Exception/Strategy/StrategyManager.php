@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -10,11 +11,11 @@
 
 namespace Sonata\BlockBundle\Exception\Strategy;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\BlockBundle\Exception\Renderer\RendererInterface;
 use Sonata\BlockBundle\Exception\Filter\FilterInterface;
+use Sonata\BlockBundle\Exception\Renderer\RendererInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * The strategy manager handles exceptions thrown by a block. It uses an exception filter to identify which exceptions
@@ -60,7 +61,7 @@ class StrategyManager implements StrategyManagerInterface
     protected $defaultRenderer;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ContainerInterface $container      Dependency injection container
      * @param array              $filters        Filter definitions
@@ -78,7 +79,7 @@ class StrategyManager implements StrategyManagerInterface
     }
 
     /**
-     * Sets the default filter name
+     * Sets the default filter name.
      *
      * @param string $name
      *
@@ -94,7 +95,7 @@ class StrategyManager implements StrategyManagerInterface
     }
 
     /**
-     * Sets the default renderer name
+     * Sets the default renderer name.
      *
      * @param string $name
      *
@@ -129,7 +130,7 @@ class StrategyManager implements StrategyManagerInterface
     }
 
     /**
-     * Returns the exception renderer for given block
+     * Returns the exception renderer for given block.
      *
      * @param BlockInterface $block
      *
@@ -152,7 +153,7 @@ class StrategyManager implements StrategyManagerInterface
     }
 
     /**
-     * Returns the exception filter for given block
+     * Returns the exception filter for given block.
      *
      * @param BlockInterface $block
      *
@@ -175,7 +176,7 @@ class StrategyManager implements StrategyManagerInterface
     }
 
     /**
-     * Returns the filter service for given filter name
+     * Returns the filter service for given filter name.
      *
      * @param string $name
      *
@@ -193,7 +194,7 @@ class StrategyManager implements StrategyManagerInterface
     }
 
     /**
-     * Returns the renderer service for given renderer name
+     * Returns the renderer service for given renderer name.
      *
      * @param string $name
      *
