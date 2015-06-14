@@ -25,7 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-abstract class BaseBlockService implements BlockServiceInterface, BlockAdminServiceInterface
+abstract class BaseBlockService extends AbstractBlockService implements BlockAdminServiceInterface
 {
     protected $name;
 
@@ -171,14 +171,6 @@ abstract class BaseBlockService implements BlockServiceInterface, BlockAdminServ
     public function getStylesheets($media)
     {
         return array();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultSettings(OptionsResolverInterface $resolver)
-    {
-
     }
 
     /**
