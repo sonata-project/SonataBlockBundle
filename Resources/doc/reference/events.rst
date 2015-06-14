@@ -33,7 +33,7 @@ So, the current the name will be ``sonata.block.event.blog.comment``.
     .. code-block:: xml
 
         <service id="disqus.comment" class="Sonata\CommentBundle\Event\Discus">
-            <tag name="kernel.event_listener" event="sonata.block.blog.comment" method="onBlock"/>
+            <tag name="kernel.event_listener" event="sonata.block.event.blog.comment" method="onBlock"/>
         </service>
 
     .. code-block:: yaml
@@ -42,9 +42,9 @@ So, the current the name will be ``sonata.block.event.blog.comment``.
             disqus.comment:
                 class: Sonata\CommentBundle\Event\Disqus"
                 tags:
-                    - { name: kernel.event_listener, event: sonata.block.blog.comment, method: onBlock }
+                    - { name: kernel.event_listener, event: sonata.block.event.blog.comment, method: onBlock }
 
-The `event listener` must return a ``BlockInterface`` so the rendering workflow will work properly.
+The `event listener` must push one or some ``BlockInterface`` instances into ``BlockEvent`` passed in so the rendering workflow will work properly.
 
 .. code-block:: jinja
 
@@ -57,7 +57,6 @@ The `event listener` must return a ``BlockInterface`` so the rendering workflow 
         /**
          * @param  BlockEvent
          *
-         * @return BlockInterface
          */
         public function onBlock(BlockEvent $event)
         {
