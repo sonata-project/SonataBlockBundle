@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -13,21 +14,21 @@ namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 use Sonata\BlockBundle\Exception\Renderer\MonkeyThrowRenderer;
 
 /**
- * Test the monkey throw exception renderer
+ * Test the monkey throw exception renderer.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 class MonkeyThrowRendererTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * test the render() method with a standard Exception
+     * test the render() method with a standard Exception.
      *
      * @expectedException \Exception
      */
     public function testRenderWithStandardException()
     {
         // GIVEN
-        $exception = new \Exception;
+        $exception = new \Exception();
         $block     = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
         $renderer  = new MonkeyThrowRenderer();
 
@@ -39,7 +40,7 @@ class MonkeyThrowRendererTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test the render() method with another exception to ensure it correctly throws the provided exception
+     * test the render() method with another exception to ensure it correctly throws the provided exception.
      *
      * @expectedException \RuntimeException
      */

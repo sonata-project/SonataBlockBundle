@@ -39,7 +39,7 @@ class FakeTemplating implements EngineInterface
             return $response;
         }
 
-        return new Response;
+        return new Response();
     }
 
     public function supports($name)

@@ -11,13 +11,12 @@
 
 namespace Sonata\BlockBundle\Block;
 
-use Symfony\Component\HttpFoundation\Response;
 use Psr\Log\LoggerInterface;
-
 use Sonata\BlockBundle\Exception\Strategy\StrategyManagerInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Handles the execution and rendering of a block
+ * Handles the execution and rendering of a block.
  *
  * This function render a block and make sure the cacheable information are correctly retrieved
  * and set to the upper response (container can have child blocks, so the smallest ttl from a child
@@ -41,25 +40,25 @@ class BlockRenderer implements BlockRendererInterface
     protected $logger;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $debug;
 
     /**
      * This property hold the last response available from the child or sibling block
-     * The cacheable attributes must be cascaded to the parent
+     * The cacheable attributes must be cascaded to the parent.
      *
      * @var Response
      */
     private $lastResponse;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param BlockServiceManagerInterface $blockServiceManager      Block service manager
      * @param StrategyManagerInterface     $exceptionStrategyManager Exception strategy manager
      * @param LoggerInterface              $logger                   Logger class
-     * @param boolean                      $debug                    Whether in debug mode or not
+     * @param bool                         $debug                    Whether in debug mode or not
      */
     public function __construct(BlockServiceManagerInterface $blockServiceManager, StrategyManagerInterface $exceptionStrategyManager, LoggerInterface $logger = null, $debug = false)
     {
@@ -92,7 +91,6 @@ class BlockRenderer implements BlockRendererInterface
             }
 
             $response = $this->addMetaInformation($response, $blockContext, $service);
-
         } catch (\Exception $exception) {
             if ($this->logger) {
                 $this->logger->critical(sprintf('[cms::renderBlock] block.id=%d - error while rendering block - %s', $block->getId(), $exception->getMessage()));
@@ -128,7 +126,7 @@ class BlockRenderer implements BlockRendererInterface
     }
 
     /**
-     * This method is responsible to cascade ttl to the parent block
+     * This method is responsible to cascade ttl to the parent block.
      *
      * @param Response              $response
      * @param BlockContextInterface $blockContext
@@ -142,7 +140,7 @@ class BlockRenderer implements BlockRendererInterface
         if ($this->lastResponse && $this->lastResponse->isCacheable()) {
             $response->setTtl($this->lastResponse->getTtl());
             $response->setPublic();
-        } else if ($this->lastResponse) { // not cacheable
+        } elseif ($this->lastResponse) { // not cacheable
             $response->setPrivate();
             $response->setTtl(0);
             $response->headers->removeCacheControlDirective('s-maxage');

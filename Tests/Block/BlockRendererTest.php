@@ -15,7 +15,7 @@ use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Block\BlockRenderer;
 
 /**
- * Unit test of BlockRenderer class
+ * Unit test of BlockRenderer class.
  */
 class BlockRendererTest extends \PHPUnit_Framework_TestCase
 {
@@ -40,7 +40,7 @@ class BlockRendererTest extends \PHPUnit_Framework_TestCase
     protected $renderer;
 
     /**
-     * Setup test object
+     * Setup test object.
      */
     public function setUp()
     {
@@ -52,7 +52,7 @@ class BlockRendererTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test rendering a block without errors
+     * Test rendering a block without errors.
      */
     public function testRenderWithoutErrors()
     {
@@ -77,7 +77,7 @@ class BlockRendererTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test rendering a block that returns a wrong response
+     * Test rendering a block that returns a wrong response.
      *
      * @expectedException \RuntimeException
      * @expectedExceptionMessage A block service must return a Response object
@@ -96,7 +96,7 @@ class BlockRendererTest extends \PHPUnit_Framework_TestCase
         // mock the exception strategy manager to rethrow the exception
         $this->exceptionStrategyManager->expects($this->once())
             ->method('handleException')
-            ->will($this->returnCallback(function($e) {
+            ->will($this->returnCallback(function ($e) {
                 throw $e;
             }));
 
@@ -115,7 +115,7 @@ class BlockRendererTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test rendering a block that throws an exception
+     * Test rendering a block that throws an exception.
      */
     public function testRenderBlockWithException()
     {
@@ -128,7 +128,7 @@ class BlockRendererTest extends \PHPUnit_Framework_TestCase
         $exception = $this->getMock('\Exception');
         $service->expects($this->once())
             ->method('execute')
-            ->will($this->returnCallback(function() use ($exception) {
+            ->will($this->returnCallback(function () use ($exception) {
                 throw $exception;
             }));
 

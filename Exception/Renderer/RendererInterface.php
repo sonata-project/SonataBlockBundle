@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -10,18 +11,18 @@
 
 namespace Sonata\BlockBundle\Exception\Renderer;
 
-use Symfony\Component\HttpFoundation\Response;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Interface for exception renderer
+ * Interface for exception renderer.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 interface RendererInterface
 {
     /**
-     * Renders an exception into an HTTP response
+     * Renders an exception into an HTTP response.
      *
      * @param \Exception     $exception Exception provoked
      * @param BlockInterface $block     Block that provoked the exception

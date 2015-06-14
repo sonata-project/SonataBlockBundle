@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -7,17 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Sonata\BlockBundle\Profiler\DataCollector;
 
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
-use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
-use Sonata\BlockBundle\Block\TraceableBlockRenderer;
+use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
 
 /**
- * Block data collector for the symfony web profiling
+ * Block data collector for the symfony web profiling.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
@@ -54,7 +54,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
     protected $events = array();
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param BlockHelper $blockHelper    Block renderer
      * @param array       $containerTypes array of container types
@@ -66,7 +66,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
     }
 
     /**
-     * Collects the traces from the block renderer
+     * Collects the traces from the block renderer.
      *
      * @param Request    $request   Http Request
      * @param Response   $response  Http Response
@@ -99,7 +99,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
     }
 
     /**
-     * Returns the number of block used
+     * Returns the number of block used.
      *
      * @return int
      */
@@ -109,7 +109,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
     }
 
     /**
-     * Return the events used on the current page
+     * Return the events used on the current page.
      *
      * @return array
      */
@@ -119,7 +119,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
     }
 
     /**
-     * Returns the block rendering history
+     * Returns the block rendering history.
      *
      * @return array
      */
@@ -129,7 +129,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
     }
 
     /**
-     * Returns the container blocks
+     * Returns the container blocks.
      *
      * @return array
      */
@@ -139,7 +139,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
     }
 
     /**
-     * Returns the real blocks (non-container)
+     * Returns the real blocks (non-container).
      *
      * @return array
      */
@@ -149,7 +149,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
     }
 
     /**
-     * serialize the data
+     * serialize the data.
      *
      * @return string
      */
@@ -166,11 +166,9 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
     }
 
     /**
-     * Unserialize the data
+     * Unserialize the data.
      *
      * @param string $data
-     *
-     * @return void
      */
     public function unserialize($data)
     {

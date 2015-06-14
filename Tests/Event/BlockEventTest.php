@@ -15,7 +15,6 @@ use Sonata\BlockBundle\Event\BlockEvent;
 
 class BlockEventTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testBlockEvent()
     {
         $blockEvent = new BlockEvent();
@@ -29,9 +28,7 @@ class BlockEventTest extends \PHPUnit_Framework_TestCase
         $blockEvent->addBlock($this->getMock('Sonata\BlockBundle\Model\BlockInterface'));
         $this->assertCount(2, $blockEvent->getBlocks());
 
-
         $this->assertNull($blockEvent->getSetting('fake'));
         $this->assertEquals(1, $blockEvent->getSetting('fake', 1));
-
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -12,5 +13,4 @@ namespace Sonata\BlockBundle\Tests\Block\Service;
 
 class BaseTestBlockService extends \PHPUnit_Framework_TestCase
 {
-
 }

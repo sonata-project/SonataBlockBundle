@@ -2,8 +2,6 @@
 
 namespace Sonata\BlockBundle\Twig\Extension;
 
-use Sonata\BlockBundle\Twig\Extension\BlockExtension;
-
 class BlockExtensionTest extends \PHPUnit_Framework_TestCase
 {
     protected $blockHelper;
@@ -25,7 +23,7 @@ class BlockExtensionTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('sonata_block_render', array(
-                'foobar', array('bar' => 'foo')    // arguments
+                'foobar', array('bar' => 'foo'),    // arguments
             ), 'render'),
             array('sonata_block_include_javascripts', array(
                 'screen',                         // arguments
@@ -35,7 +33,7 @@ class BlockExtensionTest extends \PHPUnit_Framework_TestCase
             ), 'includeStylesheets'),
             array('sonata_block_render_event', array(
                 'event.name', array(),            // arguments
-            ), 'renderEvent')
+            ), 'renderEvent'),
         );
     }
 

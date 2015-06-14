@@ -12,12 +12,11 @@
 namespace Sonata\BlockBundle\Block;
 
 use Sonata\BlockBundle\Model\BlockInterface;
-
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Interface BlockServiceInterface
+ * Interface BlockServiceInterface.
  */
 interface BlockServiceInterface
 {
@@ -35,7 +34,7 @@ interface BlockServiceInterface
     public function getName();
 
     /**
-     * Define the default options for the block
+     * Define the default options for the block.
      *
      * @param OptionsResolverInterface $resolver
      *
@@ -47,8 +46,6 @@ interface BlockServiceInterface
 
     /**
      * @param BlockInterface $block
-     *
-     * @return void
      */
     public function load(BlockInterface $block);
 

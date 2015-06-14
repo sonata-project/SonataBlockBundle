@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -10,10 +11,10 @@
 
 namespace Sonata\BlockBundle\Exception\Renderer;
 
+use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Templating\EngineInterface;
-use Sonata\BlockBundle\Model\BlockInterface;
 
 /**
  * This renderer uses a template to display an error message at the block position with extensive debug information.
@@ -33,22 +34,22 @@ class InlineDebugRenderer implements RendererInterface
     protected $template;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $forceStyle;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $debug;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param EngineInterface $templating Templating engine
      * @param string          $template   Template to render
-     * @param boolean         $debug      Whether the debug is enabled or not
-     * @param boolean         $forceStyle Whether to force style within the template or not
+     * @param bool            $debug      Whether the debug is enabled or not
+     * @param bool            $forceStyle Whether to force style within the template or not
      */
     public function __construct(EngineInterface $templating, $template, $debug, $forceStyle = true)
     {
@@ -80,7 +81,7 @@ class InlineDebugRenderer implements RendererInterface
             'logger'         => false,
             'currentContent' => false,
             'block'          => $block,
-            'forceStyle'     => $this->forceStyle
+            'forceStyle'     => $this->forceStyle,
         );
 
         $content = $this->templating->render($this->template, $parameters);
