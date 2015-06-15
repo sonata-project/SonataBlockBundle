@@ -2,10 +2,10 @@
 
 namespace Sonata\BlockBundle\Cache;
 
-use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\BlockBundle\Block\BlockContextManagerInterface;
-use Sonata\Cache\CacheManagerInterface;
 use Doctrine\Common\Util\ClassUtils;
+use Sonata\BlockBundle\Block\BlockContextManagerInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\Cache\CacheManagerInterface;
 
 class BlockCacheManager implements BlockCacheManagerInterface
 {

@@ -9,13 +9,14 @@ interface BlockCacheManagerInterface
     /**
      * @param BlockInterface $block
      *
-     * @return boolean
+     * @return bool
      */
     public function setBlockToCache(BlockInterface $block);
 
     /**
-     * @param  string          $blockName
-     * @param  array           $cacheKeys
+     * @param string $blockName
+     * @param array  $cacheKeys
+     *
      * @return BlockInterface;
      */
     public function getBlockFromCache($blockName, array $cacheKeys);
