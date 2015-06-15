@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sonata package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sonata\BlockBundle\Cache;
 
 use Doctrine\Common\Util\ClassUtils;
@@ -7,17 +16,30 @@ use Sonata\BlockBundle\Block\BlockContextManagerInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Cache\CacheManagerInterface;
 
+/**
+ * Class BlockCacheManager.
+ */
 class BlockCacheManager implements BlockCacheManagerInterface
 {
-    /** @var  array */
+    /**
+     * @var array
+     */
     protected $cacheBlocks;
 
-    /** @var  BlockContextManagerInterface */
+    /**
+     * @var BlockContextManagerInterface
+     */
     protected $blockContextManager;
 
-    /** @var  CacheManagerInterface */
+    /**
+     * @var CacheManagerInterface
+     */
     protected $cacheManager;
 
+    /**
+     * @param array                        $cacheBlocks
+     * @param BlockContextManagerInterface $blockContextManager
+     */
     public function __construct(array $cacheBlocks, BlockContextManagerInterface $blockContextManager)
     {
         $this->cacheBlocks         = $cacheBlocks;
@@ -32,7 +54,9 @@ class BlockCacheManager implements BlockCacheManagerInterface
         // TODO: Implement setBlockToCache() method.
     }
 
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     public function getBlockFromCache($blockName, array $cacheKeys)
     {
         $blockContext = $this->blockContextManager->get(array('type' => $blockName));
@@ -53,7 +77,9 @@ class BlockCacheManager implements BlockCacheManagerInterface
         return $cacheElement->getData() ? $cacheElement->getData() : false;
     }
 
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     public function getCacheService(BlockInterface $block)
     {
         if (!$this->cacheManager) {
