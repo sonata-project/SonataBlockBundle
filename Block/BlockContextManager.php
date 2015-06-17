@@ -140,7 +140,7 @@ class BlockContextManager implements BlockContextManagerInterface
     protected function setDefaultSettings(OptionsResolverInterface $optionsResolver, BlockInterface $block)
     {
         if (get_called_class() !== __CLASS__) {
-            trigger_error(__CLASS__.'::'.__METHOD__.' is deprecated since version 2.3, to be renamed in 3.0. Use '.__CLASS__.'::configureSettings instead.', E_USER_DEPRECATED);
+            trigger_error('The '.__METHOD__.' is deprecated since version 2.3, to be renamed in 3.0. Use '.__CLASS__.'::configureSettings instead.', E_USER_DEPRECATED);
         }
         $this->configureSettings($optionsResolver, $block);
     }
