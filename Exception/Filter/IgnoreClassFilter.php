@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -26,7 +27,7 @@ class IgnoreClassFilter implements FilterInterface
     protected $class;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $class
      */

@@ -11,15 +11,15 @@
 
 namespace Sonata\BlockBundle\Block;
 
-use Sonata\AdminBundle\Validator\ErrorElement;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Validator\ErrorElement;
+use Sonata\BlockBundle\Model\BlockInterface;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * BaseBlockService
+ * BaseBlockService.
  *
  *
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
@@ -41,7 +41,7 @@ abstract class BaseBlockService implements BlockServiceInterface
     }
 
     /**
-     * Returns a Response object than can be cacheable
+     * Returns a Response object than can be cacheable.
      *
      * @param string   $view
      * @param array    $parameters
@@ -80,7 +80,7 @@ abstract class BaseBlockService implements BlockServiceInterface
         return $this->name;
     }
 
-     /**
+    /**
      * {@inheritdoc}
      */
     public function getTemplating()
@@ -177,7 +177,6 @@ abstract class BaseBlockService implements BlockServiceInterface
      */
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
-
     }
 
     /**
@@ -194,22 +193,16 @@ abstract class BaseBlockService implements BlockServiceInterface
     /**
      * @param FormMapper     $form
      * @param BlockInterface $block
-     *
-     * @return void
      */
     public function buildEditForm(FormMapper $form, BlockInterface $block)
     {
-
     }
 
     /**
      * @param ErrorElement   $errorElement
      * @param BlockInterface $block
-     *
-     * @return void
      */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
-
     }
 }

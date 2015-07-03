@@ -21,17 +21,20 @@ class NoopHttpCacheHandler implements HttpCacheHandlerInterface
      * {@inheritdoc}
      */
     public function alterResponse(Response $response)
-    {}
+    {
+    }
 
     /**
      * {@inheritdoc}
      */
     public function updateMetadata(Response $response, BlockContextInterface $blockContext = null)
-    {}
+    {
+    }
 
     /**
      * {@inheritdoc}
      */
     public function onKernelResponse(FilterResponseEvent $event)
-    {}
+    {
+    }
 }

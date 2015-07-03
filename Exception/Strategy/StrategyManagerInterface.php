@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -14,14 +15,14 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Interface for exception strategy management
+ * Interface for exception strategy management.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 interface StrategyManagerInterface
 {
     /**
-     * Handles an exception for a given block
+     * Handles an exception for a given block.
      *
      * @param \Exception     $exception Exception to handle
      * @param BlockInterface $block     Block that provoked the exception

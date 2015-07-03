@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -14,7 +15,7 @@ use Sonata\BlockBundle\Exception\Strategy\StrategyManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Test the Exception Strategy Manager
+ * Test the Exception Strategy Manager.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
@@ -71,7 +72,7 @@ class StrategyManagerTest extends \PHPUnit_Framework_TestCase
     protected $filter2;
 
     /**
-     * setup a basic scenario to avoid long test setup
+     * setup a basic scenario to avoid long test setup.
      */
     public function setUp()
     {
@@ -111,7 +112,7 @@ class StrategyManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test getBlockRenderer() with existing block renderer
+     * test getBlockRenderer() with existing block renderer.
      */
     public function testGetBlockRendererWithExisting()
     {
@@ -127,7 +128,7 @@ class StrategyManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test getBlockRenderer() with non existing block renderer
+     * test getBlockRenderer() with non existing block renderer.
      */
     public function testGetBlockRendererWithNonExisting()
     {
@@ -143,7 +144,7 @@ class StrategyManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test getBlockFilter() with an existing block filter
+     * test getBlockFilter() with an existing block filter.
      */
     public function testGetBlockFilterWithExisting()
     {
@@ -159,7 +160,7 @@ class StrategyManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test getting the default block renderer
+     * test getting the default block renderer.
      */
     public function testGetBlockFilterWithNonExisting()
     {
@@ -175,7 +176,7 @@ class StrategyManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test handleException() with a keep none filter
+     * test handleException() with a keep none filter.
      */
     public function testHandleExceptionWithKeepNoneFilter()
     {
@@ -195,7 +196,7 @@ class StrategyManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test handleException() with a keep all filter
+     * test handleException() with a keep all filter.
      */
     public function testHandleExceptionWithKeepAllFilter()
     {
@@ -215,7 +216,7 @@ class StrategyManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Returns a mock block model with given type
+     * Returns a mock block model with given type.
      *
      * @param string $type
      *
@@ -230,7 +231,7 @@ class StrategyManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Returns a mock container with defined services
+     * Returns a mock container with defined services.
      *
      * @param array $services
      *

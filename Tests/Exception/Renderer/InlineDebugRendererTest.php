@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -13,14 +14,14 @@ namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 use Sonata\BlockBundle\Exception\Renderer\InlineDebugRenderer;
 
 /**
- * Test the inline debug exception renderer
+ * Test the inline debug exception renderer.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 class InlineDebugRendererTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * test the renderer without debug mode
+     * test the renderer without debug mode.
      */
     public function testRenderWithoutDebug()
     {
@@ -42,7 +43,7 @@ class InlineDebugRendererTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test the render() method with debug enabled
+     * test the render() method with debug enabled.
      */
     public function testRenderWithDebugEnabled()
     {
@@ -86,7 +87,7 @@ class InlineDebugRendererTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Returns a PHPUnit Constraint that ensures that an array has a key with given value
+     * Returns a PHPUnit Constraint that ensures that an array has a key with given value.
      *
      * @param mixed $key   Key to be found in array
      * @param mixed $value Value to be found in array
@@ -95,7 +96,7 @@ class InlineDebugRendererTest extends \PHPUnit_Framework_TestCase
      */
     public function arrayHasKeyValue($key, $value)
     {
-        return new \PHPUnit_Framework_Constraint_Callback(function($test) use ($key, $value) {
+        return new \PHPUnit_Framework_Constraint_Callback(function ($test) use ($key, $value) {
             return (is_array($test) && array_key_exists($key, $test) && $test[$key] === $value);
         });
     }

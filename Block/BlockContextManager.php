@@ -144,7 +144,7 @@ class BlockContextManager implements BlockContextManagerInterface
             'extra_cache_keys' => array(),
             'attr'             => array(),
             'template'         => false,
-            'ttl'              => (int)$block->getTtl(),
+            'ttl'              => (int) $block->getTtl(),
         ));
 
         $optionsResolver->addAllowedTypes(array(
@@ -164,10 +164,10 @@ class BlockContextManager implements BlockContextManagerInterface
 
     /**
      * Adds context settings, to be able to rebuild a block context, to the
-     * extra_cache_keys
+     * extra_cache_keys.
      *
      * @param BlockContextInterface $blockContext
-     * @param array $settings
+     * @param array                 $settings
      */
     protected function setDefaultExtraCacheKeys(BlockContextInterface $blockContext, array $settings)
     {

@@ -15,7 +15,6 @@ use Sonata\BlockBundle\Block\BlockLoaderChain;
 
 class BlockLoaderChainTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @expectedException \Sonata\BlockBundle\Exception\BlockNotFoundException
      */

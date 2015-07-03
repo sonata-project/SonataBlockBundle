@@ -11,18 +11,15 @@
 
 namespace Sonata\BlockBundle\Block\Service;
 
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Validator\ErrorElement;
+use Sonata\BlockBundle\Block\BaseBlockService;
+use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Validator\ErrorElement;
-
-use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\BlockBundle\Block\BlockContextInterface;
-use Sonata\BlockBundle\Block\BaseBlockService;
-
 /**
- *
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 class RssBlockService extends BaseBlockService
@@ -56,7 +53,7 @@ class RssBlockService extends BaseBlockService
             'keys' => array(
                 array('url', 'url', array('required' => false)),
                 array('title', 'text', array('required' => false)),
-            )
+            ),
         ));
     }
 
@@ -90,8 +87,8 @@ class RssBlockService extends BaseBlockService
             $options = array(
                 'http' => array(
                     'user_agent' => 'Sonata/RSS Reader',
-                    'timeout' => 2,
-                )
+                    'timeout'    => 2,
+                ),
             );
 
             // retrieve contents with a specific stream context to avoid php errors
@@ -111,7 +108,7 @@ class RssBlockService extends BaseBlockService
         return $this->renderResponse($blockContext->getTemplate(), array(
             'feeds'     => $feeds,
             'block'     => $blockContext->getBlock(),
-            'settings'  => $settings
+            'settings'  => $settings,
         ), $response);
     }
 }

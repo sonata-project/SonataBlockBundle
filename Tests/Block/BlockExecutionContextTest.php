@@ -13,14 +13,14 @@ namespace Sonata\BlockBundle\Tests\Block;
 
 use Sonata\BlockBundle\Block\BlockContext;
 
-class BlockContextTest extends \PHPUnit_Framework_TestCase
+class BlockExecutionContextTest extends \PHPUnit_Framework_TestCase
 {
     public function testBasicFeature()
     {
         $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
 
         $blockContext = new BlockContext($block, array(
-            'hello' => 'world'
+            'hello' => 'world',
         ));
 
         $this->assertEquals('world', $blockContext->getSetting('hello'));

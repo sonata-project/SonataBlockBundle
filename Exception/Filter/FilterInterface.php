@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -22,12 +23,12 @@ use Sonata\BlockBundle\Model\BlockInterface;
 interface FilterInterface
 {
     /**
-     * Returns whether or not this filter handles this exception for given block
+     * Returns whether or not this filter handles this exception for given block.
      *
      * @param \Exception     $exception Exception to manage
      * @param BlockInterface $block     Block that provoked the exception
      *
-     * @return boolean
+     * @return bool
      */
     public function handle(\Exception $exception, BlockInterface $block);
 }

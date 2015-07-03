@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -11,7 +12,7 @@
 namespace Sonata\BlockBundle\Exception;
 
 /**
- * Interface to implement exception identified as block-specific exceptions
+ * Interface to implement exception identified as block-specific exceptions.
  */
 interface BlockExceptionInterface
 {

@@ -25,7 +25,6 @@ use Symfony\Component\EventDispatcher\Event;
  *        class: Sonata\BlockBundle\Event\TextBlockListener
  *        tags:
  *          - { name: kernel.event_listener, event: 'sonata.block.event.sonata.admin.form.edit.top', method: onBlock}
- *
  */
 class TextBlockListener
 {
@@ -44,7 +43,7 @@ class TextBlockListener
         $block = new Block();
         $block->setId(uniqid());
         $block->setSettings(array(
-            'content' => $event->getSetting('content', $content)
+            'content' => $event->getSetting('content', $content),
         ));
         $block->setType('sonata.block.service.text');
 

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -13,7 +14,7 @@ namespace Sonata\BlockBundle\Exception\Filter;
 use Sonata\BlockBundle\Model\BlockInterface;
 
 /**
- * This filter will handle all exceptions
+ * This filter will handle all exceptions.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */

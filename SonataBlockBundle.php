@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -10,10 +11,10 @@
 
 namespace Sonata\BlockBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Sonata\BlockBundle\DependencyInjection\Compiler\TweakCompilerPass;
 use Sonata\BlockBundle\DependencyInjection\Compiler\GlobalVariablesCompilerPass;
+use Sonata\BlockBundle\DependencyInjection\Compiler\TweakCompilerPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SonataBlockBundle extends Bundle
 {

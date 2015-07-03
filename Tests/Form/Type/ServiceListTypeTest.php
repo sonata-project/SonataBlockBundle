@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -11,12 +12,10 @@
 namespace Sonata\BlockBundle\Tests\Form\Type;
 
 use Sonata\BlockBundle\Form\Type\ServiceListType;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ServiceListTypeTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testFormType()
     {
         $blockServiceManager = $this->getMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
@@ -32,7 +31,6 @@ class ServiceListTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testOptionsWithInvalidContext()
     {
-
         $blockServiceManager = $this->getMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
 
         $type = new ServiceListType($blockServiceManager);
@@ -57,7 +55,7 @@ class ServiceListTypeTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(array('my.service.code' => $blockService)));
 
         $type = new ServiceListType($blockServiceManager, array(
-            'cms' => array('my.service.code')
+            'cms' => array('my.service.code'),
         ));
 
         $resolver = new OptionsResolver();
@@ -71,15 +69,15 @@ class ServiceListTypeTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             'multiple'  => false,
             'expanded'  => false,
-            'choices'   => array (
+            'choices'   => array(
                 'my.service.code' => 'value - my.service.code',
             ),
-            'preferred_choices' => array (),
-            'empty_data'        => '',
-            'empty_value'       => NULL,
-            'error_bubbling'    => false,
-            'context'           => 'cms',
-            'include_containers' => false
+            'preferred_choices'  => array(),
+            'empty_data'         => '',
+            'empty_value'        => null,
+            'error_bubbling'     => false,
+            'context'            => 'cms',
+            'include_containers' => false,
         );
 
         $this->assertEquals($expected, $options);

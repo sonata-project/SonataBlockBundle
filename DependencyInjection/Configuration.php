@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -15,7 +16,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * This is the class that validates and merges configuration from your app/config files
+ * This is the class that validates and merges configuration from your app/config files.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
  */
@@ -48,7 +49,7 @@ class Configuration implements ConfigurationInterface
             ->fixXmlConfig('block')
             ->fixXmlConfig('block_by_class')
             ->validate()
-                ->always(function($value) {
+                ->always(function ($value) {
                     foreach ($value['blocks'] as $name => &$block) {
                         if (count($block['contexts']) == 0) {
                             $block['contexts'] = $value['default_contexts'];
@@ -58,7 +59,7 @@ class Configuration implements ConfigurationInterface
                     if (isset($value['profiler']['container_types']) && !empty($value['profiler']['container_types'])
                         && isset($value['container']['types']) && !empty($value['container']['types'])
                         && 0 !== count(array_diff($value['profiler']['container_types'], $value['container']['types']))) {
-                        throw new \RuntimeException("You cannot have different config options for sonata_block.profiler.container_types and sonata_block.container.types; the first one is deprecated, in case of doubt use the latter");
+                        throw new \RuntimeException('You cannot have different config options for sonata_block.profiler.container_types and sonata_block.container.types; the first one is deprecated, in case of doubt use the latter');
                     }
 
                     return $value;
@@ -142,7 +143,7 @@ class Configuration implements ConfigurationInterface
                             ->end()
                             ->arrayNode('exception')
                                 ->children()
-                                    ->scalarNode('filter')  ->defaultValue(null)->end()
+                                    ->scalarNode('filter')->defaultValue(null)->end()
                                     ->scalarNode('renderer')->defaultValue(null)->end()
                                 ->end()
                             ->end()
@@ -180,7 +181,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('default')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('filter')  ->defaultValue('debug_only')->end()
+                                ->scalarNode('filter')->defaultValue('debug_only')->end()
                                 ->scalarNode('renderer')->defaultValue('throw')->end()
                             ->end()
                         ->end()
@@ -220,6 +221,6 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfiguration(array $config, ContainerBuilder $container)
     {
-        return new Configuration(array());
+        return new self(array());
     }
 }

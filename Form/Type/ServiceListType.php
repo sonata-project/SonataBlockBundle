@@ -11,13 +11,10 @@
 
 namespace Sonata\BlockBundle\Form\Type;
 
-use Symfony\Component\Form\Exception\InvalidArgumentException;
+use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
-use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 
 class ServiceListType extends AbstractType
 {
@@ -83,7 +80,7 @@ class ServiceListType extends AbstractType
                 return $multiple || $expanded || !isset($previousValue) ? null : '';
             },
             'error_bubbling'     => false,
-            'include_containers' => false
+            'include_containers' => false,
         ));
     }
 }

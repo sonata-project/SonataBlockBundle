@@ -6,7 +6,6 @@ use Sonata\BlockBundle\Twig\GlobalVariables;
 
 class GlobalVariablesTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testGlobalVariables()
     {
         $variables = new GlobalVariables(array());
