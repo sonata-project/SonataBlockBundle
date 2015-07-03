@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -32,7 +33,7 @@ class RecursiveBlockIteratorIteratorTest extends \PHPUnit_Framework_TestCase
         $block1->expects($this->once())->method('hasChildren')->will($this->returnValue(true));
         $block1->expects($this->any())->method('getChildren')->will($this->returnValue(array(
             $block2,
-            $block3
+            $block3,
         )));
 
         $block4 = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');

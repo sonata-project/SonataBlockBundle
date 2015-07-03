@@ -11,12 +11,12 @@
 
 namespace Sonata\BlockBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Link the block service to the Page Manager
+ * Link the block service to the Page Manager.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
@@ -46,7 +46,7 @@ class TweakCompilerPass implements CompilerPassInterface
     }
 
     /**
-     * Apply configurations to the context manager
+     * Apply configurations to the context manager.
      *
      * @param ContainerBuilder $container
      */

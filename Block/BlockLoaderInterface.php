@@ -25,7 +25,7 @@ interface BlockLoaderInterface
     /**
      * @param mixed $name
      *
-     * @return boolean
+     * @return bool
      */
     public function support($name);
 }

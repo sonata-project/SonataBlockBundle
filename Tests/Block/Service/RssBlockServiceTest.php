@@ -12,9 +12,8 @@
 namespace Sonata\BlockBundle\Tests\Block\Service;
 
 use Sonata\BlockBundle\Block\BlockContext;
-use Sonata\BlockBundle\Model\Block;
-
 use Sonata\BlockBundle\Block\Service\RssBlockService;
+use Sonata\BlockBundle\Model\Block;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RssBlockServiceTest extends BaseTestBlockService
@@ -24,13 +23,13 @@ class RssBlockServiceTest extends BaseTestBlockService
      */
     public function testService()
     {
-        $templating = new FakeTemplating;
+        $templating = new FakeTemplating();
         $service    = new RssBlockService('sonata.page.block.rss', $templating);
 
-        $block = new Block;
+        $block = new Block();
         $block->setType('core.text');
         $block->setSettings(array(
-            'content' => 'my text'
+            'content' => 'my text',
         ));
 
         $optionResolver = new OptionsResolver();

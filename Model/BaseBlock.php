@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -11,7 +12,7 @@
 namespace Sonata\BlockBundle\Model;
 
 /**
- * Base abstract Block class that provides a default implementation of the block interface
+ * Base abstract Block class that provides a default implementation of the block interface.
  */
 abstract class BaseBlock implements BlockInterface
 {
@@ -26,12 +27,12 @@ abstract class BaseBlock implements BlockInterface
     protected $settings;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $enabled;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $position;
 
@@ -61,12 +62,12 @@ abstract class BaseBlock implements BlockInterface
     protected $type;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $ttl;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -250,7 +251,7 @@ abstract class BaseBlock implements BlockInterface
      */
     public function __toString()
     {
-        return sprintf("%s ~ #%s", $this->getname(), $this->getId());
+        return sprintf('%s ~ #%s', $this->getname(), $this->getId());
     }
 
     /**

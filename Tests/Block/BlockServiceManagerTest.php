@@ -12,7 +12,6 @@
 namespace Sonata\BlockBundle\Tests\Block;
 
 use Sonata\BlockBundle\Block\BlockServiceManager;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class BlockServiceManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -92,7 +91,7 @@ class BlockServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($manager->getServicesByContext('fake'));
     }
 
-    public function  testOrderServices()
+    public function testOrderServices()
     {
         $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
         $manager   = new BlockServiceManager($container, true);

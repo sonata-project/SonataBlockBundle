@@ -11,11 +11,9 @@
 
 namespace Sonata\BlockBundle\Block;
 
-use Sonata\BlockBundle\Model\BlockInterface;
-
-use Sonata\AdminBundle\Validator\ErrorElement;
-
 use Psr\Log\LoggerInterface;
+use Sonata\AdminBundle\Validator\ErrorElement;
+use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class BlockServiceManager implements BlockServiceManagerInterface
@@ -117,7 +115,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
      */
     public function setServices(array $blockServices)
     {
-        foreach($blockServices as $name => $service) {
+        foreach ($blockServices as $name => $service) {
             $this->add($name, $service);
         }
     }
@@ -204,7 +202,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
-     * Sort alphabetically services
+     * Sort alphabetically services.
      *
      * @param array $services
      *
@@ -212,7 +210,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
      */
     private function sortServices($services)
     {
-        uasort($services, function($a, $b) {
+        uasort($services, function ($a, $b) {
             if ($a->getName() == $b->getName()) {
                 return 0;
             }

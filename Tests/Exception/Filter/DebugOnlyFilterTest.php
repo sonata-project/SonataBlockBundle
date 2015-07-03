@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -13,14 +14,14 @@ namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 use Sonata\BlockBundle\Exception\Filter\DebugOnlyFilter;
 
 /**
- * Test the debug only exception filter
+ * Test the debug only exception filter.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 class DebugOnlyFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * test the filter with debug enabled
+     * test the filter with debug enabled.
      */
     public function testWithDebugEnabled()
     {
@@ -37,7 +38,7 @@ class DebugOnlyFilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test the filter with debug disabled
+     * test the filter with debug disabled.
      */
     public function testWithDebugDisabled()
     {

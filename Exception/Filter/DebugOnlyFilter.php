@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -20,14 +21,14 @@ use Sonata\BlockBundle\Model\BlockInterface;
 class DebugOnlyFilter implements FilterInterface
 {
     /**
-     * @var boolean
+     * @var bool
      */
     protected $debug;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param boolean $debug
+     * @param bool $debug
      */
     public function __construct($debug)
     {

@@ -11,24 +11,23 @@
 
 namespace Sonata\BlockBundle\Tests\Block\Service;
 
-use Sonata\BlockBundle\Model\Block;
-use Sonata\BlockBundle\Block\Service\TextBlockService;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sonata\BlockBundle\Block\BlockContext;
+use Sonata\BlockBundle\Block\Service\TextBlockService;
+use Sonata\BlockBundle\Model\Block;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TextBlockServiceTest extends BaseTestBlockService
 {
     public function testService()
     {
-        $templating = new FakeTemplating;
+        $templating = new FakeTemplating();
         $service    = new TextBlockService('sonata.page.block.text', $templating);
 
-        $block = new Block;
+        $block = new Block();
         $block->setType('core.text');
         $block->setSettings(array(
-            'content' => 'my text'
+            'content' => 'my text',
         ));
-
 
         $optionResolver = new OptionsResolver();
         $service->setDefaultSettings($optionResolver);

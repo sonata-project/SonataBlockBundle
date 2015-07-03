@@ -11,22 +11,20 @@
 
 namespace Sonata\BlockBundle\Templating\Helper;
 
+use Doctrine\Common\Util\ClassUtils;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\BlockContextManagerInterface;
+use Sonata\BlockBundle\Block\BlockRendererInterface;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Cache\HttpCacheHandlerInterface;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\BlockBundle\Block\BlockRendererInterface;
 use Sonata\BlockBundle\Util\RecursiveBlockIterator;
 use Sonata\Cache\CacheManagerInterface;
-
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Templating\Helper\Helper;
-use Symfony\Component\HttpFoundation\Response;
-
-use Doctrine\Common\Util\ClassUtils;
 
 class BlockHelper extends Helper
 {
@@ -46,7 +44,7 @@ class BlockHelper extends Helper
 
     /**
      * This property is a state variable holdings all assets used by the block for the current PHP request
-     * It is used to correctly render the javascripts and stylesheets tags on the main layout
+     * It is used to correctly render the javascripts and stylesheets tags on the main layout.
      *
      * @var array
      */
@@ -81,11 +79,11 @@ class BlockHelper extends Helper
 
         $this->assets = array(
             'js'  => array(),
-            'css' => array()
+            'css' => array(),
         );
 
         $this->traces = array(
-            '_events' => array()
+            '_events' => array(),
         );
     }
 
@@ -105,9 +103,9 @@ class BlockHelper extends Helper
      */
     public function includeJavascripts($media, $basePath = '')
     {
-        $html = "";
+        $html = '';
         foreach ($this->assets['js'] as $javascript) {
-            $html .= "\n" . sprintf('<script src="%s%s" type="text/javascript"></script>', $basePath, $javascript);
+            $html .= "\n".sprintf('<script src="%s%s" type="text/javascript"></script>', $basePath, $javascript);
         }
 
         return $html;
@@ -121,14 +119,14 @@ class BlockHelper extends Helper
      */
     public function includeStylesheets($media, $basePath = '')
     {
-        if(0 === count($this->assets['css'])) {
-            return "";
+        if (0 === count($this->assets['css'])) {
+            return '';
         }
 
         $html = sprintf("<style type='text/css' media='%s'>", $media);
 
         foreach ($this->assets['css'] as $stylesheet) {
-            $html .= "\n" . sprintf('@import url(%s%s);', $basePath, $stylesheet);
+            $html .= "\n".sprintf('@import url(%s%s);', $basePath, $stylesheet);
         }
 
         $html .= "\n</style>";
@@ -137,7 +135,7 @@ class BlockHelper extends Helper
     }
 
     /**
-     * Traverse the parent block and its children to retrieve the correct list css and javascript only for main block
+     * Traverse the parent block and its children to retrieve the correct list css and javascript only for main block.
      *
      * @param BlockContextInterface $blockContext
      * @param array                 $stats
@@ -152,7 +150,7 @@ class BlockHelper extends Helper
 
         $assets = array(
             'js'  => $service->getJavascripts('all'),
-            'css' => $service->getStylesheets('all')
+            'css' => $service->getStylesheets('all'),
         );
 
         if ($blockContext->getBlock()->hasChildren()) {
@@ -205,7 +203,7 @@ class BlockHelper extends Helper
             'assets'        => array(
                 'js'  => array(),
                 'css' => array(),
-            )
+            ),
         );
     }
 
@@ -238,7 +236,7 @@ class BlockHelper extends Helper
 
         $event = $this->eventDispatcher->dispatch($eventName, new BlockEvent($options));
 
-        $content = "";
+        $content = '';
 
         foreach ($event->getBlocks() as $block) {
             $content .= $this->render($block);
@@ -284,9 +282,9 @@ class BlockHelper extends Helper
         foreach ($this->eventDispatcher->getListeners($event->getName()) as $listener) {
             if (is_object($listener[0])) {
                 $results[] = get_class($listener[0]);
-            } else if (is_string($listener[0])) {
+            } elseif (is_string($listener[0])) {
                 $results[] = $listener[0];
-            } else if ($listener instanceof \Closure) {
+            } elseif ($listener instanceof \Closure) {
                 $results[] = '{closure}()';
             } else {
                 $results[] = 'Unknown type!';
@@ -294,7 +292,6 @@ class BlockHelper extends Helper
         }
 
         return $results;
-
     }
 
     /**
@@ -347,7 +344,7 @@ class BlockHelper extends Helper
 
                 if (!$cacheElement->isExpired() && $cacheElement->getData() instanceof Response) {
 
-                    /** @var Response $response */
+                    /* @var Response $response */
 
                     if ($this->stopwatch) {
                         $stats['cache']['from_cache'] = true;
@@ -357,7 +354,6 @@ class BlockHelper extends Helper
                 }
             }
         }
-
 
         if (!$response) {
             $recorder = null;
@@ -433,7 +429,7 @@ class BlockHelper extends Helper
     }
 
     /**
-     * Returns the rendering traces
+     * Returns the rendering traces.
      *
      * @return array
      */

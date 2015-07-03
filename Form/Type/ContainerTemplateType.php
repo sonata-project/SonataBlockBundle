@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,19 +9,14 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\BlockBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\HttpKernel\Kernel;
-use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-
 /**
- * Class ContainerTemplateType
+ * Class ContainerTemplateType.
  *
- * @package Sonata\BlockBundle\Form\Type
  *
  * @author Hugo Briand <briand@ekino.com>
  */

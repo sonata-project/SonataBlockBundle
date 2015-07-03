@@ -11,14 +11,13 @@
 
 namespace Sonata\BlockBundle\Block;
 
-use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 interface BlockRendererInterface
 {
     /**
      * @param BlockContextInterface $name
-     * @param null|Response                  $response
+     * @param null|Response         $response
      *
      * @return Response
      */

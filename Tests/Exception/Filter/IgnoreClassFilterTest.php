@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -13,14 +14,14 @@ namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 use Sonata\BlockBundle\Exception\Filter\IgnoreClassFilter;
 
 /**
- * Test the ignore class exception filter
+ * Test the ignore class exception filter.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 class IgnoreClassFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * test the filter with a inherited exception
+     * test the filter with a inherited exception.
      */
     public function testWithInheritedException()
     {
@@ -37,7 +38,7 @@ class IgnoreClassFilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test the the filter with a non-inherited exception
+     * test the the filter with a non-inherited exception.
      */
     public function testWithNonInheritedException()
     {

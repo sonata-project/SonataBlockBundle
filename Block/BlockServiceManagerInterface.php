@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -19,13 +20,11 @@ interface BlockServiceManagerInterface
      * @param string $name
      * @param string $service
      * @param array  $contexts
-     *
-     * @return void
      */
     public function add($name, $service, $contexts = array());
 
     /**
-     * Return the block service linked to the link
+     * Return the block service linked to the link.
      *
      * @param BlockInterface $block
      *
@@ -37,8 +36,6 @@ interface BlockServiceManagerInterface
      * @deprecated will be remove in 2.4, use the add method instead
      *
      * @param array $blockServices
-     *
-     * @return void
      */
     public function setServices(array $blockServices);
 
@@ -48,8 +45,8 @@ interface BlockServiceManagerInterface
     public function getServices();
 
     /**
-     * @param string  $name
-     * @param boolean $includeContainers
+     * @param string $name
+     * @param bool   $includeContainers
      *
      * @return array
      */
@@ -58,7 +55,7 @@ interface BlockServiceManagerInterface
     /**
      * @param string $name
      *
-     * @return boolean
+     * @return bool
      */
     public function has($name);
 
