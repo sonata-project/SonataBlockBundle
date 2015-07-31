@@ -1,14 +1,26 @@
 {% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
 
 {% block toolbar %}
+    {% set profiler_markup_version = profiler_markup_version|default(1) %}
+
     <div class="sf-toolbar-block">
-        <div class="sf-toolbar-icon">
+        {% if profiler_markup_version == 1 %}
+            <div class="sf-toolbar-icon">
+                <a href="{{ path('_profiler', { 'token': token, 'panel': name }) }}">
+                    {# fake image span #}<span style="width:0px; height: 28px; vertical-align: middle;"></span>
+                    <span class="sf-toolbar-status">{{ collector.getTotalBlock() }}</span> blocks
+                    {% if collector.events|length > 0 %}<strong>*</strong>{% endif %}
+                </a>
+            </div>
+        {% else %}
             <a href="{{ path('_profiler', { 'token': token, 'panel': name }) }}">
-                {# fake image span #}<span style="width:0px; height: 28px; vertical-align: middle;"></span>
-                <span class="sf-toolbar-status">{{ collector.getTotalBlock() }}</span> blocks
-                {% if collector.events|length > 0 %}<strong>*</strong>{% endif %}
+                <div class="sf-toolbar-icon">
+                    {{ include('@SonataBlock/Profiler/icon.svg') }}
+                    <span class="sf-toolbar-value">{{ collector.getTotalBlock() }}</span>
+                </div>
             </a>
-        </div>
+        {% endif %}
+
         <div class="sf-toolbar-info">
             <div class="sf-toolbar-info-piece">
                 <b>Real Blocks</b>
@@ -18,12 +30,16 @@
                 <b>Containers</b>
                 <span>{{ collector.containers|length }}</span>
             </div>
+            {% if profiler_markup_version == 1 %}
+                {# don't show the total number of blocks in the info in the new design,
+                it's already shown in the toolbar #}
+                <div class="sf-toolbar-info-piece">
+                    <b>Total Blocks</b>
+                    <span>{{ collector.getTotalBlock() }}</span>
+                </div>
+            {% endif %}
             <div class="sf-toolbar-info-piece">
-                <b>Total Blocks</b>
-                <span>{{ collector.getTotalBlock() }}</span>
-            </div>
-            <div class="sf-toolbar-info-piece">
-                <hr />
+                {% if profiler_markup_version == 1 %}<hr />{% endif %}
                 <b>Events</b>
                 <span>{{ collector.events|length }}</span>
             </div>
