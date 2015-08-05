@@ -16,3 +16,5 @@ License
 -------
 
 This bundle is available under the [MIT license](Resources/meta/LICENSE).
+
+Test
