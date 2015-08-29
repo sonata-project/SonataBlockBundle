@@ -175,6 +175,10 @@ class BlockContextManager implements BlockContextManagerInterface
             ));
         }
 
+        $service = $this->blockService->get($block);
+        $service->setDefaultSettings($optionsResolver, $block);
+        $this->updateReflectionCache($service);
+
         // add type and class settings for block
         $class = ClassUtils::getClass($block);
         $settingsByType = isset($this->settingsByType[$block->getType()]) ? $this->settingsByType[$block->getType()] : array();
@@ -229,10 +233,16 @@ class BlockContextManager implements BlockContextManagerInterface
 
         $this->setDefaultSettings($optionsResolver, $block);
 
-        $service = $this->blockService->get($block);
-        $service->setDefaultSettings($optionsResolver, $block);
+        return $optionsResolver->resolve($settings);
+    }
 
-        // Caching method reflection
+    /**
+     * Caching method reflection.
+     *
+     * @param $service
+     */
+    protected function updateReflectionCache($service)
+    {
         $serviceClass = get_class($service);
         if (!isset($this->reflectionCache[$serviceClass])) {
             $reflector = new \ReflectionMethod($service, 'setDefaultSettings');
@@ -255,7 +265,5 @@ class BlockContextManager implements BlockContextManagerInterface
         if ($this->reflectionCache[$serviceClass]['isOldOverwritten'] && !$this->reflectionCache[$serviceClass]['isNewOverwritten']) {
             @trigger_error('The Sonata\BlockBundle\Block\BlockServiceInterface::setDefaultSettings() method is deprecated since version 2.3 and will be removed in 3.0. Use configureSettings() instead. This method will be added to the BlockServiceInterface with SonataBlockBundle 3.0.', E_USER_DEPRECATED);
         }
-
-        return $optionsResolver->resolve($settings);
     }
 }

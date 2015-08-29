@@ -16,20 +16,43 @@ use Sonata\BlockBundle\Block\BlockContextManager;
 
 class BlockContextManagerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetWithValidData()
+    public function provideSettings()
+    {
+        return array(
+            array(array(), array(), false),
+            array(array('template' => 'service settings'), array(), 'service settings'),
+            array(array(), array('template' => 'config settings'), 'config settings'),
+            array(array('template' => 'service settings'), array('template' => 'config settings'), 'config settings'),
+        );
+    }
+
+    /**
+     * @dataProvider provideSettings
+     */
+    public function testGetWithValidData($serviceSettings, $configBlockSettings, $templateExpected)
     {
         $service = $this->getMock('Sonata\BlockBundle\Block\AbstractBlockService');
-        $service->expects($this->once())->method('setDefaultSettings');
+        $service
+            ->expects($this->once())
+            ->method('setDefaultSettings')
+            ->will(
+                $this->returnCallback(
+                    function ($optionResolver) use ($serviceSettings) {
+                        $optionResolver->setDefaults($serviceSettings);
+                    }
+                )
+            );
 
         $blockLoader = $this->getMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
 
         $serviceManager = $this->getMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
         $serviceManager->expects($this->once())->method('get')->will($this->returnValue($service));
 
-        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface', array(), array(), 'Block');
         $block->expects($this->once())->method('getSettings')->will($this->returnValue(array()));
 
         $manager = new BlockContextManager($blockLoader, $serviceManager);
+        $manager->addSettingsByClass('Block', $configBlockSettings);
 
         $blockContext = $manager->get($block);
 
@@ -39,7 +62,7 @@ class BlockContextManagerTest extends \PHPUnit_Framework_TestCase
             'use_cache'        => true,
             'extra_cache_keys' => array(),
             'attr'             => array(),
-            'template'         => false,
+            'template'         => $templateExpected,
             'ttl'              => 0,
         ), $blockContext->getSettings());
     }
