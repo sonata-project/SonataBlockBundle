@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-class AbstractBlockServiceTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractBlockServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var ContainerInterface
