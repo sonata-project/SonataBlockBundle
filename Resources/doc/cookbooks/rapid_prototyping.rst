@@ -36,7 +36,6 @@ The usage is very simple:
         'template': 'SonataDemoBundle:Block:myblock.html'
     }) }}
 
-
 Example
 ~~~~~~~
 
@@ -72,7 +71,5 @@ The main template might look like:
             <!-- monitoring:3e9fda56df2cdd3b039f189693ab7844fbb2d4f6 -->
         </body>
     </html>
-
-
 
 .. _TemplateController: http://symfony.com/doc/current/cookbook/templating/render_without_controller.html

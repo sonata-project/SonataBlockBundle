@@ -21,13 +21,13 @@ This happens when a block is rendered:
 Cache
 -----
 
-The ``SonataBlockBundle`` is integrated with the `SonataCacheBundle`_, which provides several caching solutions.
-Have a look at the available adapters in the `SonataCacheBundle`_ to see all options.
+The ``SonataBlockBundle`` is integrated with the SonataCacheBundle_, which provides several caching solutions.
+Have a look at the available adapters in the SonataCacheBundle_ to see all options.
 
 Block Context Manager - context cache
 -------------------------------------
 
-When using ``Varnish``, ``Ssi`` or `Js``` cache, the settings passed here are lost:
+When using ``Varnish``, ``Ssi`` or ``Js`` cache, the settings passed here are lost:
 
 .. code-block:: jinja
 
@@ -60,4 +60,4 @@ Empty block
 By default, the loader interface expects the exception ``Sonata\BlockBundle\Exception\BlockNotFoundException`` if a block is not found.
 Return an empty block from your loader class if the default behaviour for your blocks is to always return content.
 
-.. _`SonataCacheBundle`: https://github.com/sonata-project/SonataCacheBundle
+.. _SonataCacheBundle: https://github.com/sonata-project/SonataCacheBundle
