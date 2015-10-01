@@ -28,30 +28,34 @@ The role of an `exception filter` is to define which exceptions should be handle
 
 These filters may be modified or combined with other filters in the configuration file:
 
-.. code-block:: yaml
+.. configuration-block::
 
-    # app/config/config.yml
+    .. code-block:: yaml
 
-    sonata_block:
-        exception:
-            default:
-                filter:                     debug_only
-            filters:
-                debug_only:             sonata.block.exception.filter.debug_only
-                ignore_block_exception: sonata.block.exception.filter.ignore_block_exception
-                keep_all:               sonata.block.exception.filter.keep_all
-                keep_none:              sonata.block.exception.filter.keep_none
+        # app/config/config.yml
+
+        sonata_block:
+            exception:
+                default:
+                    filter:                     debug_only
+                filters:
+                    debug_only:             sonata.block.exception.filter.debug_only
+                    ignore_block_exception: sonata.block.exception.filter.ignore_block_exception
+                    keep_all:               sonata.block.exception.filter.keep_all
+                    keep_none:              sonata.block.exception.filter.keep_none
 
 A default filter may be configured to be applied to all block types. If you wish to customize a filter on a particular block type, you may also add the following option in the configuration file:
 
-.. code-block:: yaml
+.. configuration-block::
 
-    # app/config/config.yml
+    .. code-block:: yaml
 
-    sonata_block:
-        blocks:
-            sonata.block.service.text:
-                exception: { filter: keep_all }
+        # app/config/config.yml
+
+        sonata_block:
+            blocks:
+                sonata.block.service.text:
+                    exception: { filter: keep_all }
 
 Renderers
 ---------
@@ -64,26 +68,30 @@ The role of an `exception renderer` is to define what to do with the exceptions 
 
 These filters may be modified or completed with other filters in the configuration file:
 
-.. code-block:: yaml
+.. configuration-block::
 
-    #config.yml
-    sonata_block:
-        exception:
-            default:
-                renderer:               throw
-            renderers:
-                inline:                 sonata.block.exception.renderer.inline
-                inline_debug:           sonata.block.exception.renderer.inline_debug
-                throw:                  sonata.block.exception.renderer.throw
+    .. code-block:: yaml
+
+        # app/config/config.yml
+        sonata_block:
+            exception:
+                default:
+                    renderer:               throw
+                renderers:
+                    inline:                 sonata.block.exception.renderer.inline
+                    inline_debug:           sonata.block.exception.renderer.inline_debug
+                    throw:                  sonata.block.exception.renderer.throw
 
 
 A `default renderer` will be applied to all block types. If you wish to use a different renderer on a particular block type, you should add the following option in the configuration file:
 
-.. code-block:: yaml
+.. configuration-block::
 
-    # app/config/config.yml
+    .. code-block:: yaml
 
-    sonata_block:
-        blocks:
-            sonata.block.service.text:
-                exception: { renderer: inline }
+        # app/config/config.yml
+
+        sonata_block:
+            blocks:
+                sonata.block.service.text:
+                    exception: { renderer: inline }

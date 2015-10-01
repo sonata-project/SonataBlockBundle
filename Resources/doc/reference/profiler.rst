@@ -10,11 +10,13 @@ It also provides a panel with the list of all rendered blocks, their memory cons
 
 If you want to disable the profiling or configure it, you may add one of the following options in the block configuration file:
 
-.. code-block:: yaml
+.. configuration-block::
 
-    # app/config/config.yml
+    .. code-block:: yaml
 
-    sonata_block:
-        profiler:
-            enabled:        %kernel.debug%
-            template:       SonataBlockBundle:Profiler:block.html.twig
+        # app/config/config.yml
+
+        sonata_block:
+            profiler:
+                enabled:        %kernel.debug%
+                template:       SonataBlockBundle:Profiler:block.html.twig

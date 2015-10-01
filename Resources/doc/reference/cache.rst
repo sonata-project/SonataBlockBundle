@@ -25,6 +25,7 @@ If you are extending the ``BaseBlockService``, you can use the method ``renderPr
 .. code-block:: php
 
     <?php
+
     // Private response as the block response depends on the connected user
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
@@ -49,6 +50,7 @@ or you can use the `Response` object:
 .. code-block:: php
 
     <?php
+
     // Private response as the block response depends on the connected user
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
@@ -88,13 +90,17 @@ The ``HttpCacheHandler::updateMetadata`` is called by the templating helper when
 
 The service can be configured using the ``http_cache_handler`` key.
 
-.. code-block:: yaml
+.. configuration-block::
 
-    sonata_block:
-        http_cache:
-            handler: sonata.block.cache.handler.noop    # no cache alteration
-            handler: sonata.block.cache.handler.default # default value
-            listener: true|false                        # default to true, register or not the event listener to alter the final response
+    .. code-block:: yaml
+
+        # app/config/config.yml
+
+        sonata_block:
+            http_cache:
+                handler: sonata.block.cache.handler.noop    # no cache alteration
+                handler: sonata.block.cache.handler.default # default value
+                listener: true                              # default to true, register or not the event listener to alter the final response
 
 Cache Backends
 ~~~~~~~~~~~~~~
@@ -111,19 +117,25 @@ Cache configuration
 
 The configuration is defined per `block service`, so if you want to use `memcached` for a block type ``sonata.page.block.container`` then use the following configuration:
 
-.. code-block:: yaml
+.. configuration-block::
 
-    sonata_block:
-        sonata.page.block.container:
-            cache: sonata.cache.memcached
+    .. code-block:: yaml
+
+        # app/config/config.yml
+
+        sonata_block:
+            sonata.page.block.container:
+                cache: sonata.cache.memcached
 
 Also, make sure the memcached backend is configured in the ``sonata_cache`` definition:
 
-.. code-block:: yaml
+.. configuration-block::
 
-    sonata_cache:
-        caches:
-            memcached:
-                prefix: test     # prefix to ensure there is no clash between instances
-                servers:
-                    - {host: 127.0.0.1, port: 11211, weight: 0}
+    .. code-block:: yaml
+
+        sonata_cache:
+            caches:
+                memcached:
+                    prefix: test     # prefix to ensure there is no clash between instances
+                    servers:
+                        - {host: 127.0.0.1, port: 11211, weight: 0}
