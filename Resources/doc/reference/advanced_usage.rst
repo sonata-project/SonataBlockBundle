@@ -38,7 +38,7 @@ When using ``Varnish``, ``Ssi`` or ``Js`` cache, the settings passed here are lo
 
 Taking ``Js`` as example, a URL is generated and added to some javascript. This javascript is injected into the page. When the page is loaded, the javascript calls the URL to retrieve the block content.
 
-The default ``BlockContextManager`` automatically adds settings passed from the template to the ``extra_cache_keys`` with the key ``context`.
+The default ``BlockContextManager`` automatically adds settings passed from the template to the ``extra_cache_keys`` with the key ``context``.
 This allows cache adapters to rebuild a ``BlockContext`` if implemented.
 
 Still in the ``Js`` example, the cache keys can be added to the URL as query parameters.
