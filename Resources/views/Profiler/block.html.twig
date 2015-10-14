@@ -8,7 +8,7 @@
             <div class="sf-toolbar-icon">
                 <a href="{{ path('_profiler', { 'token': token, 'panel': name }) }}">
                     {# fake image span #}<span style="width:0px; height: 28px; vertical-align: middle;"></span>
-                    <span class="sf-toolbar-status">{{ collector.getTotalBlock() }}</span> blocks
+                    <span class="sf-toolbar-status {% if collector.getTotalBlock() > 0 %}sf-toolbar-status-green{% endif %}">{{ collector.getTotalBlock() }}</span> blocks
                     {% if collector.events|length > 0 %}<strong>*</strong>{% endif %}
                 </a>
             </div>
