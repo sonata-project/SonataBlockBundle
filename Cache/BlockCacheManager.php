@@ -17,7 +17,7 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Cache\CacheManagerInterface;
 
 /**
- * Class BlockCacheManager.
+ * @author Serhii Polishchuk <spolischook@gmail.com>
  */
 class BlockCacheManager implements BlockCacheManagerInterface
 {

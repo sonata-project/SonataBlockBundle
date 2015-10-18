@@ -14,7 +14,7 @@ namespace Sonata\BlockBundle\Cache;
 use Sonata\BlockBundle\Model\BlockInterface;
 
 /**
- * Interface BlockCacheManagerInterface.
+ * @author Serhii Polishchuk <spolischook@gmail.com>
  */
 interface BlockCacheManagerInterface
 {
