@@ -28,7 +28,7 @@ interface RendererInterface
      * @param BlockInterface $block     Block that provoked the exception
      * @param Response       $response  Response to alter
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function render(\Exception $exception, BlockInterface $block, Response $response = null);
 }

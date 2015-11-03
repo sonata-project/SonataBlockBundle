@@ -23,14 +23,29 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class BlockContextManager implements BlockContextManagerInterface
 {
+    /**
+     * @var BlockLoaderInterface
+     */
     protected $blockLoader;
 
+    /**
+     * @var BlockServiceManagerInterface
+     */
     protected $blockService;
 
+    /**
+     * @var array
+     */
     protected $settingsByType;
 
+    /**
+     * @var array
+     */
     protected $settingsByClass;
 
+    /**
+     * @var array
+     */
     protected $cacheBlocks;
 
     /**
@@ -223,6 +238,12 @@ class BlockContextManager implements BlockContextManagerInterface
         }
     }
 
+    /**
+     * @param BlockInterface $block
+     * @param array          $settings
+     *
+     * @return array
+     */
     private function resolve(BlockInterface $block, $settings)
     {
         $optionsResolver = new OptionsResolver();

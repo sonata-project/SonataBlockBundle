@@ -16,10 +16,13 @@ use Sonata\BlockBundle\Model\Block;
 
 class ServiceLoader implements BlockLoaderInterface
 {
+    /**
+     * @var string[]
+     */
     protected $types;
 
     /**
-     * @param array $types
+     * @param string[] $types
      */
     public function __construct(array $types)
     {

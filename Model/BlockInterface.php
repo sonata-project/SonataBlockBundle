@@ -11,6 +11,8 @@
 
 namespace Sonata\BlockBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
  * Interface of Block.
  */
@@ -163,7 +165,7 @@ interface BlockInterface
     /**
      * Returns child blocks.
      *
-     * @return \Doctrine\Common\Collections\Collection $children
+     * @return Collection $children
      */
     public function getChildren();
 

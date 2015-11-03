@@ -18,6 +18,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DebugBlocksCommand extends BaseCommand
 {
+    /**
+     * {@inheritdoc}
+     */
     public function configure()
     {
         $this->setName('sonata:block:debug');
@@ -26,6 +29,9 @@ class DebugBlocksCommand extends BaseCommand
         $this->addOption('context', 'c', InputOption::VALUE_REQUIRED, 'display service for the specified context');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function execute(InputInterface $input, OutputInterface $output)
     {
         if ($input->getOption('context')) {

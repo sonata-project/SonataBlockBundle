@@ -28,8 +28,14 @@ class BlockServiceManager implements BlockServiceManagerInterface
      */
     protected $container;
 
+    /**
+     * @var bool
+     */
     protected $inValidate;
 
+    /**
+     * @var array
+     */
     protected $contexts;
 
     /**

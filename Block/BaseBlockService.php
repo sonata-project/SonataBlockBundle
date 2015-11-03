@@ -26,8 +26,14 @@ use Symfony\Component\HttpFoundation\Response;
  */
 abstract class BaseBlockService extends AbstractBlockService implements BlockAdminServiceInterface
 {
+    /**
+     * @var string
+     */
     protected $name;
 
+    /**
+     * @var EngineInterface
+     */
     protected $templating;
 
     /**
@@ -108,42 +114,42 @@ abstract class BaseBlockService extends AbstractBlockService implements BlockAdm
     }
 
     /**
-     * {@inheritdoc}
+     * @param BlockInterface $block
      */
     public function prePersist(BlockInterface $block)
     {
     }
 
     /**
-     * {@inheritdoc}
+     * @param BlockInterface $block
      */
     public function postPersist(BlockInterface $block)
     {
     }
 
     /**
-     * {@inheritdoc}
+     * @param BlockInterface $block
      */
     public function preUpdate(BlockInterface $block)
     {
     }
 
     /**
-     * {@inheritdoc}
+     * @param BlockInterface $block
      */
     public function postUpdate(BlockInterface $block)
     {
     }
 
     /**
-     * {@inheritdoc}
+     * @param BlockInterface $block
      */
     public function preRemove(BlockInterface $block)
     {
     }
 
     /**
-     * {@inheritdoc}
+     * @param BlockInterface $block
      */
     public function postRemove(BlockInterface $block)
     {
@@ -184,8 +190,7 @@ abstract class BaseBlockService extends AbstractBlockService implements BlockAdm
     }
 
     /**
-     * @param FormMapper     $form
-     * @param BlockInterface $block
+     * {@inheritdoc}
      */
     public function buildEditForm(FormMapper $form, BlockInterface $block)
     {
