@@ -11,6 +11,8 @@
 
 namespace Sonata\BlockBundle\Block;
 
+use Sonata\BlockBundle\Exception\BlockNotFoundException;
+
 interface BlockLoaderInterface
 {
     /**
@@ -18,7 +20,7 @@ interface BlockLoaderInterface
      *
      * @return BlockLoaderInterface
      *
-     * @throws \Sonata\BlockBundle\Exception\BlockNotFoundException if no block with that name is found
+     * @throws BlockNotFoundException if no block with that name is found
      */
     public function load($name);
 

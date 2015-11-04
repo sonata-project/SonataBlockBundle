@@ -17,6 +17,9 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class HttpCacheHandler implements HttpCacheHandlerInterface
 {
+    /**
+     * @var int|null
+     */
     protected $currentTtl = null;
 
     /**

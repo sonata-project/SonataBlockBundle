@@ -15,10 +15,13 @@ use Sonata\BlockBundle\Exception\BlockNotFoundException;
 
 class BlockLoaderChain implements BlockLoaderInterface
 {
+    /**
+     * @var BlockLoaderInterface[]
+     */
     protected $loaders;
 
     /**
-     * @param array $loaders
+     * @param BlockLoaderInterface[] $loaders
      */
     public function __construct(array $loaders)
     {

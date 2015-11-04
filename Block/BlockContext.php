@@ -20,6 +20,9 @@ class BlockContext implements BlockContextInterface
      */
     protected $block;
 
+    /**
+     * @var array
+     */
     protected $settings;
 
     /**

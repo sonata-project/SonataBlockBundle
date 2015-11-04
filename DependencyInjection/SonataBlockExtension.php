@@ -28,10 +28,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class SonataBlockExtension extends Extension
 {
     /**
-     * Loads the url shortener configuration.
-     *
-     * @param array            $configs   An array of configuration settings
-     * @param ContainerBuilder $container A ContainerBuilder instance
+     * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -307,6 +304,9 @@ class SonataBlockExtension extends Extension
         ));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getNamespace()
     {
         return 'http://sonata-project.com/schema/dic/block';
