@@ -66,9 +66,10 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             ),
             'blocks' => array(
                 'my.block.type' => array(
-                    'contexts' => array('cms'),
-                    'cache'    => 'sonata.cache.noop',
-                    'settings' => array(),
+                    'contexts'  => array('cms'),
+                    'cache'     => 'sonata.cache.noop',
+                    'settings'  => array(),
+                    'templates' => array(),
                 ),
             ),
             'menus'           => array(),

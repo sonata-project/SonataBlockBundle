@@ -63,3 +63,9 @@ To use the ``BlockBundle``, add the following lines to your application configur
                 #sonata.media.block.media:
                 #sonata.media.block.gallery:
                 #sonata.media.block.feature_media:
+
+                # Some block with different templates
+                #acme.demo.block.demo:
+                #    templates:
+                #       - { name: 'Simple', template: 'AcmeDemoBundle:Block:demo_simple.html.twig' }
+                #       - { name: 'Big',    template: 'AcmeDemoBundle:Block:demo_big.html.twig' }
