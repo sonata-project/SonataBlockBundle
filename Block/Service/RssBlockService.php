@@ -15,6 +15,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\CoreBundle\Model\Metadata;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,14 +25,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class RssBlockService extends BaseBlockService
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'Rss Reader';
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -110,5 +103,15 @@ class RssBlockService extends BaseBlockService
             'block'     => $blockContext->getBlock(),
             'settings'  => $settings,
         ), $response);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockMetadata($code = null)
+    {
+        return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'SonataBlockBundle', array(
+            'class' => 'fa fa-rss-square',
+        ));
     }
 }
