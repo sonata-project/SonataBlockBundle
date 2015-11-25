@@ -19,6 +19,7 @@ class BlockContextManagerTest extends \PHPUnit_Framework_TestCase
     public function testGetWithValidData()
     {
         $service = $this->getMock('Sonata\BlockBundle\Block\AbstractBlockService');
+
         $service->expects($this->once())->method('setDefaultSettings');
 
         $blockLoader = $this->getMock('Sonata\BlockBundle\Block\BlockLoaderInterface');

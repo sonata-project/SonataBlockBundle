@@ -12,6 +12,7 @@
 namespace Sonata\BlockBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -38,9 +39,17 @@ class ContainerTemplateType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sonata_type_container_template_choice';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
     }
 
     /**
@@ -55,6 +64,14 @@ class ContainerTemplateType extends AbstractType
      * {@inheritdoc}
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'choices'           => $this->templateChoices,

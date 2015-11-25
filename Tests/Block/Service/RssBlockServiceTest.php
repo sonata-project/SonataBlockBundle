@@ -14,7 +14,7 @@ namespace Sonata\BlockBundle\Tests\Block\Service;
 use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Block\Service\RssBlockService;
 use Sonata\BlockBundle\Model\Block;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Sonata\BlockBundle\Util\OptionsResolver;
 
 class RssBlockServiceTest extends BaseTestBlockService
 {
