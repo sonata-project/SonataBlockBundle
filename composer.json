@@ -20,12 +20,12 @@
         "symfony/http-kernel": "~2.3|~3.0",
         "symfony/form": "~2.3|~3.0",
         "doctrine/common": "~2.3",
-        "sonata-project/core-bundle": "2.3.x-dev",
+        "sonata-project/core-bundle": "^2.3.10",
         "sonata-project/cache": "~1.0"
     },
     "require-dev": {
         "knplabs/knp-menu-bundle": "~2.0|~2.1@dev",
-        "sonata-project/admin-bundle": "dev-fix_deprecation_notices",
+        "sonata-project/admin-bundle": "dev-master",
         "symfony/phpunit-bridge": "~2.7|~3.0",
         "fabpot/php-cs-fixer": "~0.5|~1.11@dev"
     },
