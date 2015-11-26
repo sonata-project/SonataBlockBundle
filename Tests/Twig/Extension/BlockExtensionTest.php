@@ -14,8 +14,11 @@ class BlockExtensionTest extends \PHPUnit_Framework_TestCase
             'Sonata\BlockBundle\Templating\Helper\BlockHelper'
         )->disableOriginalConstructor()->getMock();
 
+        $loader = $this->getMock('Twig_LoaderInterface');
+
         $this->blockExtension = new BlockExtension($this->blockHelper);
-        $this->env = new \Twig_Environment();
+
+        $this->env = new \Twig_Environment($loader);
         $this->env->addExtension($this->blockExtension);
     }
 
