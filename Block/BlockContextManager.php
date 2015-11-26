@@ -246,7 +246,7 @@ class BlockContextManager implements BlockContextManagerInterface
      */
     private function resolve(BlockInterface $block, $settings)
     {
-        $optionsResolver = new OptionsResolver();
+        $optionsResolver = new \Sonata\BlockBundle\Util\OptionsResolver();
 
         $this->setDefaultSettings($optionsResolver, $block);
 
