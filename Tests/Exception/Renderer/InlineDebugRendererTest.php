@@ -97,7 +97,7 @@ class InlineDebugRendererTest extends \PHPUnit_Framework_TestCase
     public function arrayHasKeyValue($key, $value)
     {
         return new \PHPUnit_Framework_Constraint_Callback(function ($test) use ($key, $value) {
-            return (is_array($test) && array_key_exists($key, $test) && $test[$key] === $value);
+            return is_array($test) && array_key_exists($key, $test) && $test[$key] === $value;
         });
     }
 }
