@@ -25,7 +25,7 @@
     },
     "require-dev": {
         "knplabs/knp-menu-bundle": "~2.0|~2.1@dev",
-        "sonata-project/admin-bundle": "dev-master",
+        "sonata-project/admin-bundle": "~2.3",
         "symfony/phpunit-bridge": "~2.7|~3.0",
         "fabpot/php-cs-fixer": "~0.5|~1.11@dev"
     },
