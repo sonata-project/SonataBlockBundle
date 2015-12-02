@@ -41,6 +41,6 @@ class IgnoreClassFilter implements FilterInterface
      */
     public function handle(\Exception $exception, BlockInterface $block)
     {
-        return (!$exception instanceof $this->class);
+        return !$exception instanceof $this->class;
     }
 }
