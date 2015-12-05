@@ -104,6 +104,18 @@ class BlockContextManager implements BlockContextManagerInterface
     }
 
     /**
+     * Check if a given block type exists.
+     *
+     * @param string $type Block type to check for
+     *
+     * @return bool
+     */
+    public function exists($type)
+    {
+        return $this->blockLoader->exists($type);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function get($meta, array $settings = array())

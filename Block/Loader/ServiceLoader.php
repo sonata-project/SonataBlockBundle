@@ -30,6 +30,18 @@ class ServiceLoader implements BlockLoaderInterface
     }
 
     /**
+     * Check if a given block type exists.
+     *
+     * @param string $type Block type to check for
+     *
+     * @return bool
+     */
+    public function exists($type)
+    {
+        return in_array($type, $this->types, true);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function load($configuration)

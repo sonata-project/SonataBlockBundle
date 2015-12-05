@@ -29,6 +29,24 @@ class BlockLoaderChain implements BlockLoaderInterface
     }
 
     /**
+     * Check if a given block type exists.
+     *
+     * @param string $type Block type to check for
+     *
+     * @return bool
+     */
+    public function exists($type)
+    {
+        foreach ($this->loaders as $loader) {
+            if ($loader->exists($type)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function load($block)
