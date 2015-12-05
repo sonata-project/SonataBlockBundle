@@ -20,17 +20,17 @@ abstract class AbstractBlockServiceTest extends \PHPUnit_Framework_TestCase
     /**
      * @var ContainerInterface
      */
-    private $container;
+    protected $container;
 
     /**
      * @var BlockServiceManagerInterface
      */
-    private $blockServiceManager;
+    protected $blockServiceManager;
 
     /**
      * @var BlockContextManagerInterface
      */
-    private $blockContextManager;
+    protected $blockContextManager;
 
     /**
      * @var FakeTemplating
