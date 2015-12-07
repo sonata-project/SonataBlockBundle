@@ -323,6 +323,18 @@ class BlockHelper extends Helper
     }
 
     /**
+     * Check if a given block type exists.
+     *
+     * @param string $type Block type to check for
+     *
+     * @return bool
+     */
+    public function exists($type)
+    {
+        return $this->blockContextManager->exists($type);
+    }
+
+    /**
      * @param mixed $block
      * @param array $options
      *

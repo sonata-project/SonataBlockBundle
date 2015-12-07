@@ -36,6 +36,9 @@ class BlockExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
+            new \Twig_SimpleFunction('sonata_block_exists',
+                array($this->blockHelper, 'exists')
+            ),
             new \Twig_SimpleFunction('sonata_block_render',
                 array($this->blockHelper, 'render'),
                 array('is_safe' => array('html'))
