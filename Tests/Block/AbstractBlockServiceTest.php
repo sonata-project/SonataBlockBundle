@@ -18,12 +18,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 abstract class AbstractBlockServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var ContainerInterface
+     * @var \PHPUnit_Framework_MockObject_MockObject|ContainerInterface
      */
     protected $container;
 
     /**
-     * @var BlockServiceManagerInterface
+     * @var \PHPUnit_Framework_MockObject_MockObject|BlockServiceManagerInterface
      */
     protected $blockServiceManager;
 

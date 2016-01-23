@@ -16,20 +16,38 @@ use Symfony\Component\HttpFoundation\Response;
 
 class FakeTemplating implements EngineInterface
 {
+    /**
+     * @var string
+     */
     public $view;
 
+    /**
+     * @var array
+     */
     public $parameters;
 
+    /**
+     * @var Response
+     */
     public $response;
 
+    /**
+     * @var string
+     */
     public $name;
 
+    /**
+     * {@inheritdoc}
+     */
     public function render($name, array $parameters = array())
     {
         $this->name  = $name;
         $this->parameters = $parameters;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function renderResponse($view, array $parameters = array(), Response $response = null)
     {
         $this->view   = $view;
@@ -42,11 +60,17 @@ class FakeTemplating implements EngineInterface
         return new Response();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function supports($name)
     {
         return true;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function exists($name)
     {
         return true;
