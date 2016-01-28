@@ -78,13 +78,13 @@ class BlockHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(trim($helper->includeJavascripts('screen', '/application')), '<script src="/application/js/base.js" type="text/javascript"></script>');
         $this->assertEquals(trim($helper->includeJavascripts('screen', '')), '<script src="/js/base.js" type="text/javascript"></script>');
 
-        $this->assertEquals($helper->includeStylesheets('screen', '/application'), <<<EXPECTED
+        $this->assertEquals($helper->includeStylesheets('screen', '/application'), <<<'EXPECTED'
 <style type='text/css' media='screen'>
 @import url(/application/css/base.css);
 </style>
 EXPECTED
 );
-        $this->assertEquals($helper->includeStylesheets('screen', ''), <<<EXPECTED
+        $this->assertEquals($helper->includeStylesheets('screen', ''), <<<'EXPECTED'
 <style type='text/css' media='screen'>
 @import url(/css/base.css);
 </style>
