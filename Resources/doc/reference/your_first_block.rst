@@ -188,7 +188,7 @@ We are almost done! Now, just declare the block as a service:
                 class: Sonata\BlockBundle\Block\Service\RssBlockService
                 arguments:
                     - sonata.block.service.rss
-                    - @templating
+                    - "@templating"
                 tags:
                     - { name: sonata.block }
 
