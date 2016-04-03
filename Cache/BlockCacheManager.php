@@ -102,6 +102,9 @@ class BlockCacheManager implements BlockCacheManagerInterface
         return $this->cacheManager->getCacheService($cacheServiceId);
     }
 
+    /**
+     * @param CacheManagerInterface $cacheManager
+     */
     public function setCacheManager(CacheManagerInterface $cacheManager)
     {
         $this->cacheManager = $cacheManager;
