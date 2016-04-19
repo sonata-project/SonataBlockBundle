@@ -260,10 +260,16 @@ class BlockContextManager implements BlockContextManagerInterface
     {
         $optionsResolver = new \Sonata\BlockBundle\Util\OptionsResolver();
 
-        $this->setDefaultSettings($optionsResolver, $block);
+        $this->configureSettings($optionsResolver, $block);
 
         $service = $this->blockService->get($block);
-        $service->setDefaultSettings($optionsResolver, $block);
+
+        /* use new interface method whenever possible */
+        if (method_exists($service, 'configureSettings')) {
+            $service->configureSettings($optionsResolver, $block);
+        } else {
+            $service->setDefaultSettings($optionsResolver, $block);
+        }
 
         // Caching method reflection
         $serviceClass = get_class($service);
