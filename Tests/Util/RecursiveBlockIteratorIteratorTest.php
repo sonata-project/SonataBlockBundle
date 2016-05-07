@@ -13,9 +13,6 @@ namespace Sonata\BlockBundle\Tests\Entity;
 
 use Sonata\BlockBundle\Util\RecursiveBlockIteratorIterator;
 
-/**
- *
- */
 class RecursiveBlockIteratorIteratorTest extends \PHPUnit_Framework_TestCase
 {
     public function testInterface()
