@@ -24,7 +24,7 @@
         "sonata-project/cache": "^1.0"
     },
     "require-dev": {
-        "knplabs/knp-menu-bundle": "^2.0 || ^2.1@dev",
+        "knplabs/knp-menu-bundle": "^2.0",
         "sonata-project/admin-bundle": "^3.0@dev",
         "symfony/phpunit-bridge": "^2.7 || ^3.0"
     },
