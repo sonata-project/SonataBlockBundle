@@ -31,8 +31,8 @@ class RssBlockService extends BaseBlockService
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'url'      => false,
-            'title'    => 'Insert the rss title',
+            'url' => false,
+            'title' => 'Insert the rss title',
             'template' => 'SonataBlockBundle:Block:block_core_rss.html.twig',
         ));
     }
@@ -80,7 +80,7 @@ class RssBlockService extends BaseBlockService
             $options = array(
                 'http' => array(
                     'user_agent' => 'Sonata/RSS Reader',
-                    'timeout'    => 2,
+                    'timeout' => 2,
                 ),
             );
 
@@ -99,9 +99,9 @@ class RssBlockService extends BaseBlockService
         }
 
         return $this->renderResponse($blockContext->getTemplate(), array(
-            'feeds'     => $feeds,
-            'block'     => $blockContext->getBlock(),
-            'settings'  => $settings,
+            'feeds' => $feeds,
+            'block' => $blockContext->getBlock(),
+            'settings' => $settings,
         ), $response);
     }
 

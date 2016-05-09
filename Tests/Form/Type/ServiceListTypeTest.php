@@ -71,20 +71,20 @@ class ServiceListTypeTest extends \PHPUnit_Framework_TestCase
         }
 
         $options = $resolver->resolve(array(
-            'context'            => 'cms',
+            'context' => 'cms',
         ));
 
         $expected = array(
-            'multiple'  => false,
-            'expanded'  => false,
-            'choices'   => array(
+            'multiple' => false,
+            'expanded' => false,
+            'choices' => array(
                 'my.service.code' => 'value - my.service.code',
             ),
-            'preferred_choices'  => array(),
-            'empty_data'         => '',
-            'empty_value'        => null,
-            'error_bubbling'     => false,
-            'context'            => 'cms',
+            'preferred_choices' => array(),
+            'empty_data' => '',
+            'empty_value' => null,
+            'error_bubbling' => false,
+            'context' => 'cms',
             'include_containers' => false,
         );
 

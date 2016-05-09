@@ -27,7 +27,7 @@ class IgnoreClassFilterTest extends \PHPUnit_Framework_TestCase
     {
         // GIVEN
         $exception = $this->getMock('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
-        $block     = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
         $filter = new IgnoreClassFilter('\RuntimeException');
 
         // WHEN
@@ -44,7 +44,7 @@ class IgnoreClassFilterTest extends \PHPUnit_Framework_TestCase
     {
         // GIVEN
         $exception = $this->getMock('\Exception');
-        $block     = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
         $filter = new IgnoreClassFilter('\RuntimeException');
 
         // WHEN

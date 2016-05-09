@@ -72,7 +72,7 @@ abstract class BaseBlock implements BlockInterface
     public function __construct()
     {
         $this->settings = array();
-        $this->enabled  = false;
+        $this->enabled = false;
         $this->children = array();
     }
 

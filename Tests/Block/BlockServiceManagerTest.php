@@ -94,7 +94,7 @@ class BlockServiceManagerTest extends \PHPUnit_Framework_TestCase
     public function testOrderServices()
     {
         $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
-        $manager   = new BlockServiceManager($container, true);
+        $manager = new BlockServiceManager($container, true);
 
         $serviceAbc = $this->getMock('Sonata\BlockBundle\Block\BlockServiceInterface');
         $serviceAbc->expects($this->any())->method('getName')->will($this->returnValue('GHI'));

@@ -54,8 +54,8 @@ class InlineDebugRenderer implements RendererInterface
     public function __construct(EngineInterface $templating, $template, $debug, $forceStyle = true)
     {
         $this->templating = $templating;
-        $this->template   = $template;
-        $this->debug      = $debug;
+        $this->template = $template;
+        $this->debug = $debug;
         $this->forceStyle = $forceStyle;
     }
 
@@ -75,13 +75,13 @@ class InlineDebugRenderer implements RendererInterface
         $code = $flattenException->getStatusCode();
 
         $parameters = array(
-            'exception'      => $flattenException,
-            'status_code'    => $code,
-            'status_text'    => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
-            'logger'         => false,
+            'exception' => $flattenException,
+            'status_code' => $code,
+            'status_text' => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
+            'logger' => false,
             'currentContent' => false,
-            'block'          => $block,
-            'forceStyle'     => $this->forceStyle,
+            'block' => $block,
+            'forceStyle' => $this->forceStyle,
         );
 
         $content = $this->templating->render($this->template, $parameters);
