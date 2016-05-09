@@ -24,7 +24,7 @@ class RssBlockServiceTest extends BaseTestBlockService
     public function testService()
     {
         $templating = new FakeTemplating();
-        $service    = new RssBlockService('sonata.page.block.rss', $templating);
+        $service = new RssBlockService('sonata.page.block.rss', $templating);
 
         $block = new Block();
         $block->setType('core.text');

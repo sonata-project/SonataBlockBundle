@@ -37,11 +37,11 @@ class BlockContextManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
 
         $this->assertEquals(array(
-            'use_cache'        => true,
+            'use_cache' => true,
             'extra_cache_keys' => array(),
-            'attr'             => array(),
-            'template'         => false,
-            'ttl'              => 0,
+            'attr' => array(),
+            'template' => false,
+            'ttl' => 0,
         ), $blockContext->getSettings());
     }
 
@@ -71,15 +71,15 @@ class BlockContextManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
 
         $this->assertEquals(array(
-            'use_cache'        => true,
+            'use_cache' => true,
             'extra_cache_keys' => array(
                 BlockContextManager::CACHE_KEY => array(
                     'template' => 'custom.html.twig',
                 ),
             ),
-            'attr'     => array(),
+            'attr' => array(),
             'template' => 'custom.html.twig',
-            'ttl'      => 1,
+            'ttl' => 1,
         ), $blockContext->getSettings());
     }
 

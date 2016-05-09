@@ -74,7 +74,7 @@ class ContainerTemplateType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'choices'           => $this->templateChoices,
+            'choices' => $this->templateChoices,
         ));
     }
 }
