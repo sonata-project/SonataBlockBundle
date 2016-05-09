@@ -70,10 +70,10 @@ class BlockContextManager implements BlockContextManagerInterface
     public function __construct(BlockLoaderInterface $blockLoader, BlockServiceManagerInterface $blockService,
         array $cacheBlocks = array(), LoggerInterface $logger = null
     ) {
-        $this->blockLoader     = $blockLoader;
-        $this->blockService    = $blockService;
-        $this->cacheBlocks     = $cacheBlocks;
-        $this->logger          = $logger;
+        $this->blockLoader = $blockLoader;
+        $this->blockService = $blockService;
+        $this->cacheBlocks = $cacheBlocks;
+        $this->logger = $logger;
         $this->reflectionCache = array();
     }
 
@@ -176,11 +176,11 @@ class BlockContextManager implements BlockContextManagerInterface
     {
         // defaults for all blocks
         $optionsResolver->setDefaults(array(
-            'use_cache'        => true,
+            'use_cache' => true,
             'extra_cache_keys' => array(),
-            'attr'             => array(),
-            'template'         => false,
-            'ttl'              => (int) $block->getTtl(),
+            'attr' => array(),
+            'template' => false,
+            'ttl' => (int) $block->getTtl(),
         ));
 
         // TODO: Remove it when bumping requirements to SF 2.6+
@@ -194,11 +194,11 @@ class BlockContextManager implements BlockContextManagerInterface
             ;
         } else {
             $optionsResolver->addAllowedTypes(array(
-                'use_cache'         => array('bool'),
-                'extra_cache_keys'  => array('array'),
-                'attr'              => array('array'),
-                'ttl'               => array('int'),
-                'template'          => array('string', 'bool'),
+                'use_cache' => array('bool'),
+                'extra_cache_keys' => array('array'),
+                'attr' => array('array'),
+                'ttl' => array('int'),
+                'template' => array('string', 'bool'),
             ));
         }
 

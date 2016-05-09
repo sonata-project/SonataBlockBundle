@@ -26,10 +26,10 @@ class InlineDebugRendererTest extends \PHPUnit_Framework_TestCase
     public function testRenderWithoutDebug()
     {
         // GIVEN
-        $template   = 'test-template';
-        $debug      = false;
-        $exception  = $this->getMock('\Exception');
-        $block      = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $template = 'test-template';
+        $debug = false;
+        $exception = $this->getMock('\Exception');
+        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
 
         $renderer = new InlineDebugRenderer($templating, $template, $debug);
@@ -49,7 +49,7 @@ class InlineDebugRendererTest extends \PHPUnit_Framework_TestCase
     {
         // GIVEN
         $template = 'test-template';
-        $debug    = true;
+        $debug = true;
 
         // mock an exception to render
         $exception = $this->getMock('\Exception');

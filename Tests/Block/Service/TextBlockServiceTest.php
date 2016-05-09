@@ -21,7 +21,7 @@ class TextBlockServiceTest extends BaseTestBlockService
     public function testService()
     {
         $templating = new FakeTemplating();
-        $service    = new TextBlockService('sonata.page.block.text', $templating);
+        $service = new TextBlockService('sonata.page.block.text', $templating);
 
         $block = new Block();
         $block->setType('core.text');

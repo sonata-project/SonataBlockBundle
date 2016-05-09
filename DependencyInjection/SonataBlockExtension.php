@@ -69,10 +69,10 @@ class SonataBlockExtension extends Extension
 
         if ($config['templates']['block_base'] === null) {
             if (isset($bundles['SonataPageBundle'])) {
-                $config['templates']['block_base']      = 'SonataPageBundle:Block:block_base.html.twig';
+                $config['templates']['block_base'] = 'SonataPageBundle:Block:block_base.html.twig';
                 $config['templates']['block_container'] = 'SonataPageBundle:Block:block_container.html.twig';
             } else {
-                $config['templates']['block_base']      = 'SonataBlockBundle:Block:block_base.html.twig';
+                $config['templates']['block_base'] = 'SonataBlockBundle:Block:block_base.html.twig';
                 $config['templates']['block_container'] = 'SonataBlockBundle:Block:block_container.html.twig';
             }
         }

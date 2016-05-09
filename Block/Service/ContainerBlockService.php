@@ -44,9 +44,9 @@ class ContainerBlockService extends BaseBlockService
 
         $formMapper->add('children', 'sonata_type_collection', array(), array(
             'admin_code' => 'sonata.page.admin.block',
-            'edit'       => 'inline',
-            'inline'     => 'table',
-            'sortable'   => 'position',
+            'edit' => 'inline',
+            'inline' => 'table',
+            'sortable' => 'position',
         ));
     }
 
@@ -56,9 +56,9 @@ class ContainerBlockService extends BaseBlockService
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         return $this->renderResponse($blockContext->getTemplate(), array(
-            'block'      => $blockContext->getBlock(),
-            'decorator'  => $this->getDecorator($blockContext->getSetting('layout')),
-            'settings'   => $blockContext->getSettings(),
+            'block' => $blockContext->getBlock(),
+            'decorator' => $this->getDecorator($blockContext->getSetting('layout')),
+            'settings' => $blockContext->getSettings(),
         ), $response);
     }
 
@@ -68,10 +68,10 @@ class ContainerBlockService extends BaseBlockService
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'code'        => '',
-            'layout'      => '{{ CONTENT }}',
-            'class'       => '',
-            'template'    => 'SonataBlockBundle:Block:block_container.html.twig',
+            'code' => '',
+            'layout' => '{{ CONTENT }}',
+            'class' => '',
+            'template' => 'SonataBlockBundle:Block:block_container.html.twig',
         ));
     }
 
@@ -91,7 +91,7 @@ class ContainerBlockService extends BaseBlockService
 
         $segments = explode($key, $layout);
         $decorator = array(
-            'pre'  => isset($segments[0]) ? $segments[0] : '',
+            'pre' => isset($segments[0]) ? $segments[0] : '',
             'post' => isset($segments[1]) ? $segments[1] : '',
         );
 

@@ -41,7 +41,7 @@ class InlineRenderer implements RendererInterface
     public function __construct(EngineInterface $templating, $template)
     {
         $this->templating = $templating;
-        $this->template   = $template;
+        $this->template = $template;
     }
 
     /**
@@ -50,8 +50,8 @@ class InlineRenderer implements RendererInterface
     public function render(\Exception $exception, BlockInterface $block, Response $response = null)
     {
         $parameters = array(
-            'exception'      => $exception,
-            'block'          => $block,
+            'exception' => $exception,
+            'block' => $block,
         );
 
         $content = $this->templating->render($this->template, $parameters);

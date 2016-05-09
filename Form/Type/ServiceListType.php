@@ -73,9 +73,9 @@ class ServiceListType extends AbstractType
         ));
 
         $resolver->setDefaults(array(
-            'multiple'           => false,
-            'expanded'           => false,
-            'choices'            => function (Options $options, $previousValue) use ($manager) {
+            'multiple' => false,
+            'expanded' => false,
+            'choices' => function (Options $options, $previousValue) use ($manager) {
                 $types = array();
                 foreach ($manager->getServicesByContext($options['context'], $options['include_containers']) as $code => $service) {
                     $types[$code] = sprintf('%s - %s', $service->getName(), $code);
@@ -83,20 +83,20 @@ class ServiceListType extends AbstractType
 
                 return $types;
             },
-            'preferred_choices'  => array(),
-            'empty_data'         => function (Options $options) {
+            'preferred_choices' => array(),
+            'empty_data' => function (Options $options) {
                 $multiple = isset($options['multiple']) && $options['multiple'];
                 $expanded = isset($options['expanded']) && $options['expanded'];
 
                 return $multiple || $expanded ? array() : '';
             },
-            'empty_value'        => function (Options $options, $previousValue) {
+            'empty_value' => function (Options $options, $previousValue) {
                 $multiple = isset($options['multiple']) && $options['multiple'];
                 $expanded = isset($options['expanded']) && $options['expanded'];
 
                 return $multiple || $expanded || !isset($previousValue) ? null : '';
             },
-            'error_bubbling'     => false,
+            'error_bubbling' => false,
             'include_containers' => false,
         ));
     }
