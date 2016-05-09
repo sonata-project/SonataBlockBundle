@@ -80,15 +80,15 @@ class StrategyManagerTest extends \PHPUnit_Framework_TestCase
     {
         $this->renderer1 = $this->getMock('\Sonata\BlockBundle\Exception\Renderer\RendererInterface');
         $this->renderer2 = $this->getMock('\Sonata\BlockBundle\Exception\Renderer\RendererInterface');
-        $this->filter1   = $this->getMock('\Sonata\BlockBundle\Exception\Filter\FilterInterface');
-        $this->filter2   = $this->getMock('\Sonata\BlockBundle\Exception\Filter\FilterInterface');
+        $this->filter1 = $this->getMock('\Sonata\BlockBundle\Exception\Filter\FilterInterface');
+        $this->filter2 = $this->getMock('\Sonata\BlockBundle\Exception\Filter\FilterInterface');
 
         // setup a mock container which contains our mock renderers and filters
         $this->container = $this->getMockContainer(array(
             'service.renderer1' => $this->renderer1,
             'service.renderer2' => $this->renderer2,
-            'service.filter1'   => $this->filter1,
-            'service.filter2'   => $this->filter2,
+            'service.filter1' => $this->filter1,
+            'service.filter2' => $this->filter2,
         ));
 
         // setup 2 mock renderers

@@ -62,10 +62,10 @@ class BlockRenderer implements BlockRendererInterface
      */
     public function __construct(BlockServiceManagerInterface $blockServiceManager, StrategyManagerInterface $exceptionStrategyManager, LoggerInterface $logger = null, $debug = false)
     {
-        $this->blockServiceManager      = $blockServiceManager;
+        $this->blockServiceManager = $blockServiceManager;
         $this->exceptionStrategyManager = $exceptionStrategyManager;
-        $this->logger                   = $logger;
-        $this->debug                    = $debug;
+        $this->logger = $logger;
+        $this->debug = $debug;
     }
 
     /**

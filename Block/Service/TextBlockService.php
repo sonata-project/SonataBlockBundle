@@ -30,8 +30,8 @@ class TextBlockService extends BaseBlockService
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         return $this->renderResponse($blockContext->getTemplate(), array(
-            'block'     => $blockContext->getBlock(),
-            'settings'  => $blockContext->getSettings(),
+            'block' => $blockContext->getBlock(),
+            'settings' => $blockContext->getSettings(),
         ), $response);
     }
 
@@ -53,7 +53,7 @@ class TextBlockService extends BaseBlockService
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'content'  => 'Insert your custom content here',
+            'content' => 'Insert your custom content here',
             'template' => 'SonataBlockBundle:Block:block_core_text.html.twig',
         ));
     }

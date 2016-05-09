@@ -44,7 +44,7 @@ class SonataBlockBundle extends Bundle
     public function registerFormMapping()
     {
         FormHelper::registerFormTypeMapping(array(
-            'sonata_block_service_choice'           => 'Sonata\BlockBundle\Form\Type\ServiceListType',
+            'sonata_block_service_choice' => 'Sonata\BlockBundle\Form\Type\ServiceListType',
             'sonata_type_container_template_choice' => 'Sonata\BlockBundle\Form\Type\ContainerTemplateType',
         ));
     }

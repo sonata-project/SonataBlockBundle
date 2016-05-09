@@ -29,8 +29,8 @@ class MonkeyThrowRendererTest extends \PHPUnit_Framework_TestCase
     {
         // GIVEN
         $exception = new \Exception();
-        $block     = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
-        $renderer  = new MonkeyThrowRenderer();
+        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $renderer = new MonkeyThrowRenderer();
 
         // WHEN
         $renderer->render($exception, $block);
@@ -48,8 +48,8 @@ class MonkeyThrowRendererTest extends \PHPUnit_Framework_TestCase
     {
         // GIVEN
         $exception = new \RuntimeException();
-        $block     = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
-        $renderer  = new MonkeyThrowRenderer();
+        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $renderer = new MonkeyThrowRenderer();
 
         // WHEN
         $renderer->render($exception, $block);

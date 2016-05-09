@@ -45,8 +45,8 @@ class BlockServiceManager implements BlockServiceManagerInterface
      */
     public function __construct(ContainerInterface $container, $debug, LoggerInterface $logger = null)
     {
-        $this->services  = array();
-        $this->contexts  = array();
+        $this->services = array();
+        $this->contexts = array();
         $this->container = $container;
     }
 
