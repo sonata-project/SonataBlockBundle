@@ -30,8 +30,8 @@ class TemplateBlockService extends BaseBlockService
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         return $this->renderResponse($blockContext->getTemplate(), array(
-            'block'     => $blockContext->getBlock(),
-            'settings'  => $blockContext->getSettings(),
+            'block' => $blockContext->getBlock(),
+            'settings' => $blockContext->getSettings(),
         ), $response);
     }
 

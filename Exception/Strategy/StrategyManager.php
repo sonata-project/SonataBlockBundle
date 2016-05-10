@@ -71,10 +71,10 @@ class StrategyManager implements StrategyManagerInterface
      */
     public function __construct(ContainerInterface $container, array $filters, array $renderers, array $blockFilters, array $blockRenderers)
     {
-        $this->container      = $container;
-        $this->filters        = $filters;
-        $this->renderers      = $renderers;
-        $this->blockFilters   = $blockFilters;
+        $this->container = $container;
+        $this->filters = $filters;
+        $this->renderers = $renderers;
+        $this->blockFilters = $blockFilters;
         $this->blockRenderers = $blockRenderers;
     }
 
