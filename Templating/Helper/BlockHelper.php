@@ -241,6 +241,10 @@ class BlockHelper extends Helper
      */
     protected function stopTracing(BlockInterface $block, array $stats)
     {
+        if (is_array($this->traces[$block->getId()])) {
+            return;
+        }
+        
         $e = $this->traces[$block->getId()]->stop();
 
         $this->traces[$block->getId()] = array_merge($stats, array(
