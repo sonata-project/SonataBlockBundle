@@ -72,11 +72,11 @@ abstract class AbstractBlockServiceTest extends \PHPUnit_Framework_TestCase
     protected function assertSettings(array $expected, BlockContextInterface $blockContext)
     {
         $completeExpectedOptions = array_merge(array(
-            'use_cache'        => true,
+            'use_cache' => true,
             'extra_cache_keys' => array(),
-            'attr'             => array(),
-            'template'         => false,
-            'ttl'              => 0,
+            'attr' => array(),
+            'template' => false,
+            'ttl' => 0,
         ), $expected);
 
         ksort($completeExpectedOptions);

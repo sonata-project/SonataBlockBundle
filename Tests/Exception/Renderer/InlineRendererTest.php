@@ -42,7 +42,7 @@ class InlineRendererTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo($template),
                 $this->equalTo(array(
                     'exception' => $exception,
-                    'block'     => $block, ))
+                    'block' => $block, ))
             )
             ->will($this->returnValue('html'));
 

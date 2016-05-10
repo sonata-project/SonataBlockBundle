@@ -199,19 +199,19 @@ class Configuration implements ConfigurationInterface
                             ->useAttributeAsKey('id')
                             ->prototype('scalar')->end()
                             ->defaultValue(array(
-                                'debug_only'             => 'sonata.block.exception.filter.debug_only',
+                                'debug_only' => 'sonata.block.exception.filter.debug_only',
                                 'ignore_block_exception' => 'sonata.block.exception.filter.ignore_block_exception',
-                                'keep_all'               => 'sonata.block.exception.filter.keep_all',
-                                'keep_none'              => 'sonata.block.exception.filter.keep_none',
+                                'keep_all' => 'sonata.block.exception.filter.keep_all',
+                                'keep_none' => 'sonata.block.exception.filter.keep_none',
                             ))
                         ->end()
                         ->arrayNode('renderers')
                             ->useAttributeAsKey('id')
                             ->prototype('scalar')->end()
                             ->defaultValue(array(
-                                'inline'                 => 'sonata.block.exception.renderer.inline',
-                                'inline_debug'           => 'sonata.block.exception.renderer.inline_debug',
-                                'throw'                  => 'sonata.block.exception.renderer.throw',
+                                'inline' => 'sonata.block.exception.renderer.inline',
+                                'inline_debug' => 'sonata.block.exception.renderer.inline_debug',
+                                'throw' => 'sonata.block.exception.renderer.throw',
                             ))
                         ->end()
                     ->end()

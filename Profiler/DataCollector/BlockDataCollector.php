@@ -150,10 +150,10 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
     public function serialize()
     {
         $data = array(
-            'blocks'     => $this->blocks,
+            'blocks' => $this->blocks,
             'containers' => $this->containers,
             'realBlocks' => $this->realBlocks,
-            'events'     => $this->events,
+            'events' => $this->events,
         );
 
         return serialize($data);
@@ -166,10 +166,10 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
     {
         $merged = unserialize($data);
 
-        $this->blocks     = $merged['blocks'];
+        $this->blocks = $merged['blocks'];
         $this->containers = $merged['containers'];
         $this->realBlocks = $merged['realBlocks'];
-        $this->events     = $merged['events'];
+        $this->events = $merged['events'];
     }
 
     /**

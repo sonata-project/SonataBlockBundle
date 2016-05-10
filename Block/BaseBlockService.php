@@ -42,7 +42,7 @@ abstract class BaseBlockService extends AbstractBlockService implements BlockAdm
      */
     public function __construct($name, EngineInterface $templating)
     {
-        $this->name       = $name;
+        $this->name = $name;
         $this->templating = $templating;
     }
 
@@ -108,7 +108,7 @@ abstract class BaseBlockService extends AbstractBlockService implements BlockAdm
     public function getCacheKeys(BlockInterface $block)
     {
         return array(
-            'block_id'   => $block->getId(),
+            'block_id' => $block->getId(),
             'updated_at' => $block->getUpdatedAt() ? $block->getUpdatedAt()->format('U') : strtotime('now'),
         );
     }
@@ -184,8 +184,8 @@ abstract class BaseBlockService extends AbstractBlockService implements BlockAdm
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         return $this->renderResponse($blockContext->getTemplate(), array(
-            'block_context'  => $blockContext,
-            'block'          => $blockContext->getBlock(),
+            'block_context' => $blockContext,
+            'block' => $blockContext->getBlock(),
         ), $response);
     }
 

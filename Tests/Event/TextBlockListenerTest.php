@@ -37,7 +37,7 @@ class TextBlockListenerTest extends \PHPUnit_Framework_TestCase
         $admin->expects($this->once())->method('toString')->will($this->returnValue('fake object'));
 
         $event = new BlockEvent(array(
-            'admin'  => $admin,
+            'admin' => $admin,
             'action' => 'edit',
         ));
 

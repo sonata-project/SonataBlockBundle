@@ -27,7 +27,7 @@ class DebugOnlyFilterTest extends \PHPUnit_Framework_TestCase
     {
         // GIVEN
         $exception = $this->getMock('\Exception');
-        $block     = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
         $filter = new DebugOnlyFilter(true);
 
         // WHEN
@@ -44,7 +44,7 @@ class DebugOnlyFilterTest extends \PHPUnit_Framework_TestCase
     {
         // GIVEN
         $exception = $this->getMock('\Exception');
-        $block     = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
         $filter = new DebugOnlyFilter(false);
 
         // WHEN
