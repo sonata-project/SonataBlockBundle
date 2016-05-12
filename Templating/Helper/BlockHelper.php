@@ -163,96 +163,6 @@ class BlockHelper extends Helper
     }
 
     /**
-     * Traverse the parent block and its children to retrieve the correct list css and javascript only for main block.
-     *
-     * @param BlockContextInterface $blockContext
-     * @param array                 $stats
-     */
-    protected function computeAssets(BlockContextInterface $blockContext, array &$stats = null)
-    {
-        if ($blockContext->getBlock()->hasParent()) {
-            return;
-        }
-
-        $service = $this->blockServiceManager->get($blockContext->getBlock());
-
-        $assets = array(
-            'js' => $service->getJavascripts('all'),
-            'css' => $service->getStylesheets('all'),
-        );
-
-        if ($blockContext->getBlock()->hasChildren()) {
-            $iterator = new \RecursiveIteratorIterator(new RecursiveBlockIterator($blockContext->getBlock()->getChildren()));
-
-            foreach ($iterator as $block) {
-                $assets = array(
-                    'js' => array_merge($this->blockServiceManager->get($block)->getJavascripts('all'), $assets['js']),
-                    'css' => array_merge($this->blockServiceManager->get($block)->getStylesheets('all'), $assets['css']),
-                );
-            }
-        }
-
-        if ($this->stopwatch) {
-            $stats['assets'] = $assets;
-        }
-
-        $this->assets = array(
-            'js' => array_unique(array_merge($assets['js'], $this->assets['js'])),
-            'css' => array_unique(array_merge($assets['css'], $this->assets['css'])),
-        );
-    }
-
-    /**
-     * @param BlockInterface $block
-     *
-     * @return array
-     */
-    protected function startTracing(BlockInterface $block)
-    {
-        $this->traces[$block->getId()] = $this->stopwatch->start(sprintf('%s (id: %s, type: %s)', $block->getName(), $block->getId(), $block->getType()));
-
-        return array(
-            'name' => $block->getName(),
-            'type' => $block->getType(),
-            'duration' => false,
-            'memory_start' => memory_get_usage(true),
-            'memory_end' => false,
-            'memory_peak' => false,
-            'cache' => array(
-                'keys' => array(),
-                'contextual_keys' => array(),
-                'handler' => false,
-                'from_cache' => false,
-                'ttl' => 0,
-                'created_at' => false,
-                'lifetime' => 0,
-                'age' => 0,
-            ),
-            'assets' => array(
-                'js' => array(),
-                'css' => array(),
-            ),
-        );
-    }
-
-    /**
-     * @param BlockInterface $block
-     * @param array          $stats
-     */
-    protected function stopTracing(BlockInterface $block, array $stats)
-    {
-        $e = $this->traces[$block->getId()]->stop();
-
-        $this->traces[$block->getId()] = array_merge($stats, array(
-            'duration' => $e->getDuration(),
-            'memory_end' => memory_get_usage(true),
-            'memory_peak' => memory_get_peak_usage(true),
-        ));
-
-        $this->traces[$block->getId()]['cache']['lifetime'] = $this->traces[$block->getId()]['cache']['age'] + $this->traces[$block->getId()]['cache']['ttl'];
-    }
-
-    /**
      * @param string $name
      * @param array  $options
      *
@@ -280,46 +190,6 @@ class BlockHelper extends Helper
         }
 
         return $content;
-    }
-
-    /**
-     * @param BlockEvent $event
-     *
-     * @return array
-     */
-    protected function getEventBlocks(BlockEvent $event)
-    {
-        $results = array();
-
-        foreach ($event->getBlocks() as $block) {
-            $results[] = array($block->getId(), $block->getType());
-        }
-
-        return $results;
-    }
-
-    /**
-     * @param string $eventName
-     *
-     * @return array
-     */
-    protected function getEventListeners($eventName)
-    {
-        $results = array();
-
-        foreach ($this->eventDispatcher->getListeners($eventName) as $listener) {
-            if (is_object($listener[0])) {
-                $results[] = get_class($listener[0]);
-            } elseif (is_string($listener[0])) {
-                $results[] = $listener[0];
-            } elseif ($listener instanceof \Closure) {
-                $results[] = '{closure}()';
-            } else {
-                $results[] = 'Unknown type!';
-            }
-        }
-
-        return $results;
     }
 
     /**
@@ -437,6 +307,146 @@ class BlockHelper extends Helper
     }
 
     /**
+     * Returns the rendering traces.
+     *
+     * @return array
+     */
+    public function getTraces()
+    {
+        return $this->traces;
+    }
+
+    /**
+     * Traverse the parent block and its children to retrieve the correct list css and javascript only for main block.
+     *
+     * @param BlockContextInterface $blockContext
+     * @param array                 $stats
+     */
+    protected function computeAssets(BlockContextInterface $blockContext, array &$stats = null)
+    {
+        if ($blockContext->getBlock()->hasParent()) {
+            return;
+        }
+
+        $service = $this->blockServiceManager->get($blockContext->getBlock());
+
+        $assets = array(
+            'js' => $service->getJavascripts('all'),
+            'css' => $service->getStylesheets('all'),
+        );
+
+        if ($blockContext->getBlock()->hasChildren()) {
+            $iterator = new \RecursiveIteratorIterator(new RecursiveBlockIterator($blockContext->getBlock()->getChildren()));
+
+            foreach ($iterator as $block) {
+                $assets = array(
+                    'js' => array_merge($this->blockServiceManager->get($block)->getJavascripts('all'), $assets['js']),
+                    'css' => array_merge($this->blockServiceManager->get($block)->getStylesheets('all'), $assets['css']),
+                );
+            }
+        }
+
+        if ($this->stopwatch) {
+            $stats['assets'] = $assets;
+        }
+
+        $this->assets = array(
+            'js' => array_unique(array_merge($assets['js'], $this->assets['js'])),
+            'css' => array_unique(array_merge($assets['css'], $this->assets['css'])),
+        );
+    }
+
+    /**
+     * @param BlockInterface $block
+     *
+     * @return array
+     */
+    protected function startTracing(BlockInterface $block)
+    {
+        $this->traces[$block->getId()] = $this->stopwatch->start(sprintf('%s (id: %s, type: %s)', $block->getName(), $block->getId(), $block->getType()));
+
+        return array(
+            'name' => $block->getName(),
+            'type' => $block->getType(),
+            'duration' => false,
+            'memory_start' => memory_get_usage(true),
+            'memory_end' => false,
+            'memory_peak' => false,
+            'cache' => array(
+                'keys' => array(),
+                'contextual_keys' => array(),
+                'handler' => false,
+                'from_cache' => false,
+                'ttl' => 0,
+                'created_at' => false,
+                'lifetime' => 0,
+                'age' => 0,
+            ),
+            'assets' => array(
+                'js' => array(),
+                'css' => array(),
+            ),
+        );
+    }
+
+    /**
+     * @param BlockInterface $block
+     * @param array          $stats
+     */
+    protected function stopTracing(BlockInterface $block, array $stats)
+    {
+        $e = $this->traces[$block->getId()]->stop();
+
+        $this->traces[$block->getId()] = array_merge($stats, array(
+            'duration' => $e->getDuration(),
+            'memory_end' => memory_get_usage(true),
+            'memory_peak' => memory_get_peak_usage(true),
+        ));
+
+        $this->traces[$block->getId()]['cache']['lifetime'] = $this->traces[$block->getId()]['cache']['age'] + $this->traces[$block->getId()]['cache']['ttl'];
+    }
+
+    /**
+     * @param BlockEvent $event
+     *
+     * @return array
+     */
+    protected function getEventBlocks(BlockEvent $event)
+    {
+        $results = array();
+
+        foreach ($event->getBlocks() as $block) {
+            $results[] = array($block->getId(), $block->getType());
+        }
+
+        return $results;
+    }
+
+    /**
+     * @param string $eventName
+     *
+     * @return array
+     */
+    protected function getEventListeners($eventName)
+    {
+        $results = array();
+
+        foreach ($this->eventDispatcher->getListeners($eventName) as $listener) {
+            if (is_object($listener[0])) {
+                $results[] = get_class($listener[0]);
+            } elseif (is_string($listener[0])) {
+                $results[] = $listener[0];
+            } elseif ($listener instanceof \Closure) {
+                $results[] = '{closure}()';
+            } else {
+                $results[] = 'Unknown type!';
+            }
+        }
+
+        return $results;
+    }
+
+    /**
      * @param BlockInterface $block
      * @param array          $stats
      *
@@ -466,15 +476,5 @@ class BlockHelper extends Helper
         }
 
         return $this->cacheManager->getCacheService($cacheServiceId);
-    }
-
-    /**
-     * Returns the rendering traces.
-     *
-     * @return array
-     */
-    public function getTraces()
-    {
-        return $this->traces;
     }
 }

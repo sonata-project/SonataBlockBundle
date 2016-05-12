@@ -121,6 +121,16 @@ class MenuBlockService extends BaseBlockService
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getBlockMetadata($code = null)
+    {
+        return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'SonataBlockBundle', array(
+            'class' => 'fa fa-bars',
+        ));
+    }
+
+    /**
      * @return array
      */
     protected function getFormSettingsKeys()
@@ -179,15 +189,5 @@ class MenuBlockService extends BaseBlockService
         }
 
         return $options;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockMetadata($code = null)
-    {
-        return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'SonataBlockBundle', array(
-            'class' => 'fa fa-bars',
-        ));
     }
 }
