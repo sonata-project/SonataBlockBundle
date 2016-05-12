@@ -76,6 +76,16 @@ class ContainerBlockService extends BaseBlockService
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getBlockMetadata($code = null)
+    {
+        return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'SonataBlockBundle', array(
+            'class' => 'fa fa-square-o',
+        ));
+    }
+
+    /**
      * Returns a decorator object/array from the container layout setting.
      *
      * @param string $layout
@@ -96,15 +106,5 @@ class ContainerBlockService extends BaseBlockService
         );
 
         return $decorator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockMetadata($code = null)
-    {
-        return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'SonataBlockBundle', array(
-            'class' => 'fa fa-square-o',
-        ));
     }
 }
