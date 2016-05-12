@@ -79,6 +79,14 @@ abstract class BaseBlock implements BlockInterface
     /**
      * {@inheritdoc}
      */
+    public function __toString()
+    {
+        return sprintf('%s ~ #%s', $this->getname(), $this->getId());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -244,14 +252,6 @@ abstract class BaseBlock implements BlockInterface
     public function hasParent()
     {
         return $this->getParent() instanceof self;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return sprintf('%s ~ #%s', $this->getname(), $this->getId());
     }
 
     /**

@@ -51,30 +51,6 @@ class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
-     * @throws \RuntimeException
-     *
-     * @param $type
-     *
-     * @return BlockServiceInterface
-     */
-    private function load($type)
-    {
-        if (!$this->has($type)) {
-            throw new \RuntimeException(sprintf('The block service `%s` does not exist', $type));
-        }
-
-        if (!$this->services[$type] instanceof BlockServiceInterface) {
-            $this->services[$type] = $this->container->get($type);
-        }
-
-        if (!$this->services[$type] instanceof BlockServiceInterface) {
-            throw new \RuntimeException(sprintf('The service %s does not implement BlockServiceInterface', $type));
-        }
-
-        return $this->services[$type];
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function get(BlockInterface $block)
@@ -205,6 +181,30 @@ class BlockServiceManager implements BlockServiceManagerInterface
         } catch (\Exception $e) {
             $this->inValidate = false;
         }
+    }
+
+    /**
+     * @throws \RuntimeException
+     *
+     * @param $type
+     *
+     * @return BlockServiceInterface
+     */
+    private function load($type)
+    {
+        if (!$this->has($type)) {
+            throw new \RuntimeException(sprintf('The block service `%s` does not exist', $type));
+        }
+
+        if (!$this->services[$type] instanceof BlockServiceInterface) {
+            $this->services[$type] = $this->container->get($type);
+        }
+
+        if (!$this->services[$type] instanceof BlockServiceInterface) {
+            throw new \RuntimeException(sprintf('The service %s does not implement BlockServiceInterface', $type));
+        }
+
+        return $this->services[$type];
     }
 
     /**
