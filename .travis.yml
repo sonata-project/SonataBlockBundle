@@ -47,10 +47,6 @@ matrix:
     - php: '7.0'
       env: SONATA_CORE=dev-master@dev
     - php: '7.0'
-      env: SONATA_ADMIN=3.*
-    - php: '7.0'
-      env: SONATA_ADMIN=dev-master@dev
-    - php: '7.0'
       env: SYMFONY_DEPRECATIONS_HELPER=0
   allow_failures:
     - php: nightly
@@ -58,7 +54,6 @@ matrix:
     - env: SYMFONY_DEPRECATIONS_HELPER=0
     - env: SYMFONY=dev-master@dev
     - env: SONATA_CORE=dev-master@dev
-    - env: SONATA_ADMIN=dev-master@dev
 
 before_install:
   - if [ -x .travis/before_install_${TARGET}.sh ]; then .travis/before_install_${TARGET}.sh; fi;
