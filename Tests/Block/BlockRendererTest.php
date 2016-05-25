@@ -104,7 +104,7 @@ class BlockRendererTest extends \PHPUnit_Framework_TestCase
             }));
 
         // mock the logger to ensure a crit message is logged
-        $this->logger->expects($this->once())->method('critical');
+        $this->logger->expects($this->once())->method('error');
 
         // mock a block object
         $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
@@ -145,7 +145,7 @@ class BlockRendererTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($response));
 
         // mock the logger to ensure a crit message is logged
-        $this->logger->expects($this->once())->method('critical');
+        $this->logger->expects($this->once())->method('error');
 
         // mock a block object
         $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
