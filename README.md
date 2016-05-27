@@ -10,7 +10,9 @@ Symfony SonataBlockBundle
 [![Monthly Downloads](https://poser.pugx.org/sonata-project/block-bundle/d/monthly)](https://packagist.org/packages/sonata-project/block-bundle)
 [![Daily Downloads](https://poser.pugx.org/sonata-project/block-bundle/d/daily)](https://packagist.org/packages/sonata-project/block-bundle)
 
-[![Build Status](https://travis-ci.org/sonata-project/SonataBlockBundle.svg?branch=master)](https://travis-ci.org/sonata-project/SonataBlockBundle)
+3.x status: [![Build Status](https://travis-ci.org/sonata-project/SonataBlockBundle.svg?branch=3.x)](https://travis-ci.org/sonata-project/SonataBlockBundle)
+
+master status: [![Build Status](https://travis-ci.org/sonata-project/SonataBlockBundle.svg?branch=master)](https://travis-ci.org/sonata-project/SonataBlockBundle)
 
 ## Documentation
 
