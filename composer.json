@@ -17,6 +17,7 @@
         }
     ],
     "require": {
+        "php": "^5.3 || ^7.0",
         "symfony/http-kernel": "^2.3 || ^3.0",
         "symfony/form": "^2.3 || ^3.0",
         "doctrine/common": "^2.3",
