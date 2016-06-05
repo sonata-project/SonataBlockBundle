@@ -17,7 +17,6 @@ use Sonata\BlockBundle\Block\BlockContextManagerInterface;
 use Sonata\BlockBundle\Block\BlockServiceInterface;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Tests\Block\Service\FakeTemplating;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Abstract test class for block service tests.
@@ -26,11 +25,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 abstract class AbstractBlockServiceTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|ContainerInterface
-     */
-    protected $container;
-
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|BlockServiceManagerInterface
      */
@@ -48,7 +42,6 @@ abstract class AbstractBlockServiceTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
         $this->templating = new FakeTemplating();
 
         $blockLoader = $this->getMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
