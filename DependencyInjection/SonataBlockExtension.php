@@ -30,7 +30,7 @@ class SonataBlockExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    final public function getConfiguration(array $config, ContainerBuilder $container)
     {
         $bundles = $container->getParameter('kernel.bundles');
 
@@ -45,8 +45,18 @@ class SonataBlockExtension extends Extension
             $defaultTemplates['SonataSeoBundle:Block:block_social_container.html.twig'] = 'SonataSeoBundle (to contain social buttons)';
         }
 
+        return new Configuration($defaultTemplates);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function load(array $configs, ContainerBuilder $container)
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+
         $processor = new Processor();
-        $configuration = new Configuration($defaultTemplates);
+        $configuration = $this->getConfiguration($configs, $container);
         $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
