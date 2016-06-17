@@ -122,9 +122,9 @@ class StrategyManager implements StrategyManagerInterface
         if ($filter->handle($exception, $block)) {
             $renderer = $this->getBlockRenderer($block);
             $response = $renderer->render($exception, $block, $response);
-        } else {
-            // render empty block template?
         }
+            // render empty block template?
+
 
         return $response;
     }
