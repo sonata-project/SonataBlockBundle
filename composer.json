@@ -36,8 +36,14 @@
     },
     "autoload": {
         "psr-4": { "Sonata\\BlockBundle\\": "" },
+        "exclude-from-classmap": [
+            "Tests/"
+        ],
         "files": ["Resources/stubs/symfony2.php"]
     },
+    "autoload-dev": {
+        "psr-4": { "Sonata\\BlockBundle\\Tests\\": "Tests/" }
+     },
     "extra": {
         "branch-alias": {
             "dev-master": "4.x-dev"
