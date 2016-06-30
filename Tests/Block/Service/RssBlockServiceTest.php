@@ -14,17 +14,17 @@ namespace Sonata\BlockBundle\Tests\Block\Service;
 use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Block\Service\RssBlockService;
 use Sonata\BlockBundle\Model\Block;
+use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
 use Sonata\BlockBundle\Util\OptionsResolver;
 
-class RssBlockServiceTest extends BaseTestBlockService
+class RssBlockServiceTest extends AbstractBlockServiceTestCase
 {
     /*
      * only test if the API is not broken
      */
     public function testService()
     {
-        $templating = new FakeTemplating();
-        $service = new RssBlockService('sonata.page.block.rss', $templating);
+        $service = new RssBlockService('sonata.page.block.rss', $this->templating);
 
         $block = new Block();
         $block->setType('core.text');

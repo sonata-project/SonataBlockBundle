@@ -14,14 +14,14 @@ namespace Sonata\BlockBundle\Tests\Block\Service;
 use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Block\Service\TextBlockService;
 use Sonata\BlockBundle\Model\Block;
+use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
 use Sonata\BlockBundle\Util\OptionsResolver;
 
-class TextBlockServiceTest extends BaseTestBlockService
+class TextBlockServiceTest extends AbstractBlockServiceTestCase
 {
     public function testService()
     {
-        $templating = new FakeTemplating();
-        $service = new TextBlockService('sonata.page.block.text', $templating);
+        $service = new TextBlockService('sonata.page.block.text', $this->templating);
 
         $block = new Block();
         $block->setType('core.text');
@@ -42,6 +42,6 @@ class TextBlockServiceTest extends BaseTestBlockService
 
         $response = $service->execute($blockContext);
 
-        $this->assertEquals('my text', $templating->parameters['settings']['content']);
+        $this->assertEquals('my text', $this->templating->parameters['settings']['content']);
     }
 }
