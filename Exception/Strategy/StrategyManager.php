@@ -125,7 +125,6 @@ class StrategyManager implements StrategyManagerInterface
         }
             // render empty block template?
 
-
         return $response;
     }
 
