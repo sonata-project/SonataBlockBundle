@@ -19,7 +19,6 @@ use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
     E_USER_DEPRECATED
 );
 
-
 /**
  * @deprecated Deprecated since version 3.x. Use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase instead.
  */
