@@ -14,13 +14,13 @@ namespace Sonata\BlockBundle\Tests\Block\Service;
 use Sonata\BlockBundle\Test\FakeTemplating as BaseTemplating;
 
 @trigger_error(
-    'The '.__NAMESPACE__.'\FakeTemplating class is deprecated since version 3.x and will be removed in 4.0.'
+    'The '.__NAMESPACE__.'\FakeTemplating class is deprecated since version 3.1 and will be removed in 4.0.'
     .' Use Sonata\BlockBundle\Test\FakeTemplating instead.',
     E_USER_DEPRECATED
 );
 
 /**
- * @deprecated since version 3.x and will be removed in 4.0. Use Sonata\BlockBundle\Test\FakeTemplating instead.
+ * @deprecated since version 3.1 and will be removed in 4.0. Use Sonata\BlockBundle\Test\FakeTemplating instead.
  */
 class FakeTemplating extends BaseTemplating
 {
