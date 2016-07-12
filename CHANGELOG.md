@@ -2,6 +2,20 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.1.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.0.1...3.1.0) - 2016-07-12
+### Changed
+- Tests for `*BlockService*` now uses `AbstractBlockServiceTestCase`
+
+### Deprecated
+- Deprecate empty class `BaseTestBlockService`
+- Deprecate `Tests\Block\AbstractBlockServiceTest` in favor of `Test\AbstractBlockServiceTestCase`
+
+### Fixed
+- Profiler block design for Symfony Profiler v2
+
+### Removed
+- Internal test classes are now excluded from the auto-loader
+
 ## [3.0.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.0.0...3.0.1) - 2016-06-14
 ### Changed
 - The log level on exceptions in `BlockRenderer` is decreased from critical to error
