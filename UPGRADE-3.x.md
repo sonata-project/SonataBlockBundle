@@ -1,6 +1,11 @@
 UPGRADE 3.x
 ===========
 
+## Deprecated test classes
+
+The `Tests\Block\Service\FakeTemplating` class is deprecated. Use `Test\FakeTemplating` instead.
+
+
 UPGRADE FROM 3.0 to 3.1
 =======================
 

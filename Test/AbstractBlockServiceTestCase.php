@@ -16,7 +16,6 @@ use Sonata\BlockBundle\Block\BlockContextManager;
 use Sonata\BlockBundle\Block\BlockContextManagerInterface;
 use Sonata\BlockBundle\Block\BlockServiceInterface;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
-use Sonata\BlockBundle\Tests\Block\Service\FakeTemplating;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
