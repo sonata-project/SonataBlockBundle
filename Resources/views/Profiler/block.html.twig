@@ -59,6 +59,9 @@
 {% endblock %}
 
 {% block panel %}
+    {# NEXT_MAJOR : remove this when Symfony Requirement will be bumped to 2.8+ #}
+    {% set profiler_markup_version = profiler_markup_version|default(1) %}
+
     <h2>Events Blocks</h2>
     <table>
         <tr>
@@ -92,11 +95,23 @@
 
     <h2>Real Blocks</h2>
     {% set blocks = collector.realBlocks %}
-    {{ block('table') }}
+    {% if profiler_markup_version == 1 %}
+        {{ block('table') }}
+    {% else %}
+        <div class="tab-content">
+            {{ block('table_v2') }}
+        </div>
+    {% endif %}
 
     <h2>Containers Blocks</h2>
     {% set blocks = collector.containers %}
-    {{ block('table') }}
+    {% if profiler_markup_version == 1 %}
+        {{ block('table') }}
+    {% else %}
+        <div class="tab-content">
+            {{ block('table_v2') }}
+        </div>
+    {% endif %}
 
     {{ block('javascript') }}
 {% endblock %}
@@ -156,4 +171,64 @@
 
         {% endfor %}
     </table>
+{% endblock %}
+
+{% block table_v2 %}
+    {% for id, block in blocks %}
+        <table>
+            <thead>
+            <tr>
+                <th colspan="2">Block {{ id }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ block.name }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ block.type }}</td>
+            </tr>
+            <tr>
+                <th>Mem. diff / Mem. peak / Duration</th>
+                <td>{{ ((block.memory_end-block.memory_start)/1000)|number_format(0) }} Kb / {{ (block.memory_peak/1000)|number_format(0) }} Kb / {{ block.duration|number_format(2) }} ms</td>
+            </tr>
+
+            {% if block.cache.handler %}
+                <tr>
+                    <th>Cache backend</th>
+                    <td>
+                        {{ block.cache.handler }} - Loading from cache: {% if block.cache.from_cache %}YES{% else %}NO{% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Cache TTL / Lifetime</th>
+                    <td>
+                        {{ block.cache.ttl }}s. / {{ block.cache.lifetime }}s
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Cache Informations
+                    </th>
+                    <td>
+                        Cache Keys: <pre>{{ block.cache.keys|json_encode() }}</pre> <br />
+                        Contextual Keys: <pre>{{ block.cache.contextual_keys|json_encode() }}</pre> <br />
+                    </td>
+                </tr>
+            {% endif %}
+
+            {% if block.assets.js|length > 0 or block.assets.css|length > 0  %}
+                <tr>
+                    <th>Assets</th>
+                    <td>
+                        Javascripts: <pre>{{ block.assets.js|json_encode() }}</pre><br />
+                        Stylesheets: <pre>{{ block.assets.css|json_encode() }}</pre>
+                    </td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    {% endfor %}
 {% endblock %}
