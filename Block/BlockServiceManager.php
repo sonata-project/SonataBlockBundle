@@ -95,16 +95,6 @@ class BlockServiceManager implements BlockServiceManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function setServices(array $blockServices)
-    {
-        foreach ($blockServices as $name => $service) {
-            $this->add($name, $service);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getServices()
     {
         foreach ($this->services as $name => $id) {
@@ -138,24 +128,6 @@ class BlockServiceManager implements BlockServiceManagerInterface
         }
 
         return $this->sortServices($services);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getLoadedServices()
-    {
-        $services = array();
-
-        foreach ($this->services as $service) {
-            if (!$service instanceof BlockServiceInterface) {
-                continue;
-            }
-
-            $services[] = $service;
-        }
-
-        return $services;
     }
 
     /**

@@ -11,9 +11,6 @@
 
 namespace Sonata\BlockBundle\Block;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 /**
  * Class AbstractBlockService.
  *
@@ -21,20 +18,4 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 abstract class AbstractBlockService implements BlockServiceInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultSettings(OptionsResolverInterface $resolver)
-    {
-        $this->configureSettings($resolver);
-    }
-
-    /**
-     * Define the default options for the block.
-     *
-     * @param OptionsResolver $resolver
-     */
-    public function configureSettings(OptionsResolver $resolver)
-    {
-    }
 }
