@@ -162,7 +162,7 @@ class BlockContextManager implements BlockContextManagerInterface
      * @param BlockInterface           $block
      *
      * @deprecated since version 2.3, to be renamed in 3.0.
-     *             Use the method configureSettings instead.
+     *             Use the method configureSettings instead
      */
     protected function setDefaultSettings(OptionsResolverInterface $optionsResolver, BlockInterface $block)
     {

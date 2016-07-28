@@ -20,7 +20,7 @@ use Sonata\BlockBundle\Test\FakeTemplating as BaseTemplating;
 );
 
 /**
- * @deprecated since version 3.1 and will be removed in 4.0. Use Sonata\BlockBundle\Test\FakeTemplating instead.
+ * @deprecated since version 3.1 and will be removed in 4.0. Use Sonata\BlockBundle\Test\FakeTemplating instead
  */
 class FakeTemplating extends BaseTemplating
 {
