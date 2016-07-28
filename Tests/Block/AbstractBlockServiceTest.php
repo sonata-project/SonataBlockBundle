@@ -20,7 +20,7 @@ use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
 );
 
 /**
- * @deprecated Deprecated since version 3.1. Use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase instead.
+ * @deprecated Deprecated since version 3.1. Use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase instead
  */
 abstract class AbstractBlockServiceTest extends AbstractBlockServiceTestCase
 {

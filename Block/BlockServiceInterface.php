@@ -40,7 +40,7 @@ interface BlockServiceInterface
      *
      * @deprecated since version 2.3, to be renamed in 3.0.
      *             Use the method configureSettings instead.
-     *             This method will be added to the BlockServiceInterface with SonataBlockBundle 3.0.
+     *             This method will be added to the BlockServiceInterface with SonataBlockBundle 3.0
      */
     public function setDefaultSettings(OptionsResolverInterface $resolver);
 
