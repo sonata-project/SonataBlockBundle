@@ -17,6 +17,7 @@ Reference Guide
    reference/advanced_usage
    reference/cache
    reference/events
+   reference/testing
 
 Cookbooks
 ---------
