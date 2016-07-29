@@ -11,30 +11,19 @@
 
 namespace Sonata\BlockBundle\Block;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+@trigger_error(
+    'This class is deprecated since 3.x and will be removed with the 4.0 release.'.
+    'Use '.__NAMESPACE__.'\Block\Service\AbstractBlockService instead.',
+    E_USER_DEPRECATED
+);
 
 /**
  * Class AbstractBlockService.
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
+ *
+ * @deprecated since 3.x, to be removed with 4.0
  */
-abstract class AbstractBlockService implements BlockServiceInterface
+abstract class AbstractBlockService extends \Sonata\BlockBundle\Block\Service\AbstractBlockService
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultSettings(OptionsResolverInterface $resolver)
-    {
-        $this->configureSettings($resolver);
-    }
-
-    /**
-     * Define the default options for the block.
-     *
-     * @param OptionsResolver $resolver
-     */
-    public function configureSettings(OptionsResolver $resolver)
-    {
-    }
 }
