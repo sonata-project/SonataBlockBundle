@@ -14,6 +14,7 @@ namespace Sonata\BlockBundle\Block\Service;
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Model\Metadata;
@@ -28,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Hugo Briand <briand@ekino.com>
  */
-class MenuBlockService extends AbstractAdminBlockService
+class MenuBlockService extends BaseBlockService
 {
     /**
      * @var MenuProviderInterface

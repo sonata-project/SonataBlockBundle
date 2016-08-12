@@ -12,6 +12,7 @@
 namespace Sonata\BlockBundle\Block\Service;
 
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Model\Metadata;
@@ -21,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class TemplateBlockService extends AbstractAdminBlockService
+class TemplateBlockService extends BaseBlockService
 {
     /**
      * {@inheritdoc}
