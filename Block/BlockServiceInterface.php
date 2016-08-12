@@ -11,62 +11,17 @@
 
 namespace Sonata\BlockBundle\Block;
 
-use Sonata\BlockBundle\Model\BlockInterface;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+@trigger_error(
+    'This class is deprecated since 3.x and will be removed with the 4.0 release.'.
+    'Use '.__NAMESPACE__.'\Block\BlockServiceInterface instead.',
+    E_USER_DEPRECATED
+);
 
 /**
  * Interface BlockServiceInterface.
+ *
+ * @deprecated since 3.x, to be removed with 4.0
  */
-interface BlockServiceInterface
+interface BlockServiceInterface extends \Sonata\BlockBundle\Block\Service\BlockServiceInterface
 {
-    /**
-     * @param BlockContextInterface $blockContext
-     * @param Response              $response
-     *
-     * @return Response
-     */
-    public function execute(BlockContextInterface $blockContext, Response $response = null);
-
-    /**
-     * @return string
-     */
-    public function getName();
-
-    /**
-     * Define the default options for the block.
-     *
-     * @param OptionsResolverInterface $resolver
-     *
-     * @deprecated since version 2.3, to be renamed in 3.0.
-     *             Use the method configureSettings instead.
-     *             This method will be added to the BlockServiceInterface with SonataBlockBundle 3.0
-     */
-    public function setDefaultSettings(OptionsResolverInterface $resolver);
-
-    /**
-     * @param BlockInterface $block
-     */
-    public function load(BlockInterface $block);
-
-    /**
-     * @param $media
-     *
-     * @return array
-     */
-    public function getJavascripts($media);
-
-    /**
-     * @param $media
-     *
-     * @return array
-     */
-    public function getStylesheets($media);
-
-    /**
-     * @param BlockInterface $block
-     *
-     * @return array
-     */
-    public function getCacheKeys(BlockInterface $block);
 }
