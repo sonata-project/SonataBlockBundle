@@ -33,13 +33,6 @@ interface BlockServiceManagerInterface
     public function get(BlockInterface $block);
 
     /**
-     * @deprecated will be remove in 2.4, use the add method instead
-     *
-     * @param array $blockServices
-     */
-    public function setServices(array $blockServices);
-
-    /**
      * @return array
      */
     public function getServices();
@@ -65,13 +58,6 @@ interface BlockServiceManagerInterface
      * @return BlockServiceInterface
      */
     public function getService($name);
-
-    /**
-     * @deprecated will be remove in 2.4
-     *
-     * @return array
-     */
-    public function getLoadedServices();
 
     /**
      * @param ErrorElement   $errorElement
