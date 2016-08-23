@@ -12,14 +12,15 @@
 namespace Sonata\BlockBundle\Block\Service;
 
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\HttpFoundation\Response;
 
-class EmptyBlockService extends BaseBlockService
+class EmptyBlockService extends AbstractBlockService
 {
+    // NEXT_MAJOR: Remove this method
+
     /**
      * {@inheritdoc}
      */
@@ -27,6 +28,8 @@ class EmptyBlockService extends BaseBlockService
     {
         throw new \RuntimeException('Not used, this block renders an empty result if no block document can be found');
     }
+
+    // NEXT_MAJOR: Remove this method
 
     /**
      * {@inheritdoc}
