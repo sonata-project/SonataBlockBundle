@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Interface BlockServiceInterface.
  *
- * @deprecated since 3.x, to be removed with 4.0
+ * @deprecated since 3.2, to be removed with 4.0
  */
 interface BlockServiceInterface
 {

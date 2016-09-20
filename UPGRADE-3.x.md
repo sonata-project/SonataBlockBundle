@@ -1,6 +1,9 @@
 UPGRADE 3.x
 ===========
 
+UPGRADE FROM 3.1 to 3.2
+=======================
+
 ## Deprecated block classes and interfaces
 
 The `Sonata\BlockBundle\Block\AbstractBlockService` and `Sonata\BlockBundle\Block\BaseBlockService` classes are deprecated.

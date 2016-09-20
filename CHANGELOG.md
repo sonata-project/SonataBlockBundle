@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.2.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.1.1...3.2.0) - 2016-09-20
+### Added
+- Created `Sonata\BlockBundle\Block\Service\AbstractAdminBlockService` class
+- Created `Sonata\BlockBundle\Block\Service\AbstractBlockService` class
+- Created `Sonata\BlockBundle\Block\Service\AdminBlockServiceInterface` class
+- Created `Sonata\BlockBundle\Block\Service\BlockServiceInterface` class
+
+### Deprecated
+- The class `Sonata\BlockBundle\Block\AbstractBlockService` is deprecated
+- The class `Sonata\BlockBundle\Block\BaseBlockService` is deprecated
+- The class `Sonata\BlockBundle\Block\BlockAdminServiceInterface` is deprecated
+- The class `Sonata\BlockBundle\Block\BlockServiceInterface` is deprecated
+
 ## [3.1.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.1.0...3.1.1) - 2016-07-12
 ### Deprecated
 - Deprecate `Tests\Block\Service\FakeTemplating` in favor of `Test\Mock\MockTemplating` (missing PR for 3.1.0)
