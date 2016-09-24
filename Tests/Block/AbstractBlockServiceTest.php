@@ -20,6 +20,8 @@ use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
 );
 
 /**
+ * NEXT_MAJOR: remove this class.
+ *
  * @deprecated Deprecated since version 3.1. Use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase instead
  */
 abstract class AbstractBlockServiceTest extends AbstractBlockServiceTestCase

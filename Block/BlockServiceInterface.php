@@ -18,6 +18,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Interface BlockServiceInterface.
  *
+ * NEXT_MAJOR: remove this interface.
+ *
  * @deprecated since 3.2, to be removed with 4.0
  */
 interface BlockServiceInterface
@@ -37,6 +39,8 @@ interface BlockServiceInterface
 
     /**
      * Define the default options for the block.
+     *
+     * NEXT_MAJOR: rename this method.
      *
      * @param OptionsResolverInterface $resolver
      *

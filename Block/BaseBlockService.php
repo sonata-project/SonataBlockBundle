@@ -22,6 +22,7 @@ use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 /**
  * BaseBlockService.
  *
+ * NEXT_MAJOR: remove this class.
  *
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *

@@ -158,6 +158,8 @@ class BlockContextManager implements BlockContextManagerInterface
     }
 
     /**
+     * NEXT_MAJOR: remove this method.
+     *
      * @param OptionsResolverInterface $optionsResolver
      * @param BlockInterface           $block
      *
