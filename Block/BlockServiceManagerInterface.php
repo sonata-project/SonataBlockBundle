@@ -35,7 +35,7 @@ interface BlockServiceManagerInterface
     /**
      * NEXT_MAJOR: remove this method.
      *
-     * @deprecated will be remove in 2.4, use the add method instead
+     * @deprecated will be removed in 2.4, use the add method instead
      *
      * @param array $blockServices
      */
@@ -71,7 +71,7 @@ interface BlockServiceManagerInterface
     /**
      * NEXT_MAJOR: remove this method.
      *
-     * @deprecated will be remove in 2.4
+     * @deprecated will be removed in 2.4
      *
      * @return array
      */
