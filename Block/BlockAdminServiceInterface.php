@@ -20,6 +20,8 @@ use Sonata\BlockBundle\Block\Service\AdminBlockServiceInterface;
 );
 
 /**
+ * NEXT_MAJOR: remove this interface.
+ *
  * @deprecated since 3.2, to be removed with 4.0
  */
 interface BlockAdminServiceInterface extends AdminBlockServiceInterface

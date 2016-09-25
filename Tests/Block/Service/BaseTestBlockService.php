@@ -17,6 +17,8 @@ namespace Sonata\BlockBundle\Tests\Block\Service;
 );
 
 /**
+ * NEXT_MAJOR: remove this class.
+ *
  * @deprecated Deprecated since version 3.1 and will be removed in 4.0
  */
 class BaseTestBlockService extends \PHPUnit_Framework_TestCase
