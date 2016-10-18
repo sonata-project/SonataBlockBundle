@@ -12,8 +12,9 @@
 namespace Sonata\BlockBundle\Block;
 
 @trigger_error(
-    'This class is deprecated since 3.2 and will be removed with the 4.0 release.'.
-    'Use '.__NAMESPACE__.'\Block\Service\AbstractBlockService instead.',
+    'The '.__NAMESPACE__.'\AbstractBlockService class is deprecated since 3.2 '.
+    'and will be removed with the 4.0 release.'.
+    'Use '.__NAMESPACE__.'\Service\AbstractBlockService instead.',
     E_USER_DEPRECATED
 );
 

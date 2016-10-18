@@ -14,8 +14,9 @@ namespace Sonata\BlockBundle\Block;
 use Sonata\BlockBundle\Block\Service\AdminBlockServiceInterface;
 
 @trigger_error(
-    'This class is deprecated since 3.2 and will be removed with the 4.0 release.'.
-    'Use '.__NAMESPACE__.'\Block\Service\AdminBlockServiceInterface instead.',
+    'The '.__NAMESPACE__.'BlockAdminServiceInterface interface is deprecated since 3.2 '.
+    'and will be removed with the 4.0 release. '.
+    'Use '.__NAMESPACE__.'\Service\AdminBlockServiceInterface instead.',
     E_USER_DEPRECATED
 );
 
