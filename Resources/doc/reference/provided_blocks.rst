@@ -33,16 +33,15 @@ MenuBlockService
 
 This block service displays a KNP Menu.
 
-Provide a list of available menus in the configuration.
+Defining a menu could be done by inserting the ``sonata.block.menu`` tag.
 
 .. configuration-block::
 
-    .. code-block:: yaml
+    .. code-block:: xml
 
-        sonata_block:
-            menus:
-                'AppBundle:Builder:mainMenu': 'Main Menu'
-                'footer': 'Footer Menu' # Use alias name if using menus as a service
+        <service id="sonata.block.menu.main" class="Sonata\BlockBundle\Menu\MainMenu">
+            <tag name="sonata.block.menu" />
+        </service>
 
 Upon configuration, you may set some rendering options (see KNP Doc for those).
 

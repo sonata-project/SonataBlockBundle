@@ -28,6 +28,7 @@ class TweakCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $manager = $container->getDefinition('sonata.block.manager');
+        $registry = $container->getDefinition('sonata.block.menu.registry');
 
         $parameters = $container->getParameter('sonata_block.blocks');
 
@@ -48,6 +49,10 @@ class TweakCompilerPass implements CompilerPassInterface
             }
 
             $manager->addMethodCall('add', array($id, $id, isset($parameters[$id]) ? $parameters[$id]['contexts'] : array()));
+        }
+
+        foreach ($container->findTaggedServiceIds('sonata.block.menu') as $id => $attributes) {
+            $registry->addMethodCall('add', array(new Reference($id)));
         }
 
         $services = array();

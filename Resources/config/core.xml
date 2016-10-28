@@ -6,6 +6,9 @@
             <argument>%kernel.debug%</argument>
             <argument type="service" id="logger" on-invalid="ignore"/>
         </service>
+        <service id="sonata.block.menu.registry" class="Sonata\BlockBundle\Menu\MenuRegistry">
+            <argument/>
+        </service>
         <service id="sonata.block.context_manager.default" class="Sonata\BlockBundle\Block\BlockContextManager">
             <argument type="service" id="sonata.block.loader.chain"/>
             <argument type="service" id="sonata.block.manager"/>

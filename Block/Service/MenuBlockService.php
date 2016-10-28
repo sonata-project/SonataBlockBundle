@@ -15,6 +15,7 @@ use Knp\Menu\ItemInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Menu\MenuRegistryInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\CoreBundle\Validator\ErrorElement;
@@ -36,24 +37,43 @@ class MenuBlockService extends AbstractAdminBlockService
     protected $menuProvider;
 
     /**
+     * NEXT_MAJOR: remove property.
+     *
      * @var array
+     *
+     * @deprecated since 3.x, to be removed in 4.0
      */
     protected $menus;
 
     /**
+     * @var MenuRegistryInterface
+     */
+    protected $menuRegistry;
+
+    /**
      * Constructor.
      *
-     * @param string                $name
-     * @param EngineInterface       $templating
-     * @param MenuProviderInterface $menuProvider
-     * @param array                 $menus
+     * @param string                      $name
+     * @param EngineInterface             $templating
+     * @param MenuProviderInterface       $menuProvider
+     * @param MenuRegistryInterface|array $menuRegistry
      */
-    public function __construct($name, EngineInterface $templating, MenuProviderInterface $menuProvider, array $menus = array())
+    public function __construct($name, EngineInterface $templating, MenuProviderInterface $menuProvider, $menuRegistry)
     {
         parent::__construct($name, $templating);
 
         $this->menuProvider = $menuProvider;
-        $this->menus = $menus;
+
+        // NEXT_MAJOR: change the constructor parameter to MenuManagerInterface and remove the following condition
+        if ($menuRegistry instanceof MenuRegistryInterface) {
+            $this->menuRegistry = $menuRegistry;
+        } else {
+            @trigger_error(
+                'Initializing '.__CLASS__.' with an array parameter is deprecated since 3.x and will be removed in 4.0.',
+                E_USER_DEPRECATED
+            );
+            $this->menus = $menuRegistry;
+        }
     }
 
     /**
@@ -134,10 +154,32 @@ class MenuBlockService extends AbstractAdminBlockService
      */
     protected function getFormSettingsKeys()
     {
+        $choiceOptions = array(
+            'required' => false,
+        );
+
+        $choices = $this->menus;
+
+        if (count($choices) == 0) {
+            $choices = $this->menuRegistry->getAliasNames();
+        }
+
+        // NEXT_MAJOR: remove SF 2.7+ BC
+        if (method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
+            $choices = array_flip($choices);
+
+            // choice_as_value options is not needed in SF 3.0+
+            if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
+                $choiceOptions['choices_as_values'] = true;
+            }
+        }
+
+        $choiceOptions['choices'] = $choices;
+
         return array(
             array('title', 'text', array('required' => false)),
             array('cache_policy', 'choice', array('choices' => array('public', 'private'))),
-            array('menu_name', 'choice', array('choices' => $this->menus, 'required' => false)),
+            array('menu_name', 'choice', $choiceOptions),
             array('safe_labels', 'checkbox', array('required' => false)),
             array('current_class', 'text', array('required' => false)),
             array('first_class', 'text', array('required' => false)),

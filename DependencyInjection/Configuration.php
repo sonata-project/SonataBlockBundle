@@ -164,6 +164,18 @@ class Configuration implements ConfigurationInterface
                     ->info('KNP Menus available in sonata.block.menu block configuration')
                     ->useAttributeAsKey('id')
                     ->prototype('scalar')->end()
+                    ->validate()
+                        ->always(function ($value) {
+                            if (count($value) > 0) {
+                                @trigger_error(
+                                    'The menus configuration key is deprecated since 3.x and will be removed in 4.0.',
+                                    E_USER_DEPRECATED
+                                );
+                            }
+
+                            return $value;
+                        })
+                    ->end()
                 ->end()
 
                 ->arrayNode('blocks_by_class')
