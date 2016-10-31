@@ -274,7 +274,6 @@ class SonataBlockExtension extends Extension
     public function configureClassesToCompile()
     {
         $this->addClassesToCompile(array(
-            'Sonata\\BlockBundle\\Block\\BaseBlockService',
             'Sonata\\BlockBundle\\Block\\BlockLoaderChain',
             'Sonata\\BlockBundle\\Block\\BlockLoaderInterface',
             'Sonata\\BlockBundle\\Block\\BlockRenderer',
