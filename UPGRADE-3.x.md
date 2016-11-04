@@ -1,6 +1,26 @@
 UPGRADE 3.x
 ===========
 
+Injecting the block id into a service is deprecated and will be automatically set.
+
+Instead, provide an empty argument:
+
+## Before
+```
+    <service id="acme.block.service" class="Acme\BlockBundle\AcmeBlockService">
+        <tag name="sonata.block"/>
+        <argument>acme.block.service</argument>
+    </service>
+```
+
+## After
+```
+    <service id="acme.block.service" class="Acme\BlockBundle\AcmeBlockService">
+        <tag name="sonata.block"/>
+        <argument/>
+    </service>
+```
+
 UPGRADE FROM 3.1 to 3.2
 =======================
 
