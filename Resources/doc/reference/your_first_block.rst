@@ -177,7 +177,7 @@ We are almost done! Now, just declare the block as a service:
 
         <service id="sonata.block.service.rss" class="Sonata\BlockBundle\Block\Service\RssBlockService">
             <tag name="sonata.block" />
-            <argument>sonata.block.service.rss</argument>
+            <argument/>
             <argument type="service" id="templating" />
         </service>
 
