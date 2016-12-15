@@ -55,6 +55,10 @@ In the current tutorial, the default settings are:
         ));
     }
 
+.. note::
+
+    For version 3.2 of the block-bundle, you want to use the function configureSettings(OptionsResolver $resolver) { ... }.
+
 Form Editing
 ------------
 In order to allow editing forms, the ``BlockBundle`` relies on the ``AdminBundle``.
