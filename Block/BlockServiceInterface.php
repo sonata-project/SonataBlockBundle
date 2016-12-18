@@ -17,6 +17,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Interface BlockServiceInterface.
+ *
+ * NEXT_MAJOR: remove this interface.
+ *
+ * @deprecated since 3.2, to be removed with 4.0
  */
 interface BlockServiceInterface
 {

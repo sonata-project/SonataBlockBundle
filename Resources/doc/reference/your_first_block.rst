@@ -13,7 +13,7 @@ A `block service` is just a service which must implement the ``BlockServiceInter
 First namespaces
 ----------------
 
-The ``BaseBlockService`` implements some basic methods defined by the interface.
+The ``AbstractBlockService`` implements some basic methods defined by the interface.
 The current RSS block will extend this base class. The other `use` statements are required by the interface's remaining methods.
 
 .. code-block:: php
@@ -30,7 +30,7 @@ The current RSS block will extend this base class. The other `use` statements ar
 
     use Sonata\AdminBundle\Form\FormMapper;
     use Sonata\CoreBundle\Validator\ErrorElement;
-    use Sonata\BlockBundle\Block\BaseBlockService;
+    use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 
 Default settings
 ----------------
@@ -177,7 +177,7 @@ We are almost done! Now, just declare the block as a service:
 
         <service id="sonata.block.service.rss" class="Sonata\BlockBundle\Block\Service\RssBlockService">
             <tag name="sonata.block" />
-            <argument>sonata.block.service.rss</argument>
+            <argument/>
             <argument type="service" id="templating" />
         </service>
 

@@ -33,10 +33,21 @@ MenuBlockService
 
 This block service displays a KNP Menu.
 
-Upon configuration, you may set a KNP Menu name (as specified in `KnpMenuBundle documentation`_), and some rendering options (see KNP Doc for those).
+Provide a list of available menus in the configuration.
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        sonata_block:
+            menus:
+                'AppBundle:Builder:mainMenu': 'Main Menu'
+                'footer': 'Footer Menu' # Use alias name if using menus as a service
+
+Upon configuration, you may set some rendering options (see KNP Doc for those).
 
 Set ``cache_policy`` to private if this menu is dedicated to be in a user part.
 
 A specific menu template is provided as well to render Bootstrap3's side menu, you may use it by setting the ``menu_template`` option to ``SonataBlockBundle:Block:block_side_menu_template.html.twig`` (see the implementation in SonataUserBundle or Sonata's e-commerce suite).
 
-.. _KnpMenuBundle documentation: https://github.com/KnpLabs/KnpMenuBundle/blob/master/Resources/doc/index.md#rendering-menus
+.. _KnpMenuBundle documentation: https://symfony.com/doc/current/bundles/KnpMenuBundle/index.html

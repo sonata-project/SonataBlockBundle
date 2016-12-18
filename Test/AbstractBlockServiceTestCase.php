@@ -49,6 +49,13 @@ abstract class AbstractBlockServiceTestCase extends \PHPUnit_Framework_TestCase
         $this->blockContextManager = new BlockContextManager($blockLoader, $this->blockServiceManager);
     }
 
+    /**
+     * Create a mocked block service.
+     *
+     * @param BlockServiceInterface $blockService A block service
+     *
+     * @return BlockContextInterface
+     */
     protected function getBlockContext(BlockServiceInterface $blockService)
     {
         $this->blockServiceManager->expects($this->once())->method('get')->will($this->returnValue($blockService));
@@ -62,6 +69,12 @@ abstract class AbstractBlockServiceTestCase extends \PHPUnit_Framework_TestCase
         return $blockContext;
     }
 
+    /**
+     * Asserts that the block settings have the expected values.
+     *
+     * @param array                 $expected     Expected settings
+     * @param BlockContextInterface $blockContext BlockContext object
+     */
     protected function assertSettings(array $expected, BlockContextInterface $blockContext)
     {
         $completeExpectedOptions = array_merge(array(

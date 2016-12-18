@@ -11,68 +11,19 @@
 
 namespace Sonata\BlockBundle\Tests\Block\Service;
 
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Component\HttpFoundation\Response;
+use Sonata\BlockBundle\Test\FakeTemplating as BaseTemplating;
 
-class FakeTemplating implements EngineInterface
+@trigger_error(
+    'The '.__NAMESPACE__.'\FakeTemplating class is deprecated since version 3.1 and will be removed in 4.0.'
+    .' Use Sonata\BlockBundle\Test\FakeTemplating instead.',
+    E_USER_DEPRECATED
+);
+
+/**
+ * NEXT_MAJOR: remove this class.
+ *
+ * @deprecated since version 3.1 and will be removed in 4.0. Use Sonata\BlockBundle\Test\FakeTemplating instead
+ */
+class FakeTemplating extends BaseTemplating
 {
-    /**
-     * @var string
-     */
-    public $view;
-
-    /**
-     * @var array
-     */
-    public $parameters;
-
-    /**
-     * @var Response
-     */
-    public $response;
-
-    /**
-     * @var string
-     */
-    public $name;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function render($name, array $parameters = array())
-    {
-        $this->name = $name;
-        $this->parameters = $parameters;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function renderResponse($view, array $parameters = array(), Response $response = null)
-    {
-        $this->view = $view;
-        $this->parameters = $parameters;
-
-        if ($response) {
-            return $response;
-        }
-
-        return new Response();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function supports($name)
-    {
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function exists($name)
-    {
-        return true;
-    }
 }
