@@ -27,7 +27,8 @@ UPGRADE FROM 3.1 to 3.2
 ## Deprecated block classes and interfaces
 
 The `Sonata\BlockBundle\Block\AbstractBlockService` and `Sonata\BlockBundle\Block\BaseBlockService` classes are deprecated.
-Use `Sonata\BlockBundle\Block\AbstractBlockService` for normal blocks or `Sonata\BlockBundle\Block\AbstractAdminBlockService` for manageable blocks instead.
+Use `Sonata\BlockBundle\Block\Service\AbstractBlockService` for normal blocks
+or `Sonata\BlockBundle\Block\Service\AbstractAdminBlockService` for manageable blocks instead.
 
 The interfaces `Sonata\BlockBundle\Block\BlockServiceInterface` and `Sonata\BlockBundle\Block\BlockAdminServiceInterface` are deprecated.
 
