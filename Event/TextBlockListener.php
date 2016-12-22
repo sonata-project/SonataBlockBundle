@@ -24,7 +24,7 @@ use Symfony\Component\EventDispatcher\Event;
  *     text.listener:
  *        class: Sonata\BlockBundle\Event\TextBlockListener
  *        tags:
- *          - { name: kernel.event_listener, event: 'sonata.block.event.sonata.admin.form.edit.top', method: onBlock}
+ *          - { name: kernel.event_listener, event: 'sonata.block.event.sonata.admin.edit.form.top', method: onBlock}
  */
 class TextBlockListener
 {

@@ -253,7 +253,6 @@ class BlockHelper extends Helper
                 }
 
                 if (!$cacheElement->isExpired() && $cacheElement->getData() instanceof Response) {
-
                     /* @var Response $response */
 
                     if ($this->stopwatch) {
