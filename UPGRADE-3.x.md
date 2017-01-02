@@ -1,11 +1,19 @@
 UPGRADE 3.x
 ===========
 
+## Menu blocks
+
+Menus for the `MenuBlockService` can now be defined by a `<tag name="sonata.block.menu"/>` tag. 
+Defining the blocks via `sonata_block.menus` is deprecated.
+
+## Inject blocks
+
 Injecting the block id into a service is deprecated and will be automatically set.
+
 
 Instead, provide an empty argument:
 
-## Before
+### Before
 ```
     <service id="acme.block.service" class="Acme\BlockBundle\AcmeBlockService">
         <tag name="sonata.block"/>
@@ -13,7 +21,7 @@ Instead, provide an empty argument:
     </service>
 ```
 
-## After
+### After
 ```
     <service id="acme.block.service" class="Acme\BlockBundle\AcmeBlockService">
         <tag name="sonata.block"/>
