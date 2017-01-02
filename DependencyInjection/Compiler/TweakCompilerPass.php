@@ -34,18 +34,8 @@ class TweakCompilerPass implements CompilerPassInterface
         foreach ($container->findTaggedServiceIds('sonata.block') as $id => $tags) {
             $definition = $container->getDefinition($id);
 
-            $arguments = $definition->getArguments();
-
             // Replace empty block id with service id
-            if (strlen($arguments[0]) == 0) {
-                $definition->replaceArgument(0, $id);
-            } elseif ($id != $arguments[0]) {
-                // NEXT_MAJOR: Remove deprecation notice
-                @trigger_error(
-                    'Using different service id and block id is deprecated since 3.x and will be removed in 4.0.',
-                    E_USER_DEPRECATED
-                );
-            }
+            $definition->replaceArgument(0, $id);
 
             $manager->addMethodCall('add', array($id, $id, isset($parameters[$id]) ? $parameters[$id]['contexts'] : array()));
         }
