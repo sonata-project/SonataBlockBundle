@@ -121,7 +121,7 @@ class SonataBlockExtension extends Extension
             return;
         }
 
-        $container->getDefinition('sonata.block.service.menu')->replaceArgument(3, $config['menus']);
+        $container->getDefinition('sonata.block.menu.registry')->replaceArgument(0, $config['menus']);
     }
 
     /**

@@ -34,7 +34,7 @@
             <argument/>
             <argument type="service" id="templating"/>
             <argument type="service" id="knp_menu.menu_provider"/>
-            <argument type="collection"/>
+            <argument type="service" id="sonata.block.menu.registry"/>
         </service>
         <service id="sonata.block.service.template" class="%sonata.block.service.template.class%">
             <tag name="sonata.block"/>
