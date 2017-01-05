@@ -50,19 +50,7 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
             'required' => false,
         );
 
-        $choices = array(
-            'acme:demobundle:menu' => 'Test Menu',
-        );
-
-        // NEXT_MAJOR: remove SF 2.7+ BC
-        if (method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
-            $choices = array_flip($choices);
-
-            // choice_as_value options is not needed in SF 3.0+
-            if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
-                $choiceOptions['choices_as_values'] = true;
-            }
-        }
+        $choices = array('Test Menu' => 'acme:demobundle:menu');
 
         $choiceOptions['choices'] = $choices;
 
