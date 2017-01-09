@@ -59,9 +59,6 @@
 {% endblock %}
 
 {% block panel %}
-    {# NEXT_MAJOR : remove this when Symfony Requirement will be bumped to 2.8+ #}
-    {% set profiler_markup_version = profiler_markup_version|default(1) %}
-
     <h2>Events Blocks</h2>
     <table>
         <tr>
