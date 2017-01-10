@@ -25,7 +25,7 @@ use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
  *
  * NEXT_MAJOR: remove this class.
  *
- * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
  * @deprecated since 3.2, to be removed with 4.0
  */
