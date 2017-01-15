@@ -14,7 +14,7 @@ Injecting the block id into a service is deprecated and will be automatically se
 Instead, provide an empty argument:
 
 ### Before
-```
+```xml
     <service id="acme.block.service" class="Acme\BlockBundle\AcmeBlockService">
         <tag name="sonata.block"/>
         <argument>acme.block.service</argument>
@@ -22,7 +22,7 @@ Instead, provide an empty argument:
 ```
 
 ### After
-```
+```xml
     <service id="acme.block.service" class="Acme\BlockBundle\AcmeBlockService">
         <tag name="sonata.block"/>
         <argument/>
