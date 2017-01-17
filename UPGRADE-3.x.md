@@ -1,6 +1,9 @@
 UPGRADE 3.x
 ===========
 
+UPGRADE FROM 3.2 to 3.3
+=======================
+
 ## Menu blocks
 
 Menus for the `MenuBlockService` can now be defined by a `<tag name="sonata.block.menu"/>` tag. 

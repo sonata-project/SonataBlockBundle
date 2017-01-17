@@ -2,6 +2,23 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.3.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.2.0...3.3.0) - 2017-01-17
+### Added
+- Created `MenuManager` to collect all menus for the `MenuBlockService`
+- Added new `sonata.block_menu` tag
+
+### Changed
+- Empty block names are automatically set via `TweakCompilerPass`
+
+### Deprecated
+- Deprecated the array parameter in `MenuBlockService`in favor of the new `MenuManager`
+
+### Fixed
+- Missing italian translation
+
+### Removed
+- Deprecated `BaseBlockService` class was removed from the list of classes to compile
+
 ## [3.2.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.1.1...3.2.0) - 2016-09-20
 ### Added
 - Created `Sonata\BlockBundle\Block\Service\AbstractAdminBlockService` class
