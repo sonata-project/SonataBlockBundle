@@ -47,11 +47,11 @@ abstract class AbstractBlockServiceTestCase extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $this->container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
         $this->templating = new FakeTemplating();
 
-        $blockLoader = $this->getMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
-        $this->blockServiceManager = $this->getMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
+        $blockLoader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
+        $this->blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
         $this->blockContextManager = new BlockContextManager($blockLoader, $this->blockServiceManager);
     }
 
@@ -66,7 +66,7 @@ abstract class AbstractBlockServiceTestCase extends \PHPUnit_Framework_TestCase
     {
         $this->blockServiceManager->expects($this->once())->method('get')->will($this->returnValue($blockService));
 
-        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->once())->method('getSettings')->will($this->returnValue(array()));
 
         $blockContext = $this->blockContextManager->get($block);
@@ -96,5 +96,21 @@ abstract class AbstractBlockServiceTestCase extends \PHPUnit_Framework_TestCase
         ksort($blockSettings);
 
         $this->assertSame($completeExpectedOptions, $blockSettings);
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method when dropping support for < PHPUnit 5.4.
+     *
+     * @param string $class
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function createMock($class)
+    {
+        if (is_callable('parent::createMock')) {
+            return parent::createMock($class);
+        }
+
+        return $this->getMock($class);
     }
 }
