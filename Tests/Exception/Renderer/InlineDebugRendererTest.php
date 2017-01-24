@@ -12,13 +12,14 @@
 namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 
 use Sonata\BlockBundle\Exception\Renderer\InlineDebugRenderer;
+use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
 /**
  * Test the inline debug exception renderer.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class InlineDebugRendererTest extends \PHPUnit_Framework_TestCase
+class InlineDebugRendererTest extends PHPUnit_Framework_TestCase
 {
     /**
      * test the renderer without debug mode.
@@ -28,9 +29,9 @@ class InlineDebugRendererTest extends \PHPUnit_Framework_TestCase
         // GIVEN
         $template = 'test-template';
         $debug = false;
-        $exception = $this->getMock('\Exception');
-        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
-        $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $exception = $this->createMock('\Exception');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
 
         $renderer = new InlineDebugRenderer($templating, $template, $debug);
 
@@ -52,13 +53,13 @@ class InlineDebugRendererTest extends \PHPUnit_Framework_TestCase
         $debug = true;
 
         // mock an exception to render
-        $exception = $this->getMock('\Exception');
+        $exception = $this->createMock('\Exception');
 
         // mock a block instance that provoked the exception
-        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
 
         // mock the templating render() to return an html result
-        $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $templating->expects($this->once())
             ->method('render')
             ->with(
