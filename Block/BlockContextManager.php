@@ -55,7 +55,7 @@ class BlockContextManager implements BlockContextManagerInterface
 
     /**
      * Used for deprecation check on {@link resolve} method.
-     * To be removed in 3.0 with BC system.
+     * To be removed in 4.0 with BC system.
      *
      * @var array
      */
@@ -163,13 +163,13 @@ class BlockContextManager implements BlockContextManagerInterface
      * @param OptionsResolverInterface $optionsResolver
      * @param BlockInterface           $block
      *
-     * @deprecated since version 2.3, to be renamed in 3.0.
+     * @deprecated since version 2.3, to be renamed in 4.0.
      *             Use the method configureSettings instead
      */
     protected function setDefaultSettings(OptionsResolverInterface $optionsResolver, BlockInterface $block)
     {
         if (get_called_class() !== __CLASS__) {
-            @trigger_error('The '.__METHOD__.' is deprecated since version 2.3, to be renamed in 3.0. Use '.__CLASS__.'::configureSettings instead.', E_USER_DEPRECATED);
+            @trigger_error('The '.__METHOD__.' is deprecated since version 2.3, to be renamed in 4.0. Use '.__CLASS__.'::configureSettings instead.', E_USER_DEPRECATED);
         }
         $this->configureSettings($optionsResolver, $block);
     }
@@ -294,7 +294,7 @@ class BlockContextManager implements BlockContextManagerInterface
         }
 
         if ($this->reflectionCache[$serviceClass]['isOldOverwritten'] && !$this->reflectionCache[$serviceClass]['isNewOverwritten']) {
-            @trigger_error('The Sonata\BlockBundle\Block\BlockServiceInterface::setDefaultSettings() method is deprecated since version 2.3 and will be removed in 3.0. Use configureSettings() instead. This method will be added to the BlockServiceInterface with SonataBlockBundle 3.0.', E_USER_DEPRECATED);
+            @trigger_error('The Sonata\BlockBundle\Block\BlockServiceInterface::setDefaultSettings() method is deprecated since version 2.3 and will be removed in 4.0. Use configureSettings() instead. This method will be added to the BlockServiceInterface with SonataBlockBundle 4.0.', E_USER_DEPRECATED);
         }
 
         return $optionsResolver->resolve($settings);
