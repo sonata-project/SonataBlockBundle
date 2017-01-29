@@ -12,13 +12,14 @@
 namespace Sonata\BlockBundle\Tests\Form\Type;
 
 use Sonata\BlockBundle\Form\Type\ServiceListType;
+use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ServiceListTypeTest extends \PHPUnit_Framework_TestCase
+class ServiceListTypeTest extends PHPUnit_Framework_TestCase
 {
     public function testFormType()
     {
-        $blockServiceManager = $this->getMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
+        $blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
 
         $type = new ServiceListType($blockServiceManager);
 
@@ -31,7 +32,7 @@ class ServiceListTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testOptionsWithInvalidContext()
     {
-        $blockServiceManager = $this->getMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
+        $blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
 
         $type = new ServiceListType($blockServiceManager);
 
@@ -48,10 +49,10 @@ class ServiceListTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testOptionWithValidContext()
     {
-        $blockService = $this->getMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $blockService = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
         $blockService->expects($this->once())->method('getName')->will($this->returnValue('value'));
 
-        $blockServiceManager = $this->getMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
+        $blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
         $blockServiceManager
             ->expects($this->once())
             ->method('getServicesByContext')

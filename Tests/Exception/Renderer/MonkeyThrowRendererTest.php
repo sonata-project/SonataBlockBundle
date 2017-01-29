@@ -12,13 +12,14 @@
 namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 
 use Sonata\BlockBundle\Exception\Renderer\MonkeyThrowRenderer;
+use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
 /**
  * Test the monkey throw exception renderer.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class MonkeyThrowRendererTest extends \PHPUnit_Framework_TestCase
+class MonkeyThrowRendererTest extends PHPUnit_Framework_TestCase
 {
     /**
      * test the render() method with a standard Exception.
@@ -29,7 +30,7 @@ class MonkeyThrowRendererTest extends \PHPUnit_Framework_TestCase
     {
         // GIVEN
         $exception = new \Exception();
-        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $renderer = new MonkeyThrowRenderer();
 
         // WHEN
@@ -48,7 +49,7 @@ class MonkeyThrowRendererTest extends \PHPUnit_Framework_TestCase
     {
         // GIVEN
         $exception = new \RuntimeException();
-        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $renderer = new MonkeyThrowRenderer();
 
         // WHEN

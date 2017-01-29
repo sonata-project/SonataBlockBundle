@@ -12,21 +12,22 @@
 namespace Sonata\BlockBundle\Tests\Block;
 
 use Sonata\BlockBundle\Block\BlockServiceManager;
+use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
-class BlockServiceManagerTest extends \PHPUnit_Framework_TestCase
+class BlockServiceManagerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetBlockService()
     {
-        $service = $this->getMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $service = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
 
-        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
         $container->expects($this->once())->method('get')->will($this->returnValue($service));
 
         $manager = new BlockServiceManager($container, true);
 
         $manager->add('test', 'test');
 
-        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())->method('getType')->will($this->returnValue('test'));
 
         $this->assertInstanceOf(get_class($service), $manager->get($block));
@@ -37,16 +38,16 @@ class BlockServiceManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidServiceType()
     {
-        $service = $this->getMock('stdClass');
+        $service = $this->createMock('stdClass');
 
-        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
         $container->expects($this->once())->method('get')->will($this->returnValue($service));
 
         $manager = new BlockServiceManager($container, true);
 
         $manager->add('test', 'test');
 
-        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())->method('getType')->will($this->returnValue('test'));
 
         $this->assertInstanceOf(get_class($service), $manager->get($block));
@@ -57,11 +58,11 @@ class BlockServiceManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetBlockServiceException()
     {
-        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
 
         $manager = new BlockServiceManager($container, true);
 
-        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())->method('getType')->will($this->returnValue('fakse'));
 
         $manager->get($block);
@@ -69,10 +70,10 @@ class BlockServiceManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetEmptyListFromInvalidContext()
     {
-        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
         $manager = new BlockServiceManager($container, true);
 
-        $service = $this->getMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $service = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
 
         $manager->add('foo.bar', $service);
 
@@ -81,10 +82,10 @@ class BlockServiceManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetListFromValidContext()
     {
-        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
         $manager = new BlockServiceManager($container, true);
 
-        $service = $this->getMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $service = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
 
         $manager->add('foo.bar', $service, array('fake'));
 
@@ -93,18 +94,18 @@ class BlockServiceManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testOrderServices()
     {
-        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
         $manager = new BlockServiceManager($container, true);
 
-        $serviceAbc = $this->getMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $serviceAbc = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
         $serviceAbc->expects($this->any())->method('getName')->will($this->returnValue('GHI'));
         $manager->add('ghi', $serviceAbc);
 
-        $serviceAbc = $this->getMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $serviceAbc = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
         $serviceAbc->expects($this->any())->method('getName')->will($this->returnValue('ABC'));
         $manager->add('abc', $serviceAbc);
 
-        $serviceAbc = $this->getMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $serviceAbc = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
         $serviceAbc->expects($this->any())->method('getName')->will($this->returnValue('DEF'));
         $manager->add('def', $serviceAbc);
 
