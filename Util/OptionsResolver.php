@@ -13,9 +13,6 @@ namespace Sonata\BlockBundle\Util;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-/**
- * Class OptionsResolver.
- */
 class OptionsResolver extends \Symfony\Component\OptionsResolver\OptionsResolver implements OptionsResolverInterface
 {
 }

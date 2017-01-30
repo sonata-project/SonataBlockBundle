@@ -61,8 +61,6 @@ class StrategyManager implements StrategyManagerInterface
     protected $defaultRenderer;
 
     /**
-     * Constructor.
-     *
      * @param ContainerInterface $container      Dependency injection container
      * @param array              $filters        Filter definitions
      * @param array              $renderers      Renderer definitions

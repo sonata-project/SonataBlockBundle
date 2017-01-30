@@ -44,8 +44,6 @@ class InlineDebugRenderer implements RendererInterface
     protected $debug;
 
     /**
-     * Constructor.
-     *
      * @param EngineInterface $templating Templating engine
      * @param string          $template   Template to render
      * @param bool            $debug      Whether the debug is enabled or not

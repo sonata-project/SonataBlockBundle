@@ -18,9 +18,6 @@ use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-/**
- * Class BlockContextManager.
- */
 class BlockContextManager implements BlockContextManagerInterface
 {
     /**

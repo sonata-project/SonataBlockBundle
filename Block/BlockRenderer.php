@@ -53,8 +53,6 @@ class BlockRenderer implements BlockRendererInterface
     private $lastResponse;
 
     /**
-     * Constructor.
-     *
      * @param BlockServiceManagerInterface $blockServiceManager      Block service manager
      * @param StrategyManagerInterface     $exceptionStrategyManager Exception strategy manager
      * @param LoggerInterface              $logger                   Logger class
