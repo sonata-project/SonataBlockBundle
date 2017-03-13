@@ -40,7 +40,10 @@ class TweakCompilerPass implements CompilerPassInterface
             // Replace empty block id with service id
             if (strlen($arguments[0]) == 0) {
                 $definition->replaceArgument(0, $id);
-            } elseif ($id != $arguments[0] && 0 !== strpos('Sonata\\BlockBundle\\Block\\Service\\', $definition->getClass())) {
+            } elseif ($id != $arguments[0] && 0 !== strpos(
+                'Sonata\\BlockBundle\\Block\\Service\\',
+                $container->getParameterBag()->resolveValue($definition->getClass())
+            )) {
                 // NEXT_MAJOR: Remove deprecation notice
                 @trigger_error(
                     sprintf('Using service id %s different from block id %s is deprecated since 3.x and will be removed in 4.0.', $id, $arguments[0]),
