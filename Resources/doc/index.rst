@@ -1,10 +1,9 @@
 Block Bundle
 ============
 
-Reference Guide
----------------
-
 .. toctree::
+   :caption: Reference Guide
+   :name: reference-guide
    :maxdepth: 1
    :numbered:
 
@@ -19,10 +18,9 @@ Reference Guide
    reference/events
    reference/testing
 
-Cookbooks
----------
-
 .. toctree::
+   :caption: Cookbook
+   :name: cookbook
    :maxdepth: 1
    :numbered:
 
