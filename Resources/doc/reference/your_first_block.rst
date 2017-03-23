@@ -35,7 +35,7 @@ The current RSS block will extend this base class. The other `use` statements ar
 Default settings
 ----------------
 
-A `block service` needs settings to work properly, so to ensure consistency, the service should define a ``setDefaultSettings`` method.
+A `block service` needs settings to work properly, so to ensure consistency, the service should define a ``configureOptions`` method.
 In the current tutorial, the default settings are:
 
 * `URL`: the feed url,
@@ -46,7 +46,7 @@ In the current tutorial, the default settings are:
 
     <?php
 
-    public function setDefaultSettings(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'url'      => false,
