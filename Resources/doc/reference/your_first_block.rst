@@ -75,7 +75,7 @@ In order to allow editing forms, the ``BlockBundle`` relies on the ``AdminBundle
         ;
     }
 
-The validation is done at runtime through a ``validateBlock`` method. You can call any Symfony2 assertions, like:
+The validation is done at runtime through a ``validateBlock`` method. You can call any Symfony assertions, like:
 
 .. code-block:: php
 
