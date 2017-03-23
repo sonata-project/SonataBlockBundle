@@ -54,8 +54,6 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
     protected $events = array();
 
     /**
-     * Constructor.
-     *
      * @param BlockHelper $blockHelper    Block renderer
      * @param array       $containerTypes array of container types
      */

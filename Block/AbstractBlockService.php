@@ -19,8 +19,6 @@ namespace Sonata\BlockBundle\Block;
 );
 
 /**
- * Class AbstractBlockService.
- *
  * NEXT_MAJOR: remove this class.
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>

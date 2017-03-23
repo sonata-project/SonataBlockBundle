@@ -33,8 +33,6 @@ class InlineRenderer implements RendererInterface
     protected $template;
 
     /**
-     * Constructor.
-     *
      * @param EngineInterface $templating Templating engine
      * @param string          $template   Template to render
      */

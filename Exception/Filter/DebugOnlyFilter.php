@@ -26,8 +26,6 @@ class DebugOnlyFilter implements FilterInterface
     protected $debug;
 
     /**
-     * Constructor.
-     *
      * @param bool $debug
      */
     public function __construct($debug)

@@ -24,9 +24,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class MenuBlockService.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class MenuBlockService extends AbstractAdminBlockService
@@ -51,8 +48,6 @@ class MenuBlockService extends AbstractAdminBlockService
     protected $menuRegistry;
 
     /**
-     * Constructor.
-     *
      * @param string                      $name
      * @param EngineInterface             $templating
      * @param MenuProviderInterface       $menuProvider
