@@ -41,8 +41,8 @@ class TweakCompilerPass implements CompilerPassInterface
             if (strlen($arguments[0]) == 0) {
                 $definition->replaceArgument(0, $id);
             } elseif ($id != $arguments[0] && 0 !== strpos(
-                'Sonata\\BlockBundle\\Block\\Service\\',
-                $container->getParameterBag()->resolveValue($definition->getClass())
+                $container->getParameterBag()->resolveValue($definition->getClass()),
+                'Sonata\\BlockBundle\\Block\\Service\\'
             )) {
                 // NEXT_MAJOR: Remove deprecation notice
                 @trigger_error(
