@@ -19,7 +19,7 @@ class BlockContextManagerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetWithValidData()
     {
-        $service = $this->createMock('Sonata\BlockBundle\Block\AbstractBlockService');
+        $service = $this->createMock('Sonata\BlockBundle\Block\Service\AbstractBlockService');
 
         $service->expects($this->once())->method('configureSettings');
 
@@ -48,7 +48,7 @@ class BlockContextManagerTest extends PHPUnit_Framework_TestCase
 
     public function testGetWithSettings()
     {
-        $service = $this->createMock('Sonata\BlockBundle\Block\AbstractBlockService');
+        $service = $this->createMock('Sonata\BlockBundle\Block\Service\AbstractBlockService');
         $service->expects($this->once())->method('configureSettings');
 
         $blockLoader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
@@ -89,7 +89,7 @@ class BlockContextManagerTest extends PHPUnit_Framework_TestCase
         $logger = $this->createMock('Psr\Log\LoggerInterface');
         $logger->expects($this->exactly(1))->method('error');
 
-        $service = $this->createMock('Sonata\BlockBundle\Block\AbstractBlockService');
+        $service = $this->createMock('Sonata\BlockBundle\Block\Service\AbstractBlockService');
         $service->expects($this->exactly(2))->method('configureSettings');
 
         $blockLoader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
