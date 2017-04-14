@@ -38,7 +38,7 @@ class TweakCompilerPass implements CompilerPassInterface
             $arguments = $definition->getArguments();
 
             // Replace empty block id with service id
-            if (strlen($arguments[0]) == 0) {
+            if (empty($arguments) || strlen($arguments[0]) == 0) {
                 $definition->replaceArgument(0, $id);
             } elseif ($id != $arguments[0] && 0 !== strpos(
                 $container->getParameterBag()->resolveValue($definition->getClass()),
