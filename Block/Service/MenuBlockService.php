@@ -156,7 +156,7 @@ class MenuBlockService extends AbstractAdminBlockService
         $choices = $this->menus;
 
         if (count($choices) == 0) {
-            if(!empty($this->menuRegistry)){
+            if (!empty($this->menuRegistry)) {
                 $choices = $this->menuRegistry->getAliasNames();
             }
         }
