@@ -156,7 +156,9 @@ class MenuBlockService extends AbstractAdminBlockService
         $choices = $this->menus;
 
         if (count($choices) == 0) {
-            $choices = $this->menuRegistry->getAliasNames();
+            if(!empty($this->menuRegistry)){
+                $choices = $this->menuRegistry->getAliasNames();
+            }
         }
 
         // NEXT_MAJOR: remove SF 2.7+ BC
