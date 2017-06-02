@@ -431,12 +431,12 @@ class BlockHelper extends Helper
         $results = array();
 
         foreach ($this->eventDispatcher->getListeners($eventName) as $listener) {
-            if (is_object($listener[0])) {
+            if ($listener instanceof \Closure) {
+                $results[] = '{closure}()';
+            } elseif (is_object($listener[0])) {
                 $results[] = get_class($listener[0]);
             } elseif (is_string($listener[0])) {
                 $results[] = $listener[0];
-            } elseif ($listener instanceof \Closure) {
-                $results[] = '{closure}()';
             } else {
                 $results[] = 'Unknown type!';
             }
