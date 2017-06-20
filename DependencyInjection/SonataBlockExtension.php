@@ -72,7 +72,9 @@ class SonataBlockExtension extends Extension
         $this->configureProfiler($container, $config);
         $this->configureException($container, $config);
         $this->configureMenus($container, $config);
-        $this->configureClassesToCompile();
+        if (\PHP_VERSION_ID < 70000) {
+            $this->configureClassesToCompile();
+        }
 
         if ($config['templates']['block_base'] === null) {
             if (isset($bundles['SonataPageBundle'])) {
