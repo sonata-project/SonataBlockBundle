@@ -19,6 +19,11 @@
             <argument>sonata.block.empty</argument>
             <argument type="service" id="templating"/>
         </service>
+        <service id="sonata.block.ajax" class="Sonata\BlockBundle\Block\Service\AjaxBlockService">
+            <tag name="sonata.block"/>
+            <argument>sonata.block.ajax</argument>
+            <argument type="service" id="templating"/>
+        </service>
         <service id="sonata.block.service.text" class="%sonata.block.service.text.class%">
             <tag name="sonata.block"/>
             <argument>sonata.block.text</argument>

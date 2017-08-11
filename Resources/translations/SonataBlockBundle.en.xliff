@@ -22,6 +22,46 @@
                 <source>sonata.block.template</source>
                 <target>Template</target>
             </trans-unit>
+            <trans-unit id="sonata.block.ajax">
+                <source>sonata.block.ajax</source>
+                <target>AJAX Statistic</target>
+            </trans-unit>
+            <trans-unit id="form.label_text">
+              <source>form.label_text</source>
+              <target>Text</target>
+            </trans-unit>
+            <trans-unit id="form.label_class">
+              <source>form.label_class</source>
+              <target>CSS Class</target>
+            </trans-unit>
+            <trans-unit id="form.label_icon">
+              <source>form.label_icon</source>
+              <target>Icon</target>
+            </trans-unit>
+            <trans-unit id="form.label_color">
+              <source>form.label_color</source>
+              <target>Color</target>
+            </trans-unit>
+            <trans-unit id="form.label_url">
+                <source>form.label_url</source>
+                <target>Url</target>
+            </trans-unit>
+            <trans-unit id="form.label_link">
+                <source>form.label_link</source>
+                <target>Link</target>
+            </trans-unit>
+            <trans-unit id="form.label_template">
+              <source>form.label_template</source>
+              <target>Template</target>
+            </trans-unit>
+            <trans-unit id="form.template_simple">
+              <source>form.template_simple</source>
+              <target>Simple</target>
+            </trans-unit>
+            <trans-unit id="form.template_link">
+              <source>form.template_link</source>
+              <target>Linked</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
