@@ -102,15 +102,24 @@ abstract class AbstractBlockServiceTestCase extends \PHPUnit_Framework_TestCase
      * NEXT_MAJOR: Remove this method when dropping support for < PHPUnit 5.4.
      *
      * @param string $class
+     * @param array  $methods
+     * @param array  $arguments
+     * @param string $mockClassName
+     * @param bool   $callOriginalConstructor
+     * @param bool   $callOriginalClone
+     * @param bool   $callAutoload
+     * @param bool   $cloneArguments
+     * @param bool   $callOriginalMethods
+     * @param null   $proxyTarget
      *
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function createMock($class)
+    protected function createMock($class, array $methods = array(), array $arguments = array(), $mockClassName = '', $callOriginalConstructor = true, $callOriginalClone = true, $callAutoload = true, $cloneArguments = false, $callOriginalMethods = false, $proxyTarget = null)
     {
         if (is_callable('parent::createMock')) {
             return parent::createMock($class);
         }
 
-        return $this->getMock($class);
+        return $this->getMock($class, $methods, $arguments, $mockClassName, $callOriginalConstructor, $callOriginalClone, $callAutoload, $cloneArguments, $callOriginalMethods, $proxyTarget);
     }
 }
