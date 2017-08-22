@@ -133,6 +133,7 @@ class BlockContextManager implements BlockContextManagerInterface
         }
 
         $originalSettings = $settings;
+
         try {
             $settings = $this->resolve($block, array_merge($block->getSettings(), $settings));
         } catch (ExceptionInterface $e) {
