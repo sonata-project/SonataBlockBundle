@@ -85,6 +85,7 @@ class BlockRenderer implements BlockRendererInterface
 
             if (!$response instanceof Response) {
                 $response = null;
+
                 throw new \RuntimeException('A block service must return a Response object');
             }
 

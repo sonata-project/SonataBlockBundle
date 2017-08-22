@@ -109,7 +109,7 @@ class BlockContextManagerTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
     }
 
-//    @TODO: Think if the BlockContextManager should throw an exception if the resolver throw an exception
+    //    @TODO: Think if the BlockContextManager should throw an exception if the resolver throw an exception
 //    /**
 //     * @expectedException \Sonata\BlockBundle\Exception\BlockOptionsException
 //     */
