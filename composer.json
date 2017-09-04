@@ -46,9 +46,6 @@
         ],
         "files": ["Resources/stubs/symfony2.php"]
     },
-    "autoload-dev": {
-        "psr-4": { "Sonata\\BlockBundle\\Tests\\": "Tests/" }
-     },
      "config": {
          "sort-packages": true
      },
