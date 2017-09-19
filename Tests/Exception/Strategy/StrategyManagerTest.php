@@ -14,6 +14,7 @@ namespace Sonata\BlockBundle\Tests\Exception\Strategy;
 use Sonata\BlockBundle\Exception\Filter\FilterInterface;
 use Sonata\BlockBundle\Exception\Renderer\RendererInterface;
 use Sonata\BlockBundle\Exception\Strategy\StrategyManager;
+use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -21,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class StrategyManagerTest extends \PHPUnit_Framework_TestCase
+class StrategyManagerTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var StrategyManager
@@ -78,10 +79,10 @@ class StrategyManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->renderer1 = $this->getMock('\Sonata\BlockBundle\Exception\Renderer\RendererInterface');
-        $this->renderer2 = $this->getMock('\Sonata\BlockBundle\Exception\Renderer\RendererInterface');
-        $this->filter1 = $this->getMock('\Sonata\BlockBundle\Exception\Filter\FilterInterface');
-        $this->filter2 = $this->getMock('\Sonata\BlockBundle\Exception\Filter\FilterInterface');
+        $this->renderer1 = $this->createMock('\Sonata\BlockBundle\Exception\Renderer\RendererInterface');
+        $this->renderer2 = $this->createMock('\Sonata\BlockBundle\Exception\Renderer\RendererInterface');
+        $this->filter1 = $this->createMock('\Sonata\BlockBundle\Exception\Filter\FilterInterface');
+        $this->filter2 = $this->createMock('\Sonata\BlockBundle\Exception\Filter\FilterInterface');
 
         // setup a mock container which contains our mock renderers and filters
         $this->container = $this->getMockContainer(array(
@@ -226,7 +227,7 @@ class StrategyManagerTest extends \PHPUnit_Framework_TestCase
      */
     protected function getMockBlock($type)
     {
-        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())->method('getType')->will($this->returnValue($type));
 
         return $block;
@@ -246,7 +247,7 @@ class StrategyManagerTest extends \PHPUnit_Framework_TestCase
             $map[] = array($name, ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $service);
         }
 
-        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
         $container->expects($this->any())->method('get')->will($this->returnValueMap($map));
 
         return $container;

@@ -16,9 +16,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class ContainerTemplateType.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class ContainerTemplateType extends AbstractType

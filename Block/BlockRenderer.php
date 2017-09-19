@@ -53,8 +53,6 @@ class BlockRenderer implements BlockRendererInterface
     private $lastResponse;
 
     /**
-     * Constructor.
-     *
      * @param BlockServiceManagerInterface $blockServiceManager      Block service manager
      * @param StrategyManagerInterface     $exceptionStrategyManager Exception strategy manager
      * @param LoggerInterface              $logger                   Logger class
@@ -87,6 +85,7 @@ class BlockRenderer implements BlockRendererInterface
 
             if (!$response instanceof Response) {
                 $response = null;
+
                 throw new \RuntimeException('A block service must return a Response object');
             }
 

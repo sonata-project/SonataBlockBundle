@@ -16,16 +16,17 @@ use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
+use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class BlockHelperTest extends \PHPUnit_Framework_TestCase
+class BlockHelperTest extends PHPUnit_Framework_TestCase
 {
     public function testRenderEventWithNoListener()
     {
-        $blockServiceManager = $this->getMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
-        $blockRenderer = $this->getMock('Sonata\BlockBundle\Block\BlockRendererInterface');
-        $blockContextManager = $this->getMock('Sonata\BlockBundle\Block\BlockContextManagerInterface');
-        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
+        $blockRenderer = $this->createMock('Sonata\BlockBundle\Block\BlockRendererInterface');
+        $blockContextManager = $this->createMock('Sonata\BlockBundle\Block\BlockContextManagerInterface');
+        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
         $eventDispatcher->expects($this->once())->method('dispatch')->will($this->returnCallback(function ($name, BlockEvent $event) {
             return $event;
         }));
@@ -37,7 +38,7 @@ class BlockHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderEventWithListeners()
     {
-        $blockService = $this->getMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $blockService = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
         $blockService->expects($this->once())->method('getJavascripts')->will($this->returnValue(array(
             '/js/base.js',
         )));
@@ -45,20 +46,20 @@ class BlockHelperTest extends \PHPUnit_Framework_TestCase
             '/css/base.css',
         )));
 
-        $blockServiceManager = $this->getMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
+        $blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
         $blockServiceManager->expects($this->any())->method('get')->will($this->returnValue($blockService));
 
-        $blockRenderer = $this->getMock('Sonata\BlockBundle\Block\BlockRendererInterface');
+        $blockRenderer = $this->createMock('Sonata\BlockBundle\Block\BlockRendererInterface');
         $blockRenderer->expects($this->once())->method('render')->will($this->returnValue(new Response('<span>test</span>')));
 
-        $blockContextManager = $this->getMock('Sonata\BlockBundle\Block\BlockContextManagerInterface');
+        $blockContextManager = $this->createMock('Sonata\BlockBundle\Block\BlockContextManagerInterface');
         $blockContextManager->expects($this->once())->method('get')->will($this->returnCallback(function (BlockInterface $block) {
             $context = new BlockContext($block, $block->getSettings());
 
             return $context;
         }));
 
-        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
         $eventDispatcher->expects($this->once())->method('dispatch')->will($this->returnCallback(function ($name, BlockEvent $event) {
             $block = new Block();
             $block->setId(1);

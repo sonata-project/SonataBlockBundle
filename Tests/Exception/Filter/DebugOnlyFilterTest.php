@@ -12,13 +12,14 @@
 namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 
 use Sonata\BlockBundle\Exception\Filter\DebugOnlyFilter;
+use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
 /**
  * Test the debug only exception filter.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class DebugOnlyFilterTest extends \PHPUnit_Framework_TestCase
+class DebugOnlyFilterTest extends PHPUnit_Framework_TestCase
 {
     /**
      * test the filter with debug enabled.
@@ -26,8 +27,8 @@ class DebugOnlyFilterTest extends \PHPUnit_Framework_TestCase
     public function testWithDebugEnabled()
     {
         // GIVEN
-        $exception = $this->getMock('\Exception');
-        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $exception = $this->createMock('\Exception');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $filter = new DebugOnlyFilter(true);
 
         // WHEN
@@ -43,8 +44,8 @@ class DebugOnlyFilterTest extends \PHPUnit_Framework_TestCase
     public function testWithDebugDisabled()
     {
         // GIVEN
-        $exception = $this->getMock('\Exception');
-        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $exception = $this->createMock('\Exception');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $filter = new DebugOnlyFilter(false);
 
         // WHEN

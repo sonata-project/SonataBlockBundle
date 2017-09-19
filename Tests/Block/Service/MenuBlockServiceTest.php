@@ -32,8 +32,8 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
     {
         parent::setUp();
 
-        $this->menuProvider = $this->getMock('Knp\Menu\Provider\MenuProviderInterface');
-        $this->menuRegistry = $this->getMock('Sonata\BlockBundle\Menu\MenuRegistryInterface');
+        $this->menuProvider = $this->createMock('Knp\Menu\Provider\MenuProviderInterface');
+        $this->menuRegistry = $this->createMock('Sonata\BlockBundle\Menu\MenuRegistryInterface');
     }
 
     public function testBuildEditForm()
@@ -44,7 +44,7 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
             )));
 
         $formMapper = $this->getMockBuilder('Sonata\AdminBundle\Form\FormMapper')->disableOriginalConstructor()->getMock();
-        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
 
         $choiceOptions = array(
             'required' => false,

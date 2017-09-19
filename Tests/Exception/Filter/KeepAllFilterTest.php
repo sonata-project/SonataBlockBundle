@@ -12,13 +12,14 @@
 namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 
 use Sonata\BlockBundle\Exception\Filter\KeepAllFilter;
+use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
 /**
  * Test the keep all exception filter.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class KeepAllFilterTest extends \PHPUnit_Framework_TestCase
+class KeepAllFilterTest extends PHPUnit_Framework_TestCase
 {
     /**
      * test the filter with an exception.
@@ -30,7 +31,7 @@ class KeepAllFilterTest extends \PHPUnit_Framework_TestCase
     public function testFilter(\Exception $exception)
     {
         // GIVEN
-        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $filter = new KeepAllFilter();
 
         // WHEN
@@ -48,8 +49,8 @@ class KeepAllFilterTest extends \PHPUnit_Framework_TestCase
     public function getExceptions()
     {
         return array(
-            array($this->getMock('\Exception')),
-            array($this->getMock('\RuntimeException')),
+            array($this->createMock('\Exception')),
+            array($this->createMock('\RuntimeException')),
         );
     }
 }

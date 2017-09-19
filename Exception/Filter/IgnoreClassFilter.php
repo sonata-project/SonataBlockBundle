@@ -27,8 +27,6 @@ class IgnoreClassFilter implements FilterInterface
     protected $class;
 
     /**
-     * Constructor.
-     *
      * @param string $class
      */
     public function __construct($class)

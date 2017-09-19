@@ -25,12 +25,17 @@
         "symfony/http-kernel": "^2.8 || ^3.0"
     },
     "require-dev": {
+        "jms/di-extra-bundle": "^1.7",
         "knplabs/knp-menu-bundle": "^2.0",
         "sllh/php-cs-fixer-styleci-bridge": "^2.0",
-        "sonata-project/admin-bundle": "^3.0 || ^4.0@dev",
+        "sonata-project/admin-bundle": "^3.22 || ^4.0@dev",
         "symfony/phpunit-bridge": "^2.8 || ^3.0"
     },
+    "conflict": {
+        "jms/di-extra-bundle": "<1.7.0"
+    },
     "suggest": {
+        "jms/di-extra-bundle": "Annotations for Block definition",
         "knplabs/knp-menu-bundle": "^2.0",
         "sonata-project/cache-bundle": "^3.0"
     },
@@ -40,9 +45,6 @@
             "Tests/"
         ]
     },
-    "autoload-dev": {
-        "psr-4": { "Sonata\\BlockBundle\\Tests\\": "Tests/" }
-     },
      "config": {
          "sort-packages": true
      },

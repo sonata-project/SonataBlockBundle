@@ -66,9 +66,6 @@ abstract class BaseBlock implements BlockInterface
      */
     protected $ttl;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->settings = array();

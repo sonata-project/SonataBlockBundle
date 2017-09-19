@@ -17,9 +17,6 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * Class BlockContextManager.
- */
 class BlockContextManager implements BlockContextManagerInterface
 {
     /**
@@ -126,6 +123,7 @@ class BlockContextManager implements BlockContextManagerInterface
         }
 
         $originalSettings = $settings;
+
         try {
             $settings = $this->resolve($block, array_merge($block->getSettings(), $settings));
         } catch (ExceptionInterface $e) {
@@ -228,6 +226,35 @@ class BlockContextManager implements BlockContextManagerInterface
         $service = $this->blockService->get($block);
 
         $service->configureSettings($optionsResolver);
+
+        // Caching method reflection
+        $serviceClass = get_class($service);
+        if (!isset($this->reflectionCache[$serviceClass])) {
+            $reflector = new \ReflectionMethod($service, 'setDefaultSettings');
+            $isOldOverwritten = $reflector->getDeclaringClass()->getName() !== 'Sonata\BlockBundle\Block\AbstractBlockService';
+
+            // Prevention for service classes implementing directly the interface and not extends the new base class
+            if (!method_exists($service, 'configureSettings')) {
+                $isNewOverwritten = false;
+            } else {
+                $reflector = new \ReflectionMethod($service, 'configureSettings');
+                $isNewOverwritten = $reflector->getDeclaringClass()->getName() !== 'Sonata\BlockBundle\Block\AbstractBlockService';
+            }
+
+            $this->reflectionCache[$serviceClass] = array(
+                'isOldOverwritten' => $isOldOverwritten,
+                'isNewOverwritten' => $isNewOverwritten,
+            );
+        }
+
+        if ($this->reflectionCache[$serviceClass]['isOldOverwritten'] && !$this->reflectionCache[$serviceClass]['isNewOverwritten']) {
+            @trigger_error(
+                'The Sonata\BlockBundle\Block\BlockServiceInterface::setDefaultSettings() method is deprecated'
+                .' since version 2.3 and will be removed in 4.0. Use configureSettings() instead.'
+                .' This method will be added to the BlockServiceInterface with SonataBlockBundle 4.0.',
+                E_USER_DEPRECATED
+            );
+        }
 
         return $optionsResolver->resolve($settings);
     }

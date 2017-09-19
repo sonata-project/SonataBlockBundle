@@ -14,7 +14,7 @@ namespace Sonata\BlockBundle\Tests;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Event\TextBlockListener;
 
-class TextBlockListenerTest extends \PHPUnit_Framework_TestCase
+class TextBlockListenerTest extends PHPUnit_Framework_TestCase
 {
     public function testEvent()
     {
@@ -32,7 +32,7 @@ class TextBlockListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testEventWithAdmin()
     {
-        $admin = $this->getMock('Sonata\AdminBundle\Admin\AdminInterface');
+        $admin = $this->createMock('Sonata\AdminBundle\Admin\AdminInterface');
         $admin->expects($this->once())->method('getSubject');
         $admin->expects($this->once())->method('toString')->will($this->returnValue('fake object'));
 

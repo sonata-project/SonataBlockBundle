@@ -2,6 +2,25 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.4.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.3.2...3.4.0) - 2017-09-19
+### Added
+- added block annotation
+
+# Fixed
+- a notice that appeared when defining blocks through annotations
+- Changed order of statements in the getEventListeners() method, to prevent issues where you pass in a \Closure class
+- deprecation notices related to `addClassesToCompile`
+
+## [3.3.2](https://github.com/sonata-project/SonataBlockBundle/compare/3.3.1...3.3.2) - 2017-03-23
+### Fixed
+- Resolve container parameters before comparing class names
+- Internal deprecations finally fixed
+
+## [3.3.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.3.0...3.3.1) - 2017-02-28
+### Fixed
+- Profiler block Twig 2.0 compatibility
+- Some unwanted deprecation notices about code we can't change until next major version have been removed
+
 ## [3.3.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.2.0...3.3.0) - 2017-01-17
 ### Added
 - Created `MenuManager` to collect all menus for the `MenuBlockService`
