@@ -12,8 +12,9 @@
 namespace Sonata\BlockBundle\Twig\Extension;
 
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
+use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
-class BlockExtensionTest extends \PHPUnit_Framework_TestCase
+class BlockExtensionTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|BlockHelper
@@ -36,7 +37,7 @@ class BlockExtensionTest extends \PHPUnit_Framework_TestCase
             'Sonata\BlockBundle\Templating\Helper\BlockHelper'
         )->disableOriginalConstructor()->getMock();
 
-        $loader = $this->getMock('Twig_LoaderInterface');
+        $loader = $this->createMock('Twig_LoaderInterface');
 
         $this->blockExtension = new BlockExtension($this->blockHelper);
 

@@ -12,13 +12,14 @@
 namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 
 use Sonata\BlockBundle\Exception\Renderer\InlineRenderer;
+use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
 /**
  * Test the inline exception renderer.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class InlineRendererTest extends \PHPUnit_Framework_TestCase
+class InlineRendererTest extends PHPUnit_Framework_TestCase
 {
     /**
      * test the render() method.
@@ -29,13 +30,13 @@ class InlineRendererTest extends \PHPUnit_Framework_TestCase
         $template = 'test-template';
 
         // mock an exception to render
-        $exception = $this->getMock('\Exception');
+        $exception = $this->createMock('\Exception');
 
         // mock a block instance that provoked the exception
-        $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
 
         // mock the templating render() to return an html result
-        $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $templating->expects($this->once())
             ->method('render')
             ->with(

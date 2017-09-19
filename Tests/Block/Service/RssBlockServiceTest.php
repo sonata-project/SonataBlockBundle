@@ -37,7 +37,9 @@ class RssBlockServiceTest extends AbstractBlockServiceTestCase
 
         $blockContext = new BlockContext($block, $optionResolver->resolve());
 
-        $formMapper = $this->getMock('Sonata\\AdminBundle\\Form\\FormMapper', array(), array(), '', false);
+        $formMapper = $this->getMockBuilder('Sonata\\AdminBundle\\Form\\FormMapper')
+            ->disableOriginalConstructor()
+            ->getMock();
         $formMapper->expects($this->exactly(2))->method('add');
 
         $service->buildCreateForm($formMapper, $block);

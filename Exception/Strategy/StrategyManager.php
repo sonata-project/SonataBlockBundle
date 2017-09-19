@@ -61,8 +61,6 @@ class StrategyManager implements StrategyManagerInterface
     protected $defaultRenderer;
 
     /**
-     * Constructor.
-     *
      * @param ContainerInterface $container      Dependency injection container
      * @param array              $filters        Filter definitions
      * @param array              $renderers      Renderer definitions
@@ -123,7 +121,7 @@ class StrategyManager implements StrategyManagerInterface
             $renderer = $this->getBlockRenderer($block);
             $response = $renderer->render($exception, $block, $response);
         }
-            // render empty block template?
+        // render empty block template?
 
         return $response;
     }
