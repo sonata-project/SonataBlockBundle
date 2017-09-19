@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.4.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.3.2...3.4.0) - 2017-09-19
+### Added
+- added block annotation
+
+# Fixed
+- a notice that appeared when defining blocks through annotations
+- Changed order of statements in the getEventListeners() method, to prevent issues where you pass in a \Closure class
+- deprecation notices related to `addClassesToCompile`
+
 ## [3.3.2](https://github.com/sonata-project/SonataBlockBundle/compare/3.3.1...3.3.2) - 2017-03-23
 ### Fixed
 - Resolve container parameters before comparing class names
