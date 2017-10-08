@@ -87,7 +87,7 @@ class BlockServiceManagerTest extends PHPUnit_Framework_TestCase
 
         $service = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
 
-        $manager->add('foo.bar', $service, array('fake'));
+        $manager->add('foo.bar', $service, ['fake']);
 
         $this->assertNotEmpty($manager->getServicesByContext('fake'));
     }

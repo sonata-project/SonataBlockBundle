@@ -18,80 +18,80 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     public function testOptions()
     {
-        $defaultTemplates = array(
+        $defaultTemplates = [
             'SonataPageBundle:Block:block_container.html.twig' => 'SonataPageBundle template',
             'SonataSeoBundle:Block:block_social_container.html.twig' => 'SonataSeoBundle (to contain social buttons)',
-        );
+        ];
 
         $processor = new Processor();
 
-        $config = $processor->processConfiguration(new Configuration($defaultTemplates), array(array(
-            'default_contexts' => array('cms'),
-            'blocks' => array('my.block.type' => array()),
-        )));
+        $config = $processor->processConfiguration(new Configuration($defaultTemplates), [[
+            'default_contexts' => ['cms'],
+            'blocks' => ['my.block.type' => []],
+        ]]);
 
-        $expected = array(
-            'default_contexts' => array(
+        $expected = [
+            'default_contexts' => [
                 0 => 'cms',
-            ),
-            'profiler' => array(
+            ],
+            'profiler' => [
                 'enabled' => '%kernel.debug%',
                 'template' => 'SonataBlockBundle:Profiler:block.html.twig',
-                'container_types' => array(
+                'container_types' => [
                     0 => 'sonata.block.service.container',
                     1 => 'sonata.page.block.container',
                     2 => 'sonata.dashboard.block.container',
                     3 => 'cmf.block.container',
                     4 => 'cmf.block.slideshow',
-                ),
-            ),
+                ],
+            ],
             'context_manager' => 'sonata.block.context_manager.default',
-            'http_cache' => array(
+            'http_cache' => [
                 'handler' => 'sonata.block.cache.handler.default',
                 'listener' => true,
-            ),
-            'templates' => array(
+            ],
+            'templates' => [
                 'block_base' => null,
                 'block_container' => null,
-            ),
-            'container' => array(
-                'types' => array(
+            ],
+            'container' => [
+                'types' => [
                     0 => 'sonata.block.service.container',
                     1 => 'sonata.page.block.container',
                     2 => 'sonata.dashboard.block.container',
                     3 => 'cmf.block.container',
                     4 => 'cmf.block.slideshow',
-                ),
+                ],
                 'templates' => $defaultTemplates,
-            ),
-            'blocks' => array(
-                'my.block.type' => array(
-                    'contexts' => array('cms'),
+            ],
+            'blocks' => [
+                'my.block.type' => [
+                    'contexts' => ['cms'],
                     'cache' => 'sonata.cache.noop',
-                    'settings' => array(),
-                    'templates' => array(),
-                ),
-            ),
-            'menus' => array(),
-            'blocks_by_class' => array(),
-            'exception' => array(
-                'default' => array(
+                    'settings' => [],
+                    'templates' => [],
+                ],
+            ],
+            'menus' => [],
+            'blocks_by_class' => [],
+            'exception' => [
+                'default' => [
                     'filter' => 'debug_only',
                     'renderer' => 'throw',
-                ),
-                'filters' => array(
+                ],
+                'filters' => [
                     'debug_only' => 'sonata.block.exception.filter.debug_only',
                     'ignore_block_exception' => 'sonata.block.exception.filter.ignore_block_exception',
                     'keep_all' => 'sonata.block.exception.filter.keep_all',
                     'keep_none' => 'sonata.block.exception.filter.keep_none',
-                ),
-                'renderers' => array(
+                ],
+                'renderers' => [
                     'inline' => 'sonata.block.exception.renderer.inline',
                     'inline_debug' => 'sonata.block.exception.renderer.inline_debug',
                     'throw' => 'sonata.block.exception.renderer.throw',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $config);
     }
@@ -102,16 +102,16 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function testOptionsDuplicated()
     {
-        $defaultTemplates = array(
+        $defaultTemplates = [
             'SonataPageBundle:Block:block_container.html.twig' => 'SonataPageBundle template',
             'SonataSeoBundle:Block:block_social_container.html.twig' => 'SonataSeoBundle (to contain social buttons)',
-        );
+        ];
 
         $processor = new Processor();
-        $processor->processConfiguration(new Configuration($defaultTemplates), array(array(
-            'default_contexts' => array('cms'),
-            'profiler' => array('container_types' => array('test_type')),
-            'container' => array('types' => array('test_type2'), 'templates' => array()),
-        )));
+        $processor->processConfiguration(new Configuration($defaultTemplates), [[
+            'default_contexts' => ['cms'],
+            'profiler' => ['container_types' => ['test_type']],
+            'container' => ['types' => ['test_type2'], 'templates' => []],
+        ]]);
     }
 }

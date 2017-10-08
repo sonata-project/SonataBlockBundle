@@ -68,27 +68,27 @@ class ServiceListType extends AbstractType
     {
         $manager = $this->manager;
 
-        $resolver->setRequired(array(
+        $resolver->setRequired([
             'context',
-        ));
+        ]);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'multiple' => false,
             'expanded' => false,
             'choices' => function (Options $options, $previousValue) use ($manager) {
-                $types = array();
+                $types = [];
                 foreach ($manager->getServicesByContext($options['context'], $options['include_containers']) as $code => $service) {
                     $types[$code] = sprintf('%s - %s', $service->getName(), $code);
                 }
 
                 return $types;
             },
-            'preferred_choices' => array(),
+            'preferred_choices' => [],
             'empty_data' => function (Options $options) {
                 $multiple = isset($options['multiple']) && $options['multiple'];
                 $expanded = isset($options['expanded']) && $options['expanded'];
 
-                return $multiple || $expanded ? array() : '';
+                return $multiple || $expanded ? [] : '';
             },
             'empty_value' => function (Options $options, $previousValue) {
                 $multiple = isset($options['multiple']) && $options['multiple'];
@@ -98,6 +98,6 @@ class ServiceListType extends AbstractType
             },
             'error_bubbling' => false,
             'include_containers' => false,
-        ));
+        ]);
     }
 }

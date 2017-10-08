@@ -29,18 +29,18 @@ class RecursiveBlockIteratorIteratorTest extends PHPUnit_Framework_TestCase
         $block1 = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block1->expects($this->any())->method('getType')->will($this->returnValue('block1'));
         $block1->expects($this->once())->method('hasChildren')->will($this->returnValue(true));
-        $block1->expects($this->any())->method('getChildren')->will($this->returnValue(array(
+        $block1->expects($this->any())->method('getChildren')->will($this->returnValue([
             $block2,
             $block3,
-        )));
+        ]));
 
         $block4 = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block4->expects($this->any())->method('getType')->will($this->returnValue('block4'));
         $block4->expects($this->any())->method('hasChildren')->will($this->returnValue(false));
 
-        $i = new RecursiveBlockIteratorIterator(array($block1, $block4));
+        $i = new RecursiveBlockIteratorIterator([$block1, $block4]);
 
-        $blocks = array();
+        $blocks = [];
         foreach ($i as $block) {
             $blocks[] = $block;
         }

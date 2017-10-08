@@ -45,8 +45,8 @@ class BlockServiceManager implements BlockServiceManagerInterface
      */
     public function __construct(ContainerInterface $container, $debug, LoggerInterface $logger = null)
     {
-        $this->services = array();
-        $this->contexts = array();
+        $this->services = [];
+        $this->contexts = [];
         $this->container = $container;
     }
 
@@ -79,13 +79,13 @@ class BlockServiceManager implements BlockServiceManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function add($name, $service, $contexts = array())
+    public function add($name, $service, $contexts = [])
     {
         $this->services[$name] = $service;
 
         foreach ($contexts as $context) {
             if (!array_key_exists($context, $this->contexts)) {
-                $this->contexts[$context] = array();
+                $this->contexts[$context] = [];
             }
 
             $this->contexts[$context][] = $name;
@@ -122,10 +122,10 @@ class BlockServiceManager implements BlockServiceManagerInterface
     public function getServicesByContext($context, $includeContainers = true)
     {
         if (!array_key_exists($context, $this->contexts)) {
-            return array();
+            return [];
         }
 
-        $services = array();
+        $services = [];
 
         $containers = $this->container->getParameter('sonata.block.container.types');
 
@@ -145,7 +145,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
      */
     public function getLoadedServices()
     {
-        $services = array();
+        $services = [];
 
         foreach ($this->services as $service) {
             if (!$service instanceof BlockServiceInterface) {

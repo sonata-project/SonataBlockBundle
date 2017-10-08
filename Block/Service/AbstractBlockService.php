@@ -59,7 +59,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
      *
      * @return Response
      */
-    public function renderResponse($view, array $parameters = array(), Response $response = null)
+    public function renderResponse($view, array $parameters = [], Response $response = null)
     {
         return $this->getTemplating()->renderResponse($view, $parameters, $response);
     }
@@ -74,7 +74,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
      *
      * @return Response
      */
-    public function renderPrivateResponse($view, array $parameters = array(), Response $response = null)
+    public function renderPrivateResponse($view, array $parameters = [], Response $response = null)
     {
         return $this->renderResponse($view, $parameters, $response)
             ->setTtl(0)
@@ -104,10 +104,10 @@ abstract class AbstractBlockService implements BlockServiceInterface
      */
     public function getCacheKeys(BlockInterface $block)
     {
-        return array(
+        return [
             'block_id' => $block->getId(),
             'updated_at' => $block->getUpdatedAt() ? $block->getUpdatedAt()->format('U') : strtotime('now'),
-        );
+        ];
     }
 
     /**
@@ -122,7 +122,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
      */
     public function getJavascripts($media)
     {
-        return array();
+        return [];
     }
 
     /**
@@ -130,7 +130,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
      */
     public function getStylesheets($media)
     {
-        return array();
+        return [];
     }
 
     /**
@@ -138,10 +138,10 @@ abstract class AbstractBlockService implements BlockServiceInterface
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        return $this->renderResponse($blockContext->getTemplate(), array(
+        return $this->renderResponse($blockContext->getTemplate(), [
             'block_context' => $blockContext,
             'block' => $blockContext->getBlock(),
-        ), $response);
+        ], $response);
     }
 
     /**

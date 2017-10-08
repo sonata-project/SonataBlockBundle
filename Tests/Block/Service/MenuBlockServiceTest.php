@@ -39,20 +39,20 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
     public function testBuildEditForm()
     {
         $this->menuRegistry->expects($this->once())->method('getAliasNames')
-            ->will($this->returnValue(array(
+            ->will($this->returnValue([
                 'acme:demobundle:menu' => 'Test Menu',
-            )));
+            ]));
 
         $formMapper = $this->getMockBuilder('Sonata\AdminBundle\Form\FormMapper')->disableOriginalConstructor()->getMock();
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
 
-        $choiceOptions = array(
+        $choiceOptions = [
             'required' => false,
-        );
+        ];
 
-        $choices = array(
+        $choices = [
             'acme:demobundle:menu' => 'Test Menu',
-        );
+        ];
 
         // NEXT_MAJOR: remove SF 2.7+ BC
         if (method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
@@ -67,20 +67,20 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
         $choiceOptions['choices'] = $choices;
 
         $formMapper->expects($this->once())->method('add')
-            ->with('settings', 'sonata_type_immutable_array', array(
-                'keys' => array(
-                    array('title', 'text', array('required' => false)),
-                    array('cache_policy', 'choice', array('choices' => array('public', 'private'))),
-                    array('menu_name', 'choice', $choiceOptions),
-                    array('safe_labels', 'checkbox', array('required' => false)),
-                    array('current_class', 'text', array('required' => false)),
-                    array('first_class', 'text', array('required' => false)),
-                    array('last_class', 'text', array('required' => false)),
-                    array('menu_class', 'text', array('required' => false)),
-                    array('children_class', 'text', array('required' => false)),
-                    array('menu_template', 'text', array('required' => false)),
-                ),
-            ));
+            ->with('settings', 'sonata_type_immutable_array', [
+                'keys' => [
+                    ['title', 'text', ['required' => false]],
+                    ['cache_policy', 'choice', ['choices' => ['public', 'private']]],
+                    ['menu_name', 'choice', $choiceOptions],
+                    ['safe_labels', 'checkbox', ['required' => false]],
+                    ['current_class', 'text', ['required' => false]],
+                    ['first_class', 'text', ['required' => false]],
+                    ['last_class', 'text', ['required' => false]],
+                    ['menu_class', 'text', ['required' => false]],
+                    ['children_class', 'text', ['required' => false]],
+                    ['menu_template', 'text', ['required' => false]],
+                ],
+            ]);
 
         $blockService = new MenuBlockService('sonata.page.block.menu', $this->templating, $this->menuProvider, $this->menuRegistry);
         $blockService->buildEditForm($formMapper, $block);
@@ -91,7 +91,7 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
         $blockService = new MenuBlockService('sonata.page.block.menu', $this->templating, $this->menuProvider, $this->menuRegistry);
         $blockContext = $this->getBlockContext($blockService);
 
-        $this->assertSettings(array(
+        $this->assertSettings([
             'title' => 'sonata.page.block.menu',
             'cache_policy' => 'public',
             'template' => 'SonataBlockBundle:Block:block_core_menu.html.twig',
@@ -104,6 +104,6 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
             'menu_class' => 'list-group',
             'children_class' => 'list-group-item',
             'menu_template' => null,
-        ), $blockContext);
+        ], $blockContext);
     }
 }

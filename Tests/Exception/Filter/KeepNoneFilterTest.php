@@ -48,9 +48,9 @@ class KeepNoneFilterTest extends PHPUnit_Framework_TestCase
      */
     public function getExceptions()
     {
-        return array(
-            array($this->createMock('\Exception')),
-            array($this->createMock('\RuntimeException')),
-        );
+        return [
+            [$this->createMock('\Exception')],
+            [$this->createMock('\RuntimeException')],
+        ];
     }
 }
