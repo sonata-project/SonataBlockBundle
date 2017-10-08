@@ -31,7 +31,7 @@ class BlockHelperTest extends PHPUnit_Framework_TestCase
             return $event;
         }));
 
-        $helper = new BlockHelper($blockServiceManager, array(), $blockRenderer, $blockContextManager, $eventDispatcher);
+        $helper = new BlockHelper($blockServiceManager, [], $blockRenderer, $blockContextManager, $eventDispatcher);
 
         $this->assertEquals('', $helper->renderEvent('my.event'));
     }
@@ -39,12 +39,12 @@ class BlockHelperTest extends PHPUnit_Framework_TestCase
     public function testRenderEventWithListeners()
     {
         $blockService = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
-        $blockService->expects($this->once())->method('getJavascripts')->will($this->returnValue(array(
+        $blockService->expects($this->once())->method('getJavascripts')->will($this->returnValue([
             '/js/base.js',
-        )));
-        $blockService->expects($this->once())->method('getStylesheets')->will($this->returnValue(array(
+        ]));
+        $blockService->expects($this->once())->method('getStylesheets')->will($this->returnValue([
             '/css/base.css',
-        )));
+        ]));
 
         $blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
         $blockServiceManager->expects($this->any())->method('get')->will($this->returnValue($blockService));
@@ -63,16 +63,16 @@ class BlockHelperTest extends PHPUnit_Framework_TestCase
         $eventDispatcher->expects($this->once())->method('dispatch')->will($this->returnCallback(function ($name, BlockEvent $event) {
             $block = new Block();
             $block->setId(1);
-            $block->setSettings(array(
+            $block->setSettings([
                 'use_cache' => false,
-            ));
+            ]);
             $block->setType('test');
             $event->addBlock($block);
 
             return $event;
         }));
 
-        $helper = new BlockHelper($blockServiceManager, array(), $blockRenderer, $blockContextManager, $eventDispatcher);
+        $helper = new BlockHelper($blockServiceManager, [], $blockRenderer, $blockContextManager, $eventDispatcher);
 
         $this->assertEquals('<span>test</span>', $helper->renderEvent('my.event'));
 

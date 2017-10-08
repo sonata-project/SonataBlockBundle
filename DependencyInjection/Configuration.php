@@ -75,7 +75,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('container_types')
                             ->isRequired()
                             // add default value to well know users of BlockBundle
-                            ->defaultValue(array('sonata.block.service.container', 'sonata.page.block.container', 'sonata.dashboard.block.container', 'cmf.block.container', 'cmf.block.slideshow'))
+                            ->defaultValue(['sonata.block.service.container', 'sonata.page.block.container', 'sonata.dashboard.block.container', 'cmf.block.container', 'cmf.block.slideshow'])
                             ->prototype('scalar')->end()
                         ->end()
                     ->end()
@@ -112,7 +112,7 @@ class Configuration implements ConfigurationInterface
                             ->info('container service ids')
                             ->isRequired()
                             // add default value to well know users of BlockBundle
-                            ->defaultValue(array('sonata.block.service.container', 'sonata.page.block.container', 'sonata.dashboard.block.container', 'cmf.block.container', 'cmf.block.slideshow'))
+                            ->defaultValue(['sonata.block.service.container', 'sonata.page.block.container', 'sonata.dashboard.block.container', 'cmf.block.container', 'cmf.block.slideshow'])
                             ->prototype('scalar')->end()
                         ->end()
                         ->arrayNode('templates')
@@ -210,21 +210,21 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('filters')
                             ->useAttributeAsKey('id')
                             ->prototype('scalar')->end()
-                            ->defaultValue(array(
+                            ->defaultValue([
                                 'debug_only' => 'sonata.block.exception.filter.debug_only',
                                 'ignore_block_exception' => 'sonata.block.exception.filter.ignore_block_exception',
                                 'keep_all' => 'sonata.block.exception.filter.keep_all',
                                 'keep_none' => 'sonata.block.exception.filter.keep_none',
-                            ))
+                            ])
                         ->end()
                         ->arrayNode('renderers')
                             ->useAttributeAsKey('id')
                             ->prototype('scalar')->end()
-                            ->defaultValue(array(
+                            ->defaultValue([
                                 'inline' => 'sonata.block.exception.renderer.inline',
                                 'inline_debug' => 'sonata.block.exception.renderer.inline_debug',
                                 'throw' => 'sonata.block.exception.renderer.throw',
-                            ))
+                            ])
                         ->end()
                     ->end()
                 ->end()
@@ -242,6 +242,6 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfiguration(array $config, ContainerBuilder $container)
     {
-        return new self(array());
+        return new self([]);
     }
 }

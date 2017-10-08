@@ -31,7 +31,7 @@ class SonataBlockExtension extends Extension
     {
         $bundles = $container->getParameter('kernel.bundles');
 
-        $defaultTemplates = array();
+        $defaultTemplates = [];
         if (isset($bundles['SonataPageBundle'])) {
             $defaultTemplates['SonataPageBundle:Block:block_container.html.twig'] = 'SonataPageBundle default template';
         } else {
@@ -148,10 +148,10 @@ class SonataBlockExtension extends Extension
 
         if ($config['http_cache']['listener']) {
             $container->getDefinition($config['http_cache']['handler'])
-                ->addTag('kernel.event_listener', array('event' => 'kernel.response', 'method' => 'onKernelResponse'));
+                ->addTag('kernel.event_listener', ['event' => 'kernel.response', 'method' => 'onKernelResponse']);
         }
 
-        $cacheBlocks = array();
+        $cacheBlocks = [];
         foreach ($config['blocks'] as $service => $settings) {
             $cacheBlocks['by_type'][$service] = $settings['cache'];
         }
@@ -168,7 +168,7 @@ class SonataBlockExtension extends Extension
      */
     public function configureLoaderChain(ContainerBuilder $container, array $config)
     {
-        $types = array();
+        $types = [];
         foreach ($config['blocks'] as $service => $settings) {
             $types[] = $service;
         }
@@ -184,7 +184,7 @@ class SonataBlockExtension extends Extension
     {
         $defaults = $config['default_contexts'];
 
-        $contexts = array();
+        $contexts = [];
 
         foreach ($config['blocks'] as $service => $settings) {
             if (count($settings['contexts']) == 0) {
@@ -193,7 +193,7 @@ class SonataBlockExtension extends Extension
 
             foreach ($settings['contexts'] as $context) {
                 if (!isset($contexts[$context])) {
-                    $contexts[$context] = array();
+                    $contexts[$context] = [];
                 }
 
                 $contexts[$context][] = $service;
@@ -218,7 +218,7 @@ class SonataBlockExtension extends Extension
         // add the block data collector
         $definition = new Definition('Sonata\BlockBundle\Profiler\DataCollector\BlockDataCollector');
         $definition->setPublic(false);
-        $definition->addTag('data_collector', array('id' => 'block', 'template' => $config['profiler']['template']));
+        $definition->addTag('data_collector', ['id' => 'block', 'template' => $config['profiler']['template']]);
         $definition->addArgument(new Reference('sonata.block.templating.helper'));
         $definition->addArgument($config['container']['types']);
 
@@ -234,20 +234,20 @@ class SonataBlockExtension extends Extension
     public function configureException(ContainerBuilder $container, array $config)
     {
         // retrieve available filters
-        $filters = array();
+        $filters = [];
         foreach ($config['exception']['filters'] as $name => $filter) {
             $filters[$name] = $filter;
         }
 
         // retrieve available renderers
-        $renderers = array();
+        $renderers = [];
         foreach ($config['exception']['renderers'] as $name => $renderer) {
             $renderers[$name] = $renderer;
         }
 
         // retrieve block customization
-        $blockFilters = array();
-        $blockRenderers = array();
+        $blockFilters = [];
+        $blockRenderers = [];
         foreach ($config['blocks'] as $service => $settings) {
             if (isset($settings['exception']) && isset($settings['exception']['filter'])) {
                 $blockFilters[$service] = $settings['exception']['filter'];
@@ -266,8 +266,8 @@ class SonataBlockExtension extends Extension
         // retrieve default values
         $defaultFilter = $config['exception']['default']['filter'];
         $defaultRenderer = $config['exception']['default']['renderer'];
-        $definition->addMethodCall('setDefaultFilter', array($defaultFilter));
-        $definition->addMethodCall('setDefaultRenderer', array($defaultRenderer));
+        $definition->addMethodCall('setDefaultFilter', [$defaultFilter]);
+        $definition->addMethodCall('setDefaultRenderer', [$defaultRenderer]);
     }
 
     /**
@@ -275,7 +275,7 @@ class SonataBlockExtension extends Extension
      */
     public function configureClassesToCompile()
     {
-        $this->addClassesToCompile(array(
+        $this->addClassesToCompile([
             'Sonata\\BlockBundle\\Block\\BlockLoaderChain',
             'Sonata\\BlockBundle\\Block\\BlockLoaderInterface',
             'Sonata\\BlockBundle\\Block\\BlockRenderer',
@@ -309,7 +309,7 @@ class SonataBlockExtension extends Extension
             'Sonata\\BlockBundle\\Model\\EmptyBlock',
             'Sonata\\BlockBundle\\Twig\\Extension\\BlockExtension',
             'Sonata\\BlockBundle\\Twig\\GlobalVariables',
-        ));
+        ]);
     }
 
     /**

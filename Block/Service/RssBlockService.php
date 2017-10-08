@@ -29,11 +29,11 @@ class RssBlockService extends AbstractAdminBlockService
      */
     public function configureSettings(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'url' => false,
             'title' => 'Insert the rss title',
             'template' => 'SonataBlockBundle:Block:block_core_rss.html.twig',
-        ));
+        ]);
     }
 
     /**
@@ -41,12 +41,12 @@ class RssBlockService extends AbstractAdminBlockService
      */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
-        $formMapper->add('settings', 'sonata_type_immutable_array', array(
-            'keys' => array(
-                array('url', 'url', array('required' => false)),
-                array('title', 'text', array('required' => false)),
-            ),
-        ));
+        $formMapper->add('settings', 'sonata_type_immutable_array', [
+            'keys' => [
+                ['url', 'url', ['required' => false]],
+                ['title', 'text', ['required' => false]],
+            ],
+        ]);
     }
 
     /**
@@ -56,13 +56,13 @@ class RssBlockService extends AbstractAdminBlockService
     {
         $errorElement
             ->with('settings[url]')
-                ->assertNotNull(array())
+                ->assertNotNull([])
                 ->assertNotBlank()
             ->end()
             ->with('settings[title]')
-                ->assertNotNull(array())
+                ->assertNotNull([])
                 ->assertNotBlank()
-                ->assertLength(array('max' => 50))
+                ->assertLength(['max' => 50])
             ->end();
     }
 
@@ -76,12 +76,12 @@ class RssBlockService extends AbstractAdminBlockService
 
         $feeds = false;
         if ($settings['url']) {
-            $options = array(
-                'http' => array(
+            $options = [
+                'http' => [
                     'user_agent' => 'Sonata/RSS Reader',
                     'timeout' => 2,
-                ),
-            );
+                ],
+            ];
 
             // retrieve contents with a specific stream context to avoid php errors
             $content = @file_get_contents($settings['url'], false, stream_context_create($options));
@@ -97,11 +97,11 @@ class RssBlockService extends AbstractAdminBlockService
             }
         }
 
-        return $this->renderResponse($blockContext->getTemplate(), array(
+        return $this->renderResponse($blockContext->getTemplate(), [
             'feeds' => $feeds,
             'block' => $blockContext->getBlock(),
             'settings' => $settings,
-        ), $response);
+        ], $response);
     }
 
     /**
@@ -109,8 +109,8 @@ class RssBlockService extends AbstractAdminBlockService
      */
     public function getBlockMetadata($code = null)
     {
-        return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'SonataBlockBundle', array(
+        return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'SonataBlockBundle', [
             'class' => 'fa fa-rss-square',
-        ));
+        ]);
     }
 }

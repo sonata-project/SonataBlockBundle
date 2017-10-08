@@ -41,9 +41,9 @@ class InlineRendererTest extends PHPUnit_Framework_TestCase
             ->method('render')
             ->with(
                 $this->equalTo($template),
-                $this->equalTo(array(
+                $this->equalTo([
                     'exception' => $exception,
-                    'block' => $block, ))
+                    'block' => $block, ])
             )
             ->will($this->returnValue('html'));
 

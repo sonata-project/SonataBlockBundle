@@ -28,6 +28,6 @@ class GlobalVariablesCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $container->getDefinition('twig')
-            ->addMethodCall('addGlobal', array('sonata_block', new Reference('sonata.block.twig.global')));
+            ->addMethodCall('addGlobal', ['sonata_block', new Reference('sonata.block.twig.global')]);
     }
 }

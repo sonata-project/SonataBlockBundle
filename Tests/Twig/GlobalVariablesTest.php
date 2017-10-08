@@ -17,7 +17,7 @@ class GlobalVariablesTest extends \PHPUnit_Framework_TestCase
 {
     public function testGlobalVariables()
     {
-        $variables = new GlobalVariables(array());
+        $variables = new GlobalVariables([]);
 
         $this->assertEmpty($variables->getTemplates());
     }

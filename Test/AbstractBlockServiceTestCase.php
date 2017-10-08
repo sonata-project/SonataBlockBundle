@@ -67,7 +67,7 @@ abstract class AbstractBlockServiceTestCase extends \PHPUnit_Framework_TestCase
         $this->blockServiceManager->expects($this->once())->method('get')->will($this->returnValue($blockService));
 
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $block->expects($this->once())->method('getSettings')->will($this->returnValue(array()));
+        $block->expects($this->once())->method('getSettings')->will($this->returnValue([]));
 
         $blockContext = $this->blockContextManager->get($block);
         $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
@@ -83,13 +83,13 @@ abstract class AbstractBlockServiceTestCase extends \PHPUnit_Framework_TestCase
      */
     protected function assertSettings(array $expected, BlockContextInterface $blockContext)
     {
-        $completeExpectedOptions = array_merge(array(
+        $completeExpectedOptions = array_merge([
             'use_cache' => true,
-            'extra_cache_keys' => array(),
-            'attr' => array(),
+            'extra_cache_keys' => [],
+            'attr' => [],
             'template' => false,
             'ttl' => 0,
-        ), $expected);
+        ], $expected);
 
         ksort($completeExpectedOptions);
         $blockSettings = $blockContext->getSettings();

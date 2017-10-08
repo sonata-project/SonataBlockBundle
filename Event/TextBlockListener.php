@@ -42,9 +42,9 @@ class TextBlockListener
 
         $block = new Block();
         $block->setId(uniqid());
-        $block->setSettings(array(
+        $block->setSettings([
             'content' => $event->getSetting('content', $content),
-        ));
+        ]);
         $block->setType('sonata.block.service.text');
 
         $event->addBlock($block);

@@ -35,27 +35,27 @@ class BlockExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
+        return [
             new \Twig_SimpleFunction('sonata_block_exists',
-                array($this->blockHelper, 'exists')
+                [$this->blockHelper, 'exists']
             ),
             new \Twig_SimpleFunction('sonata_block_render',
-                array($this->blockHelper, 'render'),
-                array('is_safe' => array('html'))
+                [$this->blockHelper, 'render'],
+                ['is_safe' => ['html']]
             ),
             new \Twig_SimpleFunction('sonata_block_render_event',
-                array($this->blockHelper, 'renderEvent'),
-                array('is_safe' => array('html'))
+                [$this->blockHelper, 'renderEvent'],
+                ['is_safe' => ['html']]
             ),
             new \Twig_SimpleFunction('sonata_block_include_javascripts',
-                array($this->blockHelper, 'includeJavascripts'),
-                array('is_safe' => array('html'))
+                [$this->blockHelper, 'includeJavascripts'],
+                ['is_safe' => ['html']]
             ),
             new \Twig_SimpleFunction('sonata_block_include_stylesheets',
-                array($this->blockHelper, 'includeStylesheets'),
-                array('is_safe' => array('html'))
+                [$this->blockHelper, 'includeStylesheets'],
+                ['is_safe' => ['html']]
             ),
-        );
+        ];
     }
 
     /**

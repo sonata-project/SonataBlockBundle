@@ -21,7 +21,7 @@ class BlockLoaderChainTest extends PHPUnit_Framework_TestCase
      */
     public function testBlockNotFoundException()
     {
-        $loader = new BlockLoaderChain(array());
+        $loader = new BlockLoaderChain([]);
         $loader->load('foo');
     }
 
@@ -33,7 +33,7 @@ class BlockLoaderChainTest extends PHPUnit_Framework_TestCase
         $loader->expects($this->once())->method('support')->will($this->returnValue(true));
         $loader->expects($this->once())->method('load')->will($this->returnValue($block));
 
-        $loaderChain = new BlockLoaderChain(array($loader));
+        $loaderChain = new BlockLoaderChain([$loader]);
 
         $this->assertTrue($loaderChain->support('foo'));
 
@@ -49,7 +49,7 @@ class BlockLoaderChainTest extends PHPUnit_Framework_TestCase
         $loader->expects($this->once())->method('support')->will($this->returnValue(false));
         $loader->expects($this->never())->method('load');
 
-        $loaderChain = new BlockLoaderChain(array($loader));
+        $loaderChain = new BlockLoaderChain([$loader]);
 
         $this->assertTrue($loaderChain->support('foo'));
 

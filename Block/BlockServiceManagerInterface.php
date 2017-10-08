@@ -21,7 +21,7 @@ interface BlockServiceManagerInterface
      * @param string $service
      * @param array  $contexts
      */
-    public function add($name, $service, $contexts = array());
+    public function add($name, $service, $contexts = []);
 
     /**
      * Return the block service linked to the link.

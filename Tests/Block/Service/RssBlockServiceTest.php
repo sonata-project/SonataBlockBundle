@@ -28,9 +28,9 @@ class RssBlockServiceTest extends AbstractBlockServiceTestCase
 
         $block = new Block();
         $block->setType('core.text');
-        $block->setSettings(array(
+        $block->setSettings([
             'content' => 'my text',
-        ));
+        ]);
 
         $optionResolver = new OptionsResolver();
         $service->setDefaultSettings($optionResolver);
