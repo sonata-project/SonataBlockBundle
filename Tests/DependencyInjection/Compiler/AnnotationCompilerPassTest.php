@@ -29,7 +29,7 @@ class AnnotationCompilerPassTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             $meta->tags['sonata.block'][0],
-            array()
+            []
         );
     }
 
@@ -47,7 +47,7 @@ class AnnotationCompilerPassTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             $meta->tags['sonata.block'][0],
-            array()
+            []
         );
 
         $this->assertSame(

@@ -76,12 +76,12 @@ class MenuBlockService extends AbstractAdminBlockService
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        $responseSettings = array(
+        $responseSettings = [
             'menu' => $this->getMenu($blockContext),
             'menu_options' => $this->getMenuOptions($blockContext->getSettings()),
             'block' => $blockContext->getBlock(),
             'context' => $blockContext,
-        );
+        ];
 
         if ('private' === $blockContext->getSettings('cache_policy')) {
             return $this->renderPrivateResponse($blockContext->getTemplate(), $responseSettings, $response);
@@ -95,9 +95,9 @@ class MenuBlockService extends AbstractAdminBlockService
      */
     public function buildEditForm(FormMapper $form, BlockInterface $block)
     {
-        $form->add('settings', 'sonata_type_immutable_array', array(
+        $form->add('settings', 'sonata_type_immutable_array', [
             'keys' => $this->getFormSettingsKeys(),
-        ));
+        ]);
     }
 
     /**
@@ -108,7 +108,7 @@ class MenuBlockService extends AbstractAdminBlockService
         if (($name = $block->getSetting('menu_name')) && $name !== '' && !$this->menuProvider->has($name)) {
             // If we specified a menu_name, check that it exists
             $errorElement->with('menu_name')
-                ->addViolation('sonata.block.menu.not_existing', array('name' => $name))
+                ->addViolation('sonata.block.menu.not_existing', ['name' => $name])
             ->end();
         }
     }
@@ -118,7 +118,7 @@ class MenuBlockService extends AbstractAdminBlockService
      */
     public function configureSettings(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'title' => $this->getName(),
             'cache_policy' => 'public',
             'template' => 'SonataBlockBundle:Block:block_core_menu.html.twig',
@@ -131,7 +131,7 @@ class MenuBlockService extends AbstractAdminBlockService
             'menu_class' => 'list-group',
             'children_class' => 'list-group-item',
             'menu_template' => null,
-        ));
+        ]);
     }
 
     /**
@@ -139,9 +139,9 @@ class MenuBlockService extends AbstractAdminBlockService
      */
     public function getBlockMetadata($code = null)
     {
-        return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'SonataBlockBundle', array(
+        return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'SonataBlockBundle', [
             'class' => 'fa fa-bars',
-        ));
+        ]);
     }
 
     /**
@@ -149,9 +149,9 @@ class MenuBlockService extends AbstractAdminBlockService
      */
     protected function getFormSettingsKeys()
     {
-        $choiceOptions = array(
+        $choiceOptions = [
             'required' => false,
-        );
+        ];
 
         $choices = $this->menus;
 
@@ -171,18 +171,18 @@ class MenuBlockService extends AbstractAdminBlockService
 
         $choiceOptions['choices'] = $choices;
 
-        return array(
-            array('title', 'text', array('required' => false)),
-            array('cache_policy', 'choice', array('choices' => array('public', 'private'))),
-            array('menu_name', 'choice', $choiceOptions),
-            array('safe_labels', 'checkbox', array('required' => false)),
-            array('current_class', 'text', array('required' => false)),
-            array('first_class', 'text', array('required' => false)),
-            array('last_class', 'text', array('required' => false)),
-            array('menu_class', 'text', array('required' => false)),
-            array('children_class', 'text', array('required' => false)),
-            array('menu_template', 'text', array('required' => false)),
-        );
+        return [
+            ['title', 'text', ['required' => false]],
+            ['cache_policy', 'choice', ['choices' => ['public', 'private']]],
+            ['menu_name', 'choice', $choiceOptions],
+            ['safe_labels', 'checkbox', ['required' => false]],
+            ['current_class', 'text', ['required' => false]],
+            ['first_class', 'text', ['required' => false]],
+            ['last_class', 'text', ['required' => false]],
+            ['menu_class', 'text', ['required' => false]],
+            ['children_class', 'text', ['required' => false]],
+            ['menu_template', 'text', ['required' => false]],
+        ];
     }
 
     /**
@@ -208,15 +208,15 @@ class MenuBlockService extends AbstractAdminBlockService
      */
     protected function getMenuOptions(array $settings)
     {
-        $mapping = array(
+        $mapping = [
             'current_class' => 'currentClass',
             'first_class' => 'firstClass',
             'last_class' => 'lastClass',
             'safe_labels' => 'allow_safe_labels',
             'menu_template' => 'template',
-        );
+        ];
 
-        $options = array();
+        $options = [];
 
         foreach ($settings as $key => $value) {
             if (array_key_exists($key, $mapping) && null !== $value) {

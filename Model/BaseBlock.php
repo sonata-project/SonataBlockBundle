@@ -68,9 +68,9 @@ abstract class BaseBlock implements BlockInterface
 
     public function __construct()
     {
-        $this->settings = array();
+        $this->settings = [];
         $this->enabled = false;
-        $this->children = array();
+        $this->children = [];
     }
 
     /**
@@ -116,7 +116,7 @@ abstract class BaseBlock implements BlockInterface
     /**
      * {@inheritdoc}
      */
-    public function setSettings(array $settings = array())
+    public function setSettings(array $settings = [])
     {
         $this->settings = $settings;
     }

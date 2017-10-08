@@ -101,6 +101,6 @@ abstract class AbstractAdminBlockService extends AbstractBlockService implements
      */
     public function getBlockMetadata($code = null)
     {
-        return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'SonataBlockBundle', array('class' => 'fa fa-file'));
+        return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'SonataBlockBundle', ['class' => 'fa fa-file']);
     }
 }

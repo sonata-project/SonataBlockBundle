@@ -32,21 +32,21 @@ class ContainerBlockService extends AbstractAdminBlockService
     {
         $formMapper->add('enabled');
 
-        $formMapper->add('settings', 'sonata_type_immutable_array', array(
-            'keys' => array(
-                array('code', 'text', array('required' => false)),
-                array('layout', 'textarea', array()),
-                array('class', 'text', array('required' => false)),
-                array('template', 'sonata_type_container_template_choice', array()),
-            ),
-        ));
+        $formMapper->add('settings', 'sonata_type_immutable_array', [
+            'keys' => [
+                ['code', 'text', ['required' => false]],
+                ['layout', 'textarea', []],
+                ['class', 'text', ['required' => false]],
+                ['template', 'sonata_type_container_template_choice', []],
+            ],
+        ]);
 
-        $formMapper->add('children', 'sonata_type_collection', array(), array(
+        $formMapper->add('children', 'sonata_type_collection', [], [
             'admin_code' => 'sonata.page.admin.block',
             'edit' => 'inline',
             'inline' => 'table',
             'sortable' => 'position',
-        ));
+        ]);
     }
 
     /**
@@ -54,11 +54,11 @@ class ContainerBlockService extends AbstractAdminBlockService
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        return $this->renderResponse($blockContext->getTemplate(), array(
+        return $this->renderResponse($blockContext->getTemplate(), [
             'block' => $blockContext->getBlock(),
             'decorator' => $this->getDecorator($blockContext->getSetting('layout')),
             'settings' => $blockContext->getSettings(),
-        ), $response);
+        ], $response);
     }
 
     /**
@@ -66,12 +66,12 @@ class ContainerBlockService extends AbstractAdminBlockService
      */
     public function configureSettings(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'code' => '',
             'layout' => '{{ CONTENT }}',
             'class' => '',
             'template' => 'SonataBlockBundle:Block:block_container.html.twig',
-        ));
+        ]);
     }
 
     /**
@@ -79,9 +79,9 @@ class ContainerBlockService extends AbstractAdminBlockService
      */
     public function getBlockMetadata($code = null)
     {
-        return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'SonataBlockBundle', array(
+        return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'SonataBlockBundle', [
             'class' => 'fa fa-square-o',
-        ));
+        ]);
     }
 
     /**
@@ -95,14 +95,14 @@ class ContainerBlockService extends AbstractAdminBlockService
     {
         $key = '{{ CONTENT }}';
         if (strpos($layout, $key) === false) {
-            return array();
+            return [];
         }
 
         $segments = explode($key, $layout);
-        $decorator = array(
+        $decorator = [
             'pre' => isset($segments[0]) ? $segments[0] : '',
             'post' => isset($segments[1]) ? $segments[1] : '',
-        );
+        ];
 
         return $decorator;
     }
