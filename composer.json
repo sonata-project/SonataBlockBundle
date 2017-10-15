@@ -19,7 +19,7 @@
     "require": {
         "php": "^7.1",
         "doctrine/common": "^2.3",
-        "sonata-project/cache": "^1.0",
+        "sonata-project/cache": "^1.0 || ^2.0",
         "sonata-project/core-bundle": "^3.4",
         "symfony/form": "^2.8 || ^3.2",
         "symfony/http-kernel": "^2.8 || ^3.2"
