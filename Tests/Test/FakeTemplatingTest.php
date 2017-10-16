@@ -11,9 +11,10 @@
 
 namespace Sonata\BlockBundle\Tests\Test;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Test\FakeTemplating;
 
-class FakeTemplatingTest extends \PHPUnit_Framework_TestCase
+class FakeTemplatingTest extends TestCase
 {
     public function testRender()
     {

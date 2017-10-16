@@ -12,9 +12,10 @@
 namespace Sonata\BlockBundle\Tests\DependencyInjection;
 
 use JMS\DiExtraBundle\Metadata\ClassMetadata;
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Annotation\Block;
 
-class AnnotationCompilerPassTest extends \PHPUnit_Framework_TestCase
+class AnnotationCompilerPassTest extends TestCase
 {
     public function testMinimalBlock()
     {

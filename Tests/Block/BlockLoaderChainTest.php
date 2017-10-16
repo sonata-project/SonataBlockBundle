@@ -11,10 +11,10 @@
 
 namespace Sonata\BlockBundle\Tests\Block;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockLoaderChain;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
-class BlockLoaderChainTest extends PHPUnit_Framework_TestCase
+class BlockLoaderChainTest extends TestCase
 {
     /**
      * @expectedException \Sonata\BlockBundle\Exception\BlockNotFoundException

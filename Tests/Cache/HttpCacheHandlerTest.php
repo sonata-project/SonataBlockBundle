@@ -11,10 +11,11 @@
 
 namespace Sonata\BlockBundle\Tests\Cache;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Cache\HttpCacheHandler;
 use Symfony\Component\HttpFoundation\Response;
 
-class HttpCacheHandlerTest extends \PHPUnit_Framework_TestCase
+class HttpCacheHandlerTest extends TestCase
 {
     public function testComputeTtlWithPrivateResponse()
     {

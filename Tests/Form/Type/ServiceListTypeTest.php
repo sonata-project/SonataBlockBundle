@@ -11,11 +11,11 @@
 
 namespace Sonata\BlockBundle\Tests\Form\Type;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Form\Type\ServiceListType;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ServiceListTypeTest extends PHPUnit_Framework_TestCase
+class ServiceListTypeTest extends TestCase
 {
     public function testFormType()
     {

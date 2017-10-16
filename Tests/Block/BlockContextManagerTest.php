@@ -12,10 +12,10 @@
 namespace Sonata\BlockBundle\Tests\Block;
 
 use Doctrine\Common\Util\ClassUtils;
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockContextManager;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
-class BlockContextManagerTest extends PHPUnit_Framework_TestCase
+class BlockContextManagerTest extends TestCase
 {
     public function testGetWithValidData()
     {

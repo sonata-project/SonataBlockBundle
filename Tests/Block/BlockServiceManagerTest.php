@@ -11,10 +11,10 @@
 
 namespace Sonata\BlockBundle\Tests\Block;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockServiceManager;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
-class BlockServiceManagerTest extends PHPUnit_Framework_TestCase
+class BlockServiceManagerTest extends TestCase
 {
     public function testGetBlockService()
     {

@@ -11,10 +11,10 @@
 
 namespace Sonata\BlockBundle\Twig\Extension;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
-class BlockExtensionTest extends PHPUnit_Framework_TestCase
+class BlockExtensionTest extends TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|BlockHelper

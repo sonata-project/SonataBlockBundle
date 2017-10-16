@@ -11,6 +11,8 @@
 
 namespace Sonata\BlockBundle\Tests\Block\Service;
 
+use PHPUnit\Framework\TestCase;
+
 @trigger_error(
     'The '.__NAMESPACE__.'\BaseTestBlockService class is deprecated since version 3.1 and will be removed in 4.0.',
     E_USER_DEPRECATED
@@ -21,6 +23,6 @@ namespace Sonata\BlockBundle\Tests\Block\Service;
  *
  * @deprecated Deprecated since version 3.1 and will be removed in 4.0
  */
-class BaseTestBlockService extends \PHPUnit_Framework_TestCase
+class BaseTestBlockService extends TestCase
 {
 }

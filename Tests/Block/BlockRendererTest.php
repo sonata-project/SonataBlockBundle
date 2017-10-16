@@ -11,17 +11,17 @@
 
 namespace Sonata\BlockBundle\Tests\Block;
 
+use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Block\BlockRenderer;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Exception\Strategy\StrategyManager;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
 /**
  * Unit test of BlockRenderer class.
  */
-class BlockRendererTest extends PHPUnit_Framework_TestCase
+class BlockRendererTest extends TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|BlockServiceManagerInterface

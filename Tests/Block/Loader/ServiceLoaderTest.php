@@ -11,9 +11,10 @@
 
 namespace Sonata\BlockBundle\Tests\Block;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\Loader\ServiceLoader;
 
-class ServiceLoaderTest extends \PHPUnit_Framework_TestCase
+class ServiceLoaderTest extends TestCase
 {
     /**
      * @expectedException \RuntimeException

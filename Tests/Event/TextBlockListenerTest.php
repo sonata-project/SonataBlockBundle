@@ -11,10 +11,11 @@
 
 namespace Sonata\BlockBundle\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Event\TextBlockListener;
 
-class TextBlockListenerTest extends PHPUnit_Framework_TestCase
+class TextBlockListenerTest extends TestCase
 {
     public function testEvent()
     {
