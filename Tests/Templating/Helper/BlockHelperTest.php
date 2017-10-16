@@ -11,15 +11,15 @@
 
 namespace Sonata\BlockBundle\Tests\Templating\Helper;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class BlockHelperTest extends PHPUnit_Framework_TestCase
+class BlockHelperTest extends TestCase
 {
     public function testRenderEventWithNoListener()
     {

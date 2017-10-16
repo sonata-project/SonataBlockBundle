@@ -11,10 +11,10 @@
 
 namespace Sonata\BlockBundle\Tests\Exception\Strategy;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Filter\FilterInterface;
 use Sonata\BlockBundle\Exception\Renderer\RendererInterface;
 use Sonata\BlockBundle\Exception\Strategy\StrategyManager;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class StrategyManagerTest extends PHPUnit_Framework_TestCase
+class StrategyManagerTest extends TestCase
 {
     /**
      * @var StrategyManager

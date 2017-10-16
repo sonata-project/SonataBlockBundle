@@ -11,9 +11,10 @@
 
 namespace Sonata\BlockBundle\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Event\BlockEvent;
 
-class BlockEventTest extends PHPUnit_Framework_TestCase
+class BlockEventTest extends TestCase
 {
     public function testBlockEvent()
     {

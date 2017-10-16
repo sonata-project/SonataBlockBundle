@@ -11,15 +11,15 @@
 
 namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Filter\KeepAllFilter;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
 /**
  * Test the keep all exception filter.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class KeepAllFilterTest extends PHPUnit_Framework_TestCase
+class KeepAllFilterTest extends TestCase
 {
     /**
      * test the filter with an exception.

@@ -11,9 +11,10 @@
 
 namespace Sonata\BlockBundle\Tests\Cache;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Cache\NoopHttpCacheHandler;
 
-class NoopHttpCacheHandlerTest extends \PHPUnit_Framework_TestCase
+class NoopHttpCacheHandlerTest extends TestCase
 {
     public function testComputeTtl()
     {

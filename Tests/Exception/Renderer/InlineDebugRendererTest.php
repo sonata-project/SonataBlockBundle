@@ -11,15 +11,15 @@
 
 namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Renderer\InlineDebugRenderer;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
 /**
  * Test the inline debug exception renderer.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class InlineDebugRendererTest extends PHPUnit_Framework_TestCase
+class InlineDebugRendererTest extends TestCase
 {
     /**
      * test the renderer without debug mode.

@@ -11,15 +11,15 @@
 
 namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Renderer\MonkeyThrowRenderer;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
 /**
  * Test the monkey throw exception renderer.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class MonkeyThrowRendererTest extends PHPUnit_Framework_TestCase
+class MonkeyThrowRendererTest extends TestCase
 {
     /**
      * test the render() method with a standard Exception.

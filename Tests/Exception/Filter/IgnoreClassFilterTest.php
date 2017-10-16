@@ -11,15 +11,15 @@
 
 namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Filter\IgnoreClassFilter;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
 /**
  * Test the ignore class exception filter.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class IgnoreClassFilterTest extends PHPUnit_Framework_TestCase
+class IgnoreClassFilterTest extends TestCase
 {
     /**
      * test the filter with a inherited exception.

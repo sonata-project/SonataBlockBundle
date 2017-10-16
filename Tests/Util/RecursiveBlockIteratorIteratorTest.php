@@ -11,10 +11,10 @@
 
 namespace Sonata\BlockBundle\Tests\Entity;
 
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Util\RecursiveBlockIteratorIterator;
 
-class RecursiveBlockIteratorIteratorTest extends PHPUnit_Framework_TestCase
+class RecursiveBlockIteratorIteratorTest extends TestCase
 {
     public function testInterface()
     {
