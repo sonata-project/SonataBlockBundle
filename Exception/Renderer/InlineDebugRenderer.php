@@ -72,7 +72,7 @@ class InlineDebugRenderer implements RendererInterface
         $flattenException = FlattenException::create($exception);
         $code = $flattenException->getStatusCode();
 
-        $parameters = array(
+        $parameters = [
             'exception' => $flattenException,
             'status_code' => $code,
             'status_text' => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
@@ -80,7 +80,7 @@ class InlineDebugRenderer implements RendererInterface
             'currentContent' => false,
             'block' => $block,
             'forceStyle' => $this->forceStyle,
-        );
+        ];
 
         $content = $this->templating->render($this->template, $parameters);
         $response->setContent($content);

@@ -11,11 +11,11 @@
 
 namespace Sonata\BlockBundle\Tests\Form\Type;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Form\Type\ServiceListType;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ServiceListTypeTest extends PHPUnit_Framework_TestCase
+class ServiceListTypeTest extends TestCase
 {
     public function testFormType()
     {
@@ -57,11 +57,11 @@ class ServiceListTypeTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('getServicesByContext')
             ->with($this->equalTo('cms'))
-            ->will($this->returnValue(array('my.service.code' => $blockService)));
+            ->will($this->returnValue(['my.service.code' => $blockService]));
 
-        $type = new ServiceListType($blockServiceManager, array(
-            'cms' => array('my.service.code'),
-        ));
+        $type = new ServiceListType($blockServiceManager, [
+            'cms' => ['my.service.code'],
+        ]);
 
         $resolver = new OptionsResolver();
 
@@ -71,23 +71,23 @@ class ServiceListTypeTest extends PHPUnit_Framework_TestCase
             $type->configureOptions($resolver);
         }
 
-        $options = $resolver->resolve(array(
+        $options = $resolver->resolve([
             'context' => 'cms',
-        ));
+        ]);
 
-        $expected = array(
+        $expected = [
             'multiple' => false,
             'expanded' => false,
-            'choices' => array(
+            'choices' => [
                 'my.service.code' => 'value - my.service.code',
-            ),
-            'preferred_choices' => array(),
+            ],
+            'preferred_choices' => [],
             'empty_data' => '',
             'empty_value' => null,
             'error_bubbling' => false,
             'context' => 'cms',
             'include_containers' => false,
-        );
+        ];
 
         $this->assertEquals($expected, $options);
     }

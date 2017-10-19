@@ -29,7 +29,7 @@ class BlockContext implements BlockContextInterface
      * @param BlockInterface $block
      * @param array          $settings
      */
-    public function __construct(BlockInterface $block, array $settings = array())
+    public function __construct(BlockInterface $block, array $settings = [])
     {
         $this->block = $block;
         $this->settings = $settings;

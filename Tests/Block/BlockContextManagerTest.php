@@ -12,10 +12,10 @@
 namespace Sonata\BlockBundle\Tests\Block;
 
 use Doctrine\Common\Util\ClassUtils;
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockContextManager;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
-class BlockContextManagerTest extends PHPUnit_Framework_TestCase
+class BlockContextManagerTest extends TestCase
 {
     public function testGetWithValidData()
     {
@@ -29,7 +29,7 @@ class BlockContextManagerTest extends PHPUnit_Framework_TestCase
         $serviceManager->expects($this->once())->method('get')->will($this->returnValue($service));
 
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $block->expects($this->once())->method('getSettings')->will($this->returnValue(array()));
+        $block->expects($this->once())->method('getSettings')->will($this->returnValue([]));
 
         $manager = new BlockContextManager($blockLoader, $serviceManager);
 
@@ -37,13 +37,13 @@ class BlockContextManagerTest extends PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
 
-        $this->assertEquals(array(
+        $this->assertEquals([
             'use_cache' => true,
-            'extra_cache_keys' => array(),
-            'attr' => array(),
+            'extra_cache_keys' => [],
+            'attr' => [],
             'template' => false,
             'ttl' => 0,
-        ), $blockContext->getSettings());
+        ], $blockContext->getSettings());
     }
 
     public function testGetWithSettings()
@@ -57,31 +57,31 @@ class BlockContextManagerTest extends PHPUnit_Framework_TestCase
         $serviceManager->expects($this->once())->method('get')->will($this->returnValue($service));
 
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $block->expects($this->once())->method('getSettings')->will($this->returnValue(array()));
+        $block->expects($this->once())->method('getSettings')->will($this->returnValue([]));
 
-        $blocksCache = array(
-            'by_class' => array(ClassUtils::getClass($block) => 'my_cache.service.id'),
-        );
+        $blocksCache = [
+            'by_class' => [ClassUtils::getClass($block) => 'my_cache.service.id'],
+        ];
 
         $manager = new BlockContextManager($blockLoader, $serviceManager, $blocksCache);
 
-        $settings = array('ttl' => 1, 'template' => 'custom.html.twig');
+        $settings = ['ttl' => 1, 'template' => 'custom.html.twig'];
 
         $blockContext = $manager->get($block, $settings);
 
         $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
 
-        $this->assertEquals(array(
+        $this->assertEquals([
             'use_cache' => true,
-            'extra_cache_keys' => array(
-                BlockContextManager::CACHE_KEY => array(
+            'extra_cache_keys' => [
+                BlockContextManager::CACHE_KEY => [
                     'template' => 'custom.html.twig',
-                ),
-            ),
-            'attr' => array(),
+                ],
+            ],
+            'attr' => [],
             'template' => 'custom.html.twig',
             'ttl' => 1,
-        ), $blockContext->getSettings());
+        ], $blockContext->getSettings());
     }
 
     public function testWithInvalidSettings()
@@ -98,11 +98,11 @@ class BlockContextManagerTest extends PHPUnit_Framework_TestCase
         $serviceManager->expects($this->exactly(2))->method('get')->will($this->returnValue($service));
 
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $block->expects($this->once())->method('getSettings')->will($this->returnValue(array(
-            'template' => array(),
-        )));
+        $block->expects($this->once())->method('getSettings')->will($this->returnValue([
+            'template' => [],
+        ]));
 
-        $manager = new BlockContextManager($blockLoader, $serviceManager, array(), $logger);
+        $manager = new BlockContextManager($blockLoader, $serviceManager, [], $logger);
 
         $blockContext = $manager->get($block);
 

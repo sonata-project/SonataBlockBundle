@@ -11,15 +11,15 @@
 
 namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Renderer\InlineRenderer;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
 /**
  * Test the inline exception renderer.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class InlineRendererTest extends PHPUnit_Framework_TestCase
+class InlineRendererTest extends TestCase
 {
     /**
      * test the render() method.
@@ -41,9 +41,9 @@ class InlineRendererTest extends PHPUnit_Framework_TestCase
             ->method('render')
             ->with(
                 $this->equalTo($template),
-                $this->equalTo(array(
+                $this->equalTo([
                     'exception' => $exception,
-                    'block' => $block, ))
+                    'block' => $block, ])
             )
             ->will($this->returnValue('html'));
 

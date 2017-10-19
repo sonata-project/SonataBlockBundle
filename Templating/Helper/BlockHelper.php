@@ -105,14 +105,14 @@ class BlockHelper extends Helper
         $this->cacheHandler = $cacheHandler;
         $this->stopwatch = $stopwatch;
 
-        $this->assets = array(
-            'js' => array(),
-            'css' => array(),
-        );
+        $this->assets = [
+            'js' => [],
+            'css' => [],
+        ];
 
-        $this->traces = array(
-            '_events' => array(),
-        );
+        $this->traces = [
+            '_events' => [],
+        ];
     }
 
     /**
@@ -168,7 +168,7 @@ class BlockHelper extends Helper
      *
      * @return string
      */
-    public function renderEvent($name, array $options = array())
+    public function renderEvent($name, array $options = [])
     {
         $eventName = sprintf('sonata.block.event.%s', $name);
 
@@ -181,12 +181,12 @@ class BlockHelper extends Helper
         }
 
         if ($this->stopwatch) {
-            $this->traces['_events'][uniqid()] = array(
+            $this->traces['_events'][uniqid()] = [
                 'template_code' => $name,
                 'event_name' => $eventName,
                 'blocks' => $this->getEventBlocks($event),
                 'listeners' => $this->getEventListeners($eventName),
-            );
+            ];
         }
 
         return $content;
@@ -210,7 +210,7 @@ class BlockHelper extends Helper
      *
      * @return null|Response
      */
-    public function render($block, array $options = array())
+    public function render($block, array $options = [])
     {
         $blockContext = $this->blockContextManager->get($block, $options);
 
@@ -218,7 +218,7 @@ class BlockHelper extends Helper
             return '';
         }
 
-        $stats = array();
+        $stats = [];
 
         if ($this->stopwatch) {
             $stats = $this->startTracing($blockContext->getBlock());
@@ -276,7 +276,7 @@ class BlockHelper extends Helper
             }
 
             $response = $this->blockRenderer->render($blockContext);
-            $contextualKeys = $recorder ? $recorder->pop() : array();
+            $contextualKeys = $recorder ? $recorder->pop() : [];
 
             if ($this->stopwatch) {
                 $stats['cache']['contextual_keys'] = $contextualKeys;
@@ -329,19 +329,19 @@ class BlockHelper extends Helper
 
         $service = $this->blockServiceManager->get($blockContext->getBlock());
 
-        $assets = array(
+        $assets = [
             'js' => $service->getJavascripts('all'),
             'css' => $service->getStylesheets('all'),
-        );
+        ];
 
         if ($blockContext->getBlock()->hasChildren()) {
             $iterator = new \RecursiveIteratorIterator(new RecursiveBlockIterator($blockContext->getBlock()->getChildren()));
 
             foreach ($iterator as $block) {
-                $assets = array(
+                $assets = [
                     'js' => array_merge($this->blockServiceManager->get($block)->getJavascripts('all'), $assets['js']),
                     'css' => array_merge($this->blockServiceManager->get($block)->getStylesheets('all'), $assets['css']),
-                );
+                ];
             }
         }
 
@@ -349,10 +349,10 @@ class BlockHelper extends Helper
             $stats['assets'] = $assets;
         }
 
-        $this->assets = array(
+        $this->assets = [
             'js' => array_unique(array_merge($assets['js'], $this->assets['js'])),
             'css' => array_unique(array_merge($assets['css'], $this->assets['css'])),
-        );
+        ];
     }
 
     /**
@@ -364,28 +364,28 @@ class BlockHelper extends Helper
     {
         $this->traces[$block->getId()] = $this->stopwatch->start(sprintf('%s (id: %s, type: %s)', $block->getName(), $block->getId(), $block->getType()));
 
-        return array(
+        return [
             'name' => $block->getName(),
             'type' => $block->getType(),
             'duration' => false,
             'memory_start' => memory_get_usage(true),
             'memory_end' => false,
             'memory_peak' => false,
-            'cache' => array(
-                'keys' => array(),
-                'contextual_keys' => array(),
+            'cache' => [
+                'keys' => [],
+                'contextual_keys' => [],
                 'handler' => false,
                 'from_cache' => false,
                 'ttl' => 0,
                 'created_at' => false,
                 'lifetime' => 0,
                 'age' => 0,
-            ),
-            'assets' => array(
-                'js' => array(),
-                'css' => array(),
-            ),
-        );
+            ],
+            'assets' => [
+                'js' => [],
+                'css' => [],
+            ],
+        ];
     }
 
     /**
@@ -396,11 +396,11 @@ class BlockHelper extends Helper
     {
         $e = $this->traces[$block->getId()]->stop();
 
-        $this->traces[$block->getId()] = array_merge($stats, array(
+        $this->traces[$block->getId()] = array_merge($stats, [
             'duration' => $e->getDuration(),
             'memory_end' => memory_get_usage(true),
             'memory_peak' => memory_get_peak_usage(true),
-        ));
+        ]);
 
         $this->traces[$block->getId()]['cache']['lifetime'] = $this->traces[$block->getId()]['cache']['age'] + $this->traces[$block->getId()]['cache']['ttl'];
     }
@@ -412,10 +412,10 @@ class BlockHelper extends Helper
      */
     protected function getEventBlocks(BlockEvent $event)
     {
-        $results = array();
+        $results = [];
 
         foreach ($event->getBlocks() as $block) {
-            $results[] = array($block->getId(), $block->getType());
+            $results[] = [$block->getId(), $block->getType()];
         }
 
         return $results;
@@ -428,7 +428,7 @@ class BlockHelper extends Helper
      */
     protected function getEventListeners($eventName)
     {
-        $results = array();
+        $results = [];
 
         foreach ($this->eventDispatcher->getListeners($eventName) as $listener) {
             if ($listener instanceof \Closure) {

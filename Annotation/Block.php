@@ -39,7 +39,7 @@ class Block implements MetadataProcessorInterface
             $metadata->id = $this->id;
         }
 
-        $metadata->tags['sonata.block'][] = array();
-        $metadata->arguments = array($this->id, new Reference('templating'));
+        $metadata->tags['sonata.block'][] = [];
+        $metadata->arguments = [$this->id, new Reference('templating')];
     }
 }

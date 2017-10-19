@@ -11,9 +11,10 @@
 
 namespace Sonata\BlockBundle\Tests\Model;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Model\Block;
 
-class BlockTest extends \PHPUnit_Framework_TestCase
+class BlockTest extends TestCase
 {
     public function testGetTtl()
     {

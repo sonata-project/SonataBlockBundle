@@ -38,14 +38,14 @@ class TweakCompilerPass implements CompilerPassInterface
             // Replace empty block id with service id
             $definition->replaceArgument(0, $id);
 
-            $manager->addMethodCall('add', array($id, $id, isset($parameters[$id]) ? $parameters[$id]['contexts'] : array()));
+            $manager->addMethodCall('add', [$id, $id, isset($parameters[$id]) ? $parameters[$id]['contexts'] : []]);
         }
 
         foreach ($container->findTaggedServiceIds('sonata.block.menu') as $id => $attributes) {
-            $registry->addMethodCall('add', array(new Reference($id)));
+            $registry->addMethodCall('add', [new Reference($id)]);
         }
 
-        $services = array();
+        $services = [];
         foreach ($container->findTaggedServiceIds('sonata.block.loader') as $id => $tags) {
             $services[] = new Reference($id);
         }
@@ -66,12 +66,12 @@ class TweakCompilerPass implements CompilerPassInterface
 
         foreach ($container->getParameter('sonata_block.blocks') as $service => $settings) {
             if (count($settings['settings']) > 0) {
-                $definition->addMethodCall('addSettingsByType', array($service, $settings['settings'], true));
+                $definition->addMethodCall('addSettingsByType', [$service, $settings['settings'], true]);
             }
         }
         foreach ($container->getParameter('sonata_block.blocks_by_class') as $class => $settings) {
             if (count($settings['settings']) > 0) {
-                $definition->addMethodCall('addSettingsByClass', array($class, $settings['settings'], true));
+                $definition->addMethodCall('addSettingsByClass', [$class, $settings['settings'], true]);
             }
         }
     }

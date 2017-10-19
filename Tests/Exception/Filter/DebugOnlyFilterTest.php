@@ -11,15 +11,15 @@
 
 namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Filter\DebugOnlyFilter;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
 /**
  * Test the debug only exception filter.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class DebugOnlyFilterTest extends PHPUnit_Framework_TestCase
+class DebugOnlyFilterTest extends TestCase
 {
     /**
      * test the filter with debug enabled.

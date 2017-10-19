@@ -44,7 +44,7 @@ class FakeTemplating implements EngineInterface
     /**
      * {@inheritdoc}
      */
-    public function render($name, array $parameters = array())
+    public function render($name, array $parameters = [])
     {
         $this->name = $name;
         $this->parameters = $parameters;
@@ -53,7 +53,7 @@ class FakeTemplating implements EngineInterface
     /**
      * {@inheritdoc}
      */
-    public function renderResponse($view, array $parameters = array(), Response $response = null)
+    public function renderResponse($view, array $parameters = [], Response $response = null)
     {
         $this->view = $view;
         $this->parameters = $parameters;

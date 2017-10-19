@@ -19,12 +19,12 @@ final class MenuRegistry implements MenuRegistryInterface
     /**
      * @var MenuBuilderInterface[]
      */
-    private $menus = array();
+    private $menus = [];
 
     /**
      * @var string[]
      */
-    private $names = array();
+    private $names = [];
 
     /**
      * MenuRegistry constructor.

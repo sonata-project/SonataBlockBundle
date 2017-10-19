@@ -11,10 +11,10 @@
 
 namespace Sonata\BlockBundle\Tests\Exception\Strategy;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Filter\FilterInterface;
 use Sonata\BlockBundle\Exception\Renderer\RendererInterface;
 use Sonata\BlockBundle\Exception\Strategy\StrategyManager;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class StrategyManagerTest extends PHPUnit_Framework_TestCase
+class StrategyManagerTest extends TestCase
 {
     /**
      * @var StrategyManager
@@ -37,22 +37,22 @@ class StrategyManagerTest extends PHPUnit_Framework_TestCase
     /**
      * @var array
      */
-    protected $filters = array();
+    protected $filters = [];
 
     /**
      * @var array
      */
-    protected $renderers = array();
+    protected $renderers = [];
 
     /**
      * @var array
      */
-    protected $blockFilters = array();
+    protected $blockFilters = [];
 
     /**
      * @var array
      */
-    protected $blockRenderers = array();
+    protected $blockRenderers = [];
 
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|RendererInterface
@@ -85,26 +85,26 @@ class StrategyManagerTest extends PHPUnit_Framework_TestCase
         $this->filter2 = $this->createMock('\Sonata\BlockBundle\Exception\Filter\FilterInterface');
 
         // setup a mock container which contains our mock renderers and filters
-        $this->container = $this->getMockContainer(array(
+        $this->container = $this->getMockContainer([
             'service.renderer1' => $this->renderer1,
             'service.renderer2' => $this->renderer2,
             'service.filter1' => $this->filter1,
             'service.filter2' => $this->filter2,
-        ));
+        ]);
 
         // setup 2 mock renderers
-        $this->renderers = array();
+        $this->renderers = [];
         $this->renderers['renderer1'] = 'service.renderer1';
         $this->renderers['renderer2'] = 'service.renderer2';
 
         // setup 2 mock filters
-        $this->filters = array();
+        $this->filters = [];
         $this->filters['filter1'] = 'service.filter1';
         $this->filters['filter2'] = 'service.filter2';
 
         // setup a specific filter and renderer for "type1" blocks
-        $this->blockFilters = array('block.type1' => 'filter2');
-        $this->blockRenderers = array('block.type1' => 'renderer2');
+        $this->blockFilters = ['block.type1' => 'filter2'];
+        $this->blockRenderers = ['block.type1' => 'renderer2'];
 
         // create test object
         $this->manager = new StrategyManager($this->container, $this->filters, $this->renderers, $this->blockFilters, $this->blockRenderers);
@@ -240,11 +240,11 @@ class StrategyManagerTest extends PHPUnit_Framework_TestCase
      *
      * @return ContainerInterface
      */
-    protected function getMockContainer(array $services = array())
+    protected function getMockContainer(array $services = [])
     {
-        $map = array();
+        $map = [];
         foreach ($services as $name => $service) {
-            $map[] = array($name, ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $service);
+            $map[] = [$name, ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $service];
         }
 
         $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');

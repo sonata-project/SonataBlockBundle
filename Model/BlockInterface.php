@@ -128,7 +128,7 @@ interface BlockInterface
      *
      * @param array $settings An array of key/value
      */
-    public function setSettings(array $settings = array());
+    public function setSettings(array $settings = []);
 
     /**
      * Returns the block settings.

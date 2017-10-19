@@ -11,10 +11,11 @@
 
 namespace Sonata\BlockBundle\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Event\TextBlockListener;
 
-class TextBlockListenerTest extends PHPUnit_Framework_TestCase
+class TextBlockListenerTest extends TestCase
 {
     public function testEvent()
     {
@@ -36,10 +37,10 @@ class TextBlockListenerTest extends PHPUnit_Framework_TestCase
         $admin->expects($this->once())->method('getSubject');
         $admin->expects($this->once())->method('toString')->will($this->returnValue('fake object'));
 
-        $event = new BlockEvent(array(
+        $event = new BlockEvent([
             'admin' => $admin,
             'action' => 'edit',
-        ));
+        ]);
 
         $listener = new TextBlockListener();
         $listener->onBlock($event);

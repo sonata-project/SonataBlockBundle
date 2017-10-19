@@ -31,27 +31,27 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
     /**
      * @var array
      */
-    protected $blocks = array();
+    protected $blocks = [];
 
     /**
      * @var array
      */
-    protected $containers = array();
+    protected $containers = [];
 
     /**
      * @var array
      */
-    protected $realBlocks = array();
+    protected $realBlocks = [];
 
     /**
      * @var array
      */
-    protected $containerTypes = array();
+    protected $containerTypes = [];
 
     /**
      * @var array
      */
-    protected $events = array();
+    protected $events = [];
 
     /**
      * @param BlockHelper $blockHelper    Block renderer
@@ -147,12 +147,12 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
      */
     public function serialize()
     {
-        $data = array(
+        $data = [
             'blocks' => $this->blocks,
             'containers' => $this->containers,
             'realBlocks' => $this->realBlocks,
             'events' => $this->events,
-        );
+        ];
 
         return serialize($data);
     }

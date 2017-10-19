@@ -11,21 +11,22 @@
 
 namespace Sonata\BlockBundle\Tests\Test;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Test\FakeTemplating;
 
-class FakeTemplatingTest extends \PHPUnit_Framework_TestCase
+class FakeTemplatingTest extends TestCase
 {
     public function testRender()
     {
         $templating = new FakeTemplating();
-        $templating->render('template.html.twig', array(
+        $templating->render('template.html.twig', [
             'foo' => 'bar',
-        ));
+        ]);
 
         $this->assertSame('template.html.twig', $templating->name);
-        $this->assertSame(array(
+        $this->assertSame([
             'foo' => 'bar',
-        ), $templating->parameters);
+        ], $templating->parameters);
     }
 
     public function testRenderResponse()
@@ -33,14 +34,14 @@ class FakeTemplatingTest extends \PHPUnit_Framework_TestCase
         $response = $this->getMockBuilder('Symfony\Component\HttpFoundation\Response')->getMock();
 
         $templating = new FakeTemplating();
-        $templating->renderResponse('template.html.twig', array(
+        $templating->renderResponse('template.html.twig', [
             'foo' => 'bar',
-        ), $response);
+        ], $response);
 
         $this->assertSame('template.html.twig', $templating->view);
-        $this->assertSame(array(
+        $this->assertSame([
             'foo' => 'bar',
-        ), $templating->parameters);
+        ], $templating->parameters);
         $this->assertSame($response, $templating->response);
     }
 

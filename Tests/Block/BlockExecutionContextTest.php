@@ -11,21 +11,21 @@
 
 namespace Sonata\BlockBundle\Tests\Block;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockContext;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
-class BlockExecutionContextTest extends PHPUnit_Framework_TestCase
+class BlockExecutionContextTest extends TestCase
 {
     public function testBasicFeature()
     {
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
 
-        $blockContext = new BlockContext($block, array(
+        $blockContext = new BlockContext($block, [
             'hello' => 'world',
-        ));
+        ]);
 
         $this->assertEquals('world', $blockContext->getSetting('hello'));
-        $this->assertEquals(array('hello' => 'world'), $blockContext->getSettings());
+        $this->assertEquals(['hello' => 'world'], $blockContext->getSettings());
 
         $this->assertEquals($block, $blockContext->getBlock());
     }

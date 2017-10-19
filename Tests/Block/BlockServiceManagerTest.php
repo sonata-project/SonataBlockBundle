@@ -11,10 +11,10 @@
 
 namespace Sonata\BlockBundle\Tests\Block;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockServiceManager;
-use Sonata\BlockBundle\Tests\PHPUnit_Framework_TestCase;
 
-class BlockServiceManagerTest extends PHPUnit_Framework_TestCase
+class BlockServiceManagerTest extends TestCase
 {
     public function testGetBlockService()
     {
@@ -87,7 +87,7 @@ class BlockServiceManagerTest extends PHPUnit_Framework_TestCase
 
         $service = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
 
-        $manager->add('foo.bar', $service, array('fake'));
+        $manager->add('foo.bar', $service, ['fake']);
 
         $this->assertNotEmpty($manager->getServicesByContext('fake'));
     }

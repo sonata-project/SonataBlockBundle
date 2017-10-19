@@ -56,7 +56,7 @@ class BlockContextManager implements BlockContextManagerInterface
      * @param LoggerInterface|null         $logger
      */
     public function __construct(BlockLoaderInterface $blockLoader, BlockServiceManagerInterface $blockService,
-        array $cacheBlocks = array(), LoggerInterface $logger = null
+        array $cacheBlocks = [], LoggerInterface $logger = null
     ) {
         $this->blockLoader = $blockLoader;
         $this->blockService = $blockService;
@@ -69,7 +69,7 @@ class BlockContextManager implements BlockContextManagerInterface
      */
     public function addSettingsByType($type, array $settings, $replace = false)
     {
-        $typeSettings = isset($this->settingsByType[$type]) ? $this->settingsByType[$type] : array();
+        $typeSettings = isset($this->settingsByType[$type]) ? $this->settingsByType[$type] : [];
         if ($replace) {
             $this->settingsByType[$type] = array_merge($typeSettings, $settings);
         } else {
@@ -82,7 +82,7 @@ class BlockContextManager implements BlockContextManagerInterface
      */
     public function addSettingsByClass($class, array $settings, $replace = false)
     {
-        $classSettings = isset($this->settingsByClass[$class]) ? $this->settingsByClass[$class] : array();
+        $classSettings = isset($this->settingsByClass[$class]) ? $this->settingsByClass[$class] : [];
         if ($replace) {
             $this->settingsByClass[$class] = array_merge($classSettings, $settings);
         } else {
@@ -105,7 +105,7 @@ class BlockContextManager implements BlockContextManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function get($meta, array $settings = array())
+    public function get($meta, array $settings = [])
     {
         if (!$meta instanceof BlockInterface) {
             $block = $this->blockLoader->load($meta);
@@ -148,25 +148,25 @@ class BlockContextManager implements BlockContextManagerInterface
     protected function configureSettings(OptionsResolver $optionsResolver, BlockInterface $block)
     {
         // defaults for all blocks
-        $optionsResolver->setDefaults(array(
+        $optionsResolver->setDefaults([
             'use_cache' => true,
-            'extra_cache_keys' => array(),
-            'attr' => array(),
+            'extra_cache_keys' => [],
+            'attr' => [],
             'template' => false,
             'ttl' => (int) $block->getTtl(),
-        ));
+        ]);
 
         $optionsResolver
             ->addAllowedTypes('use_cache', 'bool')
             ->addAllowedTypes('extra_cache_keys', 'array')
             ->addAllowedTypes('attr', 'array')
             ->addAllowedTypes('ttl', 'int')
-            ->addAllowedTypes('template', array('string', 'bool'));
+            ->addAllowedTypes('template', ['string', 'bool']);
 
         // add type and class settings for block
         $class = ClassUtils::getClass($block);
-        $settingsByType = isset($this->settingsByType[$block->getType()]) ? $this->settingsByType[$block->getType()] : array();
-        $settingsByClass = isset($this->settingsByClass[$class]) ? $this->settingsByClass[$class] : array();
+        $settingsByType = isset($this->settingsByType[$block->getType()]) ? $this->settingsByType[$block->getType()] : [];
+        $settingsByClass = isset($this->settingsByClass[$class]) ? $this->settingsByClass[$class] : [];
         $optionsResolver->setDefaults(array_merge($settingsByType, $settingsByClass));
     }
 
@@ -241,10 +241,10 @@ class BlockContextManager implements BlockContextManagerInterface
                 $isNewOverwritten = $reflector->getDeclaringClass()->getName() !== 'Sonata\BlockBundle\Block\AbstractBlockService';
             }
 
-            $this->reflectionCache[$serviceClass] = array(
+            $this->reflectionCache[$serviceClass] = [
                 'isOldOverwritten' => $isOldOverwritten,
                 'isNewOverwritten' => $isNewOverwritten,
-            );
+            ];
         }
 
         if ($this->reflectionCache[$serviceClass]['isOldOverwritten'] && !$this->reflectionCache[$serviceClass]['isNewOverwritten']) {
