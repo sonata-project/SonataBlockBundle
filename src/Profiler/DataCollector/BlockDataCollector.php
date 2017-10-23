@@ -177,4 +177,15 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
     {
         return 'block';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reset()
+    {
+        $this->blocks = [];
+        $this->containers = [];
+        $this->realBlocks = [];
+        $this->events = [];
+    }
 }
