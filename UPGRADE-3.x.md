@@ -1,6 +1,12 @@
 UPGRADE 3.x
 ===========
 
+## Deprecated options resolver BC tricks.
+
+Since we require at least Symfony 2.8, this BC trick is not needed anymore.
+
+The concerned class and interface should be internal, but as they was not marked like this, we will deprecate them.
+
 UPGRADE FROM 3.2 to 3.3
 =======================
 
