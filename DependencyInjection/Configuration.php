@@ -168,7 +168,7 @@ class Configuration implements ConfigurationInterface
                         ->always(function ($value) {
                             if (count($value) > 0) {
                                 @trigger_error(
-                                    'The menus configuration key is deprecated since 3.x and will be removed in 4.0.',
+                                    'The menus configuration key is deprecated since 3.3 and will be removed in 4.0.',
                                     E_USER_DEPRECATED
                                 );
                             }

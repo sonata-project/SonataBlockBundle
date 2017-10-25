@@ -46,7 +46,7 @@ class TweakCompilerPass implements CompilerPassInterface
             )) {
                 // NEXT_MAJOR: Remove deprecation notice
                 @trigger_error(
-                    sprintf('Using service id %s different from block id %s is deprecated since 3.x and will be removed in 4.0.', $id, $arguments[0]),
+                    sprintf('Using service id %s different from block id %s is deprecated since 3.3 and will be removed in 4.0.', $id, $arguments[0]),
                     E_USER_DEPRECATED
                 );
             }

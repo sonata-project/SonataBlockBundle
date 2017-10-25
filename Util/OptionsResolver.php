@@ -14,7 +14,7 @@ namespace Sonata\BlockBundle\Util;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * @deprecated since version 3.x, to be removed in 4.0. Use \Symfony\Component\OptionsResolver\OptionsResolver instead.
+ * @deprecated since version 3.5, to be removed in 4.0. Use \Symfony\Component\OptionsResolver\OptionsResolver instead.
  */
 class OptionsResolver extends \Symfony\Component\OptionsResolver\OptionsResolver implements OptionsResolverInterface
 {

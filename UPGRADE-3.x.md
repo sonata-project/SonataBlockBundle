@@ -1,6 +1,9 @@
 UPGRADE 3.x
 ===========
 
+UPGRADE FROM 3.4 to 3.5
+=======================
+
 ## Deprecated options resolver BC tricks.
 
 Since we require at least Symfony 2.8, this BC trick is not needed anymore.

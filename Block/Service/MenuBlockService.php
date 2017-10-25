@@ -38,7 +38,7 @@ class MenuBlockService extends AbstractAdminBlockService
      *
      * @var array
      *
-     * @deprecated since 3.x, to be removed in 4.0
+     * @deprecated since 3.3, to be removed in 4.0
      */
     protected $menus;
 
@@ -64,7 +64,7 @@ class MenuBlockService extends AbstractAdminBlockService
             $this->menuRegistry = $menuRegistry;
         } else {
             @trigger_error(
-                'Initializing '.__CLASS__.' with an array parameter is deprecated since 3.x and will be removed in 4.0.',
+                'Initializing '.__CLASS__.' with an array parameter is deprecated since 3.3 and will be removed in 4.0.',
                 E_USER_DEPRECATED
             );
             $this->menus = $menuRegistry;
