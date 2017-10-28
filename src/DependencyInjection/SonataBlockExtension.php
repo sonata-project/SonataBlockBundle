@@ -61,6 +61,7 @@ class SonataBlockExtension extends Extension
         $loader->load('form.xml');
         $loader->load('core.xml');
         $loader->load('exception.xml');
+        $loader->load('commands.xml');
 
         $this->fixConfigurationDeprecation($config);
 
