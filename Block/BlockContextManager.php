@@ -187,24 +187,13 @@ class BlockContextManager implements BlockContextManagerInterface
             'ttl' => (int) $block->getTtl(),
         ]);
 
-        // TODO: Remove it when bumping requirements to SF 2.6+
-        if (method_exists($optionsResolver, 'setDefined')) {
-            $optionsResolver
-                ->addAllowedTypes('use_cache', 'bool')
-                ->addAllowedTypes('extra_cache_keys', 'array')
-                ->addAllowedTypes('attr', 'array')
-                ->addAllowedTypes('ttl', 'int')
-                ->addAllowedTypes('template', ['string', 'bool'])
-            ;
-        } else {
-            $optionsResolver->addAllowedTypes([
-                'use_cache' => ['bool'],
-                'extra_cache_keys' => ['array'],
-                'attr' => ['array'],
-                'ttl' => ['int'],
-                'template' => ['string', 'bool'],
-            ]);
-        }
+        $optionsResolver
+            ->addAllowedTypes('use_cache', 'bool')
+            ->addAllowedTypes('extra_cache_keys', 'array')
+            ->addAllowedTypes('attr', 'array')
+            ->addAllowedTypes('ttl', 'int')
+            ->addAllowedTypes('template', ['string', 'bool'])
+        ;
 
         // add type and class settings for block
         $class = ClassUtils::getClass($block);
