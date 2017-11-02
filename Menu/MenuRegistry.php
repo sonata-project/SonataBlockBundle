@@ -39,7 +39,7 @@ final class MenuRegistry implements MenuRegistryInterface
             $this->names = $menus;
 
             @trigger_error(
-                'The menus parameter in '.__CLASS__.' is deprecated since 3.x and will be removed in 4.0.',
+                'The menus parameter in '.__CLASS__.' is deprecated since 3.3 and will be removed in 4.0.',
                 E_USER_DEPRECATED
             );
         }

@@ -231,14 +231,14 @@ class BlockContextManager implements BlockContextManagerInterface
         $serviceClass = get_class($service);
         if (!isset($this->reflectionCache[$serviceClass])) {
             $reflector = new \ReflectionMethod($service, 'setDefaultSettings');
-            $isOldOverwritten = $reflector->getDeclaringClass()->getName() !== 'Sonata\BlockBundle\Block\AbstractBlockService';
+            $isOldOverwritten = 'Sonata\BlockBundle\Block\AbstractBlockService' !== $reflector->getDeclaringClass()->getName();
 
             // Prevention for service classes implementing directly the interface and not extends the new base class
             if (!method_exists($service, 'configureSettings')) {
                 $isNewOverwritten = false;
             } else {
                 $reflector = new \ReflectionMethod($service, 'configureSettings');
-                $isNewOverwritten = $reflector->getDeclaringClass()->getName() !== 'Sonata\BlockBundle\Block\AbstractBlockService';
+                $isNewOverwritten = 'Sonata\BlockBundle\Block\AbstractBlockService' !== $reflector->getDeclaringClass()->getName();
             }
 
             $this->reflectionCache[$serviceClass] = [

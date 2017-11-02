@@ -38,7 +38,7 @@ class MenuBlockService extends AbstractAdminBlockService
      *
      * @var array
      *
-     * @deprecated since 3.x, to be removed in 4.0
+     * @deprecated since 3.3, to be removed in 4.0
      */
     protected $menus;
 
@@ -64,7 +64,7 @@ class MenuBlockService extends AbstractAdminBlockService
             $this->menuRegistry = $menuRegistry;
         } else {
             @trigger_error(
-                'Initializing '.__CLASS__.' with an array parameter is deprecated since 3.x and will be removed in 4.0.',
+                'Initializing '.__CLASS__.' with an array parameter is deprecated since 3.3 and will be removed in 4.0.',
                 E_USER_DEPRECATED
             );
             $this->menus = $menuRegistry;
@@ -105,7 +105,7 @@ class MenuBlockService extends AbstractAdminBlockService
      */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
-        if (($name = $block->getSetting('menu_name')) && $name !== '' && !$this->menuProvider->has($name)) {
+        if (($name = $block->getSetting('menu_name')) && '' !== $name && !$this->menuProvider->has($name)) {
             // If we specified a menu_name, check that it exists
             $errorElement->with('menu_name')
                 ->addViolation('sonata.block.menu.not_existing', ['name' => $name])
@@ -155,7 +155,7 @@ class MenuBlockService extends AbstractAdminBlockService
 
         $choices = $this->menus;
 
-        if (count($choices) == 0) {
+        if (0 == count($choices)) {
             $choices = $this->menuRegistry->getAliasNames();
         }
 

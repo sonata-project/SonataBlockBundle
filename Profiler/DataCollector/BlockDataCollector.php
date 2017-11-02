@@ -76,7 +76,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
                 return; // something went wrong while collecting information
             }
 
-            if ($id == '_events') {
+            if ('_events' == $id) {
                 foreach ($block as $uniqid => $event) {
                     $this->events[$uniqid] = $event;
                 }

@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.5.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.4.0...3.5.0) - 2017-10-25
+### Added
+- support for sonata/cache 2
+
+### Deprecated
+- Option resolver BC trick.
+
+### Fixed
+- OutOfBoundsException while replacing block service default name argument
+
+### Removed
+- Support for old versions of PHP and Symfony.
+
 ## [3.4.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.3.2...3.4.0) - 2017-09-19
 ### Added
 - added block annotation

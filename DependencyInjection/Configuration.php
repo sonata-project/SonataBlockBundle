@@ -51,7 +51,7 @@ class Configuration implements ConfigurationInterface
             ->validate()
                 ->always(function ($value) {
                     foreach ($value['blocks'] as $name => &$block) {
-                        if (count($block['contexts']) == 0) {
+                        if (0 == count($block['contexts'])) {
                             $block['contexts'] = $value['default_contexts'];
                         }
                     }
@@ -168,7 +168,7 @@ class Configuration implements ConfigurationInterface
                         ->always(function ($value) {
                             if (count($value) > 0) {
                                 @trigger_error(
-                                    'The menus configuration key is deprecated since 3.x and will be removed in 4.0.',
+                                    'The menus configuration key is deprecated since 3.3 and will be removed in 4.0.',
                                     E_USER_DEPRECATED
                                 );
                             }
