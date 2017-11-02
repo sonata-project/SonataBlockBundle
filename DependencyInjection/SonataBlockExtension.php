@@ -187,7 +187,7 @@ class SonataBlockExtension extends Extension
         $contexts = [];
 
         foreach ($config['blocks'] as $service => $settings) {
-            if (count($settings['contexts']) == 0) {
+            if (0 == count($settings['contexts'])) {
                 $settings['contexts'] = $defaults;
             }
 

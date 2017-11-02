@@ -94,7 +94,7 @@ class ContainerBlockService extends AbstractAdminBlockService
     protected function getDecorator($layout)
     {
         $key = '{{ CONTENT }}';
-        if (strpos($layout, $key) === false) {
+        if (false === strpos($layout, $key)) {
             return [];
         }
 
