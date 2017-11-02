@@ -51,7 +51,7 @@ class Configuration implements ConfigurationInterface
             ->validate()
                 ->always(function ($value) {
                     foreach ($value['blocks'] as $name => &$block) {
-                        if (count($block['contexts']) == 0) {
+                        if (0 == count($block['contexts'])) {
                             $block['contexts'] = $value['default_contexts'];
                         }
                     }
