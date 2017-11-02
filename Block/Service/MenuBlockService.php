@@ -83,7 +83,7 @@ class MenuBlockService extends AbstractAdminBlockService
             'context' => $blockContext,
         ];
 
-        if ('private' === $blockContext->getSettings('cache_policy')) {
+        if ('private' === $blockContext->getSetting('cache_policy')) {
             return $this->renderPrivateResponse($blockContext->getTemplate(), $responseSettings, $response);
         }
 
@@ -139,7 +139,7 @@ class MenuBlockService extends AbstractAdminBlockService
      */
     public function getBlockMetadata($code = null)
     {
-        return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'SonataBlockBundle', [
+        return new Metadata($this->getName(), (null !== $code ? $code : $this->getName()), false, 'SonataBlockBundle', [
             'class' => 'fa fa-bars',
         ]);
     }

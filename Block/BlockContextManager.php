@@ -259,9 +259,9 @@ class BlockContextManager implements BlockContextManagerInterface
 
         /* use new interface method whenever possible */
         if (method_exists($service, 'configureSettings')) {
-            $service->configureSettings($optionsResolver, $block);
+            $service->configureSettings($optionsResolver);
         } else {
-            $service->setDefaultSettings($optionsResolver, $block);
+            $service->setDefaultSettings($optionsResolver);
         }
 
         // Caching method reflection
