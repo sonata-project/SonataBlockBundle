@@ -160,7 +160,7 @@ interface BlockInterface
      *
      * @param BlockInterface $children
      */
-    public function addChildren(BlockInterface $children);
+    public function addChildren(self $children);
 
     /**
      * Returns child blocks.
@@ -181,7 +181,7 @@ interface BlockInterface
      *
      * @param BlockInterface|null $parent
      */
-    public function setParent(BlockInterface $parent = null);
+    public function setParent(self $parent = null);
 
     /**
      * Returns the parent block.
