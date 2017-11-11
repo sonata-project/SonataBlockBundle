@@ -177,4 +177,15 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
     {
         return 'block';
     }
+
+    /**
+     * Resets this data collector to its initial state.
+     */
+    public function reset()
+    {
+        $this->blocks = [];
+        $this->containers = [];
+        $this->realBlocks = [];
+        $this->events = [];
+    }
 }
