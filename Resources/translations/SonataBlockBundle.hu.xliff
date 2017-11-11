@@ -22,6 +22,46 @@
                 <source>sonata.block.template</source>
                 <target>Sablon</target>
             </trans-unit>
+            <trans-unit id="sonata.block.ajax">
+                <source>sonata.block.ajax</source>
+                <target>sonata.block.ajax</target>
+            </trans-unit>
+            <trans-unit id="form.label_text">
+              <source>form.label_text</source>
+              <target>form.label_text</target>
+            </trans-unit>
+            <trans-unit id="form.label_class">
+              <source>form.label_class</source>
+              <target>form.label_class</target>
+            </trans-unit>
+            <trans-unit id="form.label_icon">
+              <source>form.label_icon</source>
+              <target>form.label_icon</target>
+            </trans-unit>
+            <trans-unit id="form.label_color">
+              <source>form.label_color</source>
+              <target>form.label_color</target>
+            </trans-unit>
+            <trans-unit id="form.label_url">
+                <source>form.label_url</source>
+                <target>form.label_url</target>
+            </trans-unit>
+            <trans-unit id="form.label_link">
+                <source>form.label_link</source>
+                <target>form.label_link</target>
+            </trans-unit>
+            <trans-unit id="form.label_template">
+              <source>form.label_template</source>
+              <target>form.label_template</target>
+            </trans-unit>
+            <trans-unit id="form.template_simple">
+              <source>form.template_simple</source>
+              <target>form.template_simple</target>
+            </trans-unit>
+            <trans-unit id="form.template_link">
+              <source>form.template_link</source>
+              <target>form.template_link</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
