@@ -40,11 +40,11 @@
         "sonata-project/cache-bundle": "^3.0"
     },
     "autoload": {
-        "psr-4": { "Sonata\\BlockBundle\\": "" },
-        "exclude-from-classmap": [
-            "Tests/"
-        ],
-        "files": ["Resources/stubs/symfony2.php"]
+        "psr-4": { "Sonata\\BlockBundle\\": "src/" },
+        "files": ["src/Resources/stubs/symfony2.php"]
+    },
+    "autoload-dev": {
+        "psr-4": { "Sonata\\BlockBundle\\Tests\\": "tests/" }
     },
      "config": {
          "sort-packages": true
