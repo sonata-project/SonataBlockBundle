@@ -14,7 +14,7 @@ namespace Sonata\BlockBundle\Tests\Profiler\DataCollector;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Profiler\DataCollector\BlockDataCollector;
 
-class BlockDataCollectorTest extends TestCase
+final class BlockDataCollectorTest extends TestCase
 {
     public function testBlockDataCollector()
     {
