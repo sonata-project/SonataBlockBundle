@@ -45,7 +45,7 @@ class BlockDataCollectorTest extends TestCase
             '1' => '2',
             '3' => '4',
         ];
-        $this->assertEquals($expectedEvents, $blockDataCollector->getEvents());
+        $this->assertSame($expectedEvents, $blockDataCollector->getEvents());
 
         $expectedBlocks = [
             '_events' => [
@@ -59,26 +59,26 @@ class BlockDataCollectorTest extends TestCase
                 'type' => 'another_type',
             ],
         ];
-        $this->assertEquals($expectedBlocks, $blockDataCollector->getBlocks());
+        $this->assertSame($expectedBlocks, $blockDataCollector->getBlocks());
 
         $expectedContainers = [
             'test1' => [
                 'type' => 'container',
             ]
         ];
-        $this->assertEquals($expectedContainers, $blockDataCollector->getContainers());
+        $this->assertSame($expectedContainers, $blockDataCollector->getContainers());
 
         $expectedRealBlocks = [
             'test2' => [
                 'type' => 'another_type',
             ]
         ];
-        $this->assertEquals($expectedRealBlocks, $blockDataCollector->getRealBlocks());
+        $this->assertSame($expectedRealBlocks, $blockDataCollector->getRealBlocks());
 
         $blockDataCollector->reset();
-        $this->assertEquals([], $blockDataCollector->getEvents());
-        $this->assertEquals([], $blockDataCollector->getBlocks());
-        $this->assertEquals([], $blockDataCollector->getContainers());
-        $this->assertEquals([], $blockDataCollector->getRealBlocks());
+        $this->assertSame([], $blockDataCollector->getEvents());
+        $this->assertSame([], $blockDataCollector->getBlocks());
+        $this->assertSame([], $blockDataCollector->getContainers());
+        $this->assertSame([], $blockDataCollector->getRealBlocks());
     }
 }
