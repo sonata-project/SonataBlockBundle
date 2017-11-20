@@ -40,10 +40,10 @@
         "sonata-project/cache-bundle": "^3.0"
     },
     "autoload": {
-        "psr-4": { "Sonata\\BlockBundle\\": "" },
-        "exclude-from-classmap": [
-            "Tests/"
-        ]
+        "psr-4": { "Sonata\\BlockBundle\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sonata\\BlockBundle\\Tests\\": "tests/" }
     },
      "config": {
          "sort-packages": true
