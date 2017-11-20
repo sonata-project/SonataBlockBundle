@@ -156,8 +156,7 @@ class BlockContextManager implements BlockContextManagerInterface
             'ttl' => (int) $block->getTtl(),
         ]);
 
-
-            $optionsResolver
+        $optionsResolver
                 ->addAllowedTypes('use_cache', 'bool')
                 ->addAllowedTypes('extra_cache_keys', 'array')
                 ->addAllowedTypes('attr', 'array')
