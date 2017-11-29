@@ -15,6 +15,7 @@ use Knp\Menu\ItemInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Menu\MenuRegistry;
 use Sonata\BlockBundle\Menu\MenuRegistryInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Model\Metadata;
@@ -48,26 +49,35 @@ class MenuBlockService extends AbstractAdminBlockService
     protected $menuRegistry;
 
     /**
-     * @param string                      $name
-     * @param EngineInterface             $templating
-     * @param MenuProviderInterface       $menuProvider
-     * @param MenuRegistryInterface|array $menuRegistry
+     * @param string                     $name
+     * @param EngineInterface            $templating
+     * @param MenuProviderInterface      $menuProvider
+     * @param MenuRegistryInterface|null $menuRegistry
      */
-    public function __construct($name, EngineInterface $templating, MenuProviderInterface $menuProvider, $menuRegistry)
+    public function __construct($name, EngineInterface $templating, MenuProviderInterface $menuProvider, $menuRegistry = null)
     {
         parent::__construct($name, $templating);
 
         $this->menuProvider = $menuProvider;
 
-        // NEXT_MAJOR: change the constructor parameter to MenuManagerInterface and remove the following condition
         if ($menuRegistry instanceof MenuRegistryInterface) {
             $this->menuRegistry = $menuRegistry;
-        } else {
+        } elseif (is_null($menuRegistry)) {
+            $this->menuRegistry = new MenuRegistry();
+        } elseif (is_array($menuRegistry)) { //NEXT_MAJOR: Remove this case
             @trigger_error(
                 'Initializing '.__CLASS__.' with an array parameter is deprecated since 3.3 and will be removed in 4.0.',
                 E_USER_DEPRECATED
             );
-            $this->menus = $menuRegistry;
+            $this->menuRegistry = new MenuRegistry();
+            foreach ($menuRegistry as $menu) {
+                $this->menuRegistry->add($menu);
+            }
+        } else {
+            throw new \InvalidArgumentException(sprintf(
+                'MenuRegistry must be either null or instance of %s',
+                MenuRegistryInterface::class
+            ));
         }
     }
 
@@ -153,11 +163,7 @@ class MenuBlockService extends AbstractAdminBlockService
             'required' => false,
         ];
 
-        $choices = $this->menus;
-
-        if (0 == count($choices)) {
-            $choices = $this->menuRegistry->getAliasNames();
-        }
+        $choices = $this->menuRegistry->getAliasNames();
 
         $choices = array_flip($choices);
 

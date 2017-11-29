@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.7.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.7.0...3.8.0) - 2017-11-28
+### Changed
+- menuRegistry parameter in `Sonata\BlockBundle\Block\Service\MenuBlockService` to be allowed the type of array
+
 ## [3.6.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.6.0...3.7.0) - 2017-11-27
 ### Changed
 - Rollback to PHP 5.6 as minimum support.
