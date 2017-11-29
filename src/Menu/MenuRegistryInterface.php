@@ -19,9 +19,9 @@ interface MenuRegistryInterface
     /**
      * Adds a new menu.
      *
-     * @param MenuBuilderInterface $name
+     * @param string $name
      */
-    public function add(MenuBuilderInterface $name);
+    public function add($name);
 
     /**
      * Returns all alias names.

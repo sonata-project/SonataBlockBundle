@@ -161,6 +161,7 @@ class MenuBlockService extends AbstractAdminBlockService
     {
         $choiceOptions = [
             'required' => false,
+            'choice_translation_domain' => 'SonataBlockBundle',
         ];
 
         $choices = $this->menuRegistry->getAliasNames();

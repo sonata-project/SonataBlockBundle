@@ -48,6 +48,7 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
 
         $choiceOptions = [
             'required' => false,
+            'choice_translation_domain' => 'SonataBlockBundle',
         ];
 
         $choices = [
