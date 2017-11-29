@@ -40,7 +40,7 @@ Defining a menu could be done by inserting the ``sonata.block.menu`` tag.
     .. code-block:: xml
 
         <service id="sonata.block.menu.main" class="Sonata\BlockBundle\Menu\MainMenu">
-            <tag name="sonata.block.menu" />
+            <tag name="knp_menu.menu" alias="sonata.main" />
         </service>
 
 Upon configuration, you may set some rendering options (see KNP Doc for those).

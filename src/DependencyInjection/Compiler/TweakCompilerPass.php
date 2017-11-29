@@ -54,8 +54,13 @@ class TweakCompilerPass implements CompilerPassInterface
             $manager->addMethodCall('add', [$id, $id, isset($parameters[$id]) ? $parameters[$id]['contexts'] : []]);
         }
 
-        foreach ($container->findTaggedServiceIds('sonata.block.menu') as $id => $attributes) {
-            $registry->addMethodCall('add', [new Reference($id)]);
+        foreach ($container->findTaggedServiceIds('knp_menu.menu') as $id => $tags) {
+            foreach ($tags as $attributes) {
+                if (empty($attributes['alias'])) {
+                    throw new \InvalidArgumentException(sprintf('The alias is not defined in the "knp_menu.menu" tag for the service "%s"', $id));
+                }
+                $registry->addMethodCall('add', [$attributes['alias']]);
+            }
         }
 
         $services = [];

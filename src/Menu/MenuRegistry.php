@@ -17,11 +17,6 @@ namespace Sonata\BlockBundle\Menu;
 final class MenuRegistry implements MenuRegistryInterface
 {
     /**
-     * @var MenuBuilderInterface[]
-     */
-    private $menus = [];
-
-    /**
      * @var string[]
      */
     private $names = [];
@@ -48,12 +43,18 @@ final class MenuRegistry implements MenuRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function add(MenuBuilderInterface $menu)
+    public function add($menu)
     {
-        $alias = $this->buildMenuAlias($menu);
+        if ($menu instanceof MenuBuilderInterface) {
+            @trigger_error(
+                'Adding a '.MenuBuilderInterface::class.' is deprecated since 3.x and will be removed in 4.0.',
+                E_USER_DEPRECATED
+            );
 
-        $this->menus[$alias] = $menu;
-        $this->names[$alias] = $menu->getName();
+            return;
+        }
+
+        $this->names[] = $menu;
     }
 
     /**
@@ -62,23 +63,5 @@ final class MenuRegistry implements MenuRegistryInterface
     public function getAliasNames()
     {
         return $this->names;
-    }
-
-    /**
-     * Returns the menu method name.
-     *
-     * @param MenuBuilderInterface $menu
-     *
-     * @return string
-     */
-    private function buildMenuAlias(MenuBuilderInterface $menu)
-    {
-        $reflector = new \ReflectionClass($menu);
-        $namespace = $reflector->getNamespaceName();
-        $class = $reflector->getName();
-
-        $bundle = str_replace('\\', '', preg_replace('/(.*Bundle)\\\\.*/i', '$1', $namespace));
-
-        return $bundle.':'.$class.':buildMenu';
     }
 }
