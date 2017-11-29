@@ -38,12 +38,7 @@ class ServiceListTypeTest extends TestCase
 
         $resolver = new OptionsResolver();
 
-        if (!method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $type->setDefaultOptions($resolver);
-        } else {
-            $type->configureOptions($resolver);
-        }
-
+        $type->configureOptions($resolver);
         $resolver->resolve();
     }
 
@@ -65,12 +60,7 @@ class ServiceListTypeTest extends TestCase
 
         $resolver = new OptionsResolver();
 
-        if (!method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $type->setDefaultOptions($resolver);
-        } else {
-            $type->configureOptions($resolver);
-        }
-
+        $type->configureOptions($resolver);
         $options = $resolver->resolve([
             'context' => 'cms',
         ]);
