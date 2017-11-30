@@ -18,6 +18,13 @@ use Sonata\BlockBundle\Block\BlockServiceInterface;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/*
+ * NEXT_MAJOR: remove check and extend PHPUnit\Framework\TestCase when dropping support for PHPUnit 4
+ */
+if (!class_exists('\PHPUnit_Framework_TestCase')) {
+    class_alias('PHPUnit\Framework\TestCase', '\PHPUnit_Framework_TestCase');
+}
+
 /**
  * Abstract test class for block service tests.
  *
