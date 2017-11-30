@@ -15,6 +15,10 @@ use Knp\Menu\Provider\MenuProviderInterface;
 use Sonata\BlockBundle\Block\Service\MenuBlockService;
 use Sonata\BlockBundle\Menu\MenuRegistryInterface;
 use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
+use Sonata\CoreBundle\Form\Type\ImmutableArrayType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormTypeInterface;
 
 class MenuBlockServiceTest extends AbstractBlockServiceTestCase
@@ -63,42 +67,42 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
         ];
 
         $formMapper->expects($this->once())->method('add')
-            ->with('settings', 'sonata_type_immutable_array', [
+            ->with('settings', ImmutableArrayType::class, [
                 'keys' => [
-                    ['title', 'text', [
+                    ['title', TextType::class, [
                         'required' => false,
                         'label' => 'form.label_title',
                     ]],
-                    ['cache_policy', 'choice', [
+                    ['cache_policy', ChoiceType::class, [
                         'label' => 'form.label_cache_policy',
                         'choices' => ['public', 'private'],
                     ]],
-                    ['menu_name', 'choice', $choiceOptions],
-                    ['safe_labels', 'checkbox', [
+                    ['menu_name', ChoiceType::class, $choiceOptions],
+                    ['safe_labels', CheckboxType::class, [
                         'required' => false,
                         'label' => 'form.label_safe_labels',
                     ]],
-                    ['current_class', 'text', [
+                    ['current_class', TextType::class, [
                         'required' => false,
                         'label' => 'form.label_current_class',
                     ]],
-                    ['first_class', 'text', [
+                    ['first_class', TextType::class, [
                         'required' => false,
                         'label' => 'form.label_first_class',
                     ]],
-                    ['last_class', 'text', [
+                    ['last_class', TextType::class, [
                         'required' => false,
                         'label' => 'form.label_last_class',
                     ]],
-                    ['menu_class', 'text', [
+                    ['menu_class', TextType::class, [
                         'required' => false,
                         'label' => 'form.label_menu_class',
                     ]],
-                    ['children_class', 'text', [
+                    ['children_class', TextType::class, [
                         'required' => false,
                         'label' => 'form.label_children_class',
                     ]],
-                    ['menu_template', 'text', [
+                    ['menu_template', TextType::class, [
                         'required' => false,
                         'label' => 'form.label_menu_template',
                     ]],
