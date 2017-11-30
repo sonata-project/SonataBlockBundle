@@ -20,10 +20,10 @@ use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /*
- * NEXT_MAJOR: remove check and extend PHPUnit\Framework\TestCase when dropping support for PHPUnit 4
+ * NEXT_MAJOR: remove check when dropping support for PHPUnit 4
  */
-if (!class_exists('\PHPUnit_Framework_TestCase')) {
-    class_alias('PHPUnit\Framework\TestCase', '\PHPUnit_Framework_TestCase');
+if (!class_exists(TestCase::class)) {
+    class_alias('\PHPUnit_Framework_TestCase', TestCase::class);
 }
 
 /**
