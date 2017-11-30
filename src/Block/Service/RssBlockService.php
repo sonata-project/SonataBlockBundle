@@ -43,9 +43,16 @@ class RssBlockService extends AbstractAdminBlockService
     {
         $formMapper->add('settings', 'sonata_type_immutable_array', [
             'keys' => [
-                ['url', 'url', ['required' => false]],
-                ['title', 'text', ['required' => false]],
+                ['url', 'url', [
+                    'required' => false,
+                    'label' => 'form.label_url',
+                ]],
+                ['title', 'text', [
+                    'required' => false,
+                    'label' => 'form.label_title',
+                ]],
             ],
+            'translation_domain' => 'SonataBlockBundle',
         ]);
     }
 
