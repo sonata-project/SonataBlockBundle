@@ -1,6 +1,12 @@
 UPGRADE 3.x
 ===========
 
+## Rewrote menu blocks
+
+Defining menu blocks by using a `<tag name="sonata.block.menu"/>` tag was removed, because it never worked properly.
+
+Use the existing `<tag name="knp_menu.menu" alias="app.main"/>` tag to define a menu block instead.
+
 UPGRADE FROM 3.4 to 3.5
 =======================
 

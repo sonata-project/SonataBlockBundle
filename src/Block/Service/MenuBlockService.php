@@ -162,6 +162,7 @@ class MenuBlockService extends AbstractAdminBlockService
     {
         $choiceOptions = [
             'required' => false,
+            'choice_translation_domain' => 'SonataBlockBundle',
         ];
 
         // choice_as_value options is not needed in SF 3.0+
