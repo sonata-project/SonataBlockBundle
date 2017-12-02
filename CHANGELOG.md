@@ -2,11 +2,20 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [3.7.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.7.0...3.8.0) - 2017-11-28
+## [3.8.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.7.0...3.8.0) - 2017-11-30
+### Added
+- added Russian translations
+- Implement reset method in `BlockDataCollector` to be compatible with Symfony 3.4
+
+### Fixed
+- It is now allowed to install Symfony 4
+- `AbstractBlockServiceTestCase` now works with PHPUnit >= 6.0
+
+## [3.7.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.6.0...3.7.0) - 2017-11-28
 ### Changed
 - menuRegistry parameter in `Sonata\BlockBundle\Block\Service\MenuBlockService` to be allowed the type of array
 
-## [3.6.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.6.0...3.7.0) - 2017-11-27
+## [3.6.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.5.0...3.6.0) - 2017-11-27
 ### Changed
 - Rollback to PHP 5.6 as minimum support.
 

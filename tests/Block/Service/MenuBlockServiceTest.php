@@ -15,6 +15,7 @@ use Knp\Menu\Provider\MenuProviderInterface;
 use Sonata\BlockBundle\Block\Service\MenuBlockService;
 use Sonata\BlockBundle\Menu\MenuRegistryInterface;
 use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
+use Symfony\Component\Form\FormTypeInterface;
 
 class MenuBlockServiceTest extends AbstractBlockServiceTestCase
 {
@@ -48,11 +49,19 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
 
         $choiceOptions = [
             'required' => false,
+            'choice_translation_domain' => 'SonataBlockBundle',
         ];
 
         $choices = ['Test Menu' => 'acme:demobundle:menu'];
 
-        $choiceOptions['choices'] = $choices;
+        // choice_as_value options is not needed in SF 3.0+
+        if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
+            $choiceOptions['choices_as_values'] = true;
+        }
+
+        $choiceOptions['choices'] = [
+            'Test Menu' => 'acme:demobundle:menu',
+        ];
 
         $formMapper->expects($this->once())->method('add')
             ->with('settings', 'sonata_type_immutable_array', [

@@ -11,19 +11,26 @@
 
 namespace Sonata\BlockBundle\Test;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\BlockContextManager;
 use Sonata\BlockBundle\Block\BlockContextManagerInterface;
 use Sonata\BlockBundle\Block\BlockServiceInterface;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
-use Sonata\BlockBundle\Tests\Block\Service\FakeTemplating;
+
+/*
+ * NEXT_MAJOR: remove check and extend PHPUnit\Framework\TestCase when dropping support for PHPUnit 4
+ */
+if (!class_exists('\PHPUnit_Framework_TestCase')) {
+    class_alias('PHPUnit\Framework\TestCase', '\PHPUnit_Framework_TestCase');
+}
 
 /**
  * Abstract test class for block service tests.
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-abstract class AbstractBlockServiceTestCase extends \PHPUnit_Framework_TestCase
+abstract class AbstractBlockServiceTestCase extends TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|BlockServiceManagerInterface
@@ -90,21 +97,5 @@ abstract class AbstractBlockServiceTestCase extends \PHPUnit_Framework_TestCase
         ksort($blockSettings);
 
         $this->assertSame($completeExpectedOptions, $blockSettings);
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this method when dropping support for < PHPUnit 5.4.
-     *
-     * @param string $class
-     *
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    protected function createMock($class)
-    {
-        if (is_callable('parent::createMock')) {
-            return parent::createMock($class);
-        }
-
-        return $this->getMock($class);
     }
 }
