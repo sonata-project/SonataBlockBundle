@@ -12,8 +12,10 @@
 namespace Sonata\BlockBundle\Twig\Extension;
 
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class BlockExtension extends \Twig_Extension
+class BlockExtension extends AbstractExtension
 {
     /**
      * @var BlockHelper
@@ -36,22 +38,22 @@ class BlockExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('sonata_block_exists',
+            new TwigFunction('sonata_block_exists',
                 [$this->blockHelper, 'exists']
             ),
-            new \Twig_SimpleFunction('sonata_block_render',
+            new TwigFunction('sonata_block_render',
                 [$this->blockHelper, 'render'],
                 ['is_safe' => ['html']]
             ),
-            new \Twig_SimpleFunction('sonata_block_render_event',
+            new TwigFunction('sonata_block_render_event',
                 [$this->blockHelper, 'renderEvent'],
                 ['is_safe' => ['html']]
             ),
-            new \Twig_SimpleFunction('sonata_block_include_javascripts',
+            new TwigFunction('sonata_block_include_javascripts',
                 [$this->blockHelper, 'includeJavascripts'],
                 ['is_safe' => ['html']]
             ),
-            new \Twig_SimpleFunction('sonata_block_include_stylesheets',
+            new TwigFunction('sonata_block_include_stylesheets',
                 [$this->blockHelper, 'includeStylesheets'],
                 ['is_safe' => ['html']]
             ),
