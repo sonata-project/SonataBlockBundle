@@ -34,11 +34,22 @@ class ContainerBlockService extends AbstractAdminBlockService
 
         $formMapper->add('settings', 'sonata_type_immutable_array', [
             'keys' => [
-                ['code', 'text', ['required' => false]],
-                ['layout', 'textarea', []],
-                ['class', 'text', ['required' => false]],
-                ['template', 'sonata_type_container_template_choice', []],
+                ['code', 'text', [
+                    'required' => false,
+                    'label' => 'form.label_code',
+                ]],
+                ['layout', 'textarea', [
+                    'label' => 'form.label_layout',
+                ]],
+                ['class', 'text', [
+                    'required' => false,
+                    'label' => 'form.label_class',
+                ]],
+                ['template', 'sonata_type_container_template_choice', [
+                    'label' => 'form.label_template',
+                ]],
             ],
+            'translation_domain' => 'SonataBlockBundle',
         ]);
 
         $formMapper->add('children', 'sonata_type_collection', [], [

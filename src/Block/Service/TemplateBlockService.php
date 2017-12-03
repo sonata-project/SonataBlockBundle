@@ -41,8 +41,11 @@ class TemplateBlockService extends AbstractAdminBlockService
     {
         $formMapper->add('settings', 'sonata_type_immutable_array', [
             'keys' => [
-                ['template', null, []],
+                ['template', null, [
+                    'label' => 'form.label_template',
+                ]],
             ],
+            'translation_domain' => 'SonataBlockBundle',
         ]);
     }
 

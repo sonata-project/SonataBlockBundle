@@ -49,6 +49,7 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
 
         $choiceOptions = [
             'required' => false,
+            'label' => 'form.label_url',
             'choice_translation_domain' => 'SonataBlockBundle',
         ];
 
@@ -66,17 +67,45 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
         $formMapper->expects($this->once())->method('add')
             ->with('settings', 'sonata_type_immutable_array', [
                 'keys' => [
-                    ['title', 'text', ['required' => false]],
-                    ['cache_policy', 'choice', ['choices' => ['public', 'private']]],
+                    ['title', 'text', [
+                        'required' => false,
+                        'label' => 'form.label_title',
+                    ]],
+                    ['cache_policy', 'choice', [
+                        'label' => 'form.label_cache_policy',
+                        'choices' => ['public', 'private'],
+                    ]],
                     ['menu_name', 'choice', $choiceOptions],
-                    ['safe_labels', 'checkbox', ['required' => false]],
-                    ['current_class', 'text', ['required' => false]],
-                    ['first_class', 'text', ['required' => false]],
-                    ['last_class', 'text', ['required' => false]],
-                    ['menu_class', 'text', ['required' => false]],
-                    ['children_class', 'text', ['required' => false]],
-                    ['menu_template', 'text', ['required' => false]],
+                    ['safe_labels', 'checkbox', [
+                        'required' => false,
+                        'label' => 'form.label_safe_labels',
+                    ]],
+                    ['current_class', 'text', [
+                        'required' => false,
+                        'label' => 'form.label_current_class',
+                    ]],
+                    ['first_class', 'text', [
+                        'required' => false,
+                        'label' => 'form.label_first_class',
+                    ]],
+                    ['last_class', 'text', [
+                        'required' => false,
+                        'label' => 'form.label_last_class',
+                    ]],
+                    ['menu_class', 'text', [
+                        'required' => false,
+                        'label' => 'form.label_menu_class',
+                    ]],
+                    ['children_class', 'text', [
+                        'required' => false,
+                        'label' => 'form.label_children_class',
+                    ]],
+                    ['menu_template', 'text', [
+                        'required' => false,
+                        'label' => 'form.label_menu_template',
+                    ]],
                 ],
+                'translation_domain' => 'SonataBlockBundle',
             ]);
 
         $blockService = new MenuBlockService('sonata.page.block.menu', $this->templating, $this->menuProvider, $this->menuRegistry);

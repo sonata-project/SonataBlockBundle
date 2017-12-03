@@ -41,8 +41,11 @@ class TextBlockService extends AbstractAdminBlockService
     {
         $formMapper->add('settings', 'sonata_type_immutable_array', [
             'keys' => [
-                ['content', 'textarea', []],
+                ['content', 'textarea', [
+                    'label' => 'form.label_content',
+                ]],
             ],
+            'translation_domain' => 'SonataBlockBundle',
         ]);
     }
 

@@ -108,6 +108,7 @@ class MenuBlockService extends AbstractAdminBlockService
     {
         $form->add('settings', 'sonata_type_immutable_array', [
             'keys' => $this->getFormSettingsKeys(),
+            'translation_domain' => 'SonataBlockBundle',
         ]);
     }
 
@@ -119,7 +120,7 @@ class MenuBlockService extends AbstractAdminBlockService
         if (($name = $block->getSetting('menu_name')) && '' !== $name && !$this->menuProvider->has($name)) {
             // If we specified a menu_name, check that it exists
             $errorElement->with('menu_name')
-                ->addViolation('sonata.block.menu.not_existing', ['name' => $name])
+                ->addViolation('sonata.block.menu.not_existing', ['%name%' => $name])
             ->end();
         }
     }
@@ -162,6 +163,7 @@ class MenuBlockService extends AbstractAdminBlockService
     {
         $choiceOptions = [
             'required' => false,
+            'label' => 'form.label_url',
             'choice_translation_domain' => 'SonataBlockBundle',
         ];
 
@@ -173,16 +175,43 @@ class MenuBlockService extends AbstractAdminBlockService
         $choiceOptions['choices'] = array_flip($this->menuRegistry->getAliasNames());
 
         return [
-            ['title', 'text', ['required' => false]],
-            ['cache_policy', 'choice', ['choices' => ['public', 'private']]],
+            ['title', 'text', [
+                'required' => false,
+                'label' => 'form.label_title',
+            ]],
+            ['cache_policy', 'choice', [
+                'label' => 'form.label_cache_policy',
+                'choices' => ['public', 'private'],
+            ]],
             ['menu_name', 'choice', $choiceOptions],
-            ['safe_labels', 'checkbox', ['required' => false]],
-            ['current_class', 'text', ['required' => false]],
-            ['first_class', 'text', ['required' => false]],
-            ['last_class', 'text', ['required' => false]],
-            ['menu_class', 'text', ['required' => false]],
-            ['children_class', 'text', ['required' => false]],
-            ['menu_template', 'text', ['required' => false]],
+            ['safe_labels', 'checkbox', [
+                'required' => false,
+                'label' => 'form.label_safe_labels',
+            ]],
+            ['current_class', 'text', [
+                'required' => false,
+                'label' => 'form.label_current_class',
+            ]],
+            ['first_class', 'text', [
+                'required' => false,
+                'label' => 'form.label_first_class',
+            ]],
+            ['last_class', 'text', [
+                'required' => false,
+                'label' => 'form.label_last_class',
+            ]],
+            ['menu_class', 'text', [
+                'required' => false,
+                'label' => 'form.label_menu_class',
+            ]],
+            ['children_class', 'text', [
+                'required' => false,
+                'label' => 'form.label_children_class',
+            ]],
+            ['menu_template', 'text', [
+                'required' => false,
+                'label' => 'form.label_menu_template',
+            ]],
         ];
     }
 
