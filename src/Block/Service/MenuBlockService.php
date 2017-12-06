@@ -63,7 +63,7 @@ class MenuBlockService extends AbstractAdminBlockService
 
         if ($menuRegistry instanceof MenuRegistryInterface) {
             $this->menuRegistry = $menuRegistry;
-        } elseif (is_null($menuRegistry)) {
+        } elseif (null === $menuRegistry) {
             $this->menuRegistry = new MenuRegistry();
         } elseif (is_array($menuRegistry)) { //NEXT_MAJOR: Remove this case
             @trigger_error(

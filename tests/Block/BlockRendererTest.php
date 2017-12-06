@@ -82,12 +82,12 @@ class BlockRendererTest extends TestCase
 
     /**
      * Test rendering a block that returns a wrong response.
-     *
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage A block service must return a Response object
      */
     public function testRenderWithWrongResponse()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('A block service must return a Response object');
+
         // GIVEN
 
         // mock a block service that returns a string response

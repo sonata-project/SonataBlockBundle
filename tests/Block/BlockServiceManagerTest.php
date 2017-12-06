@@ -33,11 +33,10 @@ class BlockServiceManagerTest extends TestCase
         $this->assertInstanceOf(get_class($service), $manager->get($block));
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testInvalidServiceType()
     {
+        $this->expectException(\RuntimeException::class);
+
         $service = $this->createMock('stdClass');
 
         $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
@@ -53,11 +52,10 @@ class BlockServiceManagerTest extends TestCase
         $this->assertInstanceOf(get_class($service), $manager->get($block));
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testGetBlockServiceException()
     {
+        $this->expectException(\RuntimeException::class);
+
         $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
 
         $manager = new BlockServiceManager($container, true);

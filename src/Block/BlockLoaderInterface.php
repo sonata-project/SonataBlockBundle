@@ -18,9 +18,9 @@ interface BlockLoaderInterface
     /**
      * @param mixed $name
      *
-     * @return BlockLoaderInterface
-     *
      * @throws BlockNotFoundException if no block with that name is found
+     *
+     * @return BlockLoaderInterface
      */
     public function load($name);
 

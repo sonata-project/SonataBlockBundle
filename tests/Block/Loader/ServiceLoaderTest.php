@@ -16,11 +16,10 @@ use Sonata\BlockBundle\Block\Loader\ServiceLoader;
 
 class ServiceLoaderTest extends TestCase
 {
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testBlockNotFoundException()
     {
+        $this->expectException(\RuntimeException::class);
+
         $loader = new ServiceLoader(['bar']);
         $loader->load(['type' => 'foo']);
     }
