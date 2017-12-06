@@ -13,6 +13,7 @@ namespace Sonata\BlockBundle\Tests\Form\Type;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Form\Type\ServiceListType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ServiceListTypeTest extends TestCase
@@ -24,7 +25,7 @@ class ServiceListTypeTest extends TestCase
         $type = new ServiceListType($blockServiceManager);
 
         $this->assertEquals('sonata_block_service_choice', $type->getName());
-        $this->assertEquals('choice', $type->getParent());
+        $this->assertEquals(ChoiceType::class, $type->getParent());
     }
 
     /**

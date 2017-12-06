@@ -13,8 +13,12 @@ namespace Sonata\BlockBundle\Block\Service;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Form\Type\ContainerTemplateType;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\CoreBundle\Form\Type\ImmutableArrayType;
 use Sonata\CoreBundle\Model\Metadata;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,20 +36,20 @@ class ContainerBlockService extends AbstractAdminBlockService
     {
         $formMapper->add('enabled');
 
-        $formMapper->add('settings', 'sonata_type_immutable_array', [
+        $formMapper->add('settings', ImmutableArrayType::class, [
             'keys' => [
-                ['code', 'text', [
+                ['code', TextType::class, [
                     'required' => false,
                     'label' => 'form.label_code',
                 ]],
-                ['layout', 'textarea', [
+                ['layout', TextareaType::class, [
                     'label' => 'form.label_layout',
                 ]],
-                ['class', 'text', [
+                ['class', TextType::class, [
                     'required' => false,
                     'label' => 'form.label_class',
                 ]],
-                ['template', 'sonata_type_container_template_choice', [
+                ['template', ContainerTemplateType::class, [
                     'label' => 'form.label_template',
                 ]],
             ],

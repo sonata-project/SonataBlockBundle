@@ -11,6 +11,7 @@
 
 namespace Sonata\BlockBundle\Form\Type;
 
+use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -54,7 +55,7 @@ class ContainerTemplateType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
