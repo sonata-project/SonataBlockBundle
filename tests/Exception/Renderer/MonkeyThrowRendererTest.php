@@ -23,11 +23,11 @@ class MonkeyThrowRendererTest extends TestCase
 {
     /**
      * test the render() method with a standard Exception.
-     *
-     * @expectedException \Exception
      */
     public function testRenderWithStandardException()
     {
+        $this->expectException(\Exception::class);
+
         // GIVEN
         $exception = new \Exception();
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
@@ -42,11 +42,11 @@ class MonkeyThrowRendererTest extends TestCase
 
     /**
      * test the render() method with another exception to ensure it correctly throws the provided exception.
-     *
-     * @expectedException \RuntimeException
      */
     public function testRenderWithRuntimeException()
     {
+        $this->expectException(\RuntimeException::class);
+
         // GIVEN
         $exception = new \RuntimeException();
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');

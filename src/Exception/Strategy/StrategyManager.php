@@ -131,9 +131,9 @@ class StrategyManager implements StrategyManagerInterface
      *
      * @param BlockInterface $block
      *
-     * @return RendererInterface
-     *
      * @throws \RuntimeException
+     *
+     * @return RendererInterface
      */
     public function getBlockRenderer(BlockInterface $block)
     {
@@ -154,9 +154,9 @@ class StrategyManager implements StrategyManagerInterface
      *
      * @param BlockInterface $block
      *
-     * @return FilterInterface
-     *
      * @throws \RuntimeException
+     *
+     * @return FilterInterface
      */
     public function getBlockFilter(BlockInterface $block)
     {
@@ -177,9 +177,9 @@ class StrategyManager implements StrategyManagerInterface
      *
      * @param string $name
      *
-     * @return object
-     *
      * @throws \RuntimeException
+     *
+     * @return object
      */
     protected function getFilterService($name)
     {
@@ -195,9 +195,9 @@ class StrategyManager implements StrategyManagerInterface
      *
      * @param string $name
      *
-     * @return object
-     *
      * @throws \RuntimeException
+     *
+     * @return object
      */
     protected function getRendererService($name)
     {

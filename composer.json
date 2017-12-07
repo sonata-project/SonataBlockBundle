@@ -28,7 +28,6 @@
     "require-dev": {
         "jms/di-extra-bundle": "^1.7",
         "knplabs/knp-menu-bundle": "^2.0",
-        "sllh/php-cs-fixer-styleci-bridge": "^2.0",
         "sonata-project/admin-bundle": "^3.22 || ^4.0@dev",
         "symfony/phpunit-bridge": "^3.3 || ^4.0"
     },

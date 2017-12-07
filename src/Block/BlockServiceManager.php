@@ -156,9 +156,9 @@ class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
-     * @throws \RuntimeException
-     *
      * @param $type
+     *
+     * @throws \RuntimeException
      *
      * @return BlockServiceInterface
      */

@@ -42,9 +42,9 @@ interface BlockContextManagerInterface
      * @param mixed $meta     Data send to the loader to load a block, can be anything...
      * @param array $settings
      *
-     * @return BlockContextInterface
-     *
      * @throws BlockOptionsException
+     *
+     * @return BlockContextInterface
      */
     public function get($meta, array $settings = []);
 }

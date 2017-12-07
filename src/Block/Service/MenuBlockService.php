@@ -18,9 +18,13 @@ use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Menu\MenuRegistry;
 use Sonata\BlockBundle\Menu\MenuRegistryInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\CoreBundle\Form\Type\ImmutableArrayType;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -63,7 +67,7 @@ class MenuBlockService extends AbstractAdminBlockService
 
         if ($menuRegistry instanceof MenuRegistryInterface) {
             $this->menuRegistry = $menuRegistry;
-        } elseif (is_null($menuRegistry)) {
+        } elseif (null === $menuRegistry) {
             $this->menuRegistry = new MenuRegistry();
         } elseif (is_array($menuRegistry)) { //NEXT_MAJOR: Remove this case
             @trigger_error(
@@ -106,7 +110,7 @@ class MenuBlockService extends AbstractAdminBlockService
      */
     public function buildEditForm(FormMapper $form, BlockInterface $block)
     {
-        $form->add('settings', 'sonata_type_immutable_array', [
+        $form->add('settings', ImmutableArrayType::class, [
             'keys' => $this->getFormSettingsKeys(),
             'translation_domain' => 'SonataBlockBundle',
         ]);
@@ -175,40 +179,40 @@ class MenuBlockService extends AbstractAdminBlockService
         $choiceOptions['choices'] = array_flip($this->menuRegistry->getAliasNames());
 
         return [
-            ['title', 'text', [
+            ['title', TextType::class, [
                 'required' => false,
                 'label' => 'form.label_title',
             ]],
-            ['cache_policy', 'choice', [
+            ['cache_policy', ChoiceType::class, [
                 'label' => 'form.label_cache_policy',
                 'choices' => ['public', 'private'],
             ]],
-            ['menu_name', 'choice', $choiceOptions],
-            ['safe_labels', 'checkbox', [
+            ['menu_name', ChoiceType::class, $choiceOptions],
+            ['safe_labels', CheckboxType::class, [
                 'required' => false,
                 'label' => 'form.label_safe_labels',
             ]],
-            ['current_class', 'text', [
+            ['current_class', TextType::class, [
                 'required' => false,
                 'label' => 'form.label_current_class',
             ]],
-            ['first_class', 'text', [
+            ['first_class', TextType::class, [
                 'required' => false,
                 'label' => 'form.label_first_class',
             ]],
-            ['last_class', 'text', [
+            ['last_class', TextType::class, [
                 'required' => false,
                 'label' => 'form.label_last_class',
             ]],
-            ['menu_class', 'text', [
+            ['menu_class', TextType::class, [
                 'required' => false,
                 'label' => 'form.label_menu_class',
             ]],
-            ['children_class', 'text', [
+            ['children_class', TextType::class, [
                 'required' => false,
                 'label' => 'form.label_children_class',
             ]],
-            ['menu_template', 'text', [
+            ['menu_template', TextType::class, [
                 'required' => false,
                 'label' => 'form.label_menu_template',
             ]],

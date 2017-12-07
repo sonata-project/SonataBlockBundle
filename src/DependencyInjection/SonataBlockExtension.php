@@ -250,10 +250,10 @@ class SonataBlockExtension extends Extension
         $blockFilters = [];
         $blockRenderers = [];
         foreach ($config['blocks'] as $service => $settings) {
-            if (isset($settings['exception']) && isset($settings['exception']['filter'])) {
+            if (isset($settings['exception'], $settings['exception']['filter'])) {
                 $blockFilters[$service] = $settings['exception']['filter'];
             }
-            if (isset($settings['exception']) && isset($settings['exception']['renderer'])) {
+            if (isset($settings['exception'], $settings['exception']['renderer'])) {
                 $blockRenderers[$service] = $settings['exception']['renderer'];
             }
         }

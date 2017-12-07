@@ -97,12 +97,11 @@ class ConfigurationTest extends TestCase
         $this->assertEquals($expected, $config);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Invalid configuration for path "sonata_block": You cannot have different config options for sonata_block.profiler.container_types and sonata_block.container.types; the first one is deprecated, in case of doubt use the latter
-     */
     public function testOptionsDuplicated()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Invalid configuration for path "sonata_block": You cannot have different config options for sonata_block.profiler.container_types and sonata_block.container.types; the first one is deprecated, in case of doubt use the latter');
+
         $defaultTemplates = [
             'SonataPageBundle:Block:block_container.html.twig' => 'SonataPageBundle template',
             'SonataSeoBundle:Block:block_social_container.html.twig' => 'SonataSeoBundle (to contain social buttons)',
