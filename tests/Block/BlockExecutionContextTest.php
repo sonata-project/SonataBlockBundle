@@ -30,11 +30,10 @@ class BlockExecutionContextTest extends TestCase
         $this->assertEquals($block, $blockContext->getBlock());
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testInvalidParameter()
     {
+        $this->expectException(\RuntimeException::class);
+
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
 
         $blockContext = new BlockContext($block);

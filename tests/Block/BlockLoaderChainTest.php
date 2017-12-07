@@ -16,11 +16,10 @@ use Sonata\BlockBundle\Block\BlockLoaderChain;
 
 class BlockLoaderChainTest extends TestCase
 {
-    /**
-     * @expectedException \Sonata\BlockBundle\Exception\BlockNotFoundException
-     */
     public function testBlockNotFoundException()
     {
+        $this->expectException(\Sonata\BlockBundle\Exception\BlockNotFoundException::class);
+
         $loader = new BlockLoaderChain([]);
         $loader->load('foo');
     }
@@ -40,11 +39,10 @@ class BlockLoaderChainTest extends TestCase
         $this->assertEquals($block, $loaderChain->load('foo'));
     }
 
-    /**
-     * @expectedException \Sonata\BlockBundle\Exception\BlockNotFoundException
-     */
     public function testLoaderWithUnSupportedLoader()
     {
+        $this->expectException(\Sonata\BlockBundle\Exception\BlockNotFoundException::class);
+
         $loader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
         $loader->expects($this->once())->method('support')->will($this->returnValue(false));
         $loader->expects($this->never())->method('load');
