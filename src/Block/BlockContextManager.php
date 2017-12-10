@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -67,7 +69,7 @@ class BlockContextManager implements BlockContextManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function addSettingsByType($type, array $settings, $replace = false)
+    public function addSettingsByType($type, array $settings, $replace = false): void
     {
         $typeSettings = isset($this->settingsByType[$type]) ? $this->settingsByType[$type] : [];
         if ($replace) {
@@ -80,7 +82,7 @@ class BlockContextManager implements BlockContextManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function addSettingsByClass($class, array $settings, $replace = false)
+    public function addSettingsByClass($class, array $settings, $replace = false): void
     {
         $classSettings = isset($this->settingsByClass[$class]) ? $this->settingsByClass[$class] : [];
         if ($replace) {
@@ -145,7 +147,7 @@ class BlockContextManager implements BlockContextManagerInterface
         return $blockContext;
     }
 
-    protected function configureSettings(OptionsResolver $optionsResolver, BlockInterface $block)
+    protected function configureSettings(OptionsResolver $optionsResolver, BlockInterface $block): void
     {
         // defaults for all blocks
         $optionsResolver->setDefaults([
@@ -178,7 +180,7 @@ class BlockContextManager implements BlockContextManagerInterface
      * @param BlockContextInterface $blockContext
      * @param array                 $settings
      */
-    protected function setDefaultExtraCacheKeys(BlockContextInterface $blockContext, array $settings)
+    protected function setDefaultExtraCacheKeys(BlockContextInterface $blockContext, array $settings): void
     {
         if (!$blockContext->getSetting('use_cache') || $blockContext->getSetting('ttl') <= 0) {
             return;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,7 +26,7 @@ class DebugOnlyFilterTest extends TestCase
     /**
      * test the filter with debug enabled.
      */
-    public function testWithDebugEnabled()
+    public function testWithDebugEnabled(): void
     {
         // GIVEN
         $exception = $this->createMock('\Exception');
@@ -41,7 +43,7 @@ class DebugOnlyFilterTest extends TestCase
     /**
      * test the filter with debug disabled.
      */
-    public function testWithDebugDisabled()
+    public function testWithDebugDisabled(): void
     {
         // GIVEN
         $exception = $this->createMock('\Exception');

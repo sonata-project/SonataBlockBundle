@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -18,7 +20,7 @@ use Sonata\BlockBundle\Exception\BlockOptionsException;
  */
 interface BlockContextManagerInterface
 {
-    const CACHE_KEY = 'context';
+    public const CACHE_KEY = 'context';
 
     /**
      * Add settings for a block service.

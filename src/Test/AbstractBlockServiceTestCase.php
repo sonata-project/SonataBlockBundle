@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -47,7 +49,7 @@ abstract class AbstractBlockServiceTestCase extends TestCase
      */
     protected $templating;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->templating = new FakeTemplating();
 
@@ -82,7 +84,7 @@ abstract class AbstractBlockServiceTestCase extends TestCase
      * @param array                 $expected     Expected settings
      * @param BlockContextInterface $blockContext BlockContext object
      */
-    protected function assertSettings(array $expected, BlockContextInterface $blockContext)
+    protected function assertSettings(array $expected, BlockContextInterface $blockContext): void
     {
         $completeExpectedOptions = array_merge([
             'use_cache' => true,

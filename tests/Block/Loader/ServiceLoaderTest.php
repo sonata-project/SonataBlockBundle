@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -16,7 +18,7 @@ use Sonata\BlockBundle\Block\Loader\ServiceLoader;
 
 class ServiceLoaderTest extends TestCase
 {
-    public function testBlockNotFoundException()
+    public function testBlockNotFoundException(): void
     {
         $this->expectException(\RuntimeException::class);
 
@@ -24,7 +26,7 @@ class ServiceLoaderTest extends TestCase
         $loader->load(['type' => 'foo']);
     }
 
-    public function testLoader()
+    public function testLoader(): void
     {
         $loader = new ServiceLoader(['foo.bar']);
 
