@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,7 +26,7 @@ class IgnoreClassFilterTest extends TestCase
     /**
      * test the filter with a inherited exception.
      */
-    public function testWithInheritedException()
+    public function testWithInheritedException(): void
     {
         // GIVEN
         $exception = $this->createMock('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
@@ -41,7 +43,7 @@ class IgnoreClassFilterTest extends TestCase
     /**
      * test the the filter with a non-inherited exception.
      */
-    public function testWithNonInheritedException()
+    public function testWithNonInheritedException(): void
     {
         // GIVEN
         $exception = $this->createMock('\Exception');

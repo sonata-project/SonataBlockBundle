@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -21,7 +23,7 @@ class DebugBlocksCommand extends BaseCommand
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function configure(): void
     {
         $this->setName('sonata:block:debug');
         $this->setDescription('Debug all blocks available, show default settings of each block');
@@ -32,7 +34,7 @@ class DebugBlocksCommand extends BaseCommand
     /**
      * {@inheritdoc}
      */
-    public function execute(InputInterface $input, OutputInterface $output)
+    public function execute(InputInterface $input, OutputInterface $output): void
     {
         if ($input->getOption('context')) {
             $services = $this->getBlockServiceManager()->getServicesByContext($input->getOption('context'));

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class BlockDataCollectorTest extends TestCase
 {
-    public function testBlockDataCollector()
+    public function testBlockDataCollector(): void
     {
         $blockHelper = $this->prophesize(BlockHelper::class);
         $request = $this->prophesize(Request::class);

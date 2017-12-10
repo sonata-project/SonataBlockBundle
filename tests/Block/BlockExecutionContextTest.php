@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -16,7 +18,7 @@ use Sonata\BlockBundle\Block\BlockContext;
 
 class BlockExecutionContextTest extends TestCase
 {
-    public function testBasicFeature()
+    public function testBasicFeature(): void
     {
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
 
@@ -30,7 +32,7 @@ class BlockExecutionContextTest extends TestCase
         $this->assertEquals($block, $blockContext->getBlock());
     }
 
-    public function testInvalidParameter()
+    public function testInvalidParameter(): void
     {
         $this->expectException(\RuntimeException::class);
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,7 +24,7 @@ class RssBlockServiceTest extends AbstractBlockServiceTestCase
     /*
      * only test if the API is not broken
      */
-    public function testService()
+    public function testService(): void
     {
         $service = new RssBlockService('sonata.page.block.rss', $this->templating);
 

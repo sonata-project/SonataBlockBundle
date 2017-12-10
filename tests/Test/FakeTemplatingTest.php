@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -16,7 +18,7 @@ use Sonata\BlockBundle\Test\FakeTemplating;
 
 class FakeTemplatingTest extends TestCase
 {
-    public function testRender()
+    public function testRender(): void
     {
         $templating = new FakeTemplating();
         $templating->render('template.html.twig', [
@@ -29,7 +31,7 @@ class FakeTemplatingTest extends TestCase
         ], $templating->parameters);
     }
 
-    public function testRenderResponse()
+    public function testRenderResponse(): void
     {
         $response = $this->getMockBuilder('Symfony\Component\HttpFoundation\Response')->getMock();
 
@@ -45,7 +47,7 @@ class FakeTemplatingTest extends TestCase
         $this->assertSame($response, $templating->response);
     }
 
-    public function testSupports()
+    public function testSupports(): void
     {
         $templating = new FakeTemplating();
         $this->assertTrue($templating->supports('foo'));
@@ -54,7 +56,7 @@ class FakeTemplatingTest extends TestCase
     /**
      * {@inheritdoc}
      */
-    public function testExists()
+    public function testExists(): void
     {
         $templating = new FakeTemplating();
         $this->assertTrue($templating->exists('foo'));

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -44,7 +46,7 @@ class FakeTemplating implements EngineInterface
     /**
      * {@inheritdoc}
      */
-    public function render($name, array $parameters = [])
+    public function render($name, array $parameters = []): void
     {
         $this->name = $name;
         $this->parameters = $parameters;

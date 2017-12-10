@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,7 +26,7 @@ class InlineDebugRendererTest extends TestCase
     /**
      * test the renderer without debug mode.
      */
-    public function testRenderWithoutDebug()
+    public function testRenderWithoutDebug(): void
     {
         // GIVEN
         $template = 'test-template';
@@ -46,7 +48,7 @@ class InlineDebugRendererTest extends TestCase
     /**
      * test the render() method with debug enabled.
      */
-    public function testRenderWithDebugEnabled()
+    public function testRenderWithDebugEnabled(): void
     {
         // GIVEN
         $template = 'test-template';
@@ -97,7 +99,7 @@ class InlineDebugRendererTest extends TestCase
      */
     public function arrayHasKeyValue($key, $value)
     {
-        return new \PHPUnit_Framework_Constraint_Callback(function ($test) use ($key, $value) {
+        return new \PHPUnit\Framework\Constraint\Callback(function ($test) use ($key, $value) {
             return is_array($test) && array_key_exists($key, $test) && $test[$key] === $value;
         });
     }
