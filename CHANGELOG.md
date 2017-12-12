@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.9.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.8.0...3.9.0) - 2017-12-12
+### Added
+- Added missing validation translations
+- Added missing translation to blocks
+
+### Changed
+- Changed `MenuRegistry::add` method signature to allow string values instead of `MenuBuilderInterface`
+- Removed usage of old form type aliases
+
+### Deprecated
+- deprecated `sonata.block.menu` tag in favor of the existing `knp_menu.menu` tag
+- deprecated `MenuBuilderInterface` class
+
 ## [3.8.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.7.0...3.8.0) - 2017-11-30
 ### Added
 - added Russian translations
