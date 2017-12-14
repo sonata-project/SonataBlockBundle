@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,7 +26,7 @@ class EmptyBlockService extends AbstractBlockService
     /**
      * {@inheritdoc}
      */
-    public function buildEditForm(FormMapper $form, BlockInterface $block)
+    public function buildEditForm(FormMapper $form, BlockInterface $block): void
     {
         throw new \RuntimeException('Not used, this block renders an empty result if no block document can be found');
     }
@@ -34,7 +36,7 @@ class EmptyBlockService extends AbstractBlockService
     /**
      * {@inheritdoc}
      */
-    public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
+    public function validateBlock(ErrorElement $errorElement, BlockInterface $block): void
     {
         throw new \RuntimeException('Not used, this block renders an empty result if no block document can be found');
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -79,7 +81,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function add($name, $service, $contexts = [])
+    public function add($name, $service, $contexts = []): void
     {
         $this->services[$name] = $service;
 
@@ -95,7 +97,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function setServices(array $blockServices)
+    public function setServices(array $blockServices): void
     {
         foreach ($blockServices as $name => $service) {
             $this->add($name, $service);
@@ -163,7 +165,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
      *
      * {@inheritdoc}
      */
-    public function validate(ErrorElement $errorElement, BlockInterface $block)
+    public function validate(ErrorElement $errorElement, BlockInterface $block): void
     {
         if (!$block->getId() && !$block->getType()) {
             return;

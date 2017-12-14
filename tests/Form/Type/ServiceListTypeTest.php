@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -18,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ServiceListTypeTest extends TestCase
 {
-    public function testFormType()
+    public function testFormType(): void
     {
         $blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
 
@@ -28,7 +30,7 @@ class ServiceListTypeTest extends TestCase
         $this->assertEquals(ChoiceType::class, $type->getParent());
     }
 
-    public function testOptionsWithInvalidContext()
+    public function testOptionsWithInvalidContext(): void
     {
         $this->expectException(\Symfony\Component\OptionsResolver\Exception\MissingOptionsException::class);
 
@@ -42,7 +44,7 @@ class ServiceListTypeTest extends TestCase
         $resolver->resolve();
     }
 
-    public function testOptionWithValidContext()
+    public function testOptionWithValidContext(): void
     {
         $blockService = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
         $blockService->expects($this->once())->method('getName')->will($this->returnValue('value'));

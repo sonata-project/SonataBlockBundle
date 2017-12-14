@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -16,7 +18,7 @@ use Sonata\BlockBundle\Event\BlockEvent;
 
 class BlockEventTest extends TestCase
 {
-    public function testBlockEvent()
+    public function testBlockEvent(): void
     {
         $blockEvent = new BlockEvent();
 

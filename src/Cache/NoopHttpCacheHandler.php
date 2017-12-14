@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,21 +22,21 @@ class NoopHttpCacheHandler implements HttpCacheHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function alterResponse(Response $response)
+    public function alterResponse(Response $response): void
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function updateMetadata(Response $response, BlockContextInterface $blockContext = null)
+    public function updateMetadata(Response $response, BlockContextInterface $blockContext = null): void
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function onKernelResponse(FilterResponseEvent $event)
+    public function onKernelResponse(FilterResponseEvent $event): void
     {
     }
 }
