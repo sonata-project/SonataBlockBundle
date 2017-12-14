@@ -19,7 +19,7 @@ use Knp\Menu\ItemInterface;
 /**
  * @author Christian Gripp <mail@core23.de>
  *
- * @deprecated since 3.x, to be removed with 4.0.
+ * @deprecated since 3.9, to be removed with 4.0.
  */
 interface MenuBuilderInterface
 {

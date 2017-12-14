@@ -24,16 +24,10 @@ class EmptyBlockService extends AbstractBlockService
 {
     // NEXT_MAJOR: Remove this method
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $form, BlockInterface $block): void
     {
         throw new \RuntimeException('Not used, this block renders an empty result if no block document can be found');
@@ -41,17 +35,11 @@ class EmptyBlockService extends AbstractBlockService
 
     // NEXT_MAJOR: Remove this method
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block): void
     {
         throw new \RuntimeException('Not used, this block renders an empty result if no block document can be found');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         return new Response();

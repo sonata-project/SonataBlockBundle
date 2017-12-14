@@ -94,9 +94,6 @@ class BlockServiceManager implements BlockServiceManagerInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getServices()
     {
         foreach ($this->services as $name => $id) {

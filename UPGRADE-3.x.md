@@ -1,6 +1,9 @@
 UPGRADE 3.x
 ===========
 
+UPGRADE FROM 3.8 to 3.9
+=======================
+
 ## Rewrote menu blocks
 
 Defining menu blocks by using a `<tag name="sonata.block.menu"/>` tag was removed, because it never worked properly.
