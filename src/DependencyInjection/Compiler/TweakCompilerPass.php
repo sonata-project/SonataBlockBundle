@@ -34,6 +34,7 @@ class TweakCompilerPass implements CompilerPassInterface
 
         foreach ($container->findTaggedServiceIds('sonata.block') as $id => $tags) {
             $definition = $container->getDefinition($id);
+            $definition->setPublic(true);
 
             $arguments = $definition->getArguments();
 
