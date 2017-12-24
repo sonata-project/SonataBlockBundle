@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="sonata.templating.locator" class="Sonata\BlockBundle\Templating\TemplateLocator">
+            <argument type="service" id="file_locator" />
+            <argument>%kernel.cache_dir%</argument>
+        </service>
+        <service id="sonata.templating.name_parser" class="Sonata\BlockBundle\Templating\TemplateNameParser">
+            <argument type="service" id="kernel" />
+        </service>
+        <service id="sonata.templating" class="Sonata\BlockBundle\Templating\TwigEngine">
+            <argument type="service" id="twig" />
+            <argument type="service" id="sonata.templating.name_parser" />
+            <argument type="service" id="sonata.templating.locator" />
+        </service>
         <service id="sonata.block.manager" class="Sonata\BlockBundle\Block\BlockServiceManager" public="false">
             <argument type="service" id="service_container"/>
             <argument>%kernel.debug%</argument>
