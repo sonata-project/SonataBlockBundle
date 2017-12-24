@@ -122,7 +122,7 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
         $this->assertSettings([
             'title' => 'sonata.page.block.menu',
             'cache_policy' => 'public',
-            'template' => 'SonataBlockBundle:Block:block_core_menu.html.twig',
+            'template' => '@SonataBlock/Block/block_core_menu.html.twig',
             'menu_name' => '',
             'safe_labels' => false,
             'current_class' => 'active',
