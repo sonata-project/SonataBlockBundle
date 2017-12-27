@@ -14,7 +14,7 @@ namespace Sonata\BlockBundle\Templating;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateNameParser as FrameworkTemplateNameParser;
 
 /**
- * @deprecated
+ * @deprecated since 3.9, to be removed with 4.0.
  */
 class TemplateNameParser extends FrameworkTemplateNameParser
 {
