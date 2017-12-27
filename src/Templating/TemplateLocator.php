@@ -18,5 +18,4 @@ use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator as Framewor
  */
 class TemplateLocator extends FrameworkTemplateLocator
 {
-
 }

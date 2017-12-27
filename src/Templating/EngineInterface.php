@@ -15,5 +15,4 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface as TemplatingEngin
 
 interface EngineInterface extends TemplatingEngineInterface
 {
-
 }

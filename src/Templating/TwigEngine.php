@@ -15,5 +15,4 @@ use Symfony\Bundle\TwigBundle\TwigEngine as BaseTwigEngine;
 
 class TwigEngine extends BaseTwigEngine implements EngineInterface
 {
-
 }

@@ -18,5 +18,4 @@ use Symfony\Bundle\FrameworkBundle\Templating\TemplateNameParser as FrameworkTem
  */
 class TemplateNameParser extends FrameworkTemplateNameParser
 {
-
 }
