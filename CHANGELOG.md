@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.9.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.9.0...3.9.1) - 2018-01-07
+### Fixed
+- Make services explicit public
+- Autoregister blocks as public services 
+
 ## [3.9.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.8.0...3.9.0) - 2017-12-12
 ### Added
 - Added missing validation translations
