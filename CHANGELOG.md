@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## [3.9.2](https://github.com/sonata-project/SonataBlockBundle/compare/3.9.1...3.9.2) - 2018-01-08
+### Fixed
+- Symfony recipe compatibility with twig-bundle requirement.
+
 ## [3.9.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.9.0...3.9.1) - 2018-01-07
 ### Fixed
 - Make services explicit public
