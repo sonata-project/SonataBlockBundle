@@ -17,7 +17,10 @@ use Symfony\Component\Config\Definition\Processor;
 
 class ConfigurationTest extends TestCase
 {
-    public function testOptions()
+    /**
+     * @dataProvider providerContexts
+     */
+    public function testOptions($contexts)
     {
         $defaultTemplates = [
             'SonataPageBundle:Block:block_container.html.twig' => 'SonataPageBundle template',
@@ -27,14 +30,15 @@ class ConfigurationTest extends TestCase
         $processor = new Processor();
 
         $config = $processor->processConfiguration(new Configuration($defaultTemplates), [[
-            'default_contexts' => ['cms'],
-            'blocks' => ['my.block.type' => []],
+            'default_contexts' => $contexts,
+            'blocks' => [
+                'my.block.type' => [],
+                'my.block_with_context.type' => ['context' => 'custom'],
+            ],
         ]]);
 
         $expected = [
-            'default_contexts' => [
-                0 => 'cms',
-            ],
+            'default_contexts' => $contexts,
             'profiler' => [
                 'enabled' => '%kernel.debug%',
                 'template' => 'SonataBlockBundle:Profiler:block.html.twig',
@@ -67,7 +71,13 @@ class ConfigurationTest extends TestCase
             ],
             'blocks' => [
                 'my.block.type' => [
-                    'contexts' => ['cms'],
+                    'contexts' => $contexts,
+                    'cache' => 'sonata.cache.noop',
+                    'settings' => [],
+                    'templates' => [],
+                ],
+                'my.block_with_context.type' => [
+                    'contexts' => ['custom'],
                     'cache' => 'sonata.cache.noop',
                     'settings' => [],
                     'templates' => [],
@@ -95,6 +105,15 @@ class ConfigurationTest extends TestCase
         ];
 
         $this->assertEquals($expected, $config);
+    }
+
+    public function providerContexts()
+    {
+        return [
+            [[]],
+            [['cms']],
+            [['cms', 'sonata_page_bundle']],
+        ];
     }
 
     public function testOptionsDuplicated()
