@@ -39,7 +39,12 @@ class TweakCompilerPass implements CompilerPassInterface
             $definition->setPublic(true);
 
             // Replace empty block id with service id
-            $definition->replaceArgument(0, $id);
+            // NEXT_MAJOR: Remove the condition when Symfony 2.8 support will be dropped.
+            if (method_exists($definition, 'setArgument')) {
+                $definition->setArgument(0, $id);
+            } else {
+                $definition->replaceArgument(0, $id);
+            }
 
             $manager->addMethodCall('add', [$id, $id, isset($parameters[$id]) ? $parameters[$id]['contexts'] : []]);
         }
