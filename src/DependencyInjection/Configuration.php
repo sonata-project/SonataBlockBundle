@@ -82,7 +82,6 @@ class Configuration implements ConfigurationInterface
                 ->end()
 
                 ->arrayNode('default_contexts')
-                    ->isRequired()
                     ->prototype('scalar')->end()
                 ->end()
 
