@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.10.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.9.2...3.10.0) - 2018-01-16
+### Fixed
+- Definition argument incompatibilities with Symfony 2.8
+
+### Removed
+- Removed requirement for `default_contexts` config parameter
 
 ## [3.9.2](https://github.com/sonata-project/SonataBlockBundle/compare/3.9.1...3.9.2) - 2018-01-08
 ### Fixed
