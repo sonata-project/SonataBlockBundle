@@ -17,7 +17,7 @@ The TemplateController_ is a native Symfony controller that can be used to rende
         path: /privacy
         defaults:
             _controller: FrameworkBundle:Template:template
-            template:    'AcmeBundle:Static:privacy.html.twig'
+            template:    '@Acme/Static/privacy.html.twig'
 
 The Template Block Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -33,7 +33,7 @@ The usage is very simple:
 .. code-block:: jinja
 
     {{ sonata_block_render({ 'type': 'sonata.block.service.template' }, {
-        'template': 'SonataDemoBundle:Block:myblock.html'
+        'template': '@SonataDemo/Block/myblock.html'
     }) }}
 
 Example
@@ -53,18 +53,18 @@ The main template might look like:
 
             <div class="container">
                 {{ sonata_block_render({ 'type': 'sonata.block.service.template' }, {
-                    'template': 'MyMenuBundle:Block:menu.twig.html'
+                    'template': '@MyMenu/Block/menu.twig.html'
                 }) }}
 
                 <div class="col-4">
                     {{ sonata_block_render({ 'type': 'sonata.block.service.template' }, {
-                        'template': 'MyMenuBundle:Block:navigation.twig.html'
+                        'template': '@MyMenu/Block/navigation.twig.html'
                     }) }}
                 </div>
 
                 <div class="col-6">
                     {{ sonata_block_render({ 'type': 'sonata.block.service.template' }, {
-                        'template': 'MyMenuBundle:Block:content.twig.html'
+                        'template': '@MyMenu/Block/content.twig.html'
                     }) }}
                 </div>
             </div>

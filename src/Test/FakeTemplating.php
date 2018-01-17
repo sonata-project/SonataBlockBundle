@@ -11,7 +11,7 @@
 
 namespace Sonata\BlockBundle\Test;
 
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Sonata\BlockBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**

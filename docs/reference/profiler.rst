@@ -19,4 +19,4 @@ If you want to disable the profiling or configure it, you may add one of the fol
         sonata_block:
             profiler:
                 enabled:        "%kernel.debug%"
-                template:       SonataBlockBundle:Profiler:block.html.twig
+                template:       "@SonataBlock/Profiler/block.html.twig"

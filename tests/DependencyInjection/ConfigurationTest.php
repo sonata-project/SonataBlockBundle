@@ -23,8 +23,8 @@ class ConfigurationTest extends TestCase
     public function testOptions($contexts)
     {
         $defaultTemplates = [
-            'SonataPageBundle:Block:block_container.html.twig' => 'SonataPageBundle template',
-            'SonataSeoBundle:Block:block_social_container.html.twig' => 'SonataSeoBundle (to contain social buttons)',
+            '@SonataPage/Block/block_container.html.twig' => 'SonataPageBundle template',
+            '@SonataSeo/Block/block_social_container.html.twig' => 'SonataSeoBundle (to contain social buttons)',
         ];
 
         $processor = new Processor();
@@ -41,7 +41,7 @@ class ConfigurationTest extends TestCase
             'default_contexts' => $contexts,
             'profiler' => [
                 'enabled' => '%kernel.debug%',
-                'template' => 'SonataBlockBundle:Profiler:block.html.twig',
+                'template' => '@SonataBlock/Profiler/block.html.twig',
                 'container_types' => [
                     0 => 'sonata.block.service.container',
                     1 => 'sonata.page.block.container',
@@ -122,8 +122,8 @@ class ConfigurationTest extends TestCase
         $this->expectExceptionMessage('Invalid configuration for path "sonata_block": You cannot have different config options for sonata_block.profiler.container_types and sonata_block.container.types; the first one is deprecated, in case of doubt use the latter');
 
         $defaultTemplates = [
-            'SonataPageBundle:Block:block_container.html.twig' => 'SonataPageBundle template',
-            'SonataSeoBundle:Block:block_social_container.html.twig' => 'SonataSeoBundle (to contain social buttons)',
+            '@SonataPage/Block/block_container.html.twig' => 'SonataPageBundle template',
+            '@SonataSeo/Block/block_social_container.html.twig' => 'SonataSeoBundle (to contain social buttons)',
         ];
 
         $processor = new Processor();

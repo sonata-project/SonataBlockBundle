@@ -35,7 +35,7 @@ class RssBlockService extends AbstractAdminBlockService
         $resolver->setDefaults([
             'url' => false,
             'title' => 'Insert the rss title',
-            'template' => 'SonataBlockBundle:Block:block_core_rss.html.twig',
+            'template' => '@SonataBlock/Block/block_core_rss.html.twig',
         ]);
     }
 
