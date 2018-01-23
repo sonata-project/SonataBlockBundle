@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.11.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.10.0...3.11.0) - 2018-01-23
+### Added
+- Added `symfony/asset` and `symfony/templating` dependencies
+- Added new service `sonata.templating` for use in place of `templating`
+- Add tag `templating.helper` back to `sonata.block.templating.helper` service
+
+### Changed
+- Referencing templates using Twig namespaced syntax
+
+### Removed
+- Removed tag `templating.helper` from `sonata.block.templating.helper` service
+
 ## [3.10.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.9.2...3.10.0) - 2018-01-16
 ### Fixed
 - Definition argument incompatibilities with Symfony 2.8
