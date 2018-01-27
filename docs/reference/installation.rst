@@ -9,11 +9,29 @@ The easiest way to install ``SonataBlockBundle`` is to require it with Composer:
 
 .. code-block:: bash
 
-    $ php composer.phar require sonata-project/block-bundle
+    $ composer require sonata-project/block-bundle
 
 Alternatively, you could add a dependency into your `composer.json` file directly.
 
-Now, enable the bundle in the kernel:
+Now, enable the bundle in ``bundles.php`` file:
+
+.. code-block:: php
+
+    <?php
+
+    // config/bundles.php
+
+    return [
+        //...
+        Knp\Bundle\MenuBundle\KnpMenuBundle::class => ['all' => true],
+        Sonata\CoreBundle\SonataCoreBundle::class => ['all' => true],
+        Sonata\BlockBundle\SonataBlockBundle::class => ['all' => true],
+    ];
+
+.. note::
+    If you are not using Symfony Flex, you should enable bundles in your
+    ``AppKernel.php``.
+
 
 .. code-block:: php
 
@@ -45,7 +63,7 @@ To use the ``BlockBundle``, add the following lines to your application configur
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # config/packages/sonata.yaml
 
         sonata_block:
             default_contexts: [sonata_page_bundle]
@@ -69,3 +87,7 @@ To use the ``BlockBundle``, add the following lines to your application configur
                 #    templates:
                 #       - { name: 'Simple', template: '@AcmeDemo/Block/demo_simple.html.twig' }
                 #       - { name: 'Big',    template: '@AcmeDemo/Block/demo_big.html.twig' }
+
+.. note::
+    If you are not using Symfony Flex, this configuration should be added
+    to ``app/config/config.yml``.
