@@ -42,7 +42,13 @@ class DebugBlocksCommand extends BaseCommand
 
         foreach ($services as $code => $service) {
             $resolver = new OptionsResolver();
-            $service->setDefaultSettings($resolver);
+
+            // NEXT_MAJOR: Remove this check
+            if (method_exists($service, 'configureSettings')) {
+                $service->configureSettings($resolver);
+            } else {
+                $service->setDefaultSettings($resolver);
+            }
 
             $settings = $resolver->resolve();
 
