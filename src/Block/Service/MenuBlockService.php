@@ -139,7 +139,7 @@ class MenuBlockService extends AbstractAdminBlockService
         $resolver->setDefaults([
             'title' => $this->getName(),
             'cache_policy' => 'public',
-            'template' => 'SonataBlockBundle:Block:block_core_menu.html.twig',
+            'template' => '@SonataBlock/Block/block_core_menu.html.twig',
             'menu_name' => '',
             'safe_labels' => false,
             'current_class' => 'active',

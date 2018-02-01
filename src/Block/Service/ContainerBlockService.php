@@ -87,7 +87,7 @@ class ContainerBlockService extends AbstractAdminBlockService
             'code' => '',
             'layout' => '{{ CONTENT }}',
             'class' => '',
-            'template' => 'SonataBlockBundle:Block:block_container.html.twig',
+            'template' => '@SonataBlock/Block/block_container.html.twig',
         ]);
     }
 

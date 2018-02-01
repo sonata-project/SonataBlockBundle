@@ -58,7 +58,7 @@ class TemplateBlockService extends AbstractAdminBlockService
     public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'template' => 'SonataBlockBundle:Block:block_template.html.twig',
+            'template' => '@SonataBlock/Block/block_template.html.twig',
         ]);
     }
 

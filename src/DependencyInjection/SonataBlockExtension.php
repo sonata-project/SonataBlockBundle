@@ -35,13 +35,13 @@ class SonataBlockExtension extends Extension
 
         $defaultTemplates = [];
         if (isset($bundles['SonataPageBundle'])) {
-            $defaultTemplates['SonataPageBundle:Block:block_container.html.twig'] = 'SonataPageBundle default template';
+            $defaultTemplates['@SonataPage/Block/block_container.html.twig'] = 'SonataPageBundle default template';
         } else {
-            $defaultTemplates['SonataBlockBundle:Block:block_container.html.twig'] = 'SonataBlockBundle default template';
+            $defaultTemplates['@SonataBlock/Block/block_container.html.twig'] = 'SonataBlockBundle default template';
         }
 
         if (isset($bundles['SonataSeoBundle'])) {
-            $defaultTemplates['SonataSeoBundle:Block:block_social_container.html.twig'] = 'SonataSeoBundle (to contain social buttons)';
+            $defaultTemplates['@SonataSeo/Block/block_social_container.html.twig'] = 'SonataSeoBundle (to contain social buttons)';
         }
 
         return new Configuration($defaultTemplates);
@@ -81,11 +81,11 @@ class SonataBlockExtension extends Extension
 
         if ($config['templates']['block_base'] === null) {
             if (isset($bundles['SonataPageBundle'])) {
-                $config['templates']['block_base'] = 'SonataPageBundle:Block:block_base.html.twig';
-                $config['templates']['block_container'] = 'SonataPageBundle:Block:block_container.html.twig';
+                $config['templates']['block_base'] = '@SonataPage/Block/block_base.html.twig';
+                $config['templates']['block_container'] = '@SonataPage/Block/block_container.html.twig';
             } else {
-                $config['templates']['block_base'] = 'SonataBlockBundle:Block:block_base.html.twig';
-                $config['templates']['block_container'] = 'SonataBlockBundle:Block:block_container.html.twig';
+                $config['templates']['block_base'] = '@SonataBlock/Block/block_base.html.twig';
+                $config['templates']['block_container'] = '@SonataBlock/Block/block_container.html.twig';
             }
         }
 

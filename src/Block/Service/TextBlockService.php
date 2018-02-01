@@ -60,7 +60,7 @@ class TextBlockService extends AbstractAdminBlockService
     {
         $resolver->setDefaults([
             'content' => 'Insert your custom content here',
-            'template' => 'SonataBlockBundle:Block:block_core_text.html.twig',
+            'template' => '@SonataBlock/Block/block_core_text.html.twig',
         ]);
     }
 

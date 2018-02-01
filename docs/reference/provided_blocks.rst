@@ -26,7 +26,7 @@ This block displays an RSS feed.
 
 When you add this block, specify a title and an RSS URL. Then, the last messages from the RSS feed will be displayed in your block.
 
-Base template is ``SonataBlockBundle:Block:block_core_rss.html.twig`` but you may of course override it.
+Base template is ``@SonataBlock/Block/block_core_rss.html.twig`` but you may of course override it.
 
 MenuBlockService
 ----------------
@@ -47,6 +47,6 @@ Upon configuration, you may set some rendering options (see KNP Doc for those).
 
 Set ``cache_policy`` to private if this menu is dedicated to be in a user part.
 
-A specific menu template is provided as well to render Bootstrap3's side menu, you may use it by setting the ``menu_template`` option to ``SonataBlockBundle:Block:block_side_menu_template.html.twig`` (see the implementation in SonataUserBundle or Sonata's e-commerce suite).
+A specific menu template is provided as well to render Bootstrap3's side menu, you may use it by setting the ``menu_template`` option to ``@SonataBlock/Block/block_side_menu_template.html.twig`` (see the implementation in SonataUserBundle or Sonata's e-commerce suite).
 
 .. _KnpMenuBundle documentation: https://symfony.com/doc/current/bundles/KnpMenuBundle/index.html
