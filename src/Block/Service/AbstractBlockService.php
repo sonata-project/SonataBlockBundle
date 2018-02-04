@@ -24,12 +24,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 abstract class AbstractBlockService implements BlockServiceInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var EngineInterface
+     * @var EngineInterface|null
      */
     protected $templating;
 

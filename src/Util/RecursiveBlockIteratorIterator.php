@@ -11,6 +11,8 @@
 
 namespace Sonata\BlockBundle\Util;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
  * RecursiveBlockIteratorIterator.
  *
@@ -19,7 +21,7 @@ namespace Sonata\BlockBundle\Util;
 class RecursiveBlockIteratorIterator extends \RecursiveIteratorIterator
 {
     /**
-     * @param \Traversable $array
+     * @param Collection|array $array
      */
     public function __construct($array)
     {

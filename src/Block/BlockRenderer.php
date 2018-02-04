@@ -35,7 +35,7 @@ class BlockRenderer implements BlockRendererInterface
     protected $exceptionStrategyManager;
 
     /**
-     * @var LoggerInterface
+     * @var LoggerInterface|null
      */
     protected $logger;
 
@@ -48,7 +48,7 @@ class BlockRenderer implements BlockRendererInterface
      * This property hold the last response available from the child or sibling block
      * The cacheable attributes must be cascaded to the parent.
      *
-     * @var Response
+     * @var Response|null
      */
     private $lastResponse;
 
