@@ -363,7 +363,11 @@ class BlockHelper extends Helper
      */
     protected function startTracing(BlockInterface $block)
     {
-        $this->traces[$block->getId()] = $this->stopwatch->start(sprintf('%s (id: %s, type: %s)', $block->getName(), $block->getId(), $block->getType()));
+        if (null !== $this->stopwatch) {
+            $this->traces[$block->getId()] = $this->stopwatch->start(
+                sprintf('%s (id: %s, type: %s)', $block->getName(), $block->getId(), $block->getType())
+            );
+        }
 
         return [
             'name' => $block->getName(),
