@@ -44,7 +44,7 @@ interface BlockContextManagerInterface
      *
      * @throws BlockOptionsException
      *
-     * @return BlockContextInterface
+     * @return BlockContextInterface|false
      */
     public function get($meta, array $settings = []);
 }

@@ -17,7 +17,7 @@ namespace Sonata\BlockBundle\Model;
 abstract class BaseBlock implements BlockInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
@@ -32,37 +32,37 @@ abstract class BaseBlock implements BlockInterface
     protected $enabled;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $position;
 
     /**
-     * @var BlockInterface
+     * @var BlockInterface|null
      */
     protected $parent;
 
     /**
-     * @var array
+     * @var BlockInterface[]
      */
     protected $children;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $updatedAt;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $ttl;
 

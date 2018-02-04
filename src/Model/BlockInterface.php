@@ -11,8 +11,6 @@
 
 namespace Sonata\BlockBundle\Model;
 
-use Doctrine\Common\Collections\Collection;
-
 /**
  * Interface of Block.
  */
@@ -42,7 +40,7 @@ interface BlockInterface
     /**
      * Returns the name.
      *
-     * @return string
+     * @return string|null
      */
     public function getName();
 
@@ -56,7 +54,7 @@ interface BlockInterface
     /**
      * Returns the type.
      *
-     * @return string $type
+     * @return string|null $type
      */
     public function getType();
 
@@ -84,35 +82,35 @@ interface BlockInterface
     /**
      * Returns the block ordered position.
      *
-     * @return int $position
+     * @return int|null $position
      */
     public function getPosition();
 
     /**
      * Sets the creation date and time.
      *
-     * @param \Datetime $createdAt
+     * @param \DateTime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
      * Returns the creation date and time.
      *
-     * @return \Datetime $createdAt
+     * @return \DateTime|null $createdAt
      */
     public function getCreatedAt();
 
     /**
      * Set the last update date and time.
      *
-     * @param \Datetime $updatedAt
+     * @param \DateTime $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
      * Returns the last update date and time.
      *
-     * @return \Datetime $updatedAt
+     * @return \DateTime|null $updatedAt
      */
     public function getUpdatedAt();
 
@@ -165,7 +163,7 @@ interface BlockInterface
     /**
      * Returns child blocks.
      *
-     * @return Collection $children
+     * @return BlockInterface[] $children
      */
     public function getChildren();
 
@@ -186,7 +184,7 @@ interface BlockInterface
     /**
      * Returns the parent block.
      *
-     * @return BlockInterface $parent
+     * @return BlockInterface|null $parent
      */
     public function getParent();
 

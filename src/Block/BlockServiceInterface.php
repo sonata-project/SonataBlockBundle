@@ -56,14 +56,14 @@ interface BlockServiceInterface
     public function load(BlockInterface $block);
 
     /**
-     * @param $media
+     * @param string $media
      *
      * @return array
      */
     public function getJavascripts($media);
 
     /**
-     * @param $media
+     * @param string $media
      *
      * @return array
      */
