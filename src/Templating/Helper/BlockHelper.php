@@ -284,7 +284,7 @@ class BlockHelper extends Helper
             }
 
             if ($response->isCacheable() && $cacheKeys && $cacheService) {
-                $cacheService->set($cacheKeys, $response, $response->getTtl(), $contextualKeys);
+                $cacheService->set($cacheKeys, $response, (int) $response->getTtl(), $contextualKeys);
             }
         }
 
