@@ -15,6 +15,7 @@ namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Renderer\InlineDebugRenderer;
+use Twig\Environment;
 
 /**
  * Test the inline debug exception renderer.
@@ -33,9 +34,9 @@ class InlineDebugRendererTest extends TestCase
         $debug = false;
         $exception = $this->createMock('\Exception');
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $twig = $this->createMock(Environment::class);
 
-        $renderer = new InlineDebugRenderer($templating, $template, $debug);
+        $renderer = new InlineDebugRenderer($twig, $template, $debug);
 
         // WHEN
         $response = $renderer->render($exception, $block);
@@ -60,9 +61,9 @@ class InlineDebugRendererTest extends TestCase
         // mock a block instance that provoked the exception
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
 
-        // mock the templating render() to return an html result
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $templating->expects($this->once())
+        // mock the twig render() to return an html result
+        $twig = $this->createMock(Environment::class);
+        $twig->expects($this->once())
             ->method('render')
             ->with(
                 $this->equalTo($template),
@@ -91,7 +92,7 @@ class InlineDebugRendererTest extends TestCase
             ->will($this->returnValue('html'));
 
         // create renderer to test
-        $renderer = new InlineDebugRenderer($templating, $template, $debug);
+        $renderer = new InlineDebugRenderer($twig, $template, $debug);
 
         // WHEN
         $response = $renderer->render($exception, $block);

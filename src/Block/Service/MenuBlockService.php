@@ -23,13 +23,13 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Form\Type\ImmutableArrayType;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\CoreBundle\Validator\ErrorElement;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Twig\Environment;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -56,14 +56,11 @@ class MenuBlockService extends AbstractAdminBlockService
     protected $menuRegistry;
 
     /**
-     * @param string                     $name
-     * @param EngineInterface            $templating
-     * @param MenuProviderInterface      $menuProvider
      * @param MenuRegistryInterface|null $menuRegistry
      */
-    public function __construct($name, EngineInterface $templating, MenuProviderInterface $menuProvider, $menuRegistry = null)
+    public function __construct(string $name, Environment $twig, MenuProviderInterface $menuProvider, $menuRegistry = null)
     {
-        parent::__construct($name, $templating);
+        parent::__construct($name, $twig);
 
         $this->menuProvider = $menuProvider;
 

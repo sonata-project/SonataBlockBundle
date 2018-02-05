@@ -26,7 +26,7 @@ class RssBlockServiceTest extends AbstractBlockServiceTestCase
      */
     public function testService(): void
     {
-        $service = new RssBlockService('sonata.page.block.rss', $this->templating);
+        $service = new RssBlockService('sonata.page.block.rss', $this->twig);
 
         $block = new Block();
         $block->setType('core.text');

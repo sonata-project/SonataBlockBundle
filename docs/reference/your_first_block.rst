@@ -178,7 +178,7 @@ We are almost done! Now, just declare the block as a service:
         <service id="sonata.block.service.rss" class="Sonata\BlockBundle\Block\Service\RssBlockService">
             <tag name="sonata.block" />
             <argument/>
-            <argument type="service" id="sonata.templating" />
+            <argument type="service" id="twig" />
         </service>
 
     .. code-block:: yaml
@@ -187,8 +187,8 @@ We are almost done! Now, just declare the block as a service:
             sonata.block.service.rss:
                 class: Sonata\BlockBundle\Block\Service\RssBlockService
                 arguments:
-                    - sonata.block.service.rss
-                    - "@templating"
+                    - ~
+                    - '@twig'
                 tags:
                     - { name: sonata.block }
 

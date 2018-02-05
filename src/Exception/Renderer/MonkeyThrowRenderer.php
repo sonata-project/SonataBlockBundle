@@ -26,7 +26,7 @@ class MonkeyThrowRenderer implements RendererInterface
     /**
      * {@inheritdoc}
      */
-    public function render(\Exception $banana, BlockInterface $block, Response $response = null): void
+    public function render(\Exception $banana, BlockInterface $block, Response $response = null): Response
     {
         throw $banana;
     }

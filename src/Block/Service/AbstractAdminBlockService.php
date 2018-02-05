@@ -17,22 +17,12 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\CoreBundle\Validator\ErrorElement;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
 /**
  * @author Christian Gripp <mail@core23.de>
  */
 abstract class AbstractAdminBlockService extends AbstractBlockService implements AdminBlockServiceInterface
 {
-    /**
-     * @param string          $name
-     * @param EngineInterface $templating
-     */
-    public function __construct($name, EngineInterface $templating)
-    {
-        parent::__construct($name, $templating);
-    }
-
     /**
      * {@inheritdoc}
      */
