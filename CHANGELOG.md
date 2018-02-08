@@ -2,6 +2,20 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.12.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.11.0...3.12.0) - 2018-02-08
+### Added
+- added title translation domain option to `RssBlockService`
+- added icon option to `RssBlockService`
+- added class option to `RssBlockService`
+
+### Fixed
+- Fixed OptionsResolver handling in command
+
+### Removed
+- Removed default title from `RssBlockService`
+- Redesign `RssBlockService` template
+- Removed support for PHPUnit 4 in `AbstractBlockServiceTestCase`
+
 ## [3.11.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.10.0...3.11.0) - 2018-01-23
 ### Added
 - Added `symfony/asset` and `symfony/templating` dependencies
