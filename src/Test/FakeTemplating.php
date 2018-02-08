@@ -34,7 +34,7 @@ class FakeTemplating implements EngineInterface
     public $parameters;
 
     /**
-     * @var Response
+     * @var Response|null
      */
     public $response;
 

@@ -55,7 +55,7 @@ interface BlockServiceManagerInterface
     public function has($name);
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return BlockServiceInterface
      */

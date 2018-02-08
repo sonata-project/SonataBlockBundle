@@ -32,7 +32,7 @@ final class MenuRegistry implements MenuRegistryInterface
      */
     public function __construct($menus = null)
     {
-        if (null != $menus) {
+        if (null !== $menus) {
             $this->names = $menus;
 
             @trigger_error(

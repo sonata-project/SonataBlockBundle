@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Util;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
  * RecursiveBlockIterator.
  *
@@ -21,7 +23,7 @@ namespace Sonata\BlockBundle\Util;
 class RecursiveBlockIterator extends \RecursiveArrayIterator implements \RecursiveIterator
 {
     /**
-     * @param array $array
+     * @param Collection|array $array
      */
     public function __construct($array)
     {

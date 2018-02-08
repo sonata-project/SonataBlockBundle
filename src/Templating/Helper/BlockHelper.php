@@ -37,7 +37,7 @@ class BlockHelper extends Helper
     private $blockServiceManager;
 
     /**
-     * @var CacheManagerInterface
+     * @var CacheManagerInterface|null
      */
     private $cacheManager;
 
@@ -57,7 +57,7 @@ class BlockHelper extends Helper
     private $blockContextManager;
 
     /**
-     * @var HttpCacheHandlerInterface
+     * @var HttpCacheHandlerInterface|null
      */
     private $cacheHandler;
 
@@ -80,7 +80,7 @@ class BlockHelper extends Helper
     private $traces;
 
     /**
-     * @var Stopwatch
+     * @var Stopwatch|null
      */
     private $stopwatch;
 
@@ -211,7 +211,7 @@ class BlockHelper extends Helper
      * @param mixed $block
      * @param array $options
      *
-     * @return null|Response
+     * @return null|string
      */
     public function render($block, array $options = [])
     {
@@ -286,7 +286,7 @@ class BlockHelper extends Helper
             }
 
             if ($response->isCacheable() && $cacheKeys && $cacheService) {
-                $cacheService->set($cacheKeys, $response, $response->getTtl(), $contextualKeys);
+                $cacheService->set($cacheKeys, $response, (int) $response->getTtl(), $contextualKeys);
             }
         }
 
@@ -365,7 +365,11 @@ class BlockHelper extends Helper
      */
     protected function startTracing(BlockInterface $block)
     {
-        $this->traces[$block->getId()] = $this->stopwatch->start(sprintf('%s (id: %s, type: %s)', $block->getName(), $block->getId(), $block->getType()));
+        if (null !== $this->stopwatch) {
+            $this->traces[$block->getId()] = $this->stopwatch->start(
+                sprintf('%s (id: %s, type: %s)', $block->getName(), $block->getId(), $block->getType())
+            );
+        }
 
         return [
             'name' => $block->getName(),
@@ -452,7 +456,7 @@ class BlockHelper extends Helper
      * @param BlockInterface $block
      * @param array          $stats
      *
-     * @return CacheAdapterInterface
+     * @return CacheAdapterInterface|false
      */
     protected function getCacheService(BlockInterface $block, array &$stats = null)
     {
