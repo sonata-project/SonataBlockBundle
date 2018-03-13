@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.12.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.12.0...3.12.1) - 2018-03-12
+### Added
+- Missing italian translations
+
+### Fixed
+- sonata.block.manager is public
+- Fixed old form alias usage
+
 ## [3.12.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.11.0...3.12.0) - 2018-02-08
 ### Added
 - added title translation domain option to `RssBlockService`
