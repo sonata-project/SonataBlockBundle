@@ -12,3 +12,9 @@ See also the [diff code](https://github.com/sonata-project/SonataAdminBundle/com
 ## Block id
 
 If you have created a custom `AbstractBlockService` you must now implement the new constructor, because all blocks use the service id as the block id now. Because of that, the translation keys for the block ids have changed from `sonata.block.$NAME` to `sonata.block.service.$NAME`.
+
+## Block constructor
+
+Blocks are using `twig` service to render templates, so if you already overrode a constructor of a custom `AbstractBlockService`, you must update it.
+
+Also, both arguments of `AbstractBlockService` constructor became required.

@@ -43,7 +43,7 @@ You can write unit tests for block services with the following code.
     {
         public function testDefaultSettings()
         {
-            $blockService = new CustomBlockService('foo', $this->templating);
+            $blockService = new CustomBlockService('foo', $this->twig);
             $blockContext = $this->getBlockContext($blockService);
 
             $this->assertSettings(array(
@@ -55,14 +55,9 @@ You can write unit tests for block services with the following code.
 
         public function testExecute()
         {
-            $blockService = new CustomBlockService('foo', $this->templating);
+            $blockService = new CustomBlockService('foo', $this->twig);
             $blockContext = $this->getBlockContext($blockService);
 
             $service->execute($blockContext);
-
-            $this->assertSame($blockContext, $this->templating->parameters['context']);
-            $this->assertInternalType('array', $this->templating->parameters['settings']);
-            $this->assertInstanceOf('Sonata\BlockBundle\Model\BlockInterface', $this->templating->parameters['block']);
-            $this->assertSame('bar', $this->templating->parameters['foo']);
         }
     }

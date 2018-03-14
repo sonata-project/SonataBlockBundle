@@ -19,6 +19,7 @@ use Sonata\BlockBundle\Block\BlockContextManager;
 use Sonata\BlockBundle\Block\BlockContextManagerInterface;
 use Sonata\BlockBundle\Block\BlockServiceInterface;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
+use Twig\Environment;
 
 /**
  * Abstract test class for block service tests.
@@ -38,13 +39,18 @@ abstract class AbstractBlockServiceTestCase extends TestCase
     protected $blockContextManager;
 
     /**
-     * @var FakeTemplating
+     * @var Environment
      */
-    protected $templating;
+    protected $twig;
 
     protected function setUp(): void
     {
-        $this->templating = new FakeTemplating();
+        $this->twig = $this->getMockBuilder(Environment::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->twig->method('render')
+            ->willReturn('');
 
         $blockLoader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
         $this->blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');

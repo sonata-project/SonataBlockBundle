@@ -18,6 +18,7 @@ use Sonata\BlockBundle\Exception\Filter\FilterInterface;
 use Sonata\BlockBundle\Exception\Renderer\RendererInterface;
 use Sonata\BlockBundle\Exception\Strategy\StrategyManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Test the Exception Strategy Manager.
@@ -205,9 +206,11 @@ class StrategyManagerTest extends TestCase
      */
     public function testHandleExceptionWithKeepAllFilter(): void
     {
+        $rendererResponse = new Response();
+        $rendererResponse->setContent('renderer response');
         // GIVEN
         $this->filter1->expects($this->once())->method('handle')->will($this->returnValue(true));
-        $this->renderer1->expects($this->once())->method('render')->will($this->returnValue('renderer response'));
+        $this->renderer1->expects($this->once())->method('render')->will($this->returnValue($rendererResponse));
 
         $exception = new \Exception();
         $block = $this->getMockBlock('block.other_type');
@@ -217,7 +220,7 @@ class StrategyManagerTest extends TestCase
 
         // THEN
         $this->assertNotNull($response, 'should return something');
-        $this->assertEquals('renderer response', $response, 'should return the renderer response');
+        $this->assertEquals('renderer response', $response->getContent(), 'should return the renderer response');
     }
 
     /**
