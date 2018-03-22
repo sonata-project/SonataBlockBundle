@@ -124,8 +124,9 @@ The configuration is defined per `block service`, so if you want to use `memcach
         # app/config/config.yml
 
         sonata_block:
-            sonata.page.block.container:
-                cache: sonata.cache.memcached
+            blocks:
+                sonata.page.block.container:
+                    cache: sonata.cache.memcached
 
 Also, make sure the memcached backend is configured in the ``sonata_cache`` definition:
 
