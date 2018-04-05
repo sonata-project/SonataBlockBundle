@@ -47,7 +47,7 @@ You can write unit tests for block services with the following code.
             $blockContext = $this->getBlockContext($blockService);
 
             $this->assertSettings(array(
-                'foo' => bar,
+                'foo' => 'bar',
                 'attr' => array(),
                 'template' => false,
             ), $blockContext);
@@ -58,7 +58,7 @@ You can write unit tests for block services with the following code.
             $blockService = new CustomBlockService('foo', $this->templating);
             $blockContext = $this->getBlockContext($blockService);
 
-            $service->execute($blockContext);
+            $blockService->execute($blockContext);
 
             $this->assertSame($blockContext, $this->templating->parameters['context']);
             $this->assertInternalType('array', $this->templating->parameters['settings']);
