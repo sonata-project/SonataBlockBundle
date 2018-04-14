@@ -228,20 +228,19 @@ class BlockContextManager implements BlockContextManagerInterface
 
         $service = $this->blockService->get($block);
 
-        $service->configureSettings($optionsResolver);
-
         // Caching method reflection
+        // NEXT_MAJOR: Remove everything here
         $serviceClass = get_class($service);
         if (!isset($this->reflectionCache[$serviceClass])) {
             $reflector = new \ReflectionMethod($service, 'setDefaultSettings');
-            $isOldOverwritten = 'Sonata\BlockBundle\Block\AbstractBlockService' !== $reflector->getDeclaringClass()->getName();
+            $isOldOverwritten = get_class($service) === $reflector->getDeclaringClass()->getName();
 
             // Prevention for service classes implementing directly the interface and not extends the new base class
             if (!method_exists($service, 'configureSettings')) {
                 $isNewOverwritten = false;
             } else {
                 $reflector = new \ReflectionMethod($service, 'configureSettings');
-                $isNewOverwritten = 'Sonata\BlockBundle\Block\AbstractBlockService' !== $reflector->getDeclaringClass()->getName();
+                $isNewOverwritten = get_class($service) === $reflector->getDeclaringClass()->getName();
             }
 
             $this->reflectionCache[$serviceClass] = [
@@ -250,6 +249,7 @@ class BlockContextManager implements BlockContextManagerInterface
             ];
         }
 
+        // NEXT_MAJOR: Keep Only else case
         if ($this->reflectionCache[$serviceClass]['isOldOverwritten'] && !$this->reflectionCache[$serviceClass]['isNewOverwritten']) {
             @trigger_error(
                 'The Sonata\BlockBundle\Block\BlockServiceInterface::setDefaultSettings() method is deprecated'
@@ -257,6 +257,9 @@ class BlockContextManager implements BlockContextManagerInterface
                 .' This method will be added to the BlockServiceInterface with SonataBlockBundle 4.0.',
                 E_USER_DEPRECATED
             );
+            $service->setDefaultSettings($optionsResolver);
+        } else {
+            $service->configureSettings($optionsResolver);
         }
 
         return $optionsResolver->resolve($settings);
