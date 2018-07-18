@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,7 +26,7 @@ class MonkeyThrowRenderer implements RendererInterface
     /**
      * {@inheritdoc}
      */
-    public function render(\Exception $banana, BlockInterface $block, Response $response = null)
+    public function render(\Exception $banana, BlockInterface $block, Response $response = null): Response
     {
         throw $banana;
     }

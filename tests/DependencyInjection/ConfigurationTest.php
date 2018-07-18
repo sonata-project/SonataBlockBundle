@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ class ConfigurationTest extends TestCase
     /**
      * @dataProvider providerContexts
      */
-    public function testOptions($contexts)
+    public function testOptions($contexts): void
     {
         $defaultTemplates = [
             '@SonataPage/Block/block_container.html.twig' => 'SonataPageBundle template',
@@ -116,7 +118,7 @@ class ConfigurationTest extends TestCase
         ];
     }
 
-    public function testOptionsDuplicated()
+    public function testOptionsDuplicated(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Invalid configuration for path "sonata_block": You cannot have different config options for sonata_block.profiler.container_types and sonata_block.container.types; the first one is deprecated, in case of doubt use the latter');

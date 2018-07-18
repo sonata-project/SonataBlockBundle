@@ -86,7 +86,7 @@ Final Response TTL computation
 The ``BlockRendered`` stores a global state for the smallest TTL available, there is another service used to store the smallest
 TTL for the page: ``HttpCacheHandler``. Why two services? This has been done to add an extra layer of control.
 
-The ``HttpCacheHandler::updateMetadata`` is called by the templating helper when the response is retrieved, then an event listener is registered to alter the final Response.
+The ``HttpCacheHandler::updateMetadata`` is called by the twig extension when the response is retrieved, then an event listener is registered to alter the final Response.
 
 The service can be configured using the ``http_cache_handler`` key.
 

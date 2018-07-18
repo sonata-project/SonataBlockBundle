@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -33,7 +35,7 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
      */
     private $menuRegistry;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -41,7 +43,7 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
         $this->menuRegistry = $this->createMock('Sonata\BlockBundle\Menu\MenuRegistryInterface');
     }
 
-    public function testBuildEditForm()
+    public function testBuildEditForm(): void
     {
         $this->menuRegistry->expects($this->once())->method('getAliasNames')
             ->will($this->returnValue([
@@ -56,6 +58,8 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
             'label' => 'form.label_url',
             'choice_translation_domain' => 'SonataBlockBundle',
         ];
+
+        $choices = ['Test Menu' => 'acme:demobundle:menu'];
 
         // choice_as_value options is not needed in SF 3.0+
         if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
@@ -110,13 +114,13 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
                 'translation_domain' => 'SonataBlockBundle',
             ]);
 
-        $blockService = new MenuBlockService('sonata.page.block.menu', $this->templating, $this->menuProvider, $this->menuRegistry);
+        $blockService = new MenuBlockService('sonata.page.block.menu', $this->twig, $this->menuProvider, $this->menuRegistry);
         $blockService->buildEditForm($formMapper, $block);
     }
 
-    public function testDefaultSettings()
+    public function testDefaultSettings(): void
     {
-        $blockService = new MenuBlockService('sonata.page.block.menu', $this->templating, $this->menuProvider, $this->menuRegistry);
+        $blockService = new MenuBlockService('sonata.page.block.menu', $this->twig, $this->menuProvider, $this->menuRegistry);
         $blockContext = $this->getBlockContext($blockService);
 
         $this->assertSettings([

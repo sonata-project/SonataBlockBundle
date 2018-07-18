@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -16,7 +18,7 @@ use Sonata\BlockBundle\Model\Block;
 
 class BlockTest extends TestCase
 {
-    public function testGetTtl()
+    public function testGetTtl(): void
     {
         $block = new Block();
 
@@ -40,7 +42,7 @@ class BlockTest extends TestCase
         $this->assertTrue($block->hasChildren());
     }
 
-    public function testSetterGetter()
+    public function testSetterGetter(): void
     {
         $time = new \DateTime();
         $parent = $this->getMockBuilder('Sonata\BlockBundle\Model\Block')->getMock();
@@ -64,7 +66,7 @@ class BlockTest extends TestCase
         $this->assertEquals($parent, $block->getParent());
     }
 
-    public function testSetting()
+    public function testSetting(): void
     {
         $block = new Block();
         $block->setSetting('foo', 'bar');

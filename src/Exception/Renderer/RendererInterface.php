@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -30,5 +32,5 @@ interface RendererInterface
      *
      * @return Response
      */
-    public function render(\Exception $exception, BlockInterface $block, Response $response = null);
+    public function render(\Exception $exception, BlockInterface $block, Response $response = null): Response;
 }

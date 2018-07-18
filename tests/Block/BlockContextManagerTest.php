@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -17,7 +19,7 @@ use Sonata\BlockBundle\Block\BlockContextManager;
 
 class BlockContextManagerTest extends TestCase
 {
-    public function testGetWithValidData()
+    public function testGetWithValidData(): void
     {
         $service = $this->createMock('Sonata\BlockBundle\Block\Service\AbstractBlockService');
 
@@ -46,7 +48,7 @@ class BlockContextManagerTest extends TestCase
         ], $blockContext->getSettings());
     }
 
-    public function testGetWithSettings()
+    public function testGetWithSettings(): void
     {
         $service = $this->createMock('Sonata\BlockBundle\Block\Service\AbstractBlockService');
         $service->expects($this->once())->method('configureSettings');
@@ -84,7 +86,7 @@ class BlockContextManagerTest extends TestCase
         ], $blockContext->getSettings());
     }
 
-    public function testWithInvalidSettings()
+    public function testWithInvalidSettings(): void
     {
         $logger = $this->createMock('Psr\Log\LoggerInterface');
         $logger->expects($this->exactly(1))->method('error');

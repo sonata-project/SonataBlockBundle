@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -17,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HttpCacheHandlerTest extends TestCase
 {
-    public function testComputeTtlWithPrivateResponse()
+    public function testComputeTtlWithPrivateResponse(): void
     {
         $handler = new HttpCacheHandler();
         $handler->updateMetadata(Response::create()->setTtl(60));
@@ -30,7 +32,7 @@ class HttpCacheHandlerTest extends TestCase
         $this->assertEquals(0, $response->getTtl());
     }
 
-    public function testComputeTtlWithPublicResponse()
+    public function testComputeTtlWithPublicResponse(): void
     {
         $handler = new HttpCacheHandler();
         $handler->updateMetadata(Response::create()->setTtl(60));
@@ -43,7 +45,7 @@ class HttpCacheHandlerTest extends TestCase
         $this->assertEquals(42, $response->getTtl());
     }
 
-    public function testResponseTtlNotAlteredIfNoRenderedBlock()
+    public function testResponseTtlNotAlteredIfNoRenderedBlock(): void
     {
         $handler = new HttpCacheHandler();
 
