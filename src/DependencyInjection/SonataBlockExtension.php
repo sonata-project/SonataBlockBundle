@@ -79,7 +79,7 @@ class SonataBlockExtension extends Extension
             $this->configureClassesToCompile();
         }
 
-        if ($config['templates']['block_base'] === null) {
+        if (null === $config['templates']['block_base']) {
             if (isset($bundles['SonataPageBundle'])) {
                 $config['templates']['block_base'] = '@SonataPage/Block/block_base.html.twig';
                 $config['templates']['block_container'] = '@SonataPage/Block/block_container.html.twig';
