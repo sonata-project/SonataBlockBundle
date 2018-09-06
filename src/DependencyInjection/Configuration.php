@@ -51,14 +51,14 @@ class Configuration implements ConfigurationInterface
             ->validate()
                 ->always(function ($value) {
                     foreach ($value['blocks'] as $name => &$block) {
-                        if (0 == count($block['contexts'])) {
+                        if (0 == \count($block['contexts'])) {
                             $block['contexts'] = $value['default_contexts'];
                         }
                     }
 
                     if (isset($value['profiler']['container_types']) && !empty($value['profiler']['container_types'])
                         && isset($value['container']['types']) && !empty($value['container']['types'])
-                        && 0 !== count(array_diff($value['profiler']['container_types'], $value['container']['types']))) {
+                        && 0 !== \count(array_diff($value['profiler']['container_types'], $value['container']['types']))) {
                         throw new \RuntimeException('You cannot have different config options for sonata_block.profiler.container_types and sonata_block.container.types; the first one is deprecated, in case of doubt use the latter');
                     }
 
@@ -165,7 +165,7 @@ class Configuration implements ConfigurationInterface
                     ->prototype('scalar')->end()
                     ->validate()
                         ->always(function ($value) {
-                            if (count($value) > 0) {
+                            if (\count($value) > 0) {
                                 @trigger_error(
                                     'The menus configuration key is deprecated since 3.3 and will be removed in 4.0.',
                                     E_USER_DEPRECATED

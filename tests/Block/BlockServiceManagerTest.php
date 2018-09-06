@@ -30,7 +30,7 @@ class BlockServiceManagerTest extends TestCase
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())->method('getType')->will($this->returnValue('test'));
 
-        $this->assertInstanceOf(get_class($service), $manager->get($block));
+        $this->assertInstanceOf(\get_class($service), $manager->get($block));
     }
 
     public function testInvalidServiceType()
@@ -49,7 +49,7 @@ class BlockServiceManagerTest extends TestCase
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())->method('getType')->will($this->returnValue('test'));
 
-        $this->assertInstanceOf(get_class($service), $manager->get($block));
+        $this->assertInstanceOf(\get_class($service), $manager->get($block));
     }
 
     public function testGetBlockServiceException()

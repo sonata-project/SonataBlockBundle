@@ -25,7 +25,7 @@ class RecursiveBlockIterator extends \RecursiveArrayIterator implements \Recursi
      */
     public function __construct($array)
     {
-        if (is_object($array)) {
+        if (\is_object($array)) {
             $array = $array->toArray();
         }
 
