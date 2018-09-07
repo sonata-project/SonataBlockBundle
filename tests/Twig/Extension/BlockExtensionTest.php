@@ -73,6 +73,6 @@ class BlockExtensionTest extends TestCase
 
         $func = $this->env->getFunction($name);
         $this->assertInstanceOf('Twig_SimpleFunction', $func);
-        call_user_func_array($func->getCallable(), $args);
+        \call_user_func_array($func->getCallable(), $args);
     }
 }

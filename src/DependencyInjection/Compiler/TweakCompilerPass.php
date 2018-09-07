@@ -39,7 +39,7 @@ class TweakCompilerPass implements CompilerPassInterface
             $arguments = $definition->getArguments();
 
             // Replace empty block id with service id
-            if (empty($arguments) || 0 == strlen($arguments[0])) {
+            if (empty($arguments) || 0 == \strlen($arguments[0])) {
                 // NEXT_MAJOR: Remove the condition when Symfony 2.8 support will be dropped.
                 if (method_exists($definition, 'setArgument')) {
                     $definition->setArgument(0, $id);
@@ -89,12 +89,12 @@ class TweakCompilerPass implements CompilerPassInterface
         $definition = $container->findDefinition('sonata.block.context_manager');
 
         foreach ($container->getParameter('sonata_block.blocks') as $service => $settings) {
-            if (count($settings['settings']) > 0) {
+            if (\count($settings['settings']) > 0) {
                 $definition->addMethodCall('addSettingsByType', [$service, $settings['settings'], true]);
             }
         }
         foreach ($container->getParameter('sonata_block.blocks_by_class') as $class => $settings) {
-            if (count($settings['settings']) > 0) {
+            if (\count($settings['settings']) > 0) {
                 $definition->addMethodCall('addSettingsByClass', [$class, $settings['settings'], true]);
             }
         }
