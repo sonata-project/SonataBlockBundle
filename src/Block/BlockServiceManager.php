@@ -108,7 +108,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
     public function getServices()
     {
         foreach ($this->services as $name => $id) {
-            if (is_string($id)) {
+            if (\is_string($id)) {
                 $this->load($id);
             }
         }
@@ -130,7 +130,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
         $containers = $this->container->getParameter('sonata.block.container.types');
 
         foreach ($this->contexts[$context] as $name) {
-            if (!$includeContainers && in_array($name, $containers)) {
+            if (!$includeContainers && \in_array($name, $containers)) {
                 continue;
             }
 

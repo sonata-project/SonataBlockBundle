@@ -147,7 +147,7 @@ class BlockHelper extends Helper
      */
     public function includeStylesheets($media, $basePath = '')
     {
-        if (0 === count($this->assets['css'])) {
+        if (0 === \count($this->assets['css'])) {
             return '';
         }
 
@@ -438,9 +438,9 @@ class BlockHelper extends Helper
         foreach ($this->eventDispatcher->getListeners($eventName) as $listener) {
             if ($listener instanceof \Closure) {
                 $results[] = '{closure}()';
-            } elseif (is_object($listener[0])) {
-                $results[] = get_class($listener[0]);
-            } elseif (is_string($listener[0])) {
+            } elseif (\is_object($listener[0])) {
+                $results[] = \get_class($listener[0]);
+            } elseif (\is_string($listener[0])) {
                 $results[] = $listener[0];
             } else {
                 $results[] = 'Unknown type!';

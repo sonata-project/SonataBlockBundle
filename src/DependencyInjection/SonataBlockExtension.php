@@ -106,7 +106,7 @@ class SonataBlockExtension extends Extension
      */
     public function fixConfigurationDeprecation(array &$config)
     {
-        if (count(array_diff($config['profiler']['container_types'], $config['container']['types']))) {
+        if (\count(array_diff($config['profiler']['container_types'], $config['container']['types']))) {
             $config['container']['types'] = array_merge($config['profiler']['container_types'], $config['container']['types']);
         }
     }
@@ -188,7 +188,7 @@ class SonataBlockExtension extends Extension
         $contexts = [];
 
         foreach ($config['blocks'] as $service => $settings) {
-            if (0 == count($settings['contexts'])) {
+            if (0 == \count($settings['contexts'])) {
                 $settings['contexts'] = $defaults;
             }
 

@@ -278,6 +278,6 @@ abstract class BaseBlock implements BlockInterface
      */
     public function hasChildren()
     {
-        return count($this->children) > 0;
+        return \count($this->children) > 0;
     }
 }
