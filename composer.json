@@ -45,7 +45,7 @@
         "knplabs/knp-menu-bundle": "^2.0",
         "sonata-project/admin-bundle": "^3.22 || ^4.0@dev",
         "symfony/debug": "^2.8 || ^3.2 || ^4.0",
-        "symfony/phpunit-bridge": "^4.0",
+        "symfony/phpunit-bridge": "^4.1",
         "symfony/stopwatch": "^2.8 || ^3.2 || ^4.0"
     },
     "suggest": {
