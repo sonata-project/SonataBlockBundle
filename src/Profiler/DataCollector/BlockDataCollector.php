@@ -74,7 +74,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
 
         // split into containers & real blocks
         foreach ($this->blocks as $id => $block) {
-            if (!is_array($block)) {
+            if (!\is_array($block)) {
                 return; // something went wrong while collecting information
             }
 
@@ -86,7 +86,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
                 continue;
             }
 
-            if (in_array($block['type'], $this->containerTypes)) {
+            if (\in_array($block['type'], $this->containerTypes)) {
                 $this->containers[$id] = $block;
             } else {
                 $this->realBlocks[$id] = $block;
@@ -101,7 +101,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
      */
     public function getTotalBlock()
     {
-        return count($this->realBlocks) + count($this->containers);
+        return \count($this->realBlocks) + \count($this->containers);
     }
 
     /**

@@ -40,7 +40,7 @@ class ServiceLoader implements BlockLoaderInterface
      */
     public function exists($type)
     {
-        return in_array($type, $this->types, true);
+        return \in_array($type, $this->types, true);
     }
 
     /**
@@ -48,7 +48,7 @@ class ServiceLoader implements BlockLoaderInterface
      */
     public function load($configuration)
     {
-        if (!in_array($configuration['type'], $this->types)) {
+        if (!\in_array($configuration['type'], $this->types)) {
             throw new \RuntimeException(sprintf(
                 'The block type "%s" does not exist',
                 $configuration['type']
@@ -71,7 +71,7 @@ class ServiceLoader implements BlockLoaderInterface
      */
     public function support($configuration)
     {
-        if (!is_array($configuration)) {
+        if (!\is_array($configuration)) {
             return false;
         }
 
