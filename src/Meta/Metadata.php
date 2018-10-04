@@ -86,14 +86,4 @@ class Metadata implements MetadataInterface
     {
         return array_key_exists($name, $this->options) ? $this->options[$name] : $default;
     }
-
-    public function setOption($name, $option)
-    {
-        $this->options[$name] = $option;
-    }
-
-    public function setOptions(array $options)
-    {
-        $this->options = $options;
-    }
 }
