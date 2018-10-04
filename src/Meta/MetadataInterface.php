@@ -24,30 +24,28 @@ interface MetadataInterface extends \Sonata\CoreBundle\Model\MetadataInterface
     public function getTitle();
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDescription();
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getImage();
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDomain();
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     public function getOptions();
 
     /**
      * @param string $name    The option key
      * @param mixed  $default The default value if option not found
-     *
-     * @return mixed
      */
     public function getOption($name, $default = null);
 }

@@ -22,30 +22,30 @@ class Metadata implements MetadataInterface
     protected $title;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $description;
 
     /**
-     * @var mixed
+     * @var string|null
      */
     protected $image;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $domain;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     protected $options;
 
     /**
      * @param string               $title
      * @param string               $description
-     * @param mixed                $image
-     * @param string               $domain
+     * @param string|null          $image
+     * @param string|null          $domain
      * @param array<string, mixed> $options
      */
     public function __construct($title, $description = null, $image = null, $domain = null, array $options = [])
