@@ -46,7 +46,7 @@ In the current tutorial, the default settings are:
 
     <?php
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'url'      => false,
