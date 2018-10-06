@@ -141,7 +141,7 @@ class BlockRenderer implements BlockRendererInterface
     {
         // a response exists, use it
         if ($this->lastResponse && $this->lastResponse->isCacheable()) {
-            if($this->lastResponse->getTtl()<$response->getTtl()) {
+            if($this->lastResponse->getTtl() < $response->getTtl()) {
                 $response->setTtl($this->lastResponse->getTtl());
             }
             $response->setPublic();
