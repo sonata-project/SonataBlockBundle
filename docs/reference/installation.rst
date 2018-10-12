@@ -68,9 +68,6 @@ To use the ``BlockBundle``, add the following lines to your application configur
         sonata_block:
             default_contexts: [sonata_page_bundle]
             blocks:
-                sonata.block.service.text:
-                sonata.block.service.rss:
-
                 # Some block with different templates
                 #acme.demo.block.demo:
                 #    templates:
