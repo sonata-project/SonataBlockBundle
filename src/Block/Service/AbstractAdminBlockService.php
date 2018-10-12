@@ -12,8 +12,8 @@
 namespace Sonata\BlockBundle\Block\Service;
 
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\CoreBundle\Model\Metadata;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
