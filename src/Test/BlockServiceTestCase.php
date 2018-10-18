@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-abstract class AbstractBlockServiceTestCase extends TestCase
+abstract class BlockServiceTestCase extends TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|ContainerInterface
