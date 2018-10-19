@@ -56,6 +56,8 @@ interface BlockServiceInterface
     public function load(BlockInterface $block);
 
     /**
+     * @deprecated since 3.x, to be removed in 4.0
+     *
      * @param string $media
      *
      * @return array
@@ -63,6 +65,8 @@ interface BlockServiceInterface
     public function getJavascripts($media);
 
     /**
+     * @deprecated since 3.x, to be removed in 4.0
+     *
      * @param string $media
      *
      * @return array

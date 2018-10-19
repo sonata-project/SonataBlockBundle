@@ -36,6 +36,9 @@ class BlockHelperTest extends TestCase
         $this->assertEquals('', $helper->renderEvent('my.event'));
     }
 
+    /**
+     * @group legacy
+     */
     public function testRenderEventWithListeners()
     {
         $blockService = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');

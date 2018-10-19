@@ -1,6 +1,15 @@
 UPGRADE 3.x
 ===========
 
+UPGRADE FROM 3.12 to 3.x
+=======================
+
+## Deprecate block assets 
+
+Deprecated `BlockServiceInterface::getJavascripts` and `BlockServiceInterface::getStylesheets`. 
+Move your block assets to the template.
+
+
 UPGRADE FROM 3.8 to 3.9
 =======================
 
