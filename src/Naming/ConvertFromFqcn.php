@@ -9,29 +9,31 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\BlockBundle\Util;
+namespace Sonata\BlockBundle\Naming;
 
-class StringUtil
+use Sonata\BlockBundle\Naming\Exception\NamingException;
+
+/**
+ * Converts a fully-qualified class name to a block name.
+ *
+ * @author Christian Gripp <mail@core23.de>
+ */
+final class ConvertFromFqcn
 {
     /**
-     * This class should not be instantiated.
-     */
-    private function __construct()
-    {
-    }
-
-    /**
-     * Converts a fully-qualified class name to a block name.
-     *
      * @param string $fqcn The fully-qualified class name
      *
-     * @return string|null The block name or null if not a valid FQCN
+     * @throws NamingException
+     *
+     * @return string The block name
      */
-    public static function fqcnToBlockName($fqcn)
+    public function __invoke($fqcn)
     {
         // Non-greedy ("+?") to match "service" suffix, if present
         if (preg_match('~([^\\\\]+?)(service)?$~i', $fqcn, $matches)) {
             return strtolower(preg_replace(['/([A-Z]+)([A-Z][a-z])/', '/([a-z\d])([A-Z])/'], ['\\1_\\2', '\\1_\\2'], $matches[1]));
         }
+
+        throw new NamingException(sprintf('The name "%s" is not a valid FCQN', $fqcn));
     }
 }

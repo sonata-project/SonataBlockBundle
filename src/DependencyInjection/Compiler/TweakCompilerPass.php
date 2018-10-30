@@ -11,7 +11,7 @@
 
 namespace Sonata\BlockBundle\DependencyInjection\Compiler;
 
-use Sonata\BlockBundle\Util\StringUtil;
+use Sonata\BlockBundle\Naming\ConvertFromFqcn;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -48,7 +48,7 @@ class TweakCompilerPass implements CompilerPassInterface
 
             // Only convert class service names
             if (false !== strpos($blockId, '\\')) {
-                $blockId = StringUtil::fqcnToBlockName($blockId);
+                $blockId = (new ConvertFromFqcn())($blockId);
             }
 
             // Skip manual defined blocks

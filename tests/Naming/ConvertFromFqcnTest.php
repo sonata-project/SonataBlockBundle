@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\BlockBundle\Tests\Util;
+namespace Sonata\BlockBundle\Tests\Naming;
 
 use PHPUnit\Framework\TestCase;
-use Sonata\BlockBundle\Util\StringUtil;
+use Sonata\BlockBundle\Naming\ConvertFromFqcn;
 
-class StringUtilTest extends TestCase
+class ConvertFromFqcnTest extends TestCase
 {
     /**
      * @dataProvider fqcnToBlockNameProvider
      */
     public function testFqcnToBlockName($fqcn, $expectedBlockName)
     {
-        $blockName = StringUtil::fqcnToBlockName($fqcn);
-        $this->assertSame($expectedBlockName, $blockName);
+        $this->assertSame($expectedBlockName, (new ConvertFromFqcn())($fqcn));
     }
 
     public function fqcnToBlockNameProvider()
