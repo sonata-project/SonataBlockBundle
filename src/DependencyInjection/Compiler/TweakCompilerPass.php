@@ -48,7 +48,8 @@ class TweakCompilerPass implements CompilerPassInterface
 
             // Only convert class service names
             if (false !== strpos($blockId, '\\')) {
-                $blockId = (new ConvertFromFqcn())($blockId);
+                $convert = (new ConvertFromFqcn());
+                $blockId = $convert($blockId);
             }
 
             // Skip manual defined blocks

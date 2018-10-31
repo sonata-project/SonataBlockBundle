@@ -21,7 +21,9 @@ class ConvertFromFqcnTest extends TestCase
      */
     public function testFqcnToBlockName($fqcn, $expectedBlockName)
     {
-        $this->assertSame($expectedBlockName, (new ConvertFromFqcn())($fqcn));
+        $convert = (new ConvertFromFqcn());
+
+        $this->assertSame($expectedBlockName, $convert($fqcn));
     }
 
     public function fqcnToBlockNameProvider()
