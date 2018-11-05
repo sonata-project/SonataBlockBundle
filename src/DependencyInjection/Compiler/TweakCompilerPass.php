@@ -93,13 +93,19 @@ class TweakCompilerPass implements CompilerPassInterface
 
         // Replace empty block id with service id
         if (empty($arguments) || 0 == \strlen($arguments[0])) {
-            // NEXT_MAJOR: Remove the condition when Symfony 2.8 support will be dropped.
+            // NEXT_MAJOR: Remove the if block when Symfony 2.8 support will be dropped.
             if (method_exists($definition, 'setArgument')) {
                 $definition->setArgument(0, $id);
-            } else {
-                $definition->replaceArgument(0, $id);
+
+                return;
             }
-        } elseif ($id != $arguments[0] && 0 !== strpos(
+
+            $definition->replaceArgument(0, $id);
+
+            return;
+        }
+
+        if ($id != $arguments[0] && 0 !== strpos(
             $container->getParameterBag()->resolveValue($definition->getClass()),
             'Sonata\\BlockBundle\\Block\\Service\\'
         )) {
