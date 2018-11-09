@@ -33,8 +33,10 @@ final class TweakCompilerPassTest extends TestCase
         $this->container->setDefinition('sonata.block.menu.registry', $this->createMock(Definition::class));
         $this->container->setDefinition('sonata.block.loader.chain', $this->createMock(Definition::class));
         $this->container->setDefinition('sonata.block.context_manager', $this->createMock(Definition::class));
+        $this->container->setDefinition('sonata.block.loader.service', $this->createMock(Definition::class));
 
         $this->container->setParameter('sonata_block.blocks', []);
+        $this->container->setParameter('sonata_blocks.block_types', []);
         $this->container->setParameter('sonata_block.blocks_by_class', []);
     }
 
