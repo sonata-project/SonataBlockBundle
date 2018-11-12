@@ -66,6 +66,22 @@ or you can use the `Response` object:
         return Response::create(sprintf("your name is %s", $user->getUsername()))->setTtl(0)->setPrivate();
     }
 
+Cache Keys
+::::::::::
+
+The ``SonataCacheBundle`` needs ``CacheKeys`` in order to find cached blocks. By default ``CacheKeys`` consist of the ``block_id`` and the ``updated_at`` timestamp. Because these values change on every call from the Twig Helper, it is mandatory to overwrite the ``getCacheKeys`` function:
+
+.. code-block:: php
+
+    <?php
+
+    public function getCacheKeys(BlockInterface $block)
+    {
+        return [
+            'id' => 'sample_cached_block'
+        ];
+    }
+
 Block TTL computation
 ~~~~~~~~~~~~~~~~~~~~~
 
