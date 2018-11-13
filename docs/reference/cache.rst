@@ -78,6 +78,9 @@ it is mandatory to overwrite the ``getCacheKeys`` function in your custom block 
 
     <?php
 
+    namespace App\Block;
+    
+    use Sonata\BlockBundle\Block\Service\AbstractBlockService;
     final class CachedBlock extends AbstractBlockService
     {
         public function execute(BlockContextInterface $blockContext, Response $response = null)
