@@ -89,7 +89,7 @@ it is mandatory to overwrite the ``getCacheKeys`` function in your custom block 
             // ...
         }
 
-        public function getCacheKeys(BlockInterface $block)
+        public function getCacheKeys(BlockInterface $block): array
         {
             return [
                 'id' => 'sample_cached_block'
