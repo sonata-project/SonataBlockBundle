@@ -84,7 +84,7 @@ it is mandatory to overwrite the ``getCacheKeys`` function in your custom block 
 
     final class CachedBlock extends AbstractBlockService
     {
-        public function execute(BlockContextInterface $blockContext, Response $response = null)
+        public function execute(BlockContextInterface $blockContext, Response $response = null): Response
         {
             // ...
         }
