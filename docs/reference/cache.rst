@@ -70,7 +70,7 @@ Cache Keys
 ::::::::::
 
 The ``SonataCacheBundle`` needs cache keys in order to find cached blocks.
-blocks. By default cache keys consist of the ``block_id`` and the ``updated_at``
+By default cache keys consist of the ``block_id`` and the ``updated_at``
 timestamp. Because these values change on every call from the Twig Helper,
 it is mandatory to overwrite the ``getCacheKeys`` function in your custom block class:
 
