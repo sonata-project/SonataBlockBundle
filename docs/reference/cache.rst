@@ -78,11 +78,17 @@ it is mandatory to overwrite the ``getCacheKeys`` function:
 
     <?php
 
-    public function getCacheKeys(BlockInterface $block)
+    class CachedBlock extends AbstractBlockService implements BlockServiceInterface
     {
-        return [
-            'id' => 'sample_cached_block'
-        ];
+        public function execute(BlockContextInterface $blockContext, Response $response = null) { /*... */ }
+
+        public function getCacheKeys(BlockInterface $block)
+        {
+            return [
+                'id' => 'sample_cached_block'
+            ];
+        }
+        // ...
     }
 
 Block TTL computation
