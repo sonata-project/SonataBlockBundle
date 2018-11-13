@@ -69,10 +69,10 @@ or you can use the `Response` object:
 Cache Keys
 ::::::::::
 
-The ``SonataCacheBundle`` needs ``CacheKeys`` in order to find cached
-blocks. By default ``CacheKeys`` consist of the ``block_id`` and the ``updated_at``
+The ``SonataCacheBundle`` needs cache keys in order to find cached
+blocks. By default cache keys consist of the ``block_id`` and the ``updated_at``
 timestamp. Because these values change on every call from the Twig Helper,
-it is mandatory to overwrite the ``getCacheKeys`` function:
+it is mandatory to overwrite the ``getCacheKeys`` function in your custom block class:
 
 .. code-block:: php
 
