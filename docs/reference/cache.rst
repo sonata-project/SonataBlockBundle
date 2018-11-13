@@ -78,7 +78,7 @@ it is mandatory to overwrite the ``getCacheKeys`` function in your custom block 
 
     <?php
 
-    class CachedBlock extends AbstractBlockService implements BlockServiceInterface
+    final class CachedBlock extends AbstractBlockService
     {
         public function execute(BlockContextInterface $blockContext, Response $response = null) { /*... */ }
 
