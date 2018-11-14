@@ -81,6 +81,9 @@ it is mandatory to overwrite the ``getCacheKeys`` function in your custom block 
     namespace App\Block;
     
     use Sonata\BlockBundle\Block\Service\AbstractBlockService;
+    use Sonata\BlockBundle\Block\BlockContextInterface;
+    use Sonata\BlockBundle\Model\BlockInterface;
+    use Symfony\Component\HttpFoundation\Response;
 
     final class CachedBlock extends AbstractBlockService
     {
