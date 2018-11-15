@@ -66,6 +66,41 @@ or you can use the `Response` object:
         return Response::create(sprintf("your name is %s", $user->getUsername()))->setTtl(0)->setPrivate();
     }
 
+Cache Keys
+::::::::::
+
+The ``SonataCacheBundle`` needs cache keys in order to find cached blocks.
+By default cache keys consist of the ``block_id`` and the ``updated_at``
+timestamp. Because these values change on every call from the Twig Helper,
+it is mandatory to overwrite the ``getCacheKeys`` function in your custom block class:
+
+.. code-block:: php
+
+    <?php
+
+    namespace App\Block;
+    
+    use Sonata\BlockBundle\Block\Service\AbstractBlockService;
+    use Sonata\BlockBundle\Block\BlockContextInterface;
+    use Sonata\BlockBundle\Model\BlockInterface;
+    use Symfony\Component\HttpFoundation\Response;
+
+    final class CachedBlock extends AbstractBlockService
+    {
+        public function execute(BlockContextInterface $blockContext, Response $response = null): Response
+        {
+            // ...
+        }
+
+        public function getCacheKeys(BlockInterface $block): array
+        {
+            return [
+                'id' => 'sample_cached_block'
+            ];
+        }
+        // ...
+    }
+
 Block TTL computation
 ~~~~~~~~~~~~~~~~~~~~~
 
