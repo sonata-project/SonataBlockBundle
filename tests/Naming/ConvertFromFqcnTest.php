@@ -42,4 +42,12 @@ class ConvertFromFqcnTest extends TestCase
             ['FooBarBazService', 'foo_bar_baz'],
         ];
     }
+
+    public function testInvalidBlockName()
+    {
+        $this->expectException(\Sonata\BlockBundle\Naming\Exception\NamingException::class);
+
+        $convert = (new ConvertFromFqcn());
+        $convert('');
+    }
 }
