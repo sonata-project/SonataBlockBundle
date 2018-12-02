@@ -174,7 +174,7 @@ class SonataBlockExtension extends Extension
             $types[] = $service;
         }
 
-        $container->getDefinition('sonata.block.loader.service')->replaceArgument(0, $types);
+        $container->setParameter('sonata.block.block_types', $types);
     }
 
     /**
