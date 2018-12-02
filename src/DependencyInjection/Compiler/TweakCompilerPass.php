@@ -138,6 +138,8 @@ class TweakCompilerPass implements CompilerPassInterface
     }
 
     /**
+     * @param string[][]
+     *
      * @return string[]
      */
     private function getContextFromTags(array $tags)
