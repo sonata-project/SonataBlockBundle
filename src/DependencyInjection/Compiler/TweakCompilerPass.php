@@ -143,8 +143,8 @@ class TweakCompilerPass implements CompilerPassInterface
     private function getContextFromTags(array $tags)
     {
         return array_filter(array_map(function (array $attribute) {
-            if (array_key_exists('context', $attribute) && $attribute['context']) {
-                return (string) $attribute['context'];
+            if (array_key_exists('context', $attribute) && \is_string($attribute['context'])) {
+                return $attribute['context'];
             }
 
             return null;
