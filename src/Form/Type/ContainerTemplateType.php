@@ -11,8 +11,8 @@
 
 namespace Sonata\BlockBundle\Form\Type;
 
-use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
