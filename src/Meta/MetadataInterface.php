@@ -34,6 +34,11 @@ interface MetadataInterface extends \Sonata\CoreBundle\Model\MetadataInterface
     public function getImage();
 
     /**
+     * @return boolean
+     */
+    public function isImageAvailable();
+
+    /**
      * @return string|null
      */
     public function getDomain();
