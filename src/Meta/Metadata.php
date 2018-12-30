@@ -78,11 +78,11 @@ class Metadata implements MetadataInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isImageAvailable()
     {
-        return $this->image !== false && $this->image !== self::DEFAULT_MOSAIC_BACKGROUND;
+        return false !== $this->image && self::DEFAULT_MOSAIC_BACKGROUND !== $this->image;
     }
 
     public function getDomain()
