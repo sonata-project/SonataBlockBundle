@@ -63,9 +63,9 @@ class MetadataTest extends TestCase
     public function isImageAvailableProvider()
     {
         return [
-            'image is null' => ['title', 'description', null, false],
-            'image is false' => ['title', 'description', false, false],
-            'image is available' => ['title', 'description', 'image.png', true]
+            'image is null' => [false, null],
+            'image is false' => [false, false],
+            'image is available' => [true, 'image.png']
         ];
     }
 }
