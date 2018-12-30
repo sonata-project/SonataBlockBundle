@@ -14,11 +14,6 @@ namespace Sonata\BlockBundle\Tests\Meta;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Meta\Metadata;
 
-/**
- * @author Jonathan Vautrin <jvautrin@pro-info.be>
- *
- * @group legacy
- */
 class MetadataTest extends TestCase
 {
     public function testGetters()
