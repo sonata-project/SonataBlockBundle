@@ -29,6 +29,7 @@ Now, enable the bundle in ``bundles.php`` file:
     ];
 
 .. note::
+
     If you are not using Symfony Flex, you should enable bundles in your
     ``AppKernel.php``.
 
@@ -75,5 +76,6 @@ To use the ``BlockBundle``, add the following lines to your application configur
                 #       - { name: 'Big',    template: '@AcmeDemo/Block/demo_big.html.twig' }
 
 .. note::
+
     If you are not using Symfony Flex, this configuration should be added
     to ``app/config/config.yml``.
