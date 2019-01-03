@@ -2,6 +2,25 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.13.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.12.1...3.13.0) - 2018-12-03
+
+### Added
+- All blocks containing `sonata.block` will be auto registered
+- Added `EditableBlockService` and `FormMapper` interfaces
+- Added `Meta\Metadata` class (import from CoreBundle)
+- Added `Meta\MetadataInterface` class (import from CoreBundle)
+- Added `debug:sonata:block` command alias for `DebugBlocksCommand`
+
+### Fixed
+- Allow autowiring blocks
+- Now the deprecated `setDefaultSettings()` for blocks is handled correctly.
+  You should avoid using it in favor of `configureSettings()` but it will work
+and show the deprecated message.
+
+### Deprecated
+- Deprecated `BlockServiceInterface::getJavascripts()`
+- Deprecated `BlockServiceInterface::getStylesheets()`
+
 ## [3.12.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.12.0...3.12.1) - 2018-03-12
 ### Added
 - Missing italian translations

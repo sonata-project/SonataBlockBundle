@@ -42,8 +42,14 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root('sonata_block');
+        $treeBuilder = new TreeBuilder('sonata_block');
+
+        // Keep compatibility with symfony/config < 4.2
+        if (!\method_exists($treeBuilder, 'getRootNode')) {
+            $node = $treeBuilder->root('sonata_block');
+        } else {
+            $node = $treeBuilder->getRootNode();
+        }
 
         $node
             ->fixXmlConfig('default_context')

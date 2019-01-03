@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\DependencyInjection\Compiler;
 
+use Sonata\BlockBundle\Naming\ConvertFromFqcn;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -34,6 +35,8 @@ class TweakCompilerPass implements CompilerPassInterface
 
         $parameters = $container->getParameter('sonata_block.blocks');
 
+        $blockTypes = $container->getParameter('sonata_blocks.block_types');
+
         foreach ($container->findTaggedServiceIds('sonata.block') as $id => $tags) {
             $definition = $container->getDefinition($id);
             $definition->setPublic(true);
@@ -46,6 +49,22 @@ class TweakCompilerPass implements CompilerPassInterface
                 } else {
                     $definition->replaceArgument(0, $id);
                 }
+            }
+
+            $blockId = $id;
+
+            // Only convert class service names
+            if (false !== strpos($blockId, '\\')) {
+                $convert = (new ConvertFromFqcn());
+                $blockId = $convert($blockId);
+            }
+
+            // Skip manual defined blocks
+            if (!isset($blockTypes[$blockId])) {
+                $contexts = $this->getContextFromTags($tags);
+                $blockTypes[$blockId] = [
+                    'context' => $contexts,
+                ];
             }
 
             $manager->addMethodCall('add', [$id, $id, isset($parameters[$id]) ? $parameters[$id]['contexts'] : []]);
@@ -65,6 +84,7 @@ class TweakCompilerPass implements CompilerPassInterface
             $services[] = new Reference($id);
         }
 
+        $container->getDefinition('sonata.block.loader.service')->replaceArgument(0, $blockTypes);
         $container->getDefinition('sonata.block.loader.chain')->replaceArgument(0, $services);
 
         $this->applyContext($container);
@@ -89,5 +109,21 @@ class TweakCompilerPass implements CompilerPassInterface
                 $definition->addMethodCall('addSettingsByClass', [$class, $settings['settings'], true]);
             }
         }
+    }
+
+    /**
+     * @param string[][] $tags
+     *
+     * @return string[]
+     */
+    private function getContextFromTags(array $tags)
+    {
+        return array_filter(array_map(function (array $attribute) {
+            if (array_key_exists('context', $attribute) && \is_string($attribute['context'])) {
+                return $attribute['context'];
+            }
+
+            return null;
+        }, $tags));
     }
 }

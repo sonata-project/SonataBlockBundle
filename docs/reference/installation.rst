@@ -29,6 +29,7 @@ Now, enable the bundle in ``bundles.php`` file:
     ];
 
 .. note::
+
     If you are not using Symfony Flex, you should enable bundles in your
     ``AppKernel.php``.
 
@@ -68,20 +69,6 @@ To use the ``BlockBundle``, add the following lines to your application configur
         sonata_block:
             default_contexts: [sonata_page_bundle]
             blocks:
-                sonata.admin.block.admin_list:
-                    contexts:   [admin]
-
-                #sonata.admin_doctrine_orm.block.audit:
-                #    contexts:   [admin]
-
-                sonata.block.service.text:
-                sonata.block.service.rss:
-
-                # Some specific block from the SonataMediaBundle
-                #sonata.media.block.media:
-                #sonata.media.block.gallery:
-                #sonata.media.block.feature_media:
-
                 # Some block with different templates
                 #acme.demo.block.demo:
                 #    templates:
@@ -89,5 +76,6 @@ To use the ``BlockBundle``, add the following lines to your application configur
                 #       - { name: 'Big',    template: '@AcmeDemo/Block/demo_big.html.twig' }
 
 .. note::
+
     If you are not using Symfony Flex, this configuration should be added
     to ``app/config/config.yml``.
