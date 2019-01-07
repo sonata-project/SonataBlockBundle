@@ -17,7 +17,7 @@ interface BlockRendererInterface
 {
     /**
      * @param BlockContextInterface $name
-     * @param null|Response         $response
+     * @param Response|null         $response
      *
      * @return Response
      */
