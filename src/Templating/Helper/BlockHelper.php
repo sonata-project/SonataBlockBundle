@@ -209,7 +209,7 @@ class BlockHelper extends Helper
      * @param mixed $block
      * @param array $options
      *
-     * @return null|string
+     * @return string|null
      */
     public function render($block, array $options = [])
     {
