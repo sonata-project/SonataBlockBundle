@@ -43,7 +43,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
     /**
      * @param ContainerInterface   $container
      * @param mixed                $debug
-     * @param null|LoggerInterface $logger
+     * @param LoggerInterface|null $logger
      */
     public function __construct(ContainerInterface $container, $debug, LoggerInterface $logger = null)
     {
