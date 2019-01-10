@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -126,7 +128,7 @@ class TweakCompilerPass implements CompilerPassInterface
         }
 
         if ($id != $arguments[0] && 0 !== strpos(
-            $container->getParameterBag()->resolveValue($definition->getClass()),
+            (string) $container->getParameterBag()->resolveValue($definition->getClass()),
             'Sonata\\BlockBundle\\Block\\Service\\'
         )) {
             // NEXT_MAJOR: Remove deprecation notice
