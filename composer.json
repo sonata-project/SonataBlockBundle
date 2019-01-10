@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^5.6 || ^7.0",
+        "php": "^7.1",
         "doctrine/common": "^2.3",
         "sonata-project/cache": "^1.0 || ^2.0",
         "sonata-project/core-bundle": "^3.4",
