@@ -17,7 +17,7 @@ use Knp\Menu\Provider\MenuProviderInterface;
 use Sonata\BlockBundle\Block\Service\MenuBlockService;
 use Sonata\BlockBundle\Menu\MenuRegistryInterface;
 use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
-use Sonata\CoreBundle\Form\Type\ImmutableArrayType;
+use Sonata\Form\Type\ImmutableArrayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
