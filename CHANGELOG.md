@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.14.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.13.0...3.14.0) - 2019-01-12
+
+### Fixed
+- Deprecations about `Sonata\CoreBundle\Form\*`
+- Deprecations about `Sonata\CoreBundle\Model\*`
+- Fix deprecation for symfony/config 4.2+
+
+### Removed
+- support for php 5 and php 7.0
+
 ## [3.13.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.12.1...3.13.0) - 2018-12-03
 
 ### Added
