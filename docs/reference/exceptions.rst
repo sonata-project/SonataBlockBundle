@@ -32,12 +32,12 @@ These filters may be modified or combined with other filters in the configuratio
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # config/packages/sonata_block.yaml
 
         sonata_block:
             exception:
                 default:
-                    filter:                     debug_only
+                    filter: debug_only
                 filters:
                     debug_only:             sonata.block.exception.filter.debug_only
                     ignore_block_exception: sonata.block.exception.filter.ignore_block_exception
@@ -50,7 +50,7 @@ A default filter may be configured to be applied to all block types. If you wish
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # config/packages/sonata_block.yaml
 
         sonata_block:
             blocks:
@@ -72,15 +72,16 @@ These filters may be modified or completed with other filters in the configurati
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # config/packages/sonata_block.yaml
+
         sonata_block:
             exception:
                 default:
-                    renderer:               throw
+                    renderer: throw
                 renderers:
-                    inline:                 sonata.block.exception.renderer.inline
-                    inline_debug:           sonata.block.exception.renderer.inline_debug
-                    throw:                  sonata.block.exception.renderer.throw
+                    inline:       sonata.block.exception.renderer.inline
+                    inline_debug: sonata.block.exception.renderer.inline_debug
+                    throw:        sonata.block.exception.renderer.throw
 
 
 A `default renderer` will be applied to all block types. If you wish to use a different renderer on a particular block type, you should add the following option in the configuration file:
@@ -89,7 +90,7 @@ A `default renderer` will be applied to all block types. If you wish to use a di
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # config/packages/sonata_block.yaml
 
         sonata_block:
             blocks:

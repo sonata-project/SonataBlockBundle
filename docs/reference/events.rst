@@ -38,17 +38,15 @@ So, the current the name will be ``sonata.block.event.blog.comment``.
 
     .. code-block:: yaml
 
+        # config/services.yaml
+
         services:
             disqus.comment:
                 class: Sonata\CommentBundle\Event\Disqus"
                 tags:
                     - { name: kernel.event_listener, event: sonata.block.event.blog.comment, method: onBlock }
 
-The `event listener` must push one or some ``BlockInterface`` instances into ``BlockEvent`` passed in so the rendering workflow will work properly.
-
-.. code-block:: php
-
-    <?php
+The `event listener` must push one or some ``BlockInterface`` instances into ``BlockEvent`` passed in so the rendering workflow will work properly::
 
     use Sonata\BlockBundle\Model\Block;
 

@@ -11,6 +11,8 @@ if you want to know more: http://jmsyst.com/bundles/JMSDiExtraBundle
 
 .. code-block:: yaml
 
+    # config/packages/jms_di_extra.yaml
+
     jms_di_extra:
         annotation_patterns:
             - JMS\DiExtraBundle\Annotation
@@ -19,11 +21,7 @@ if you want to know more: http://jmsyst.com/bundles/JMSDiExtraBundle
 Define Blocks
 ^^^^^^^^^^^^^
 
-All you have to do is include ``Sonata\BlockBundle\Annotation`` and define the values you need.
-
-.. code-block:: php
-
-    <?php
+All you have to do is include ``Sonata\BlockBundle\Annotation`` and define the values you need::
 
     namespace AcmeBundle\Block;
 
