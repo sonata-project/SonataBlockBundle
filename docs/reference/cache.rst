@@ -20,11 +20,7 @@ The default `TTL` is `86400` seconds. Now, there are many ways to control this b
 * set a ``use_cache`` setting to ``false`` or ``true``, if the variable is set to ``false`` then no cache will be available for the block and its parents,
 * no cache backend by default! By default, there is no cache backend setup, you should focus on raw performance before adding cache layers.
 
-If you are extending the ``BaseBlockService``, you can use the method ``renderPrivateResponse`` to return a private `Response`.
-
-.. code-block:: php
-
-    <?php
+If you are extending the ``BaseBlockService``, you can use the method ``renderPrivateResponse`` to return a private `Response`::
 
     // Private response as the block response depends on the connected user
     public function execute(BlockContextInterface $blockContext, Response $response = null)
@@ -45,11 +41,7 @@ If you are extending the ``BaseBlockService``, you can use the method ``renderPr
         ));
     }
 
-or you can use the `Response` object:
-
-.. code-block:: php
-
-    <?php
+or you can use the `Response` object::
 
     // Private response as the block response depends on the connected user
     public function execute(BlockContextInterface $blockContext, Response $response = null)
@@ -72,11 +64,7 @@ Cache Keys
 The ``SonataCacheBundle`` needs cache keys in order to find cached blocks.
 By default cache keys consist of the ``block_id`` and the ``updated_at``
 timestamp. Because these values change on every call from the Twig Helper,
-it is mandatory to overwrite the ``getCacheKeys`` function in your custom block class:
-
-.. code-block:: php
-
-    <?php
+it is mandatory to overwrite the ``getCacheKeys`` function in your custom block class::
 
     namespace App\Block;
     
@@ -98,7 +86,6 @@ it is mandatory to overwrite the ``getCacheKeys`` function in your custom block 
                 'id' => 'sample_cached_block'
             ];
         }
-        // ...
     }
 
 Block TTL computation
@@ -129,7 +116,7 @@ The service can be configured using the ``http_cache_handler`` key.
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # config/packages/sonata_block.yaml
 
         sonata_block:
             http_cache:
@@ -156,7 +143,7 @@ The configuration is defined per `block service`, so if you want to use `memcach
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # config/packages/sonata_block.yaml
 
         sonata_block:
             blocks:
@@ -169,9 +156,11 @@ Also, make sure the memcached backend is configured in the ``sonata_cache`` defi
 
     .. code-block:: yaml
 
+        # config/packages/sonata_cache.yaml
+
         sonata_cache:
             caches:
                 memcached:
-                    prefix: test     # prefix to ensure there is no clash between instances
+                    prefix: test # prefix to ensure there is no clash between instances
                     servers:
-                        - {host: 127.0.0.1, port: 11211, weight: 0}
+                        - { host: 127.0.0.1, port: 11211, weight: 0 }

@@ -14,11 +14,7 @@ First namespaces
 ----------------
 
 The ``AbstractBlockService`` implements some basic methods defined by the interface.
-The current RSS block will extend this base class. The other `use` statements are required by the interface's remaining methods.
-
-.. code-block:: php
-
-    <?php
+The current RSS block will extend this base class. The other `use` statements are required by the interface's remaining methods::
 
     namespace Sonata\BlockBundle\Block;
 
@@ -44,42 +40,32 @@ In the current tutorial, the default settings are:
 
 .. code-block:: php
 
-    <?php
-
     public function configureSettings(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'url'      => false,
-            'title'    => 'Insert the rss title',
+        $resolver->setDefaults([
+            'url' => false,
+            'title' => 'Insert the rss title',
             'template' => '@SonataBlock/Block/block_core_rss.html.twig',
-        ));
+        ]);
     }
 
 Form Editing
 ------------
-In order to allow editing forms, the ``BlockBundle`` relies on the ``AdminBundle``.
-
-.. code-block:: php
-
-    <?php
+In order to allow editing forms, the ``BlockBundle`` relies on the ``AdminBundle``::
 
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
         $formMapper
-            ->add('settings', 'sonata_type_immutable_array', array(
-                'keys' => array(
-                    array('url', 'url', array('required' => false)),
-                    array('title', 'text', array('required' => false)),
-                )
-            ))
+            ->add('settings', 'sonata_type_immutable_array', [
+                'keys' => [
+                    ['url', 'url', array['required' => false]],
+                    ['title', 'text', array['required' => false]],
+                ]
+            ])
         ;
     }
 
-The validation is done at runtime through a ``validateBlock`` method. You can call any Symfony assertions, like:
-
-.. code-block:: php
-
-    <?php
+The validation is done at runtime through a ``validateBlock`` method. You can call any Symfony assertions, like::
 
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
@@ -101,11 +87,7 @@ The ``sonata_type_immutable_array`` type is a specific `form type` which allows 
 Execute
 -------
 
-The next step is to implement the `execute` method. This method must return a ``Response`` object, which is used to render the block.
-
-.. code-block:: php
-
-    <?php
+The next step is to implement the `execute` method. This method must return a ``Response`` object, which is used to render the block::
 
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
@@ -114,12 +96,12 @@ The next step is to implement the `execute` method. This method must return a ``
         $feeds = false;
 
         if ($settings['url']) {
-            $options = array(
-                'http' => array(
+            $options = [
+                'http' => [
                     'user_agent' => 'Sonata/RSS Reader',
                     'timeout' => 2,
-                )
-            );
+                ]
+            ];
 
             // retrieve contents with a specific stream context to avoid php errors
             $content = @file_get_contents($settings['url'], false, stream_context_create($options));
@@ -135,11 +117,11 @@ The next step is to implement the `execute` method. This method must return a ``
             }
         }
 
-        return $this->renderResponse($blockContext->getTemplate(), array(
+        return $this->renderResponse($blockContext->getTemplate(), [
             'feeds'     => $feeds,
             'block'     => $blockContext->getBlock(),
             'settings'  => $settings
-        ), $response);
+        ], $response);
     }
 
 Template
@@ -175,6 +157,8 @@ We are almost done! Now, just declare the block as a service:
 
     .. code-block:: xml
 
+        <!-- config/services.xml -->
+
         <service id="sonata.block.service.rss" class="Sonata\BlockBundle\Block\Service\RssBlockService">
             <tag name="sonata.block" />
             <argument/>
@@ -182,6 +166,8 @@ We are almost done! Now, just declare the block as a service:
         </service>
 
     .. code-block:: yaml
+
+        # config/services.yaml
 
         services:
             sonata.block.service.rss:
@@ -198,7 +184,7 @@ Then, add the service to Sonata configuration:
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # config/packages/sonata_block.yaml
 
         sonata_block:
             blocks:
