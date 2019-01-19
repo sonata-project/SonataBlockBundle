@@ -47,7 +47,7 @@ The main template might look like:
     <html>
         <body>
             <head>
-                <link rel="stylesheet" href="{{ asset('css/default.css') }}" type="text/css" media="all" />
+                <link rel="stylesheet" href="{{ asset('css/default.css') }}" type="text/css" media="all"/>
                 <script src="{{ asset('js/jquery-1.8.3.js') }}" type="text/javascript"></script>
             </head>
 

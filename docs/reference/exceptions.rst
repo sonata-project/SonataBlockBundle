@@ -83,7 +83,6 @@ These filters may be modified or completed with other filters in the configurati
                     inline_debug: sonata.block.exception.renderer.inline_debug
                     throw:        sonata.block.exception.renderer.throw
 
-
 A `default renderer` will be applied to all block types. If you wish to use a different renderer on a particular block type, you should add the following option in the configuration file:
 
 .. configuration-block::
