@@ -35,7 +35,7 @@ class BlockHelperTest extends TestCase
 
         $helper = new BlockHelper($blockServiceManager, [], $blockRenderer, $blockContextManager, $eventDispatcher);
 
-        $this->assertEquals('', $helper->renderEvent('my.event'));
+        $this->assertSame('', $helper->renderEvent('my.event'));
     }
 
     /**
@@ -79,18 +79,18 @@ class BlockHelperTest extends TestCase
 
         $helper = new BlockHelper($blockServiceManager, [], $blockRenderer, $blockContextManager, $eventDispatcher);
 
-        $this->assertEquals('<span>test</span>', $helper->renderEvent('my.event'));
+        $this->assertSame('<span>test</span>', $helper->renderEvent('my.event'));
 
-        $this->assertEquals(trim($helper->includeJavascripts('screen', '/application')), '<script src="/application/js/base.js" type="text/javascript"></script>');
-        $this->assertEquals(trim($helper->includeJavascripts('screen', '')), '<script src="/js/base.js" type="text/javascript"></script>');
+        $this->assertSame(trim($helper->includeJavascripts('screen', '/application')), '<script src="/application/js/base.js" type="text/javascript"></script>');
+        $this->assertSame(trim($helper->includeJavascripts('screen', '')), '<script src="/js/base.js" type="text/javascript"></script>');
 
-        $this->assertEquals($helper->includeStylesheets('screen', '/application'), <<<'EXPECTED'
+        $this->assertSame($helper->includeStylesheets('screen', '/application'), <<<'EXPECTED'
 <style type='text/css' media='screen'>
 @import url(/application/css/base.css);
 </style>
 EXPECTED
 );
-        $this->assertEquals($helper->includeStylesheets('screen', ''), <<<'EXPECTED'
+        $this->assertSame($helper->includeStylesheets('screen', ''), <<<'EXPECTED'
 <style type='text/css' media='screen'>
 @import url(/css/base.css);
 </style>

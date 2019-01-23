@@ -114,6 +114,6 @@ final class TweakCompilerPassTest extends TestCase
         $pass = new TweakCompilerPass();
         $pass->process($this->container);
 
-        $this->assertEquals('acme.block.service', $blockDefinition->getArgument(0));
+        $this->assertSame('acme.block.service', $blockDefinition->getArgument(0));
     }
 }

@@ -46,6 +46,6 @@ class TextBlockServiceTest extends AbstractBlockServiceTestCase
 
         $response = $service->execute($blockContext);
 
-        $this->assertEquals('my text', $this->templating->parameters['settings']['content']);
+        $this->assertSame('my text', $this->templating->parameters['settings']['content']);
     }
 }

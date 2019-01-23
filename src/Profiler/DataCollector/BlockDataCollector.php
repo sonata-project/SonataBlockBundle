@@ -78,7 +78,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
                 return; // something went wrong while collecting information
             }
 
-            if ('_events' == $id) {
+            if ('_events' === $id) {
                 foreach ($block as $uniqid => $event) {
                     $this->events[$uniqid] = $event;
                 }
@@ -86,7 +86,7 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
                 continue;
             }
 
-            if (\in_array($block['type'], $this->containerTypes)) {
+            if (\in_array($block['type'], $this->containerTypes, true)) {
                 $this->containers[$id] = $block;
             } else {
                 $this->realBlocks[$id] = $block;
