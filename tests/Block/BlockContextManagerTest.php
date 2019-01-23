@@ -39,7 +39,7 @@ class BlockContextManagerTest extends TestCase
 
         $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
 
-        $this->assertEquals([
+        $this->assertSame([
             'use_cache' => true,
             'extra_cache_keys' => [],
             'attr' => [],
@@ -73,7 +73,7 @@ class BlockContextManagerTest extends TestCase
 
         $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
 
-        $this->assertEquals([
+        $this->assertSame([
             'use_cache' => true,
             'extra_cache_keys' => [
                 BlockContextManager::CACHE_KEY => [

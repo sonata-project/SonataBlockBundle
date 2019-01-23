@@ -26,8 +26,8 @@ class ServiceListTypeTest extends TestCase
 
         $type = new ServiceListType($blockServiceManager);
 
-        $this->assertEquals('sonata_block_service_choice', $type->getName());
-        $this->assertEquals(ChoiceType::class, $type->getParent());
+        $this->assertSame('sonata_block_service_choice', $type->getName());
+        $this->assertSame(ChoiceType::class, $type->getParent());
     }
 
     public function testOptionsWithInvalidContext()
@@ -81,6 +81,6 @@ class ServiceListTypeTest extends TestCase
             'include_containers' => false,
         ];
 
-        $this->assertEquals($expected, $options);
+        $this->assertSame($expected, $options);
     }
 }
