@@ -57,6 +57,6 @@ class InlineRendererTest extends TestCase
 
         // THEN
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response, 'Should return a Response');
-        $this->assertEquals('html', $response->getContent(), 'Should contain the templating html result');
+        $this->assertSame('html', $response->getContent(), 'Should contain the templating html result');
     }
 }

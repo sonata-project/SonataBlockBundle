@@ -129,7 +129,7 @@ class StrategyManagerTest extends TestCase
 
         // THEN
         $this->assertNotNull($renderer);
-        $this->assertEquals($this->renderer2, $renderer, 'Should return the block type1 renderer');
+        $this->assertSame($this->renderer2, $renderer, 'Should return the block type1 renderer');
     }
 
     /**
@@ -145,7 +145,7 @@ class StrategyManagerTest extends TestCase
 
         // THEN
         $this->assertNotNull($renderer);
-        $this->assertEquals($this->renderer1, $renderer, 'Should return the default renderer');
+        $this->assertSame($this->renderer1, $renderer, 'Should return the default renderer');
     }
 
     /**
@@ -161,7 +161,7 @@ class StrategyManagerTest extends TestCase
 
         // THEN
         $this->assertNotNull($filter);
-        $this->assertEquals($this->filter2, $filter, 'Should return the block type1 filter');
+        $this->assertSame($this->filter2, $filter, 'Should return the block type1 filter');
     }
 
     /**
@@ -177,7 +177,7 @@ class StrategyManagerTest extends TestCase
 
         // THEN
         $this->assertNotNull($filter);
-        $this->assertEquals($this->filter1, $filter, 'Should return the default filter');
+        $this->assertSame($this->filter1, $filter, 'Should return the default filter');
     }
 
     /**
@@ -217,7 +217,7 @@ class StrategyManagerTest extends TestCase
 
         // THEN
         $this->assertNotNull($response, 'should return something');
-        $this->assertEquals('renderer response', $response, 'should return the renderer response');
+        $this->assertSame('renderer response', $response, 'should return the renderer response');
     }
 
     /**
