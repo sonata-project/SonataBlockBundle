@@ -32,11 +32,10 @@ class ServiceListTypeTest extends TestCase
         $this->assertSame(ChoiceType::class, $type->getParent());
     }
 
-    /**
-     * @expectedException \Symfony\Component\OptionsResolver\Exception\MissingOptionsException
-     */
     public function testOptionsWithInvalidContext()
     {
+        $this->expectException(\Symfony\Component\OptionsResolver\Exception\MissingOptionsException::class);
+
         $type = new ServiceListType(
             $this->createMock(BlockServiceManagerInterface::class)
         );
