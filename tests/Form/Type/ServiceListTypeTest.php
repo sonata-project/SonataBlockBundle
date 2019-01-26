@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Tests\Form\Type;
 
 use PHPUnit\Framework\TestCase;
+use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
+use Sonata\BlockBundle\Block\Service\BlockServiceInterface;
 use Sonata\BlockBundle\Form\Type\ServiceListType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,21 +24,22 @@ class ServiceListTypeTest extends TestCase
 {
     public function testFormType()
     {
-        $blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
-
-        $type = new ServiceListType($blockServiceManager);
+        $type = new ServiceListType(
+            $this->createMock(BlockServiceManagerInterface::class)
+        );
 
         $this->assertSame('sonata_block_service_choice', $type->getName());
         $this->assertSame(ChoiceType::class, $type->getParent());
     }
 
+    /**
+     * @expectedException \Symfony\Component\OptionsResolver\Exception\MissingOptionsException
+     */
     public function testOptionsWithInvalidContext()
     {
-        $this->expectException(\Symfony\Component\OptionsResolver\Exception\MissingOptionsException::class);
-
-        $blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
-
-        $type = new ServiceListType($blockServiceManager);
+        $type = new ServiceListType(
+            $this->createMock(BlockServiceManagerInterface::class)
+        );
 
         $resolver = new OptionsResolver();
 
@@ -46,10 +49,10 @@ class ServiceListTypeTest extends TestCase
 
     public function testOptionWithValidContext()
     {
-        $blockService = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $blockService = $this->createMock(BlockServiceInterface::class);
         $blockService->expects($this->once())->method('getName')->will($this->returnValue('value'));
 
-        $blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
+        $blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
         $blockServiceManager
             ->expects($this->once())
             ->method('getServicesByContext')
