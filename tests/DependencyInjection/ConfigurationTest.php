@@ -41,6 +41,20 @@ class ConfigurationTest extends TestCase
 
         $expected = [
             'default_contexts' => $contexts,
+            'blocks' => [
+                'my.block.type' => [
+                    'contexts' => $contexts,
+                    'templates' => [],
+                    'cache' => 'sonata.cache.noop',
+                    'settings' => [],
+                ],
+                'my.block_with_context.type' => [
+                    'contexts' => ['custom'],
+                    'templates' => [],
+                    'cache' => 'sonata.cache.noop',
+                    'settings' => [],
+                ],
+            ],
             'profiler' => [
                 'enabled' => '%kernel.debug%',
                 'template' => '@SonataBlock/Profiler/block.html.twig',
@@ -70,20 +84,6 @@ class ConfigurationTest extends TestCase
                     4 => 'cmf.block.slideshow',
                 ],
                 'templates' => $defaultTemplates,
-            ],
-            'blocks' => [
-                'my.block.type' => [
-                    'contexts' => $contexts,
-                    'cache' => 'sonata.cache.noop',
-                    'settings' => [],
-                    'templates' => [],
-                ],
-                'my.block_with_context.type' => [
-                    'contexts' => ['custom'],
-                    'cache' => 'sonata.cache.noop',
-                    'settings' => [],
-                    'templates' => [],
-                ],
             ],
             'menus' => [],
             'blocks_by_class' => [],
