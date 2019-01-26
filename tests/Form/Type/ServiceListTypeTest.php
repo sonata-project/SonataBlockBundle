@@ -73,15 +73,15 @@ class ServiceListTypeTest extends TestCase
         $expected = [
             'multiple' => false,
             'expanded' => false,
+            'preferred_choices' => [],
+            'error_bubbling' => false,
+            'include_containers' => false,
+            'context' => 'cms',
             'choices' => [
                 'my.service.code' => 'value - my.service.code',
             ],
-            'preferred_choices' => [],
             'empty_data' => '',
             'empty_value' => null,
-            'error_bubbling' => false,
-            'context' => 'cms',
-            'include_containers' => false,
         ];
 
         $this->assertSame($expected, $options);

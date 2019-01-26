@@ -29,7 +29,7 @@ class HttpCacheHandlerTest extends TestCase
 
         $handler->alterResponse($response = Response::create());
 
-        $this->assertSame(0, $response->getTtl());
+        $this->assertNull($response->getTtl());
     }
 
     public function testComputeTtlWithPublicResponse()
