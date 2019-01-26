@@ -14,13 +14,16 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Tests\Cache;
 
 use PHPUnit\Framework\TestCase;
+use Sonata\BlockBundle\Cache\HttpCacheHandlerInterface;
 use Sonata\BlockBundle\Cache\NoopHttpCacheHandler;
 
 class NoopHttpCacheHandlerTest extends TestCase
 {
-    public function testComputeTtl()
+    public function testInterface()
     {
-        // check interface
-        new NoopHttpCacheHandler();
+        $this->assertInstanceOf(
+            HttpCacheHandlerInterface::class,
+            new NoopHttpCacheHandler()
+        );
     }
 }
