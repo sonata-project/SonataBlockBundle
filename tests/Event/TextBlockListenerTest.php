@@ -30,7 +30,7 @@ class TextBlockListenerTest extends TestCase
 
         $blocks = $event->getBlocks();
 
-        $this->assertEquals('This block is coming from inline event from the template', $blocks[0]->getSetting('content'));
+        $this->assertSame('This block is coming from inline event from the template', $blocks[0]->getSetting('content'));
     }
 
     public function testEventWithAdmin(): void
@@ -51,6 +51,6 @@ class TextBlockListenerTest extends TestCase
 
         $blocks = $event->getBlocks();
 
-        $this->assertEquals('<p class=\'well\'>The admin subject is <strong>fake object</strong></p>', $blocks[0]->getSetting('content'));
+        $this->assertSame('<p class=\'well\'>The admin subject is <strong>fake object</strong></p>', $blocks[0]->getSetting('content'));
     }
 }

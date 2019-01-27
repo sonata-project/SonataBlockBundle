@@ -58,8 +58,8 @@ In order to allow editing forms, the ``BlockBundle`` relies on the ``AdminBundle
         $formMapper
             ->add('settings', 'sonata_type_immutable_array', [
                 'keys' => [
-                    ['url', 'url', array['required' => false]],
-                    ['title', 'text', array['required' => false]],
+                    ['url', 'url', ['required' => false]],
+                    ['title', 'text', ['required' => false]],
                 ]
             ])
         ;
@@ -71,13 +71,13 @@ The validation is done at runtime through a ``validateBlock`` method. You can ca
     {
         $errorElement
             ->with('settings.url')
-                ->assertNotNull(array())
+                ->assertNotNull([])
                 ->assertNotBlank()
             ->end()
             ->with('settings.title')
-                ->assertNotNull(array())
+                ->assertNotNull([])
                 ->assertNotBlank()
-                ->assertMaxLength(array('limit' => 50))
+                ->assertMaxLength(['limit' => 50])
             ->end()
         ;
     }
@@ -160,9 +160,9 @@ We are almost done! Now, just declare the block as a service:
         <!-- config/services.xml -->
 
         <service id="sonata.block.service.rss" class="Sonata\BlockBundle\Block\Service\RssBlockService">
-            <tag name="sonata.block" />
+            <tag name="sonata.block"/>
             <argument/>
-            <argument type="service" id="twig" />
+            <argument type="service" id="twig"/>
         </service>
 
     .. code-block:: yaml

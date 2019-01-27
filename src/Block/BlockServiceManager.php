@@ -119,7 +119,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
         $containers = $this->container->getParameter('sonata.block.container.types');
 
         foreach ($this->contexts[$context] as $name) {
-            if (!$includeContainers && \in_array($name, $containers)) {
+            if (!$includeContainers && \in_array($name, $containers, true)) {
                 continue;
             }
 
@@ -188,7 +188,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
     private function sortServices($services)
     {
         uasort($services, function ($a, $b) {
-            if ($a->getName() == $b->getName()) {
+            if ($a->getName() === $b->getName()) {
                 return 0;
             }
 

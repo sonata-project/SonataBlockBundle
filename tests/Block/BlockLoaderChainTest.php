@@ -38,7 +38,7 @@ class BlockLoaderChainTest extends TestCase
 
         $this->assertTrue($loaderChain->support('foo'));
 
-        $this->assertEquals($block, $loaderChain->load('foo'));
+        $this->assertSame($block, $loaderChain->load('foo'));
     }
 
     public function testLoaderWithUnSupportedLoader(): void

@@ -34,11 +34,11 @@ If you are extending the ``BaseBlockService``, you can use the method ``renderPr
             $user = false;
         }
 
-        return $this->renderPrivateResponse($blockContext->getTemplate(), array(
-            'user'    => $user,
-            'block'   => $blockContext->getBlock(),
-            'context' => $blockContext
-        ));
+        return $this->renderPrivateResponse($blockContext->getTemplate(), [
+            'user' => $user,
+            'block' => $blockContext->getBlock(),
+            'context' => $blockContext,
+        ]);
     }
 
 or you can use the `Response` object::

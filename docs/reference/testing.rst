@@ -7,35 +7,30 @@ Testing
 Test Blocks
 ~~~~~~~~~~~
 
-Given the following block service:
-
-.. code-block:: php
+Given the following block service::
 
     class CustomBlockService extends AbstractBlockService
     {
         public function execute(BlockContextInterface $blockContext, Response $response = null)
         {
-            return $this->renderResponse($blockContext->getTemplate(), array(
+            return $this->renderResponse($blockContext->getTemplate(), [
                 'context' => $blockContext,
                 'block' => $blockContext->getBlock(),
                 'settings' => $blockContext->getSettings(),
-            ), $response);
+            ], $response);
         }
 
         public function configureSettings(OptionsResolver $resolver)
         {
-            $resolver->setDefaults(array(
+            $resolver->setDefaults([
                 'foo' => 'bar',
-                'attr' => array(),
+                'attr' => [],
                 'template' => false,
-            ));
+            ]);
         }
     }
 
-
-You can write unit tests for block services with the following code.
-
-.. code-block:: php
+You can write unit tests for block services with the following code::
 
     use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
 
@@ -46,11 +41,11 @@ You can write unit tests for block services with the following code.
             $blockService = new CustomBlockService('foo', $this->twig);
             $blockContext = $this->getBlockContext($blockService);
 
-            $this->assertSettings(array(
+            $this->assertSettings([
                 'foo' => 'bar',
-                'attr' => array(),
+                'attr' => [],
                 'template' => false,
-            ), $blockContext);
+            ], $blockContext);
         }
 
         public function testExecute()

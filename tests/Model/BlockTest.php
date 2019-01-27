@@ -37,7 +37,7 @@ class BlockTest extends TestCase
         $block->addChildren($child2);
         $block->addChildren($child3);
 
-        $this->assertEquals(50, $block->getTtl());
+        $this->assertSame(50, $block->getTtl());
 
         $this->assertTrue($block->hasChildren());
     }
@@ -57,21 +57,21 @@ class BlockTest extends TestCase
         $block->setType('foo.bar');
         $block->setParent($parent);
 
-        $this->assertEquals('my.block.name', $block->getName());
-        $this->assertEquals($time, $block->getCreatedAt());
-        $this->assertEquals($time, $block->getUpdatedAt());
+        $this->assertSame('my.block.name', $block->getName());
+        $this->assertSame($time, $block->getCreatedAt());
+        $this->assertSame($time, $block->getUpdatedAt());
         $this->assertTrue($block->getEnabled());
-        $this->assertEquals(1, $block->getPosition());
-        $this->assertEquals('foo.bar', $block->getType());
-        $this->assertEquals($parent, $block->getParent());
+        $this->assertSame(1, $block->getPosition());
+        $this->assertSame('foo.bar', $block->getType());
+        $this->assertSame($parent, $block->getParent());
     }
 
     public function testSetting(): void
     {
         $block = new Block();
         $block->setSetting('foo', 'bar');
-        $this->assertEquals('void', $block->getSetting('fake', 'void'));
+        $this->assertSame('void', $block->getSetting('fake', 'void'));
         $this->assertNull($block->getSetting('fake'));
-        $this->assertEquals('bar', $block->getSetting('foo'));
+        $this->assertSame('bar', $block->getSetting('foo'));
     }
 }

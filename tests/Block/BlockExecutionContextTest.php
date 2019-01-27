@@ -26,10 +26,10 @@ class BlockExecutionContextTest extends TestCase
             'hello' => 'world',
         ]);
 
-        $this->assertEquals('world', $blockContext->getSetting('hello'));
-        $this->assertEquals(['hello' => 'world'], $blockContext->getSettings());
+        $this->assertSame('world', $blockContext->getSetting('hello'));
+        $this->assertSame(['hello' => 'world'], $blockContext->getSettings());
 
-        $this->assertEquals($block, $blockContext->getBlock());
+        $this->assertSame($block, $blockContext->getBlock());
     }
 
     public function testInvalidParameter(): void

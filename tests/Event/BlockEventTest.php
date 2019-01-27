@@ -32,6 +32,6 @@ class BlockEventTest extends TestCase
         $this->assertCount(2, $blockEvent->getBlocks());
 
         $this->assertNull($blockEvent->getSetting('fake'));
-        $this->assertEquals(1, $blockEvent->getSetting('fake', 1));
+        $this->assertSame(1, $blockEvent->getSetting('fake', 1));
     }
 }

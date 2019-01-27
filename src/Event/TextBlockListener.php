@@ -36,7 +36,7 @@ class TextBlockListener
     public function onBlock(BlockEvent $event): void
     {
         $content = 'This block is coming from inline event from the template';
-        if ($event->getSetting('admin') instanceof AdminInterface && 'edit' == $event->getSetting('action')) {
+        if ($event->getSetting('admin') instanceof AdminInterface && 'edit' === $event->getSetting('action')) {
             $admin = $event->getSetting('admin');
 
             $content = sprintf("<p class='well'>The admin subject is <strong>%s</strong></p>", $admin->toString($admin->getSubject()));

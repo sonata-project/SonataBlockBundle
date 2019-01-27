@@ -9,8 +9,7 @@ The easiest way to install ``SonataBlockBundle`` is to require it with Composer:
 
 .. code-block:: bash
 
-    $ composer require sonata-project/block-bundle
-
+    composer require sonata-project/block-bundle
 
 Now, enable the bundle in ``bundles.php`` file::
 

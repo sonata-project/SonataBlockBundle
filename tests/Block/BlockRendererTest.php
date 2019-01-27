@@ -79,7 +79,7 @@ class BlockRendererTest extends TestCase
         $result = $this->renderer->render($blockContext);
 
         // THEN
-        $this->assertEquals($response, $result, 'Should return the response from the block service');
+        $this->assertSame($response, $result, 'Should return the response from the block service');
     }
 
     /**
@@ -158,6 +158,6 @@ class BlockRendererTest extends TestCase
         $result = $this->renderer->render($blockContext);
 
         // THEN
-        $this->assertEquals($response, $result, 'Should return the response provider by the exception manager');
+        $this->assertSame($response, $result, 'Should return the response provider by the exception manager');
     }
 }

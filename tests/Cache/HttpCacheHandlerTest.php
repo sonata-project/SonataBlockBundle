@@ -29,7 +29,7 @@ class HttpCacheHandlerTest extends TestCase
 
         $handler->alterResponse($response = Response::create());
 
-        $this->assertEquals(0, $response->getTtl());
+        $this->assertNull($response->getTtl());
     }
 
     public function testComputeTtlWithPublicResponse(): void
@@ -42,7 +42,7 @@ class HttpCacheHandlerTest extends TestCase
 
         $handler->alterResponse($response = Response::create()->setTtl(84));
 
-        $this->assertEquals(42, $response->getTtl());
+        $this->assertSame(42, $response->getTtl());
     }
 
     public function testResponseTtlNotAlteredIfNoRenderedBlock(): void
@@ -51,6 +51,6 @@ class HttpCacheHandlerTest extends TestCase
 
         $handler->alterResponse($response = Response::create()->setTtl(84));
 
-        $this->assertEquals(84, $response->getTtl());
+        $this->assertSame(84, $response->getTtl());
     }
 }
