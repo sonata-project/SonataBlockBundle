@@ -184,7 +184,7 @@ class BlockHelper extends Helper
         }
 
         if ($this->stopwatch) {
-            $this->traces['_events'][uniqid()] = [
+            $this->traces['_events'][uniqid('', true)] = [
                 'template_code' => $name,
                 'event_name' => $eventName,
                 'blocks' => $this->getEventBlocks($event),

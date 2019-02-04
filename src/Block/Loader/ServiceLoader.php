@@ -56,7 +56,7 @@ class ServiceLoader implements BlockLoaderInterface
         }
 
         $block = new Block();
-        $block->setId(uniqid());
+        $block->setId(uniqid('', true));
         $block->setType($configuration['type']);
         $block->setEnabled(true);
         $block->setCreatedAt(new \DateTime());
