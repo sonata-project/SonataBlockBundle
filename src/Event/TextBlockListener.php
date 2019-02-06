@@ -43,7 +43,7 @@ class TextBlockListener
         }
 
         $block = new Block();
-        $block->setId(uniqid());
+        $block->setId(uniqid('', true));
         $block->setSettings([
             'content' => $event->getSetting('content', $content),
         ]);

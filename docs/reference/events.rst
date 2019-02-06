@@ -55,7 +55,7 @@ The `event listener` must push one or some ``BlockInterface`` instances into ``B
         public function onBlock(BlockEvent $event)
         {
             $block = new Block();
-            $block->setId(uniqid()); // set a fake id
+            $block->setId(uniqid('', true)); // set a fake id
             $block->setSettings($event->getSettings());
             $block->setType('sonata.comment.block.discus');
 
