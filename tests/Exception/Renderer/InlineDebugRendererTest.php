@@ -100,7 +100,7 @@ class InlineDebugRendererTest extends TestCase
     public function arrayHasKeyValue($key, $value)
     {
         return new \PHPUnit\Framework\Constraint\Callback(function ($test) use ($key, $value) {
-            return \is_array($test) && array_key_exists($key, $test) && $test[$key] === $value;
+            return \is_array($test) && \array_key_exists($key, $test) && $test[$key] === $value;
         });
     }
 }
