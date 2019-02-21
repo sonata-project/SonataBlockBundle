@@ -58,7 +58,7 @@ class BlockContext implements BlockContextInterface
      */
     public function getSetting($name)
     {
-        if (!array_key_exists($name, $this->settings)) {
+        if (!\array_key_exists($name, $this->settings)) {
             throw new \RuntimeException(sprintf('Unable to find the option `%s` (%s) - define the option in the related BlockServiceInterface', $name, $this->block->getType()));
         }
 
@@ -70,7 +70,7 @@ class BlockContext implements BlockContextInterface
      */
     public function setSetting($name, $value)
     {
-        if (!array_key_exists($name, $this->settings)) {
+        if (!\array_key_exists($name, $this->settings)) {
             throw new \RuntimeException(sprintf('It\'s not possible add non existing setting `%s`.', $name));
         }
 

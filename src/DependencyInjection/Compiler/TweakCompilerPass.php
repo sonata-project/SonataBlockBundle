@@ -114,7 +114,7 @@ class TweakCompilerPass implements CompilerPassInterface
         $arguments = $definition->getArguments();
 
         // Replace empty block id with service id
-        if (empty($arguments) || 0 === \strlen($arguments[0])) {
+        if ($this->serviceDefinitionNeedsFirstArgument($definition)) {
             // NEXT_MAJOR: Remove the if block when Symfony 2.8 support will be dropped.
             if (method_exists($definition, 'setArgument')) {
                 $definition->setArgument(0, $id);
@@ -139,6 +139,15 @@ class TweakCompilerPass implements CompilerPassInterface
         }
     }
 
+    private function serviceDefinitionNeedsFirstArgument(Definition $definition): bool
+    {
+        $arguments = $definition->getArguments();
+
+        return empty($arguments) ||
+            null === ($arguments[0]) ||
+            \is_string($arguments[0]) && 0 === \strlen($arguments[0]);
+    }
+
     /**
      * @param string[][]
      *
@@ -147,7 +156,7 @@ class TweakCompilerPass implements CompilerPassInterface
     private function getContextFromTags(array $tags)
     {
         return array_filter(array_map(function (array $attribute) {
-            if (array_key_exists('context', $attribute) && \is_string($attribute['context'])) {
+            if (\array_key_exists('context', $attribute) && \is_string($attribute['context'])) {
                 return $attribute['context'];
             }
 

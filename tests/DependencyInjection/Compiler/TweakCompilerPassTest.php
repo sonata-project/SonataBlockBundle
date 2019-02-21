@@ -99,10 +99,19 @@ final class TweakCompilerPassTest extends TestCase
         $pass->process($this->container);
     }
 
-    public function testProcesEmptyBlockId()
+    public function blockIds(): \Generator
+    {
+        yield 'null' => [null];
+        yield 'empty string' => [''];
+    }
+
+    /**
+     * @dataProvider blockIds
+     */
+    public function testProcessEmptyBlockId($blockId)
     {
         /** @var Definition $blockDefinition */
-        $blockDefinition = new Definition(null, ['']);
+        $blockDefinition = new Definition(null, [$blockId]);
         $blockDefinition->addTag('sonata.block');
 
         $managerDefinition = $this->createMock(Definition::class);
