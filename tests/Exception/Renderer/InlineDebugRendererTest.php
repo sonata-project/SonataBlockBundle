@@ -80,7 +80,7 @@ class InlineDebugRendererTest extends TestCase
                         ];
 
                         foreach ($expected as $key => $value) {
-                            if (!array_key_exists($key, $subject) || $subject[$key] !== $value) {
+                            if (!\array_key_exists($key, $subject) || $subject[$key] !== $value) {
                                 return false;
                             }
                         }

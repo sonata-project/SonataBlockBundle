@@ -86,7 +86,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
         $this->services[$name] = $service;
 
         foreach ($contexts as $context) {
-            if (!array_key_exists($context, $this->contexts)) {
+            if (!\array_key_exists($context, $this->contexts)) {
                 $this->contexts[$context] = [];
             }
 
@@ -110,7 +110,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
      */
     public function getServicesByContext($context, $includeContainers = true)
     {
-        if (!array_key_exists($context, $this->contexts)) {
+        if (!\array_key_exists($context, $this->contexts)) {
             return [];
         }
 

@@ -252,7 +252,7 @@ class MenuBlockService extends AbstractAdminBlockService
         $options = [];
 
         foreach ($settings as $key => $value) {
-            if (array_key_exists($key, $mapping) && null !== $value) {
+            if (\array_key_exists($key, $mapping) && null !== $value) {
                 $options[$mapping[$key]] = $value;
             }
         }
