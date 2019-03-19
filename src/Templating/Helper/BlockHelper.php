@@ -284,7 +284,8 @@ class BlockHelper extends Helper
         }
 
         if ($this->stopwatch) {
-            $stats['cache']['created_at'] = $response->getDate();
+            // avoid \DateTime because of serialize/unserialize issue in PHP7.3 (https://bugs.php.net/bug.php?id=77302)
+            $stats['cache']['created_at'] = $response->getDate()->getTimestamp();
             $stats['cache']['ttl'] = $response->getTtl() ?: 0;
             $stats['cache']['age'] = $response->getAge();
         }
