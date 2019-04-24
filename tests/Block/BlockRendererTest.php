@@ -102,7 +102,7 @@ class BlockRendererTest extends TestCase
         // mock the exception strategy manager to rethrow the exception
         $this->exceptionStrategyManager->expects($this->once())
             ->method('handleException')
-            ->will($this->returnCallback(function ($e) {
+            ->will($this->returnCallback(static function ($e) {
                 throw $e;
             }));
 
@@ -134,7 +134,7 @@ class BlockRendererTest extends TestCase
         $exception = $this->createMock('\Exception');
         $service->expects($this->once())
             ->method('execute')
-            ->will($this->returnCallback(function () use ($exception) {
+            ->will($this->returnCallback(static function () use ($exception) {
                 throw $exception;
             }));
 
