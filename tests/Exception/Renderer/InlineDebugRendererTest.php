@@ -69,7 +69,7 @@ class InlineDebugRendererTest extends TestCase
                 $this->equalTo($template),
                 $this->logicalAnd(
                     $this->arrayHasKey('exception'),
-                    $this->callback(function ($subject) use ($block) {
+                    $this->callback(static function ($subject) use ($block) {
                         $expected = [
                             'status_code' => 500,
                             'status_text' => 'Internal Server Error',

@@ -57,7 +57,7 @@ class Configuration implements ConfigurationInterface
             ->fixXmlConfig('block')
             ->fixXmlConfig('block_by_class')
             ->validate()
-                ->always(function ($value) {
+                ->always(static function ($value) {
                     foreach ($value['blocks'] as $name => &$block) {
                         if (0 === \count($block['contexts'])) {
                             $block['contexts'] = $value['default_contexts'];
@@ -172,7 +172,7 @@ class Configuration implements ConfigurationInterface
                     ->useAttributeAsKey('id')
                     ->prototype('scalar')->end()
                     ->validate()
-                        ->always(function ($value) {
+                        ->always(static function ($value) {
                             if (\count($value) > 0) {
                                 @trigger_error(
                                     'The menus configuration key is deprecated since 3.3 and will be removed in 4.0.',

@@ -29,7 +29,7 @@ class BlockHelperTest extends TestCase
         $blockRenderer = $this->createMock('Sonata\BlockBundle\Block\BlockRendererInterface');
         $blockContextManager = $this->createMock('Sonata\BlockBundle\Block\BlockContextManagerInterface');
         $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
-        $eventDispatcher->expects($this->once())->method('dispatch')->will($this->returnCallback(function ($name, BlockEvent $event) {
+        $eventDispatcher->expects($this->once())->method('dispatch')->will($this->returnCallback(static function ($name, BlockEvent $event) {
             return $event;
         }));
 
@@ -58,14 +58,14 @@ class BlockHelperTest extends TestCase
         $blockRenderer->expects($this->once())->method('render')->will($this->returnValue(new Response('<span>test</span>')));
 
         $blockContextManager = $this->createMock('Sonata\BlockBundle\Block\BlockContextManagerInterface');
-        $blockContextManager->expects($this->once())->method('get')->will($this->returnCallback(function (BlockInterface $block) {
+        $blockContextManager->expects($this->once())->method('get')->will($this->returnCallback(static function (BlockInterface $block) {
             $context = new BlockContext($block, $block->getSettings());
 
             return $context;
         }));
 
         $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
-        $eventDispatcher->expects($this->once())->method('dispatch')->will($this->returnCallback(function ($name, BlockEvent $event) {
+        $eventDispatcher->expects($this->once())->method('dispatch')->will($this->returnCallback(static function ($name, BlockEvent $event) {
             $block = new Block();
             $block->setId(1);
             $block->setSettings([
