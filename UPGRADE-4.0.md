@@ -1,6 +1,14 @@
 UPGRADE FROM 3.X to 4.0
 =======================
 
+## Removed CoreBundle
+
+The SonataCoreBundle dependency was removed and replaced with splitted, smaller libraries.
+- [sonata-project/form-extensions](https://github.com/sonata-project/form-extensions)
+- [sonata-project/twig-extensions](https://github.com/sonata-project/twig-extensions)
+
+You need to register the new extensions in you AppKernel.
+
 ## Deprecations
 
 All the deprecated code introduced on 3.x is removed on 4.0.
