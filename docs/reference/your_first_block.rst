@@ -20,13 +20,11 @@ The current RSS block will extend this base class. The other `use` statements ar
 
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
-    use Sonata\BlockBundle\Model\BlockInterface;
     use Sonata\BlockBundle\Block\BlockContextInterface;
-
-    use Sonata\CoreBundle\Validator\ErrorElement;
     use Sonata\BlockBundle\Block\Service\AbstractBlockService;
-    use Sonata\BlockBundle\Form\Mapper\FormMapper;
+    use Sonata\BlockBundle\Mapper\FormMapper;
+    use Sonata\BlockBundle\Model\BlockInterface;
+    use Sonata\Form\Validator\ErrorElement;
 
 Default settings
 ----------------
