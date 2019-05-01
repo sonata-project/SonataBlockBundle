@@ -22,10 +22,6 @@ Now, enable the bundle in ``bundles.php`` file::
         Sonata\BlockBundle\SonataBlockBundle::class => ['all' => true],
     ];
 
-Some features provided by this bundle require the ``SonataAdminBundle``.
-Please add an explicit required dependency to your project's `composer.json` to
-the ``SonataAdminBundle`` with the version listed in the suggestions of this Bundle.
-
 Configuration
 -------------
 
