@@ -24,9 +24,9 @@ The current RSS block will extend this base class. The other `use` statements ar
     use Sonata\BlockBundle\Model\BlockInterface;
     use Sonata\BlockBundle\Block\BlockContextInterface;
 
-    use Sonata\AdminBundle\Form\FormMapper;
     use Sonata\CoreBundle\Validator\ErrorElement;
     use Sonata\BlockBundle\Block\Service\AbstractBlockService;
+    use Sonata\BlockBundle\Form\Mapper\FormMapper;
 
 Default settings
 ----------------
@@ -51,7 +51,7 @@ In the current tutorial, the default settings are:
 
 Form Editing
 ------------
-In order to allow editing forms, the ``BlockBundle`` relies on the ``AdminBundle``::
+You can define an editing config the following way::
 
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {

@@ -15,6 +15,7 @@ namespace Sonata\BlockBundle\Tests\Block\Service;
 
 use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Block\Service\TextBlockService;
+use Sonata\BlockBundle\Form\Mapper\FormMapper\FormMapper;
 use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -36,9 +37,7 @@ class TextBlockServiceTest extends AbstractBlockServiceTestCase
 
         $blockContext = new BlockContext($block, $optionResolver->resolve($block->getSettings()));
 
-        $formMapper = $this->getMockBuilder('Sonata\\AdminBundle\\Form\\FormMapper')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $formMapper = $this->createMock(FormMapper::class);
         $formMapper->expects($this->exactly(2))->method('add');
 
         $service->buildCreateForm($formMapper, $block);

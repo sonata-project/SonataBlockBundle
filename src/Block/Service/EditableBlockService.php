@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Block\Service;
 
-use Sonata\BlockBundle\Form\Mapper\FormMapper;
+use Sonata\BlockBundle\Form\Mapper\FormMapper\Mapper;
 use Sonata\BlockBundle\Meta\MetadataInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Validator\ErrorElement;

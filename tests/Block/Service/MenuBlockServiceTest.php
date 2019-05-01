@@ -15,6 +15,7 @@ namespace Sonata\BlockBundle\Tests\Block\Service;
 
 use Knp\Menu\Provider\MenuProviderInterface;
 use Sonata\BlockBundle\Block\Service\MenuBlockService;
+use Sonata\BlockBundle\Form\Mapper\FormMapper\FormMapper;
 use Sonata\BlockBundle\Menu\MenuRegistryInterface;
 use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
 use Sonata\Form\Type\ImmutableArrayType;
@@ -50,7 +51,7 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
                 'acme:demobundle:menu' => 'Test Menu',
             ]));
 
-        $formMapper = $this->getMockBuilder('Sonata\AdminBundle\Form\FormMapper')->disableOriginalConstructor()->getMock();
+        $formMapper = $this->createMock(FormMapper::class);
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
 
         $choiceOptions = [

@@ -15,7 +15,7 @@ namespace Sonata\BlockBundle\Block\Service;
 
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
-use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\BlockBundle\Form\Mapper\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Menu\MenuRegistry;
 use Sonata\BlockBundle\Menu\MenuRegistryInterface;
