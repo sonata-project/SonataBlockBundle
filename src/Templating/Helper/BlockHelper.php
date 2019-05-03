@@ -27,9 +27,8 @@ use Sonata\Cache\CacheManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Stopwatch\Stopwatch;
-use Symfony\Component\Templating\Helper\Helper;
 
-class BlockHelper extends Helper
+class BlockHelper
 {
     /**
      * @var BlockServiceManagerInterface
@@ -115,14 +114,6 @@ class BlockHelper extends Helper
         $this->traces = [
             '_events' => [],
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sonata_block';
     }
 
     /**
