@@ -18,7 +18,11 @@ use Psr\Log\LoggerInterface;
 use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Block\BlockRenderer;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
+use Sonata\BlockBundle\Block\Service\BlockServiceInterface;
 use Sonata\BlockBundle\Exception\Strategy\StrategyManager;
+use Sonata\BlockBundle\Exception\Strategy\StrategyManagerInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Unit test of BlockRenderer class.
@@ -50,9 +54,9 @@ class BlockRendererTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
-        $this->exceptionStrategyManager = $this->createMock('Sonata\BlockBundle\Exception\Strategy\StrategyManagerInterface');
-        $this->logger = $this->createMock('Psr\Log\LoggerInterface');
+        $this->blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
+        $this->exceptionStrategyManager = $this->createMock(StrategyManagerInterface::class);
+        $this->logger = $this->createMock(LoggerInterface::class);
 
         $this->renderer = new BlockRenderer($this->blockServiceManager, $this->exceptionStrategyManager, $this->logger);
     }
@@ -65,14 +69,14 @@ class BlockRendererTest extends TestCase
         // GIVEN
 
         // mock a block service that returns a response
-        $response = $this->createMock('Symfony\Component\HttpFoundation\Response');
-        $service = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $response = $this->createMock(Response::class);
+        $service = $this->createMock(BlockServiceInterface::class);
         $service->expects($this->once())->method('load');
         $service->expects($this->once())->method('execute')->willReturn($response);
         $this->blockServiceManager->expects($this->once())->method('get')->willReturn($service);
 
         // mock a block object
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock(BlockInterface::class);
         $blockContext = new BlockContext($block);
 
         // WHEN
@@ -93,7 +97,7 @@ class BlockRendererTest extends TestCase
         // GIVEN
 
         // mock a block service that returns a string response
-        $service = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $service = $this->createMock(BlockServiceInterface::class);
         $service->expects($this->once())->method('load');
         $service->expects($this->once())->method('execute')->willReturn('wrong response');
 
@@ -110,7 +114,7 @@ class BlockRendererTest extends TestCase
         $this->logger->expects($this->once())->method('error');
 
         // mock a block object
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock(BlockInterface::class);
         $blockContext = new BlockContext($block);
 
         // WHEN
@@ -128,10 +132,10 @@ class BlockRendererTest extends TestCase
         // GIVEN
 
         // mock a block service that throws an user exception
-        $service = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $service = $this->createMock(BlockServiceInterface::class);
         $service->expects($this->once())->method('load');
 
-        $exception = $this->createMock('\Exception');
+        $exception = $this->createMock(\Exception::class);
         $service->expects($this->once())
             ->method('execute')
             ->willReturnCallback(static function () use ($exception): void {
@@ -141,7 +145,7 @@ class BlockRendererTest extends TestCase
         $this->blockServiceManager->expects($this->once())->method('get')->willReturn($service);
 
         // mock the exception strategy manager to return a response when given the correct exception
-        $response = $this->createMock('Symfony\Component\HttpFoundation\Response');
+        $response = $this->createMock(Response::class);
         $this->exceptionStrategyManager->expects($this->once())
             ->method('handleException')
             ->with($this->equalTo($exception))
@@ -151,7 +155,7 @@ class BlockRendererTest extends TestCase
         $this->logger->expects($this->once())->method('error');
 
         // mock a block object
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock(BlockInterface::class);
         $blockContext = new BlockContext($block);
 
         // WHEN

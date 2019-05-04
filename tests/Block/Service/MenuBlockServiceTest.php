@@ -15,8 +15,9 @@ namespace Sonata\BlockBundle\Tests\Block\Service;
 
 use Knp\Menu\Provider\MenuProviderInterface;
 use Sonata\BlockBundle\Block\Service\MenuBlockService;
-use Sonata\BlockBundle\Form\Mapper\FormMapper\FormMapper;
+use Sonata\BlockBundle\Form\Mapper\FormMapper;
 use Sonata\BlockBundle\Menu\MenuRegistryInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
 use Sonata\Form\Type\ImmutableArrayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -40,8 +41,8 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
     {
         parent::setUp();
 
-        $this->menuProvider = $this->createMock('Knp\Menu\Provider\MenuProviderInterface');
-        $this->menuRegistry = $this->createMock('Sonata\BlockBundle\Menu\MenuRegistryInterface');
+        $this->menuProvider = $this->createMock(MenuProviderInterface::class);
+        $this->menuRegistry = $this->createMock(MenuRegistryInterface::class);
     }
 
     public function testBuildEditForm(): void
@@ -52,7 +53,7 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
             ]);
 
         $formMapper = $this->createMock(FormMapper::class);
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock(BlockInterface::class);
 
         $choiceOptions = [
             'required' => false,

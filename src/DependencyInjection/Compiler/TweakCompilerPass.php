@@ -112,50 +112,6 @@ class TweakCompilerPass implements CompilerPassInterface
     }
 
     /**
-     * Replaces the empty service name with the service id.
-     *
-     * @param string[][] $tags
-     */
-    private function replaceBlockName(ContainerBuilder $container, Definition $definition, $id)
-    {
-        $arguments = $definition->getArguments();
-
-        // Replace empty block id with service id
-        if ($this->serviceDefinitionNeedsFirstArgument($definition)) {
-            // NEXT_MAJOR: Remove the if block when Symfony 2.8 support will be dropped.
-            if (method_exists($definition, 'setArgument')) {
-                $definition->setArgument(0, $id);
-
-                return;
-            }
-
-            $definition->replaceArgument(0, $id);
-
-            return;
-        }
-
-        if ($id !== $arguments[0] && 0 !== strpos(
-            (string) $container->getParameterBag()->resolveValue($definition->getClass()),
-            'Sonata\\BlockBundle\\Block\\Service\\'
-        )) {
-            // NEXT_MAJOR: Remove deprecation notice
-            @trigger_error(
-                sprintf('Using service id %s different from block id %s is deprecated since 3.3 and will be removed in 4.0.', $id, $arguments[0]),
-                E_USER_DEPRECATED
-            );
-        }
-    }
-
-    private function serviceDefinitionNeedsFirstArgument(Definition $definition): bool
-    {
-        $arguments = $definition->getArguments();
-
-        return empty($arguments) ||
-            null === ($arguments[0]) ||
-            \is_string($arguments[0]) && 0 === \strlen($arguments[0]);
-    }
-
-    /**
      * @param string[][]
      *
      * @return string[]

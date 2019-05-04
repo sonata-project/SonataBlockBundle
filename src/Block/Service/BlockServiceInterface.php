@@ -13,9 +13,45 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Block\Service;
 
+use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 /**
  * @author Christian Gripp <mail@core23.de>
  */
-interface BlockServiceInterface extends \Sonata\BlockBundle\Block\BlockServiceInterface
+interface BlockServiceInterface
 {
+    /**
+     * @param BlockContextInterface $blockContext
+     * @param Response              $response
+     *
+     * @return Response
+     */
+    public function execute(BlockContextInterface $blockContext, Response $response = null);
+
+    /**
+     * @return string
+     */
+    public function getName();
+
+    /**
+     * @param BlockInterface $block
+     */
+    public function load(BlockInterface $block);
+
+    /**
+     * @param BlockInterface $block
+     *
+     * @return array
+     */
+    public function getCacheKeys(BlockInterface $block);
+
+    /**
+     * Define the default options for the block.
+     *
+     * @param OptionsResolver $resolver
+     */
+    public function configureSettings(OptionsResolver $resolver);
 }
