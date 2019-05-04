@@ -17,8 +17,10 @@ use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\BlockContextManager;
 use Sonata\BlockBundle\Block\BlockContextManagerInterface;
-use Sonata\BlockBundle\Block\BlockServiceInterface;
+use Sonata\BlockBundle\Block\BlockLoaderInterface;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
+use Sonata\BlockBundle\Block\Service\BlockServiceInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
 use Twig\Environment;
 
 /**
@@ -52,8 +54,8 @@ abstract class AbstractBlockServiceTestCase extends TestCase
         $this->twig->method('render')
             ->willReturn('');
 
-        $blockLoader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
-        $this->blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
+        $blockLoader = $this->createMock(BlockLoaderInterface::class);
+        $this->blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
         $this->blockContextManager = new BlockContextManager($blockLoader, $this->blockServiceManager);
     }
 
@@ -68,11 +70,11 @@ abstract class AbstractBlockServiceTestCase extends TestCase
     {
         $this->blockServiceManager->expects($this->once())->method('get')->willReturn($blockService);
 
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock(BlockInterface::class);
         $block->expects($this->once())->method('getSettings')->willReturn([]);
 
         $blockContext = $this->blockContextManager->get($block);
-        $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
+        $this->assertInstanceOf(BlockContextInterface::class, $blockContext);
 
         return $blockContext;
     }

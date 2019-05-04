@@ -85,7 +85,6 @@ class ConfigurationTest extends TestCase
                 ],
                 'templates' => $defaultTemplates,
             ],
-            'menus' => [],
             'blocks_by_class' => [],
             'exception' => [
                 'default' => [

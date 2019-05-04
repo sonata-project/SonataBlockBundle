@@ -42,15 +42,6 @@ class MenuBlockService extends AbstractAdminBlockService
     protected $menuProvider;
 
     /**
-     * NEXT_MAJOR: remove property.
-     *
-     * @var array
-     *
-     * @deprecated since 3.3, to be removed in 4.0
-     */
-    protected $menus;
-
-    /**
      * @var MenuRegistryInterface
      */
     protected $menuRegistry;
@@ -68,15 +59,6 @@ class MenuBlockService extends AbstractAdminBlockService
             $this->menuRegistry = $menuRegistry;
         } elseif (null === $menuRegistry) {
             $this->menuRegistry = new MenuRegistry();
-        } elseif (\is_array($menuRegistry)) { //NEXT_MAJOR: Remove this case
-            @trigger_error(
-                'Initializing '.__CLASS__.' with an array parameter is deprecated since 3.3 and will be removed in 4.0.',
-                E_USER_DEPRECATED
-            );
-            $this->menuRegistry = new MenuRegistry();
-            foreach ($menuRegistry as $menu) {
-                $this->menuRegistry->add($menu);
-            }
         } else {
             throw new \InvalidArgumentException(sprintf(
                 'MenuRegistry must be either null or instance of %s',

@@ -55,7 +55,7 @@ final class XliffTest extends TestCase
      */
     private function getXliffPaths(): array
     {
-        return [[__DIR__.'/../../Resources/translations']];
+        return [[__DIR__.'/../../src/Resources/translations']];
     }
 
     /**

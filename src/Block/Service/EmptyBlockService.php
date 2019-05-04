@@ -16,26 +16,11 @@ namespace Sonata\BlockBundle\Block\Service;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Form\Mapper\FormMapper;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EmptyBlockService extends AbstractBlockService
 {
-    // NEXT_MAJOR: Remove this method
-
-    public function configureSettings(OptionsResolver $resolver): void
-    {
-    }
-
     public function buildEditForm(FormMapper $form, BlockInterface $block): void
-    {
-        throw new \RuntimeException('Not used, this block renders an empty result if no block document can be found');
-    }
-
-    // NEXT_MAJOR: Remove this method
-
-    public function validateBlock(ErrorElement $errorElement, BlockInterface $block): void
     {
         throw new \RuntimeException('Not used, this block renders an empty result if no block document can be found');
     }

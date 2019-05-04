@@ -227,40 +227,7 @@ class BlockContextManager implements BlockContextManagerInterface
         $this->configureSettings($optionsResolver, $block);
 
         $service = $this->blockService->get($block);
-
-        // Caching method reflection
-        // NEXT_MAJOR: Remove everything here
-        $serviceClass = \get_class($service);
-        if (!isset($this->reflectionCache[$serviceClass])) {
-            $reflector = new \ReflectionMethod($service, 'setDefaultSettings');
-            $isOldOverwritten = \get_class($service) === $reflector->getDeclaringClass()->getName();
-
-            // Prevention for service classes implementing directly the interface and not extends the new base class
-            if (!method_exists($service, 'configureSettings')) {
-                $isNewOverwritten = false;
-            } else {
-                $reflector = new \ReflectionMethod($service, 'configureSettings');
-                $isNewOverwritten = \get_class($service) === $reflector->getDeclaringClass()->getName();
-            }
-
-            $this->reflectionCache[$serviceClass] = [
-                'isOldOverwritten' => $isOldOverwritten,
-                'isNewOverwritten' => $isNewOverwritten,
-            ];
-        }
-
-        // NEXT_MAJOR: Keep Only else case
-        if ($this->reflectionCache[$serviceClass]['isOldOverwritten'] && !$this->reflectionCache[$serviceClass]['isNewOverwritten']) {
-            @trigger_error(
-                'The Sonata\BlockBundle\Block\BlockServiceInterface::setDefaultSettings() method is deprecated'
-                .' since version 2.3 and will be removed in 4.0. Use configureSettings() instead.'
-                .' This method will be added to the BlockServiceInterface with SonataBlockBundle 4.0.',
-                E_USER_DEPRECATED
-            );
-            $service->setDefaultSettings($optionsResolver);
-        } else {
-            $service->configureSettings($optionsResolver);
-        }
+        $service->configureSettings($optionsResolver);
 
         return $optionsResolver->resolve($settings);
     }

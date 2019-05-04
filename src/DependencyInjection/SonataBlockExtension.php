@@ -74,7 +74,6 @@ class SonataBlockExtension extends Extension
         $this->configureForm($container, $config);
         $this->configureProfiler($container, $config);
         $this->configureException($container, $config);
-        $this->configureMenus($container, $config);
         if (\PHP_VERSION_ID < 70000) {
             $this->configureClassesToCompile();
         }
@@ -111,22 +110,6 @@ class SonataBlockExtension extends Extension
         if (\count(array_diff($config['profiler']['container_types'], $config['container']['types']))) {
             $config['container']['types'] = array_merge($config['profiler']['container_types'], $config['container']['types']);
         }
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     * @param array            $config
-     */
-    public function configureMenus(ContainerBuilder $container, array $config): void
-    {
-        $bundles = $container->getParameter('kernel.bundles');
-        if (!isset($bundles['KnpMenuBundle'])) {
-            $container->removeDefinition('sonata.block.service.menu');
-
-            return;
-        }
-
-        $container->getDefinition('sonata.block.menu.registry')->replaceArgument(0, $config['menus']);
     }
 
     /**
