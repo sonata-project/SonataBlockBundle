@@ -89,7 +89,7 @@ class InlineDebugRendererTest extends TestCase
                     })
                 )
             )
-            ->will($this->returnValue('html'));
+            ->willReturn('html');
 
         // create renderer to test
         $renderer = new InlineDebugRenderer($twig, $template, $debug);

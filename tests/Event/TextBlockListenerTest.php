@@ -37,7 +37,7 @@ class TextBlockListenerTest extends TestCase
     {
         $admin = $this->createMock('Sonata\AdminBundle\Admin\AdminInterface');
         $admin->expects($this->once())->method('getSubject');
-        $admin->expects($this->once())->method('toString')->will($this->returnValue('fake object'));
+        $admin->expects($this->once())->method('toString')->willReturn('fake object');
 
         $event = new BlockEvent([
             'admin' => $admin,
