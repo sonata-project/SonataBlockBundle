@@ -48,7 +48,7 @@ class InlineRendererTest extends TestCase
                     'exception' => $exception,
                     'block' => $block, ])
             )
-            ->will($this->returnValue('html'));
+            ->willReturn('html');
 
         // create renderer to test
         $renderer = new InlineRenderer($twig, $template);

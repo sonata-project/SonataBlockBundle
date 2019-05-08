@@ -68,8 +68,8 @@ class BlockRendererTest extends TestCase
         $response = $this->createMock('Symfony\Component\HttpFoundation\Response');
         $service = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
         $service->expects($this->once())->method('load');
-        $service->expects($this->once())->method('execute')->will($this->returnValue($response));
-        $this->blockServiceManager->expects($this->once())->method('get')->will($this->returnValue($service));
+        $service->expects($this->once())->method('execute')->willReturn($response);
+        $this->blockServiceManager->expects($this->once())->method('get')->willReturn($service);
 
         // mock a block object
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
@@ -95,16 +95,16 @@ class BlockRendererTest extends TestCase
         // mock a block service that returns a string response
         $service = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
         $service->expects($this->once())->method('load');
-        $service->expects($this->once())->method('execute')->will($this->returnValue('wrong response'));
+        $service->expects($this->once())->method('execute')->willReturn('wrong response');
 
-        $this->blockServiceManager->expects($this->once())->method('get')->will($this->returnValue($service));
+        $this->blockServiceManager->expects($this->once())->method('get')->willReturn($service);
 
         // mock the exception strategy manager to rethrow the exception
         $this->exceptionStrategyManager->expects($this->once())
             ->method('handleException')
-            ->will($this->returnCallback(static function ($e): void {
+            ->willReturnCallback(static function ($e): void {
                 throw $e;
-            }));
+            });
 
         // mock the logger to ensure a crit message is logged
         $this->logger->expects($this->once())->method('error');
@@ -134,18 +134,18 @@ class BlockRendererTest extends TestCase
         $exception = $this->createMock('\Exception');
         $service->expects($this->once())
             ->method('execute')
-            ->will($this->returnCallback(static function () use ($exception): void {
+            ->willReturnCallback(static function () use ($exception): void {
                 throw $exception;
-            }));
+            });
 
-        $this->blockServiceManager->expects($this->once())->method('get')->will($this->returnValue($service));
+        $this->blockServiceManager->expects($this->once())->method('get')->willReturn($service);
 
         // mock the exception strategy manager to return a response when given the correct exception
         $response = $this->createMock('Symfony\Component\HttpFoundation\Response');
         $this->exceptionStrategyManager->expects($this->once())
             ->method('handleException')
             ->with($this->equalTo($exception))
-            ->will($this->returnValue($response));
+            ->willReturn($response);
 
         // mock the logger to ensure a crit message is logged
         $this->logger->expects($this->once())->method('error');

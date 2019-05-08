@@ -66,10 +66,10 @@ abstract class AbstractBlockServiceTestCase extends TestCase
      */
     protected function getBlockContext(BlockServiceInterface $blockService)
     {
-        $this->blockServiceManager->expects($this->once())->method('get')->will($this->returnValue($blockService));
+        $this->blockServiceManager->expects($this->once())->method('get')->willReturn($blockService);
 
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $block->expects($this->once())->method('getSettings')->will($this->returnValue([]));
+        $block->expects($this->once())->method('getSettings')->willReturn([]);
 
         $blockContext = $this->blockContextManager->get($block);
         $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
