@@ -31,8 +31,8 @@ class BlockLoaderChainTest extends TestCase
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
 
         $loader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
-        $loader->expects($this->once())->method('support')->will($this->returnValue(true));
-        $loader->expects($this->once())->method('load')->will($this->returnValue($block));
+        $loader->expects($this->once())->method('support')->willReturn(true);
+        $loader->expects($this->once())->method('load')->willReturn($block);
 
         $loaderChain = new BlockLoaderChain([$loader]);
 
@@ -46,7 +46,7 @@ class BlockLoaderChainTest extends TestCase
         $this->expectException(\Sonata\BlockBundle\Exception\BlockNotFoundException::class);
 
         $loader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
-        $loader->expects($this->once())->method('support')->will($this->returnValue(false));
+        $loader->expects($this->once())->method('support')->willReturn(false);
         $loader->expects($this->never())->method('load');
 
         $loaderChain = new BlockLoaderChain([$loader]);

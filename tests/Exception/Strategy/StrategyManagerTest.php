@@ -186,7 +186,7 @@ class StrategyManagerTest extends TestCase
     public function testHandleExceptionWithKeepNoneFilter()
     {
         // GIVEN
-        $this->filter1->expects($this->once())->method('handle')->will($this->returnValue(false));
+        $this->filter1->expects($this->once())->method('handle')->willReturn(false);
         //$this->renderer1->expects($this->once())->method('render')->will($this->returnValue('renderer response'));
 
         $exception = new \Exception();
@@ -206,8 +206,8 @@ class StrategyManagerTest extends TestCase
     public function testHandleExceptionWithKeepAllFilter()
     {
         // GIVEN
-        $this->filter1->expects($this->once())->method('handle')->will($this->returnValue(true));
-        $this->renderer1->expects($this->once())->method('render')->will($this->returnValue('renderer response'));
+        $this->filter1->expects($this->once())->method('handle')->willReturn(true);
+        $this->renderer1->expects($this->once())->method('render')->willReturn('renderer response');
 
         $exception = new \Exception();
         $block = $this->getMockBlock('block.other_type');
@@ -230,7 +230,7 @@ class StrategyManagerTest extends TestCase
     protected function getMockBlock($type)
     {
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $block->expects($this->any())->method('getType')->will($this->returnValue($type));
+        $block->expects($this->any())->method('getType')->willReturn($type);
 
         return $block;
     }
@@ -250,7 +250,7 @@ class StrategyManagerTest extends TestCase
         }
 
         $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
-        $container->expects($this->any())->method('get')->will($this->returnValueMap($map));
+        $container->expects($this->any())->method('get')->willReturnMap($map);
 
         return $container;
     }

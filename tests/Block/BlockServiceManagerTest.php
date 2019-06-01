@@ -23,14 +23,14 @@ class BlockServiceManagerTest extends TestCase
         $service = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
 
         $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
-        $container->expects($this->once())->method('get')->will($this->returnValue($service));
+        $container->expects($this->once())->method('get')->willReturn($service);
 
         $manager = new BlockServiceManager($container, true);
 
         $manager->add('test', 'test');
 
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $block->expects($this->any())->method('getType')->will($this->returnValue('test'));
+        $block->expects($this->any())->method('getType')->willReturn('test');
 
         $this->assertInstanceOf(\get_class($service), $manager->get($block));
     }
@@ -42,14 +42,14 @@ class BlockServiceManagerTest extends TestCase
         $service = $this->createMock('stdClass');
 
         $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
-        $container->expects($this->once())->method('get')->will($this->returnValue($service));
+        $container->expects($this->once())->method('get')->willReturn($service);
 
         $manager = new BlockServiceManager($container, true);
 
         $manager->add('test', 'test');
 
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $block->expects($this->any())->method('getType')->will($this->returnValue('test'));
+        $block->expects($this->any())->method('getType')->willReturn('test');
 
         $this->assertInstanceOf(\get_class($service), $manager->get($block));
     }
@@ -63,7 +63,7 @@ class BlockServiceManagerTest extends TestCase
         $manager = new BlockServiceManager($container, true);
 
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $block->expects($this->any())->method('getType')->will($this->returnValue('fakse'));
+        $block->expects($this->any())->method('getType')->willReturn('fakse');
 
         $manager->get($block);
     }
@@ -98,15 +98,15 @@ class BlockServiceManagerTest extends TestCase
         $manager = new BlockServiceManager($container, true);
 
         $serviceAbc = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
-        $serviceAbc->expects($this->any())->method('getName')->will($this->returnValue('GHI'));
+        $serviceAbc->expects($this->any())->method('getName')->willReturn('GHI');
         $manager->add('ghi', $serviceAbc);
 
         $serviceAbc = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
-        $serviceAbc->expects($this->any())->method('getName')->will($this->returnValue('ABC'));
+        $serviceAbc->expects($this->any())->method('getName')->willReturn('ABC');
         $manager->add('abc', $serviceAbc);
 
         $serviceAbc = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
-        $serviceAbc->expects($this->any())->method('getName')->will($this->returnValue('DEF'));
+        $serviceAbc->expects($this->any())->method('getName')->willReturn('DEF');
         $manager->add('def', $serviceAbc);
 
         $services = array_keys($manager->getServices());
