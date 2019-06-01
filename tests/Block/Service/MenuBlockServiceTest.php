@@ -46,9 +46,9 @@ class MenuBlockServiceTest extends AbstractBlockServiceTestCase
     public function testBuildEditForm()
     {
         $this->menuRegistry->expects($this->once())->method('getAliasNames')
-            ->will($this->returnValue([
+            ->willReturn([
                 'acme:demobundle:menu' => 'Test Menu',
-            ]));
+            ]);
 
         $formMapper = $this->getMockBuilder('Sonata\AdminBundle\Form\FormMapper')->disableOriginalConstructor()->getMock();
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');

@@ -25,13 +25,13 @@ class BlockTest extends TestCase
         $this->assertFalse($block->hasChildren());
 
         $child1 = $this->getMockBuilder('Sonata\BlockBundle\Model\Block')->getMock();
-        $child1->expects($this->once())->method('getTtl')->will($this->returnValue(100));
+        $child1->expects($this->once())->method('getTtl')->willReturn(100);
 
         $child2 = $this->getMockBuilder('Sonata\BlockBundle\Model\Block')->getMock();
-        $child2->expects($this->once())->method('getTtl')->will($this->returnValue(50));
+        $child2->expects($this->once())->method('getTtl')->willReturn(50);
 
         $child3 = $this->getMockBuilder('Sonata\BlockBundle\Model\Block')->getMock();
-        $child3->expects($this->once())->method('getTtl')->will($this->returnValue(65));
+        $child3->expects($this->once())->method('getTtl')->willReturn(65);
 
         $block->addChildren($child1);
         $block->addChildren($child2);
