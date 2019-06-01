@@ -50,14 +50,14 @@ class ServiceListTypeTest extends TestCase
     public function testOptionWithValidContext()
     {
         $blockService = $this->createMock(BlockServiceInterface::class);
-        $blockService->expects($this->once())->method('getName')->will($this->returnValue('value'));
+        $blockService->expects($this->once())->method('getName')->willReturn('value');
 
         $blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
         $blockServiceManager
             ->expects($this->once())
             ->method('getServicesByContext')
             ->with($this->equalTo('cms'))
-            ->will($this->returnValue(['my.service.code' => $blockService]));
+            ->willReturn(['my.service.code' => $blockService]);
 
         $type = new ServiceListType($blockServiceManager, [
             'cms' => ['my.service.code'],

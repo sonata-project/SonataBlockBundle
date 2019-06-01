@@ -76,7 +76,7 @@ class InlineDebugRendererTest extends TestCase
                     $this->arrayHasKeyValue('forceStyle', true)
                 )
             )
-            ->will($this->returnValue('html'));
+            ->willReturn('html');
 
         // create renderer to test
         $renderer = new InlineDebugRenderer($templating, $template, $debug);
