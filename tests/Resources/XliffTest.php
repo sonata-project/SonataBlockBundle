@@ -53,7 +53,7 @@ final class XliffTest extends TestCase
     /**
      * @return string[] List all path to validate xliff
      */
-    private function getXliffPaths(): array
+    public function getXliffPaths(): array
     {
         return [[__DIR__.'/../../src/Resources/translations']];
     }
