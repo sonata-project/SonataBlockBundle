@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Tests\Test;
 
 use PHPUnit\Framework\TestCase;
-use Sonata\BlockBundle\Test\FakeTemplating;
+use Sonata\BlockBundle\Tests\Fixtures\Templating\FakeTemplating;
 
 class FakeTemplatingTest extends TestCase
 {

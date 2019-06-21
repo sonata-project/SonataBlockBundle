@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Sonata\BlockBundle\Test;
+namespace Sonata\BlockBundle\Tests\Fixtures\Templating;
 
 use Sonata\BlockBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
