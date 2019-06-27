@@ -36,20 +36,30 @@ abstract class AbstractBlockService implements BlockServiceInterface
     protected $templating;
 
     /**
-     * @param string          $name
-     * @param EngineInterface $templating
+     * @param EngineInterface|string $templatingOrDeprecatedName
+     * @param EngineInterface        $templating
      */
-    public function __construct($name = null, EngineInterface $templating = null)
+    public function __construct($templatingOrDeprecatedName = null, EngineInterface $templating = null)
     {
-        if (null === $name || null === $templating) {
+        if (!$templatingOrDeprecatedName instanceof EngineInterface && 0 !== strpos(static::class, __NAMESPACE__.'\\')) {
             @trigger_error(
-                'The $name and $templating parameters will be required fields with the 4.0 release.',
+                sprintf(
+                    'Passing %s as argument 1 to %s::%s() is deprecated since sonata-project/block-bundle 3.x and will throw a \TypeError as of 4.0. You must pass an instance of %s instead',
+                    \gettype($templatingOrDeprecatedName),
+                    static::class, __FUNCTION__,
+                    EngineInterface::class
+                ),
                 E_USER_DEPRECATED
             );
         }
 
-        $this->name = $name;
-        $this->templating = $templating;
+        if ($templatingOrDeprecatedName instanceof EngineInterface) {
+            $this->name = '';
+            $this->templating = $templatingOrDeprecatedName;
+        } else {
+            $this->name = $templatingOrDeprecatedName;
+            $this->templating = $templating;
+        }
     }
 
     /**
