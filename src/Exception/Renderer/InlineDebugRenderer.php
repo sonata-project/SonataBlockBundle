@@ -25,22 +25,22 @@ use Twig\Environment;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class InlineDebugRenderer implements RendererInterface
+final class InlineDebugRenderer implements RendererInterface
 {
     /**
      * @var string
      */
-    protected $template;
+    private $template;
 
     /**
      * @var bool
      */
-    protected $forceStyle;
+    private $forceStyle;
 
     /**
      * @var bool
      */
-    protected $debug;
+    private $debug;
 
     /**
      * @var Environment

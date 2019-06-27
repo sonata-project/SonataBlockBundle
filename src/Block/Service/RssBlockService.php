@@ -29,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class RssBlockService extends AbstractAdminBlockService
+final class RssBlockService extends AbstractAdminBlockService
 {
     /**
      * {@inheritdoc}

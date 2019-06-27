@@ -19,40 +19,37 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @final since sonata-project/block-bundle 3.0
- */
-class BlockContextManager implements BlockContextManagerInterface
+final class BlockContextManager implements BlockContextManagerInterface
 {
     /**
      * @var BlockLoaderInterface
      */
-    protected $blockLoader;
+    private $blockLoader;
 
     /**
      * @var BlockServiceManagerInterface
      */
-    protected $blockService;
+    private $blockService;
 
     /**
      * @var array
      */
-    protected $settingsByType;
+    private $settingsByType;
 
     /**
      * @var array
      */
-    protected $settingsByClass;
+    private $settingsByClass;
 
     /**
      * @var array
      */
-    protected $cacheBlocks;
+    private $cacheBlocks;
 
     /**
      * @var LoggerInterface
      */
-    protected $logger;
+    private $logger;
 
     public function __construct(BlockLoaderInterface $blockLoader, BlockServiceManagerInterface $blockService,
         array $cacheBlocks = [], LoggerInterface $logger = null
@@ -144,7 +141,7 @@ class BlockContextManager implements BlockContextManagerInterface
         return $blockContext;
     }
 
-    protected function configureSettings(OptionsResolver $optionsResolver, BlockInterface $block): void
+    private function configureSettings(OptionsResolver $optionsResolver, BlockInterface $block): void
     {
         // defaults for all blocks
         $optionsResolver->setDefaults([
@@ -174,7 +171,7 @@ class BlockContextManager implements BlockContextManagerInterface
      * Adds context settings, to be able to rebuild a block context, to the
      * extra_cache_keys.
      */
-    protected function setDefaultExtraCacheKeys(BlockContextInterface $blockContext, array $settings): void
+    private function setDefaultExtraCacheKeys(BlockContextInterface $blockContext, array $settings): void
     {
         if (!$blockContext->getSetting('use_cache') || $blockContext->getSetting('ttl') <= 0) {
             return;

@@ -354,10 +354,8 @@ class BlockHelper
 
     /**
      * @return array
-     *
-     * @internal since sonata-project/block-bundle 4.0
      */
-    protected function startTracing(BlockInterface $block)
+    private function startTracing(BlockInterface $block)
     {
         if (null !== $this->stopwatch) {
             $this->traces[$block->getId()] = $this->stopwatch->start(
@@ -389,10 +387,7 @@ class BlockHelper
         ];
     }
 
-    /**
-     * @internal since sonata-project/block-bundle 4.0
-     */
-    protected function stopTracing(BlockInterface $block, array $stats): void
+    private function stopTracing(BlockInterface $block, array $stats): void
     {
         $e = $this->traces[$block->getId()]->stop();
 
@@ -407,10 +402,8 @@ class BlockHelper
 
     /**
      * @return array
-     *
-     * @internal since sonata-project/block-bundle 4.0
      */
-    protected function getEventBlocks(BlockEvent $event)
+    private function getEventBlocks(BlockEvent $event)
     {
         $results = [];
 
@@ -425,10 +418,8 @@ class BlockHelper
      * @param string $eventName
      *
      * @return array
-     *
-     * @internal since sonata-project/block-bundle 4.0
      */
-    protected function getEventListeners($eventName)
+    private function getEventListeners($eventName)
     {
         $results = [];
 
@@ -451,10 +442,8 @@ class BlockHelper
      * @param array $stats
      *
      * @return CacheAdapterInterface|false
-     *
-     * @internal since sonata-project/block-bundle 4.0
      */
-    protected function getCacheService(BlockInterface $block, array &$stats = null)
+    private function getCacheService(BlockInterface $block, array &$stats = null)
     {
         if (!$this->cacheManager) {
             return false;

@@ -19,30 +19,27 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * @final since sonata-project/block-bundle 3.0
- */
-class BlockServiceManager implements BlockServiceManagerInterface
+final class BlockServiceManager implements BlockServiceManagerInterface
 {
     /**
      * @var array
      */
-    protected $services;
+    private $services;
 
     /**
      * @var ContainerInterface
      */
-    protected $container;
+    private $container;
 
     /**
      * @var bool
      */
-    protected $inValidate;
+    private $inValidate;
 
     /**
      * @var array
      */
-    protected $contexts;
+    private $contexts;
 
     /**
      * @param mixed $debug

@@ -24,12 +24,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * @final since sonata-project/block-bundle 3.0
  */
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
     /**
      * @var array
      */
-    protected $defaultContainerTemplates;
+    private $defaultContainerTemplates;
 
     public function __construct(array $defaultContainerTemplates)
     {

@@ -27,27 +27,27 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @final since sonata-project/block-bundle 3.0
  */
-class BlockRenderer implements BlockRendererInterface
+final class BlockRenderer implements BlockRendererInterface
 {
     /**
      * @var BlockServiceManagerInterface
      */
-    protected $blockServiceManager;
+    private $blockServiceManager;
 
     /**
      * @var StrategyManagerInterface
      */
-    protected $exceptionStrategyManager;
+    private $exceptionStrategyManager;
 
     /**
      * @var LoggerInterface|null
      */
-    protected $logger;
+    private $logger;
 
     /**
      * @var bool
      */
-    protected $debug;
+    private $debug;
 
     /**
      * This property hold the last response available from the child or sibling block
@@ -118,7 +118,7 @@ class BlockRenderer implements BlockRendererInterface
      *
      * @return Response
      */
-    protected function createResponse(BlockContextInterface $blockContext, Response $response = null)
+    private function createResponse(BlockContextInterface $blockContext, Response $response = null)
     {
         if (null === $response) {
             $response = new Response();
@@ -138,7 +138,7 @@ class BlockRenderer implements BlockRendererInterface
      *
      * @return Response
      */
-    protected function addMetaInformation(Response $response, BlockContextInterface $blockContext, BlockServiceInterface $service)
+    private function addMetaInformation(Response $response, BlockContextInterface $blockContext, BlockServiceInterface $service)
     {
         // a response exists, use it
         if ($this->lastResponse && $this->lastResponse->isCacheable()) {

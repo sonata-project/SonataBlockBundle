@@ -23,12 +23,12 @@ use Sonata\BlockBundle\Model\BlockInterface;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class IgnoreClassFilter implements FilterInterface
+final class IgnoreClassFilter implements FilterInterface
 {
     /**
      * @var string
      */
-    protected $class;
+    private $class;
 
     /**
      * @param string $class

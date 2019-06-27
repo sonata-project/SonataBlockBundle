@@ -26,12 +26,12 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class SonataBlockExtension extends Extension
+final class SonataBlockExtension extends Extension
 {
     /**
      * {@inheritdoc}
      */
-    final public function getConfiguration(array $config, ContainerBuilder $container)
+    public function getConfiguration(array $config, ContainerBuilder $container)
     {
         $bundles = $container->getParameter('kernel.bundles');
 

@@ -25,7 +25,7 @@ use Symfony\Component\DependencyInjection\Reference;
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class TweakCompilerPass implements CompilerPassInterface
+final class TweakCompilerPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}

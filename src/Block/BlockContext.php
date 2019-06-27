@@ -15,20 +15,17 @@ namespace Sonata\BlockBundle\Block;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 
-/**
- * @final since sonata-project/block-bundle 3.0
- */
-class BlockContext implements BlockContextInterface
+final class BlockContext implements BlockContextInterface
 {
     /**
      * @var BlockInterface
      */
-    protected $block;
+    private $block;
 
     /**
      * @var array
      */
-    protected $settings;
+    private $settings;
 
     public function __construct(BlockInterface $block, array $settings = [])
     {

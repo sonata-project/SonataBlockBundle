@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Hugo Briand <briand@ekino.com>
  */
-class ContainerTemplateType extends AbstractType
+final class ContainerTemplateType extends AbstractType
 {
     /**
      * @var array

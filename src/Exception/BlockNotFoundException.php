@@ -15,9 +15,6 @@ namespace Sonata\BlockBundle\Exception;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * @final since sonata-project/block-bundle 3.0
- */
-class BlockNotFoundException extends NotFoundHttpException
+final class BlockNotFoundException extends NotFoundHttpException
 {
 }

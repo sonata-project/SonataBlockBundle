@@ -18,32 +18,32 @@ namespace Sonata\BlockBundle\Meta;
  *
  * @author Hugo Briand <briand@ekino.com>
  */
-class Metadata implements MetadataInterface
+final class Metadata implements MetadataInterface
 {
     /**
      * @var string
      */
-    protected $title;
+    private $title;
 
     /**
      * @var string|null
      */
-    protected $description;
+    private $description;
 
     /**
      * @var string|null
      */
-    protected $image;
+    private $image;
 
     /**
      * @var string|null
      */
-    protected $domain;
+    private $domain;
 
     /**
      * @var array<string, mixed>
      */
-    protected $options;
+    private $options;
 
     /**
      * @param string               $title
