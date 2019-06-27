@@ -27,7 +27,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class TextBlockService extends AbstractAdminBlockService
+final class TextBlockService extends AbstractAdminBlockService
 {
     /**
      * {@inheritdoc}

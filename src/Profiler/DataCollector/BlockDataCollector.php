@@ -25,37 +25,37 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class BlockDataCollector implements DataCollectorInterface, \Serializable
+final class BlockDataCollector implements DataCollectorInterface, \Serializable
 {
     /**
      * @var BlockHelper
      */
-    protected $blocksHelper;
+    private $blocksHelper;
 
     /**
      * @var array
      */
-    protected $blocks = [];
+    private $blocks = [];
 
     /**
      * @var array
      */
-    protected $containers = [];
+    private $containers = [];
 
     /**
      * @var array
      */
-    protected $realBlocks = [];
+    private $realBlocks = [];
 
     /**
      * @var array
      */
-    protected $containerTypes = [];
+    private $containerTypes = [];
 
     /**
      * @var array
      */
-    protected $events = [];
+    private $events = [];
 
     /**
      * @param BlockHelper $blockHelper    Block renderer

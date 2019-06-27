@@ -18,6 +18,6 @@ namespace Sonata\BlockBundle\Model;
  *
  * @final since sonata-project/block-bundle 3.0
  */
-class EmptyBlock extends Block
+final class EmptyBlock extends Block
 {
 }

@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class MonkeyThrowRenderer implements RendererInterface
+final class MonkeyThrowRenderer implements RendererInterface
 {
     /**
      * {@inheritdoc}

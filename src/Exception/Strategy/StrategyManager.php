@@ -27,42 +27,42 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class StrategyManager implements StrategyManagerInterface
+final class StrategyManager implements StrategyManagerInterface
 {
     /**
      * @var ContainerInterface
      */
-    protected $container;
+    private $container;
 
     /**
      * @var array
      */
-    protected $filters;
+    private $filters;
 
     /**
      * @var array
      */
-    protected $renderers;
+    private $renderers;
 
     /**
      * @var array
      */
-    protected $blockFilters;
+    private $blockFilters;
 
     /**
      * @var array
      */
-    protected $blockRenderers;
+    private $blockRenderers;
 
     /**
      * @var string
      */
-    protected $defaultFilter;
+    private $defaultFilter;
 
     /**
      * @var string
      */
-    protected $defaultRenderer;
+    private $defaultRenderer;
 
     /**
      * @param ContainerInterface $container      Dependency injection container
@@ -183,7 +183,7 @@ class StrategyManager implements StrategyManagerInterface
      *
      * @return object
      */
-    protected function getFilterService($name)
+    private function getFilterService($name)
     {
         if (!isset($this->filters[$name])) {
             throw new \RuntimeException('The filter "%s" does not exist.');
@@ -201,7 +201,7 @@ class StrategyManager implements StrategyManagerInterface
      *
      * @return object
      */
-    protected function getRendererService($name)
+    private function getRendererService($name)
     {
         if (!isset($this->renderers[$name])) {
             throw new \RuntimeException('The renderer "%s" does not exist.');

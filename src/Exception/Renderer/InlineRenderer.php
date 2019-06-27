@@ -24,12 +24,12 @@ use Twig\Environment;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class InlineRenderer implements RendererInterface
+final class InlineRenderer implements RendererInterface
 {
     /**
      * @var string
      */
-    protected $template;
+    private $template;
 
     /**
      * @var Environment

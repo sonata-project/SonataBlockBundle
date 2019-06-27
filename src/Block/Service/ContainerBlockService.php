@@ -32,7 +32,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class ContainerBlockService extends AbstractAdminBlockService
+final class ContainerBlockService extends AbstractAdminBlockService
 {
     /**
      * {@inheritdoc}

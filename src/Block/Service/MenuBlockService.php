@@ -36,7 +36,7 @@ use Twig\Environment;
  *
  * @author Hugo Briand <briand@ekino.com>
  */
-class MenuBlockService extends AbstractAdminBlockService
+final class MenuBlockService extends AbstractAdminBlockService
 {
     /**
      * @var MenuProviderInterface

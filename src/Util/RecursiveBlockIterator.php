@@ -22,7 +22,7 @@ use Doctrine\Common\Collections\Collection;
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class RecursiveBlockIterator extends \RecursiveArrayIterator implements \RecursiveIterator
+final class RecursiveBlockIterator extends \RecursiveArrayIterator implements \RecursiveIterator
 {
     /**
      * @param Collection|array $array

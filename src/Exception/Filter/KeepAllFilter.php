@@ -22,7 +22,7 @@ use Sonata\BlockBundle\Model\BlockInterface;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class KeepAllFilter implements FilterInterface
+final class KeepAllFilter implements FilterInterface
 {
     /**
      * {@inheritdoc}

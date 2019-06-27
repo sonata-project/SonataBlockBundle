@@ -19,12 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @final since sonata-project/block-bundle 3.0
- *
- * NEXT_MAJOR: Uncomment the "final" class declaration
- */
-/* final */class DebugBlocksCommand extends BaseCommand
+final class DebugBlocksCommand extends BaseCommand
 {
     /**
      * {@inheritdoc}
