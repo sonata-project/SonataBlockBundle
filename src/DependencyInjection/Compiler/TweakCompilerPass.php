@@ -123,19 +123,6 @@ class TweakCompilerPass implements CompilerPassInterface
             }
 
             $definition->replaceArgument(0, $id);
-
-            return;
-        }
-
-        if ($id !== $arguments[0] && 0 !== strpos(
-            (string) $container->getParameterBag()->resolveValue($definition->getClass()),
-            'Sonata\\BlockBundle\\Block\\Service\\'
-        )) {
-            // NEXT_MAJOR: Remove deprecation notice
-            @trigger_error(
-                sprintf('Using service id %s different from block id %s is deprecated since 3.3 and will be removed in 4.0.', $id, $arguments[0]),
-                E_USER_DEPRECATED
-            );
         }
     }
 
