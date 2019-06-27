@@ -19,8 +19,16 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
+@trigger_error(
+    'The '.__NAMESPACE__.'AbstractAdminBlockService class is deprecated since 3.2x '.
+    'and will be removed with the 4.0 release.',
+    E_USER_DEPRECATED
+);
+
 /**
  * @author Christian Gripp <mail@core23.de>
+ *
+ * @deprecated since 3.x without any replacement
  */
 abstract class AbstractAdminBlockService extends AbstractBlockService implements AdminBlockServiceInterface
 {
