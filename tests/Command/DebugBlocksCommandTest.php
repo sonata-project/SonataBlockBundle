@@ -105,13 +105,13 @@ class DebugBlocksCommandTest extends TestCase
             ->expects($this->any())
             ->method('getServices')
             ->willReturn([
-                'test.without_options' => new class extends AbstractBlockService {
+                'test.without_options' => new class() extends AbstractBlockService {
                     public function getName()
                     {
                         return 'Test service block without options';
                     }
                 },
-                'test.with_simple_option' => new class extends AbstractBlockService {
+                'test.with_simple_option' => new class() extends AbstractBlockService {
                     public function configureSettings(OptionsResolver $resolver)
                     {
                         $resolver->setDefault('limit', 150);
@@ -123,7 +123,7 @@ class DebugBlocksCommandTest extends TestCase
                         return 'Test service block with simple option';
                     }
                 },
-                'test.with_required_option' => new class extends AbstractBlockService {
+                'test.with_required_option' => new class() extends AbstractBlockService {
                     public function configureSettings(OptionsResolver $resolver)
                     {
                         $resolver->setRequired('limit');
