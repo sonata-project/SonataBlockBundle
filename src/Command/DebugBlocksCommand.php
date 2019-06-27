@@ -16,6 +16,7 @@ namespace Sonata\BlockBundle\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -65,6 +66,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
         }
 
         foreach ($services as $code => $service) {
+            $output->writeln('');
+            $output->writeln(sprintf('<info>>> %s</info> (<comment>%s</comment>)', $service->getName(), $code));
+
             $resolver = new OptionsResolver();
 
             // NEXT_MAJOR: Remove this check
@@ -74,13 +78,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
                 $service->setDefaultSettings($resolver);
             }
 
-            $settings = $resolver->resolve();
-
-            $output->writeln('');
-            $output->writeln(sprintf('<info>>> %s</info> (<comment>%s</comment>)', $service->getName(), $code));
-
-            foreach ($settings as $key => $val) {
-                $output->writeln(sprintf('    %-30s%s', $key, json_encode($val)));
+            try {
+                foreach ($resolver->resolve() as $key => $val) {
+                    $output->writeln(sprintf('    %-30s%s', $key, json_encode($val)));
+                }
+            } catch (MissingOptionsException $e) {
+                foreach ($resolver->getDefinedOptions() as $option) {
+                    $output->writeln(sprintf('    %s', $option));
+                }
             }
         }
 
