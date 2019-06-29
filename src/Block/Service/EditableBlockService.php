@@ -28,10 +28,5 @@ interface EditableBlockService
 
     public function validate(ErrorElement $errorElement, BlockInterface $block);
 
-    /**
-     * @param string|null $code
-     *
-     * @return MetadataInterface
-     */
-    public function getMetadata($code = null);
+    public function getMetadata(): MetadataInterface;
 }
