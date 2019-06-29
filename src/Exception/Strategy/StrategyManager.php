@@ -23,6 +23,8 @@ use Symfony\Component\HttpFoundation\Response;
  * The strategy manager handles exceptions thrown by a block. It uses an exception filter to identify which exceptions
  * it should handle or ignore. It then uses an exception renderer to "somehow" display the exception.
  *
+ * @final since sonata-project/block-bundle 3.0
+ *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 class StrategyManager implements StrategyManagerInterface

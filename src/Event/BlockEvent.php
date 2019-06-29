@@ -16,6 +16,9 @@ namespace Sonata\BlockBundle\Event;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * @final since sonata-project/block-bundle 3.0
+ */
 class BlockEvent extends Event
 {
     /**

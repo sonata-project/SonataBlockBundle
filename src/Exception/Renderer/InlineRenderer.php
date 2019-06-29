@@ -20,6 +20,8 @@ use Symfony\Component\Templating\EngineInterface;
 /**
  * This renderer uses a template to display an error message at the block position.
  *
+ * @final since sonata-project/block-bundle 3.0
+ *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 class InlineRenderer implements RendererInterface

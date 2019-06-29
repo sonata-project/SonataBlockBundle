@@ -17,6 +17,9 @@ use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
+/**
+ * @final since sonata-project/block-bundle 3.0
+ */
 class HttpCacheHandler implements HttpCacheHandlerInterface
 {
     /**

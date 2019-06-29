@@ -15,6 +15,9 @@ namespace Sonata\BlockBundle\Block;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 
+/**
+ * @final since sonata-project/block-bundle 3.0
+ */
 class BlockContext implements BlockContextInterface
 {
     /**

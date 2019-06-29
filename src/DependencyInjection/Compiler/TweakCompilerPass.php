@@ -22,6 +22,8 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * Link the block service to the Page Manager.
  *
+ * @final since sonata-project/block-bundle 3.0
+ *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 class TweakCompilerPass implements CompilerPassInterface
