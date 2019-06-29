@@ -19,6 +19,9 @@ use Sonata\CoreBundle\Form\FormHelper;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+/**
+ * @final since sonata-project/block-bundle 3.0
+ */
 class SonataBlockBundle extends Bundle
 {
     /**

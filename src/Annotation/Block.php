@@ -20,6 +20,8 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * Use annotations to define block classes.
  *
+ * @final since sonata-project/block-bundle 3.0
+ *
  * @Annotation
  * @Target("CLASS")
  *

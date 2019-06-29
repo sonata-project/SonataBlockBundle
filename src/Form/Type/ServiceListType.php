@@ -19,6 +19,9 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @final since sonata-project/block-bundle 3.0
+ */
 class ServiceListType extends AbstractType
 {
     protected $manager;

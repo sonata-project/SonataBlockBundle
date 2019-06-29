@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Meta;
 
 /**
+ * @final since sonata-project/block-bundle 3.0
+ *
  * @author Hugo Briand <briand@ekino.com>
  */
 class Metadata implements MetadataInterface
