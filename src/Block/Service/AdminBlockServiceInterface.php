@@ -28,7 +28,7 @@ use Sonata\CoreBundle\Validator\ErrorElement;
 /**
  * @author Christian Gripp <mail@core23.de>
  *
- * @deprecated since 3.x, to be removed with 4.0
+ * @deprecated since sonata-project/block-bundle 3.x, to be removed with 4.0
  */
 interface AdminBlockServiceInterface extends BlockServiceInterface
 {
