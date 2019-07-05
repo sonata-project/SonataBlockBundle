@@ -25,24 +25,21 @@ interface BlockContextManagerInterface
     /**
      * Add settings for a block service.
      *
-     * @param string $type     block service
-     * @param array  $settings
-     * @param bool   $replace  replace existing settings
+     * @param string $type    block service
+     * @param bool   $replace replace existing settings
      */
     public function addSettingsByType($type, array $settings, $replace = false);
 
     /**
      * Add settings for a block class.
      *
-     * @param string $class    block class
-     * @param array  $settings
-     * @param bool   $replace  replace existing settings
+     * @param string $class   block class
+     * @param bool   $replace replace existing settings
      */
     public function addSettingsByClass($class, array $settings, $replace = false);
 
     /**
-     * @param mixed $meta     Data send to the loader to load a block, can be anything...
-     * @param array $settings
+     * @param mixed $meta Data send to the loader to load a block, can be anything...
      *
      * @throws BlockOptionsException
      *

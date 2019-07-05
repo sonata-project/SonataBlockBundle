@@ -30,9 +30,6 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class TextBlockListener
 {
-    /**
-     * @param BlockEvent $event
-     */
     public function onBlock(BlockEvent $event)
     {
         $content = 'This block is coming from inline event from the template';

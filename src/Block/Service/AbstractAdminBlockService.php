@@ -25,8 +25,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 abstract class AbstractAdminBlockService extends AbstractBlockService implements AdminBlockServiceInterface
 {
     /**
-     * @param string          $name
-     * @param EngineInterface $templating
+     * @param string $name
      */
     public function __construct($name, EngineInterface $templating)
     {
@@ -41,44 +40,26 @@ abstract class AbstractAdminBlockService extends AbstractBlockService implements
         $this->buildEditForm($formMapper, $block);
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function prePersist(BlockInterface $block)
     {
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function postPersist(BlockInterface $block)
     {
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function preUpdate(BlockInterface $block)
     {
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function postUpdate(BlockInterface $block)
     {
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function preRemove(BlockInterface $block)
     {
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function postRemove(BlockInterface $block)
     {
     }
@@ -90,10 +71,6 @@ abstract class AbstractAdminBlockService extends AbstractBlockService implements
     {
     }
 
-    /**
-     * @param ErrorElement   $errorElement
-     * @param BlockInterface $block
-     */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
     }

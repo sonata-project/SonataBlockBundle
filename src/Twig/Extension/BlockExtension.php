@@ -26,8 +26,6 @@ class BlockExtension extends AbstractExtension
 
     /**
      * BlockExtension constructor.
-     *
-     * @param BlockHelper $blockHelper
      */
     public function __construct(BlockHelper $blockHelper)
     {

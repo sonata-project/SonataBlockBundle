@@ -85,14 +85,9 @@ class BlockHelper extends Helper
     private $stopwatch;
 
     /**
-     * @param BlockServiceManagerInterface $blockServiceManager
-     * @param array                        $cacheBlocks
-     * @param BlockRendererInterface       $blockRenderer
-     * @param BlockContextManagerInterface $blockContextManager
-     * @param EventDispatcherInterface     $eventDispatcher
-     * @param CacheManagerInterface        $cacheManager
-     * @param HttpCacheHandlerInterface    $cacheHandler
-     * @param Stopwatch                    $stopwatch
+     * @param CacheManagerInterface     $cacheManager
+     * @param HttpCacheHandlerInterface $cacheHandler
+     * @param Stopwatch                 $stopwatch
      */
     public function __construct(BlockServiceManagerInterface $blockServiceManager, array $cacheBlocks, BlockRendererInterface $blockRenderer,
                                 BlockContextManagerInterface $blockContextManager, EventDispatcherInterface $eventDispatcher,
@@ -166,7 +161,6 @@ class BlockHelper extends Helper
 
     /**
      * @param string $name
-     * @param array  $options
      *
      * @return string
      */
@@ -209,7 +203,6 @@ class BlockHelper extends Helper
 
     /**
      * @param mixed $block
-     * @param array $options
      *
      * @return string|null
      */
@@ -321,8 +314,7 @@ class BlockHelper extends Helper
     /**
      * Traverse the parent block and its children to retrieve the correct list css and javascript only for main block.
      *
-     * @param BlockContextInterface $blockContext
-     * @param array                 $stats
+     * @param array $stats
      */
     protected function computeAssets(BlockContextInterface $blockContext, array &$stats = null)
     {
@@ -373,8 +365,6 @@ class BlockHelper extends Helper
     }
 
     /**
-     * @param BlockInterface $block
-     *
      * @return array
      */
     protected function startTracing(BlockInterface $block)
@@ -409,10 +399,6 @@ class BlockHelper extends Helper
         ];
     }
 
-    /**
-     * @param BlockInterface $block
-     * @param array          $stats
-     */
     protected function stopTracing(BlockInterface $block, array $stats)
     {
         $e = $this->traces[$block->getId()]->stop();
@@ -427,8 +413,6 @@ class BlockHelper extends Helper
     }
 
     /**
-     * @param BlockEvent $event
-     *
      * @return array
      */
     protected function getEventBlocks(BlockEvent $event)
@@ -467,8 +451,7 @@ class BlockHelper extends Helper
     }
 
     /**
-     * @param BlockInterface $block
-     * @param array          $stats
+     * @param array $stats
      *
      * @return CacheAdapterInterface|false
      */

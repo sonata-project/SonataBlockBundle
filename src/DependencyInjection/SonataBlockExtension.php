@@ -92,10 +92,6 @@ class SonataBlockExtension extends Extension
         $container->getDefinition('sonata.block.twig.global')->replaceArgument(0, $config['templates']);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array            $config
-     */
     public function configureBlockContainers(ContainerBuilder $container, array $config)
     {
         $container->setParameter('sonata.block.container.types', $config['container']['types']);
@@ -103,9 +99,6 @@ class SonataBlockExtension extends Extension
         $container->getDefinition('sonata.block.form.type.container_template')->replaceArgument(0, $config['container']['templates']);
     }
 
-    /**
-     * @param array $config
-     */
     public function fixConfigurationDeprecation(array &$config)
     {
         if (\count(array_diff($config['profiler']['container_types'], $config['container']['types']))) {
@@ -113,10 +106,6 @@ class SonataBlockExtension extends Extension
         }
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array            $config
-     */
     public function configureMenus(ContainerBuilder $container, array $config)
     {
         $bundles = $container->getParameter('kernel.bundles');
@@ -129,10 +118,6 @@ class SonataBlockExtension extends Extension
         $container->getDefinition('sonata.block.menu.registry')->replaceArgument(0, $config['menus']);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array            $config
-     */
     public function configureContext(ContainerBuilder $container, array $config)
     {
         $container->setParameter($this->getAlias().'.blocks', $config['blocks']);
@@ -141,10 +126,6 @@ class SonataBlockExtension extends Extension
         $container->setAlias('sonata.block.context_manager', $config['context_manager']);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array            $config
-     */
     public function configureCache(ContainerBuilder $container, array $config)
     {
         $container->setAlias('sonata.block.cache.handler', $config['http_cache']['handler']);
@@ -165,10 +146,6 @@ class SonataBlockExtension extends Extension
         $container->setParameter($this->getAlias().'.cache_blocks', $cacheBlocks);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array            $config
-     */
     public function configureLoaderChain(ContainerBuilder $container, array $config)
     {
         $types = [];
@@ -179,10 +156,6 @@ class SonataBlockExtension extends Extension
         $container->setParameter('sonata_blocks.block_types', $types);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array            $config
-     */
     public function configureForm(ContainerBuilder $container, array $config)
     {
         $defaults = $config['default_contexts'];

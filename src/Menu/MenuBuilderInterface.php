@@ -26,8 +26,6 @@ interface MenuBuilderInterface
     /**
      * Create a knp menu.
      *
-     * @param FactoryInterface $factory
-     * @param array            $options
      *
      * @return ItemInterface
      */

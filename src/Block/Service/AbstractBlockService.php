@@ -56,7 +56,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
      * Returns a Response object than can be cacheable.
      *
      * @param string   $view
-     * @param array    $parameters
      * @param Response $response
      *
      * @return Response
@@ -71,7 +70,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
      * A good solution to make the page cacheable is to configure the block to be cached with javascript ...
      *
      * @param string   $view
-     * @param array    $parameters
      * @param Response $response
      *
      * @return Response
@@ -94,8 +92,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
 
     /**
      * Define the default options for the block.
-     *
-     * @param OptionsResolver $resolver
      */
     public function configureSettings(OptionsResolver $resolver)
     {
