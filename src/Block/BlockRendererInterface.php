@@ -18,9 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
 interface BlockRendererInterface
 {
     /**
-     * @param BlockContextInterface $name
-     * @param Response|null         $response
-     *
      * @return Response
      */
     public function render(BlockContextInterface $name, Response $response = null);

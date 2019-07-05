@@ -27,8 +27,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 interface BlockServiceInterface
 {
     /**
-     * @param BlockContextInterface $blockContext
-     * @param Response              $response
+     * @param Response $response
      *
      * @return Response
      */
@@ -44,7 +43,6 @@ interface BlockServiceInterface
      *
      * NEXT_MAJOR: rename this method.
      *
-     * @param OptionsResolverInterface $resolver
      *
      * @deprecated since version 2.3, to be renamed in 4.0.
      *             Use the method configureSettings instead.
@@ -52,9 +50,6 @@ interface BlockServiceInterface
      */
     public function setDefaultSettings(OptionsResolverInterface $resolver);
 
-    /**
-     * @param BlockInterface $block
-     */
     public function load(BlockInterface $block);
 
     /**
@@ -76,8 +71,6 @@ interface BlockServiceInterface
     public function getStylesheets($media);
 
     /**
-     * @param BlockInterface $block
-     *
      * @return array
      */
     public function getCacheKeys(BlockInterface $block);

@@ -41,9 +41,7 @@ class BlockServiceManager implements BlockServiceManagerInterface
     protected $contexts;
 
     /**
-     * @param ContainerInterface   $container
-     * @param mixed                $debug
-     * @param LoggerInterface|null $logger
+     * @param mixed $debug
      */
     public function __construct(ContainerInterface $container, $debug, LoggerInterface $logger = null)
     {

@@ -28,7 +28,6 @@ interface BlockServiceManagerInterface
     /**
      * Return the block service linked to the link.
      *
-     * @param BlockInterface $block
      *
      * @return BlockServiceInterface
      */
@@ -38,8 +37,6 @@ interface BlockServiceManagerInterface
      * NEXT_MAJOR: remove this method.
      *
      * @deprecated will be removed in 2.4, use the add method instead
-     *
-     * @param array $blockServices
      */
     public function setServices(array $blockServices);
 
@@ -79,9 +76,5 @@ interface BlockServiceManagerInterface
      */
     public function getLoadedServices();
 
-    /**
-     * @param ErrorElement   $errorElement
-     * @param BlockInterface $block
-     */
     public function validate(ErrorElement $errorElement, BlockInterface $block);
 }

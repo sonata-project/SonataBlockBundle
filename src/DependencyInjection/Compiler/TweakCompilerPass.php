@@ -87,8 +87,6 @@ class TweakCompilerPass implements CompilerPassInterface
 
     /**
      * Apply configurations to the context manager.
-     *
-     * @param ContainerBuilder $container
      */
     public function applyContext(ContainerBuilder $container)
     {
