@@ -92,6 +92,9 @@ final class BlockServiceManagerTest extends TestCase
         $this->assertNotEmpty($manager->getServicesByContext('fake'));
     }
 
+    /**
+     * @group legacy
+     */
     public function testOrderServices()
     {
         $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
