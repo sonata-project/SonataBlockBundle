@@ -20,6 +20,9 @@ class Block extends BaseBlock
 {
     /**
      * @var mixed
+     *
+     * @deprecated since sonata-project/block-bundle 3.x, to be removed in 4.0.
+     *             You should implement the id inside your bundle.
      */
     protected $id;
 

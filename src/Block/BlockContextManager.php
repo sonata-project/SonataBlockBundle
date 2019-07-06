@@ -141,8 +141,8 @@ class BlockContextManager implements BlockContextManagerInterface
         } catch (ExceptionInterface $e) {
             if ($this->logger) {
                 $this->logger->error(sprintf(
-                    '[cms::blockContext] block.id=%s - error while resolving options - %s',
-                    $block->getId(),
+                    '[cms::blockContext] block.name=%s - error while resolving options - %s',
+                    $block->getName(),
                     $e->getMessage()
                 ));
             }

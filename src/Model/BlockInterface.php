@@ -22,6 +22,9 @@ interface BlockInterface
      * Sets the block Id.
      *
      * @param mixed $id
+     *
+     * @deprecated since sonata-project/block-bundle 3.x, to be removed in 4.0.
+     *             You should implement the id inside your bundle.
      */
     public function setId($id);
 
@@ -29,6 +32,9 @@ interface BlockInterface
      * Returns the block id.
      *
      * @return mixed void
+     *
+     * @deprecated since sonata-project/block-bundle 3.x, to be removed in 4.0.
+     *             You should implement the id inside your bundle.
      */
     public function getId();
 
