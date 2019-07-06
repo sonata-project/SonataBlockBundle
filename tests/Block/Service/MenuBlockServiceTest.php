@@ -43,6 +43,9 @@ final class MenuBlockServiceTest extends AbstractBlockServiceTestCase
         $this->menuRegistry = $this->createMock('Sonata\BlockBundle\Menu\MenuRegistryInterface');
     }
 
+    /**
+     * @group legacy
+     */
     public function testBuildEditForm()
     {
         $this->menuRegistry->expects($this->once())->method('getAliasNames')
