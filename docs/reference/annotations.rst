@@ -1,6 +1,10 @@
 Annotations
 ===========
 
+.. note::
+
+    Block annotations are deprecated, because they are not working with upcoming symfony releases.
+
 All annotations require jms/di-extra-bundle, it can easily be installed by composer:
 
 .. code-block:: bash
