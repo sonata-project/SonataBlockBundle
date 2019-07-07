@@ -15,7 +15,7 @@ namespace Sonata\BlockBundle\Tests\Resources;
 
 use Sonata\CoreBundle\Test\XliffValidatorTestCase;
 
-class XliffTest extends XliffValidatorTestCase
+final class XliffTest extends XliffValidatorTestCase
 {
     /**
      * @return array List all path to validate xliff

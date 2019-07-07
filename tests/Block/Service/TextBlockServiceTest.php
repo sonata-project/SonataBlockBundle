@@ -19,7 +19,7 @@ use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
 use Sonata\BlockBundle\Util\OptionsResolver;
 
-class TextBlockServiceTest extends AbstractBlockServiceTestCase
+final class TextBlockServiceTest extends AbstractBlockServiceTestCase
 {
     public function testService()
     {

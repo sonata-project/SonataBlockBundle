@@ -21,7 +21,7 @@ use Sonata\BlockBundle\Exception\Renderer\MonkeyThrowRenderer;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class MonkeyThrowRendererTest extends TestCase
+final class MonkeyThrowRendererTest extends TestCase
 {
     /**
      * test the render() method with a standard Exception.

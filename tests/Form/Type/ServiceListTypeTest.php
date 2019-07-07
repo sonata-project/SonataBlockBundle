@@ -21,7 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ServiceListTypeTest extends TestCase
+final class ServiceListTypeTest extends TestCase
 {
     public function testFormType()
     {

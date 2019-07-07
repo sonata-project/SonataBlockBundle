@@ -21,7 +21,7 @@ use Sonata\BlockBundle\Exception\Filter\KeepAllFilter;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class KeepAllFilterTest extends TestCase
+final class KeepAllFilterTest extends TestCase
 {
     /**
      * test the filter with an exception.

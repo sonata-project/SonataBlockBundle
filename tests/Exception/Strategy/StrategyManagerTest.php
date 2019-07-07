@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class StrategyManagerTest extends TestCase
+final class StrategyManagerTest extends TestCase
 {
     /**
      * @var StrategyManager

@@ -17,11 +17,11 @@ use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Filter\IgnoreClassFilter;
 
 /**
- * Test the ignore class exception filter.
+ * Test the ignore final class exception filter.
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class IgnoreClassFilterTest extends TestCase
+final class IgnoreClassFilterTest extends TestCase
 {
     /**
      * test the filter with a inherited exception.

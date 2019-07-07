@@ -19,7 +19,7 @@ use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
 use Sonata\BlockBundle\Util\OptionsResolver;
 
-class RssBlockServiceTest extends AbstractBlockServiceTestCase
+final class RssBlockServiceTest extends AbstractBlockServiceTestCase
 {
     /*
      * only test if the API is not broken

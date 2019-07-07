@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Event\TextBlockListener;
 
-class TextBlockListenerTest extends TestCase
+final class TextBlockListenerTest extends TestCase
 {
     public function testEvent()
     {
