@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.3",
         "doctrine/common": "^2.3",
         "sonata-project/cache": "^1.0 || ^2.0",
         "sonata-project/doctrine-extensions": "^1.1",
@@ -37,7 +37,7 @@
         "symfony/http-kernel": "^4.3",
         "symfony/options-resolver": "^4.3",
         "symfony/twig-bundle": "^4.3",
-        "twig/twig": "^2.1"
+        "twig/twig": "^2.11"
     },
     "require-dev": {
         "knplabs/knp-menu-bundle": "^2.0",
