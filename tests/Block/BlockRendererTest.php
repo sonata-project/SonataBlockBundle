@@ -23,7 +23,7 @@ use Sonata\BlockBundle\Exception\Strategy\StrategyManager;
 /**
  * Unit test of BlockRenderer class.
  */
-class BlockRendererTest extends TestCase
+final class BlockRendererTest extends TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|BlockServiceManagerInterface

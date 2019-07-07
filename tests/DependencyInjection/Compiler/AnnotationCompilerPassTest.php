@@ -17,7 +17,7 @@ use JMS\DiExtraBundle\Metadata\ClassMetadata;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Annotation\Block;
 
-class AnnotationCompilerPassTest extends TestCase
+final class AnnotationCompilerPassTest extends TestCase
 {
     public function testMinimalBlock()
     {

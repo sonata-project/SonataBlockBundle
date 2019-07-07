@@ -16,7 +16,7 @@ namespace Sonata\BlockBundle\Tests\Entity;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Util\RecursiveBlockIteratorIterator;
 
-class RecursiveBlockIteratorIteratorTest extends TestCase
+final class RecursiveBlockIteratorIteratorTest extends TestCase
 {
     public function testInterface()
     {

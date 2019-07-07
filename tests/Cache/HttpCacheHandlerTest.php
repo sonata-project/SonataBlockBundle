@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Cache\HttpCacheHandler;
 use Symfony\Component\HttpFoundation\Response;
 
-class HttpCacheHandlerTest extends TestCase
+final class HttpCacheHandlerTest extends TestCase
 {
     public function testComputeTtlWithPrivateResponse()
     {

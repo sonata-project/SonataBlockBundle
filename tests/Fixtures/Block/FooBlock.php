@@ -13,6 +13,6 @@ namespace Sonata\BlockBundle\Tests\Fixtures\Block;
 
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 
-class FooBlock extends AbstractBlockService
+final class FooBlock extends AbstractBlockService
 {
 }
