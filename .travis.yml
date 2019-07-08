@@ -13,7 +13,7 @@ php:
   - '7.1'
   - '7.2'
   - '7.3'
-  - '7.4snapshot'
+  - '7.4'
   - nightly
 
 dist: xenial
@@ -56,7 +56,7 @@ matrix:
     - php: '7.3'
       env: SYMFONY_DEPRECATIONS_HELPER=0
   allow_failures:
-    - php: 7.4snapshot
+    - php: 7.4
     - php: nightly
     - env: SYMFONY_DEPRECATIONS_HELPER=0
     - env: SYMFONY='dev-master as 3.4.x-dev'
