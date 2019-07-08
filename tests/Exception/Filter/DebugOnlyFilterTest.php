@@ -21,7 +21,7 @@ use Sonata\BlockBundle\Exception\Filter\DebugOnlyFilter;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class DebugOnlyFilterTest extends TestCase
+final class DebugOnlyFilterTest extends TestCase
 {
     /**
      * test the filter with debug enabled.

@@ -19,7 +19,7 @@ use Sonata\BlockBundle\Block\Service\BlockServiceInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class BlockServiceManagerTest extends TestCase
+final class BlockServiceManagerTest extends TestCase
 {
     public function testGetBlockService(): void
     {

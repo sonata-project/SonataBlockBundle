@@ -80,10 +80,6 @@ abstract class AbstractAdminBlockService extends AbstractBlockService implements
     {
     }
 
-    /**
-     * @param ErrorElement   $errorElement
-     * @param BlockInterface $block
-     */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block): void
     {
     }

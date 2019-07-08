@@ -16,7 +16,7 @@ namespace Sonata\BlockBundle\Tests\Block;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\Loader\ServiceLoader;
 
-class ServiceLoaderTest extends TestCase
+final class ServiceLoaderTest extends TestCase
 {
     public function testBlockNotFoundException(): void
     {

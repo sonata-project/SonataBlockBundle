@@ -27,7 +27,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Unit test of BlockRenderer class.
  */
-class BlockRendererTest extends TestCase
+final class BlockRendererTest extends TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|BlockServiceManagerInterface

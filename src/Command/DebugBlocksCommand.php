@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @final since sonata-project/block-bundle 4.0
+ * @final since sonata-project/block-bundle 3.0
  *
  * NEXT_MAJOR: Uncomment the "final" class declaration
  */

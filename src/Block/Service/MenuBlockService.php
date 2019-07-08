@@ -32,6 +32,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Twig\Environment;
 
 /**
+ * @final since sonata-project/block-bundle 3.0
+ *
  * @author Hugo Briand <briand@ekino.com>
  */
 class MenuBlockService extends AbstractAdminBlockService
@@ -203,7 +205,6 @@ class MenuBlockService extends AbstractAdminBlockService
     /**
      * Gets the menu to render.
      *
-     * @param BlockContextInterface $blockContext
      *
      * @return ItemInterface|string
      */
@@ -217,7 +218,6 @@ class MenuBlockService extends AbstractAdminBlockService
     /**
      * Replaces setting keys with knp menu item options keys.
      *
-     * @param array $settings
      *
      * @return array
      */

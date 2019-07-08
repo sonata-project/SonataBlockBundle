@@ -28,6 +28,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Render children pages.
  *
+ * @final since sonata-project/block-bundle 3.0
+ *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 class ContainerBlockService extends AbstractAdminBlockService

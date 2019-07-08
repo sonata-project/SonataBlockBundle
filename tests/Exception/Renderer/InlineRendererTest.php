@@ -22,7 +22,7 @@ use Twig\Environment;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class InlineRendererTest extends TestCase
+final class InlineRendererTest extends TestCase
 {
     /**
      * test the render() method.

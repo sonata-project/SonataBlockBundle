@@ -22,6 +22,8 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
+ * @final since sonata-project/block-bundle 3.0
+ *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 class SonataBlockExtension extends Extension
@@ -91,10 +93,6 @@ class SonataBlockExtension extends Extension
         $container->getDefinition('sonata.block.twig.global')->replaceArgument(0, $config['templates']);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array            $config
-     */
     public function configureBlockContainers(ContainerBuilder $container, array $config): void
     {
         $container->setParameter('sonata.block.container.types', $config['container']['types']);
@@ -112,10 +110,6 @@ class SonataBlockExtension extends Extension
         }
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array            $config
-     */
     public function configureContext(ContainerBuilder $container, array $config): void
     {
         $container->setParameter($this->getAlias().'.blocks', $config['blocks']);
@@ -124,10 +118,6 @@ class SonataBlockExtension extends Extension
         $container->setAlias('sonata.block.context_manager', $config['context_manager']);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array            $config
-     */
     public function configureCache(ContainerBuilder $container, array $config): void
     {
         $container->setAlias('sonata.block.cache.handler', $config['http_cache']['handler']);
@@ -148,10 +138,6 @@ class SonataBlockExtension extends Extension
         $container->setParameter($this->getAlias().'.cache_blocks', $cacheBlocks);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array            $config
-     */
     public function configureLoaderChain(ContainerBuilder $container, array $config): void
     {
         $types = [];
@@ -162,10 +148,6 @@ class SonataBlockExtension extends Extension
         $container->setParameter('sonata_blocks.block_types', $types);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array            $config
-     */
     public function configureForm(ContainerBuilder $container, array $config): void
     {
         $defaults = $config['default_contexts'];

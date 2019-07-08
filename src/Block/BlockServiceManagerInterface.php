@@ -29,7 +29,6 @@ interface BlockServiceManagerInterface
     /**
      * Return the block service linked to the link.
      *
-     * @param BlockInterface $block
      *
      * @return BlockServiceInterface
      */
@@ -62,9 +61,5 @@ interface BlockServiceManagerInterface
      */
     public function getService($name);
 
-    /**
-     * @param ErrorElement   $errorElement
-     * @param BlockInterface $block
-     */
     public function validate(ErrorElement $errorElement, BlockInterface $block);
 }

@@ -22,7 +22,7 @@ use Twig\Environment;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class InlineDebugRendererTest extends TestCase
+final class InlineDebugRendererTest extends TestCase
 {
     /**
      * test the renderer without debug mode.

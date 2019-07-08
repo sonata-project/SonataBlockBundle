@@ -18,6 +18,9 @@ use Sonata\BlockBundle\Form\Mapper\FormMapper;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @final since sonata-project/block-bundle 3.0
+ */
 class EmptyBlockService extends AbstractBlockService
 {
     public function buildEditForm(FormMapper $form, BlockInterface $block): void

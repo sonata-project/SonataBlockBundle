@@ -17,6 +17,9 @@ use Sonata\BlockBundle\Templating\Helper\BlockHelper;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
+/**
+ * @final since sonata-project/block-bundle 3.0
+ */
 class BlockExtension extends AbstractExtension
 {
     /**
@@ -26,8 +29,6 @@ class BlockExtension extends AbstractExtension
 
     /**
      * BlockExtension constructor.
-     *
-     * @param BlockHelper $blockHelper
      */
     public function __construct(BlockHelper $blockHelper)
     {

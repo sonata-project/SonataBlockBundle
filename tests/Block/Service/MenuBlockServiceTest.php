@@ -25,7 +25,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormTypeInterface;
 
-class MenuBlockServiceTest extends AbstractBlockServiceTestCase
+final class MenuBlockServiceTest extends AbstractBlockServiceTestCase
 {
     /**
      * @var MenuProviderInterface

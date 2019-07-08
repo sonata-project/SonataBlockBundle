@@ -20,7 +20,7 @@ use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RssBlockServiceTest extends AbstractBlockServiceTestCase
+final class RssBlockServiceTest extends AbstractBlockServiceTestCase
 {
     /*
      * only test if the API is not broken

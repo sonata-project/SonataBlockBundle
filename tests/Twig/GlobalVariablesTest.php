@@ -16,7 +16,7 @@ namespace Sonata\BlockBundle\Twig\Extension;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Twig\GlobalVariables;
 
-class GlobalVariablesTest extends TestCase
+final class GlobalVariablesTest extends TestCase
 {
     public function testGlobalVariables(): void
     {

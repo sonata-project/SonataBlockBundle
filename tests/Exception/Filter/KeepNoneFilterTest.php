@@ -21,12 +21,11 @@ use Sonata\BlockBundle\Exception\Filter\KeepNoneFilter;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class KeepNoneFilterTest extends TestCase
+final class KeepNoneFilterTest extends TestCase
 {
     /**
      * test the filter with an exception.
      *
-     * @param \Exception $exception
      *
      * @dataProvider getExceptions
      */

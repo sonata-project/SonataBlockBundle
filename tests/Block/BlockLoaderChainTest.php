@@ -16,7 +16,7 @@ namespace Sonata\BlockBundle\Tests\Block;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockLoaderChain;
 
-class BlockLoaderChainTest extends TestCase
+final class BlockLoaderChainTest extends TestCase
 {
     public function testBlockNotFoundException(): void
     {

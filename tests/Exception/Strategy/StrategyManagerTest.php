@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
-class StrategyManagerTest extends TestCase
+final class StrategyManagerTest extends TestCase
 {
     /**
      * @var StrategyManager
@@ -241,7 +241,6 @@ class StrategyManagerTest extends TestCase
     /**
      * Returns a mock container with defined services.
      *
-     * @param array $services
      *
      * @return ContainerInterface
      */

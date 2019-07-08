@@ -19,6 +19,9 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @final since sonata-project/block-bundle 3.0
+ */
 class BlockContextManager implements BlockContextManagerInterface
 {
     /**
@@ -176,9 +179,6 @@ class BlockContextManager implements BlockContextManagerInterface
     /**
      * Adds context settings, to be able to rebuild a block context, to the
      * extra_cache_keys.
-     *
-     * @param BlockContextInterface $blockContext
-     * @param array                 $settings
      */
     protected function setDefaultExtraCacheKeys(BlockContextInterface $blockContext, array $settings): void
     {
@@ -215,8 +215,7 @@ class BlockContextManager implements BlockContextManagerInterface
     }
 
     /**
-     * @param BlockInterface $block
-     * @param array          $settings
+     * @param array $settings
      *
      * @return array
      */

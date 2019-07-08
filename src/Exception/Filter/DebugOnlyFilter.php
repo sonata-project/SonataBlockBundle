@@ -18,6 +18,8 @@ use Sonata\BlockBundle\Model\BlockInterface;
 /**
  * This filter handles exceptions only when debug mode is enabled.
  *
+ * @final since sonata-project/block-bundle 3.0
+ *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 class DebugOnlyFilter implements FilterInterface

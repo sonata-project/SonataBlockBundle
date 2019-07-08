@@ -20,7 +20,7 @@ use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TextBlockServiceTest extends AbstractBlockServiceTestCase
+final class TextBlockServiceTest extends AbstractBlockServiceTestCase
 {
     public function testService(): void
     {

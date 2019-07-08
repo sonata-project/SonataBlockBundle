@@ -15,6 +15,9 @@ namespace Sonata\BlockBundle\Block;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 
+/**
+ * @final since sonata-project/block-bundle 3.0
+ */
 class BlockContext implements BlockContextInterface
 {
     /**
@@ -27,10 +30,6 @@ class BlockContext implements BlockContextInterface
      */
     protected $settings;
 
-    /**
-     * @param BlockInterface $block
-     * @param array          $settings
-     */
     public function __construct(BlockInterface $block, array $settings = [])
     {
         $this->block = $block;

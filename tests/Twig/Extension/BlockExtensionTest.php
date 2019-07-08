@@ -16,7 +16,7 @@ namespace Sonata\BlockBundle\Twig\Extension;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
 
-class BlockExtensionTest extends TestCase
+final class BlockExtensionTest extends TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|BlockHelper

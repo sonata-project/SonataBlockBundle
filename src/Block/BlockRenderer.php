@@ -24,6 +24,8 @@ use Symfony\Component\HttpFoundation\Response;
  * This function render a block and make sure the cacheable information are correctly retrieved
  * and set to the upper response (container can have child blocks, so the smallest ttl from a child
  * must be used in the container).
+ *
+ * @final since sonata-project/block-bundle 3.0
  */
 class BlockRenderer implements BlockRendererInterface
 {
@@ -112,8 +114,7 @@ class BlockRenderer implements BlockRendererInterface
     }
 
     /**
-     * @param BlockContextInterface $blockContext
-     * @param Response              $response
+     * @param Response $response
      *
      * @return Response
      */
@@ -134,9 +135,6 @@ class BlockRenderer implements BlockRendererInterface
     /**
      * This method is responsible to cascade ttl to the parent block.
      *
-     * @param Response              $response
-     * @param BlockContextInterface $blockContext
-     * @param BlockServiceInterface $service
      *
      * @return Response
      */

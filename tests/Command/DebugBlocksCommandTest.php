@@ -25,7 +25,7 @@ use Twig\Environment;
 /**
  * @author Javier Spagnoletti <phansys@gmail.com>
  */
-class DebugBlocksCommandTest extends TestCase
+final class DebugBlocksCommandTest extends TestCase
 {
     /**
      * @var Application
