@@ -23,9 +23,9 @@ use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Cache\CacheAdapterInterface;
 use Sonata\Cache\CacheManagerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Stopwatch\Stopwatch;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class BlockHelper
 {
