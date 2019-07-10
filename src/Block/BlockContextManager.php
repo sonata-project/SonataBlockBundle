@@ -54,12 +54,6 @@ class BlockContextManager implements BlockContextManagerInterface
      */
     protected $logger;
 
-    /**
-     * @param BlockLoaderInterface         $blockLoader
-     * @param BlockServiceManagerInterface $blockService
-     * @param array                        $cacheBlocks
-     * @param LoggerInterface|null         $logger
-     */
     public function __construct(BlockLoaderInterface $blockLoader, BlockServiceManagerInterface $blockService,
         array $cacheBlocks = [], LoggerInterface $logger = null
     ) {
