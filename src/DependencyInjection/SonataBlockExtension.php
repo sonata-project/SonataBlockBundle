@@ -100,9 +100,6 @@ class SonataBlockExtension extends Extension
         $container->getDefinition('sonata.block.form.type.container_template')->replaceArgument(0, $config['container']['templates']);
     }
 
-    /**
-     * @param array $config
-     */
     public function fixConfigurationDeprecation(array &$config): void
     {
         if (\count(array_diff($config['profiler']['container_types'], $config['container']['types']))) {
