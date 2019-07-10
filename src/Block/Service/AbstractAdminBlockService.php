@@ -31,44 +31,26 @@ abstract class AbstractAdminBlockService extends AbstractBlockService implements
         $this->buildEditForm($formMapper, $block);
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function prePersist(BlockInterface $block): void
     {
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function postPersist(BlockInterface $block): void
     {
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function preUpdate(BlockInterface $block): void
     {
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function postUpdate(BlockInterface $block): void
     {
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function preRemove(BlockInterface $block): void
     {
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function postRemove(BlockInterface $block): void
     {
     }

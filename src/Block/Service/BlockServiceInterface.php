@@ -24,8 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 interface BlockServiceInterface
 {
     /**
-     * @param BlockContextInterface $blockContext
-     * @param Response              $response
+     * @param Response $response
      *
      * @return Response
      */
@@ -36,22 +35,15 @@ interface BlockServiceInterface
      */
     public function getName();
 
-    /**
-     * @param BlockInterface $block
-     */
     public function load(BlockInterface $block);
 
     /**
-     * @param BlockInterface $block
-     *
      * @return array
      */
     public function getCacheKeys(BlockInterface $block);
 
     /**
      * Define the default options for the block.
-     *
-     * @param OptionsResolver $resolver
      */
     public function configureSettings(OptionsResolver $resolver);
 }
