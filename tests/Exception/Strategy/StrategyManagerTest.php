@@ -188,7 +188,6 @@ final class StrategyManagerTest extends TestCase
     {
         // GIVEN
         $this->filter1->expects($this->once())->method('handle')->willReturn(false);
-        //$this->renderer1->expects($this->once())->method('render')->will($this->returnValue('renderer response'));
 
         $exception = new \Exception();
         $block = $this->getMockBlock('block.other_type');
