@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\DependencyInjection\Compiler;
 
-use Sonata\BlockBundle\Naming\ConvertFromFqcn;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -39,51 +38,30 @@ class TweakCompilerPass implements CompilerPassInterface
 
         $blockTypes = $container->getParameter('sonata_blocks.block_types');
 
-        foreach ($container->findTaggedServiceIds('sonata.block') as $id => $tags) {
-            $definition = $container->getDefinition($id);
-            $definition->setPublic(true);
-
-            if (!$definition->isAutowired()) {
-                // Replace empty block id with service id
-                // NEXT_MAJOR: Remove the condition when Symfony 2.8 support will be dropped.
-                if (method_exists($definition, 'setArgument')) {
-                    $definition->setArgument(0, $id);
-                } else {
-                    $definition->replaceArgument(0, $id);
-                }
-            }
-
-            $blockId = $id;
-
-            // Only convert class service names
-            if (false !== strpos($blockId, '\\')) {
-                $convert = (new ConvertFromFqcn());
-                $blockId = $convert($blockId);
-            }
-
+        foreach ($container->findTaggedServiceIds('sonata.block') as $serviceId => $tags) {
             // Skip manual defined blocks
-            if (!isset($blockTypes[$blockId])) {
+            if (!isset($blockTypes[$serviceId])) {
                 $contexts = $this->getContextFromTags($tags);
-                $blockTypes[$blockId] = [
+                $blockTypes[$serviceId] = [
                     'context' => $contexts,
                 ];
             }
 
-            $manager->addMethodCall('add', [$id, $id, isset($parameters[$id]) ? $parameters[$id]['contexts'] : []]);
+            $manager->addMethodCall('add', [$serviceId, $serviceId, isset($parameters[$serviceId]) ? $parameters[$serviceId]['contexts'] : []]);
         }
 
-        foreach ($container->findTaggedServiceIds('knp_menu.menu') as $id => $tags) {
+        foreach ($container->findTaggedServiceIds('knp_menu.menu') as $serviceId => $tags) {
             foreach ($tags as $attributes) {
                 if (empty($attributes['alias'])) {
-                    throw new \InvalidArgumentException(sprintf('The alias is not defined in the "knp_menu.menu" tag for the service "%s"', $id));
+                    throw new \InvalidArgumentException(sprintf('The alias is not defined in the "knp_menu.menu" tag for the service "%s"', $serviceId));
                 }
                 $registry->addMethodCall('add', [$attributes['alias']]);
             }
         }
 
         $services = [];
-        foreach ($container->findTaggedServiceIds('sonata.block.loader') as $id => $tags) {
-            $services[] = new Reference($id);
+        foreach ($container->findTaggedServiceIds('sonata.block.loader') as $serviceId => $tags) {
+            $services[] = new Reference($serviceId);
         }
 
         $container->getDefinition('sonata.block.loader.service')->replaceArgument(0, $blockTypes);
