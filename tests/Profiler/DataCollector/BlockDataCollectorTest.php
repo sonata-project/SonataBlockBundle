@@ -40,7 +40,7 @@ final class BlockDataCollectorTest extends TestCase
             'test2' => ['type' => 'another_type', 'datetime' => $objectForBlock],
         ];
         $expectedContainers = ['test1' => ['type' => 'container']];
-        $expectedRealBlocks = ['test2' => ['type' => 'another_type']];
+        $expectedRealBlocks = ['test2' => ['type' => 'another_type', 'datetime' => $objectForBlock]];
 
         $blockHelper->getTraces()->willReturn([
             '_events' => ['1' => '2', '3' => '4'],
