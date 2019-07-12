@@ -19,7 +19,7 @@ See also the [diff code](https://github.com/sonata-project/SonataAdminBundle/com
 
 ## Block id
 
-If you have created a custom `AbstractBlockService` you must now implement the new constructor, because all blocks use the service id as the block id now. 
+If you have created a custom `AbstractBlockService` you must implement the new constructor, because all blocks use the service id as the block id. 
 
 ## Block constructor
 
