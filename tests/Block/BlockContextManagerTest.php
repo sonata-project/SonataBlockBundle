@@ -110,30 +110,4 @@ final class BlockContextManagerTest extends TestCase
 
         $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
     }
-
-    //    @TODO: Think if the BlockContextManager should throw an exception if the resolver throw an exception
-//    /**
-//     * @expectedException \Sonata\BlockBundle\Exception\BlockOptionsException
-//     */
-//    public function testGetWithException()
-//    {
-//        $service = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
-//        $service->expects($this->exactly(2))->method('setDefaultSettings');
-//
-//        $blockLoader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
-//
-//        $serviceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
-//        $serviceManager->expects($this->exactly(2))->method('get')->will($this->returnValue($service));
-//
-//        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-//        $block->expects($this->once())->method('getSettings')->will($this->returnValue(array(
-//            'template' => array()
-//        )));
-//
-//        $manager = new BlockContextManager($blockLoader, $serviceManager);
-//
-//        $blockContext = $manager->get($block);
-//
-//        $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
-//    }
 }
