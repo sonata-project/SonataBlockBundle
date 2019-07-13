@@ -16,6 +16,9 @@ namespace Sonata\BlockBundle\Command;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Symfony\Component\Console\Command\Command;
 
+/**
+ * @deprecated since sonata-project/block-bundle 3.x, to be removed in 4.0
+ */
 abstract class BaseCommand extends Command
 {
     /**
