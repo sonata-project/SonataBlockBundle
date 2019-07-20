@@ -17,10 +17,10 @@ use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Block\Service\TextBlockService;
 use Sonata\BlockBundle\Form\Mapper\FormMapper;
 use Sonata\BlockBundle\Model\Block;
-use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
+use Sonata\BlockBundle\Test\BlockServiceTestCase;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class TextBlockServiceTest extends AbstractBlockServiceTestCase
+final class TextBlockServiceTest extends BlockServiceTestCase
 {
     public function testService(): void
     {

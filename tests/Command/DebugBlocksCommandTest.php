@@ -97,6 +97,9 @@ final class DebugBlocksCommandTest extends TestCase
         new DebugBlocksCommand();
     }
 
+    /**
+     * @group legacy
+     */
     public function testDebugBlocks(): void
     {
         $this->application = new Application();

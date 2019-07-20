@@ -17,10 +17,10 @@ use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Block\Service\RssBlockService;
 use Sonata\BlockBundle\Form\Mapper\FormMapper;
 use Sonata\BlockBundle\Model\Block;
-use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
+use Sonata\BlockBundle\Test\BlockServiceTestCase;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class RssBlockServiceTest extends AbstractBlockServiceTestCase
+final class RssBlockServiceTest extends BlockServiceTestCase
 {
     /*
      * only test if the API is not broken

@@ -35,10 +35,31 @@ abstract class AbstractBlockService implements BlockServiceInterface
      */
     private $twig;
 
-    public function __construct(string $name, Environment $twig)
+    /**
+     * @param Environment|string $twigOrDeprecatedName
+     * @param Environment        $twig
+     */
+    public function __construct($twigOrDeprecatedName = null, Environment $twig = null)
     {
-        $this->name = $name;
-        $this->twig = $twig;
+        if (!$twigOrDeprecatedName instanceof Environment && 0 !== strpos(static::class, __NAMESPACE__.'\\')) {
+            @trigger_error(
+                sprintf(
+                    'Passing %s as argument 1 to %s::%s() is deprecated since sonata-project/block-bundle 3.x and will throw a \TypeError as of 4.0. You must pass an instance of %s instead',
+                    \gettype($twigOrDeprecatedName),
+                    static::class, __FUNCTION__,
+                    Environment::class
+                ),
+                E_USER_DEPRECATED
+            );
+        }
+
+        if ($twigOrDeprecatedName instanceof Environment) {
+            $this->name = '';
+            $this->twig = $twigOrDeprecatedName;
+        } else {
+            $this->name = $twigOrDeprecatedName;
+            $this->twig = $twig;
+        }
     }
 
     /**

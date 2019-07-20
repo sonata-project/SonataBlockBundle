@@ -47,6 +47,9 @@ final class ServiceListTypeTest extends TestCase
         $resolver->resolve();
     }
 
+    /**
+     * @group legacy
+     */
     public function testOptionWithValidContext(): void
     {
         $blockService = $this->createMock(BlockServiceInterface::class);

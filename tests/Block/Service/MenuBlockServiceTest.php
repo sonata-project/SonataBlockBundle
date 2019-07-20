@@ -18,14 +18,14 @@ use Sonata\BlockBundle\Block\Service\MenuBlockService;
 use Sonata\BlockBundle\Form\Mapper\FormMapper;
 use Sonata\BlockBundle\Menu\MenuRegistryInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
+use Sonata\BlockBundle\Test\BlockServiceTestCase;
 use Sonata\Form\Type\ImmutableArrayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormTypeInterface;
 
-final class MenuBlockServiceTest extends AbstractBlockServiceTestCase
+final class MenuBlockServiceTest extends BlockServiceTestCase
 {
     /**
      * @var MenuProviderInterface
@@ -45,6 +45,9 @@ final class MenuBlockServiceTest extends AbstractBlockServiceTestCase
         $this->menuRegistry = $this->createMock(MenuRegistryInterface::class);
     }
 
+    /**
+     * @group legacy
+     */
     public function testBuildEditForm(): void
     {
         $this->menuRegistry->expects($this->once())->method('getAliasNames')
