@@ -39,7 +39,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
      * @param Environment|string $twigOrDeprecatedName
      * @param Environment        $twig
      */
-    public function __construct($twigOrDeprecatedName = null, Environment $twig = null)
+    public function __construct($twigOrDeprecatedName = null, ?Environment $twig = null)
     {
         if (!$twigOrDeprecatedName instanceof Environment && 0 !== strpos(static::class, __NAMESPACE__.'\\')) {
             @trigger_error(
@@ -64,13 +64,8 @@ abstract class AbstractBlockService implements BlockServiceInterface
 
     /**
      * Returns a Response object than can be cacheable.
-     *
-     * @param string   $view
-     * @param Response $response
-     *
-     * @return Response
      */
-    public function renderResponse($view, array $parameters = [], Response $response = null)
+    public function renderResponse(string $view, array $parameters = [], ?Response $response = null): Response
     {
         $response = $response ?? new Response();
 
@@ -82,13 +77,8 @@ abstract class AbstractBlockService implements BlockServiceInterface
     /**
      * Returns a Response object that cannot be cacheable, this must be used if the Response is related to the user.
      * A good solution to make the page cacheable is to configure the block to be cached with javascript ...
-     *
-     * @param string   $view
-     * @param Response $response
-     *
-     * @return Response
      */
-    public function renderPrivateResponse($view, array $parameters = [], Response $response = null)
+    public function renderPrivateResponse(string $view, array $parameters = [], ?Response $response = null): Response
     {
         return $this->renderResponse($view, $parameters, $response)
             ->setTtl(0)
@@ -111,10 +101,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCacheKeys(BlockInterface $block)
+    public function getCacheKeys(BlockInterface $block): array
     {
         return [
             'block_id' => $block->getId(),
@@ -129,10 +116,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
         return $this->renderResponse($blockContext->getTemplate(), [
             'block_context' => $blockContext,
@@ -143,15 +127,12 @@ abstract class AbstractBlockService implements BlockServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTwig()
+    public function getTwig(): Environment
     {
         return $this->twig;
     }

@@ -20,46 +20,22 @@ use Sonata\Form\Validator\ErrorElement;
 interface BlockServiceManagerInterface
 {
     /**
-     * @param string $name
-     * @param string $service
-     * @param array  $contexts
+     * @param BlockServiceInterface|string $service
      */
-    public function add($name, $service, $contexts = []);
+    public function add(string $name, $service, array $contexts = []): void;
 
     /**
      * Return the block service linked to the link.
-     *
-     *
-     * @return BlockServiceInterface
      */
-    public function get(BlockInterface $block);
+    public function get(BlockInterface $block): BlockServiceInterface;
 
-    /**
-     * @return array
-     */
-    public function getServices();
+    public function getServices(): array;
 
-    /**
-     * @param string $name
-     * @param bool   $includeContainers
-     *
-     * @return array
-     */
-    public function getServicesByContext($name, $includeContainers = true);
+    public function getServicesByContext(string $name, bool $includeContainers = true): array;
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function has($name);
+    public function has(string $name): bool;
 
-    /**
-     * @param string $name
-     *
-     * @return BlockServiceInterface
-     */
-    public function getService($name);
+    public function getService(string $name): BlockServiceInterface;
 
-    public function validate(ErrorElement $errorElement, BlockInterface $block);
+    public function validate(ErrorElement $errorElement, BlockInterface $block): void;
 }

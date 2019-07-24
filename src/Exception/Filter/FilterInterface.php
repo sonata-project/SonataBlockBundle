@@ -27,10 +27,8 @@ interface FilterInterface
     /**
      * Returns whether or not this filter handles this exception for given block.
      *
-     * @param \Exception     $exception Exception to manage
+     * @param \Throwable     $exception Exception to manage
      * @param BlockInterface $block     Block that provoked the exception
-     *
-     * @return bool
      */
-    public function handle(\Exception $exception, BlockInterface $block);
+    public function handle(\Throwable $exception, BlockInterface $block): bool;
 }

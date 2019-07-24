@@ -26,11 +26,9 @@ interface StrategyManagerInterface
     /**
      * Handles an exception for a given block.
      *
-     * @param \Exception     $exception Exception to handle
+     * @param \Throwable     $exception Exception to handle
      * @param BlockInterface $block     Block that provoked the exception
      * @param Response       $response  Response provided to the block service
-     *
-     * @return Response
      */
-    public function handleException(\Exception $exception, BlockInterface $block, Response $response = null);
+    public function handleException(\Throwable $exception, BlockInterface $block, ?Response $response = null): Response;
 }

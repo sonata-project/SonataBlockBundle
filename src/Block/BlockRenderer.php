@@ -63,18 +63,19 @@ final class BlockRenderer implements BlockRendererInterface
      * @param LoggerInterface              $logger                   Logger class
      * @param bool                         $debug                    Whether in debug mode or not
      */
-    public function __construct(BlockServiceManagerInterface $blockServiceManager, StrategyManagerInterface $exceptionStrategyManager, LoggerInterface $logger = null, $debug = false)
-    {
+    public function __construct(
+        BlockServiceManagerInterface $blockServiceManager,
+        StrategyManagerInterface $exceptionStrategyManager,
+        ?LoggerInterface $logger = null,
+        bool $debug = false
+    ) {
         $this->blockServiceManager = $blockServiceManager;
         $this->exceptionStrategyManager = $exceptionStrategyManager;
         $this->logger = $logger;
         $this->debug = $debug;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function render(BlockContextInterface $blockContext, Response $response = null)
+    public function render(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
         $block = $blockContext->getBlock();
 
@@ -88,14 +89,8 @@ final class BlockRenderer implements BlockRendererInterface
 
             $response = $service->execute($blockContext, $this->createResponse($blockContext, $response));
 
-            if (!$response instanceof Response) {
-                $response = null;
-
-                throw new \RuntimeException('A block service must return a Response object');
-            }
-
             $response = $this->addMetaInformation($response, $blockContext, $service);
-        } catch (\Exception $exception) {
+        } catch (\Throwable $exception) {
             if ($this->logger) {
                 $this->logger->error(sprintf(
                     '[cms::renderBlock] block.id=%d - error while rendering block - %s',
@@ -113,12 +108,7 @@ final class BlockRenderer implements BlockRendererInterface
         return $response;
     }
 
-    /**
-     * @param Response $response
-     *
-     * @return Response
-     */
-    private function createResponse(BlockContextInterface $blockContext, Response $response = null)
+    private function createResponse(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
         if (null === $response) {
             $response = new Response();
@@ -134,12 +124,12 @@ final class BlockRenderer implements BlockRendererInterface
 
     /**
      * This method is responsible to cascade ttl to the parent block.
-     *
-     *
-     * @return Response
      */
-    private function addMetaInformation(Response $response, BlockContextInterface $blockContext, BlockServiceInterface $service)
-    {
+    private function addMetaInformation(
+        Response $response,
+        BlockContextInterface $blockContext,
+        BlockServiceInterface $service
+    ): Response {
         // a response exists, use it
         if ($this->lastResponse && $this->lastResponse->isCacheable()) {
             $response->setTtl($this->lastResponse->getTtl());

@@ -27,7 +27,7 @@ final class KeepNoneFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(\Exception $exception, BlockInterface $block)
+    public function handle(\Throwable $exception, BlockInterface $block): bool
     {
         return false;
     }

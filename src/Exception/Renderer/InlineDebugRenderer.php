@@ -58,7 +58,7 @@ final class InlineDebugRenderer implements RendererInterface
     /**
      * {@inheritdoc}
      */
-    public function render(\Exception $exception, BlockInterface $block, Response $response = null): Response
+    public function render(\Exception $exception, BlockInterface $block, ?Response $response = null): Response
     {
         $response = $response ?: new Response();
 

@@ -91,8 +91,8 @@ final class BlockRendererTest extends TestCase
      */
     public function testRenderWithWrongResponse(): void
     {
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('A block service must return a Response object');
+        $this->expectException(\TypeError::class);
+        $this->expectExceptionMessageRegExp('{^Return value of [^:]+::execute\(\) must be an instance of [^,]+, string returned$}');
 
         // GIVEN
 
@@ -106,7 +106,7 @@ final class BlockRendererTest extends TestCase
         // mock the exception strategy manager to rethrow the exception
         $this->exceptionStrategyManager->expects($this->once())
             ->method('handleException')
-            ->willReturnCallback(static function ($e): void {
+            ->willReturnCallback(static function (\Throwable $e): void {
                 throw $e;
             });
 

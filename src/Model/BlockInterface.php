@@ -23,7 +23,7 @@ interface BlockInterface
      *
      * @param mixed $id
      */
-    public function setId($id);
+    public function setId($id): void;
 
     /**
      * Returns the block id.
@@ -34,108 +34,82 @@ interface BlockInterface
 
     /**
      * Sets the name.
-     *
-     * @param string $name
      */
-    public function setName($name);
+    public function setName(string $name): void;
 
     /**
      * Returns the name.
-     *
-     * @return string|null
      */
-    public function getName();
+    public function getName(): ?string;
 
     /**
      * Sets the type.
-     *
-     * @param string $type
      */
-    public function setType($type);
+    public function setType(string $type): void;
 
     /**
      * Returns the type.
-     *
-     * @return string|null $type
      */
-    public function getType();
+    public function getType(): ?string;
 
     /**
      * Sets whether or not this block is enabled.
-     *
-     * @param bool $enabled
      */
-    public function setEnabled($enabled);
+    public function setEnabled(bool $enabled): void;
 
     /**
      * Returns whether or not this block is enabled.
-     *
-     * @return bool $enabled
      */
-    public function getEnabled();
+    public function getEnabled(): bool;
 
     /**
      * Set the block ordered position.
-     *
-     * @param int $position
      */
-    public function setPosition($position);
+    public function setPosition(int $position): void;
 
     /**
      * Returns the block ordered position.
-     *
-     * @return int|null $position
      */
-    public function getPosition();
+    public function getPosition(): ?int;
 
     /**
      * Sets the creation date and time.
-     *
-     * @param \DateTime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt = null);
+    public function setCreatedAt(\DateTime $createdAt = null): void;
 
     /**
      * Returns the creation date and time.
-     *
-     * @return \DateTime|null $createdAt
      */
-    public function getCreatedAt();
+    public function getCreatedAt(): ?\DateTime;
 
     /**
      * Set the last update date and time.
-     *
-     * @param \DateTime $updatedAt
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null);
+    public function setUpdatedAt(\DateTime $updatedAt = null): void;
 
     /**
      * Returns the last update date and time.
-     *
-     * @return \DateTime|null $updatedAt
      */
-    public function getUpdatedAt();
+    public function getUpdatedAt(): ?\DateTime;
 
     /**
      * Returns the block cache TTL.
-     *
-     * @return int
      */
-    public function getTtl();
+    public function getTtl(): int;
 
     /**
      * Sets the block settings.
      *
      * @param array $settings An array of key/value
      */
-    public function setSettings(array $settings = []);
+    public function setSettings(array $settings = []): void;
 
     /**
      * Returns the block settings.
      *
      * @return array $settings An array of key/value
      */
-    public function getSettings();
+    public function getSettings(): array;
 
     /**
      * Sets one block setting.
@@ -143,7 +117,7 @@ interface BlockInterface
      * @param string $name  Key name
      * @param mixed  $value Value
      */
-    public function setSetting($name, $value);
+    public function setSetting(string $name, $value): void;
 
     /**
      * Returns one block setting or the given default value if no value is found.
@@ -153,47 +127,37 @@ interface BlockInterface
      *
      * @return mixed
      */
-    public function getSetting($name, $default = null);
+    public function getSetting(string $name, $default = null);
 
     /**
      * Add one child block.
-     *
-     * @param BlockInterface $children
      */
-    public function addChildren(self $children);
+    public function addChildren(self $children): void;
 
     /**
      * Returns child blocks.
      *
      * @return BlockInterface[] $children
      */
-    public function getChildren();
+    public function getChildren(): array;
 
     /**
      * Returns whether or not this block has children.
-     *
-     * @return bool
      */
-    public function hasChildren();
+    public function hasChildren(): bool;
 
     /**
      * Set the parent block.
-     *
-     * @param BlockInterface|null $parent
      */
-    public function setParent(self $parent = null);
+    public function setParent(self $parent = null): void;
 
     /**
      * Returns the parent block.
-     *
-     * @return BlockInterface|null $parent
      */
-    public function getParent();
+    public function getParent(): ?self;
 
     /**
      * Returns whether or not this block has a parent.
-     *
-     * @return bool
      */
-    public function hasParent();
+    public function hasParent(): bool;
 }

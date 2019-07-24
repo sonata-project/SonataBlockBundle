@@ -95,10 +95,7 @@ final class RssBlockService extends AbstractAdminBlockService
             ->end();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
         // merge settings
         $settings = $blockContext->getSettings();

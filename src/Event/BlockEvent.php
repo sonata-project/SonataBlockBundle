@@ -38,10 +38,7 @@ final class BlockEvent extends Event
         $this->blocks[] = $block;
     }
 
-    /**
-     * @return array
-     */
-    public function getSettings()
+    public function getSettings(): array
     {
         return $this->settings;
     }
@@ -55,12 +52,11 @@ final class BlockEvent extends Event
     }
 
     /**
-     * @param string $name
-     * @param mixed  $default
+     * @param mixed $default
      *
      * @return mixed
      */
-    public function getSetting($name, $default = null)
+    public function getSetting(string $name, $default = null)
     {
         return isset($this->settings[$name]) ? $this->settings[$name] : $default;
     }

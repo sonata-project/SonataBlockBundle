@@ -26,7 +26,7 @@ final class MenuRegistry implements MenuRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function add($menu): void
+    public function add(string $menu): void
     {
         $this->names[$menu] = $menu;
     }
@@ -34,7 +34,7 @@ final class MenuRegistry implements MenuRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function getAliasNames()
+    public function getAliasNames(): array
     {
         return $this->names;
     }

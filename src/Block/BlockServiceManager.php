@@ -44,44 +44,43 @@ final class BlockServiceManager implements BlockServiceManagerInterface
     /**
      * @param mixed $debug
      */
-    public function __construct(ContainerInterface $container, $debug, LoggerInterface $logger = null)
+    public function __construct(ContainerInterface $container, $debug, ?LoggerInterface $logger = null)
     {
         $this->services = [];
         $this->contexts = [];
         $this->container = $container;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function get(BlockInterface $block)
+    public function get(BlockInterface $block): BlockServiceInterface
     {
         $this->load($block->getType());
 
         return $this->services[$block->getType()];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getService($id)
+    public function getService($id): BlockServiceInterface
     {
         return $this->load($id);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function has($id)
+    public function has(string $id): bool
     {
-        return isset($this->services[$id]) ? true : false;
+        return isset($this->services[$id]);
     }
 
     /**
-     * {@inheritdoc}
+     * @param BlockServiceInterface|string $service
      */
-    public function add($name, $service, $contexts = []): void
+    public function add(string $name, $service, array $contexts = []): void
     {
+        if (!\is_string($service) && !$service instanceof BlockServiceInterface) {
+            throw new \TypeError(sprintf(
+                'Argument 2 passed to %s() must be of type string or an object implementing %s, %s given',
+                __METHOD__,
+                BlockServiceInterface::class,
+                \is_object($service) ? \get_class($service) : \gettype($service)
+            ));
+        }
         $this->services[$name] = $service;
 
         foreach ($contexts as $context) {
@@ -93,7 +92,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
         }
     }
 
-    public function getServices()
+    public function getServices(): array
     {
         foreach ($this->services as $name => $id) {
             if (\is_string($id)) {
@@ -104,10 +103,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
         return $this->sortServices($this->services);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getServicesByContext($context, $includeContainers = true)
+    public function getServicesByContext(string $context, bool $includeContainers = true): array
     {
         if (!\array_key_exists($context, $this->contexts)) {
             return [];
@@ -154,13 +150,9 @@ final class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
-     * @param string $type
-     *
      * @throws \RuntimeException
-     *
-     * @return BlockServiceInterface
      */
-    private function load($type)
+    private function load(string $type): BlockServiceInterface
     {
         if (!$this->has($type)) {
             throw new \RuntimeException(sprintf('The block service `%s` does not exist', $type));
@@ -180,13 +172,11 @@ final class BlockServiceManager implements BlockServiceManagerInterface
     /**
      * Sort alphabetically services.
      *
-     * @param array $services
-     *
-     * @return array
+     * @param BlockServiceInterface[] $services
      */
-    private function sortServices($services)
+    private function sortServices(array $services): array
     {
-        uasort($services, static function ($a, $b) {
+        uasort($services, static function (BlockServiceInterface $a, BlockServiceInterface $b): int {
             if ($a->getName() === $b->getName()) {
                 return 0;
             }

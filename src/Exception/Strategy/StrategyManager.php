@@ -83,11 +83,9 @@ final class StrategyManager implements StrategyManagerInterface
     /**
      * Sets the default filter name.
      *
-     * @param string $name
-     *
      * @throws \InvalidArgumentException
      */
-    public function setDefaultFilter($name): void
+    public function setDefaultFilter(string $name): void
     {
         if (!\array_key_exists($name, $this->filters)) {
             throw new \InvalidArgumentException(sprintf('Cannot set default exception filter "%s". It does not exist.', $name));
@@ -99,11 +97,9 @@ final class StrategyManager implements StrategyManagerInterface
     /**
      * Sets the default renderer name.
      *
-     * @param string $name
-     *
      * @throws \InvalidArgumentException
      */
-    public function setDefaultRenderer($name): void
+    public function setDefaultRenderer(string $name): void
     {
         if (!\array_key_exists($name, $this->renderers)) {
             throw new \InvalidArgumentException(sprintf('Cannot set default exception renderer "%s". It does not exist.', $name));
@@ -112,10 +108,7 @@ final class StrategyManager implements StrategyManagerInterface
         $this->defaultRenderer = $name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function handleException(\Exception $exception, BlockInterface $block, Response $response = null)
+    public function handleException(\Throwable $exception, BlockInterface $block, ?Response $response = null): Response
     {
         $response = $response ?: new Response();
         $response->setPrivate();
@@ -135,10 +128,8 @@ final class StrategyManager implements StrategyManagerInterface
      *
      *
      * @throws \RuntimeException
-     *
-     * @return RendererInterface
      */
-    public function getBlockRenderer(BlockInterface $block)
+    public function getBlockRenderer(BlockInterface $block): RendererInterface
     {
         $type = $block->getType();
 
@@ -157,10 +148,8 @@ final class StrategyManager implements StrategyManagerInterface
      *
      *
      * @throws \RuntimeException
-     *
-     * @return FilterInterface
      */
-    public function getBlockFilter(BlockInterface $block)
+    public function getBlockFilter(BlockInterface $block): FilterInterface
     {
         $type = $block->getType();
 
@@ -177,13 +166,9 @@ final class StrategyManager implements StrategyManagerInterface
     /**
      * Returns the filter service for given filter name.
      *
-     * @param string $name
-     *
      * @throws \RuntimeException
-     *
-     * @return object
      */
-    private function getFilterService($name)
+    private function getFilterService(string $name): object
     {
         if (!isset($this->filters[$name])) {
             throw new \RuntimeException('The filter "%s" does not exist.');
@@ -195,13 +180,9 @@ final class StrategyManager implements StrategyManagerInterface
     /**
      * Returns the renderer service for given renderer name.
      *
-     * @param string $name
-     *
      * @throws \RuntimeException
-     *
-     * @return object
      */
-    private function getRendererService($name)
+    private function getRendererService(string $name): object
     {
         if (!isset($this->renderers[$name])) {
             throw new \RuntimeException('The renderer "%s" does not exist.');

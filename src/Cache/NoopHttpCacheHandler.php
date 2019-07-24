@@ -29,7 +29,7 @@ final class NoopHttpCacheHandler implements HttpCacheHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function updateMetadata(Response $response, BlockContextInterface $blockContext = null): void
+    public function updateMetadata(Response $response, ?BlockContextInterface $blockContext = null): void
     {
     }
 
