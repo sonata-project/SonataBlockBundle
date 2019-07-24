@@ -25,9 +25,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class MonkeyThrowRenderer implements RendererInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function render(\Exception $banana, BlockInterface $block, Response $response = null)
     {
         throw $banana;

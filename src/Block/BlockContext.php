@@ -36,25 +36,16 @@ class BlockContext implements BlockContextInterface
         $this->settings = $settings;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlock()
     {
         return $this->block;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSettings()
     {
         return $this->settings;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSetting($name)
     {
         if (!\array_key_exists($name, $this->settings)) {
@@ -64,9 +55,6 @@ class BlockContext implements BlockContextInterface
         return $this->settings[$name];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSetting($name, $value)
     {
         if (!\array_key_exists($name, $this->settings)) {
@@ -78,9 +66,6 @@ class BlockContext implements BlockContextInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplate()
     {
         return $this->getSetting('template');

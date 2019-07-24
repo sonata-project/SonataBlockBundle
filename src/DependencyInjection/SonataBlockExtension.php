@@ -28,9 +28,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class SonataBlockExtension extends Extension
 {
-    /**
-     * {@inheritdoc}
-     */
     final public function getConfiguration(array $config, ContainerBuilder $container)
     {
         $bundles = $container->getParameter('kernel.bundles');
@@ -49,9 +46,6 @@ class SonataBlockExtension extends Extension
         return new Configuration($defaultTemplates);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $bundles = $container->getParameter('kernel.bundles');
@@ -290,9 +284,6 @@ class SonataBlockExtension extends Extension
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getNamespace()
     {
         return 'http://sonata-project.com/schema/dic/block';

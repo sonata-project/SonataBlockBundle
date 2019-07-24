@@ -112,9 +112,6 @@ class BlockHelper extends Helper
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'sonata_block';

@@ -31,9 +31,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class RssBlockService extends AbstractAdminBlockService
 {
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -46,9 +43,6 @@ class RssBlockService extends AbstractAdminBlockService
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
         $formMapper->add('settings', ImmutableArrayType::class, [
@@ -78,9 +72,6 @@ class RssBlockService extends AbstractAdminBlockService
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
         $errorElement
@@ -95,9 +86,6 @@ class RssBlockService extends AbstractAdminBlockService
             ->end();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         // merge settings
@@ -133,9 +121,6 @@ class RssBlockService extends AbstractAdminBlockService
         ], $response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockMetadata($code = null)
     {
         return new Metadata($this->getName(), (null !== $code ? $code : $this->getName()), false, 'SonataBlockBundle', [
