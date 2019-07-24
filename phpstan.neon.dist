@@ -1,0 +1,19 @@
+parameters:
+    level: 2
+
+    paths:
+        - src
+# Uncomment this, when phpstan extensions are allowed
+#        - tests
+
+    excludes_analyse:
+        - src/Test/BlockServiceTestCase.php
+        - tests/bootstrap.php
+
+    autoload_files:
+        - vendor/autoload.php
+
+    ignoreErrors:
+        - '#Call to an undefined method Sonata\\Form\\Validator\\ErrorElement::assert.*\(\).#'
+        - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::fixXmlConfig\(\).#'
+        - '#Method Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface::dispatch\(\) invoked with 2 parameters, 1 required.#'
