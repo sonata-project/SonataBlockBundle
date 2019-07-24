@@ -1,0 +1,14 @@
+parameters:
+    level: 0
+
+    paths:
+        - src
+        - tests
+
+    excludes_analyse:
+        - tests/bootstrap.php
+
+    autoload_files:
+        - vendor/autoload.php
+
+    ignoreErrors:
