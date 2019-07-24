@@ -46,9 +46,6 @@ class ServiceLoader implements BlockLoaderInterface
         return \in_array($type, $this->types, true);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load($configuration)
     {
         if (!\in_array($configuration['type'], $this->types, true)) {
@@ -69,9 +66,6 @@ class ServiceLoader implements BlockLoaderInterface
         return $block;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function support($configuration)
     {
         if (!\is_array($configuration)) {

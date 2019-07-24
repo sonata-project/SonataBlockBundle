@@ -33,9 +33,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
      */
     protected static $defaultName = 'sonata:block:debug';
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure()
     {
         $this->setName(static::$defaultName); // BC for symfony/console < 3.4.0
@@ -46,9 +43,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
         $this->addOption('context', 'c', InputOption::VALUE_REQUIRED, 'display service for the specified context');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(InputInterface $input, OutputInterface $output)
     {
         if ('sonata:block:debug' === $input->getArgument('command')) {

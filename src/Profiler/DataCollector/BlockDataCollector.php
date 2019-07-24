@@ -67,9 +67,6 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
         $this->containerTypes = $containerTypes;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         $this->blocks = $this->blocksHelper->getTraces();
@@ -146,9 +143,6 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
         return $this->realBlocks;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function serialize()
     {
         $data = [
@@ -161,9 +155,6 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
         return serialize($data);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function unserialize($data)
     {
         $merged = unserialize($data);
@@ -174,17 +165,11 @@ class BlockDataCollector implements DataCollectorInterface, \Serializable
         $this->events = $merged['events'];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'block';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reset()
     {
         $this->blocks = [];

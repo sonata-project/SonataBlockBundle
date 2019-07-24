@@ -42,9 +42,6 @@ final class MenuRegistry implements MenuRegistryInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function add($menu)
     {
         if ($menu instanceof MenuBuilderInterface) {
@@ -59,9 +56,6 @@ final class MenuRegistry implements MenuRegistryInterface
         $this->names[$menu] = $menu;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAliasNames()
     {
         return $this->names;

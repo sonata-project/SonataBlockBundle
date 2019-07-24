@@ -92,9 +92,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
         $this->configureSettings($resolver);
@@ -107,9 +104,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCacheKeys(BlockInterface $block)
     {
         return [
@@ -118,32 +112,20 @@ abstract class AbstractBlockService implements BlockServiceInterface
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(BlockInterface $block)
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getJavascripts($media)
     {
         return [];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStylesheets($media)
     {
         return [];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         return $this->renderResponse($blockContext->getTemplate(), [
@@ -152,17 +134,11 @@ abstract class AbstractBlockService implements BlockServiceInterface
         ], $response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplating()
     {
         return $this->templating;
