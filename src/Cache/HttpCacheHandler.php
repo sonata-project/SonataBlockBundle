@@ -49,7 +49,7 @@ final class HttpCacheHandler implements HttpCacheHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function updateMetadata(Response $response, BlockContextInterface $blockContext = null): void
+    public function updateMetadata(Response $response, ?BlockContextInterface $blockContext = null): void
     {
         if (null === $this->currentTtl) {
             $this->currentTtl = $response->getTtl();

@@ -30,5 +30,5 @@ interface RendererInterface
      * @param BlockInterface $block     Block that provoked the exception
      * @param Response       $response  Response to alter
      */
-    public function render(\Exception $exception, BlockInterface $block, Response $response = null): Response;
+    public function render(\Exception $exception, BlockInterface $block, ?Response $response = null): Response;
 }

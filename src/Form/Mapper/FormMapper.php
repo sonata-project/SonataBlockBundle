@@ -20,9 +20,6 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 interface FormMapper
 {
-    /**
-     * @param mixed $type
-     */
     public function create(string $name, ?string $type = null, array $options = []): FormBuilderInterface;
 
     /**

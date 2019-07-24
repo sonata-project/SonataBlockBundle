@@ -60,10 +60,7 @@ final class BlockContextManager implements BlockContextManagerInterface
         $this->logger = $logger;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addSettingsByType($type, array $settings, $replace = false): void
+    public function addSettingsByType(string $type, array $settings, bool $replace = false): void
     {
         $typeSettings = isset($this->settingsByType[$type]) ? $this->settingsByType[$type] : [];
         if ($replace) {
@@ -73,10 +70,7 @@ final class BlockContextManager implements BlockContextManagerInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addSettingsByClass($class, array $settings, $replace = false): void
+    public function addSettingsByClass(string $class, array $settings, bool $replace = false): void
     {
         $classSettings = isset($this->settingsByClass[$class]) ? $this->settingsByClass[$class] : [];
         if ($replace) {
@@ -90,10 +84,8 @@ final class BlockContextManager implements BlockContextManagerInterface
      * Check if a given block type exists.
      *
      * @param string $type Block type to check for
-     *
-     * @return bool
      */
-    public function exists($type)
+    public function exists(string $type): bool
     {
         return $this->blockLoader->exists($type);
     }
@@ -205,12 +197,7 @@ final class BlockContextManager implements BlockContextManagerInterface
         }
     }
 
-    /**
-     * @param array $settings
-     *
-     * @return array
-     */
-    private function resolve(BlockInterface $block, $settings)
+    private function resolve(BlockInterface $block, array $settings): array
     {
         $optionsResolver = new OptionsResolver();
 

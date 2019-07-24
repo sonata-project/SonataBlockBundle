@@ -82,15 +82,16 @@ class BlockHelper
      */
     private $stopwatch;
 
-    /**
-     * @param CacheManagerInterface     $cacheManager
-     * @param HttpCacheHandlerInterface $cacheHandler
-     * @param Stopwatch                 $stopwatch
-     */
-    public function __construct(BlockServiceManagerInterface $blockServiceManager, array $cacheBlocks, BlockRendererInterface $blockRenderer,
-                                BlockContextManagerInterface $blockContextManager, EventDispatcherInterface $eventDispatcher,
-                                CacheManagerInterface $cacheManager = null, HttpCacheHandlerInterface $cacheHandler = null, Stopwatch $stopwatch = null)
-    {
+    public function __construct(
+        BlockServiceManagerInterface $blockServiceManager,
+        array $cacheBlocks,
+        BlockRendererInterface $blockRenderer,
+        BlockContextManagerInterface $blockContextManager,
+        EventDispatcherInterface $eventDispatcher,
+        ?CacheManagerInterface $cacheManager = null,
+        ?HttpCacheHandlerInterface $cacheHandler = null,
+        ?Stopwatch $stopwatch = null
+    ) {
         $this->blockServiceManager = $blockServiceManager;
         $this->cacheBlocks = $cacheBlocks;
         $this->blockRenderer = $blockRenderer;
@@ -149,12 +150,7 @@ class BlockHelper
         return $html;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
-    public function renderEvent($name, array $options = [])
+    public function renderEvent(string $name, array $options = []): string
     {
         $eventName = sprintf('sonata.block.event.%s', $name);
 
@@ -183,20 +179,16 @@ class BlockHelper
      * Check if a given block type exists.
      *
      * @param string $type Block type to check for
-     *
-     * @return bool
      */
-    public function exists($type)
+    public function exists(string $type): bool
     {
         return $this->blockContextManager->exists($type);
     }
 
     /**
      * @param mixed $block
-     *
-     * @return string|null
      */
-    public function render($block, array $options = [])
+    public function render($block, array $options = []): string
     {
         $blockContext = $this->blockContextManager->get($block, $options);
 
@@ -291,20 +283,16 @@ class BlockHelper
 
     /**
      * Returns the rendering traces.
-     *
-     * @return array
      */
-    public function getTraces()
+    public function getTraces(): array
     {
         return $this->traces;
     }
 
     /**
      * Traverse the parent block and its children to retrieve the correct list css and javascript only for main block.
-     *
-     * @param array $stats
      */
-    protected function computeAssets(BlockContextInterface $blockContext, array &$stats = null)
+    protected function computeAssets(BlockContextInterface $blockContext, array &$stats = null): void
     {
         if ($blockContext->getBlock()->hasParent()) {
             return;
@@ -352,10 +340,7 @@ class BlockHelper
         ];
     }
 
-    /**
-     * @return array
-     */
-    private function startTracing(BlockInterface $block)
+    private function startTracing(BlockInterface $block): array
     {
         if (null !== $this->stopwatch) {
             $this->traces[$block->getId()] = $this->stopwatch->start(
@@ -400,10 +385,7 @@ class BlockHelper
         $this->traces[$block->getId()]['cache']['lifetime'] = $this->traces[$block->getId()]['cache']['age'] + $this->traces[$block->getId()]['cache']['ttl'];
     }
 
-    /**
-     * @return array
-     */
-    private function getEventBlocks(BlockEvent $event)
+    private function getEventBlocks(BlockEvent $event): array
     {
         $results = [];
 
@@ -414,12 +396,7 @@ class BlockHelper
         return $results;
     }
 
-    /**
-     * @param string $eventName
-     *
-     * @return array
-     */
-    private function getEventListeners($eventName)
+    private function getEventListeners(string $eventName): array
     {
         $results = [];
 
@@ -439,8 +416,6 @@ class BlockHelper
     }
 
     /**
-     * @param array $stats
-     *
      * @return CacheAdapterInterface|false
      */
     private function getCacheService(BlockInterface $block, array &$stats = null)

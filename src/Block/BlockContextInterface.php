@@ -17,33 +17,19 @@ use Sonata\BlockBundle\Model\BlockInterface;
 
 interface BlockContextInterface
 {
-    /**
-     * @return BlockInterface
-     */
-    public function getBlock();
+    public function getBlock(): BlockInterface;
+
+    public function getSettings(): array;
 
     /**
-     * @return array
-     */
-    public function getSettings();
-
-    /**
-     * @param string $name
-     *
      * @return mixed
      */
-    public function getSetting($name);
+    public function getSetting(string $name);
 
     /**
-     * @param string $name
-     * @param mixed  $value
-     *
-     * @return BlockContextInterface
+     * @param mixed $value
      */
-    public function setSetting($name, $value);
+    public function setSetting(string $name, $value): self;
 
-    /**
-     * @return string
-     */
-    public function getTemplate();
+    public function getTemplate(): string;
 }

@@ -26,7 +26,7 @@ abstract class BaseCommand extends Command
      */
     protected $blockManager;
 
-    public function __construct(string $name = null, BlockServiceManagerInterface $blockManager = null)
+    public function __construct(string $name = null, ?BlockServiceManagerInterface $blockManager = null)
     {
         // NEXT_MAJOR: Remove the default value for argument 2 and the following condition
         if (null === $blockManager) {

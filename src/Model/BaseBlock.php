@@ -83,34 +83,22 @@ abstract class BaseBlock implements BlockInterface
         return sprintf('%s ~ #%s', $this->getName(), $this->getId());
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setName($name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setType($type): void
+    public function setType(string $type): void
     {
         $this->type = $type;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -123,58 +111,37 @@ abstract class BaseBlock implements BlockInterface
         $this->settings = $settings;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSettings()
+    public function getSettings(): array
     {
         return $this->settings;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setSetting($name, $value): void
+    public function setSetting(string $name, $value): void
     {
         $this->settings[$name] = $value;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSetting($name, $default = null)
+    public function getSetting(string $name, $default = null)
     {
         return isset($this->settings[$name]) ? $this->settings[$name] : $default;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setEnabled($enabled): void
+    public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getEnabled()
+    public function getEnabled(): bool
     {
         return $this->enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setPosition($position): void
+    public function setPosition(int $position): void
     {
         $this->position = $position;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPosition()
+    public function getPosition(): ?int
     {
         return $this->position;
     }
@@ -187,10 +154,7 @@ abstract class BaseBlock implements BlockInterface
         $this->createdAt = $createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
@@ -203,10 +167,7 @@ abstract class BaseBlock implements BlockInterface
         $this->updatedAt = $updatedAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
@@ -221,10 +182,7 @@ abstract class BaseBlock implements BlockInterface
         $child->setParent($this);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getChildren()
+    public function getChildren(): array
     {
         return $this->children;
     }
@@ -237,26 +195,17 @@ abstract class BaseBlock implements BlockInterface
         $this->parent = $parent;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent()
+    public function getParent(): BlockInterface
     {
         return $this->parent;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasParent()
+    public function hasParent(): bool
     {
         return $this->getParent() instanceof self;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTtl()
+    public function getTtl(): int
     {
         if (!$this->getSetting('use_cache', true)) {
             return 0;
@@ -275,10 +224,7 @@ abstract class BaseBlock implements BlockInterface
         return $this->ttl;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasChildren()
+    public function hasChildren(): bool
     {
         return \count($this->children) > 0;
     }

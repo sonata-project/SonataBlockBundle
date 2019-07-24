@@ -28,8 +28,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Render children pages.
  *
- * @final since sonata-project/block-bundle 3.0
- *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 final class ContainerBlockService extends AbstractAdminBlockService
@@ -69,10 +67,7 @@ final class ContainerBlockService extends AbstractAdminBlockService
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
         return $this->renderResponse($blockContext->getTemplate(), [
             'block' => $blockContext->getBlock(),
@@ -106,12 +101,8 @@ final class ContainerBlockService extends AbstractAdminBlockService
 
     /**
      * Returns a decorator object/array from the container layout setting.
-     *
-     * @param string $layout
-     *
-     * @return array
      */
-    protected function getDecorator($layout)
+    protected function getDecorator(string $layout): array
     {
         $key = '{{ CONTENT }}';
         if (false === strpos($layout, $key)) {

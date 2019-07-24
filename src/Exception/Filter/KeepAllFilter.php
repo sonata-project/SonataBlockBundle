@@ -27,7 +27,7 @@ final class KeepAllFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(\Exception $exception, BlockInterface $block)
+    public function handle(\Throwable $exception, BlockInterface $block): bool
     {
         return true;
     }

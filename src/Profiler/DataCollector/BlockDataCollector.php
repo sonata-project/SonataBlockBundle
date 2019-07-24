@@ -70,7 +70,7 @@ final class BlockDataCollector implements DataCollectorInterface, \Serializable
     /**
      * {@inheritdoc}
      */
-    public function collect(Request $request, Response $response, \Exception $exception = null): void
+    public function collect(Request $request, Response $response, ?\Exception $exception = null): void
     {
         $this->blocks = $this->blocksHelper->getTraces();
 

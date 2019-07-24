@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Block\Service;
 
+use Sonata\BlockBundle\Form\Mapper\FormMapper;
 use Sonata\BlockBundle\Meta\MetadataInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Validator\ErrorElement;
@@ -22,11 +23,11 @@ use Sonata\Form\Validator\ErrorElement;
  */
 interface EditableBlockService
 {
-    public function configureEditForm(FormMapper $form, BlockInterface $block);
+    public function configureEditForm(FormMapper $form, BlockInterface $block): void;
 
-    public function configureCreateForm(FormMapper $form, BlockInterface $block);
+    public function configureCreateForm(FormMapper $form, BlockInterface $block): void;
 
-    public function validate(ErrorElement $errorElement, BlockInterface $block);
+    public function validate(ErrorElement $errorElement, BlockInterface $block): void;
 
     public function getMetadata(): MetadataInterface;
 }
