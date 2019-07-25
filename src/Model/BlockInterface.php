@@ -90,8 +90,6 @@ interface BlockInterface
 
     /**
      * Sets the creation date and time.
-     *
-     * @param \DateTime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
@@ -104,8 +102,6 @@ interface BlockInterface
 
     /**
      * Set the last update date and time.
-     *
-     * @param \DateTime $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
