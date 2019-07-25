@@ -110,8 +110,6 @@ class BlockRenderer implements BlockRendererInterface
     }
 
     /**
-     * @param Response $response
-     *
      * @return Response
      */
     protected function createResponse(BlockContextInterface $blockContext, Response $response = null)

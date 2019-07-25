@@ -84,11 +84,6 @@ class BlockHelper extends Helper
      */
     private $stopwatch;
 
-    /**
-     * @param CacheManagerInterface     $cacheManager
-     * @param HttpCacheHandlerInterface $cacheHandler
-     * @param Stopwatch                 $stopwatch
-     */
     public function __construct(BlockServiceManagerInterface $blockServiceManager, array $cacheBlocks, BlockRendererInterface $blockRenderer,
                                 BlockContextManagerInterface $blockContextManager, EventDispatcherInterface $eventDispatcher,
                                 CacheManagerInterface $cacheManager = null, HttpCacheHandlerInterface $cacheHandler = null, Stopwatch $stopwatch = null)
@@ -310,8 +305,6 @@ class BlockHelper extends Helper
 
     /**
      * Traverse the parent block and its children to retrieve the correct list css and javascript only for main block.
-     *
-     * @param array $stats
      */
     protected function computeAssets(BlockContextInterface $blockContext, array &$stats = null)
     {
@@ -457,8 +450,6 @@ class BlockHelper extends Helper
     }
 
     /**
-     * @param array $stats
-     *
      * @return CacheAdapterInterface|false
      *
      * @internal since sonata-project/block-bundle 3.x
