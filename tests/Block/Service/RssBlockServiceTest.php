@@ -16,10 +16,10 @@ namespace Sonata\BlockBundle\Tests\Block\Service;
 use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Block\Service\RssBlockService;
 use Sonata\BlockBundle\Model\Block;
-use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
+use Sonata\BlockBundle\Test\BlockServiceTestCase;
 use Sonata\BlockBundle\Util\OptionsResolver;
 
-final class RssBlockServiceTest extends AbstractBlockServiceTestCase
+final class RssBlockServiceTest extends BlockServiceTestCase
 {
     /*
      * only test if the API is not broken

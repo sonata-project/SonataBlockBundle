@@ -27,8 +27,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 interface BlockServiceInterface
 {
     /**
-     * @param Response $response
-     *
      * @return Response
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null);

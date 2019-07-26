@@ -51,9 +51,6 @@ class BlockLoaderChain implements BlockLoaderInterface
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load($block)
     {
         foreach ($this->loaders as $loader) {
@@ -65,9 +62,6 @@ class BlockLoaderChain implements BlockLoaderInterface
         throw new BlockNotFoundException();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function support($name)
     {
         return true;

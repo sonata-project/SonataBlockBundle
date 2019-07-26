@@ -40,9 +40,6 @@ abstract class AbstractAdminBlockService extends AbstractBlockService implements
         parent::__construct($name, $templating);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildCreateForm(FormMapper $formMapper, BlockInterface $block)
     {
         $this->buildEditForm($formMapper, $block);
@@ -72,9 +69,6 @@ abstract class AbstractAdminBlockService extends AbstractBlockService implements
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $form, BlockInterface $block)
     {
     }
@@ -83,9 +77,6 @@ abstract class AbstractAdminBlockService extends AbstractBlockService implements
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockMetadata($code = null)
     {
         return new Metadata($this->getName(), (null !== $code ? $code : $this->getName()), false, 'SonataBlockBundle', ['class' => 'fa fa-file']);

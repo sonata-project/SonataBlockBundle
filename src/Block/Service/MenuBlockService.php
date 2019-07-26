@@ -88,9 +88,6 @@ class MenuBlockService extends AbstractAdminBlockService
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         $responseSettings = [
@@ -107,9 +104,6 @@ class MenuBlockService extends AbstractAdminBlockService
         return $this->renderResponse($blockContext->getTemplate(), $responseSettings, $response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $form, BlockInterface $block)
     {
         $form->add('settings', ImmutableArrayType::class, [
@@ -118,9 +112,6 @@ class MenuBlockService extends AbstractAdminBlockService
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
         if (($name = $block->getSetting('menu_name')) && '' !== $name && !$this->menuProvider->has($name)) {
@@ -131,9 +122,6 @@ class MenuBlockService extends AbstractAdminBlockService
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -152,9 +140,6 @@ class MenuBlockService extends AbstractAdminBlockService
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockMetadata($code = null)
     {
         return new Metadata($this->getName(), (null !== $code ? $code : $this->getName()), false, 'SonataBlockBundle', [

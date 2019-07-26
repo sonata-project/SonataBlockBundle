@@ -37,7 +37,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
 
     /**
      * @param EngineInterface|string $templatingOrDeprecatedName
-     * @param EngineInterface        $templating
      */
     public function __construct($templatingOrDeprecatedName = null, EngineInterface $templating = null)
     {
@@ -65,8 +64,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
     /**
      * Returns a Response object than can be cacheable.
      *
-     * @param string   $view
-     * @param Response $response
+     * @param string $view
      *
      * @return Response
      */
@@ -79,8 +77,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
      * Returns a Response object that cannot be cacheable, this must be used if the Response is related to the user.
      * A good solution to make the page cacheable is to configure the block to be cached with javascript ...
      *
-     * @param string   $view
-     * @param Response $response
+     * @param string $view
      *
      * @return Response
      */
@@ -92,9 +89,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
         $this->configureSettings($resolver);
@@ -107,9 +101,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCacheKeys(BlockInterface $block)
     {
         return [
@@ -118,32 +109,20 @@ abstract class AbstractBlockService implements BlockServiceInterface
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(BlockInterface $block)
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getJavascripts($media)
     {
         return [];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStylesheets($media)
     {
         return [];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         return $this->renderResponse($blockContext->getTemplate(), [
@@ -152,17 +131,11 @@ abstract class AbstractBlockService implements BlockServiceInterface
         ], $response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplating()
     {
         return $this->templating;

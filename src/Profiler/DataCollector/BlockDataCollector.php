@@ -48,9 +48,6 @@ class BlockDataCollector extends DataCollector
         $this->reset();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         $this->data['blocks'] = $this->blocksHelper->getTraces();
@@ -127,17 +124,11 @@ class BlockDataCollector extends DataCollector
         return $this->data['realBlocks'];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'block';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reset()
     {
         $this->data['blocks'] = [];

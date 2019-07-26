@@ -84,11 +84,6 @@ class BlockHelper extends Helper
      */
     private $stopwatch;
 
-    /**
-     * @param CacheManagerInterface     $cacheManager
-     * @param HttpCacheHandlerInterface $cacheHandler
-     * @param Stopwatch                 $stopwatch
-     */
     public function __construct(BlockServiceManagerInterface $blockServiceManager, array $cacheBlocks, BlockRendererInterface $blockRenderer,
                                 BlockContextManagerInterface $blockContextManager, EventDispatcherInterface $eventDispatcher,
                                 CacheManagerInterface $cacheManager = null, HttpCacheHandlerInterface $cacheHandler = null, Stopwatch $stopwatch = null)
@@ -112,9 +107,6 @@ class BlockHelper extends Helper
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'sonata_block';
@@ -314,8 +306,6 @@ class BlockHelper extends Helper
 
     /**
      * Traverse the parent block and its children to retrieve the correct list css and javascript only for main block.
-     *
-     * @param array $stats
      */
     protected function computeAssets(BlockContextInterface $blockContext, array &$stats = null)
     {
@@ -368,7 +358,7 @@ class BlockHelper extends Helper
     /**
      * @return array
      *
-     * @internal since sonata-project/block-bundle 4.0
+     * @internal since sonata-project/block-bundle 3.x
      */
     protected function startTracing(BlockInterface $block)
     {
@@ -403,7 +393,7 @@ class BlockHelper extends Helper
     }
 
     /**
-     * @internal since sonata-project/block-bundle 4.0
+     * @internal since sonata-project/block-bundle 3.x
      */
     protected function stopTracing(BlockInterface $block, array $stats)
     {
@@ -421,7 +411,7 @@ class BlockHelper extends Helper
     /**
      * @return array
      *
-     * @internal since sonata-project/block-bundle 4.0
+     * @internal since sonata-project/block-bundle 3.x
      */
     protected function getEventBlocks(BlockEvent $event)
     {
@@ -439,7 +429,7 @@ class BlockHelper extends Helper
      *
      * @return array
      *
-     * @internal since sonata-project/block-bundle 4.0
+     * @internal since sonata-project/block-bundle 3.x
      */
     protected function getEventListeners($eventName)
     {
@@ -461,11 +451,9 @@ class BlockHelper extends Helper
     }
 
     /**
-     * @param array $stats
-     *
      * @return CacheAdapterInterface|false
      *
-     * @internal since sonata-project/block-bundle 4.0
+     * @internal since sonata-project/block-bundle 3.x
      */
     protected function getCacheService(BlockInterface $block, array &$stats = null)
     {

@@ -37,9 +37,6 @@ class DebugOnlyFilter implements FilterInterface
         $this->debug = $debug;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function handle(\Exception $exception, BlockInterface $block)
     {
         return $this->debug ? true : false;

@@ -27,9 +27,6 @@ class HttpCacheHandler implements HttpCacheHandlerInterface
      */
     protected $currentTtl = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function alterResponse(Response $response)
     {
         if (!$response->isCacheable()) {
@@ -49,9 +46,6 @@ class HttpCacheHandler implements HttpCacheHandlerInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function updateMetadata(Response $response, BlockContextInterface $blockContext = null)
     {
         if (null === $this->currentTtl) {
@@ -63,9 +57,6 @@ class HttpCacheHandler implements HttpCacheHandlerInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function onKernelResponse(FilterResponseEvent $event)
     {
         $this->alterResponse($event->getResponse());

@@ -28,9 +28,6 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class TweakCompilerPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container)
     {
         $manager = $container->getDefinition('sonata.block.manager');

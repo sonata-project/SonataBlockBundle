@@ -70,9 +70,6 @@ class BlockRenderer implements BlockRendererInterface
         $this->debug = $debug;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function render(BlockContextInterface $blockContext, Response $response = null)
     {
         $block = $blockContext->getBlock();
@@ -113,8 +110,6 @@ class BlockRenderer implements BlockRendererInterface
     }
 
     /**
-     * @param Response $response
-     *
      * @return Response
      */
     protected function createResponse(BlockContextInterface $blockContext, Response $response = null)

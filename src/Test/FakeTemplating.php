@@ -43,18 +43,12 @@ class FakeTemplating implements EngineInterface
      */
     public $name;
 
-    /**
-     * {@inheritdoc}
-     */
     public function render($name, array $parameters = [])
     {
         $this->name = $name;
         $this->parameters = $parameters;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function renderResponse($view, array $parameters = [], Response $response = null)
     {
         $this->view = $view;
@@ -68,17 +62,11 @@ class FakeTemplating implements EngineInterface
         return new Response();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($name)
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function exists($name)
     {
         return true;
