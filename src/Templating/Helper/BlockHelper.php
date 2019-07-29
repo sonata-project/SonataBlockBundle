@@ -160,8 +160,16 @@ class BlockHelper extends Helper
     {
         $eventName = sprintf('sonata.block.event.%s', $name);
 
-        /** @var BlockEvent $event */
-        $event = $this->eventDispatcher->dispatch($eventName, new BlockEvent($options));
+        // NEXT_MAJOR: remove this when dropping support for symfony/event-dispatcher 3.x
+        $reflectionMethod = new \ReflectionMethod($this->eventDispatcher, 'dispatch');
+        $param2 = $reflectionMethod->getParameters()[1] ?? null;
+
+        /* @var BlockEvent $event */
+        if (null === $param2 || !$param2->hasType() || $param2->getType()->isBuiltin()) {
+            $event = $this->eventDispatcher->dispatch(new BlockEvent($options), $eventName);
+        } else {
+            $event = $this->eventDispatcher->dispatch($eventName, new BlockEvent($options));
+        }
 
         $content = '';
 
