@@ -55,9 +55,6 @@ final class InlineDebugRenderer implements RendererInterface
         $this->forceStyle = $forceStyle;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function render(\Exception $exception, BlockInterface $block, ?Response $response = null): Response
     {
         $response = $response ?: new Response();

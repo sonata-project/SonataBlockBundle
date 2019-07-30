@@ -20,9 +20,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class SonataBlockBundle extends Bundle
 {
-    /**
-     * {@inheritdoc}
-     */
     public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new TweakCompilerPass());
@@ -31,9 +28,6 @@ final class SonataBlockBundle extends Bundle
         $this->registerFormMapping();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function boot(): void
     {
         $this->registerFormMapping();

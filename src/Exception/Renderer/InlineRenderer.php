@@ -42,9 +42,6 @@ final class InlineRenderer implements RendererInterface
         $this->template = $template;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function render(\Exception $exception, BlockInterface $block, ?Response $response = null): Response
     {
         $parameters = [

@@ -75,9 +75,6 @@ abstract class BaseBlock implements BlockInterface
         $this->children = [];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString()
     {
         return sprintf('%s ~ #%s', $this->getName(), $this->getId());
@@ -103,9 +100,6 @@ abstract class BaseBlock implements BlockInterface
         return $this->type;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSettings(array $settings = []): void
     {
         $this->settings = $settings;
@@ -146,9 +140,6 @@ abstract class BaseBlock implements BlockInterface
         return $this->position;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
@@ -159,9 +150,6 @@ abstract class BaseBlock implements BlockInterface
         return $this->createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
@@ -172,9 +160,6 @@ abstract class BaseBlock implements BlockInterface
         return $this->updatedAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addChildren(BlockInterface $child): void
     {
         $this->children[] = $child;
@@ -187,9 +172,6 @@ abstract class BaseBlock implements BlockInterface
         return $this->children;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setParent(BlockInterface $parent = null): void
     {
         $this->parent = $parent;

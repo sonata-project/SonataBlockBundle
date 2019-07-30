@@ -31,9 +31,6 @@ use Sonata\Form\Validator\ErrorElement;
  */
 abstract class AbstractAdminBlockService extends AbstractBlockService implements AdminBlockServiceInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildCreateForm(FormMapper $formMapper, BlockInterface $block): void
     {
         $this->buildEditForm($formMapper, $block);
@@ -63,9 +60,6 @@ abstract class AbstractAdminBlockService extends AbstractBlockService implements
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $form, BlockInterface $block): void
     {
     }
@@ -74,9 +68,6 @@ abstract class AbstractAdminBlockService extends AbstractBlockService implements
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockMetadata($code = null)
     {
         return new Metadata($this->getName(), (null !== $code ? $code : $this->getName()), false, 'SonataBlockBundle', ['class' => 'fa fa-file']);

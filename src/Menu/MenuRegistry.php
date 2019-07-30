@@ -23,17 +23,11 @@ final class MenuRegistry implements MenuRegistryInterface
      */
     private $names = [];
 
-    /**
-     * {@inheritdoc}
-     */
     public function add(string $menu): void
     {
         $this->names[$menu] = $menu;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAliasNames(): array
     {
         return $this->names;

@@ -35,9 +35,6 @@ final class IgnoreClassFilter implements FilterInterface
         $this->class = $class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function handle(\Throwable $exception, BlockInterface $block): bool
     {
         return !$exception instanceof $this->class;

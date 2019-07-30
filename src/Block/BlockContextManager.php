@@ -90,9 +90,6 @@ final class BlockContextManager implements BlockContextManagerInterface
         return $this->blockLoader->exists($type);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function get($meta, array $settings = [])
     {
         if (!$meta instanceof BlockInterface) {

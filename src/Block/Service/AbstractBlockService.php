@@ -37,7 +37,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
 
     /**
      * @param Environment|string $twigOrDeprecatedName
-     * @param Environment        $twig
      */
     public function __construct($twigOrDeprecatedName = null, ?Environment $twig = null)
     {
@@ -86,9 +85,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultSettings(OptionsResolverInterface $resolver): void
     {
         $this->configureSettings($resolver);
@@ -109,9 +105,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(BlockInterface $block): void
     {
     }
@@ -124,9 +117,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
         ], $response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return $this->name;

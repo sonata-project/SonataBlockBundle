@@ -32,9 +32,6 @@ final class BlockExtension extends AbstractExtension
         $this->blockHelper = $blockHelper;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFunctions()
     {
         return [

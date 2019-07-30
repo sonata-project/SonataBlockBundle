@@ -36,17 +36,11 @@ final class RecursiveBlockIterator extends \RecursiveArrayIterator implements \R
         parent::__construct($array);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getChildren()
     {
         return new self($this->current()->getChildren());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasChildren()
     {
         return $this->current()->hasChildren();

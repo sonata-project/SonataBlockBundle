@@ -24,9 +24,6 @@ use Sonata\BlockBundle\Model\BlockInterface;
  */
 final class KeepNoneFilter implements FilterInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function handle(\Throwable $exception, BlockInterface $block): bool
     {
         return false;

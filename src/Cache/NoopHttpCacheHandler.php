@@ -19,23 +19,14 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 final class NoopHttpCacheHandler implements HttpCacheHandlerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function alterResponse(Response $response): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function updateMetadata(Response $response, ?BlockContextInterface $blockContext = null): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function onKernelResponse(FilterResponseEvent $event): void
     {
     }

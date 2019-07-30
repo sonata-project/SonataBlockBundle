@@ -28,9 +28,6 @@ final class DebugBlocksCommand extends BaseCommand
      */
     protected static $defaultName = 'sonata:block:debug';
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(): void
     {
         $this->setName(static::$defaultName); // BC for symfony/console < 3.4.0
@@ -41,9 +38,6 @@ final class DebugBlocksCommand extends BaseCommand
         $this->addOption('context', 'c', InputOption::VALUE_REQUIRED, 'display service for the specified context');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(InputInterface $input, OutputInterface $output): void
     {
         if ('sonata:block:debug' === $input->getArgument('command')) {
