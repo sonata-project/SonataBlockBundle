@@ -2,6 +2,30 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.16.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.15.0...3.16.0) - 2019-07-31
+
+### Deprecated
+- `BaseCommand` class
+- JMS annotations
+- `AbstractBlockServiceTestCase` class with `BlockServiceTestCase`
+- Passing block name to the AbstractBlockService class
+- `AdminBlockServiceInterface` interface
+- `AbstractAdminBlockService` class
+- `BlockServiceInterface::getName` method
+- `BaseCommand::getBlockServiceManager()` method in favor of `BaseCommand::$blockManager` property;
+- Extending `DebugBlocksCommand` class, which will be declared final in 4.0;
+- Invoking `DebugBlocksCommand` with "debug:sonata:block" as name.
+- Marked all classes as `@final`
+
+
+### Removed
+- Removed deprecation warning when block name does not match service id
+
+### Fixed
+- error when debugging blocks with the required options.
+- serializing issue for `BlockDataCollector`
+- Deprecation caused by usage of `ContainerAwareCommand`.
+
 ## [3.15.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.14.0...3.15.0) - 2019-03-03
 
 ### Changed

@@ -43,7 +43,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
         if (!$templatingOrDeprecatedName instanceof EngineInterface && 0 !== strpos(static::class, __NAMESPACE__.'\\')) {
             @trigger_error(
                 sprintf(
-                    'Passing %s as argument 1 to %s::%s() is deprecated since sonata-project/block-bundle 3.x and will throw a \TypeError as of 4.0. You must pass an instance of %s instead',
+                    'Passing %s as argument 1 to %s::%s() is deprecated since sonata-project/block-bundle 3.16 and will throw a \TypeError as of 4.0. You must pass an instance of %s instead',
                     \gettype($templatingOrDeprecatedName),
                     static::class, __FUNCTION__,
                     EngineInterface::class

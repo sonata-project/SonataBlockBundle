@@ -48,7 +48,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
         if ('sonata:block:debug' === $input->getArgument('command')) {
             // NEXT_MAJOR: Remove this check
             @trigger_error(
-                'Command "sonata:block:debug" is deprecated since sonata-project/block-bundle 3.x and will be removed with the 4.0 release.'.
+                'Command "sonata:block:debug" is deprecated since sonata-project/block-bundle 3.16 and will be removed with the 4.0 release.'.
                 ' Use the "debug:sonata:block" command instead.',
                 E_USER_DEPRECATED
             );
