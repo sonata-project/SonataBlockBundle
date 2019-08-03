@@ -19,7 +19,7 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Validator\ErrorElement;
 
 @trigger_error(
-    'The '.__NAMESPACE__.'\AbstractAdminBlockService class is deprecated since sonata-project/block-bundle 3.x '.
+    'The '.__NAMESPACE__.'\AbstractAdminBlockService class is deprecated since sonata-project/block-bundle 3.16 '.
     'and will be removed with the 4.0 release.',
     E_USER_DEPRECATED
 );
@@ -27,7 +27,7 @@ use Sonata\Form\Validator\ErrorElement;
 /**
  * @author Christian Gripp <mail@core23.de>
  *
- * @deprecated since sonata-project/block-bundle 3.x without any replacement
+ * @deprecated since sonata-project/block-bundle 3.16 without any replacement
  */
 abstract class AbstractAdminBlockService extends AbstractBlockService implements AdminBlockServiceInterface
 {

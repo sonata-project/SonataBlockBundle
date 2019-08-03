@@ -341,6 +341,92 @@ class BlockHelper
         ];
     }
 
+    /**
+     * @internal since sonata-project/block-bundle 3.16
+     */
+    private function stopTracing(BlockInterface $block, array $stats): void
+    {
+        $e = $this->traces[$block->getId()]->stop();
+
+        $this->traces[$block->getId()] = array_merge($stats, [
+            'duration' => $e->getDuration(),
+            'memory_end' => memory_get_usage(true),
+            'memory_peak' => memory_get_peak_usage(true),
+        ]);
+
+        $this->traces[$block->getId()]['cache']['lifetime'] = $this->traces[$block->getId()]['cache']['age'] + $this->traces[$block->getId()]['cache']['ttl'];
+    }
+
+    /**
+     * @internal since sonata-project/block-bundle 3.16
+     */
+    private function getEventBlocks(BlockEvent $event): array
+    {
+        $results = [];
+
+        foreach ($event->getBlocks() as $block) {
+            $results[] = [$block->getId(), $block->getType()];
+        }
+
+        return $results;
+    }
+
+    /**
+     * @internal since sonata-project/block-bundle 3.16
+     */
+    private function getEventListeners(string $eventName): array
+    {
+        $results = [];
+
+        foreach ($this->eventDispatcher->getListeners($eventName) as $listener) {
+            if ($listener instanceof \Closure) {
+                $results[] = '{closure}()';
+            } elseif (\is_object($listener[0])) {
+                $results[] = \get_class($listener[0]);
+            } elseif (\is_string($listener[0])) {
+                $results[] = $listener[0];
+            } else {
+                $results[] = 'Unknown type!';
+            }
+        }
+
+        return $results;
+    }
+
+    /**
+     * @return CacheAdapterInterface|false
+     *
+     * @internal since sonata-project/block-bundle 3.16
+     */
+    private function getCacheService(BlockInterface $block, array &$stats = null)
+    {
+        if (!$this->cacheManager) {
+            return false;
+        }
+
+        // type by block class
+        $class = ClassUtils::getClass($block);
+        $cacheServiceId = isset($this->cacheBlocks['by_class'][$class]) ? $this->cacheBlocks['by_class'][$class] : false;
+
+        // type by block service
+        if (!$cacheServiceId) {
+            $cacheServiceId = isset($this->cacheBlocks['by_type'][$block->getType()]) ? $this->cacheBlocks['by_type'][$block->getType()] : false;
+        }
+
+        if (!$cacheServiceId) {
+            return false;
+        }
+
+        if ($this->stopwatch) {
+            $stats['cache']['handler'] = $cacheServiceId;
+        }
+
+        return $this->cacheManager->getCacheService($cacheServiceId);
+    }
+
+    /**
+     * @internal since sonata-project/block-bundle 3.16
+     */
     private function startTracing(BlockInterface $block): array
     {
         if (null !== $this->stopwatch) {
@@ -371,77 +457,5 @@ class BlockHelper
                 'css' => [],
             ],
         ];
-    }
-
-    private function stopTracing(BlockInterface $block, array $stats): void
-    {
-        $e = $this->traces[$block->getId()]->stop();
-
-        $this->traces[$block->getId()] = array_merge($stats, [
-            'duration' => $e->getDuration(),
-            'memory_end' => memory_get_usage(true),
-            'memory_peak' => memory_get_peak_usage(true),
-        ]);
-
-        $this->traces[$block->getId()]['cache']['lifetime'] = $this->traces[$block->getId()]['cache']['age'] + $this->traces[$block->getId()]['cache']['ttl'];
-    }
-
-    private function getEventBlocks(BlockEvent $event): array
-    {
-        $results = [];
-
-        foreach ($event->getBlocks() as $block) {
-            $results[] = [$block->getId(), $block->getType()];
-        }
-
-        return $results;
-    }
-
-    private function getEventListeners(string $eventName): array
-    {
-        $results = [];
-
-        foreach ($this->eventDispatcher->getListeners($eventName) as $listener) {
-            if ($listener instanceof \Closure) {
-                $results[] = '{closure}()';
-            } elseif (\is_object($listener[0])) {
-                $results[] = \get_class($listener[0]);
-            } elseif (\is_string($listener[0])) {
-                $results[] = $listener[0];
-            } else {
-                $results[] = 'Unknown type!';
-            }
-        }
-
-        return $results;
-    }
-
-    /**
-     * @return CacheAdapterInterface|false
-     */
-    private function getCacheService(BlockInterface $block, array &$stats = null)
-    {
-        if (!$this->cacheManager) {
-            return false;
-        }
-
-        // type by block class
-        $class = ClassUtils::getClass($block);
-        $cacheServiceId = isset($this->cacheBlocks['by_class'][$class]) ? $this->cacheBlocks['by_class'][$class] : false;
-
-        // type by block service
-        if (!$cacheServiceId) {
-            $cacheServiceId = isset($this->cacheBlocks['by_type'][$block->getType()]) ? $this->cacheBlocks['by_type'][$block->getType()] : false;
-        }
-
-        if (!$cacheServiceId) {
-            return false;
-        }
-
-        if ($this->stopwatch) {
-            $stats['cache']['handler'] = $cacheServiceId;
-        }
-
-        return $this->cacheManager->getCacheService($cacheServiceId);
     }
 }

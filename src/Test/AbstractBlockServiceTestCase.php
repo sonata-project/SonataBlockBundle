@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Test;
 
 @trigger_error(
-    'The '.__NAMESPACE__.'\AbstractBlockServiceTestCase class is deprecated since sonata-project/block-bundle 3.x '.
+    'The '.__NAMESPACE__.'\AbstractBlockServiceTestCase class is deprecated since sonata-project/block-bundle 3.16 '.
     'and will be removed with the 4.0 release. '.
     'Use '.__NAMESPACE__.'\BlockServiceTestCase instead.',
     E_USER_DEPRECATED
@@ -25,7 +25,7 @@ namespace Sonata\BlockBundle\Test;
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  *
- * @deprecated since sonata-project/block-bundle 3.x, to be removed in 4.0. Use Sonata\BlockBundle\Test\BlockServiceTestCase instead.
+ * @deprecated since sonata-project/block-bundle 3.16, to be removed in 4.0. Use Sonata\BlockBundle\Test\BlockServiceTestCase instead.
  */
 abstract class AbstractBlockServiceTestCase extends BlockServiceTestCase
 {

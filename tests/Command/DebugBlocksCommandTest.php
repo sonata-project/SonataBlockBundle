@@ -53,7 +53,7 @@ final class DebugBlocksCommandTest extends TestCase
     /**
      * @group legacy
      *
-     * @expectedDeprecation Command "sonata:block:debug" is deprecated since sonata-project/block-bundle 3.x and will be removed with the 4.0 release. Use the "debug:sonata:block" command instead.
+     * @expectedDeprecation Command "sonata:block:debug" is deprecated since sonata-project/block-bundle 3.16 and will be removed with the 4.0 release. Use the "debug:sonata:block" command instead.
      */
     public function testExecute(): void
     {
@@ -76,7 +76,7 @@ final class DebugBlocksCommandTest extends TestCase
     /**
      * @group legacy
      *
-     * @expectedDeprecation Method Sonata\BlockBundle\Command\DebugBlocksCommand::getBlockServiceManager() is deprecated since sonata-project/block-bundle 3.x and will be removed with the 4.0 release.Use the Sonata\BlockBundle\Command\DebugBlocksCommand::$blockManager property instead.
+     * @expectedDeprecation Method Sonata\BlockBundle\Command\DebugBlocksCommand::getBlockServiceManager() is deprecated since sonata-project/block-bundle 3.16 and will be removed with the 4.0 release.Use the Sonata\BlockBundle\Command\DebugBlocksCommand::$blockManager property instead.
      */
     public function testGetBlockServiceManager(): void
     {

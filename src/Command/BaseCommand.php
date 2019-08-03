@@ -17,7 +17,7 @@ use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Symfony\Component\Console\Command\Command;
 
 /**
- * @deprecated since sonata-project/block-bundle 3.x, to be removed in 4.0
+ * @deprecated since sonata-project/block-bundle 3.16, to be removed in 4.0
  */
 abstract class BaseCommand extends Command
 {
@@ -51,7 +51,7 @@ abstract class BaseCommand extends Command
     {
         // NEXT_MAJOR: Remove this method
         @trigger_error(sprintf(
-            'Method %1$s::%2$s() is deprecated since sonata-project/block-bundle 3.x and will be removed with the 4.0 release.'.
+            'Method %1$s::%2$s() is deprecated since sonata-project/block-bundle 3.16 and will be removed with the 4.0 release.'.
             'Use the %1$s::$blockManager property instead.',
             static::class,
             __FUNCTION__
