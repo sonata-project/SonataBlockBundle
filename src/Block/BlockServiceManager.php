@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Block;
 
 use Psr\Log\LoggerInterface;
+use Sonata\BlockBundle\Block\Service\EditableBlockService;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -155,7 +156,16 @@ class BlockServiceManager implements BlockServiceManagerInterface
         // As block can be nested, we only need to validate the main block, no the children
         try {
             $this->inValidate = true;
-            $this->get($block)->validateBlock($errorElement, $block);
+
+            $blockService = $this->get($block);
+
+            if ($blockService instanceof EditableBlockService) {
+                $blockService->validate($errorElement, $block);
+            } else {
+                // NEXT_MAJOR: Remove this case
+                $this->get($block)->validateBlock($errorElement, $block);
+            }
+
             $this->inValidate = false;
         } catch (\Exception $e) {
             $this->inValidate = false;
