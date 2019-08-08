@@ -28,8 +28,10 @@ use Twig\Environment;
  * Abstract test class for block service tests.
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
+ *
+ * @internal
  */
-abstract class BlockServiceTestCase extends TestCase
+abstract class InternalBlockServiceTestCase extends TestCase
 {
     /**
      * @var MockObject|BlockServiceManagerInterface
@@ -46,7 +48,10 @@ abstract class BlockServiceTestCase extends TestCase
      */
     protected $twig;
 
-    protected function setUp(): void
+    /**
+     * @internal
+     */
+    protected function internalSetUp(): void
     {
         $this->twig = $this->getMockBuilder(Environment::class)
             ->disableOriginalConstructor()
@@ -95,5 +100,24 @@ abstract class BlockServiceTestCase extends TestCase
         ksort($blockSettings);
 
         $this->assertSame($completeExpectedOptions, $blockSettings);
+    }
+}
+
+// NEXT_MAJOR: Remove this hack when dropping support for PHPUnit 7
+if (version_compare(\PHPUnit\Runner\Version::id(), '8.0', '<')) {
+    abstract class BlockServiceTestCase extends InternalBlockServiceTestCase
+    {
+        protected function setUp()
+        {
+            $this->internalSetUp();
+        }
+    }
+} else {
+    abstract class BlockServiceTestCase extends InternalBlockServiceTestCase
+    {
+        protected function setUp(): void
+        {
+            $this->internalSetUp();
+        }
     }
 }

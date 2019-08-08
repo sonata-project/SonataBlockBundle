@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.16.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.16.0...3.16.1) - 2019-08-05
+
+### Added
+- Added support for PHPUnit 8 for provided `BlockServiceTestCase`
+
 ## [3.16.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.15.0...3.16.0) - 2019-07-31
 
 ### Deprecated
