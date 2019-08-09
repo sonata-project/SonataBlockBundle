@@ -35,6 +35,11 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
      */
     private $menuRegistry;
 
+    /**
+     * NEXT_MAJOR: Remove the "legacy" group.
+     *
+     * @group legacy
+     */
     protected function setUp()
     {
         parent::setUp();
