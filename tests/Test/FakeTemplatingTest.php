@@ -16,6 +16,11 @@ namespace Sonata\BlockBundle\Tests\Test;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Test\FakeTemplating;
 
+/**
+ * NEXT_MAJOR: Remove this class.
+ *
+ * @deprecated since sonata-project/block-bundle 3.x, will be removed in version 4.0.
+ */
 final class FakeTemplatingTest extends TestCase
 {
     public function testRender()

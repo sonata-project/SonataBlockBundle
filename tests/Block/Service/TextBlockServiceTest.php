@@ -21,6 +21,11 @@ use Sonata\BlockBundle\Util\OptionsResolver;
 
 final class TextBlockServiceTest extends BlockServiceTestCase
 {
+    /**
+     * NEXT_MAJOR: Remove the "legacy" group.
+     *
+     * @group legacy
+     */
     public function testService()
     {
         $service = new TextBlockService('sonata.page.block.text', $this->templating);

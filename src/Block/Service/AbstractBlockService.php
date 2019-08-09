@@ -19,6 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Twig\Environment;
 
 /**
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
@@ -31,33 +32,64 @@ abstract class AbstractBlockService implements BlockServiceInterface
     protected $name;
 
     /**
+     * NEXT_MAJOR: Remove this property.
+     *
      * @var EngineInterface|null
      */
     protected $templating;
 
     /**
-     * @param EngineInterface|string $templatingOrDeprecatedName
+     * @var Environment
+     */
+    private $twig;
+
+    /**
+     * NEXT_MAJOR: Make `$twig` argument mandatory and remove other arguments.
+     *
+     * @param Environment|EngineInterface|string $templatingOrDeprecatedName
      */
     public function __construct($templatingOrDeprecatedName = null, EngineInterface $templating = null)
     {
-        if (!$templatingOrDeprecatedName instanceof EngineInterface && 0 !== strpos(static::class, __NAMESPACE__.'\\')) {
-            @trigger_error(
-                sprintf(
-                    'Passing %s as argument 1 to %s::%s() is deprecated since sonata-project/block-bundle 3.16 and will throw a \TypeError as of 4.0. You must pass an instance of %s instead',
-                    \gettype($templatingOrDeprecatedName),
-                    static::class, __FUNCTION__,
-                    EngineInterface::class
-                ),
-                E_USER_DEPRECATED
-            );
-        }
+        // $this->twig = $twig;
+        // NEXT_MAJOR: Uncomment the previous assignment and remove the following lines in this method.
 
-        if ($templatingOrDeprecatedName instanceof EngineInterface) {
+        if ($templatingOrDeprecatedName instanceof Environment) {
             $this->name = '';
-            $this->templating = $templatingOrDeprecatedName;
+            $this->twig = $templatingOrDeprecatedName;
         } else {
-            $this->name = $templatingOrDeprecatedName;
-            $this->templating = $templating;
+            if (0 !== strpos(static::class, __NAMESPACE__.'\\')) {
+                $class = 'c' === static::class[0] && 0 === strpos(static::class, "class@anonymous\0") ? get_parent_class(static::class).'@anonymous' : static::class;
+
+                @trigger_error(
+                    sprintf(
+                        'Passing %s as argument 1 to %s::%s() is deprecated since sonata-project/block-bundle 3.16 and will throw a \TypeError as of 4.0. You must pass an instance of %s instead.',
+                        \is_object($templatingOrDeprecatedName) ? 'instance of '.\get_class($templatingOrDeprecatedName) : \gettype($templatingOrDeprecatedName),
+                        $class,
+                        __FUNCTION__,
+                        Environment::class
+                    ),
+                    E_USER_DEPRECATED
+                );
+            }
+
+            if ($templatingOrDeprecatedName instanceof EngineInterface) {
+                $this->name = '';
+                $this->templating = $templatingOrDeprecatedName;
+            } elseif (\is_string($templatingOrDeprecatedName)) {
+                $this->name = $templatingOrDeprecatedName;
+                $this->templating = $templating;
+            } else {
+                $class = 'c' === static::class[0] && 0 === strpos(static::class, "class@anonymous\0") ? get_parent_class(static::class).'@anonymous' : static::class;
+
+                throw new \TypeError(sprintf(
+                    'Argument 1 passed to %s::%s() must be a string or an instance of %s or %s, %s given.',
+                    $class,
+                    __FUNCTION__,
+                    Environment::class,
+                    EngineInterface::class,
+                    \is_object($templatingOrDeprecatedName) ? 'instance of '.\get_class($templatingOrDeprecatedName) : \gettype($templatingOrDeprecatedName)
+                ));
+            }
         }
     }
 
@@ -70,7 +102,18 @@ abstract class AbstractBlockService implements BlockServiceInterface
      */
     public function renderResponse($view, array $parameters = [], Response $response = null)
     {
-        return $this->getTemplating()->renderResponse($view, $parameters, $response);
+        if (null === $this->twig) {
+            return $this->getTemplating()->renderResponse($view, $parameters, $response);
+        }
+
+        // NEXT_MAJOR: Remove the previous condition
+        if (null === $response) {
+            $response = new Response();
+        }
+
+        $response->setContent($this->twig->render($view, $parameters));
+
+        return $response;
     }
 
     /**
@@ -136,8 +179,33 @@ abstract class AbstractBlockService implements BlockServiceInterface
         return $this->name;
     }
 
+    /**
+     * NEXT_MAJOR: Remove this method.
+     *
+     * @deprecated since sonata-project/block-bundle 3.x
+     */
     public function getTemplating()
     {
+        $class = 'c' === static::class[0] && 0 === strpos(static::class, "class@anonymous\0") ? get_parent_class(static::class).'@anonymous' : static::class;
+
+        @trigger_error(
+            sprintf(
+                'Method %s::%s() is deprecated since sonata-project/block-bundle 3.x and will be removed as of version 4.0.',
+                $class,
+                __FUNCTION__
+            ),
+            E_USER_DEPRECATED
+        );
+
+        if (null !== $this->twig) {
+            throw new \BadMethodCallException(sprintf(
+                'Calling %1$s::%2$s() is not allowed when an instance of %3$s is passed as argument 1 to %1$s::__construct().',
+                $class,
+                __FUNCTION__,
+                Environment::class
+            ));
+        }
+
         return $this->templating;
     }
 }
