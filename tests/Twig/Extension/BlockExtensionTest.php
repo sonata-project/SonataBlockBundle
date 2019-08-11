@@ -13,13 +13,17 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Twig\Extension;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
+use Twig\Environment;
+use Twig\Loader\LoaderInterface;
+use Twig\TwigFunction;
 
 final class BlockExtensionTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|BlockHelper
+     * @var MockObject|BlockHelper
      */
     protected $blockHelper;
 
@@ -29,7 +33,7 @@ final class BlockExtensionTest extends TestCase
     protected $blockExtension;
 
     /**
-     * @var \Twig_Environment
+     * @var Environment
      */
     protected $env;
 
@@ -39,11 +43,11 @@ final class BlockExtensionTest extends TestCase
             'Sonata\BlockBundle\Templating\Helper\BlockHelper'
         )->disableOriginalConstructor()->getMock();
 
-        $loader = $this->createMock('Twig_LoaderInterface');
+        $loader = $this->createMock(LoaderInterface::class);
 
         $this->blockExtension = new BlockExtension($this->blockHelper);
 
-        $this->env = new \Twig_Environment($loader);
+        $this->env = new Environment($loader);
         $this->env->addExtension($this->blockExtension);
     }
 
@@ -74,7 +78,7 @@ final class BlockExtensionTest extends TestCase
             ->method($expectedMethod);
 
         $func = $this->env->getFunction($name);
-        $this->assertInstanceOf('Twig_SimpleFunction', $func);
-        \call_user_func_array($func->getCallable(), $args);
+        $this->assertInstanceOf(TwigFunction::class, $func);
+        $func->getCallable()(...$args);
     }
 }
