@@ -17,7 +17,7 @@ use Sonata\BlockBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 @trigger_error(
-    'The '.__NAMESPACE__.'\FakeTemplating class is deprecated since 3.x '.
+    'The '.__NAMESPACE__.'\FakeTemplating class is deprecated since 3.17 '.
     'and will be removed in version 4.0.',
     E_USER_DEPRECATED
 );
@@ -27,7 +27,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * NEXT_MAJOR: Remove this class.
  *
- * @deprecated since sonata-project/block-bundle 3.x, will be removed in version 4.0.
+ * @deprecated since sonata-project/block-bundle 3.17, will be removed in version 4.0.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */

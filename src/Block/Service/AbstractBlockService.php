@@ -182,7 +182,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
     /**
      * NEXT_MAJOR: Remove this method.
      *
-     * @deprecated since sonata-project/block-bundle 3.x
+     * @deprecated since sonata-project/block-bundle 3.17
      */
     public function getTemplating()
     {
@@ -190,7 +190,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
 
         @trigger_error(
             sprintf(
-                'Method %s::%s() is deprecated since sonata-project/block-bundle 3.x and will be removed as of version 4.0.',
+                'Method %s::%s() is deprecated since sonata-project/block-bundle 3.17 and will be removed as of version 4.0.',
                 $class,
                 __FUNCTION__
             ),

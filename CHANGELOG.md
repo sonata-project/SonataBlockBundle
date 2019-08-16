@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.17.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.16.1...3.17.0) - 2019-08-16
+### Deprecated
+- "sonata.templating", "sonata.templating.locator" and "sonata.templating.name_parser" services;
+- `Sonata\BlockBundle\Templating\TwigEngine` and `Sonata\BlockBundle\Test\FakeTemplating` classes.
+
+### Fixed
+- Fixed validation of `EditableBlock`
+
 ## [3.16.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.16.0...3.16.1) - 2019-08-05
 ### Added
 - Added support for PHPUnit 8 for provided `BlockServiceTestCase`

@@ -1,8 +1,8 @@
 UPGRADE 3.x
 ===========
 
-UPGRADE FROM 3.12 to 3.x
-=======================
+UPGRADE FROM 3.12 to 3.17
+=========================
 
 ## Autoregister blocks
 
@@ -10,9 +10,9 @@ All blocks tagged with `sonata.block` will now be autoregistered into the `sonat
 
 You can still override the block configuration with `sonata_block.blocks`, e.g. to change the contexts.
 
-## Deprecate block assets 
+## Deprecate block assets
 
-Deprecated `BlockServiceInterface::getJavascripts` and `BlockServiceInterface::getStylesheets`. 
+Deprecated `BlockServiceInterface::getJavascripts` and `BlockServiceInterface::getStylesheets`.
 Move your block assets to the template.
 
 
@@ -39,7 +39,7 @@ UPGRADE FROM 3.2 to 3.3
 
 ## Menu blocks
 
-Menus for the `MenuBlockService` can now be defined by a `<tag name="sonata.block.menu"/>` tag. 
+Menus for the `MenuBlockService` can now be defined by a `<tag name="sonata.block.menu"/>` tag.
 Defining the blocks via `sonata_block.menus` is deprecated.
 
 ## Inject blocks
