@@ -134,6 +134,12 @@ abstract class AbstractBlockService implements BlockServiceInterface
 
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
+        if (!$resolver instanceof OptionsResolver) {
+            throw new \BadMethodCallException(
+                sprintf('Calling %s with %s is unsupported', __METHOD__, \get_class($resolver))
+            );
+        }
+
         $this->configureSettings($resolver);
     }
 
