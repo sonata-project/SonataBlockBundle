@@ -247,6 +247,10 @@ class SonataBlockExtension extends Extension
      */
     public function configureClassesToCompile()
     {
+        if (!\is_callable([$this, 'addClassesToCompile'])) {
+            return;
+        }
+
         $this->addClassesToCompile([
             'Sonata\\BlockBundle\\Block\\BlockLoaderChain',
             'Sonata\\BlockBundle\\Block\\BlockLoaderInterface',
