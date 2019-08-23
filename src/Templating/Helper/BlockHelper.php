@@ -44,6 +44,11 @@ class BlockHelper extends Helper
     private $cacheManager;
 
     /**
+     * @var CacheItemPoolInterface|null
+     */
+    private $cachePool;
+
+    /**
      * @var array
      */
     private $cacheBlocks;
@@ -86,15 +91,41 @@ class BlockHelper extends Helper
      */
     private $stopwatch;
 
-    public function __construct(BlockServiceManagerInterface $blockServiceManager, array $cacheBlocks, BlockRendererInterface $blockRenderer,
-                                BlockContextManagerInterface $blockContextManager, EventDispatcherInterface $eventDispatcher,
-                                CacheManagerInterface $cacheManager = null, HttpCacheHandlerInterface $cacheHandler = null, Stopwatch $stopwatch = null)
-    {
+    /**
+     * @param CacheManagerInterface|CacheItemPoolInterface|null $cacheManagerOrCachePool
+     */
+    public function __construct(
+        BlockServiceManagerInterface $blockServiceManager,
+        array $cacheBlocks,
+        BlockRendererInterface $blockRenderer,
+        BlockContextManagerInterface $blockContextManager,
+        EventDispatcherInterface $eventDispatcher,
+        $cacheManagerOrCachePool = null,
+        HttpCacheHandlerInterface $cacheHandler = null,
+        Stopwatch $stopwatch = null
+    ) {
         $this->blockServiceManager = $blockServiceManager;
         $this->cacheBlocks = $cacheBlocks;
         $this->blockRenderer = $blockRenderer;
         $this->eventDispatcher = $eventDispatcher;
-        $this->cacheManager = $cacheManager;
+
+        if ($cacheManagerOrCachePool instanceof CacheManagerInterface) {
+            @trigger_error(
+                sprintf(
+                    'Passing %s as argument 6 to %s::%s() is deprecated since sonata-project/block-bundle 3.x and will throw a \TypeError as of 4.0. You must pass an instance of %s instead.',
+                    CacheManagerInterface::class,
+                    static::class,
+                    __FUNCTION__,
+                    CacheItemPoolInterface::class
+                ),
+                E_USER_DEPRECATED
+            );
+
+            $this->cacheManager = $cacheManagerOrCachePool;
+        } elseif ($cacheManagerOrCachePool instanceof CacheItemPoolInterface) {
+            $this->cachePool = $cacheManagerOrCachePool;
+        }
+
         $this->blockContextManager = $blockContextManager;
         $this->cacheHandler = $cacheHandler;
         $this->stopwatch = $stopwatch;
@@ -474,6 +505,12 @@ class BlockHelper extends Helper
     {
         $cacheKeys = $this->getCacheKey($service, $blockContext);
 
+        if (null !== $this->cachePool) {
+            $item = $this->cachePool->getItem(json_encode($cacheKeys));
+
+            return $item->get();
+        }
+
         $cacheService = $this->getCacheService($blockContext->getBlock(), $stats);
 
         if (!$cacheService) {
@@ -515,6 +552,16 @@ class BlockHelper extends Helper
         }
 
         $cacheKeys = $this->getCacheKey($service, $blockContext);
+
+        if (null !== $this->cachePool) {
+            $item = $this->cachePool->getItem(json_encode($cacheKeys));
+            $item->set($response);
+            $item->expiresAfter((int) $response->getTtl());
+
+            $this->cachePool->save($item);
+
+            return;
+        }
 
         $cacheService = $this->getCacheService($blockContext->getBlock(), $stats);
 
