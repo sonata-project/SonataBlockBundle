@@ -75,30 +75,6 @@ final class DebugBlocksCommandTest extends TestCase
 
     /**
      * @group legacy
-     *
-     * @expectedDeprecation Method Sonata\BlockBundle\Command\DebugBlocksCommand::getBlockServiceManager() is deprecated since sonata-project/block-bundle 3.16 and will be removed with the 4.0 release.Use the Sonata\BlockBundle\Command\DebugBlocksCommand::$blockManager property instead.
-     */
-    public function testGetBlockServiceManager(): void
-    {
-        $blockManager = $this->createMock(BlockServiceManagerInterface::class);
-        $blockManager
-            ->expects($this->any())
-            ->method('getServices')
-            ->willReturn([]);
-
-        (new DebugBlocksCommand(null, $blockManager))->getBlockServiceManager();
-    }
-
-    public function testConstructorArguments(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Argument 2 passed to Sonata\BlockBundle\Command\DebugBlocksCommand::__construct() must be an instance of Sonata\BlockBundle\Block\BlockServiceManagerInterface, NULL given.');
-
-        new DebugBlocksCommand();
-    }
-
-    /**
-     * @group legacy
      */
     public function testDebugBlocks(): void
     {
