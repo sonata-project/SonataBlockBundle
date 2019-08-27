@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Command;
 
+use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,7 +26,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * NEXT_MAJOR: Uncomment the "final" class declaration
  */
-/* final */class DebugBlocksCommand extends BaseCommand
+/* final */class DebugBlocksCommand extends Command
 {
     /**
      * {@inheritdoc}
@@ -33,9 +35,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
      */
     protected static $defaultName = 'sonata:block:debug';
 
+    /**
+     * @var BlockServiceManagerInterface
+     */
+    private $blockManager;
+
     public function __construct(string $name = null, BlockServiceManagerInterface $blockManager)
     {
-        parent::__construct($name, $blockManager);
+        $this->blockManager = $blockManager;
+
+        parent::__construct($name);
     }
 
     public function configure()
