@@ -33,6 +33,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
      */
     protected static $defaultName = 'sonata:block:debug';
 
+    public function __construct(string $name = null, BlockServiceManagerInterface $blockManager)
+    {
+        parent::__construct($name, $blockManager);
+    }
+
     public function configure()
     {
         $this->setName(static::$defaultName); // BC for symfony/console < 3.4.0
