@@ -235,7 +235,7 @@ class BlockHelper extends Helper
     }
 
     /**
-     * @param mixed $block
+     * @param BlockInterface|array $block
      *
      * @return string|null
      */
