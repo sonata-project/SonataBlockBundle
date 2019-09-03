@@ -14,21 +14,78 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Tests\Templating\Helper;
 
 use PHPUnit\Framework\TestCase;
+use Psr\Cache\CacheItemInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Sonata\BlockBundle\Block\BlockContext;
+use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Block\BlockContextManagerInterface;
+use Sonata\BlockBundle\Block\BlockRendererInterface;
+use Sonata\BlockBundle\Block\BlockServiceInterface;
+use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 final class BlockHelperTest extends TestCase
 {
+    /**
+     * @group legacy
+     */
+    public function testRenderWithCachedBlock(): void
+    {
+        $service = $this->createMock(BlockServiceInterface::class);
+        $service->method('getJavascripts')->willReturn([]);
+        $service->method('getStylesheets')->willReturn([]);
+        $service->method('getCacheKeys')->willReturn([]);
+
+        $blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
+        $blockServiceManager->method('get')
+            ->willReturn($service);
+
+        $blockRenderer = $this->createMock(BlockRendererInterface::class);
+
+        $block = $this->createMock(BlockInterface::class);
+
+        $blockContext = $this->createMock(BlockContextInterface::class);
+        $blockContext->method('getBlock')
+            ->willReturn($block);
+        $blockContext->method('getSetting')->willReturnCallback(static function (string $key) {
+            if ('use_cache' === $key) {
+                return true;
+            }
+            if ('extra_cache_keys' === $key) {
+                return [];
+            }
+
+            return null;
+        });
+
+        $blockContextManager = $this->createMock(BlockContextManagerInterface::class);
+        $blockContextManager->expects($this->once())->method('get')
+            ->willReturn($blockContext);
+
+        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
+
+        $cacheItem = $this->createMock(CacheItemInterface::class);
+        $cacheItem->method('get')->willReturn(new Response());
+
+        $cacheItemPool = $this->createMock(CacheItemPoolInterface::class);
+        $cacheItemPool->method('getItem')->willReturn($cacheItem);
+
+        $helper = new BlockHelper($blockServiceManager, [], $blockRenderer, $blockContextManager, $eventDispatcher, $cacheItemPool);
+
+        $this->assertSame('', $helper->render($block));
+    }
+
     public function testRenderEventWithNoListener()
     {
-        $blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
-        $blockRenderer = $this->createMock('Sonata\BlockBundle\Block\BlockRendererInterface');
-        $blockContextManager = $this->createMock('Sonata\BlockBundle\Block\BlockContextManagerInterface');
-        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
+        $blockRenderer = $this->createMock(BlockRendererInterface::class);
+        $blockContextManager = $this->createMock(BlockContextManagerInterface::class);
+        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $eventDispatcher->expects($this->once())->method('dispatch')->willReturnCallback(static function ($event, $name): BlockEvent {
             // NEXT_MAJOR: remove this check when dropping support for symfony/event-dispatcher 3.x
             if ($event instanceof BlockEvent) {
@@ -49,7 +106,7 @@ final class BlockHelperTest extends TestCase
      */
     public function testRenderEventWithListeners()
     {
-        $blockService = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
+        $blockService = $this->createMock(BlockServiceInterface::class);
         $blockService->expects($this->once())->method('getJavascripts')->willReturn([
             '/js/base.js',
         ]);
@@ -57,20 +114,20 @@ final class BlockHelperTest extends TestCase
             '/css/base.css',
         ]);
 
-        $blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
+        $blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
         $blockServiceManager->expects($this->any())->method('get')->willReturn($blockService);
 
-        $blockRenderer = $this->createMock('Sonata\BlockBundle\Block\BlockRendererInterface');
+        $blockRenderer = $this->createMock(BlockRendererInterface::class);
         $blockRenderer->expects($this->once())->method('render')->willReturn(new Response('<span>test</span>'));
 
-        $blockContextManager = $this->createMock('Sonata\BlockBundle\Block\BlockContextManagerInterface');
+        $blockContextManager = $this->createMock(BlockContextManagerInterface::class);
         $blockContextManager->expects($this->once())->method('get')->willReturnCallback(static function (BlockInterface $block) {
             $context = new BlockContext($block, $block->getSettings());
 
             return $context;
         });
 
-        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $eventDispatcher->expects($this->once())->method('dispatch')->willReturnCallback(static function ($event, $name): BlockEvent {
             $block = new Block();
             $block->setId(1);
