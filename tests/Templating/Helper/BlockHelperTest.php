@@ -80,7 +80,7 @@ final class BlockHelperTest extends TestCase
         $this->assertSame('', $helper->render($block));
     }
 
-    public function testRenderEventWithNoListener()
+    public function testRenderEventWithNoListener(): void
     {
         $blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
         $blockRenderer = $this->createMock(BlockRendererInterface::class);
@@ -104,7 +104,7 @@ final class BlockHelperTest extends TestCase
     /**
      * @group legacy
      */
-    public function testRenderEventWithListeners()
+    public function testRenderEventWithListeners(): void
     {
         $blockService = $this->createMock(BlockServiceInterface::class);
         $blockService->expects($this->once())->method('getJavascripts')->willReturn([

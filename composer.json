@@ -25,7 +25,7 @@
         "psr/cache": "^1.0",
         "psr/cache-implementation": "*",
         "sonata-project/cache": "^1.0 || ^2.0",
-        "sonata-project/core-bundle": "^3.13.7",
+        "sonata-project/core-bundle": "^3.15.1",
         "sonata-project/doctrine-extensions": "^1.1",
         "symfony/asset": "^2.8 || ^3.2 || ^4.0",
         "symfony/config": "^2.8 || ^3.2 || ^4.0",
