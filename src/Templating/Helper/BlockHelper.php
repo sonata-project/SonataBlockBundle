@@ -49,7 +49,7 @@ class BlockHelper extends Helper
     private $cachePool;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private $cacheBlocks;
 
@@ -93,6 +93,7 @@ class BlockHelper extends Helper
 
     /**
      * @param CacheManagerInterface|CacheItemPoolInterface|null $cacheManagerOrCachePool
+     * @param array<string, mixed>                              $cacheBlocks
      */
     public function __construct(
         BlockServiceManagerInterface $blockServiceManager,
