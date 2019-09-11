@@ -50,7 +50,7 @@ class BlockEvent extends Event
     }
 
     /**
-     * @return mixed
+     * @return BlockInterface[]
      */
     public function getBlocks()
     {
