@@ -2,6 +2,25 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.18.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.17.0...3.18.0) - 2019-08-11
+### Added
+- Added support for PSR Cache
+
+### Deprecated
+- Deprecate Sonata Cache in favor of PSR Cache
+
+### Removed
+- Remove default image from metadata
+
+### Changed
+- Removed unused BlockServiceManager constructor arguments
+
+### Fixed
+- Fix auto-registration of tagged blocks
+- Added explicit type check
+- Added check before calling deprecated method
+- Fix `Symfony\Component\EventDispatcher\EventDispatcherInterface::dispatch()` deprecation
+
 ## [3.17.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.16.1...3.17.0) - 2019-08-16
 ### Deprecated
 - "sonata.templating", "sonata.templating.locator" and "sonata.templating.name_parser" services;

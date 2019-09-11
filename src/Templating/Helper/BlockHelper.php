@@ -113,7 +113,7 @@ class BlockHelper extends Helper
         if ($cacheManagerOrCachePool instanceof CacheManagerInterface) {
             @trigger_error(
                 sprintf(
-                    'Passing %s as argument 6 to %s::%s() is deprecated since sonata-project/block-bundle 3.x and will throw a \TypeError as of 4.0. You must pass an instance of %s instead.',
+                    'Passing %s as argument 6 to %s::%s() is deprecated since sonata-project/block-bundle 3.18 and will throw a \TypeError as of 4.0. You must pass an instance of %s instead.',
                     CacheManagerInterface::class,
                     static::class,
                     __FUNCTION__,
