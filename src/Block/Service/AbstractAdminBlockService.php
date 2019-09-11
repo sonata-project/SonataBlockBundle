@@ -17,7 +17,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\Templating\EngineInterface;
 
 @trigger_error(
     'The '.__NAMESPACE__.'\AbstractAdminBlockService class is deprecated since sonata-project/block-bundle 3.16 '.
