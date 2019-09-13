@@ -31,7 +31,7 @@ final class EmptyBlockServiceTest extends BlockServiceTestCase
         new EmptyBlockService('sonata.page.block.rss');
 
         $this->expectException(\TypeError::class);
-        $this->expectExceptionMessage('Argument 1 passed to Sonata\BlockBundle\Block\Service\EmptyBlockService::__construct() must be a string or an instance of Twig\Environment or Symfony\Bundle\FrameworkBundle\Templating\EngineInterface, instance of stdClass given.');
+        $this->expectExceptionMessage('Argument 1 passed to Sonata\BlockBundle\Block\Service\EmptyBlockService::__construct() must be a string or an instance of Twig\Environment or Symfony\Component\Templating\EngineInterface, instance of stdClass given.');
         new EmptyBlockService(new \stdClass());
     }
 }

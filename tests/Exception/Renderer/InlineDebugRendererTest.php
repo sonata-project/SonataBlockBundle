@@ -15,6 +15,7 @@ namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Renderer\InlineDebugRenderer;
+use Symfony\Component\Templating\EngineInterface;
 
 /**
  * Test the inline debug exception renderer.
@@ -33,7 +34,7 @@ final class InlineDebugRendererTest extends TestCase
         $debug = false;
         $exception = $this->createMock('\Exception');
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $templating = $this->createMock(EngineInterface::class);
 
         $renderer = new InlineDebugRenderer($templating, $template, $debug);
 
@@ -61,7 +62,7 @@ final class InlineDebugRendererTest extends TestCase
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
 
         // mock the templating render() to return an html result
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $templating = $this->createMock(EngineInterface::class);
         $templating->expects($this->once())
             ->method('render')
             ->with(
