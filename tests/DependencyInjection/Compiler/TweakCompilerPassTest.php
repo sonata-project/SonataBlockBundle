@@ -39,6 +39,8 @@ final class TweakCompilerPassTest extends TestCase
 
         $this->container->setParameter('sonata_block.blocks', []);
         $this->container->setParameter('sonata_blocks.block_types', []);
+        $this->container->setParameter('sonata_block.cache_blocks', []);
+        $this->container->setParameter('sonata_blocks.default_contexts', []);
         $this->container->setParameter('sonata_block.blocks_by_class', []);
     }
 

@@ -2,13 +2,42 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [3.16.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.16.0...3.16.1) - 2019-08-05
+## [3.18.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.18.0...3.18.1) - 2019-09-19
+### Changed
+- Replaced deprecated EngineInterface
 
+## [3.18.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.17.0...3.18.0) - 2019-09-11
+### Added
+- Added support for PSR Cache
+
+### Deprecated
+- Deprecate Sonata Cache in favor of PSR Cache
+
+### Removed
+- Remove default image from metadata
+
+### Changed
+- Removed unused BlockServiceManager constructor arguments
+
+### Fixed
+- Fix auto-registration of tagged blocks
+- Added explicit type check
+- Added check before calling deprecated method
+- Fix `Symfony\Component\EventDispatcher\EventDispatcherInterface::dispatch()` deprecation
+
+## [3.17.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.16.1...3.17.0) - 2019-08-16
+### Deprecated
+- "sonata.templating", "sonata.templating.locator" and "sonata.templating.name_parser" services;
+- `Sonata\BlockBundle\Templating\TwigEngine` and `Sonata\BlockBundle\Test\FakeTemplating` classes.
+
+### Fixed
+- Fixed validation of `EditableBlock`
+
+## [3.16.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.16.0...3.16.1) - 2019-08-05
 ### Added
 - Added support for PHPUnit 8 for provided `BlockServiceTestCase`
 
 ## [3.16.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.15.0...3.16.0) - 2019-07-31
-
 ### Deprecated
 - `BaseCommand` class
 - JMS annotations
@@ -22,7 +51,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Invoking `DebugBlocksCommand` with "debug:sonata:block" as name.
 - Marked all classes as `@final`
 
-
 ### Removed
 - Removed deprecation warning when block name does not match service id
 
@@ -32,7 +60,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Deprecation caused by usage of `ContainerAwareCommand`.
 
 ## [3.15.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.14.0...3.15.0) - 2019-03-03
-
 ### Changed
 - Improve performance and entropy when calling `uniqid` from [@jacquesbh](https://github.com/jacquesbh).
 
@@ -40,7 +67,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - crash when using `null` as a block name in service definitions
 
 ## [3.14.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.13.0...3.14.0) - 2019-01-12
-
 ### Fixed
 - Deprecations about `Sonata\CoreBundle\Form\*`
 - Deprecations about `Sonata\CoreBundle\Model\*`
@@ -50,7 +76,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - support for php 5 and php 7.0
 
 ## [3.13.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.12.1...3.13.0) - 2018-12-03
-
 ### Added
 - All blocks containing `sonata.block` will be auto registered
 - Added `EditableBlockService` and `FormMapper` interfaces
@@ -116,7 +141,7 @@ and show the deprecated message.
 ## [3.9.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.9.0...3.9.1) - 2018-01-07
 ### Fixed
 - Make services explicit public
-- Autoregister blocks as public services 
+- Autoregister blocks as public services
 
 ## [3.9.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.8.0...3.9.0) - 2017-12-12
 ### Added

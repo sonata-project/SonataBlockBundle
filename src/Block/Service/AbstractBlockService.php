@@ -41,11 +41,14 @@ abstract class AbstractBlockService implements BlockServiceInterface
     public function __construct($twigOrDeprecatedName = null, ?Environment $twig = null)
     {
         if (!$twigOrDeprecatedName instanceof Environment && 0 !== strpos(static::class, __NAMESPACE__.'\\')) {
+            $class = 'c' === static::class[0] && 0 === strpos(static::class, "class@anonymous\0") ? get_parent_class(static::class).'@anonymous' : static::class;
+
             @trigger_error(
                 sprintf(
                     'Passing %s as argument 1 to %s::%s() is deprecated since sonata-project/block-bundle 3.16 and will throw a \TypeError as of 4.0. You must pass an instance of %s instead',
                     \gettype($twigOrDeprecatedName),
-                    static::class, __FUNCTION__,
+                    $class,
+                    __FUNCTION__,
                     Environment::class
                 ),
                 E_USER_DEPRECATED
@@ -55,9 +58,19 @@ abstract class AbstractBlockService implements BlockServiceInterface
         if ($twigOrDeprecatedName instanceof Environment) {
             $this->name = '';
             $this->twig = $twigOrDeprecatedName;
-        } else {
+        } elseif (\is_string($twigOrDeprecatedName)) {
             $this->name = $twigOrDeprecatedName;
             $this->twig = $twig;
+        } else {
+            $class = 'c' === static::class[0] && 0 === strpos(static::class, "class@anonymous\0") ? get_parent_class(static::class).'@anonymous' : static::class;
+
+            throw new \TypeError(sprintf(
+                'Argument 1 passed to %s::%s() must be a string or an instance of %s, %s given.',
+                $class,
+                __FUNCTION__,
+                Environment::class,
+                \is_object($twigOrDeprecatedName) ? 'instance of '.\get_class($twigOrDeprecatedName) : \gettype($twigOrDeprecatedName)
+            ));
         }
     }
 
@@ -87,6 +100,12 @@ abstract class AbstractBlockService implements BlockServiceInterface
 
     public function setDefaultSettings(OptionsResolverInterface $resolver): void
     {
+        if (!$resolver instanceof OptionsResolver) {
+            throw new \BadMethodCallException(
+                sprintf('Calling %s with %s is unsupported', __METHOD__, \get_class($resolver))
+            );
+        }
+
         $this->configureSettings($resolver);
     }
 

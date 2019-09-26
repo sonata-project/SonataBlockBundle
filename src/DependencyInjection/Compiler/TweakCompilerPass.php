@@ -31,20 +31,27 @@ final class TweakCompilerPass implements CompilerPassInterface
         $manager = $container->getDefinition('sonata.block.manager');
         $registry = $container->getDefinition('sonata.block.menu.registry');
 
-        $parameters = $container->getParameter('sonata_block.blocks');
-
+        $blocks = $container->getParameter('sonata_block.blocks');
         $blockTypes = $container->getParameter('sonata_blocks.block_types');
+        $cacheBlocks = $container->getParameter('sonata_block.cache_blocks');
+        $defaultContexs = $container->getParameter('sonata_blocks.default_contexts');
 
-        foreach ($container->findTaggedServiceIds('sonata.block') as $serviceId => $tags) {
-            // Skip manual defined blocks
-            if (!isset($blockTypes[$serviceId])) {
-                $contexts = $this->getContextFromTags($tags);
-                $blockTypes[$serviceId] = [
-                    'context' => $contexts,
-                ];
+        foreach ($container->findTaggedServiceIds('sonata.block') as $id => $tags) {
+            $blockId = $this->getBlockId($id);
+            $settings = $this->createBlockSettings($id, $tags, $defaultContexs);
+
+            // Register blocks dynamicaly
+            if (!\array_key_exists($blockId, $blocks)) {
+                $blocks[$blockId] = $settings;
+            }
+            if (!\in_array($blockId, $blockTypes, true)) {
+                $blockTypes[] = $blockId;
+            }
+            if (isset($cacheBlocks['by_type']) && !\array_key_exists($blockId, $cacheBlocks['by_type'])) {
+                $cacheBlocks['by_type'][$blockId] = $settings['cache'];
             }
 
-            $manager->addMethodCall('add', [$serviceId, $serviceId, isset($parameters[$serviceId]) ? $parameters[$serviceId]['contexts'] : []]);
+            $manager->addMethodCall('add', [$id, $id, $settings['contexts']]);
         }
 
         foreach ($container->findTaggedServiceIds('knp_menu.menu') as $serviceId => $tags) {
@@ -60,6 +67,10 @@ final class TweakCompilerPass implements CompilerPassInterface
         foreach ($container->findTaggedServiceIds('sonata.block.loader') as $serviceId => $tags) {
             $services[] = new Reference($serviceId);
         }
+
+        $container->setParameter('sonata_block.blocks', $blocks);
+        $container->setParameter('sonata_blocks.block_types', $blockTypes);
+        $container->setParameter('sonata_block.cache_blocks', $cacheBlocks);
 
         $container->getDefinition('sonata.block.loader.service')->replaceArgument(0, $blockTypes);
         $container->getDefinition('sonata.block.loader.chain')->replaceArgument(0, $services);
@@ -84,6 +95,35 @@ final class TweakCompilerPass implements CompilerPassInterface
                 $definition->addMethodCall('addSettingsByClass', [$class, $settings['settings'], true]);
             }
         }
+    }
+
+    private function getBlockId(string $id): string
+    {
+        $blockId = $id;
+
+        // Only convert class service names
+        if (false !== strpos($blockId, '\\')) {
+            $convert = (new ConvertFromFqcn());
+            $blockId = $convert($blockId);
+        }
+
+        return $blockId;
+    }
+
+    private function createBlockSettings(string $id, array $tags = [], array $defaultContexts = []): array
+    {
+        $contexts = $this->getContextFromTags($tags);
+
+        if (0 === \count($contexts)) {
+            $contexts = $defaultContexts;
+        }
+
+        return [
+            'contexts' => $contexts,
+            'templates' => [],
+            'cache' => 'sonata.cache.noop',
+            'settings' => [],
+        ];
     }
 
     /**

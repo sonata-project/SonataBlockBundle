@@ -34,8 +34,14 @@ final class BlockHelperTest extends TestCase
         $blockRenderer = $this->createMock(BlockRendererInterface::class);
         $blockContextManager = $this->createMock(BlockContextManagerInterface::class);
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $eventDispatcher->expects($this->once())->method('dispatch')->willReturnCallback(static function ($name, BlockEvent $event) {
-            return $event;
+        $eventDispatcher->expects($this->once())->method('dispatch')->willReturnCallback(static function ($event, $name): BlockEvent {
+            // NEXT_MAJOR: remove this check when dropping support for symfony/event-dispatcher 3.x
+            if ($event instanceof BlockEvent) {
+                return $event;
+            }
+
+            // $event is the second argument in symfony/event-dispatcher 3.x
+            return $name;
         });
 
         $helper = new BlockHelper($blockServiceManager, [], $blockRenderer, $blockContextManager, $eventDispatcher);
@@ -64,16 +70,25 @@ final class BlockHelperTest extends TestCase
         });
 
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $eventDispatcher->expects($this->once())->method('dispatch')->willReturnCallback(static function ($name, BlockEvent $event) {
+        $eventDispatcher->expects($this->once())->method('dispatch')->willReturnCallback(static function ($event, $name): BlockEvent {
             $block = new Block();
             $block->setId(1);
             $block->setSettings([
                 'use_cache' => false,
             ]);
             $block->setType('test');
-            $event->addBlock($block);
 
-            return $event;
+            // NEXT_MAJOR: remove this check when dropping support for symfony/event-dispatcher 3.x
+            if ($event instanceof BlockEvent) {
+                $event->addBlock($block);
+
+                return $event;
+            }
+
+            // $event is the second argument in symfony/event-dispatcher 3.x
+            $name->addBlock($block);
+
+            return $name;
         });
 
         $helper = new BlockHelper($blockServiceManager, [], $blockRenderer, $blockContextManager, $eventDispatcher);

@@ -53,15 +53,10 @@ abstract class InternalBlockServiceTestCase extends TestCase
      */
     protected function internalSetUp(): void
     {
-        $this->twig = $this->getMockBuilder(Environment::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $this->twig->method('render')
-            ->willReturn('');
-
         $blockLoader = $this->createMock(BlockLoaderInterface::class);
         $this->blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
         $this->blockContextManager = new BlockContextManager($blockLoader, $this->blockServiceManager);
+        $this->twig = $this->createMock(Environment::class);
     }
 
     /**

@@ -22,8 +22,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class RssBlockServiceTest extends BlockServiceTestCase
 {
-    /*
-     * only test if the API is not broken
+    /**
+     * only test if the API is not broken.
      */
     public function testService(): void
     {
