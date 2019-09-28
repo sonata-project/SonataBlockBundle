@@ -124,7 +124,6 @@ final class StrategyManager implements StrategyManagerInterface
     /**
      * Returns the exception renderer for given block.
      *
-     *
      * @throws \RuntimeException
      */
     public function getBlockRenderer(BlockInterface $block): RendererInterface
@@ -143,7 +142,6 @@ final class StrategyManager implements StrategyManagerInterface
 
     /**
      * Returns the exception filter for given block.
-     *
      *
      * @throws \RuntimeException
      */

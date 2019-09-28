@@ -26,7 +26,6 @@ final class KeepNoneFilterTest extends TestCase
     /**
      * test the filter with an exception.
      *
-     *
      * @dataProvider getExceptions
      */
     public function testFilter(\Exception $exception): void

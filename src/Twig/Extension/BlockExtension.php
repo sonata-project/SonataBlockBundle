@@ -24,9 +24,6 @@ final class BlockExtension extends AbstractExtension
      */
     protected $blockHelper;
 
-    /**
-     * BlockExtension constructor.
-     */
     public function __construct(BlockHelper $blockHelper)
     {
         $this->blockHelper = $blockHelper;
