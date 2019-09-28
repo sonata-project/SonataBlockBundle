@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests\Block;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Sonata\BlockBundle\Block\BlockContext;
@@ -30,17 +31,17 @@ use Symfony\Component\HttpFoundation\Response;
 final class BlockRendererTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|BlockServiceManagerInterface
+     * @var MockObject|BlockServiceManagerInterface
      */
     protected $blockServiceManager;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|LoggerInterface
+     * @var MockObject|LoggerInterface
      */
     protected $logger;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|StrategyManager
+     * @var MockObject|StrategyManager
      */
     protected $exceptionStrategyManager;
 
