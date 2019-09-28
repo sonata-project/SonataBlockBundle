@@ -21,8 +21,6 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 /**
  * Block data collector for the symfony web profiling.
  *
- * @final since sonata-project/block-bundle 3.0
- *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 final class BlockDataCollector extends DataCollector

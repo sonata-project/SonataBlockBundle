@@ -15,8 +15,6 @@ namespace Sonata\BlockBundle\Model;
 
 /**
  * EmptyBlock model to be used to return an empty result if a block is not found or not valid.
- *
- * @final since sonata-project/block-bundle 3.0
  */
 final class EmptyBlock extends Block
 {

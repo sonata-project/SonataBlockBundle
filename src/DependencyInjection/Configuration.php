@@ -21,8 +21,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * This is the class that validates and merges configuration from your app/config files.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
- *
- * @final since sonata-project/block-bundle 3.0
  */
 final class Configuration implements ConfigurationInterface
 {

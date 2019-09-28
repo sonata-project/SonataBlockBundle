@@ -19,8 +19,6 @@ use Sonata\BlockBundle\Model\BlockInterface;
  * This filter ignores exceptions that inherit a given class or interface, or in other words, it will only handle
  * exceptions that do not inherit the given class or interface.
  *
- * @final since sonata-project/block-bundle 3.0
- *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 final class IgnoreClassFilter implements FilterInterface
