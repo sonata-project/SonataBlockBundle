@@ -50,20 +50,6 @@ final class DebugBlocksCommandTest extends TestCase
         $this->application = null;
     }
 
-    /**
-     * @group legacy
-     *
-     * @expectedDeprecation Command "sonata:block:debug" is deprecated since sonata-project/block-bundle 3.16 and will be removed with the 4.0 release. Use the "debug:sonata:block" command instead.
-     */
-    public function testExecute(): void
-    {
-        $command = $this->application->find('sonata:block:debug');
-        $commandTester = new CommandTester($command);
-        $commandTester->execute(['command' => 'sonata:block:debug']);
-
-        $this->assertSame("done!\n", $commandTester->getDisplay());
-    }
-
     public function testExecuteWithAlias(): void
     {
         $command = $this->application->find('debug:sonata:block');
@@ -71,30 +57,6 @@ final class DebugBlocksCommandTest extends TestCase
         $commandTester->execute(['command' => 'debug:sonata:block']);
 
         $this->assertSame("done!\n", $commandTester->getDisplay());
-    }
-
-    /**
-     * @group legacy
-     *
-     * @expectedDeprecation Method Sonata\BlockBundle\Command\DebugBlocksCommand::getBlockServiceManager() is deprecated since sonata-project/block-bundle 3.16 and will be removed with the 4.0 release.Use the Sonata\BlockBundle\Command\DebugBlocksCommand::$blockManager property instead.
-     */
-    public function testGetBlockServiceManager(): void
-    {
-        $blockManager = $this->createMock(BlockServiceManagerInterface::class);
-        $blockManager
-            ->expects($this->any())
-            ->method('getServices')
-            ->willReturn([]);
-
-        (new DebugBlocksCommand(null, $blockManager))->getBlockServiceManager();
-    }
-
-    public function testConstructorArguments(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Argument 2 passed to Sonata\BlockBundle\Command\DebugBlocksCommand::__construct() must be an instance of Sonata\BlockBundle\Block\BlockServiceManagerInterface, NULL given.');
-
-        new DebugBlocksCommand();
     }
 
     /**
