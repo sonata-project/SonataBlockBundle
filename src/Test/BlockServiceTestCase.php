@@ -31,7 +31,7 @@ use Twig\Environment;
  *
  * @internal
  */
-abstract class InternalBlockServiceTestCase extends TestCase
+abstract class BlockServiceTestCase extends TestCase
 {
     /**
      * @var MockObject|BlockServiceManagerInterface
@@ -51,7 +51,7 @@ abstract class InternalBlockServiceTestCase extends TestCase
     /**
      * @internal
      */
-    protected function internalSetUp(): void
+    protected function setUp(): void
     {
         $blockLoader = $this->createMock(BlockLoaderInterface::class);
         $this->blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
@@ -95,24 +95,5 @@ abstract class InternalBlockServiceTestCase extends TestCase
         ksort($blockSettings);
 
         $this->assertSame($completeExpectedOptions, $blockSettings);
-    }
-}
-
-// NEXT_MAJOR: Remove this hack when dropping support for PHPUnit 7
-if (version_compare(\PHPUnit\Runner\Version::id(), '8.0', '<')) {
-    abstract class BlockServiceTestCase extends InternalBlockServiceTestCase
-    {
-        protected function setUp()
-        {
-            $this->internalSetUp();
-        }
-    }
-} else {
-    abstract class BlockServiceTestCase extends InternalBlockServiceTestCase
-    {
-        protected function setUp(): void
-        {
-            $this->internalSetUp();
-        }
     }
 }
