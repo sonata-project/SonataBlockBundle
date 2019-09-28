@@ -17,9 +17,11 @@ use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Form\Mapper\FormMapper;
 use Sonata\BlockBundle\Form\Type\ContainerTemplateType;
 use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\BlockBundle\Meta\MetadataInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Type\CollectionType;
 use Sonata\Form\Type\ImmutableArrayType;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,13 +32,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-final class ContainerBlockService extends AbstractAdminBlockService
+final class ContainerBlockService extends AbstractBlockService implements EditableBlockService
 {
-    public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
+    public function configureCreateForm(FormMapper $form, BlockInterface $block): void
     {
-        $formMapper->add('enabled');
+        $this->configureEditForm($form, $block);
+    }
 
-        $formMapper->add('settings', ImmutableArrayType::class, [
+    public function configureEditForm(FormMapper $form, BlockInterface $block): void
+    {
+        $form->add('enabled');
+
+        $form->add('settings', ImmutableArrayType::class, [
             'keys' => [
                 ['code', TextType::class, [
                     'required' => false,
@@ -56,7 +63,7 @@ final class ContainerBlockService extends AbstractAdminBlockService
             'translation_domain' => 'SonataBlockBundle',
         ]);
 
-        $formMapper->add('children', CollectionType::class, [], [
+        $form->add('children', CollectionType::class, [], [
             'admin_code' => 'sonata.page.admin.block',
             'edit' => 'inline',
             'inline' => 'table',
@@ -73,6 +80,10 @@ final class ContainerBlockService extends AbstractAdminBlockService
         ], $response);
     }
 
+    public function validate(ErrorElement $errorElement, BlockInterface $block): void
+    {
+    }
+
     public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -83,9 +94,9 @@ final class ContainerBlockService extends AbstractAdminBlockService
         ]);
     }
 
-    public function getBlockMetadata($code = null)
+    public function getMetadata(): MetadataInterface
     {
-        return new Metadata($this->getName(), (null !== $code ? $code : $this->getName()), false, 'SonataBlockBundle', [
+        return new Metadata('sonata.block.service.container', null, null, 'SonataBlockBundle', [
             'class' => 'fa fa-square-o',
         ]);
     }

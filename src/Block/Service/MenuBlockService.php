@@ -17,9 +17,9 @@ use Knp\Menu\ItemInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Form\Mapper\FormMapper;
-use Sonata\BlockBundle\Menu\MenuRegistry;
 use Sonata\BlockBundle\Menu\MenuRegistryInterface;
 use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\BlockBundle\Meta\MetadataInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Type\ImmutableArrayType;
 use Sonata\Form\Validator\ErrorElement;
@@ -34,7 +34,7 @@ use Twig\Environment;
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-final class MenuBlockService extends AbstractAdminBlockService
+final class MenuBlockService extends AbstractBlockService implements EditableBlockService
 {
     /**
      * @var MenuProviderInterface
@@ -47,15 +47,14 @@ final class MenuBlockService extends AbstractAdminBlockService
     protected $menuRegistry;
 
     public function __construct(
-        string $name,
         Environment $twig,
         MenuProviderInterface $menuProvider,
-        MenuRegistryInterface $menuRegistry = null
+        MenuRegistryInterface $menuRegistry
     ) {
-        parent::__construct($name, $twig);
+        parent::__construct($twig);
 
         $this->menuProvider = $menuProvider;
-        $this->menuRegistry = $menuRegistry ?: new MenuRegistry();
+        $this->menuRegistry = $menuRegistry;
     }
 
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
@@ -74,7 +73,12 @@ final class MenuBlockService extends AbstractAdminBlockService
         return $this->renderResponse($blockContext->getTemplate(), $responseSettings, $response);
     }
 
-    public function buildEditForm(FormMapper $form, BlockInterface $block): void
+    public function configureCreateForm(FormMapper $form, BlockInterface $block): void
+    {
+        $this->configureEditForm($form, $block);
+    }
+
+    public function configureEditForm(FormMapper $form, BlockInterface $block): void
     {
         $form->add('settings', ImmutableArrayType::class, [
             'keys' => $this->getFormSettingsKeys(),
@@ -82,7 +86,7 @@ final class MenuBlockService extends AbstractAdminBlockService
         ]);
     }
 
-    public function validateBlock(ErrorElement $errorElement, BlockInterface $block): void
+    public function validate(ErrorElement $errorElement, BlockInterface $block): void
     {
         if (($name = $block->getSetting('menu_name')) && '' !== $name && !$this->menuProvider->has($name)) {
             // If we specified a menu_name, check that it exists
@@ -95,7 +99,7 @@ final class MenuBlockService extends AbstractAdminBlockService
     public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'title' => $this->getName(),
+            'title' => '',
             'cache_policy' => 'public',
             'template' => '@SonataBlock/Block/block_core_menu.html.twig',
             'menu_name' => '',
@@ -110,9 +114,9 @@ final class MenuBlockService extends AbstractAdminBlockService
         ]);
     }
 
-    public function getBlockMetadata($code = null)
+    public function getMetadata(): MetadataInterface
     {
-        return new Metadata($this->getName(), (null !== $code ? $code : $this->getName()), false, 'SonataBlockBundle', [
+        return new Metadata('sonata.block.service.menu', null, null, 'SonataBlockBundle', [
             'class' => 'fa fa-bars',
         ]);
     }

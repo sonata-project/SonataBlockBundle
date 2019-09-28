@@ -101,7 +101,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
             }
         }
 
-        return $this->sortServices($this->services);
+        return $this->services;
     }
 
     public function getServicesByContext(string $context, bool $includeContainers = true): array
@@ -122,7 +122,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
             $services[$name] = $this->getService($name);
         }
 
-        return $this->sortServices($services);
+        return $services;
     }
 
     /**
@@ -148,9 +148,6 @@ final class BlockServiceManager implements BlockServiceManagerInterface
 
             if ($blockService instanceof EditableBlockService) {
                 $blockService->validate($errorElement, $block);
-            } else {
-                // NEXT_MAJOR: Remove this case
-                $this->get($block)->validateBlock($errorElement, $block);
             }
 
             $this->inValidate = false;
@@ -177,23 +174,5 @@ final class BlockServiceManager implements BlockServiceManagerInterface
         }
 
         return $this->services[$type];
-    }
-
-    /**
-     * Sort alphabetically services.
-     *
-     * @param BlockServiceInterface[] $services
-     */
-    private function sortServices(array $services): array
-    {
-        uasort($services, static function (BlockServiceInterface $a, BlockServiceInterface $b): int {
-            if ($a->getName() === $b->getName()) {
-                return 0;
-            }
-
-            return ($a->getName() < $b->getName()) ? -1 : 1;
-        });
-
-        return $services;
     }
 }

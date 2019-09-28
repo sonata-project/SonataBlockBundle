@@ -88,44 +88,6 @@ final class BlockRendererTest extends TestCase
     }
 
     /**
-     * Test rendering a block that returns a wrong response.
-     */
-    public function testRenderWithWrongResponse(): void
-    {
-        $this->expectException(\TypeError::class);
-        $this->expectExceptionMessageRegExp('{^Return value of [^:]+::execute\(\) must be an instance of [^,]+, string returned$}');
-
-        // GIVEN
-
-        // mock a block service that returns a string response
-        $service = $this->createMock(BlockServiceInterface::class);
-        $service->expects($this->once())->method('load');
-        $service->expects($this->once())->method('execute')->willReturn('wrong response');
-
-        $this->blockServiceManager->expects($this->once())->method('get')->willReturn($service);
-
-        // mock the exception strategy manager to rethrow the exception
-        $this->exceptionStrategyManager->expects($this->once())
-            ->method('handleException')
-            ->willReturnCallback(static function (\Throwable $e): void {
-                throw $e;
-            });
-
-        // mock the logger to ensure a crit message is logged
-        $this->logger->expects($this->once())->method('error');
-
-        // mock a block object
-        $block = $this->createMock(BlockInterface::class);
-        $blockContext = new BlockContext($block);
-
-        // WHEN
-        $this->renderer->render($blockContext);
-
-        // THEN
-        // exception thrown
-    }
-
-    /**
      * Test rendering a block that throws an exception.
      */
     public function testRenderBlockWithException(): void

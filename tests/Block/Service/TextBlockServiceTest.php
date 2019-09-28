@@ -24,7 +24,7 @@ final class TextBlockServiceTest extends BlockServiceTestCase
 {
     public function testService(): void
     {
-        $service = new TextBlockService('sonata.page.block.text', $this->twig);
+        $service = new TextBlockService($this->twig);
 
         $block = new Block();
         $block->setType('core.text');
@@ -40,8 +40,8 @@ final class TextBlockServiceTest extends BlockServiceTestCase
         $formMapper = $this->createMock(FormMapper::class);
         $formMapper->expects($this->exactly(2))->method('add');
 
-        $service->buildCreateForm($formMapper, $block);
-        $service->buildEditForm($formMapper, $block);
+        $service->configureCreateForm($formMapper, $block);
+        $service->configureEditForm($formMapper, $block);
 
         $service->execute($blockContext);
     }

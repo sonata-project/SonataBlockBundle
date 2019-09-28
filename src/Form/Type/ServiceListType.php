@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Form\Type;
 
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
+use Sonata\BlockBundle\Block\Service\EditableBlockService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
@@ -57,7 +58,11 @@ final class ServiceListType extends AbstractType
             'choices' => static function (Options $options, $previousValue) use ($manager) {
                 $types = [];
                 foreach ($manager->getServicesByContext($options['context'], $options['include_containers']) as $code => $service) {
-                    $types[$code] = sprintf('%s - %s', $service->getName(), $code);
+                    if ($service instanceof EditableBlockService) {
+                        $types[$code] = sprintf('%s - %s', $service->getMetadata()->getTitle(), $code);
+                    } else {
+                        $types[$code] = sprintf('%s', $code);
+                    }
                 }
 
                 return $types;
