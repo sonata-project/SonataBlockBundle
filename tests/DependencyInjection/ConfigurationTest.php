@@ -58,13 +58,6 @@ final class ConfigurationTest extends TestCase
             'profiler' => [
                 'enabled' => '%kernel.debug%',
                 'template' => '@SonataBlock/Profiler/block.html.twig',
-                'container_types' => [
-                    0 => 'sonata.block.service.container',
-                    1 => 'sonata.page.block.container',
-                    2 => 'sonata.dashboard.block.container',
-                    3 => 'cmf.block.container',
-                    4 => 'cmf.block.slideshow',
-                ],
             ],
             'context_manager' => 'sonata.block.context_manager.default',
             'http_cache' => [
@@ -115,23 +108,5 @@ final class ConfigurationTest extends TestCase
             [['cms']],
             [['cms', 'sonata_page_bundle']],
         ];
-    }
-
-    public function testOptionsDuplicated(): void
-    {
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Invalid configuration for path "sonata_block": You cannot have different config options for sonata_block.profiler.container_types and sonata_block.container.types; the first one is deprecated, in case of doubt use the latter');
-
-        $defaultTemplates = [
-            '@SonataPage/Block/block_container.html.twig' => 'SonataPageBundle template',
-            '@SonataSeo/Block/block_social_container.html.twig' => 'SonataSeoBundle (to contain social buttons)',
-        ];
-
-        $processor = new Processor();
-        $processor->processConfiguration(new Configuration($defaultTemplates), [[
-            'default_contexts' => ['cms'],
-            'profiler' => ['container_types' => ['test_type']],
-            'container' => ['types' => ['test_type2'], 'templates' => []],
-        ]]);
     }
 }

@@ -61,8 +61,6 @@ final class SonataBlockExtension extends Extension
         $loader->load('exception.xml');
         $loader->load('commands.xml');
 
-        $this->fixConfigurationDeprecation($config);
-
         $this->configureBlockContainers($container, $config);
         $this->configureContext($container, $config);
         $this->configureLoaderChain($container, $config);
@@ -92,13 +90,6 @@ final class SonataBlockExtension extends Extension
         $container->setParameter('sonata.block.container.types', $config['container']['types']);
 
         $container->getDefinition('sonata.block.form.type.container_template')->replaceArgument(0, $config['container']['templates']);
-    }
-
-    public function fixConfigurationDeprecation(array &$config): void
-    {
-        if (\count(array_diff($config['profiler']['container_types'], $config['container']['types']))) {
-            $config['container']['types'] = array_merge($config['profiler']['container_types'], $config['container']['types']);
-        }
     }
 
     public function configureContext(ContainerBuilder $container, array $config): void

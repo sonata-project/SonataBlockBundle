@@ -60,28 +60,15 @@ final class Configuration implements ConfigurationInterface
                         }
                     }
 
-                    if (isset($value['profiler']['container_types']) && !empty($value['profiler']['container_types'])
-                        && isset($value['container']['types']) && !empty($value['container']['types'])
-                        && 0 !== \count(array_diff($value['profiler']['container_types'], $value['container']['types']))) {
-                        throw new \RuntimeException('You cannot have different config options for sonata_block.profiler.container_types and sonata_block.container.types; the first one is deprecated, in case of doubt use the latter');
-                    }
-
                     return $value;
                 })
             ->end()
             ->children()
                 ->arrayNode('profiler')
                     ->addDefaultsIfNotSet()
-                    ->fixXmlConfig('container_type', 'container_types')
                     ->children()
                         ->scalarNode('enabled')->defaultValue('%kernel.debug%')->end()
                         ->scalarNode('template')->defaultValue('@SonataBlock/Profiler/block.html.twig')->end()
-                        ->arrayNode('container_types')
-                            ->isRequired()
-                            // add default value to well know users of BlockBundle
-                            ->defaultValue(['sonata.block.service.container', 'sonata.page.block.container', 'sonata.dashboard.block.container', 'cmf.block.container', 'cmf.block.slideshow'])
-                            ->prototype('scalar')->end()
-                        ->end()
                     ->end()
                 ->end()
 
