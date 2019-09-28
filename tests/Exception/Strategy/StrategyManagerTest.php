@@ -31,52 +31,52 @@ final class StrategyManagerTest extends TestCase
     /**
      * @var StrategyManager
      */
-    protected $manager;
+    private $manager;
 
     /**
      * @var MockObject|ContainerInterface
      */
-    protected $container;
+    private $container;
 
     /**
      * @var array
      */
-    protected $filters = [];
+    private $filters = [];
 
     /**
      * @var array
      */
-    protected $renderers = [];
+    private $renderers = [];
 
     /**
      * @var array
      */
-    protected $blockFilters = [];
+    private $blockFilters = [];
 
     /**
      * @var array
      */
-    protected $blockRenderers = [];
+    private $blockRenderers = [];
 
     /**
      * @var MockObject|RendererInterface
      */
-    protected $renderer1;
+    private $renderer1;
 
     /**
      * @var MockObject|RendererInterface
      */
-    protected $renderer2;
+    private $renderer2;
 
     /**
      * @var MockObject|FilterInterface
      */
-    protected $filter1;
+    private $filter1;
 
     /**
      * @var MockObject|FilterInterface
      */
-    protected $filter2;
+    private $filter2;
 
     /**
      * setup a basic scenario to avoid long test setup.

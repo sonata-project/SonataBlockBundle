@@ -25,7 +25,7 @@ final class ContainerTemplateType extends AbstractType
     /**
      * @var array
      */
-    protected $templateChoices;
+    private $templateChoices;
 
     public function __construct(array $templateChoices)
     {

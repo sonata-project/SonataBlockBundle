@@ -39,12 +39,12 @@ final class MenuBlockService extends AbstractBlockService implements EditableBlo
     /**
      * @var MenuProviderInterface
      */
-    protected $menuProvider;
+    private $menuProvider;
 
     /**
      * @var MenuRegistryInterface
      */
-    protected $menuRegistry;
+    private $menuRegistry;
 
     public function __construct(
         Environment $twig,
@@ -121,7 +121,7 @@ final class MenuBlockService extends AbstractBlockService implements EditableBlo
         ]);
     }
 
-    protected function getFormSettingsKeys(): array
+    private function getFormSettingsKeys(): array
     {
         $choiceOptions = [
             'required' => false,
@@ -181,9 +181,10 @@ final class MenuBlockService extends AbstractBlockService implements EditableBlo
      * Gets the menu to render.
      *
      *
+     *
      * @return ItemInterface|string
      */
-    protected function getMenu(BlockContextInterface $blockContext)
+    private function getMenu(BlockContextInterface $blockContext)
     {
         $settings = $blockContext->getSettings();
 
@@ -193,7 +194,7 @@ final class MenuBlockService extends AbstractBlockService implements EditableBlo
     /**
      * Replaces setting keys with knp menu item options keys.
      */
-    protected function getMenuOptions(array $settings): array
+    private function getMenuOptions(array $settings): array
     {
         $mapping = [
             'current_class' => 'currentClass',

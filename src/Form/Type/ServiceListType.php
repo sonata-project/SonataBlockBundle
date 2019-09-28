@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ServiceListType extends AbstractType
 {
-    protected $manager;
+    private $manager;
 
     public function __construct(BlockServiceManagerInterface $manager)
     {
