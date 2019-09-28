@@ -104,7 +104,7 @@ final class ContainerBlockService extends AbstractBlockService implements Editab
     /**
      * Returns a decorator object/array from the container layout setting.
      */
-    protected function getDecorator(string $layout): array
+    private function getDecorator(string $layout): array
     {
         $key = '{{ CONTENT }}';
         if (false === strpos($layout, $key)) {

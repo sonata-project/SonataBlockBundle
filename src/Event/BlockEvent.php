@@ -21,12 +21,12 @@ final class BlockEvent extends Event
     /**
      * @var array
      */
-    protected $settings;
+    private $settings;
 
     /**
      * @var BlockInterface[]
      */
-    protected $blocks = [];
+    private $blocks = [];
 
     public function __construct(array $settings = [])
     {

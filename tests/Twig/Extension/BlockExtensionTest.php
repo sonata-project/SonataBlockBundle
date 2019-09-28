@@ -25,17 +25,17 @@ final class BlockExtensionTest extends TestCase
     /**
      * @var MockObject|BlockHelper
      */
-    protected $blockHelper;
+    private $blockHelper;
 
     /**
      * @var BlockExtension
      */
-    protected $blockExtension;
+    private $blockExtension;
 
     /**
      * @var Environment
      */
-    protected $env;
+    private $env;
 
     public function setUp(): void
     {

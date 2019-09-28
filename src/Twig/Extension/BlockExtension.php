@@ -22,7 +22,7 @@ final class BlockExtension extends AbstractExtension
     /**
      * @var BlockHelper
      */
-    protected $blockHelper;
+    private $blockHelper;
 
     public function __construct(BlockHelper $blockHelper)
     {
