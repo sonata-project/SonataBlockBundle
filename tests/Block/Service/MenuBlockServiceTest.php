@@ -119,17 +119,17 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
                 'translation_domain' => 'SonataBlockBundle',
             ]);
 
-        $blockService = new MenuBlockService('sonata.page.block.menu', $this->twig, $this->menuProvider, $this->menuRegistry);
-        $blockService->buildEditForm($formMapper, $block);
+        $blockService = new MenuBlockService($this->twig, $this->menuProvider, $this->menuRegistry);
+        $blockService->configureEditForm($formMapper, $block);
     }
 
     public function testDefaultSettings(): void
     {
-        $blockService = new MenuBlockService('sonata.page.block.menu', $this->twig, $this->menuProvider, $this->menuRegistry);
+        $blockService = new MenuBlockService($this->twig, $this->menuProvider, $this->menuRegistry);
         $blockContext = $this->getBlockContext($blockService);
 
         $this->assertSettings([
-            'title' => 'sonata.page.block.menu',
+            'title' => '',
             'cache_policy' => 'public',
             'template' => '@SonataBlock/Block/block_core_menu.html.twig',
             'menu_name' => '',

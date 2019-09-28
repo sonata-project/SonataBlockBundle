@@ -27,7 +27,7 @@ final class RssBlockServiceTest extends BlockServiceTestCase
      */
     public function testService(): void
     {
-        $service = new RssBlockService('sonata.page.block.rss', $this->twig);
+        $service = new RssBlockService($this->twig);
 
         $block = new Block();
         $block->setType('core.text');
@@ -43,8 +43,8 @@ final class RssBlockServiceTest extends BlockServiceTestCase
         $formMapper = $this->createMock(FormMapper::class);
         $formMapper->expects($this->exactly(2))->method('add');
 
-        $service->buildCreateForm($formMapper, $block);
-        $service->buildEditForm($formMapper, $block);
+        $service->configureCreateForm($formMapper, $block);
+        $service->configureEditForm($formMapper, $block);
 
         $service->execute($blockContext);
     }

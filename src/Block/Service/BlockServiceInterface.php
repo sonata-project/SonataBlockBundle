@@ -25,8 +25,6 @@ interface BlockServiceInterface
 {
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response;
 
-    public function getName(): string;
-
     public function load(BlockInterface $block): void;
 
     public function getCacheKeys(BlockInterface $block): array;

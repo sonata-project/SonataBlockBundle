@@ -16,7 +16,13 @@ namespace Sonata\BlockBundle\Tests\Command;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
+use Sonata\BlockBundle\Block\Service\EditableBlockService;
 use Sonata\BlockBundle\Command\DebugBlocksCommand;
+use Sonata\BlockBundle\Form\Mapper\FormMapper;
+use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\BlockBundle\Meta\MetadataInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -72,20 +78,38 @@ final class DebugBlocksCommandTest extends TestCase
             ->expects($this->any())
             ->method('getServices')
             ->willReturn([
-                'test.without_options' => new class('Test service block without options', $twig) extends AbstractBlockService {
+                'test.without_options' => new class($twig) extends AbstractBlockService {
                 },
-                'test.with_simple_option' => new class('Test service block with simple option', $twig) extends AbstractBlockService {
+                'test.with_simple_option' => new class($twig) extends AbstractBlockService {
                     public function configureSettings(OptionsResolver $resolver): void
                     {
                         $resolver->setDefault('limit', 150);
                         $resolver->setAllowedTypes('limit', 'int');
                     }
                 },
-                'test.with_required_option' => new class('Test service block with required option', $twig) extends AbstractBlockService {
+                'test.with_required_option' => new class($twig) extends AbstractBlockService {
                     public function configureSettings(OptionsResolver $resolver): void
                     {
                         $resolver->setRequired('limit');
                         $resolver->setAllowedTypes('limit', 'int');
+                    }
+                },
+                'test.with_metadata' => new class($twig) extends AbstractBlockService implements EditableBlockService {
+                    public function configureEditForm(FormMapper $form, BlockInterface $block): void
+                    {
+                    }
+
+                    public function configureCreateForm(FormMapper $form, BlockInterface $block): void
+                    {
+                    }
+
+                    public function validate(ErrorElement $errorElement, BlockInterface $block): void
+                    {
+                    }
+
+                    public function getMetadata(): MetadataInterface
+                    {
+                        return new Metadata('My block title');
                     }
                 },
             ]);
@@ -98,13 +122,15 @@ final class DebugBlocksCommandTest extends TestCase
 
         $expected = <<<EOF
 
->> Test service block without options (test.without_options)
+>> test.without_options
 
->> Test service block with simple option (test.with_simple_option)
+>> test.with_simple_option
     limit                         150
 
->> Test service block with required option (test.with_required_option)
+>> test.with_required_option
     limit
+
+>> test.with_metadata (My block title)
 done!
 
 EOF;

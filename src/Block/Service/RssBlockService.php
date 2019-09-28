@@ -16,6 +16,7 @@ namespace Sonata\BlockBundle\Block\Service;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Form\Mapper\FormMapper;
 use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\BlockBundle\Meta\MetadataInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Type\ImmutableArrayType;
 use Sonata\Form\Validator\ErrorElement;
@@ -27,7 +28,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-final class RssBlockService extends AbstractAdminBlockService
+final class RssBlockService extends AbstractBlockService implements EditableBlockService
 {
     public function configureSettings(OptionsResolver $resolver): void
     {
@@ -41,9 +42,14 @@ final class RssBlockService extends AbstractAdminBlockService
         ]);
     }
 
-    public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
+    public function configureCreateForm(FormMapper $form, BlockInterface $block): void
     {
-        $formMapper->add('settings', ImmutableArrayType::class, [
+        $this->configureEditForm($form, $block);
+    }
+
+    public function configureEditForm(FormMapper $form, BlockInterface $block): void
+    {
+        $form->add('settings', ImmutableArrayType::class, [
             'keys' => [
                 ['url', UrlType::class, [
                     'required' => false,
@@ -70,7 +76,7 @@ final class RssBlockService extends AbstractAdminBlockService
         ]);
     }
 
-    public function validateBlock(ErrorElement $errorElement, BlockInterface $block): void
+    public function validate(ErrorElement $errorElement, BlockInterface $block): void
     {
         $errorElement
             ->with('settings[url]')
@@ -119,9 +125,9 @@ final class RssBlockService extends AbstractAdminBlockService
         ], $response);
     }
 
-    public function getBlockMetadata($code = null)
+    public function getMetadata(): MetadataInterface
     {
-        return new Metadata($this->getName(), (null !== $code ? $code : $this->getName()), false, 'SonataBlockBundle', [
+        return new Metadata('sonata.block.service.rss', null, null, 'SonataBlockBundle', [
             'class' => 'fa fa-rss-square',
         ]);
     }

@@ -14,17 +14,10 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Block\Service;
 
 use Sonata\BlockBundle\Block\BlockContextInterface;
-use Sonata\BlockBundle\Form\Mapper\FormMapper;
-use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 final class EmptyBlockService extends AbstractBlockService
 {
-    public function buildEditForm(FormMapper $form, BlockInterface $block): void
-    {
-        throw new \RuntimeException('Not used, this block renders an empty result if no block document can be found');
-    }
-
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
         return new Response();

@@ -94,31 +94,4 @@ final class BlockServiceManagerTest extends TestCase
 
         $this->assertNotEmpty($manager->getServicesByContext('fake'));
     }
-
-    /**
-     * @group legacy
-     */
-    public function testOrderServices(): void
-    {
-        $container = $this->createMock(ContainerInterface::class);
-        $manager = new BlockServiceManager($container, true);
-
-        $serviceAbc = $this->createMock(BlockServiceInterface::class);
-        $serviceAbc->expects($this->any())->method('getName')->willReturn('GHI');
-        $manager->add('ghi', $serviceAbc);
-
-        $serviceAbc = $this->createMock(BlockServiceInterface::class);
-        $serviceAbc->expects($this->any())->method('getName')->willReturn('ABC');
-        $manager->add('abc', $serviceAbc);
-
-        $serviceAbc = $this->createMock(BlockServiceInterface::class);
-        $serviceAbc->expects($this->any())->method('getName')->willReturn('DEF');
-        $manager->add('def', $serviceAbc);
-
-        $services = array_keys($manager->getServices());
-
-        $this->assertSame('abc', $services[0], 'After order, the first service should be "ABC"');
-        $this->assertSame('def', $services[1], 'After order, the second service should be "DEF"');
-        $this->assertSame('ghi', $services[2], 'After order, the third service should be "GHI"');
-    }
 }

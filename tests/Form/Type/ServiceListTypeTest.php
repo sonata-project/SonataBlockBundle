@@ -53,7 +53,6 @@ final class ServiceListTypeTest extends TestCase
     public function testOptionWithValidContext(): void
     {
         $blockService = $this->createMock(BlockServiceInterface::class);
-        $blockService->expects($this->once())->method('getName')->willReturn('value');
 
         $blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
         $blockServiceManager
@@ -81,7 +80,7 @@ final class ServiceListTypeTest extends TestCase
             'include_containers' => false,
             'context' => 'cms',
             'choices' => [
-                'my.service.code' => 'value - my.service.code',
+                'my.service.code' => 'my.service.code',
             ],
             'empty_data' => '',
             'empty_value' => null,

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Command;
 
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
+use Sonata\BlockBundle\Block\Service\EditableBlockService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -58,7 +59,12 @@ final class DebugBlocksCommand extends Command
 
         foreach ($services as $code => $service) {
             $output->writeln('');
-            $output->writeln(sprintf('<info>>> %s</info> (<comment>%s</comment>)', $service->getName(), $code));
+
+            $title = '';
+            if ($service instanceof EditableBlockService) {
+                $title = sprintf(' (<comment>%s</comment>)', $service->getMetadata()->getTitle());
+            }
+            $output->writeln(sprintf('<info>>> %s</info>%s', $code, $title));
 
             $resolver = new OptionsResolver();
             $service->configureSettings($resolver);
