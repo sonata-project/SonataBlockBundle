@@ -32,8 +32,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Twig\Environment;
 
 /**
- * @final since sonata-project/block-bundle 3.0
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 final class MenuBlockService extends AbstractAdminBlockService
