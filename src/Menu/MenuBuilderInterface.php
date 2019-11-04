@@ -26,7 +26,6 @@ interface MenuBuilderInterface
     /**
      * Create a knp menu.
      *
-     *
      * @return ItemInterface
      */
     public function buildMenu(FactoryInterface $factory, array $options);

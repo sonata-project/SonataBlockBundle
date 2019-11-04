@@ -81,14 +81,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
             } else {
                 $class = 'c' === static::class[0] && 0 === strpos(static::class, "class@anonymous\0") ? get_parent_class(static::class).'@anonymous' : static::class;
 
-                throw new \TypeError(sprintf(
-                    'Argument 1 passed to %s::%s() must be a string or an instance of %s or %s, %s given.',
-                    $class,
-                    __FUNCTION__,
-                    Environment::class,
-                    EngineInterface::class,
-                    \is_object($templatingOrDeprecatedName) ? 'instance of '.\get_class($templatingOrDeprecatedName) : \gettype($templatingOrDeprecatedName)
-                ));
+                throw new \TypeError(sprintf('Argument 1 passed to %s::%s() must be a string or an instance of %s or %s, %s given.', $class, __FUNCTION__, Environment::class, EngineInterface::class, \is_object($templatingOrDeprecatedName) ? 'instance of '.\get_class($templatingOrDeprecatedName) : \gettype($templatingOrDeprecatedName)));
             }
         }
     }
@@ -135,9 +128,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
         if (!$resolver instanceof OptionsResolver) {
-            throw new \BadMethodCallException(
-                sprintf('Calling %s with %s is unsupported', __METHOD__, \get_class($resolver))
-            );
+            throw new \BadMethodCallException(sprintf('Calling %s with %s is unsupported', __METHOD__, \get_class($resolver)));
         }
 
         $this->configureSettings($resolver);
@@ -204,12 +195,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
         );
 
         if (null !== $this->twig) {
-            throw new \BadMethodCallException(sprintf(
-                'Calling %1$s::%2$s() is not allowed when an instance of %3$s is passed as argument 1 to %1$s::__construct().',
-                $class,
-                __FUNCTION__,
-                Environment::class
-            ));
+            throw new \BadMethodCallException(sprintf('Calling %1$s::%2$s() is not allowed when an instance of %3$s is passed as argument 1 to %1$s::__construct().', $class, __FUNCTION__, Environment::class));
         }
 
         return $this->templating;

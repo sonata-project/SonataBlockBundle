@@ -81,10 +81,7 @@ class MenuBlockService extends AbstractAdminBlockService
                 $this->menuRegistry->add($menu);
             }
         } else {
-            throw new \InvalidArgumentException(sprintf(
-                'MenuRegistry must be either null or instance of %s',
-                MenuRegistryInterface::class
-            ));
+            throw new \InvalidArgumentException(sprintf('MenuRegistry must be either null or instance of %s', MenuRegistryInterface::class));
         }
     }
 
@@ -209,7 +206,6 @@ class MenuBlockService extends AbstractAdminBlockService
     /**
      * Gets the menu to render.
      *
-     *
      * @return ItemInterface|string
      */
     protected function getMenu(BlockContextInterface $blockContext)
@@ -221,7 +217,6 @@ class MenuBlockService extends AbstractAdminBlockService
 
     /**
      * Replaces setting keys with knp menu item options keys.
-     *
      *
      * @return array
      */

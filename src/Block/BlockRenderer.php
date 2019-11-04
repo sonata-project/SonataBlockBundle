@@ -129,7 +129,6 @@ class BlockRenderer implements BlockRendererInterface
     /**
      * This method is responsible to cascade ttl to the parent block.
      *
-     *
      * @return Response
      */
     protected function addMetaInformation(Response $response, BlockContextInterface $blockContext, BlockServiceInterface $service)

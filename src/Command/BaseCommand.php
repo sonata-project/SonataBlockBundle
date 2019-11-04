@@ -30,13 +30,7 @@ abstract class BaseCommand extends Command
     {
         // NEXT_MAJOR: Remove the default value for argument 2 and the following condition
         if (null === $blockManager) {
-            throw new \InvalidArgumentException(sprintf(
-                'Argument 2 passed to %s::%s() must be an instance of %s, %s given.',
-                static::class,
-                __FUNCTION__,
-                BlockServiceManagerInterface::class,
-                \gettype($blockManager)
-            ));
+            throw new \InvalidArgumentException(sprintf('Argument 2 passed to %s::%s() must be an instance of %s, %s given.', static::class, __FUNCTION__, BlockServiceManagerInterface::class, \gettype($blockManager)));
         }
 
         $this->blockManager = $blockManager;
