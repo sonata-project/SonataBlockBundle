@@ -28,7 +28,6 @@ interface BlockServiceManagerInterface
     /**
      * Return the block service linked to the link.
      *
-     *
      * @return BlockServiceInterface
      */
     public function get(BlockInterface $block);

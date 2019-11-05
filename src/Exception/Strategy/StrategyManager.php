@@ -130,7 +130,6 @@ class StrategyManager implements StrategyManagerInterface
     /**
      * Returns the exception renderer for given block.
      *
-     *
      * @throws \RuntimeException
      *
      * @return RendererInterface
@@ -151,7 +150,6 @@ class StrategyManager implements StrategyManagerInterface
 
     /**
      * Returns the exception filter for given block.
-     *
      *
      * @throws \RuntimeException
      *

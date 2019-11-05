@@ -43,7 +43,6 @@ interface BlockServiceInterface
      *
      * NEXT_MAJOR: rename this method.
      *
-     *
      * @deprecated since version 2.3, to be renamed in 4.0.
      *             Use the method configureSettings instead.
      *             This method will be added to the BlockServiceInterface with SonataBlockBundle 4.0
