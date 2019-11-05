@@ -238,7 +238,6 @@ final class StrategyManagerTest extends TestCase
     /**
      * Returns a mock container with defined services.
      *
-     *
      * @return ContainerInterface
      */
     protected function getMockContainer(array $services = [])
