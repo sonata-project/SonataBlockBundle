@@ -209,7 +209,6 @@ class MenuBlockService extends AbstractAdminBlockService
     /**
      * Gets the menu to render.
      *
-     *
      * @return ItemInterface|string
      */
     protected function getMenu(BlockContextInterface $blockContext)
@@ -221,7 +220,6 @@ class MenuBlockService extends AbstractAdminBlockService
 
     /**
      * Replaces setting keys with knp menu item options keys.
-     *
      *
      * @return array
      */
