@@ -180,8 +180,6 @@ final class MenuBlockService extends AbstractBlockService implements EditableBlo
     /**
      * Gets the menu to render.
      *
-     *
-     *
      * @return ItemInterface|string
      */
     private function getMenu(BlockContextInterface $blockContext)
