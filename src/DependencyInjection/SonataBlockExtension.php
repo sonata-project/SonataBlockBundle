@@ -71,9 +71,6 @@ final class SonataBlockExtension extends Extension
         $this->configureForm($container, $config);
         $this->configureProfiler($container, $config);
         $this->configureException($container, $config);
-        if (\PHP_VERSION_ID < 70000) {
-            $this->configureClassesToCompile();
-        }
 
         if (null === $config['templates']['block_base']) {
             if (isset($bundles['SonataPageBundle'])) {
@@ -223,52 +220,6 @@ final class SonataBlockExtension extends Extension
         $defaultRenderer = $config['exception']['default']['renderer'];
         $definition->addMethodCall('setDefaultFilter', [$defaultFilter]);
         $definition->addMethodCall('setDefaultRenderer', [$defaultRenderer]);
-    }
-
-    /**
-     * Add class to compile.
-     */
-    public function configureClassesToCompile(): void
-    {
-        if (!\is_callable([$this, 'addClassesToCompile'])) {
-            return;
-        }
-
-        $this->addClassesToCompile([
-            'Sonata\\BlockBundle\\Block\\BlockLoaderChain',
-            'Sonata\\BlockBundle\\Block\\BlockLoaderInterface',
-            'Sonata\\BlockBundle\\Block\\BlockRenderer',
-            'Sonata\\BlockBundle\\Block\\BlockRendererInterface',
-            'Sonata\\BlockBundle\\Block\\BlockServiceInterface',
-            'Sonata\\BlockBundle\\Block\\BlockServiceManager',
-            'Sonata\\BlockBundle\\Block\\BlockServiceManagerInterface',
-            'Sonata\\BlockBundle\\Block\\Loader\\ServiceLoader',
-            'Sonata\\BlockBundle\\Block\\Service\\EmptyBlockService',
-            'Sonata\\BlockBundle\\Block\\Service\\RssBlockService',
-            'Sonata\\BlockBundle\\Block\\Service\\MenuBlockService',
-            'Sonata\\BlockBundle\\Block\\Service\\TextBlockService',
-            'Sonata\\BlockBundle\\Exception\\BlockExceptionInterface',
-            'Sonata\\BlockBundle\\Exception\\BlockNotFoundException',
-            'Sonata\\BlockBundle\\Exception\\Filter\\DebugOnlyFilter',
-            'Sonata\\BlockBundle\\Exception\\Filter\\FilterInterface',
-            'Sonata\\BlockBundle\\Exception\\Filter\\IgnoreClassFilter',
-            'Sonata\\BlockBundle\\Exception\\Filter\\KeepAllFilter',
-            'Sonata\\BlockBundle\\Exception\\Filter\\KeepNoneFilter',
-            'Sonata\\BlockBundle\\Exception\\Renderer\\InlineDebugRenderer',
-            'Sonata\\BlockBundle\\Exception\\Renderer\\InlineRenderer',
-            'Sonata\\BlockBundle\\Exception\\Renderer\\MonkeyThrowRenderer',
-            'Sonata\\BlockBundle\\Exception\\Renderer\\RendererInterface',
-            'Sonata\\BlockBundle\\Exception\\Strategy\\StrategyManager',
-            'Sonata\\BlockBundle\\Exception\\Strategy\\StrategyManagerInterface',
-            'Sonata\\BlockBundle\\Form\\Type\\ServiceListType',
-            'Sonata\\BlockBundle\\Model\\BaseBlock',
-            'Sonata\\BlockBundle\\Model\\Block',
-            'Sonata\\BlockBundle\\Model\\BlockInterface',
-            'Sonata\\BlockBundle\\Model\\BlockManagerInterface',
-            'Sonata\\BlockBundle\\Model\\EmptyBlock',
-            'Sonata\\BlockBundle\\Twig\\Extension\\BlockExtension',
-            'Sonata\\BlockBundle\\Twig\\GlobalVariables',
-        ]);
     }
 
     public function getNamespace()
