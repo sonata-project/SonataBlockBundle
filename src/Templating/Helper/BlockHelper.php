@@ -341,26 +341,23 @@ class BlockHelper
         return $results;
     }
 
-    /**
-     * @return CacheAdapterInterface|false
-     */
-    private function getCacheService(BlockInterface $block, array &$stats = null)
+    private function getCacheService(BlockInterface $block, array &$stats = null): ?CacheAdapterInterface
     {
         if (!$this->cacheManager) {
-            return false;
+            return null;
         }
 
         // type by block class
         $class = ClassUtils::getClass($block);
-        $cacheServiceId = isset($this->cacheBlocks['by_class'][$class]) ? $this->cacheBlocks['by_class'][$class] : false;
+        $cacheServiceId = $this->cacheBlocks['by_class'][$class] ?? null;
 
         // type by block service
-        if (!$cacheServiceId) {
-            $cacheServiceId = isset($this->cacheBlocks['by_type'][$block->getType()]) ? $this->cacheBlocks['by_type'][$block->getType()] : false;
+        if (null === $cacheServiceId) {
+            $cacheServiceId = $this->cacheBlocks['by_type'][$block->getType()] ?? null;
         }
 
-        if (!$cacheServiceId) {
-            return false;
+        if (null === $cacheServiceId) {
+            return null;
         }
 
         if ($this->stopwatch) {

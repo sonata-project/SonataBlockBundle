@@ -85,7 +85,7 @@ final class BlockContextManager implements BlockContextManagerInterface
         return $this->blockLoader->exists($type);
     }
 
-    public function get($meta, array $settings = [])
+    public function get($meta, array $settings = []): BlockContextInterface
     {
         if (!$meta instanceof BlockInterface) {
             $block = $this->blockLoader->load($meta);
@@ -96,10 +96,6 @@ final class BlockContextManager implements BlockContextManagerInterface
             }
         } else {
             $block = $meta;
-        }
-
-        if (!$block instanceof BlockInterface) {
-            return false;
         }
 
         $originalSettings = $settings;

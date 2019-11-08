@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Block;
 
-use Sonata\BlockBundle\Exception\BlockOptionsException;
+use Sonata\BlockBundle\Exception\BlockNotFoundException;
+use Sonata\BlockBundle\Model\BlockInterface;
 
 interface BlockContextManagerInterface
 {
@@ -36,13 +37,11 @@ interface BlockContextManagerInterface
     public function addSettingsByClass(string $class, array $settings, bool $replace = false): void;
 
     /**
-     * @param mixed $meta Data send to the loader to load a block, can be anything...
+     * @param string|array|BlockInterface $meta Data send to the loader to load a block, can be anything...
      *
-     * @throws BlockOptionsException
-     *
-     * @return BlockContextInterface|false
+     * @throws BlockNotFoundException
      */
-    public function get($meta, array $settings = []);
+    public function get($meta, array $settings = []): BlockContextInterface;
 
     public function exists(string $type): bool;
 }
