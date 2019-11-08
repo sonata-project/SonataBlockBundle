@@ -54,6 +54,11 @@ final class SonataBlockExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('block.xml');
+
+        if (isset($bundles['KnpMenuBundle'])) {
+            $loader->load('knp_block.xml');
+        }
+
         $loader->load('form.xml');
         $loader->load('core.xml');
         $loader->load('exception.xml');

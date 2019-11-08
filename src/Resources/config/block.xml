@@ -17,12 +17,6 @@
             <tag name="sonata.block"/>
             <argument type="service" id="twig"/>
         </service>
-        <service id="sonata.block.service.menu" class="Sonata\BlockBundle\Block\Service\MenuBlockService">
-            <tag name="sonata.block"/>
-            <argument type="service" id="twig"/>
-            <argument type="service" id="knp_menu.menu_provider"/>
-            <argument type="service" id="sonata.block.menu.registry"/>
-        </service>
         <service id="sonata.block.service.template" class="Sonata\BlockBundle\Block\Service\TemplateBlockService">
             <tag name="sonata.block"/>
             <argument type="service" id="twig"/>
