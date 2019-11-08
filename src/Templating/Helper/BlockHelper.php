@@ -311,9 +311,6 @@ class BlockHelper
         $this->traces[$block->getId()]['cache']['lifetime'] = $this->traces[$block->getId()]['cache']['age'] + $this->traces[$block->getId()]['cache']['ttl'];
     }
 
-    /**
-     * @internal since sonata-project/block-bundle 3.16
-     */
     private function getEventBlocks(BlockEvent $event): array
     {
         $results = [];
@@ -325,9 +322,6 @@ class BlockHelper
         return $results;
     }
 
-    /**
-     * @internal since sonata-project/block-bundle 3.16
-     */
     private function getEventListeners(string $eventName): array
     {
         $results = [];
@@ -349,8 +343,6 @@ class BlockHelper
 
     /**
      * @return CacheAdapterInterface|false
-     *
-     * @internal since sonata-project/block-bundle 3.16
      */
     private function getCacheService(BlockInterface $block, array &$stats = null)
     {
@@ -378,9 +370,6 @@ class BlockHelper
         return $this->cacheManager->getCacheService($cacheServiceId);
     }
 
-    /**
-     * @internal since sonata-project/block-bundle 3.16
-     */
     private function startTracing(BlockInterface $block): array
     {
         if (null !== $this->stopwatch) {

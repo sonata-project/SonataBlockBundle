@@ -33,8 +33,5 @@ interface HttpCacheHandlerInterface
      */
     public function updateMetadata(Response $response, ?BlockContextInterface $blockContext = null): void;
 
-    /**
-     * @return mixed
-     */
     public function onKernelResponse(FilterResponseEvent $event): void;
 }
