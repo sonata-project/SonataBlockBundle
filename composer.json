@@ -42,6 +42,7 @@
     },
     "require-dev": {
         "knplabs/knp-menu-bundle": "^2.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.0",
         "symfony/debug": "^4.3",
         "symfony/phpunit-bridge": "^4.3",
         "symfony/stopwatch": "^4.3"
