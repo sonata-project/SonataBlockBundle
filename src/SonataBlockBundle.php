@@ -24,12 +24,5 @@ final class SonataBlockBundle extends Bundle
     {
         $container->addCompilerPass(new TweakCompilerPass());
         $container->addCompilerPass(new GlobalVariablesCompilerPass());
-
-        $this->registerFormMapping();
-    }
-
-    public function boot(): void
-    {
-        $this->registerFormMapping();
     }
 }
