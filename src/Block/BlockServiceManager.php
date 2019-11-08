@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Block;
 
-use Psr\Log\LoggerInterface;
 use Sonata\BlockBundle\Block\Service\BlockServiceInterface;
 use Sonata\BlockBundle\Block\Service\EditableBlockService;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -42,10 +41,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
      */
     private $contexts;
 
-    /**
-     * @param mixed $debug
-     */
-    public function __construct(ContainerInterface $container, $debug, ?LoggerInterface $logger = null)
+    public function __construct(ContainerInterface $container)
     {
         $this->services = [];
         $this->contexts = [];

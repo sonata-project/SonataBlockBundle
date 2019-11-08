@@ -28,7 +28,7 @@ final class BlockServiceManagerTest extends TestCase
         $container = $this->createMock(ContainerInterface::class);
         $container->expects($this->once())->method('get')->willReturn($service);
 
-        $manager = new BlockServiceManager($container, true);
+        $manager = new BlockServiceManager($container);
 
         $manager->add('test', 'test');
 
@@ -47,7 +47,7 @@ final class BlockServiceManagerTest extends TestCase
         $container = $this->createMock(ContainerInterface::class);
         $container->expects($this->once())->method('get')->willReturn($service);
 
-        $manager = new BlockServiceManager($container, true);
+        $manager = new BlockServiceManager($container);
 
         $manager->add('test', 'test');
 
@@ -63,7 +63,7 @@ final class BlockServiceManagerTest extends TestCase
 
         $container = $this->createMock(ContainerInterface::class);
 
-        $manager = new BlockServiceManager($container, true);
+        $manager = new BlockServiceManager($container);
 
         $block = $this->createMock(BlockInterface::class);
         $block->expects($this->any())->method('getType')->willReturn('fakse');
@@ -74,7 +74,7 @@ final class BlockServiceManagerTest extends TestCase
     public function testGetEmptyListFromInvalidContext(): void
     {
         $container = $this->createMock(ContainerInterface::class);
-        $manager = new BlockServiceManager($container, true);
+        $manager = new BlockServiceManager($container);
 
         $service = $this->createMock(BlockServiceInterface::class);
 
@@ -86,7 +86,7 @@ final class BlockServiceManagerTest extends TestCase
     public function testGetListFromValidContext(): void
     {
         $container = $this->createMock(ContainerInterface::class);
-        $manager = new BlockServiceManager($container, true);
+        $manager = new BlockServiceManager($container);
 
         $service = $this->createMock(BlockServiceInterface::class);
 
