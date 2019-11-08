@@ -43,4 +43,6 @@ interface BlockContextManagerInterface
      * @return BlockContextInterface|false
      */
     public function get($meta, array $settings = []);
+
+    public function exists(string $type): bool;
 }
