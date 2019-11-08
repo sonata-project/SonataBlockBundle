@@ -63,12 +63,7 @@ final class ContainerBlockService extends AbstractBlockService implements Editab
             'translation_domain' => 'SonataBlockBundle',
         ]);
 
-        $form->add('children', CollectionType::class, [], [
-            'admin_code' => 'sonata.page.admin.block',
-            'edit' => 'inline',
-            'inline' => 'table',
-            'sortable' => 'position',
-        ]);
+        $form->add('children', CollectionType::class);
     }
 
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
