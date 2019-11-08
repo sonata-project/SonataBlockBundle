@@ -35,7 +35,10 @@ final class TweakCompilerPass implements CompilerPassInterface
         $defaultContexs = $container->getParameter('sonata_blocks.default_contexts');
 
         foreach ($container->findTaggedServiceIds('sonata.block') as $id => $tags) {
-            $blockId = $this->getBlockId($id);
+            $container->getDefinition($id)
+                ->setPublic(true);
+
+            $blockId = $id;
             $settings = $this->createBlockSettings($id, $tags, $defaultContexs);
 
             // Register blocks dynamicaly
@@ -93,19 +96,6 @@ final class TweakCompilerPass implements CompilerPassInterface
                 $definition->addMethodCall('addSettingsByClass', [$class, $settings['settings'], true]);
             }
         }
-    }
-
-    private function getBlockId(string $id): string
-    {
-        $blockId = $id;
-
-        // Only convert class service names
-        if (false !== strpos($blockId, '\\')) {
-            $convert = (new ConvertFromFqcn());
-            $blockId = $convert($blockId);
-        }
-
-        return $blockId;
     }
 
     private function createBlockSettings(string $id, array $tags = [], array $defaultContexts = []): array
