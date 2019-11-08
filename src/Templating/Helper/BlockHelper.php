@@ -326,6 +326,10 @@ class BlockHelper
     {
         $results = [];
 
+        if (!$this->eventDispatcher instanceof \Symfony\Component\EventDispatcher\EventDispatcherInterface) {
+            return $results;
+        }
+
         foreach ($this->eventDispatcher->getListeners($eventName) as $listener) {
             if ($listener instanceof \Closure) {
                 $results[] = '{closure}()';
