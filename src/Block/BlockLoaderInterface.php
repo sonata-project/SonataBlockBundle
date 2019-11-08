@@ -29,4 +29,6 @@ interface BlockLoaderInterface
      * @param string|array $name
      */
     public function support($name): bool;
+
+    public function exists(string $type): bool;
 }
