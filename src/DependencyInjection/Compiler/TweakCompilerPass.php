@@ -144,13 +144,6 @@ class TweakCompilerPass implements CompilerPassInterface
 
         // Replace empty block id with service id
         if ($this->serviceDefinitionNeedsFirstArgument($definition)) {
-            // NEXT_MAJOR: Remove the if block when Symfony 2.8 support will be dropped.
-            if (method_exists($definition, 'setArgument')) {
-                $definition->setArgument(0, $id);
-
-                return;
-            }
-
             $definition->replaceArgument(0, $id);
         }
     }

@@ -21,7 +21,6 @@ use Sonata\Form\Type\ImmutableArrayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormTypeInterface;
 
 final class MenuBlockServiceTest extends BlockServiceTestCase
 {
@@ -66,11 +65,6 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
             'label' => 'form.label_url',
             'choice_translation_domain' => 'SonataBlockBundle',
         ];
-
-        // choice_as_value options is not needed in SF 3.0+
-        if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
-            $choiceOptions['choices_as_values'] = true;
-        }
 
         $choiceOptions['choices'] = [
             'Test Menu' => 'acme:demobundle:menu',

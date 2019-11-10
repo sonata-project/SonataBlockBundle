@@ -46,12 +46,6 @@ final class TweakCompilerPassTest extends TestCase
 
     public function testProcessAutowired()
     {
-        if (!method_exists(Definition::class, 'setAutoconfigured')) {
-            $this->markTestSkipped(
-              'Autowiring does not exist in < symfony 3.'
-            );
-        }
-
         $blockDefinition = new Definition(null, ['acme.block.service']);
         $blockDefinition->addTag('sonata.block');
         $blockDefinition->setAutoconfigured(true);

@@ -39,6 +39,11 @@ class ContainerTemplateType extends AbstractType
         return 'sonata_type_container_template_choice';
     }
 
+    /**
+     * NEXT_MAJOR: Remove this method.
+     *
+     * @deprecated since sonata-project/block-bundle 3.x, to be removed in version 4.0.
+     */
     public function getName()
     {
         return $this->getBlockPrefix();

@@ -36,6 +36,11 @@ class ServiceListType extends AbstractType
         return 'sonata_block_service_choice';
     }
 
+    /**
+     * NEXT_MAJOR: Remove this method.
+     *
+     * @deprecated since sonata-project/block-bundle 3.x, to be removed in version 4.0.
+     */
     public function getName()
     {
         return $this->getBlockPrefix();
