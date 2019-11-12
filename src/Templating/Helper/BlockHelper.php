@@ -23,6 +23,7 @@ use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Cache\CacheAdapterInterface;
 use Sonata\Cache\CacheManagerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface as EventDispatcherComponentInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
@@ -326,7 +327,7 @@ class BlockHelper
     {
         $results = [];
 
-        if (!$this->eventDispatcher instanceof \Symfony\Component\EventDispatcher\EventDispatcherInterface) {
+        if (!$this->eventDispatcher instanceof EventDispatcherComponentInterface) {
             return $results;
         }
 
