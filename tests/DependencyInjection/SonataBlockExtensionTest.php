@@ -16,7 +16,7 @@ namespace Sonata\BlockBundle\Tests\DependencyInjection;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sonata\BlockBundle\DependencyInjection\SonataBlockExtension;
 
-class SonataBlockExtensionTest extends AbstractExtensionTestCase
+final class SonataBlockExtensionTest extends AbstractExtensionTestCase
 {
     public function testLoadDefault(): void
     {
