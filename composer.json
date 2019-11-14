@@ -49,7 +49,8 @@
         "sonata-project/admin-bundle": "^3.22",
         "symfony/debug": "^3.4 || ^4.2",
         "symfony/phpunit-bridge": "^4.2",
-        "symfony/stopwatch": "^3.4 || ^4.2"
+        "symfony/stopwatch": "^3.4 || ^4.2",
+        "symfony/symfony": "^3.4 || ^4.2"
     },
     "suggest": {
         "jms/di-extra-bundle": "Annotations for Block definition",
