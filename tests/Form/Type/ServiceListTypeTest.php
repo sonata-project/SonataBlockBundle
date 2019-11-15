@@ -29,7 +29,7 @@ final class ServiceListTypeTest extends TestCase
             $this->createMock(BlockServiceManagerInterface::class)
         );
 
-        $this->assertSame('sonata_block_service_choice', $type->getName());
+        $this->assertSame('sonata_block_service_choice', $type->getBlockPrefix());
         $this->assertSame(ChoiceType::class, $type->getParent());
     }
 

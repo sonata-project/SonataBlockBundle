@@ -37,11 +37,6 @@ final class ContainerTemplateType extends AbstractType
         return 'sonata_type_container_template_choice';
     }
 
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
-
     public function getParent()
     {
         return ChoiceType::class;
