@@ -26,7 +26,6 @@ use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Twig\Environment;
@@ -128,11 +127,6 @@ final class MenuBlockService extends AbstractBlockService implements EditableBlo
             'label' => 'form.label_url',
             'choice_translation_domain' => 'SonataBlockBundle',
         ];
-
-        // choice_as_value options is not needed in SF 3.0+
-        if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
-            $choiceOptions['choices_as_values'] = true;
-        }
 
         $choiceOptions['choices'] = array_flip($this->menuRegistry->getAliasNames());
 
