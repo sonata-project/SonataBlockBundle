@@ -177,7 +177,7 @@ abstract class BaseBlock implements BlockInterface
         $this->parent = $parent;
     }
 
-    public function getParent(): BlockInterface
+    public function getParent(): ?BlockInterface
     {
         return $this->parent;
     }

@@ -52,6 +52,12 @@ final class ServiceLoader implements BlockLoaderInterface
             ));
         }
 
+        if (\is_string($configuration)) {
+            $configuration = [
+                'type' => $configuration,
+            ];
+        }
+
         if (!\in_array($configuration['type'], $this->types, true)) {
             throw new \RuntimeException(sprintf(
                 'The block type "%s" does not exist',

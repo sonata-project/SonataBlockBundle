@@ -15,6 +15,7 @@ namespace Sonata\BlockBundle\Block;
 
 use Doctrine\Common\Util\ClassUtils;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -57,12 +58,12 @@ final class BlockContextManager implements BlockContextManagerInterface
         $this->blockLoader = $blockLoader;
         $this->blockService = $blockService;
         $this->cacheBlocks = $cacheBlocks;
-        $this->logger = $logger;
+        $this->logger = $logger ?? new NullLogger();
     }
 
     public function addSettingsByType(string $type, array $settings, bool $replace = false): void
     {
-        $typeSettings = isset($this->settingsByType[$type]) ? $this->settingsByType[$type] : [];
+        $typeSettings = $this->settingsByType[$type] ?? [];
         if ($replace) {
             $this->settingsByType[$type] = array_merge($typeSettings, $settings);
         } else {
@@ -72,7 +73,7 @@ final class BlockContextManager implements BlockContextManagerInterface
 
     public function addSettingsByClass(string $class, array $settings, bool $replace = false): void
     {
-        $classSettings = isset($this->settingsByClass[$class]) ? $this->settingsByClass[$class] : [];
+        $classSettings = $this->settingsByClass[$class] ?? [];
         if ($replace) {
             $this->settingsByClass[$class] = array_merge($classSettings, $settings);
         } else {
@@ -103,13 +104,11 @@ final class BlockContextManager implements BlockContextManagerInterface
         try {
             $settings = $this->resolve($block, array_merge($block->getSettings(), $settings));
         } catch (ExceptionInterface $e) {
-            if ($this->logger) {
-                $this->logger->error(sprintf(
-                    '[cms::blockContext] block.id=%s - error while resolving options - %s',
-                    $block->getId(),
-                    $e->getMessage()
-                ));
-            }
+            $this->logger->error(sprintf(
+                '[cms::blockContext] block.id=%s - error while resolving options - %s',
+                $block->getId(),
+                $e->getMessage()
+            ));
 
             $settings = $this->resolve($block, $settings);
         }

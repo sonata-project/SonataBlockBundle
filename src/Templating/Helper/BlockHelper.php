@@ -155,16 +155,9 @@ class BlockHelper
     {
         $eventName = sprintf('sonata.block.event.%s', $name);
 
-        // NEXT_MAJOR: remove this when dropping support for symfony/event-dispatcher 3.x
-        $reflectionMethod = new \ReflectionMethod($this->eventDispatcher, 'dispatch');
-        $param2 = $reflectionMethod->getParameters()[1] ?? null;
+        $event = $this->eventDispatcher->dispatch(new BlockEvent($options), $eventName);
 
-        /* @var BlockEvent $event */
-        if (null === $param2 || !$param2->hasType() || $param2->getType()->isBuiltin()) {
-            $event = $this->eventDispatcher->dispatch(new BlockEvent($options), $eventName);
-        } else {
-            $event = $this->eventDispatcher->dispatch($eventName, new BlockEvent($options));
-        }
+        \assert($event instanceof BlockEvent);
 
         $content = '';
 
@@ -172,7 +165,7 @@ class BlockHelper
             $content .= $this->render($block);
         }
 
-        if ($this->stopwatch) {
+        if (null !== $this->stopwatch) {
             $this->traces['_events'][uniqid('', true)] = [
                 'template_code' => $name,
                 'event_name' => $eventName,
@@ -288,7 +281,7 @@ class BlockHelper
             $this->stopTracing($blockContext->getBlock(), $stats);
         }
 
-        return $response->getContent();
+        return (string) $response->getContent();
     }
 
     /**

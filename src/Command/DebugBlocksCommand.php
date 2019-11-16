@@ -49,10 +49,10 @@ final class DebugBlocksCommand extends Command
         $this->addOption('context', 'c', InputOption::VALUE_REQUIRED, 'display service for the specified context');
     }
 
-    public function execute(InputInterface $input, OutputInterface $output): void
+    public function execute(InputInterface $input, OutputInterface $output): ?int
     {
         if ($input->getOption('context')) {
-            $services = $this->blockManager->getServicesByContext($input->getOption('context'));
+            $services = $this->blockManager->getServicesByContext((string) $input->getOption('context'));
         } else {
             $services = $this->blockManager->getServices();
         }
@@ -81,5 +81,7 @@ final class DebugBlocksCommand extends Command
         }
 
         $output->writeln('done!');
+
+        return 0;
     }
 }
