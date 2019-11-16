@@ -48,7 +48,7 @@ final class DebugBlocksCommandTest extends TestCase
             ->method('getServices')
             ->willReturn([]);
 
-        $this->application->add(new DebugBlocksCommand(null, $blockManager));
+        $this->application->add(new DebugBlocksCommand($blockManager));
     }
 
     protected function tearDown(): void
@@ -114,7 +114,7 @@ final class DebugBlocksCommandTest extends TestCase
                 },
             ]);
 
-        $this->application->add(new DebugBlocksCommand(null, $blockManager));
+        $this->application->add(new DebugBlocksCommand($blockManager));
 
         $command = $this->application->find('debug:sonata:block');
         $commandTester = new CommandTester($command);
