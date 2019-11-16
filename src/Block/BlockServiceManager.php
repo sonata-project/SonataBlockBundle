@@ -50,6 +50,10 @@ final class BlockServiceManager implements BlockServiceManagerInterface
 
     public function get(BlockInterface $block): BlockServiceInterface
     {
+        if (null === $block->getType()) {
+            throw new \RuntimeException('The block service `` does not exist');
+        }
+
         $this->load($block->getType());
 
         return $this->services[$block->getType()];
@@ -123,8 +127,6 @@ final class BlockServiceManager implements BlockServiceManagerInterface
 
     /**
      * @todo: this function should be remove into a proper statefull object
-     *
-     * {@inheritdoc}
      */
     public function validate(ErrorElement $errorElement, BlockInterface $block): void
     {

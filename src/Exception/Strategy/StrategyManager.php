@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Exception\Strategy;
 
+use Exception;
 use Sonata\BlockBundle\Exception\Filter\FilterInterface;
 use Sonata\BlockBundle\Exception\Renderer\RendererInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -114,6 +115,12 @@ final class StrategyManager implements StrategyManagerInterface
         $filter = $this->getBlockFilter($block);
         if ($filter->handle($exception, $block)) {
             $renderer = $this->getBlockRenderer($block);
+
+            // Convert throwable to exception
+            if (!$exception instanceof \Exception) {
+                $exception = new Exception($exception->getMessage(), $exception->getCode(), $exception);
+            }
+
             $response = $renderer->render($exception, $block, $response);
         }
         // render empty block template?
@@ -130,7 +137,7 @@ final class StrategyManager implements StrategyManagerInterface
     {
         $type = $block->getType();
 
-        $name = isset($this->blockRenderers[$type]) ? $this->blockRenderers[$type] : $this->defaultRenderer;
+        $name = $this->blockRenderers[$type] ?? $this->defaultRenderer;
         $service = $this->getRendererService($name);
 
         if (!$service instanceof RendererInterface) {
@@ -149,7 +156,7 @@ final class StrategyManager implements StrategyManagerInterface
     {
         $type = $block->getType();
 
-        $name = isset($this->blockFilters[$type]) ? $this->blockFilters[$type] : $this->defaultFilter;
+        $name = $this->blockFilters[$type] ?? $this->defaultFilter;
         $service = $this->getFilterService($name);
 
         if (!$service instanceof FilterInterface) {
