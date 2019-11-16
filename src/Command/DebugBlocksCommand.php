@@ -24,9 +24,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class DebugBlocksCommand extends Command
 {
-    /**
-     * {@inheritdoc}
-     */
     protected static $defaultName = 'debug:sonata:block';
 
     /**
@@ -34,16 +31,15 @@ final class DebugBlocksCommand extends Command
      */
     private $blockManager;
 
-    public function __construct(string $name = null, BlockServiceManagerInterface $blockManager)
+    public function __construct(BlockServiceManagerInterface $blockManager)
     {
         $this->blockManager = $blockManager;
 
-        parent::__construct($name);
+        parent::__construct();
     }
 
     public function configure(): void
     {
-        $this->setName(static::$defaultName); // BC for symfony/console < 3.4.0
         $this->setDescription('Debug all blocks available, show default settings of each block');
 
         $this->addOption('context', 'c', InputOption::VALUE_REQUIRED, 'display service for the specified context');
