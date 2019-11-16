@@ -38,7 +38,7 @@
         "symfony/http-kernel": "^4.3",
         "symfony/options-resolver": "^4.3",
         "symfony/twig-bundle": "^4.3",
-        "twig/twig": "^2.11"
+        "twig/twig": "^2.11 || ^3.0"
     },
     "require-dev": {
         "knplabs/knp-menu-bundle": "^2.0",
