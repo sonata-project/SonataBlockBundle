@@ -39,7 +39,7 @@ final class TweakCompilerPass implements CompilerPassInterface
                 ->setPublic(true);
 
             $blockId = $id;
-            $settings = $this->createBlockSettings($id, $tags, $defaultContexs);
+            $settings = $this->createBlockSettings($tags, $defaultContexs);
 
             // Register blocks dynamicaly
             if (!\array_key_exists($blockId, $blocks)) {
@@ -98,7 +98,7 @@ final class TweakCompilerPass implements CompilerPassInterface
         }
     }
 
-    private function createBlockSettings(string $id, array $tags = [], array $defaultContexts = []): array
+    private function createBlockSettings(array $tags = [], array $defaultContexts = []): array
     {
         $contexts = $this->getContextFromTags($tags);
 
