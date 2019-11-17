@@ -141,8 +141,8 @@ final class BlockContextManager implements BlockContextManagerInterface
 
         // add type and class settings for block
         $class = ClassUtils::getClass($block);
-        $settingsByType = isset($this->settingsByType[$block->getType()]) ? $this->settingsByType[$block->getType()] : [];
-        $settingsByClass = isset($this->settingsByClass[$class]) ? $this->settingsByClass[$class] : [];
+        $settingsByType = $this->settingsByType[$block->getType()] ?? [];
+        $settingsByClass = $this->settingsByClass[$class] ?? [];
         $optionsResolver->setDefaults(array_merge($settingsByType, $settingsByClass));
     }
 
@@ -160,11 +160,11 @@ final class BlockContextManager implements BlockContextManagerInterface
 
         // type by block class
         $class = ClassUtils::getClass($block);
-        $cacheServiceId = isset($this->cacheBlocks['by_class'][$class]) ? $this->cacheBlocks['by_class'][$class] : false;
+        $cacheServiceId = $this->cacheBlocks['by_class'][$class] ?? false;
 
         // type by block service
         if (!$cacheServiceId) {
-            $cacheServiceId = isset($this->cacheBlocks['by_type'][$block->getType()]) ? $this->cacheBlocks['by_type'][$block->getType()] : false;
+            $cacheServiceId = $this->cacheBlocks['by_type'][$block->getType()] ?? false;
         }
 
         if (!$cacheServiceId) {

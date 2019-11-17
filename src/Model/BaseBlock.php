@@ -117,7 +117,7 @@ abstract class BaseBlock implements BlockInterface
 
     public function getSetting(string $name, $default = null)
     {
-        return isset($this->settings[$name]) ? $this->settings[$name] : $default;
+        return $this->settings[$name] ?? $default;
     }
 
     public function setEnabled(bool $enabled): void
