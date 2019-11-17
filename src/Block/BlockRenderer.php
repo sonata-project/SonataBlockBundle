@@ -87,7 +87,7 @@ final class BlockRenderer implements BlockRendererInterface
 
             $response = $service->execute($blockContext, $this->createResponse($blockContext, $response));
 
-            $response = $this->addMetaInformation($response, $blockContext, $service);
+            $response = $this->addMetaInformation($response, $blockContext);
         } catch (\Throwable $exception) {
             if ($this->logger) {
                 $this->logger->error(sprintf(
@@ -123,11 +123,8 @@ final class BlockRenderer implements BlockRendererInterface
     /**
      * This method is responsible to cascade ttl to the parent block.
      */
-    private function addMetaInformation(
-        Response $response,
-        BlockContextInterface $blockContext,
-        BlockServiceInterface $service
-    ): Response {
+    private function addMetaInformation(Response $response, BlockContextInterface $blockContext): Response
+    {
         // a response exists, use it
         if ($this->lastResponse && $this->lastResponse->isCacheable()) {
             if (null !== $this->lastResponse->getTtl()) {
