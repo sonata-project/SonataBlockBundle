@@ -15,20 +15,21 @@ namespace Sonata\BlockBundle\Tests\Entity;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Util\RecursiveBlockIteratorIterator;
+use Sonata\BlockBundle\Model\BlockInterface;
 
 final class RecursiveBlockIteratorIteratorTest extends TestCase
 {
     public function testInterface(): void
     {
-        $block2 = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block2 = $this->createMock(BlockInterface::class);
         $block2->expects($this->any())->method('getType')->willReturn('block2');
         $block2->expects($this->once())->method('hasChildren')->willReturn(false);
 
-        $block3 = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block3 = $this->createMock(BlockInterface::class);
         $block3->expects($this->any())->method('getType')->willReturn('block3');
         $block3->expects($this->once())->method('hasChildren')->willReturn(false);
 
-        $block1 = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block1 = $this->createMock(BlockInterface::class);
         $block1->expects($this->any())->method('getType')->willReturn('block1');
         $block1->expects($this->once())->method('hasChildren')->willReturn(true);
         $block1->expects($this->any())->method('getChildren')->willReturn([
@@ -36,7 +37,7 @@ final class RecursiveBlockIteratorIteratorTest extends TestCase
             $block3,
         ]);
 
-        $block4 = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block4 = $this->createMock(BlockInterface::class);
         $block4->expects($this->any())->method('getType')->willReturn('block4');
         $block4->expects($this->any())->method('hasChildren')->willReturn(false);
 

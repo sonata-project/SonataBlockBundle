@@ -40,7 +40,7 @@ final class BlockExtensionTest extends TestCase
     public function setUp(): void
     {
         $this->blockHelper = $this->getMockBuilder(
-            'Sonata\BlockBundle\Templating\Helper\BlockHelper'
+            BlockHelper::class
         )->disableOriginalConstructor()->getMock();
 
         $loader = $this->createMock(LoaderInterface::class);

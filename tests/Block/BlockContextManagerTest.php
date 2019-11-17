@@ -16,28 +16,34 @@ namespace Sonata\BlockBundle\Tests\Block;
 use Doctrine\Common\Util\ClassUtils;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockContextManager;
+use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
+use Sonata\BlockBundle\Block\BlockLoaderInterface;
+use Sonata\BlockBundle\Block\Service\AbstractBlockService;
+use Psr\Log\LoggerInterface;
 
 final class BlockContextManagerTest extends TestCase
 {
     public function testGetWithValidData(): void
     {
-        $service = $this->createMock('Sonata\BlockBundle\Block\Service\AbstractBlockService');
+        $service = $this->createMock(AbstractBlockService::class);
 
         $service->expects($this->once())->method('configureSettings');
 
-        $blockLoader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
+        $blockLoader = $this->createMock(BlockLoaderInterface::class);
 
-        $serviceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
+        $serviceManager = $this->createMock(BlockServiceManagerInterface::class);
         $serviceManager->expects($this->once())->method('get')->willReturn($service);
 
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock(BlockInterface::class);
         $block->expects($this->once())->method('getSettings')->willReturn([]);
 
         $manager = new BlockContextManager($blockLoader, $serviceManager);
 
         $blockContext = $manager->get($block);
 
-        $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
+        $this->assertInstanceOf(BlockContextInterface::class, $blockContext);
 
         $this->assertSame([
             'use_cache' => true,
@@ -50,15 +56,15 @@ final class BlockContextManagerTest extends TestCase
 
     public function testGetWithSettings(): void
     {
-        $service = $this->createMock('Sonata\BlockBundle\Block\Service\AbstractBlockService');
+        $service = $this->createMock(AbstractBlockService::class);
         $service->expects($this->once())->method('configureSettings');
 
-        $blockLoader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
+        $blockLoader = $this->createMock(BlockLoaderInterface::class);
 
-        $serviceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
+        $serviceManager = $this->createMock(BlockServiceManagerInterface::class);
         $serviceManager->expects($this->once())->method('get')->willReturn($service);
 
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock(BlockInterface::class);
         $block->expects($this->once())->method('getSettings')->willReturn([]);
 
         $blocksCache = [
@@ -71,7 +77,7 @@ final class BlockContextManagerTest extends TestCase
 
         $blockContext = $manager->get($block, $settings);
 
-        $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
+        $this->assertInstanceOf(BlockContextInterface::class, $blockContext);
 
         $this->assertSame([
             'use_cache' => true,
@@ -88,18 +94,18 @@ final class BlockContextManagerTest extends TestCase
 
     public function testWithInvalidSettings(): void
     {
-        $logger = $this->createMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         $logger->expects($this->exactly(1))->method('error');
 
-        $service = $this->createMock('Sonata\BlockBundle\Block\Service\AbstractBlockService');
+        $service = $this->createMock(AbstractBlockService::class);
         $service->expects($this->exactly(2))->method('configureSettings');
 
-        $blockLoader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
+        $blockLoader = $this->createMock(BlockLoaderInterface::class);
 
-        $serviceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
+        $serviceManager = $this->createMock(BlockServiceManagerInterface::class);
         $serviceManager->expects($this->exactly(2))->method('get')->willReturn($service);
 
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock(BlockInterface::class);
         $block->expects($this->once())->method('getSettings')->willReturn([
             'template' => [],
         ]);
@@ -108,6 +114,6 @@ final class BlockContextManagerTest extends TestCase
 
         $blockContext = $manager->get($block);
 
-        $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
+        $this->assertInstanceOf(BlockContextInterface::class, $blockContext);
     }
 }

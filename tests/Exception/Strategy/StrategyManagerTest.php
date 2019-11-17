@@ -20,6 +20,7 @@ use Sonata\BlockBundle\Exception\Renderer\RendererInterface;
 use Sonata\BlockBundle\Exception\Strategy\StrategyManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Sonata\BlockBundle\Model\BlockInterface;
 
 /**
  * Test the Exception Strategy Manager.
@@ -83,10 +84,10 @@ final class StrategyManagerTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->renderer1 = $this->createMock('\Sonata\BlockBundle\Exception\Renderer\RendererInterface');
-        $this->renderer2 = $this->createMock('\Sonata\BlockBundle\Exception\Renderer\RendererInterface');
-        $this->filter1 = $this->createMock('\Sonata\BlockBundle\Exception\Filter\FilterInterface');
-        $this->filter2 = $this->createMock('\Sonata\BlockBundle\Exception\Filter\FilterInterface');
+        $this->renderer1 = $this->createMock(RendererInterface::class);
+        $this->renderer2 = $this->createMock(RendererInterface::class);
+        $this->filter1 = $this->createMock(FilterInterface::class);
+        $this->filter2 = $this->createMock(FilterInterface::class);
 
         // setup a mock container which contains our mock renderers and filters
         $this->container = $this->getMockContainer([
@@ -198,7 +199,7 @@ final class StrategyManagerTest extends TestCase
 
         // THEN
         $this->assertNotNull($response, 'should return something');
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response, 'should return a response object');
+        $this->assertInstanceOf(Response::class, $response, 'should return a response object');
     }
 
     /**
@@ -232,7 +233,7 @@ final class StrategyManagerTest extends TestCase
      */
     protected function getMockBlock($type)
     {
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock(BlockInterface::class);
         $block->expects($this->any())->method('getType')->willReturn($type);
 
         return $block;
@@ -250,7 +251,7 @@ final class StrategyManagerTest extends TestCase
             $map[] = [$name, ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $service];
         }
 
-        $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container = $this->createMock(ContainerInterface::class);
         $container->expects($this->any())->method('get')->willReturnMap($map);
 
         return $container;

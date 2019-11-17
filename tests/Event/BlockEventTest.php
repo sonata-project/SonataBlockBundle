@@ -15,6 +15,7 @@ namespace Sonata\BlockBundle\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Event\BlockEvent;
+use Sonata\BlockBundle\Model\BlockInterface;
 
 final class BlockEventTest extends TestCase
 {
@@ -27,11 +28,11 @@ final class BlockEventTest extends TestCase
 
         $this->assertEmpty($blockEvent->getSettings());
 
-        $blockEvent->addBlock($this->createMock('Sonata\BlockBundle\Model\BlockInterface'));
+        $blockEvent->addBlock($this->createMock(BlockInterface::class));
 
         $this->assertCount(1, $blockEvent->getBlocks());
 
-        $blockEvent->addBlock($this->createMock('Sonata\BlockBundle\Model\BlockInterface'));
+        $blockEvent->addBlock($this->createMock(BlockInterface::class));
         $this->assertCount(2, $blockEvent->getBlocks());
 
         $this->assertNull($blockEvent->getSetting('fake'));
