@@ -34,14 +34,8 @@ final class BlockHelperTest extends TestCase
         $blockRenderer = $this->createMock(BlockRendererInterface::class);
         $blockContextManager = $this->createMock(BlockContextManagerInterface::class);
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $eventDispatcher->expects($this->once())->method('dispatch')->willReturnCallback(static function ($event, $name): BlockEvent {
-            // NEXT_MAJOR: remove this check when dropping support for symfony/event-dispatcher 3.x
-            if ($event instanceof BlockEvent) {
-                return $event;
-            }
-
-            // $event is the second argument in symfony/event-dispatcher 3.x
-            return $name;
+        $eventDispatcher->expects($this->once())->method('dispatch')->willReturnCallback(static function ($event): BlockEvent {
+            return $event;
         });
 
         $helper = new BlockHelper($blockServiceManager, [], $blockRenderer, $blockContextManager, $eventDispatcher);
@@ -64,13 +58,11 @@ final class BlockHelperTest extends TestCase
 
         $blockContextManager = $this->createMock(BlockContextManagerInterface::class);
         $blockContextManager->expects($this->once())->method('get')->willReturnCallback(static function (BlockInterface $block) {
-            $context = new BlockContext($block, $block->getSettings());
-
-            return $context;
+            return new BlockContext($block, $block->getSettings());
         });
 
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $eventDispatcher->expects($this->once())->method('dispatch')->willReturnCallback(static function ($event, $name): BlockEvent {
+        $eventDispatcher->expects($this->once())->method('dispatch')->willReturnCallback(static function (BlockEvent $event): BlockEvent {
             $block = new Block();
             $block->setId(1);
             $block->setSettings([
@@ -78,17 +70,9 @@ final class BlockHelperTest extends TestCase
             ]);
             $block->setType('test');
 
-            // NEXT_MAJOR: remove this check when dropping support for symfony/event-dispatcher 3.x
-            if ($event instanceof BlockEvent) {
-                $event->addBlock($block);
+            $event->addBlock($block);
 
-                return $event;
-            }
-
-            // $event is the second argument in symfony/event-dispatcher 3.x
-            $name->addBlock($block);
-
-            return $name;
+            return $event;
         });
 
         $helper = new BlockHelper($blockServiceManager, [], $blockRenderer, $blockContextManager, $eventDispatcher);

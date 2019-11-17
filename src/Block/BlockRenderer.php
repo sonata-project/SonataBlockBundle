@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Block;
 
 use Psr\Log\LoggerInterface;
-use Sonata\BlockBundle\Block\Service\BlockServiceInterface;
 use Sonata\BlockBundle\Exception\Strategy\StrategyManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -43,11 +42,6 @@ final class BlockRenderer implements BlockRendererInterface
     private $logger;
 
     /**
-     * @var bool
-     */
-    private $debug;
-
-    /**
      * This property hold the last response available from the child or sibling block
      * The cacheable attributes must be cascaded to the parent.
      *
@@ -59,18 +53,15 @@ final class BlockRenderer implements BlockRendererInterface
      * @param BlockServiceManagerInterface $blockServiceManager      Block service manager
      * @param StrategyManagerInterface     $exceptionStrategyManager Exception strategy manager
      * @param LoggerInterface              $logger                   Logger class
-     * @param bool                         $debug                    Whether in debug mode or not
      */
     public function __construct(
         BlockServiceManagerInterface $blockServiceManager,
         StrategyManagerInterface $exceptionStrategyManager,
-        ?LoggerInterface $logger = null,
-        bool $debug = false
+        ?LoggerInterface $logger = null
     ) {
         $this->blockServiceManager = $blockServiceManager;
         $this->exceptionStrategyManager = $exceptionStrategyManager;
         $this->logger = $logger;
-        $this->debug = $debug;
     }
 
     public function render(BlockContextInterface $blockContext, ?Response $response = null): Response

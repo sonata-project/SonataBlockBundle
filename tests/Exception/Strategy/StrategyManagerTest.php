@@ -18,9 +18,9 @@ use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Filter\FilterInterface;
 use Sonata\BlockBundle\Exception\Renderer\RendererInterface;
 use Sonata\BlockBundle\Exception\Strategy\StrategyManager;
+use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Sonata\BlockBundle\Model\BlockInterface;
 
 /**
  * Test the Exception Strategy Manager.

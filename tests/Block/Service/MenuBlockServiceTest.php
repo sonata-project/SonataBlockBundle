@@ -63,8 +63,6 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
             'choice_translation_domain' => 'SonataBlockBundle',
         ];
 
-        $choices = ['Test Menu' => 'acme:demobundle:menu'];
-
         $choiceOptions['choices'] = [
             'Test Menu' => 'acme:demobundle:menu',
         ];

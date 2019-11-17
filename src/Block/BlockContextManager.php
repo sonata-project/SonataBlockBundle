@@ -128,7 +128,7 @@ final class BlockContextManager implements BlockContextManagerInterface
             'extra_cache_keys' => [],
             'attr' => [],
             'template' => false,
-            'ttl' => (int) $block->getTtl(),
+            'ttl' => $block->getTtl(),
         ]);
 
         $optionsResolver

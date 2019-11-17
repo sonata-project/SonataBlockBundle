@@ -22,7 +22,7 @@ final class HttpCacheHandler implements HttpCacheHandlerInterface
     /**
      * @var int|null
      */
-    private $currentTtl = null;
+    private $currentTtl;
 
     public function alterResponse(Response $response): void
     {

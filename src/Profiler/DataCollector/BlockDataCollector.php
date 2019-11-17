@@ -33,7 +33,7 @@ final class BlockDataCollector extends DataCollector
     /**
      * @var array
      */
-    private $containerTypes = [];
+    private $containerTypes;
 
     /**
      * @param BlockHelper $blockHelper    Block renderer

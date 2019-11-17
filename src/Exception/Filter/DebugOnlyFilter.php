@@ -25,7 +25,7 @@ final class DebugOnlyFilter implements FilterInterface
     /**
      * @var bool
      */
-    private $debug = false;
+    private $debug;
 
     public function __construct(bool $debug)
     {
