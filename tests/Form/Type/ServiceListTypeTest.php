@@ -61,9 +61,7 @@ final class ServiceListTypeTest extends TestCase
             ->with($this->equalTo('cms'))
             ->willReturn(['my.service.code' => $blockService]);
 
-        $type = new ServiceListType($blockServiceManager, [
-            'cms' => ['my.service.code'],
-        ]);
+        $type = new ServiceListType($blockServiceManager);
 
         $resolver = new OptionsResolver();
 

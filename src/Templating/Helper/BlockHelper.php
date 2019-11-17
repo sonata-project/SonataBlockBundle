@@ -247,10 +247,8 @@ class BlockHelper
             if ($this->cacheManager) {
                 $recorder = $this->cacheManager->getRecorder();
 
-                if ($recorder) {
-                    $recorder->add($blockContext->getBlock());
-                    $recorder->push();
-                }
+                $recorder->add($blockContext->getBlock());
+                $recorder->push();
             }
 
             $response = $this->blockRenderer->render($blockContext);
@@ -362,7 +360,7 @@ class BlockHelper
             $stats['cache']['handler'] = $cacheServiceId;
         }
 
-        return $this->cacheManager->getCacheService($cacheServiceId);
+        return $this->cacheManager->getCacheService((string) $cacheServiceId);
     }
 
     private function startTracing(BlockInterface $block): array

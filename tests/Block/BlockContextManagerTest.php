@@ -15,13 +15,13 @@ namespace Sonata\BlockBundle\Tests\Block;
 
 use Doctrine\Common\Util\ClassUtils;
 use PHPUnit\Framework\TestCase;
-use Sonata\BlockBundle\Block\BlockContextManager;
-use Sonata\BlockBundle\Block\BlockContextInterface;
-use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
-use Sonata\BlockBundle\Block\BlockLoaderInterface;
-use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Psr\Log\LoggerInterface;
+use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Block\BlockContextManager;
+use Sonata\BlockBundle\Block\BlockLoaderInterface;
+use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
+use Sonata\BlockBundle\Block\Service\AbstractBlockService;
+use Sonata\BlockBundle\Model\BlockInterface;
 
 final class BlockContextManagerTest extends TestCase
 {
@@ -95,7 +95,7 @@ final class BlockContextManagerTest extends TestCase
     public function testWithInvalidSettings(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
-        $logger->expects($this->exactly(1))->method('error');
+        $logger->expects($this->once())->method('error');
 
         $service = $this->createMock(AbstractBlockService::class);
         $service->expects($this->exactly(2))->method('configureSettings');

@@ -20,7 +20,7 @@ use Doctrine\Common\Collections\Collection;
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-final class RecursiveBlockIterator extends \RecursiveArrayIterator implements \RecursiveIterator
+final class RecursiveBlockIterator extends \RecursiveArrayIterator
 {
     /**
      * @param Collection|array $array

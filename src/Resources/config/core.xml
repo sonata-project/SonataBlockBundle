@@ -19,7 +19,6 @@
             <argument type="service" id="sonata.block.manager"/>
             <argument type="service" id="sonata.block.exception.strategy.manager"/>
             <argument type="service" id="logger" on-invalid="ignore"/>
-            <argument>%kernel.debug%</argument>
         </service>
         <service id="sonata.block.twig.extension" class="Sonata\BlockBundle\Twig\Extension\BlockExtension" public="false">
             <tag name="twig.extension"/>

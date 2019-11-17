@@ -15,9 +15,9 @@ namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Renderer\InlineRenderer;
-use Twig\Environment;
-use Symfony\Component\HttpFoundation\Response;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Twig\Environment;
 
 /**
  * Test the inline exception renderer.
