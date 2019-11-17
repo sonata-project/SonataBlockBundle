@@ -24,13 +24,13 @@ final class BlockTest extends TestCase
 
         $this->assertFalse($block->hasChildren());
 
-        $child1 = $this->getMockBuilder(Block::class)->getMock();
+        $child1 = $this->createMock(Block::class);
         $child1->expects($this->once())->method('getTtl')->willReturn(100);
 
-        $child2 = $this->getMockBuilder(Block::class)->getMock();
+        $child2 = $this->createMock(Block::class);
         $child2->expects($this->once())->method('getTtl')->willReturn(50);
 
-        $child3 = $this->getMockBuilder(Block::class)->getMock();
+        $child3 = $this->createMock(Block::class);
         $child3->expects($this->once())->method('getTtl')->willReturn(65);
 
         $block->addChildren($child1);
@@ -45,7 +45,7 @@ final class BlockTest extends TestCase
     public function testSetterGetter(): void
     {
         $time = new \DateTime();
-        $parent = $this->getMockBuilder(Block::class)->getMock();
+        $parent = $this->createMock(Block::class);
 
         $block = new Block();
 
