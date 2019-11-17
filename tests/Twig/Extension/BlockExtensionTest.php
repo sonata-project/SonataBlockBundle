@@ -39,9 +39,7 @@ final class BlockExtensionTest extends TestCase
 
     public function setUp(): void
     {
-        $this->blockHelper = $this->getMockBuilder(
-            BlockHelper::class
-        )->disableOriginalConstructor()->getMock();
+        $this->blockHelper = $this->createMock(BlockHelper::class);
 
         $loader = $this->createMock(LoaderInterface::class);
 
