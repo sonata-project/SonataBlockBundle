@@ -15,12 +15,13 @@ namespace Sonata\BlockBundle\Tests\Block;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockContext;
+use Sonata\BlockBundle\Model\BlockInterface;
 
 final class BlockExecutionContextTest extends TestCase
 {
     public function testBasicFeature(): void
     {
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock(BlockInterface::class);
 
         $blockContext = new BlockContext($block, [
             'hello' => 'world',
@@ -36,7 +37,7 @@ final class BlockExecutionContextTest extends TestCase
     {
         $this->expectException(\RuntimeException::class);
 
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock(BlockInterface::class);
 
         $blockContext = new BlockContext($block);
 

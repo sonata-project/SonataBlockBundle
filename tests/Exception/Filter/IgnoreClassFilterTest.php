@@ -15,6 +15,8 @@ namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Filter\IgnoreClassFilter;
+use Sonata\BlockBundle\Model\BlockInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Test the ignore final class exception filter.
@@ -29,9 +31,9 @@ final class IgnoreClassFilterTest extends TestCase
     public function testWithInheritedException(): void
     {
         // GIVEN
-        $exception = $this->createMock('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $filter = new IgnoreClassFilter('\RuntimeException');
+        $exception = $this->createMock(NotFoundHttpException::class);
+        $block = $this->createMock(BlockInterface::class);
+        $filter = new IgnoreClassFilter(\RuntimeException::class);
 
         // WHEN
         $result = $filter->handle($exception, $block);
@@ -46,9 +48,9 @@ final class IgnoreClassFilterTest extends TestCase
     public function testWithNonInheritedException(): void
     {
         // GIVEN
-        $exception = $this->createMock('\Exception');
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $filter = new IgnoreClassFilter('\RuntimeException');
+        $exception = $this->createMock(\Exception::class);
+        $block = $this->createMock(BlockInterface::class);
+        $filter = new IgnoreClassFilter(\RuntimeException::class);
 
         // WHEN
         $result = $filter->handle($exception, $block);

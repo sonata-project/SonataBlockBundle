@@ -15,6 +15,8 @@ namespace Sonata\BlockBundle\Tests\Block;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockLoaderChain;
+use Sonata\BlockBundle\Block\BlockLoaderInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
 
 final class BlockLoaderChainTest extends TestCase
 {
@@ -28,9 +30,9 @@ final class BlockLoaderChainTest extends TestCase
 
     public function testLoaderWithSupportedLoader(): void
     {
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock(BlockInterface::class);
 
-        $loader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
+        $loader = $this->createMock(BlockLoaderInterface::class);
         $loader->expects($this->once())->method('support')->willReturn(true);
         $loader->expects($this->once())->method('load')->willReturn($block);
 
@@ -45,7 +47,7 @@ final class BlockLoaderChainTest extends TestCase
     {
         $this->expectException(\Sonata\BlockBundle\Exception\BlockNotFoundException::class);
 
-        $loader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
+        $loader = $this->createMock(BlockLoaderInterface::class);
         $loader->expects($this->once())->method('support')->willReturn(false);
         $loader->expects($this->never())->method('load');
 

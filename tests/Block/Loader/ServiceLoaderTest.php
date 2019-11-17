@@ -15,6 +15,7 @@ namespace Sonata\BlockBundle\Tests\Block;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\Loader\ServiceLoader;
+use Sonata\BlockBundle\Model\BlockInterface;
 
 final class ServiceLoaderTest extends TestCase
 {
@@ -37,6 +38,6 @@ final class ServiceLoaderTest extends TestCase
 
         $this->assertTrue($loader->support($definition));
 
-        $this->assertInstanceOf('Sonata\BlockBundle\Model\BlockInterface', $loader->load($definition));
+        $this->assertInstanceOf(BlockInterface::class, $loader->load($definition));
     }
 }

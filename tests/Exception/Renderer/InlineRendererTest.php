@@ -16,6 +16,8 @@ namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Renderer\InlineRenderer;
 use Twig\Environment;
+use Symfony\Component\HttpFoundation\Response;
+use Sonata\BlockBundle\Model\BlockInterface;
 
 /**
  * Test the inline exception renderer.
@@ -33,10 +35,10 @@ final class InlineRendererTest extends TestCase
         $template = 'test-template';
 
         // mock an exception to render
-        $exception = $this->createMock('\Exception');
+        $exception = $this->createMock(\Exception::class);
 
         // mock a block instance that provoked the exception
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock(BlockInterface::class);
 
         // mock the twig render() to return an html result
         $twig = $this->createMock(Environment::class);
@@ -57,7 +59,7 @@ final class InlineRendererTest extends TestCase
         $response = $renderer->render($exception, $block);
 
         // THEN
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response, 'Should return a Response');
+        $this->assertInstanceOf(Response::class, $response, 'Should return a Response');
         $this->assertSame('html', $response->getContent(), 'Should contain the templating html result');
     }
 }
