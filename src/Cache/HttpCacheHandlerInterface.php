@@ -15,7 +15,7 @@ namespace Sonata\BlockBundle\Cache;
 
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 interface HttpCacheHandlerInterface
 {
@@ -33,5 +33,5 @@ interface HttpCacheHandlerInterface
      */
     public function updateMetadata(Response $response, ?BlockContextInterface $blockContext = null): void;
 
-    public function onKernelResponse(FilterResponseEvent $event): void;
+    public function onKernelResponse(ResponseEvent $event): void;
 }
