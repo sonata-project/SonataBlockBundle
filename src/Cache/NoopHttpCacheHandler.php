@@ -15,7 +15,7 @@ namespace Sonata\BlockBundle\Cache;
 
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 final class NoopHttpCacheHandler implements HttpCacheHandlerInterface
 {
@@ -27,7 +27,7 @@ final class NoopHttpCacheHandler implements HttpCacheHandlerInterface
     {
     }
 
-    public function onKernelResponse(FilterResponseEvent $event): void
+    public function onKernelResponse(ResponseEvent $event): void
     {
     }
 }
