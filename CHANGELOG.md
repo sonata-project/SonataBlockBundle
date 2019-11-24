@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.18.2](https://github.com/sonata-project/SonataBlockBundle/compare/3.18.1...3.18.2) - 2019-11-24
+### Fixed
+- Make cache optional again
+
 ## [3.18.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.18.0...3.18.1) - 2019-09-19
 ### Changed
 - Replaced deprecated EngineInterface
