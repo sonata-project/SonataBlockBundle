@@ -2,6 +2,46 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.18.2...4.0.0) - 2019-11-24
+### Added
+- Added support for Symfony 5
+- Add support for twig 3
+- Add `BlockLoaderInterface::exists` method to interface
+- Add `BlockContextManagerInterface::exists` method to interface
+
+### Changed
+- Replaced deprecated FilterResponseEvent
+- Make command fully lazy
+- Make all services public by default
+- Use symfony event dispatcher contracts
+- Use Twig directly in Blocks and Exception renderers
+- `AbstractBlockService::getTemplating` method renamed to `getTwig`
+- The block name is automatically set via `TweakCompilerPass`
+
+### Fixed
+- Fix some PhpStorm findings
+- Fix some phpstan findings
+- Fix twig import of macros
+- Load menu block only when KnpMenuBundle exist
+- Remove undefined method call
+
+### Removed
+- Remove service class parameters
+- Remove PageBundle specific code
+- Remove addClassesToCompile
+- Removed block id autowiring
+- Removed ConvertFromFqcn component
+- Dropped support for old symfony (=< 4.3) versions
+- Dropped support for twig 1.x
+- Dropped support for PHP 7.2 and lower
+- Removed `symfony/event-dispatcher` dependency
+- Removed default null values for arguments of `AbstractBlockService` class
+- Removed dependency on `symfony/templating` in `composer.json`
+- Removed all temporary classes for templating
+- Removed `FakeTemplating` class
+- internal test classes are now excluded from the autoloader
+- Removed `AbstractBlockServiceTest::$container`
+
 ## [3.18.2](https://github.com/sonata-project/SonataBlockBundle/compare/3.18.1...3.18.2) - 2019-11-24
 ### Fixed
 - Make cache optional again
