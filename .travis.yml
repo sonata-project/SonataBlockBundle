@@ -5,12 +5,13 @@
 branches:
   only:
     - master
-    - 3.x
+    - 4.x
 
 language: php
 
 php:
   - '7.3'
+  - '7.4snapshot'
   - nightly
 
 dist: xenial
