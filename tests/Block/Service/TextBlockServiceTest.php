@@ -14,10 +14,13 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Tests\Block\Service;
 
 use Sonata\BlockBundle\Block\BlockContext;
+use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\Service\TextBlockService;
 use Sonata\BlockBundle\Form\Mapper\FormMapper;
 use Sonata\BlockBundle\Model\Block;
+use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Test\BlockServiceTestCase;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class TextBlockServiceTest extends BlockServiceTestCase
@@ -44,5 +47,29 @@ final class TextBlockServiceTest extends BlockServiceTestCase
         $service->configureEditForm($formMapper, $block);
 
         $service->execute($blockContext);
+    }
+
+    public function testExecute(): void
+    {
+        $block = $this->createMock(BlockInterface::class);
+
+        $blockContext = $this->createMock(BlockContextInterface::class);
+        $blockContext->method('getTemplate')
+            ->willReturn('@SonataBlock/Block/block_core_text.html.twig');
+        $blockContext->method('getSettings')
+            ->willReturn(['content' => 'foo']);
+        $blockContext->method('getBlock')
+            ->willReturn($block);
+
+        $this->twig->expects($this->once())->method('render')
+            ->with('@SonataBlock/Block/block_core_text.html.twig', [
+               'block' => $block,
+               'settings' => ['content' => 'foo'],
+            ]);
+
+        $service = new TextBlockService($this->twig);
+        $response = $service->execute($blockContext);
+
+        static::assertInstanceOf(Response::class, $response);
     }
 }
