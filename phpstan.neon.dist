@@ -17,4 +17,3 @@ parameters:
         - '#Call to an undefined method Sonata\\Form\\Validator\\ErrorElement::assert.*\(\).#'
         - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::fixXmlConfig\(\).#'
         - '#Method Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface::dispatch\(\) invoked with 2 parameters, 1 required.#'
-        - '#Access to offset .* on an unknown class Symfony\\Component\\VarDumper\\Cloner\\Data.#'
