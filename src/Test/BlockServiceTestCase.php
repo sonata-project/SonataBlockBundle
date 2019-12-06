@@ -44,7 +44,7 @@ abstract class BlockServiceTestCase extends TestCase
     protected $blockContextManager;
 
     /**
-     * @var Environment
+     * @var MockObject|Environment
      */
     protected $twig;
 
