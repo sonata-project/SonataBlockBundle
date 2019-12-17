@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.1.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.0.0...4.1.0) - 2019-12-16
+### Added
+- Added support for `symfony/event-dispatcher-contracts` 2.x
+
+### Changed
+- Remove current timestamp from cache key
+
 ## [4.0.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.18.2...4.0.0) - 2019-11-24
 ### Added
 - Added support for Symfony 5
