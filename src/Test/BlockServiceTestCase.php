@@ -50,16 +50,28 @@ abstract class InternalBlockServiceTestCase extends TestCase
     protected $blockContextManager;
 
     /**
-     * NEXT_MAJOR: Remove this property.
-     *
-     * @var FakeTemplating
-     */
-    protected $templating;
-
-    /**
      * @var Environment
      */
     protected $twig;
+
+    /**
+     * NEXT_MAJOR: Remove this property.
+     */
+    private $internalTemplating;
+
+    /**
+     * NEXT_MAJOR: Remove this property hack.
+     */
+    public function __get($name)
+    {
+        if ('templating' === $name) {
+            if (null === $this->internalTemplating) {
+                $this->internalTemplating = new FakeTemplating();
+            }
+
+            return $this->internalTemplating;
+        }
+    }
 
     /**
      * @internal
@@ -67,8 +79,6 @@ abstract class InternalBlockServiceTestCase extends TestCase
     protected function internalSetUp(): void
     {
         $this->container = $this->createMock(ContainerInterface::class);
-        // NEXT_MAJOR: Remove the following assignment.
-        $this->templating = new FakeTemplating();
 
         $blockLoader = $this->createMock(BlockLoaderInterface::class);
         $this->blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
