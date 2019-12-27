@@ -23,15 +23,44 @@ final class EmptyBlockServiceTest extends BlockServiceTestCase
 {
     /**
      * NEXT_MAJOR: Remove this test.
+     *
+     * @group legacy
      */
-    public function testArgumentCheck()
+    public function testInvalidConstructor(): void
     {
-        new EmptyBlockService($this->twig);
-        new EmptyBlockService($this->templating);
-        new EmptyBlockService('sonata.page.block.rss');
-
         $this->expectException(\TypeError::class);
         $this->expectExceptionMessage('Argument 1 passed to Sonata\BlockBundle\Block\Service\EmptyBlockService::__construct() must be a string or an instance of Twig\Environment or Symfony\Component\Templating\EngineInterface, instance of stdClass given.');
+
         new EmptyBlockService(new \stdClass());
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this test.
+     *
+     * @group legacy
+     */
+    public function testDeprecatedStringConstructor(): void
+    {
+        new EmptyBlockService('sonata.page.block.empty');
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this test.
+     *
+     * @group legacy
+     *
+     * @expectedDeprecation The Sonata\BlockBundle\Test\FakeTemplating class is deprecated since 3.17 and will be removed in version 4.0.
+     */
+    public function testDeprecatedTemplatingConstructor(): void
+    {
+        new EmptyBlockService($this->templating);
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this test.
+     */
+    public function testValiConstructor(): void
+    {
+        new EmptyBlockService($this->twig);
     }
 }
