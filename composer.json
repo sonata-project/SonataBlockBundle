@@ -49,8 +49,8 @@
         "symfony/stopwatch": "^4.3 || ^5.0"
     },
     "suggest": {
-        "knplabs/knp-menu-bundle": "^2.0",
-        "sonata-project/cache-bundle": "^3.0"
+        "knplabs/knp-menu-bundle": "Required to use the menu block",
+        "sonata-project/cache-bundle": "Required for caching blocks"
     },
     "config": {
         "sort-packages": true
