@@ -46,7 +46,10 @@ final class BlockDataCollector extends DataCollector
         $this->reset();
     }
 
-    public function collect(Request $request, Response $response, ?\Exception $exception = null): void
+    /**
+     * TODO: add type declaration for exception when dropping php 7.3 or Symfony 4.
+     */
+    public function collect(Request $request, Response $response, $exception = null): void
     {
         $this->data['blocks'] = $this->blocksHelper->getTraces();
 
