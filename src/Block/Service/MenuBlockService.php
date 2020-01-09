@@ -48,7 +48,7 @@ class MenuBlockService extends AbstractAdminBlockService
      *
      * @var array
      *
-     * @deprecated since 3.3, to be removed in 4.0
+     * @deprecated since sonata-project/block-bundle 3.3, to be removed in 4.0
      */
     protected $menus;
 
