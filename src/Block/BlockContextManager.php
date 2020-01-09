@@ -148,7 +148,7 @@ class BlockContextManager implements BlockContextManagerInterface
     /**
      * NEXT_MAJOR: remove this method.
      *
-     * @deprecated since version 2.3, to be renamed in 4.0.
+     * @deprecated since sonata-project/block-bundle 2.3, to be renamed in 4.0.
      *             Use the method configureSettings instead
      */
     protected function setDefaultSettings(OptionsResolverInterface $optionsResolver, BlockInterface $block)
