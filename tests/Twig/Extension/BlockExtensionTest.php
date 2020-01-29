@@ -18,6 +18,7 @@ use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
 use Twig\Environment;
 use Twig\Loader\LoaderInterface;
+use Twig\RuntimeLoader\FactoryRuntimeLoader;
 use Twig\TwigFunction;
 
 final class BlockExtensionTest extends TestCase
@@ -41,17 +42,23 @@ final class BlockExtensionTest extends TestCase
     {
         $this->blockHelper = $this->createMock(BlockHelper::class);
 
-        $loader = $this->createMock(LoaderInterface::class);
+        $this->blockExtension = new BlockExtension();
 
-        $this->blockExtension = new BlockExtension($this->blockHelper);
-
-        $this->env = new Environment($loader);
+        $this->env = new Environment($this->createMock(LoaderInterface::class));
         $this->env->addExtension($this->blockExtension);
+        $this->env->addRuntimeLoader(new FactoryRuntimeLoader([
+            BlockHelper::class => function (): BlockHelper {
+                return $this->blockHelper;
+            },
+        ]));
     }
 
     public function provideFunction()
     {
         return [
+            ['sonata_block_exists', [
+                'block_name',    // arguments
+            ], 'exists'],
             ['sonata_block_render', [
                 'foobar', ['bar' => 'foo'],    // arguments
             ], 'render'],
@@ -73,10 +80,11 @@ final class BlockExtensionTest extends TestCase
     public function testFunction($name, $args, $expectedMethod): void
     {
         $this->blockHelper->expects($this->once())
-            ->method($expectedMethod);
+            ->method($expectedMethod)
+            ->with(...$args);
 
         $func = $this->env->getFunction($name);
         $this->assertInstanceOf(TwigFunction::class, $func);
-        $func->getCallable()(...$args);
+        \call_user_func_array([$this->env->getRuntime(BlockHelper::class), $expectedMethod], $args);
     }
 }

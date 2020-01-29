@@ -19,41 +19,31 @@ use Twig\TwigFunction;
 
 final class BlockExtension extends AbstractExtension
 {
-    /**
-     * @var BlockHelper
-     */
-    private $blockHelper;
-
-    public function __construct(BlockHelper $blockHelper)
-    {
-        $this->blockHelper = $blockHelper;
-    }
-
     public function getFunctions()
     {
         return [
             new TwigFunction(
                 'sonata_block_exists',
-                [$this->blockHelper, 'exists']
+                [BlockHelper::class, 'exists']
             ),
             new TwigFunction(
                 'sonata_block_render',
-                [$this->blockHelper, 'render'],
+                [BlockHelper::class, 'render'],
                 ['is_safe' => ['html']]
             ),
             new TwigFunction(
                 'sonata_block_render_event',
-                [$this->blockHelper, 'renderEvent'],
+                [BlockHelper::class, 'renderEvent'],
                 ['is_safe' => ['html']]
             ),
             new TwigFunction(
                 'sonata_block_include_javascripts',
-                [$this->blockHelper, 'includeJavascripts'],
+                [BlockHelper::class, 'includeJavascripts'],
                 ['is_safe' => ['html']]
             ),
             new TwigFunction(
                 'sonata_block_include_stylesheets',
-                [$this->blockHelper, 'includeStylesheets'],
+                [BlockHelper::class, 'includeStylesheets'],
                 ['is_safe' => ['html']]
             ),
         ];

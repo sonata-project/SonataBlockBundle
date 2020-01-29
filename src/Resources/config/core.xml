@@ -25,6 +25,7 @@
             <argument type="service" id="sonata.block.templating.helper"/>
         </service>
         <service id="sonata.block.templating.helper" class="Sonata\BlockBundle\Templating\Helper\BlockHelper">
+            <tag name="twig.runtime"/>
             <argument type="service" id="sonata.block.manager"/>
             <argument>%sonata_block.cache_blocks%</argument>
             <argument type="service" id="sonata.block.renderer"/>
@@ -34,6 +35,7 @@
             <argument type="service" id="sonata.block.cache.handler.default" on-invalid="ignore"/>
             <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
         </service>
+        <service id="Sonata\BlockBundle\Templating\Helper\BlockHelper" alias="sonata.block.templating.helper"/>
         <service id="sonata.block.loader.chain" class="Sonata\BlockBundle\Block\BlockLoaderChain">
             <argument/>
         </service>
