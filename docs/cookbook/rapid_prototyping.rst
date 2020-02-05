@@ -30,7 +30,7 @@ You start integrating your HTML with the ``sonata.block.service.template`` block
 
 The usage is very simple:
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {{ sonata_block_render({ 'type': 'sonata.block.service.template' }, {
         'template': '@SonataDemo/Block/myblock.html'
@@ -41,7 +41,7 @@ Example
 
 The main template might look like:
 
-.. code-block:: jinja
+.. code-block:: twig
 
     <!DOCTYPE html>
     <html>
