@@ -29,14 +29,7 @@ The current RSS block will extend this base class. The other `use` statements ar
 Default settings
 ----------------
 
-A `block service` needs settings to work properly, so to ensure consistency, the service should define a ``configureOptions`` method.
-In the current tutorial, the default settings are:
-
-* `URL`: the feed url,
-* `title`: the block title,
-* `template`: the template to render the block.
-
-.. code-block:: php
+A `block service` needs settings to work properly, so to ensure consistency, the service should define a ``configureOptions`` method::
 
     public function configureSettings(OptionsResolver $resolver)
     {
@@ -47,8 +40,16 @@ In the current tutorial, the default settings are:
         ]);
     }
 
+In the current tutorial, the default settings are:
+
+* `URL`: the feed url,
+* `title`: the block title,
+* `template`: the template to render the block.
+
+
 Form Editing
 ------------
+
 You can define an editing config the following way::
 
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
@@ -127,7 +128,7 @@ Template
 
 In this tutorial, the block template is very simple. We loop through feeds, or if none are available, an error message is displayed.
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {% extends sonata_block.templates.block_base %}
 
@@ -153,16 +154,6 @@ We are almost done! Now, just declare the block as a service:
 
 .. configuration-block::
 
-    .. code-block:: xml
-
-        <!-- config/services.xml -->
-
-        <service id="sonata.block.service.rss" class="Sonata\BlockBundle\Block\Service\RssBlockService">
-            <tag name="sonata.block"/>
-            <argument/>
-            <argument type="service" id="twig"/>
-        </service>
-
     .. code-block:: yaml
 
         # config/services.yaml
@@ -175,6 +166,16 @@ We are almost done! Now, just declare the block as a service:
                     - '@twig'
                 tags:
                     - { name: sonata.block }
+
+    .. code-block:: xml
+
+        <!-- config/services.xml -->
+
+        <service id="sonata.block.service.rss" class="Sonata\BlockBundle\Block\Service\RssBlockService">
+            <tag name="sonata.block"/>
+            <argument/>
+            <argument type="service" id="twig"/>
+        </service>
 
 Then, add the service to Sonata configuration:
 
