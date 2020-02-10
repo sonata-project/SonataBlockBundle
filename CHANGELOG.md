@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.2.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.1.0...4.2.0) - 2020-02-10
+### Added
+- Hungarian translations
+
 ## [4.1.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.0.0...4.1.0) - 2019-12-16
 ### Added
 - Added support for `symfony/event-dispatcher-contracts` 2.x
