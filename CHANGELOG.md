@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.2.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.1.0...4.2.0) - 2020-03-21
+### Added
+- Hungarian translations
+- Allow knp-menu-bundle 3
+
 ## [4.1.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.0.0...4.1.0) - 2019-12-16
 ### Added
 - Added support for `symfony/event-dispatcher-contracts` 2.x
