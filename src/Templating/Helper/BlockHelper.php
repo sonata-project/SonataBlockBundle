@@ -337,7 +337,7 @@ class BlockHelper
         return $results;
     }
 
-    private function getCacheService(BlockInterface $block, array &$stats = null): ?CacheAdapterInterface
+    private function getCacheService(BlockInterface $block, ?array &$stats = null): ?CacheAdapterInterface
     {
         if (!$this->cacheManager) {
             return null;
