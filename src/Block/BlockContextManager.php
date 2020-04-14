@@ -56,7 +56,7 @@ final class BlockContextManager implements BlockContextManagerInterface
         BlockLoaderInterface $blockLoader,
         BlockServiceManagerInterface $blockService,
         array $cacheBlocks = [],
-        LoggerInterface $logger = null
+        ?LoggerInterface $logger = null
     ) {
         $this->blockLoader = $blockLoader;
         $this->blockService = $blockService;

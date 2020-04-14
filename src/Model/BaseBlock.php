@@ -140,7 +140,7 @@ abstract class BaseBlock implements BlockInterface
         return $this->position;
     }
 
-    public function setCreatedAt(\DateTime $createdAt = null): void
+    public function setCreatedAt(?\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
@@ -150,7 +150,7 @@ abstract class BaseBlock implements BlockInterface
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt = null): void
+    public function setUpdatedAt(?\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -172,7 +172,7 @@ abstract class BaseBlock implements BlockInterface
         return $this->children;
     }
 
-    public function setParent(BlockInterface $parent = null): void
+    public function setParent(?BlockInterface $parent = null): void
     {
         $this->parent = $parent;
     }
