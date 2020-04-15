@@ -75,7 +75,7 @@ interface BlockInterface
     /**
      * Sets the creation date and time.
      */
-    public function setCreatedAt(\DateTime $createdAt = null): void;
+    public function setCreatedAt(?\DateTime $createdAt = null): void;
 
     /**
      * Returns the creation date and time.
@@ -85,7 +85,7 @@ interface BlockInterface
     /**
      * Set the last update date and time.
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null): void;
+    public function setUpdatedAt(?\DateTime $updatedAt = null): void;
 
     /**
      * Returns the last update date and time.
@@ -149,7 +149,7 @@ interface BlockInterface
     /**
      * Set the parent block.
      */
-    public function setParent(self $parent = null): void;
+    public function setParent(?self $parent = null): void;
 
     /**
      * Returns the parent block.
