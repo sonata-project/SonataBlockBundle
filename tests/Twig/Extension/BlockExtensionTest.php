@@ -38,7 +38,7 @@ final class BlockExtensionTest extends TestCase
      */
     private $env;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->blockHelper = $this->createMock(BlockHelper::class);
 
