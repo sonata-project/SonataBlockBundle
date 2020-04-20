@@ -53,7 +53,7 @@ final class BlockRendererTest extends TestCase
     /**
      * Setup test object.
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
         $this->exceptionStrategyManager = $this->createMock(StrategyManagerInterface::class);

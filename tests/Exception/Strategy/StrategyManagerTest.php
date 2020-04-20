@@ -82,7 +82,7 @@ final class StrategyManagerTest extends TestCase
     /**
      * setup a basic scenario to avoid long test setup.
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->renderer1 = $this->createMock(RendererInterface::class);
         $this->renderer2 = $this->createMock(RendererInterface::class);
