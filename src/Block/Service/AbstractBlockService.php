@@ -48,7 +48,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
      *
      * @param Environment|EngineInterface|string $templatingOrDeprecatedName
      */
-    public function __construct($templatingOrDeprecatedName = null, EngineInterface $templating = null)
+    public function __construct($templatingOrDeprecatedName = null, ?EngineInterface $templating = null)
     {
         // $this->twig = $twig;
         // NEXT_MAJOR: Uncomment the previous assignment and remove the following lines in this method.
