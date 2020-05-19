@@ -13,12 +13,20 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Meta;
 
-/**
- * @author Hugo Briand <briand@ekino.com>
- *
- * NEXT_MAJOR: Remove CoreBundle dependency
- */
-interface MetadataInterface extends \Sonata\CoreBundle\Model\MetadataInterface
+use Sonata\CoreBundle\Model\MetadataInterface as CoreMetadataInterface;
+
+// NEXT_MAJOR: Remove CoreBundle dependency.
+if (interface_exists(CoreMetadataInterface::class)) {
+    interface InternalMetadataInterface extends CoreMetadataInterface
+    {
+    }
+} else {
+    interface InternalMetadataInterface
+    {
+    }
+}
+
+interface MetadataInterface extends InternalMetadataInterface
 {
     /**
      * @return string
