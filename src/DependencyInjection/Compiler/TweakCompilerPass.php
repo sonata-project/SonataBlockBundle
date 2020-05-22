@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\DependencyInjection\Compiler;
 
-use Sonata\BlockBundle\Naming\ConvertFromFqcn;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -46,18 +45,17 @@ class TweakCompilerPass implements CompilerPassInterface
                 $this->replaceBlockName($container, $definition, $id);
             }
 
-            $blockId = $this->getBlockId($id);
             $settings = $this->createBlockSettings($id, $tags, $defaultContexs);
 
             // Register blocks dynamicaly
-            if (!\array_key_exists($blockId, $blocks)) {
-                $blocks[$blockId] = $settings;
+            if (!\array_key_exists($id, $blocks)) {
+                $blocks[$id] = $settings;
             }
-            if (!\in_array($blockId, $blockTypes, true)) {
-                $blockTypes[] = $blockId;
+            if (!\in_array($id, $blockTypes, true)) {
+                $blockTypes[] = $id;
             }
-            if (isset($cacheBlocks['by_type']) && !\array_key_exists($blockId, $cacheBlocks['by_type'])) {
-                $cacheBlocks['by_type'][$blockId] = $settings['cache'];
+            if (isset($cacheBlocks['by_type']) && !\array_key_exists($id, $cacheBlocks['by_type'])) {
+                $cacheBlocks['by_type'][$id] = $settings['cache'];
             }
 
             $manager->addMethodCall('add', [$id, $id, $settings['contexts']]);
@@ -104,19 +102,6 @@ class TweakCompilerPass implements CompilerPassInterface
                 $definition->addMethodCall('addSettingsByClass', [$class, $settings['settings'], true]);
             }
         }
-    }
-
-    private function getBlockId(string $id): string
-    {
-        $blockId = $id;
-
-        // Only convert class service names
-        if (false !== strpos($blockId, '\\')) {
-            $convert = (new ConvertFromFqcn());
-            $blockId = $convert($blockId);
-        }
-
-        return $blockId;
     }
 
     private function createBlockSettings(string $id, array $tags = [], array $defaultContexts = []): array
