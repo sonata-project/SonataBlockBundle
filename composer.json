@@ -21,7 +21,8 @@
     ],
     "require": {
         "php": "^7.1",
-        "doctrine/common": "^2.3",
+        "doctrine/collections": "^1.6",
+        "doctrine/common": "^2.3 || ^3.0",
         "psr/cache": "^1.0",
         "sonata-project/cache": "^1.0 || ^2.0",
         "sonata-project/core-bundle": "^3.15.1",
