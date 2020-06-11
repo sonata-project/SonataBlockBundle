@@ -48,7 +48,7 @@ final class BlockRendererTest extends TestCase
     /**
      * Setup test object.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->blockServiceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
         $this->exceptionStrategyManager = $this->createMock('Sonata\BlockBundle\Exception\Strategy\StrategyManagerInterface');

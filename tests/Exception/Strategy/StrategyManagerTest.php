@@ -79,7 +79,7 @@ final class StrategyManagerTest extends TestCase
     /**
      * setup a basic scenario to avoid long test setup.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->renderer1 = $this->createMock('\Sonata\BlockBundle\Exception\Renderer\RendererInterface');
         $this->renderer2 = $this->createMock('\Sonata\BlockBundle\Exception\Renderer\RendererInterface');

@@ -28,7 +28,7 @@ final class TweakCompilerPassTest extends TestCase
     /**
      * Setup test object.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->container = new ContainerBuilder();
 
