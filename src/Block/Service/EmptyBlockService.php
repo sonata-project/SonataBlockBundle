@@ -16,7 +16,7 @@ namespace Sonata\BlockBundle\Block\Service;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\HttpFoundation\Response;
 
 /**

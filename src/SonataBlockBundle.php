@@ -39,12 +39,16 @@ class SonataBlockBundle extends Bundle
 
     /**
      * Register form mapping information.
+     *
+     * NEXT_MAJOR: remove this method
      */
     public function registerFormMapping()
     {
-        FormHelper::registerFormTypeMapping([
-            'sonata_block_service_choice' => 'Sonata\BlockBundle\Form\Type\ServiceListType',
-            'sonata_type_container_template_choice' => 'Sonata\BlockBundle\Form\Type\ContainerTemplateType',
-        ]);
+        if (class_exists(FormHelper::class)) {
+            FormHelper::registerFormTypeMapping([
+                'sonata_block_service_choice' => 'Sonata\BlockBundle\Form\Type\ServiceListType',
+                'sonata_type_container_template_choice' => 'Sonata\BlockBundle\Form\Type\ContainerTemplateType',
+            ]);
+        }
     }
 }
