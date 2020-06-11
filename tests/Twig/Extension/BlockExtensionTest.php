@@ -37,7 +37,7 @@ final class BlockExtensionTest extends TestCase
      */
     protected $env;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->blockHelper = $this->getMockBuilder(
             'Sonata\BlockBundle\Templating\Helper\BlockHelper'

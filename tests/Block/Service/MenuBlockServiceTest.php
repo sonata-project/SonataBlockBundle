@@ -40,7 +40,7 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
      *
      * @group legacy
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
