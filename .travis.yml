@@ -32,7 +32,7 @@ matrix:
     - php: '7.3'
       env: COMPOSER_FLAGS="--prefer-lowest"
     - php: '7.3'
-      env: SYMFONY=4.3.*
+      env: SYMFONY=4.4.*
     - php: '7.3'
       env: SYMFONY=5.0.*
     - php: '7.3'
