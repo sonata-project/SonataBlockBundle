@@ -27,18 +27,18 @@
         "sonata-project/cache": "^1.0 || ^2.0",
         "sonata-project/doctrine-extensions": "^1.1",
         "sonata-project/form-extensions": "^0.1.1 || ^1.4",
-        "symfony/asset": "^4.3",
-        "symfony/config": "^4.3",
-        "symfony/console": "^4.3",
-        "symfony/dependency-injection": "^4.3",
-        "symfony/event-dispatcher": "^4.3",
-        "symfony/form": "^4.3",
-        "symfony/framework-bundle": "^4.3",
-        "symfony/http-foundation": "^4.3",
-        "symfony/http-kernel": "^4.3",
-        "symfony/options-resolver": "^4.3",
-        "symfony/templating": "^4.3",
-        "symfony/twig-bundle": "^4.3",
+        "symfony/asset": "^4.4",
+        "symfony/config": "^4.4",
+        "symfony/console": "^4.4",
+        "symfony/dependency-injection": "^4.4",
+        "symfony/event-dispatcher": "^4.4",
+        "symfony/form": "^4.4",
+        "symfony/framework-bundle": "^4.4",
+        "symfony/http-foundation": "^4.4",
+        "symfony/http-kernel": "^4.4",
+        "symfony/options-resolver": "^4.4",
+        "symfony/templating": "^4.4",
+        "symfony/twig-bundle": "^4.4",
         "twig/twig": "^2.12.1"
     },
     "conflict": {
@@ -49,9 +49,9 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpspec/prophecy": "^1.10",
         "sonata-project/admin-bundle": "^3.28",
-        "symfony/debug": "^4.3",
-        "symfony/phpunit-bridge": "^5.0",
-        "symfony/stopwatch": "^4.3"
+        "symfony/debug": "^4.4",
+        "symfony/phpunit-bridge": "^5.1",
+        "symfony/stopwatch": "^4.4"
     },
     "suggest": {
         "knplabs/knp-menu-bundle": "^2.2"
