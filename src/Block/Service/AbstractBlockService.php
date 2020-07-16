@@ -100,7 +100,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
      *
      * @return Response
      */
-    public function renderResponse($view, array $parameters = [], Response $response = null)
+    public function renderResponse($view, array $parameters = [], ?Response $response = null)
     {
         if (null === $this->twig) {
             return $this->getTemplating()->renderResponse($view, $parameters, $response);
@@ -124,7 +124,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
      *
      * @return Response
      */
-    public function renderPrivateResponse($view, array $parameters = [], Response $response = null)
+    public function renderPrivateResponse($view, array $parameters = [], ?Response $response = null)
     {
         return $this->renderResponse($view, $parameters, $response)
             ->setTtl(0)
@@ -172,7 +172,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
         return [];
     }
 
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null)
     {
         return $this->renderResponse($blockContext->getTemplate(), [
             'block_context' => $blockContext,

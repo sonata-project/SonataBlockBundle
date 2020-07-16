@@ -112,7 +112,7 @@ class StrategyManager implements StrategyManagerInterface
         $this->defaultRenderer = $name;
     }
 
-    public function handleException(\Exception $exception, BlockInterface $block, Response $response = null)
+    public function handleException(\Exception $exception, BlockInterface $block, ?Response $response = null)
     {
         $response = $response ?: new Response();
         $response->setPrivate();

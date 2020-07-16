@@ -26,7 +26,7 @@ class NoopHttpCacheHandler implements HttpCacheHandlerInterface
     {
     }
 
-    public function updateMetadata(Response $response, BlockContextInterface $blockContext = null)
+    public function updateMetadata(Response $response, ?BlockContextInterface $blockContext = null)
     {
     }
 

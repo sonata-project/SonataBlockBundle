@@ -102,8 +102,8 @@ class BlockHelper extends Helper
         BlockContextManagerInterface $blockContextManager,
         EventDispatcherInterface $eventDispatcher,
         $cacheManagerOrCachePool = null,
-        HttpCacheHandlerInterface $cacheHandler = null,
-        Stopwatch $stopwatch = null
+        ?HttpCacheHandlerInterface $cacheHandler = null,
+        ?Stopwatch $stopwatch = null
     ) {
         $this->blockServiceManager = $blockServiceManager;
         $this->cacheBlocks = $cacheBlocks;
@@ -325,7 +325,7 @@ class BlockHelper extends Helper
     /**
      * Traverse the parent block and its children to retrieve the correct list css and javascript only for main block.
      */
-    protected function computeAssets(BlockContextInterface $blockContext, array &$stats = null)
+    protected function computeAssets(BlockContextInterface $blockContext, ?array &$stats = null)
     {
         if ($blockContext->getBlock()->hasParent()) {
             return;
@@ -473,7 +473,7 @@ class BlockHelper extends Helper
      *
      * @internal since sonata-project/block-bundle 3.16
      */
-    protected function getCacheService(BlockInterface $block, array &$stats = null)
+    protected function getCacheService(BlockInterface $block, ?array &$stats = null)
     {
         if (!$this->cacheManager) {
             return false;

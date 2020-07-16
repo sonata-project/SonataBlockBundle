@@ -28,7 +28,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class TemplateBlockService extends AbstractAdminBlockService
 {
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null)
     {
         return $this->renderResponse($blockContext->getTemplate(), [
             'block' => $blockContext->getBlock(),

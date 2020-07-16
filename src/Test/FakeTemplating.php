@@ -59,7 +59,7 @@ class FakeTemplating implements EngineInterface
         $this->parameters = $parameters;
     }
 
-    public function renderResponse($view, array $parameters = [], Response $response = null)
+    public function renderResponse($view, array $parameters = [], ?Response $response = null)
     {
         $this->view = $view;
         $this->parameters = $parameters;

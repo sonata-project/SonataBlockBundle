@@ -46,7 +46,7 @@ class HttpCacheHandler implements HttpCacheHandlerInterface
         }
     }
 
-    public function updateMetadata(Response $response, BlockContextInterface $blockContext = null)
+    public function updateMetadata(Response $response, ?BlockContextInterface $blockContext = null)
     {
         if (null === $this->currentTtl) {
             $this->currentTtl = $response->getTtl();
