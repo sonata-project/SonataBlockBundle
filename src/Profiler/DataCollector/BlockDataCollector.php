@@ -48,7 +48,7 @@ class BlockDataCollector extends DataCollector
         $this->reset();
     }
 
-    public function collect(Request $request, Response $response, \Exception $exception = null)
+    public function collect(Request $request, Response $response, ?\Exception $exception = null)
     {
         $this->data['blocks'] = $this->blocksHelper->getTraces();
 

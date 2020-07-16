@@ -62,7 +62,7 @@ class BlockRenderer implements BlockRendererInterface
      * @param LoggerInterface              $logger                   Logger class
      * @param bool                         $debug                    Whether in debug mode or not
      */
-    public function __construct(BlockServiceManagerInterface $blockServiceManager, StrategyManagerInterface $exceptionStrategyManager, LoggerInterface $logger = null, $debug = false)
+    public function __construct(BlockServiceManagerInterface $blockServiceManager, StrategyManagerInterface $exceptionStrategyManager, ?LoggerInterface $logger = null, $debug = false)
     {
         $this->blockServiceManager = $blockServiceManager;
         $this->exceptionStrategyManager = $exceptionStrategyManager;
@@ -70,7 +70,7 @@ class BlockRenderer implements BlockRendererInterface
         $this->debug = $debug;
     }
 
-    public function render(BlockContextInterface $blockContext, Response $response = null)
+    public function render(BlockContextInterface $blockContext, ?Response $response = null)
     {
         $block = $blockContext->getBlock();
 
@@ -112,7 +112,7 @@ class BlockRenderer implements BlockRendererInterface
     /**
      * @return Response
      */
-    protected function createResponse(BlockContextInterface $blockContext, Response $response = null)
+    protected function createResponse(BlockContextInterface $blockContext, ?Response $response = null)
     {
         if (null === $response) {
             $response = new Response();

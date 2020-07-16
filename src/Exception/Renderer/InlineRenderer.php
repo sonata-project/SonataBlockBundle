@@ -46,7 +46,7 @@ class InlineRenderer implements RendererInterface
         $this->template = $template;
     }
 
-    public function render(\Exception $exception, BlockInterface $block, Response $response = null)
+    public function render(\Exception $exception, BlockInterface $block, ?Response $response = null)
     {
         $parameters = [
             'exception' => $exception,

@@ -32,5 +32,5 @@ interface StrategyManagerInterface
      *
      * @return Response
      */
-    public function handleException(\Exception $exception, BlockInterface $block, Response $response = null);
+    public function handleException(\Exception $exception, BlockInterface $block, ?Response $response = null);
 }
