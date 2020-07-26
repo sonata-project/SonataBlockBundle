@@ -5,6 +5,7 @@
 branches:
   only:
     - master
+    - 4.x
     - 3.x
 
 language: php
@@ -12,36 +13,24 @@ language: php
 php:
   - '7.2'
   - '7.3'
-  - '7.4snapshot'
+  - '7.4'
   - nightly
 
 dist: xenial
 
-addons:
-  apt:
-    packages:
-      - libxml2-utils
-
 cache:
-  pip: true
   directories:
     - $HOME/.composer/cache/files
 
 env:
   global:
     - PATH="$HOME/.local/bin:$PATH"
-    - SYMFONY_DEPRECATIONS_HELPER=max[self]=0
     - TARGET=test
     - UPSTREAM_URL=https://github.com/sonata-project/SonataBlockBundle.git
-    - PHPUNIT_VERSION=7
 
 matrix:
   fast_finish: true
   include:
-    - php: '7.3'
-      env: TARGET=docs
-    - php: '7.3'
-      env: TARGET=lint
     - php: '7.2'
       env: COMPOSER_FLAGS="--prefer-lowest"
     - php: '7.3'
@@ -49,16 +38,20 @@ matrix:
     - php: '7.3'
       env: SYMFONY='dev-master as 4.4.x-dev'
     - php: '7.3'
+      env: SONATA_ADMIN=3.*
+    - php: '7.3'
+      env: SONATA_ADMIN='dev-master as 3.x-dev'
+    - php: '7.3'
       env: SONATA_CORE=3.*
     - php: '7.3'
       env: SONATA_CORE='dev-master as 3.x-dev'
     - php: '7.3'
       env: SYMFONY_DEPRECATIONS_HELPER=0
   allow_failures:
-    - php: 7.4snapshot
     - php: nightly
     - env: SYMFONY_DEPRECATIONS_HELPER=0
     - env: SYMFONY='dev-master as 4.4.x-dev'
+    - env: SONATA_ADMIN='dev-master as 3.x-dev'
     - env: SONATA_CORE='dev-master as 3.x-dev'
 
 before_install:
@@ -71,6 +64,7 @@ install:
   - if [ -x .travis/install_${TARGET}.sh ]; then .travis/install_${TARGET}.sh; fi;
 
 before_script:
+  - phpenv config-rm xdebug.ini
   - if [ -x .travis/before_script_${TARGET}.sh ]; then .travis/before_script_${TARGET}.sh; fi;
 
 script: make $TARGET

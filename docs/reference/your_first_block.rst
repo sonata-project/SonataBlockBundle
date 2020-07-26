@@ -31,14 +31,7 @@ The current RSS block will extend this base class. The other `use` statements ar
 Default settings
 ----------------
 
-A `block service` needs settings to work properly, so to ensure consistency, the service should define a ``configureOptions`` method.
-In the current tutorial, the default settings are:
-
-* `URL`: the feed url,
-* `title`: the block title,
-* `template`: the template to render the block.
-
-.. code-block:: php
+A `block service` needs settings to work properly, so to ensure consistency, the service should define a ``configureOptions`` method::
 
     public function configureSettings(OptionsResolver $resolver)
     {
@@ -48,6 +41,12 @@ In the current tutorial, the default settings are:
             'template' => '@SonataBlock/Block/block_core_rss.html.twig',
         ]);
     }
+
+In the current tutorial, the default settings are:
+
+* `URL`: the feed url,
+* `title`: the block title,
+* `template`: the template to render the block.
 
 Form Editing
 ------------
@@ -155,16 +154,6 @@ We are almost done! Now, just declare the block as a service:
 
 .. configuration-block::
 
-    .. code-block:: xml
-
-        <!-- config/services.xml -->
-
-        <service id="sonata.block.service.rss" class="Sonata\BlockBundle\Block\Service\RssBlockService">
-            <tag name="sonata.block"/>
-            <argument/>
-            <argument type="service" id="sonata.templating"/>
-        </service>
-
     .. code-block:: yaml
 
         # config/services.yaml
@@ -177,6 +166,16 @@ We are almost done! Now, just declare the block as a service:
                     - "@templating"
                 tags:
                     - { name: sonata.block }
+
+    .. code-block:: xml
+
+        <!-- config/services.xml -->
+
+        <service id="sonata.block.service.rss" class="Sonata\BlockBundle\Block\Service\RssBlockService">
+            <tag name="sonata.block"/>
+            <argument/>
+            <argument type="service" id="sonata.templating"/>
+        </service>
 
 Then, add the service to Sonata configuration:
 
