@@ -58,6 +58,6 @@ Empty block
 -----------
 
 By default, the loader interface expects the exception ``Sonata\BlockBundle\Exception\BlockNotFoundException`` if a block is not found.
-Return an empty block from your loader class if the default behaviour for your blocks is to always return content.
+Return an empty block from your loader class if the default behavior for your blocks is to always return content.
 
 .. _SonataCacheBundle: https://github.com/sonata-project/SonataCacheBundle

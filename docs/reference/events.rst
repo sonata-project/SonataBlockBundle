@@ -14,6 +14,7 @@ The `Event mechanism` implemented in the ``SonataBlockBundle`` tries to address 
 .. code-block:: jinja
 
     {# post.twig.html #}
+
     <h1>{{ post.title }}</h1>
     <div> {{ post.message }} </div>
 
@@ -30,12 +31,6 @@ So, the current the name will be ``sonata.block.event.blog.comment``.
 
 .. configuration-block::
 
-    .. code-block:: xml
-
-        <service id="disqus.comment" class="Sonata\CommentBundle\Event\Discus">
-            <tag name="kernel.event_listener" event="sonata.block.event.blog.comment" method="onBlock"/>
-        </service>
-
     .. code-block:: yaml
 
         # config/services.yaml
@@ -45,6 +40,12 @@ So, the current the name will be ``sonata.block.event.blog.comment``.
                 class: Sonata\CommentBundle\Event\Disqus"
                 tags:
                     - { name: kernel.event_listener, event: sonata.block.event.blog.comment, method: onBlock }
+
+    .. code-block:: xml
+
+        <service id="disqus.comment" class="Sonata\CommentBundle\Event\Discus">
+            <tag name="kernel.event_listener" event="sonata.block.event.blog.comment" method="onBlock"/>
+        </service>
 
 The `event listener` must push one or some ``BlockInterface`` instances into ``BlockEvent`` passed in so the rendering workflow will work properly::
 
