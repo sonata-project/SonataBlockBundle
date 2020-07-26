@@ -46,7 +46,6 @@ In the current tutorial, the default settings are:
 * `title`: the block title,
 * `template`: the template to render the block.
 
-
 Form Editing
 ------------
 
