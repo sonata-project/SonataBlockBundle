@@ -28,7 +28,7 @@ final class TweakCompilerPassTest extends TestCase
     /**
      * Setup test object.
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->container = new ContainerBuilder();
 
@@ -48,7 +48,7 @@ final class TweakCompilerPassTest extends TestCase
     {
         if (!method_exists(Definition::class, 'setAutoconfigured')) {
             $this->markTestSkipped(
-              'Autowiring does not exist in < symfony 3.'
+                'Autowiring does not exist in < symfony 3.'
             );
         }
 

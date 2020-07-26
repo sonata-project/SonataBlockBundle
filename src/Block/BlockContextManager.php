@@ -63,8 +63,11 @@ class BlockContextManager implements BlockContextManagerInterface
      */
     private $reflectionCache;
 
-    public function __construct(BlockLoaderInterface $blockLoader, BlockServiceManagerInterface $blockService,
-        array $cacheBlocks = [], ?LoggerInterface $logger = null
+    public function __construct(
+        BlockLoaderInterface $blockLoader,
+        BlockServiceManagerInterface $blockService,
+        array $cacheBlocks = [],
+        ?LoggerInterface $logger = null
     ) {
         $this->blockLoader = $blockLoader;
         $this->blockService = $blockService;
