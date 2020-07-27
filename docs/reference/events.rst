@@ -47,7 +47,6 @@ So, the current the name will be ``sonata.block.event.blog.comment``.
             <tag name="kernel.event_listener" event="sonata.block.event.blog.comment" method="onBlock"/>
         </service>
 
-
 The `event listener` must push one or some ``BlockInterface`` instances into ``BlockEvent`` passed in so the rendering workflow will work properly::
 
     use Sonata\BlockBundle\Model\Block;

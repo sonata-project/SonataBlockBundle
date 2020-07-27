@@ -54,6 +54,26 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - internal test classes are now excluded from the autoloader
 - Removed `AbstractBlockServiceTest::$container`
 
+## [3.20.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.19.0...3.20.0) - 2020-06-23
+### Removed
+- remove SonataCoreBundle dependencies
+
+## [3.19.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.18.4...3.18.5) - 2020-05-08
+### Added
+- Support for `doctrine/common` 3.
+
+## [3.18.5](https://github.com/sonata-project/SonataBlockBundle/compare/3.18.4...3.18.5) - 2020-05-08
+### Fixed
+- Drop unnecessary constructor
+
+## [3.18.4](https://github.com/sonata-project/SonataBlockBundle/compare/3.18.3...3.18.4) - 2020-02-10
+### Removed
+- Removed deprecation warnings when extending `BlockServiceTestCase`
+
+## [3.18.3](https://github.com/sonata-project/SonataBlockBundle/compare/3.18.2...3.18.3) - 2019-12-30
+### Fixed
+- Crash when attempting to display the side menu when using sonata/ecommerce and Symfony 4.1
+
 ## [3.18.2](https://github.com/sonata-project/SonataBlockBundle/compare/3.18.1...3.18.2) - 2019-11-24
 ### Fixed
 - Make cache optional again
