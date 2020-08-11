@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.3.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.2.0...4.3.0) - 2020-08-11
+### Added
+- [[#710](https://github.com/sonata-project/SonataBlockBundle/pull/710)] Added support for `doctrine/common` 3 ([@jaikdean](https://github.com/jaikdean))
+
+### Changed
+- [[#676](https://github.com/sonata-project/SonataBlockBundle/pull/676)] * Lazy `BlockExtension` to speed Twig initialization ([@mikemix](https://github.com/mikemix))
+
+### Removed
+- [[#716](https://github.com/sonata-project/SonataBlockBundle/pull/716)] Support for Symfony < 4.4 ([@wbloszyk](https://github.com/wbloszyk))
+
 ## [4.2.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.1.0...4.2.0) - 2020-03-21
 ### Added
 - Hungarian translations
