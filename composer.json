@@ -39,7 +39,7 @@
         "symfony/options-resolver": "^4.4 || ^5.1",
         "symfony/templating": "^4.4",
         "symfony/twig-bundle": "^4.4",
-        "twig/twig": "^2.12.1"
+        "twig/twig": "^2.12.1 || ^3.0"
     },
     "conflict": {
         "sonata-project/core-bundle": "<3.20"
@@ -51,10 +51,10 @@
         "sonata-project/admin-bundle": "^3.28",
         "symfony/debug": "^4.4",
         "symfony/phpunit-bridge": "^5.1.1",
-        "symfony/stopwatch": "^4.4"
+        "symfony/stopwatch": "^4.4 || ^5.1"
     },
     "suggest": {
-        "knplabs/knp-menu-bundle": "^2.2"
+        "knplabs/knp-menu-bundle": "In order to use MenuBlockService."
     },
     "config": {
         "sort-packages": true
