@@ -10,9 +10,7 @@ on:
       - master
       - 4.x
       - 3.x
-
   pull_request:
-    paths: ['**.php', '**.yml', '**.yaml', '**.xml', '**.xml.dist', '**.twig', '**.js', '**.css', '**.json']
 
 jobs:
   test:
