@@ -12,7 +12,7 @@ on:
       - 3.x
 
   pull_request:
-    paths: ['**.php', '**.yml', '**.yaml', '**.xml', '**.twig', '**.js', '**.css', '**.json']
+    paths: ['**.php', '**.yml', '**.yaml', '**.xml', '**.xml.dist', '**.twig', '**.js', '**.css', '**.json']
 
 jobs:
   test:
@@ -73,6 +73,9 @@ jobs:
       - name: Install variant
         if: matrix.variant != 'normal'
         run: composer require ${{ matrix.variant }} --no-update
+
+      - name: Allow cyclic dependency between block-bundle and admin-bundle
+        run: sed --in-place "s/\"dev-master\":/\"dev-${GITHUB_SHA}\":/" composer.json
 
       - name: Install Composer dependencies (lowest)
         if: matrix.dependencies == 'lowest'
