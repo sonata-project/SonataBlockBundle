@@ -79,9 +79,6 @@ jobs:
         if: matrix.variant != 'normal'
         run: composer require ${{ matrix.variant }} --no-update
 
-      - name: Allow cyclic dependency between block-bundle and admin-bundle
-        run: sed --in-place "s/\"dev-master\":/\"dev-${GITHUB_SHA}\":/" composer.json
-
       - name: Install Composer dependencies (lowest)
         if: matrix.dependencies == 'lowest'
         run: composer update --prefer-dist --no-progress --no-interaction --prefer-stable --prefer-lowest
