@@ -64,6 +64,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - internal test classes are now excluded from the autoloader
 - Removed `AbstractBlockServiceTest::$container`
 
+## [3.21.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.20.0...3.21.0) - 2020-08-25
+### Added
+- [[#732](https://github.com/sonata-project/SonataBlockBundle/pull/732)] Added support for "twig/twig:^3.0" ([@phansys](https://github.com/phansys))
+- [[#730](https://github.com/sonata-project/SonataBlockBundle/pull/730)] Added support for symfony/options-resolver:^5.1 ([@phansys](https://github.com/phansys))
+
+### Removed
+- [[#715](https://github.com/sonata-project/SonataBlockBundle/pull/715)] Support for Symfony < 4.4 ([@wbloszyk](https://github.com/wbloszyk))
+
 ## [3.20.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.19.0...3.20.0) - 2020-06-23
 ### Removed
 - remove SonataCoreBundle dependencies
