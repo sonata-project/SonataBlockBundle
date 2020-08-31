@@ -14,7 +14,7 @@ on:
 
 jobs:
   build:
-    name: Build documentation
+    name: Sphinx build
 
     runs-on: ubuntu-latest
 
