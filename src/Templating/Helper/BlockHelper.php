@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Templating\Helper;
 
 use Doctrine\Common\Util\ClassUtils;
-use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\BlockContextManagerInterface;
 use Sonata\BlockBundle\Block\BlockRendererInterface;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
@@ -193,10 +192,6 @@ class BlockHelper
     public function render($block, array $options = []): string
     {
         $blockContext = $this->blockContextManager->get($block, $options);
-
-        if (!$blockContext instanceof BlockContextInterface) {
-            return '';
-        }
 
         $stats = [];
 
