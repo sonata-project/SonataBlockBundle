@@ -31,7 +31,7 @@ interface BlockServiceManagerInterface
 
     public function getServices(): array;
 
-    public function getServicesByContext(string $name, bool $includeContainers = true): array;
+    public function getServicesByContext(string $context, bool $includeContainers = true): array;
 
     public function has(string $name): bool;
 

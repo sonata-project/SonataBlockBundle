@@ -118,7 +118,7 @@ final class StrategyManager implements StrategyManagerInterface
 
             // Convert throwable to exception
             if (!$exception instanceof \Exception) {
-                $exception = new Exception($exception->getMessage(), $exception->getCode(), $exception);
+                $exception = new Exception($exception->getMessage(), (int) $exception->getCode(), $exception);
             }
 
             $response = $renderer->render($exception, $block, $response);

@@ -23,8 +23,8 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class MonkeyThrowRenderer implements RendererInterface
 {
-    public function render(\Exception $banana, BlockInterface $block, ?Response $response = null): Response
+    public function render(\Exception $exception, BlockInterface $block, ?Response $response = null): Response
     {
-        throw $banana;
+        throw $exception;
     }
 }
