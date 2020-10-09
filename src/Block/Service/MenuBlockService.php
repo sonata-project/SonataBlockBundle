@@ -33,7 +33,7 @@ use Twig\Environment;
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-final class MenuBlockService extends AbstractBlockService implements EditableBlockService
+class MenuBlockService extends AbstractBlockService implements EditableBlockService
 {
     /**
      * @var MenuProviderInterface

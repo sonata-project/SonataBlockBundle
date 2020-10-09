@@ -49,7 +49,7 @@ final class HttpCacheHandler implements HttpCacheHandlerInterface
             $this->currentTtl = $response->getTtl();
         }
 
-        if (null !== $response->isCacheable() && $response->getTtl() < $this->currentTtl) {
+        if ($response->isCacheable() && $response->getTtl() < $this->currentTtl) {
             $this->currentTtl = $response->getTtl();
         }
     }
