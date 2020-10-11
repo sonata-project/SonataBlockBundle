@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Naming\Exception;
 
-use InvalidArgumentException;
-
-final class NamingException extends InvalidArgumentException
+final class NamingException extends \InvalidArgumentException
 {
 }
