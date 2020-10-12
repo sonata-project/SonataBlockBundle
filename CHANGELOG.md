@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.4.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.3.0...4.4.0) - 2020-10-11
+### Changed
+- [[#761](https://github.com/sonata-project/SonataBlockBundle/pull/761)] Make `MenuBlockService` non-final ([@core23](https://github.com/core23))
+
+### Fixed
+- [[#763](https://github.com/sonata-project/SonataBlockBundle/pull/763)] Fix some parameter name mismatches for PHP 8 ([@core23](https://github.com/core23))
+
+### Removed
+- [[#763](https://github.com/sonata-project/SonataBlockBundle/pull/763)] Removed unused type check ([@core23](https://github.com/core23))
+
 ## [4.3.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.2.0...4.3.0) - 2020-08-11
 ### Added
 - [[#710](https://github.com/sonata-project/SonataBlockBundle/pull/710)] Added support for `doctrine/common` 3 ([@jaikdean](https://github.com/jaikdean))
