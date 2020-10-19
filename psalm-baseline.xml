@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="3.17.2@9e526d9cb569fe4631e6a737bbb7948d05596e3f">
+    <file src="src/Annotation/Block.php">
+        <UndefinedClass occurrences="1">
+            <code>MetadataProcessorInterface</code>
+        </UndefinedClass>
+    </file>
+    <file src="src/Block/BlockRenderer.php">
+        <ParamNameMismatch occurrences="1">
+            <code>$blockContext</code>
+        </ParamNameMismatch>
+    </file>
+    <file src="src/Block/BlockServiceManager.php">
+        <ParamNameMismatch occurrences="1">
+            <code>$context</code>
+        </ParamNameMismatch>
+    </file>
+    <file src="src/Block/Service/AbstractAdminBlockService.php">
+        <ParamNameMismatch occurrences="1">
+            <code>$formMapper</code>
+        </ParamNameMismatch>
+    </file>
+    <file src="src/Block/Service/ContainerBlockService.php">
+        <ParamNameMismatch occurrences="1">
+            <code>$formMapper</code>
+        </ParamNameMismatch>
+    </file>
+    <file src="src/Block/Service/RssBlockService.php">
+        <ParamNameMismatch occurrences="1">
+            <code>$formMapper</code>
+        </ParamNameMismatch>
+    </file>
+    <file src="src/Block/Service/TemplateBlockService.php">
+        <ParamNameMismatch occurrences="1">
+            <code>$formMapper</code>
+        </ParamNameMismatch>
+    </file>
+    <file src="src/Block/Service/TextBlockService.php">
+        <ParamNameMismatch occurrences="1">
+            <code>$formMapper</code>
+        </ParamNameMismatch>
+    </file>
+    <file src="src/Exception/Renderer/MonkeyThrowRenderer.php">
+        <ParamNameMismatch occurrences="1">
+            <code>$banana</code>
+        </ParamNameMismatch>
+    </file>
+    <file src="src/Meta/MetadataInterface.php">
+        <UndefinedClass occurrences="1">
+            <code>CoreMetadataInterface</code>
+        </UndefinedClass>
+        <UnrecognizedStatement occurrences="1"/>
+    </file>
+    <file src="src/Resources/stubs/symfony2.php">
+        <UnrecognizedStatement occurrences="1"/>
+    </file>
+    <file src="src/Test/BlockServiceTestCase.php">
+        <DuplicateClass occurrences="1">
+            <code>BlockServiceTestCase</code>
+        </DuplicateClass>
+    </file>
+</files>
