@@ -49,7 +49,6 @@
         "knplabs/knp-menu": "^3.1",
         "knplabs/knp-menu-bundle": "^3.0",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-        "phpspec/prophecy": "^1.10",
         "sonata-project/admin-bundle": "^3.28",
         "symfony/debug": "^4.4",
         "symfony/phpunit-bridge": "^5.1.1",
