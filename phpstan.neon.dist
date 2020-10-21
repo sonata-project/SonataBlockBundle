@@ -1,0 +1,11 @@
+parameters:
+    level: 0
+
+    paths:
+        - src
+
+    bootstrapFiles:
+        - vendor/autoload.php
+
+    excludes_analyse:
+        - src/Test/BlockServiceTestCase.php
