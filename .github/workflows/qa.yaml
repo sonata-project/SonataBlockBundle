@@ -22,6 +22,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Allow cyclic dependency between block-bundle and admin-bundle
+        run: sed --in-place "s/\"dev-master\":/\"dev-${GITHUB_SHA}\":/" composer.json
+
       - name: PHPStan
         uses: docker://oskarstark/phpstan-ga
         env:
@@ -36,6 +39,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Allow cyclic dependency between block-bundle and admin-bundle
+        run: sed --in-place "s/\"dev-master\":/\"dev-${GITHUB_SHA}\":/" composer.json
 
       - name: Psalm
         uses: docker://vimeo/psalm-github-actions
