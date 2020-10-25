@@ -22,6 +22,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Set COMPOSER_ROOT_VERSION environment variable
+        uses: ergebnis/composer-root-version-action@0.2.0
+        with:
+          branch: master
+
       - name: PHPStan
         uses: docker://oskarstark/phpstan-ga
         env:
@@ -37,8 +42,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Allow cyclic dependency between block-bundle and admin-bundle
-        run: sed --in-place "s/\"dev-master\":/\"dev-${GITHUB_SHA}\":/" composer.json
+      - name: Set COMPOSER_ROOT_VERSION environment variable
+        uses: ergebnis/composer-root-version-action@0.2.0
+        with:
+          branch: master
 
       - name: Psalm
         uses: docker://vimeo/psalm-github-actions
