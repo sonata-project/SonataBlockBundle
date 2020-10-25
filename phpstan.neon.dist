@@ -1,0 +1,15 @@
+parameters:
+    level: 0
+
+    paths:
+        - src
+
+    bootstrapFiles:
+        - vendor/autoload.php
+
+    excludes_analyse:
+        - src/Annotation/Block.php
+        - src/Meta/Metadata.php
+        - src/Meta/MetadataInterface.php
+        - src/Test/AbstractBlockServiceTestCase.php
+        - src/Test/BlockServiceTestCase.php
