@@ -49,10 +49,12 @@
         "knplabs/knp-menu": "^3.1",
         "knplabs/knp-menu-bundle": "^3.0",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "psalm/plugin-symfony": "^1.4",
         "sonata-project/admin-bundle": "^3.28",
         "symfony/debug": "^4.4",
-        "symfony/phpunit-bridge": "^5.1.1",
-        "symfony/stopwatch": "^4.4 || ^5.1"
+        "symfony/phpunit-bridge": "^5.1.4",
+        "symfony/stopwatch": "^4.4 || ^5.1",
+        "vimeo/psalm": "^3.13.1"
     },
     "suggest": {
         "knplabs/knp-menu-bundle": "In order to use MenuBlockService."
