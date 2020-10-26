@@ -57,8 +57,8 @@ abstract class AbstractBlockService implements BlockServiceInterface
             $this->name = '';
             $this->twig = $templatingOrDeprecatedName;
         } else {
-            if (0 !== strpos(static::class, __NAMESPACE__.'\\')) {
-                $class = 'c' === static::class[0] && 0 === strpos(static::class, "class@anonymous\0") ? get_parent_class(static::class).'@anonymous' : static::class;
+            if (0 !== strpos(static::class, __NAMESPACE__.'\\') || false !== strpos(static::class, '@anonymous')) {
+                $class = false !== strpos(static::class, "@anonymous\0") ? get_parent_class(static::class).'@anonymous' : static::class;
 
                 @trigger_error(
                     sprintf(
