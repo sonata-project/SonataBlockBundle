@@ -78,7 +78,7 @@ class BlockContextManager implements BlockContextManagerInterface
 
     public function addSettingsByType($type, array $settings, $replace = false)
     {
-        $typeSettings = isset($this->settingsByType[$type]) ? $this->settingsByType[$type] : [];
+        $typeSettings = $this->settingsByType[$type] ?? [];
         if ($replace) {
             $this->settingsByType[$type] = array_merge($typeSettings, $settings);
         } else {
@@ -88,7 +88,7 @@ class BlockContextManager implements BlockContextManagerInterface
 
     public function addSettingsByClass($class, array $settings, $replace = false)
     {
-        $classSettings = isset($this->settingsByClass[$class]) ? $this->settingsByClass[$class] : [];
+        $classSettings = $this->settingsByClass[$class] ?? [];
         if ($replace) {
             $this->settingsByClass[$class] = array_merge($classSettings, $settings);
         } else {
@@ -188,7 +188,7 @@ class BlockContextManager implements BlockContextManagerInterface
         // add type and class settings for block
         $class = ClassUtils::getClass($block);
         $settingsByType = isset($this->settingsByType[$block->getType()]) ? $this->settingsByType[$block->getType()] : [];
-        $settingsByClass = isset($this->settingsByClass[$class]) ? $this->settingsByClass[$class] : [];
+        $settingsByClass = $this->settingsByClass[$class] ?? [];
         $optionsResolver->setDefaults(array_merge($settingsByType, $settingsByClass));
     }
 
@@ -206,7 +206,7 @@ class BlockContextManager implements BlockContextManagerInterface
 
         // type by block class
         $class = ClassUtils::getClass($block);
-        $cacheServiceId = isset($this->cacheBlocks['by_class'][$class]) ? $this->cacheBlocks['by_class'][$class] : false;
+        $cacheServiceId = $this->cacheBlocks['by_class'][$class] ?? false;
 
         // type by block service
         if (!$cacheServiceId) {
