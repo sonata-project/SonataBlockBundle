@@ -65,6 +65,6 @@ class BlockEvent extends Event
      */
     public function getSetting($name, $default = null)
     {
-        return isset($this->settings[$name]) ? $this->settings[$name] : $default;
+        return $this->settings[$name] ?? $default;
     }
 }

@@ -76,7 +76,7 @@ class InlineDebugRenderer implements RendererInterface
         $parameters = [
             'exception' => $flattenException,
             'status_code' => $code,
-            'status_text' => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
+            'status_text' => Response::$statusTexts[$code] ?? '',
             'logger' => false,
             'currentContent' => false,
             'block' => $block,

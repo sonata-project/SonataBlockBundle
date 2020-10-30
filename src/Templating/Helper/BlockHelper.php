@@ -481,7 +481,7 @@ class BlockHelper extends Helper
 
         // type by block class
         $class = ClassUtils::getClass($block);
-        $cacheServiceId = isset($this->cacheBlocks['by_class'][$class]) ? $this->cacheBlocks['by_class'][$class] : false;
+        $cacheServiceId = $this->cacheBlocks['by_class'][$class] ?? false;
 
         // type by block service
         if (!$cacheServiceId) {
