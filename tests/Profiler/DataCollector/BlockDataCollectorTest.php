@@ -26,12 +26,10 @@ final class BlockDataCollectorTest extends TestCase
 {
     public function testBlockDataCollector(): void
     {
-        $blockHelper = $this->prophesize(BlockHelper::class);
-        $request = $this->prophesize(Request::class);
-        $response = $this->prophesize(Response::class);
+        $blockHelper = $this->createStub(BlockHelper::class);
         $objectForBlock = new \DateTime();
 
-        $blockDataCollector = new BlockDataCollector($blockHelper->reveal(), ['container']);
+        $blockDataCollector = new BlockDataCollector($blockHelper, ['container']);
 
         $expectedEvents = ['1' => '2', '3' => '4'];
         $expectedBlocks = [
@@ -42,13 +40,13 @@ final class BlockDataCollectorTest extends TestCase
         $expectedContainers = ['test1' => ['type' => 'container']];
         $expectedRealBlocks = ['test2' => ['type' => 'another_type', 'datetime' => $objectForBlock]];
 
-        $blockHelper->getTraces()->willReturn([
+        $blockHelper->method('getTraces')->willReturn([
             '_events' => ['1' => '2', '3' => '4'],
             'test1' => ['type' => 'container'],
             'test2' => ['type' => 'another_type', 'datetime' => $objectForBlock],
         ]);
 
-        $blockDataCollector->collect($request->reveal(), $response->reveal());
+        $blockDataCollector->collect(new Request(), new Response());
 
         $this->assertSame($expectedEvents, $blockDataCollector->getEvents());
         $this->assertSame($expectedBlocks, $blockDataCollector->getBlocks());
