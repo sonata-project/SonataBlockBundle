@@ -40,11 +40,6 @@ jobs:
                   key: ${{ runner.os }}-7.4-composer-highest-normal
                   restore-keys: ${{ runner.os }}-7.4-composer-
 
-            - name: Set COMPOSER_ROOT_VERSION environment variable
-              uses: ergebnis/composer-root-version-action@0.2.0
-              with:
-                  branch: master
-
             - name: Install Composer dependencies (highest)
               run: composer update --prefer-dist --no-progress --no-interaction --prefer-stable
 
@@ -77,11 +72,6 @@ jobs:
                   path: ${{ steps.composer-cache.outputs.dir }}
                   key: ${{ runner.os }}-7.4-composer-highest-normal
                   restore-keys: ${{ runner.os }}-7.4-composer-
-
-            - name: Set COMPOSER_ROOT_VERSION environment variable
-              uses: ergebnis/composer-root-version-action@0.2.0
-              with:
-                  branch: master
 
             - name: Install Composer dependencies (highest)
               run: composer update --prefer-dist --no-progress --no-interaction --prefer-stable

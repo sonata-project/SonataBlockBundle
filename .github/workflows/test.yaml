@@ -79,11 +79,6 @@ jobs:
               if: matrix.variant != 'normal'
               run: composer require ${{ matrix.variant }} --no-update
 
-            - name: Set COMPOSER_ROOT_VERSION environment variable
-              uses: ergebnis/composer-root-version-action@0.2.0
-              with:
-                  branch: master
-
             - name: Install Composer dependencies (lowest)
               if: matrix.dependencies == 'lowest'
               run: composer update --prefer-dist --no-progress --no-interaction --prefer-stable --prefer-lowest
