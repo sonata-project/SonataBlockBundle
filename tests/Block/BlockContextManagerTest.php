@@ -49,7 +49,7 @@ final class BlockContextManagerTest extends TestCase
             'use_cache' => true,
             'extra_cache_keys' => [],
             'attr' => [],
-            'template' => false,
+            'template' => null,
             'ttl' => 0,
         ], $blockContext->getSettings());
     }

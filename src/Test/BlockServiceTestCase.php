@@ -30,6 +30,10 @@ use Twig\Environment;
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  *
  * @internal
+ * @psalm-suppress UndefinedClass
+ *
+ * @todo the psalm-suppress annotation was added because phpunit/phpunit is not strictly a project dependency and will
+ * be required dynamically when running tests
  */
 abstract class BlockServiceTestCase extends TestCase
 {
@@ -49,6 +53,11 @@ abstract class BlockServiceTestCase extends TestCase
     protected $twig;
 
     /**
+     * @var MockObject|BlockInterface
+     */
+    protected $block;
+
+    /**
      * @internal
      */
     protected function setUp(): void
@@ -57,6 +66,7 @@ abstract class BlockServiceTestCase extends TestCase
         $this->blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
         $this->blockContextManager = new BlockContextManager($blockLoader, $this->blockServiceManager);
         $this->twig = $this->createMock(Environment::class);
+        $this->block = $this->createMock(BlockInterface::class);
     }
 
     /**
@@ -65,14 +75,9 @@ abstract class BlockServiceTestCase extends TestCase
     protected function getBlockContext(BlockServiceInterface $blockService): BlockContextInterface
     {
         $this->blockServiceManager->expects($this->once())->method('get')->willReturn($blockService);
+        $this->block->expects($this->once())->method('getSettings')->willReturn([]);
 
-        $block = $this->createMock(BlockInterface::class);
-        $block->expects($this->once())->method('getSettings')->willReturn([]);
-
-        $blockContext = $this->blockContextManager->get($block);
-        $this->assertInstanceOf(BlockContextInterface::class, $blockContext);
-
-        return $blockContext;
+        return $this->blockContextManager->get($this->block);
     }
 
     /**

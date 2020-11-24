@@ -63,7 +63,7 @@ final class BlockContext implements BlockContextInterface
         return $this;
     }
 
-    public function getTemplate(): string
+    public function getTemplate(): ?string
     {
         return $this->getSetting('template');
     }
