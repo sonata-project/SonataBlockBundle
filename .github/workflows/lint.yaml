@@ -12,6 +12,9 @@ on:
             - master
     pull_request:
 
+env:
+    ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
 jobs:
     php-cs-fixer:
         name: PHP-CS-Fixer
