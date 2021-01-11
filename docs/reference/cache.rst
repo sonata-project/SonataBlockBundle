@@ -59,7 +59,7 @@ or you can use the `Response` object::
     }
 
 Cache Keys
-::::::::::
+~~~~~~~~~~
 
 The ``SonataCacheBundle`` needs cache keys in order to find cached blocks.
 By default cache keys consist of the ``block_id`` and the ``updated_at``
