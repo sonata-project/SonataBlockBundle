@@ -31,5 +31,5 @@ interface BlockContextInterface
      */
     public function setSetting(string $name, $value): self;
 
-    public function getTemplate(): string;
+    public function getTemplate(): ?string;
 }

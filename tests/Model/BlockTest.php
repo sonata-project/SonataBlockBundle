@@ -48,7 +48,6 @@ final class BlockTest extends TestCase
         $parent = $this->createMock(Block::class);
 
         $block = new Block();
-
         $block->setName('my.block.name');
         $block->setCreatedAt($time);
         $block->setUpdatedAt($time);
@@ -70,6 +69,7 @@ final class BlockTest extends TestCase
     {
         $block = new Block();
         $block->setSetting('foo', 'bar');
+
         $this->assertSame('void', $block->getSetting('fake', 'void'));
         $this->assertNull($block->getSetting('fake'));
         $this->assertSame('bar', $block->getSetting('foo'));

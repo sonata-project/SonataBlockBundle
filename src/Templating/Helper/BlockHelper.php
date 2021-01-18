@@ -154,6 +154,11 @@ class BlockHelper
     {
         $eventName = sprintf('sonata.block.event.%s', $name);
 
+        /**
+         * @psalm-suppress TooManyArguments
+         *
+         * @todo remove annotation when Symfony 4.4.x support is dropped
+         */
         $event = $this->eventDispatcher->dispatch(new BlockEvent($options), $eventName);
 
         \assert($event instanceof BlockEvent);

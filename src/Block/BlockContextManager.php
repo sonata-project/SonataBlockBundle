@@ -18,6 +18,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class BlockContextManager implements BlockContextManagerInterface
@@ -130,7 +131,7 @@ final class BlockContextManager implements BlockContextManagerInterface
             'use_cache' => true,
             'extra_cache_keys' => [],
             'attr' => [],
-            'template' => false,
+            'template' => null,
             'ttl' => $block->getTtl(),
         ]);
 
@@ -139,7 +140,16 @@ final class BlockContextManager implements BlockContextManagerInterface
                 ->addAllowedTypes('extra_cache_keys', 'array')
                 ->addAllowedTypes('attr', 'array')
                 ->addAllowedTypes('ttl', 'int')
-                ->addAllowedTypes('template', ['string', 'bool'])
+                // NEXT_MAJOR: Remove bool.
+                ->addAllowedTypes('template', ['null', 'string', 'bool'])
+                // NEXT_MAJOR: Remove setDeprecated.
+                ->setDeprecated('template', 'sonata-project/block-bundle', '4.5.0', static function (Options $options, $value): string {
+                    if (\is_bool($value)) {
+                        return 'Passing a boolean to option "template" is deprecated and will not be allowed in 5.0, pass a string or null instead.';
+                    }
+
+                    return '';
+                })
             ;
 
         // add type and class settings for block
