@@ -119,7 +119,7 @@ class BlockHelper extends Helper
                     __FUNCTION__,
                     CacheItemPoolInterface::class
                 ),
-                E_USER_DEPRECATED
+                \E_USER_DEPRECATED
             );
 
             $this->cacheManager = $cacheManagerOrCachePool;
@@ -341,14 +341,14 @@ class BlockHelper extends Helper
         if (\count($assets['js']) > 0) {
             @trigger_error(
                 'Defining javascripts assets inside a block is deprecated since 3.3.0 and will be removed in 4.0',
-                E_USER_DEPRECATED
+                \E_USER_DEPRECATED
             );
         }
 
         if (\count($assets['css']) > 0) {
             @trigger_error(
                 'Defining css assets inside a block is deprecated since 3.2.0 and will be removed in 4.0',
-                E_USER_DEPRECATED
+                \E_USER_DEPRECATED
             );
         }
 

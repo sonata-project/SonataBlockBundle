@@ -24,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * NEXT_MAJOR: Uncomment the "final" class declaration
  */
-/* final */class DebugBlocksCommand extends BaseCommand
+/* final */ class DebugBlocksCommand extends BaseCommand
 {
     /**
      * {@inheritdoc}
@@ -50,7 +50,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
             @trigger_error(
                 'Command "sonata:block:debug" is deprecated since sonata-project/block-bundle 3.16 and will be removed with the 4.0 release.'.
                 ' Use the "debug:sonata:block" command instead.',
-                E_USER_DEPRECATED
+                \E_USER_DEPRECATED
             );
         }
         if ($input->getOption('context')) {
