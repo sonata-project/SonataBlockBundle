@@ -55,7 +55,7 @@ abstract class BaseCommand extends Command
             'Use the %1$s::$blockManager property instead.',
             static::class,
             __FUNCTION__
-        ), E_USER_DEPRECATED);
+        ), \E_USER_DEPRECATED);
 
         return $this->blockManager;
     }

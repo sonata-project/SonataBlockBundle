@@ -21,7 +21,7 @@ use Sonata\Form\Validator\ErrorElement;
 @trigger_error(
     'The '.__NAMESPACE__.'\AbstractAdminBlockService class is deprecated since sonata-project/block-bundle 3.16 '.
     'and will be removed with the 4.0 release.',
-    E_USER_DEPRECATED
+    \E_USER_DEPRECATED
 );
 
 /**

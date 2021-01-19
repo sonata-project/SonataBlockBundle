@@ -74,7 +74,7 @@ class MenuBlockService extends AbstractAdminBlockService
         } elseif (\is_array($menuRegistry)) { //NEXT_MAJOR: Remove this case
             @trigger_error(
                 'Initializing '.__CLASS__.' with an array parameter is deprecated since 3.3 and will be removed in 4.0.',
-                E_USER_DEPRECATED
+                \E_USER_DEPRECATED
             );
             $this->menuRegistry = new MenuRegistry();
             foreach ($menuRegistry as $menu) {

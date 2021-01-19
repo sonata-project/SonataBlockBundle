@@ -160,7 +160,7 @@ class BlockContextManager implements BlockContextManagerInterface
             @trigger_error(
                 'The '.__METHOD__.' is deprecated since version 2.3, to be renamed in 4.0.'
                 .' Use '.__CLASS__.'::configureSettings instead.',
-                E_USER_DEPRECATED
+                \E_USER_DEPRECATED
             );
         }
         $this->configureSettings($optionsResolver, $block);
@@ -270,7 +270,7 @@ class BlockContextManager implements BlockContextManagerInterface
                 'The Sonata\BlockBundle\Block\BlockServiceInterface::setDefaultSettings() method is deprecated'
                 .' since version 2.3 and will be removed in 4.0. Use configureSettings() instead.'
                 .' This method will be added to the BlockServiceInterface with SonataBlockBundle 4.0.',
-                E_USER_DEPRECATED
+                \E_USER_DEPRECATED
             );
             $service->setDefaultSettings($optionsResolver);
         } else {
