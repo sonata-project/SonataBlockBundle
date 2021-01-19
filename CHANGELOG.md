@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.22.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.21.0...3.22.0) - 2021-01-19
+### Added
+- [[#778](https://github.com/sonata-project/SonataBlockBundle/pull/778)] Added Dutch translations ([@zghosts](https://github.com/zghosts))
+- [[#821](https://github.com/sonata-project/SonataBlockBundle/pull/821)] Allow PHP8 ([@VincentLanglet](https://github.com/VincentLanglet))
+
 ## [3.21.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.20.0...3.21.0) - 2020-08-25
 ### Added
 - [[#732](https://github.com/sonata-project/SonataBlockBundle/pull/732)] Added support for "twig/twig:^3.0" ([@phansys](https://github.com/phansys))
