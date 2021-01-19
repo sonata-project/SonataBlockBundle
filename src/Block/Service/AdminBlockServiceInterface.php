@@ -22,7 +22,7 @@ use Sonata\Form\Validator\ErrorElement;
     'The '.__NAMESPACE__.'\AdminBlockServiceInterface interface is deprecated since sonata-project/block-bundle 3.16 '.
     'and will be removed with the 4.0 release. '.
     'Use '.__NAMESPACE__.'\Service\EditableBlockService instead.',
-    E_USER_DEPRECATED
+    \E_USER_DEPRECATED
 );
 
 /**
