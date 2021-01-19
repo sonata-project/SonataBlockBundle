@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 @trigger_error(
     'The '.__NAMESPACE__.'\FakeTemplating class is deprecated since 3.17 '.
     'and will be removed in version 4.0.',
-    E_USER_DEPRECATED
+    \E_USER_DEPRECATED
 );
 
 /**

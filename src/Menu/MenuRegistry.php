@@ -37,7 +37,7 @@ final class MenuRegistry implements MenuRegistryInterface
 
             @trigger_error(
                 'The menus parameter in '.__CLASS__.' is deprecated since 3.3 and will be removed in 4.0.',
-                E_USER_DEPRECATED
+                \E_USER_DEPRECATED
             );
         }
     }
@@ -47,7 +47,7 @@ final class MenuRegistry implements MenuRegistryInterface
         if ($menu instanceof MenuBuilderInterface) {
             @trigger_error(
                 'Adding a '.MenuBuilderInterface::class.' is deprecated since 3.9 and will be removed in 4.0.',
-                E_USER_DEPRECATED
+                \E_USER_DEPRECATED
             );
 
             return;

@@ -68,7 +68,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
                         __FUNCTION__,
                         Environment::class
                     ),
-                    E_USER_DEPRECATED
+                    \E_USER_DEPRECATED
                 );
             }
 
@@ -200,7 +200,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
                 $class,
                 __FUNCTION__
             ),
-            E_USER_DEPRECATED
+            \E_USER_DEPRECATED
         );
 
         if (null !== $this->twig) {
