@@ -172,7 +172,7 @@ class Configuration implements ConfigurationInterface
                             if (\count($value) > 0) {
                                 @trigger_error(
                                     'The menus configuration key is deprecated since 3.3 and will be removed in 4.0.',
-                                    E_USER_DEPRECATED
+                                    \E_USER_DEPRECATED
                                 );
                             }
 
