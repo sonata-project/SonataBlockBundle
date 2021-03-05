@@ -29,8 +29,6 @@ use Twig\Environment;
  * Abstract test class for block service tests.
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
- *
- * @internal
  */
 abstract class InternalBlockServiceTestCase extends TestCase
 {
@@ -73,9 +71,6 @@ abstract class InternalBlockServiceTestCase extends TestCase
         }
     }
 
-    /**
-     * @internal
-     */
     protected function internalSetUp(): void
     {
         $this->container = $this->createMock(ContainerInterface::class);
