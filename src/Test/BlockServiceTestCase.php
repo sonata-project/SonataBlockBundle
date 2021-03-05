@@ -29,7 +29,6 @@ use Twig\Environment;
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  *
- * @internal
  * @psalm-suppress UndefinedClass
  *
  * @todo the psalm-suppress annotation was added because phpunit/phpunit is not strictly a project dependency and will
@@ -57,9 +56,6 @@ abstract class BlockServiceTestCase extends TestCase
      */
     protected $block;
 
-    /**
-     * @internal
-     */
     protected function setUp(): void
     {
         $blockLoader = $this->createMock(BlockLoaderInterface::class);
