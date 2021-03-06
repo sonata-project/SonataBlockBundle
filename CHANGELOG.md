@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.5.1](https://github.com/sonata-project/SonataBlockBundle/compare/4.5.0...4.5.1) - 2021-03-06
+### Removed
+- [[#841](https://github.com/sonata-project/SonataBlockBundle/pull/841)] Remove `@internal` annotation from `BlockServiceTestCase` class ([@core23](https://github.com/core23))
+
 ## [4.5.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.4.0...4.5.0) - 2021-01-11
 ### Added
 - [[#782](https://github.com/sonata-project/SonataBlockBundle/pull/782)] Added Dutch translations ([@franmomu](https://github.com/franmomu))
