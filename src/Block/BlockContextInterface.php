@@ -43,7 +43,7 @@ interface BlockContextInterface
     public function setSetting($name, $value);
 
     /**
-     * @return string
+     * @return string|false|null
      */
     public function getTemplate();
 }
