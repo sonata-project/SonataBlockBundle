@@ -87,6 +87,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - internal test classes are now excluded from the autoloader
 - Removed `AbstractBlockServiceTest::$container`
 
+## [3.23.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.22.1...3.23.0) - 2021-03-09
+### Added
+- [[#844](https://github.com/sonata-project/SonataBlockBundle/pull/844)] Support for "symfony/asset:^5.2" ([@phansys](https://github.com/phansys))
+- [[#844](https://github.com/sonata-project/SonataBlockBundle/pull/844)] Support for "symfony/config:^5.2" ([@phansys](https://github.com/phansys))
+- [[#844](https://github.com/sonata-project/SonataBlockBundle/pull/844)] Support for "symfony/dependency-injection:^5.2" ([@phansys](https://github.com/phansys))
+- [[#844](https://github.com/sonata-project/SonataBlockBundle/pull/844)] Support for "symfony/http-foundation:^5.2" ([@phansys](https://github.com/phansys))
+- [[#844](https://github.com/sonata-project/SonataBlockBundle/pull/844)] Support for "symfony/templating:^5.2" ([@phansys](https://github.com/phansys))
+
+### Changed
+- [[#845](https://github.com/sonata-project/SonataBlockBundle/pull/845)] Extend possible return type of `BlockContextInterface::getTemplate()` ([@core23](https://github.com/core23))
+
+## [3.22.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.22.0...3.22.1) - 2021-03-06
+### Removed
+- [[#841](https://github.com/sonata-project/SonataBlockBundle/pull/841)] Remove `@internal` annotation from `BlockServiceTestCase` class ([@core23](https://github.com/core23))
+
 ## [3.22.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.21.0...3.22.0) - 2021-01-19
 ### Added
 - [[#778](https://github.com/sonata-project/SonataBlockBundle/pull/778)] Added Dutch translations ([@zghosts](https://github.com/zghosts))
@@ -104,7 +119,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - remove SonataCoreBundle dependencies
 
-## [3.19.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.18.4...3.18.5) - 2020-05-08
+## [3.19.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.18.5...3.19.0) - 2020-05-08
 ### Added
 - Support for `doctrine/common` 3.
 
