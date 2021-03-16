@@ -23,7 +23,7 @@ use Twig\TwigFunction;
 final class BlockExtensionTest extends TestCase
 {
     /**
-     * @var MockObject|BlockHelper
+     * @var MockObject&BlockHelper
      */
     protected $blockHelper;
 
@@ -39,9 +39,7 @@ final class BlockExtensionTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->blockHelper = $this->getMockBuilder(
-            'Sonata\BlockBundle\Templating\Helper\BlockHelper'
-        )->disableOriginalConstructor()->getMock();
+        $this->blockHelper = $this->getMockBuilder(BlockHelper::class)->disableOriginalConstructor()->getMock();
 
         $loader = $this->createMock(LoaderInterface::class);
 
