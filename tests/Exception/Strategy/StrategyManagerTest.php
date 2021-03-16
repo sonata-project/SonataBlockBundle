@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests\Exception\Strategy;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Filter\FilterInterface;
 use Sonata\BlockBundle\Exception\Renderer\RendererInterface;
@@ -32,7 +33,7 @@ final class StrategyManagerTest extends TestCase
     protected $manager;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|ContainerInterface
+     * @var MockObject&ContainerInterface
      */
     protected $container;
 
@@ -57,22 +58,22 @@ final class StrategyManagerTest extends TestCase
     protected $blockRenderers = [];
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|RendererInterface
+     * @var MockObject&RendererInterface
      */
     protected $renderer1;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|RendererInterface
+     * @var MockObject&RendererInterface
      */
     protected $renderer2;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|FilterInterface
+     * @var MockObject&FilterInterface
      */
     protected $filter1;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|FilterInterface
+     * @var MockObject&FilterInterface
      */
     protected $filter2;
 
