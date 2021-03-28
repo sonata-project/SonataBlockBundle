@@ -33,12 +33,12 @@ use Twig\Environment;
 abstract class InternalBlockServiceTestCase extends TestCase
 {
     /**
-     * @var MockObject|ContainerInterface
+     * @var MockObject&ContainerInterface
      */
     protected $container;
 
     /**
-     * @var MockObject|BlockServiceManagerInterface
+     * @var MockObject&BlockServiceManagerInterface
      */
     protected $blockServiceManager;
 
