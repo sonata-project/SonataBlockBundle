@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [4.5.3](https://github.com/sonata-project/SonataBlockBundle/compare/4.5.2...4.5.3) - 2021-03-29
+## [4.5.3](https://github.com/sonata-project/SonataBlockBundle/compare/4.5.2...4.5.3) - 2021-03-28
 ### Fixed
 - [[#861](https://github.com/sonata-project/SonataBlockBundle/pull/846)] `BlockServiceTestCase` phpdoc ([@VincentLanglet](https://github.com/VincentLanglet))
 
