@@ -37,7 +37,7 @@ use Twig\Environment;
 abstract class BlockServiceTestCase extends TestCase
 {
     /**
-     * @var MockObject|BlockServiceManagerInterface
+     * @var MockObject&BlockServiceManagerInterface
      */
     protected $blockServiceManager;
 
@@ -47,12 +47,12 @@ abstract class BlockServiceTestCase extends TestCase
     protected $blockContextManager;
 
     /**
-     * @var MockObject|Environment
+     * @var MockObject&Environment
      */
     protected $twig;
 
     /**
-     * @var MockObject|BlockInterface
+     * @var MockObject&BlockInterface
      */
     protected $block;
 
