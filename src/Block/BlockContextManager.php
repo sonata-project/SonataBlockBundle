@@ -182,8 +182,7 @@ class BlockContextManager implements BlockContextManagerInterface
             ->addAllowedTypes('extra_cache_keys', 'array')
             ->addAllowedTypes('attr', 'array')
             ->addAllowedTypes('ttl', 'int')
-            ->addAllowedTypes('template', ['string', 'bool'])
-        ;
+            ->addAllowedTypes('template', ['string', 'bool']);
 
         // add type and class settings for block
         $class = ClassUtils::getClass($block);
