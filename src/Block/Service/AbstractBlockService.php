@@ -54,8 +54,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
     {
         return $this->renderResponse($view, $parameters, $response)
             ->setTtl(0)
-            ->setPrivate()
-        ;
+            ->setPrivate();
     }
 
     /**

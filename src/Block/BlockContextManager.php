@@ -136,21 +136,20 @@ final class BlockContextManager implements BlockContextManagerInterface
         ]);
 
         $optionsResolver
-                ->addAllowedTypes('use_cache', 'bool')
-                ->addAllowedTypes('extra_cache_keys', 'array')
-                ->addAllowedTypes('attr', 'array')
-                ->addAllowedTypes('ttl', 'int')
-                // NEXT_MAJOR: Remove bool.
-                ->addAllowedTypes('template', ['null', 'string', 'bool'])
-                // NEXT_MAJOR: Remove setDeprecated.
-                ->setDeprecated('template', 'sonata-project/block-bundle', '4.5.0', static function (Options $options, $value): string {
-                    if (\is_bool($value)) {
-                        return 'Passing a boolean to option "template" is deprecated and will not be allowed in 5.0, pass a string or null instead.';
-                    }
+            ->addAllowedTypes('use_cache', 'bool')
+            ->addAllowedTypes('extra_cache_keys', 'array')
+            ->addAllowedTypes('attr', 'array')
+            ->addAllowedTypes('ttl', 'int')
+            // NEXT_MAJOR: Remove bool.
+            ->addAllowedTypes('template', ['null', 'string', 'bool'])
+            // NEXT_MAJOR: Remove setDeprecated.
+            ->setDeprecated('template', 'sonata-project/block-bundle', '4.5.0', static function (Options $options, $value): string {
+                if (\is_bool($value)) {
+                    return 'Passing a boolean to option "template" is deprecated and will not be allowed in 5.0, pass a string or null instead.';
+                }
 
-                    return '';
-                })
-            ;
+                return '';
+            });
 
         // add type and class settings for block
         $class = ClassUtils::getClass($block);
