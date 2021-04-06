@@ -31,17 +31,17 @@ use Symfony\Component\HttpFoundation\Response;
 final class BlockRendererTest extends TestCase
 {
     /**
-     * @var MockObject|BlockServiceManagerInterface
+     * @var MockObject&BlockServiceManagerInterface
      */
     private $blockServiceManager;
 
     /**
-     * @var MockObject|LoggerInterface
+     * @var MockObject&LoggerInterface
      */
     private $logger;
 
     /**
-     * @var MockObject|StrategyManager
+     * @var MockObject&StrategyManager
      */
     private $exceptionStrategyManager;
 

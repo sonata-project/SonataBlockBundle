@@ -24,7 +24,7 @@ use Twig\TwigFunction;
 final class BlockExtensionTest extends TestCase
 {
     /**
-     * @var MockObject|BlockHelper
+     * @var MockObject&BlockHelper
      */
     private $blockHelper;
 

@@ -35,7 +35,7 @@ final class StrategyManagerTest extends TestCase
     private $manager;
 
     /**
-     * @var MockObject|ContainerInterface
+     * @var MockObject&ContainerInterface
      */
     private $container;
 
@@ -60,22 +60,22 @@ final class StrategyManagerTest extends TestCase
     private $blockRenderers = [];
 
     /**
-     * @var MockObject|RendererInterface
+     * @var MockObject&RendererInterface
      */
     private $renderer1;
 
     /**
-     * @var MockObject|RendererInterface
+     * @var MockObject&RendererInterface
      */
     private $renderer2;
 
     /**
-     * @var MockObject|FilterInterface
+     * @var MockObject&FilterInterface
      */
     private $filter1;
 
     /**
-     * @var MockObject|FilterInterface
+     * @var MockObject&FilterInterface
      */
     private $filter2;
 
