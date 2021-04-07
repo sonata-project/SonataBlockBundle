@@ -12,9 +12,6 @@ on:
             - master
     pull_request:
 
-env:
-    ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-
 jobs:
     phpstan:
         name: PHPStan
@@ -33,7 +30,7 @@ jobs:
                   tools: composer:v2
 
             - name: Set COMPOSER_ROOT_VERSION environment variable
-              uses: ergebnis/composer-root-version-action@0.2.0
+              uses: ergebnis/composer-root-version-action@0.2.1
               with:
                   branch: master
 
@@ -62,7 +59,7 @@ jobs:
                   tools: composer:v2
 
             - name: Set COMPOSER_ROOT_VERSION environment variable
-              uses: ergebnis/composer-root-version-action@0.2.0
+              uses: ergebnis/composer-root-version-action@0.2.1
               with:
                   branch: master
 
