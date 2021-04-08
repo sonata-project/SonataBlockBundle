@@ -81,7 +81,7 @@ final class ServiceListTypeTest extends TestCase
             'include_containers' => false,
             'context' => 'cms',
             'choices' => [
-                'my.service.code' => 'value - my.service.code',
+                'value - my.service.code' => 'my.service.code',
             ],
             'empty_data' => '',
             'empty_value' => null,

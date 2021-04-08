@@ -60,7 +60,7 @@ class ServiceListType extends AbstractType
             'choices' => static function (Options $options, $previousValue) use ($manager) {
                 $types = [];
                 foreach ($manager->getServicesByContext($options['context'], $options['include_containers']) as $code => $service) {
-                    $types[$code] = sprintf('%s - %s', $service->getName(), $code);
+                    $types[sprintf('%s - %s', $service->getName(), $code)] = $code;
                 }
 
                 return $types;
