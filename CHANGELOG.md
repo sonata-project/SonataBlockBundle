@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.23.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.23.0...3.23.1) - 2021-05-01
+### Fixed
+- [[#873](https://github.com/sonata-project/SonataBlockBundle/pull/873)] Flipped `ServiceListType` returned `choices` option ([@gremo](https://github.com/gremo))
+- [[#871](https://github.com/sonata-project/SonataBlockBundle/pull/871)] Flipped `sonata.block.form.type.container_template` service array argument in the extension ([@gremo](https://github.com/gremo))
+- [[#860](https://github.com/sonata-project/SonataBlockBundle/pull/860)] `BlockServiceTestCase` phpdoc ([@VincentLanglet](https://github.com/VincentLanglet))
+- [[#859](https://github.com/sonata-project/SonataBlockBundle/pull/859)] Fix phpdoc for test class ([@core23](https://github.com/core23))
+
 ## [3.23.0](https://github.com/sonata-project/SonataBlockBundle/compare/3.22.1...3.23.0) - 2021-03-09
 ### Added
 - [[#844](https://github.com/sonata-project/SonataBlockBundle/pull/844)] Support for "symfony/asset:^5.2" ([@phansys](https://github.com/phansys))
