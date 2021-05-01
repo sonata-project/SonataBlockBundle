@@ -33,13 +33,13 @@ final class SonataBlockExtension extends Extension
 
         $defaultTemplates = [];
         if (isset($bundles['SonataPageBundle'])) {
-            $defaultTemplates['@SonataPage/Block/block_container.html.twig'] = 'SonataPageBundle default template';
+            $defaultTemplates['SonataPageBundle default template'] = '@SonataPage/Block/block_container.html.twig';
         } else {
-            $defaultTemplates['@SonataBlock/Block/block_container.html.twig'] = 'SonataBlockBundle default template';
+            $defaultTemplates['SonataBlockBundle default template'] = '@SonataBlock/Block/block_container.html.twig';
         }
 
         if (isset($bundles['SonataSeoBundle'])) {
-            $defaultTemplates['@SonataSeo/Block/block_social_container.html.twig'] = 'SonataSeoBundle (to contain social buttons)';
+            $defaultTemplates['SonataSeoBundle (to contain social buttons)'] = '@SonataSeo/Block/block_social_container.html.twig';
         }
 
         return new Configuration($defaultTemplates);
