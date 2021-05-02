@@ -12,7 +12,7 @@ maintained_branches:
     - 4.x
     - master
 
-doc_dir: 'doc/'
+doc_dir: 'docs/'
 
 current_branch: 4.x
 
