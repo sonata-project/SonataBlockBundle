@@ -23,9 +23,9 @@ final class MenuRegistry implements MenuRegistryInterface
      */
     private $names = [];
 
-    public function add(string $menu): void
+    public function add(string $name): void
     {
-        $this->names[$menu] = $menu;
+        $this->names[$name] = $name;
     }
 
     public function getAliasNames(): array

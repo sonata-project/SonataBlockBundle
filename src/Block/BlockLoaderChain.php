@@ -47,32 +47,32 @@ final class BlockLoaderChain implements BlockLoaderInterface
         return false;
     }
 
-    public function load($block): BlockInterface
+    public function load($configuration): BlockInterface
     {
-        if (!\is_string($block) && !\is_array($block)) {
+        if (!\is_string($configuration) && !\is_array($configuration)) {
             throw new \TypeError(sprintf(
                 'Argument 1 passed to %s must be of type string or array, %s given',
                 __METHOD__,
-                \is_object($block) ? 'object of type '.\get_class($block) : \gettype($block)
+                \is_object($configuration) ? 'object of type '.\get_class($configuration) : \gettype($configuration)
             ));
         }
 
         foreach ($this->loaders as $loader) {
-            if ($loader->support($block)) {
-                return $loader->load($block);
+            if ($loader->support($configuration)) {
+                return $loader->load($configuration);
             }
         }
 
         throw new BlockNotFoundException();
     }
 
-    public function support($name): bool
+    public function support($configuration): bool
     {
-        if (!\is_string($name) && !\is_array($name)) {
+        if (!\is_string($configuration) && !\is_array($configuration)) {
             throw new \TypeError(sprintf(
                 'Argument 1 passed to %s must be of type string or array, %s given',
                 __METHOD__,
-                \is_object($name) ? 'object of type '.\get_class($name) : \gettype($name)
+                \is_object($configuration) ? 'object of type '.\get_class($configuration) : \gettype($configuration)
             ));
         }
 
