@@ -59,14 +59,14 @@ final class BlockServiceManager implements BlockServiceManagerInterface
         return $this->services[$block->getType()];
     }
 
-    public function getService($id): BlockServiceInterface
+    public function getService($name): BlockServiceInterface
     {
-        return $this->load($id);
+        return $this->load($name);
     }
 
-    public function has(string $id): bool
+    public function has(string $name): bool
     {
-        return isset($this->services[$id]);
+        return isset($this->services[$name]);
     }
 
     /**
