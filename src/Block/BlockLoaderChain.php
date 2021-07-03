@@ -51,11 +51,11 @@ class BlockLoaderChain implements BlockLoaderInterface
         return false;
     }
 
-    public function load($block)
+    public function load($name)
     {
         foreach ($this->loaders as $loader) {
-            if ($loader->support($block)) {
-                return $loader->load($block);
+            if ($loader->support($name)) {
+                return $loader->load($name);
             }
         }
 

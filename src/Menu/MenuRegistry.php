@@ -42,9 +42,9 @@ final class MenuRegistry implements MenuRegistryInterface
         }
     }
 
-    public function add($menu)
+    public function add($name)
     {
-        if ($menu instanceof MenuBuilderInterface) {
+        if ($name instanceof MenuBuilderInterface) {
             @trigger_error(
                 'Adding a '.MenuBuilderInterface::class.' is deprecated since 3.9 and will be removed in 4.0.',
                 \E_USER_DEPRECATED
@@ -53,7 +53,7 @@ final class MenuRegistry implements MenuRegistryInterface
             return;
         }
 
-        $this->names[$menu] = $menu;
+        $this->names[$name] = $name;
     }
 
     public function getAliasNames()

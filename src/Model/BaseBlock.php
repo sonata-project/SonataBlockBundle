@@ -160,11 +160,11 @@ abstract class BaseBlock implements BlockInterface
         return $this->updatedAt;
     }
 
-    public function addChildren(BlockInterface $child)
+    public function addChildren(BlockInterface $children)
     {
-        $this->children[] = $child;
+        $this->children[] = $children;
 
-        $child->setParent($this);
+        $children->setParent($this);
     }
 
     public function getChildren()
