@@ -46,33 +46,33 @@ class ServiceLoader implements BlockLoaderInterface
         return \in_array($type, $this->types, true);
     }
 
-    public function load($configuration)
+    public function load($name)
     {
-        if (!\in_array($configuration['type'], $this->types, true)) {
+        if (!\in_array($name['type'], $this->types, true)) {
             throw new \RuntimeException(sprintf(
                 'The block type "%s" does not exist',
-                $configuration['type']
+                $name['type']
             ));
         }
 
         $block = new Block();
         $block->setId(uniqid('', true));
-        $block->setType($configuration['type']);
+        $block->setType($name['type']);
         $block->setEnabled(true);
         $block->setCreatedAt(new \DateTime());
         $block->setUpdatedAt(new \DateTime());
-        $block->setSettings($configuration['settings'] ?? []);
+        $block->setSettings($name['settings'] ?? []);
 
         return $block;
     }
 
-    public function support($configuration)
+    public function support($name)
     {
-        if (!\is_array($configuration)) {
+        if (!\is_array($name)) {
             return false;
         }
 
-        if (!isset($configuration['type'])) {
+        if (!isset($name['type'])) {
             return false;
         }
 
