@@ -84,5 +84,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
         }
 
         $output->writeln('done!');
+
+        return 0;
     }
 }
