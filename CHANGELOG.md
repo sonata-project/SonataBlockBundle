@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.23.2](https://github.com/sonata-project/SonataBlockBundle/compare/3.23.1...3.23.2) - 2021-07-20
+### Fixed
+- [[#891](https://github.com/sonata-project/SonataBlockBundle/pull/891)] Fix inconsistencies in parameter names between interfaces and their implementations ([@greg0ire](https://github.com/greg0ire))
+
 ## [3.23.1](https://github.com/sonata-project/SonataBlockBundle/compare/3.23.0...3.23.1) - 2021-05-01
 ### Fixed
 - [[#873](https://github.com/sonata-project/SonataBlockBundle/pull/873)] Flipped `ServiceListType` returned `choices` option ([@gremo](https://github.com/gremo))
