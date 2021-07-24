@@ -14,34 +14,40 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Form\Mapper;
 
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * @author Christian Gripp <mail@core23.de>
  */
 interface FormMapper
 {
+    /**
+     * @param class-string<FormTypeInterface>|null $type
+     * @param array<string, mixed>                 $options
+     */
     public function create(string $name, ?string $type = null, array $options = []): FormBuilderInterface;
 
     /**
-     * @param string[] $keys field names
+     * @param string[] $keys
+     *
+     * @return static
      */
-    public function reorder(array $keys): self;
+    public function reorder(array $keys);
 
     /**
-     * @param FormBuilderInterface|string $name
+     * @param class-string<FormTypeInterface>|null $type
+     * @param array<string, mixed>                 $options
+     *
+     * @return static
      */
-    public function add($name, ?string $type = null, array $options = []): self;
+    public function add(string $name, ?string $type = null, array $options = []);
 
-    public function remove(string $key): self;
-
-    public function setHelps(array $helps = []): self;
-
-    public function addHelp(string $name, string $help): self;
+    /**
+     * @return static
+     */
+    public function remove(string $key);
 
     public function has(string $key): bool;
 
-    /**
-     * @return mixed
-     */
-    public function get(string $name);
+    public function get(string $key): FormBuilderInterface;
 }
