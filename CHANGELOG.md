@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.7.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.6.0...4.7.0) - 2021-08-06
+### Changed
+- [[#899](https://github.com/sonata-project/SonataBlockBundle/pull/899)] `Sonata\BlockBundle\Form\Mapper\FormMapper` methods signature to be compatible with `Sonata\AdminBundle\Form\Mapper\FormMapper` ([@VincentLanglet](https://github.com/VincentLanglet))
+
 ## [4.6.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.5.3...4.6.0) - 2021-05-26
 ### Added
 - [[#882](https://github.com/sonata-project/SonataBlockBundle/pull/882)] Allow installation with psr/cache versions 2 and 3. ([@dbu](https://github.com/dbu))
