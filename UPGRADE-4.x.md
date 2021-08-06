@@ -1,7 +1,7 @@
 UPGRADE 4.x
 ===========
 
-UPGRADE FROM 4.x to 4.x
+UPGRADE FROM 4.6 to 4.7
 =======================
 
 ### Sonata\BlockBundle\Form\Mapper\FormMapper
