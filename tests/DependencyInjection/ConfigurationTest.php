@@ -98,7 +98,7 @@ final class ConfigurationTest extends TestCase
             ],
         ];
 
-        $this->assertSame($expected, $config);
+        static::assertSame($expected, $config);
     }
 
     public function providerContexts()

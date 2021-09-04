@@ -131,8 +131,8 @@ final class StrategyManagerTest extends TestCase
         $renderer = $this->manager->getBlockRenderer($block);
 
         // THEN
-        $this->assertNotNull($renderer);
-        $this->assertSame($this->renderer2, $renderer, 'Should return the block type1 renderer');
+        static::assertNotNull($renderer);
+        static::assertSame($this->renderer2, $renderer, 'Should return the block type1 renderer');
     }
 
     /**
@@ -147,8 +147,8 @@ final class StrategyManagerTest extends TestCase
         $renderer = $this->manager->getBlockRenderer($block);
 
         // THEN
-        $this->assertNotNull($renderer);
-        $this->assertSame($this->renderer1, $renderer, 'Should return the default renderer');
+        static::assertNotNull($renderer);
+        static::assertSame($this->renderer1, $renderer, 'Should return the default renderer');
     }
 
     /**
@@ -163,8 +163,8 @@ final class StrategyManagerTest extends TestCase
         $filter = $this->manager->getBlockFilter($block);
 
         // THEN
-        $this->assertNotNull($filter);
-        $this->assertSame($this->filter2, $filter, 'Should return the block type1 filter');
+        static::assertNotNull($filter);
+        static::assertSame($this->filter2, $filter, 'Should return the block type1 filter');
     }
 
     /**
@@ -179,8 +179,8 @@ final class StrategyManagerTest extends TestCase
         $filter = $this->manager->getBlockFilter($block);
 
         // THEN
-        $this->assertNotNull($filter);
-        $this->assertSame($this->filter1, $filter, 'Should return the default filter');
+        static::assertNotNull($filter);
+        static::assertSame($this->filter1, $filter, 'Should return the default filter');
     }
 
     /**
@@ -189,7 +189,7 @@ final class StrategyManagerTest extends TestCase
     public function testHandleExceptionWithKeepNoneFilter(): void
     {
         // GIVEN
-        $this->filter1->expects($this->once())->method('handle')->willReturn(false);
+        $this->filter1->expects(static::once())->method('handle')->willReturn(false);
 
         $exception = new \Exception();
         $block = $this->getMockBlock('block.other_type');
@@ -198,8 +198,8 @@ final class StrategyManagerTest extends TestCase
         $response = $this->manager->handleException($exception, $block);
 
         // THEN
-        $this->assertNotNull($response, 'should return something');
-        $this->assertInstanceOf(Response::class, $response, 'should return a response object');
+        static::assertNotNull($response, 'should return something');
+        static::assertInstanceOf(Response::class, $response, 'should return a response object');
     }
 
     /**
@@ -210,8 +210,8 @@ final class StrategyManagerTest extends TestCase
         $rendererResponse = new Response();
         $rendererResponse->setContent('renderer response');
         // GIVEN
-        $this->filter1->expects($this->once())->method('handle')->willReturn(true);
-        $this->renderer1->expects($this->once())->method('render')->willReturn($rendererResponse);
+        $this->filter1->expects(static::once())->method('handle')->willReturn(true);
+        $this->renderer1->expects(static::once())->method('render')->willReturn($rendererResponse);
 
         $exception = new \Exception();
         $block = $this->getMockBlock('block.other_type');
@@ -220,8 +220,8 @@ final class StrategyManagerTest extends TestCase
         $response = $this->manager->handleException($exception, $block);
 
         // THEN
-        $this->assertNotNull($response, 'should return something');
-        $this->assertSame('renderer response', $response->getContent(), 'should return the renderer response');
+        static::assertNotNull($response, 'should return something');
+        static::assertSame('renderer response', $response->getContent(), 'should return the renderer response');
     }
 
     /**
@@ -234,7 +234,7 @@ final class StrategyManagerTest extends TestCase
     protected function getMockBlock($type)
     {
         $block = $this->createMock(BlockInterface::class);
-        $block->expects($this->any())->method('getType')->willReturn($type);
+        $block->expects(static::any())->method('getType')->willReturn($type);
 
         return $block;
     }
@@ -252,7 +252,7 @@ final class StrategyManagerTest extends TestCase
         }
 
         $container = $this->createMock(ContainerInterface::class);
-        $container->expects($this->any())->method('get')->willReturnMap($map);
+        $container->expects(static::any())->method('get')->willReturnMap($map);
 
         return $container;
     }

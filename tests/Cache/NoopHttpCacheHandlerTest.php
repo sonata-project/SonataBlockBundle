@@ -21,7 +21,7 @@ final class NoopHttpCacheHandlerTest extends TestCase
 {
     public function testInterface(): void
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             HttpCacheHandlerInterface::class,
             new NoopHttpCacheHandler()
         );

@@ -38,7 +38,7 @@ final class DebugOnlyFilterTest extends TestCase
         $result = $filter->handle($exception, $block);
 
         // THEN
-        $this->assertTrue($result, 'Should handle it since we have enabled debug');
+        static::assertTrue($result, 'Should handle it since we have enabled debug');
     }
 
     /**
@@ -55,6 +55,6 @@ final class DebugOnlyFilterTest extends TestCase
         $result = $filter->handle($exception, $block);
 
         // THEN
-        $this->assertFalse($result, 'Should NOT handle it since we have disabled debug');
+        static::assertFalse($result, 'Should NOT handle it since we have disabled debug');
     }
 }

@@ -39,7 +39,7 @@ final class KeepNoneFilterTest extends TestCase
         $result = $filter->handle($exception, $block);
 
         // THEN
-        $this->assertFalse($result, 'Should handle no exceptions');
+        static::assertFalse($result, 'Should handle no exceptions');
     }
 
     /**

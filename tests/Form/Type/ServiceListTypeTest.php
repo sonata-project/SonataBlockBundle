@@ -29,8 +29,8 @@ final class ServiceListTypeTest extends TestCase
             $this->createMock(BlockServiceManagerInterface::class)
         );
 
-        $this->assertSame('sonata_block_service_choice', $type->getBlockPrefix());
-        $this->assertSame(ChoiceType::class, $type->getParent());
+        static::assertSame('sonata_block_service_choice', $type->getBlockPrefix());
+        static::assertSame(ChoiceType::class, $type->getParent());
     }
 
     public function testOptionsWithInvalidContext(): void
@@ -56,9 +56,9 @@ final class ServiceListTypeTest extends TestCase
 
         $blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
         $blockServiceManager
-            ->expects($this->once())
+            ->expects(static::once())
             ->method('getServicesByContext')
-            ->with($this->equalTo('cms'))
+            ->with(static::equalTo('cms'))
             ->willReturn(['my.service.code' => $blockService]);
 
         $type = new ServiceListType($blockServiceManager);
@@ -84,6 +84,6 @@ final class ServiceListTypeTest extends TestCase
             'empty_value' => null,
         ];
 
-        $this->assertSame($expected, $options);
+        static::assertSame($expected, $options);
     }
 }

@@ -22,6 +22,6 @@ final class GlobalVariablesTest extends TestCase
     {
         $variables = new GlobalVariables([]);
 
-        $this->assertEmpty($variables->getTemplates());
+        static::assertEmpty($variables->getTemplates());
     }
 }

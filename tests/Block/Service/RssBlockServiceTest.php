@@ -44,7 +44,7 @@ final class RssBlockServiceTest extends BlockServiceTestCase
         $blockContext = new BlockContext($block, $optionResolver->resolve());
 
         $formMapper = $this->createMock(FormMapper::class);
-        $formMapper->expects($this->exactly(2))->method('add');
+        $formMapper->expects(static::exactly(2))->method('add');
 
         $service->configureCreateForm($formMapper, $block);
         $service->configureEditForm($formMapper, $block);
@@ -67,7 +67,7 @@ final class RssBlockServiceTest extends BlockServiceTestCase
         $blockContext->method('getBlock')
             ->willReturn($block);
 
-        $this->twig->expects($this->once())->method('render')
+        $this->twig->expects(static::once())->method('render')
             ->with('@SonataBlock/Block/block_core_rss.html.twig', [
                'feeds' => false,
                'block' => $block,
