@@ -25,16 +25,16 @@ final class BlockEventTest extends TestCase
     {
         $blockEvent = new BlockEvent();
 
-        $this->assertEmpty($blockEvent->getSettings());
+        static::assertEmpty($blockEvent->getSettings());
 
         $blockEvent->addBlock($this->createMock('Sonata\BlockBundle\Model\BlockInterface'));
 
-        $this->assertCount(1, $blockEvent->getBlocks());
+        static::assertCount(1, $blockEvent->getBlocks());
 
         $blockEvent->addBlock($this->createMock('Sonata\BlockBundle\Model\BlockInterface'));
-        $this->assertCount(2, $blockEvent->getBlocks());
+        static::assertCount(2, $blockEvent->getBlocks());
 
-        $this->assertNull($blockEvent->getSetting('fake'));
-        $this->assertSame(1, $blockEvent->getSetting('fake', 1));
+        static::assertNull($blockEvent->getSetting('fake'));
+        static::assertSame(1, $blockEvent->getSetting('fake', 1));
     }
 }

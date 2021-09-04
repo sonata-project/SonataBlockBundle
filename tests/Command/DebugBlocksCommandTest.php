@@ -38,7 +38,7 @@ final class DebugBlocksCommandTest extends TestCase
 
         $blockManager = $this->createMock(BlockServiceManagerInterface::class);
         $blockManager
-            ->expects($this->any())
+            ->expects(static::any())
             ->method('getServices')
             ->willReturn([]);
 
@@ -61,7 +61,7 @@ final class DebugBlocksCommandTest extends TestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute(['command' => 'sonata:block:debug']);
 
-        $this->assertSame("done!\n", $commandTester->getDisplay());
+        static::assertSame("done!\n", $commandTester->getDisplay());
     }
 
     public function testExecuteWithAlias(): void
@@ -70,7 +70,7 @@ final class DebugBlocksCommandTest extends TestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute(['command' => 'debug:sonata:block']);
 
-        $this->assertSame("done!\n", $commandTester->getDisplay());
+        static::assertSame("done!\n", $commandTester->getDisplay());
     }
 
     /**
@@ -82,7 +82,7 @@ final class DebugBlocksCommandTest extends TestCase
     {
         $blockManager = $this->createMock(BlockServiceManagerInterface::class);
         $blockManager
-            ->expects($this->any())
+            ->expects(static::any())
             ->method('getServices')
             ->willReturn([]);
 
@@ -107,7 +107,7 @@ final class DebugBlocksCommandTest extends TestCase
 
         $blockManager = $this->createMock(BlockServiceManagerInterface::class);
         $blockManager
-            ->expects($this->any())
+            ->expects(static::any())
             ->method('getServices')
             ->willReturn([
                 'test.without_options' => new class('Test service block without options', $templating) extends AbstractBlockService {
@@ -147,6 +147,6 @@ done!
 
 EOF;
 
-        $this->assertSame($expected, $commandTester->getDisplay());
+        static::assertSame($expected, $commandTester->getDisplay());
     }
 }

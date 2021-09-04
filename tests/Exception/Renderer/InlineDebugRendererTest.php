@@ -42,8 +42,8 @@ final class InlineDebugRendererTest extends TestCase
         $response = $renderer->render($exception, $block);
 
         // THEN
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response, 'Should return a Response');
-        $this->assertEmpty($response->getContent(), 'Should have no content');
+        static::assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response, 'Should return a Response');
+        static::assertEmpty($response->getContent(), 'Should have no content');
     }
 
     /**
@@ -63,14 +63,14 @@ final class InlineDebugRendererTest extends TestCase
 
         // mock the templating render() to return an html result
         $templating = $this->createMock(EngineInterface::class);
-        $templating->expects($this->once())
+        $templating->expects(static::once())
             ->method('render')
             ->with(
-                $this->equalTo($template),
-                $this->logicalAnd(
-                    $this->arrayHasKey('exception'),
-                    $this->arrayHasKey('status_code'),
-                    $this->arrayHasKey('status_text'),
+                static::equalTo($template),
+                static::logicalAnd(
+                    static::arrayHasKey('exception'),
+                    static::arrayHasKey('status_code'),
+                    static::arrayHasKey('status_text'),
                     $this->arrayHasKeyValue('logger', false),
                     $this->arrayHasKeyValue('currentContent', false),
                     $this->arrayHasKeyValue('block', $block),
@@ -86,8 +86,8 @@ final class InlineDebugRendererTest extends TestCase
         $response = $renderer->render($exception, $block);
 
         // THEN
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response, 'Should return a Response');
-        $this->assertSame('html', $response->getContent(), 'Should contain the templating html result');
+        static::assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response, 'Should return a Response');
+        static::assertSame('html', $response->getContent(), 'Should contain the templating html result');
     }
 
     /**

@@ -23,23 +23,23 @@ final class BlockContextManagerTest extends TestCase
     {
         $service = $this->createMock('Sonata\BlockBundle\Block\Service\AbstractBlockService');
 
-        $service->expects($this->once())->method('configureSettings');
+        $service->expects(static::once())->method('configureSettings');
 
         $blockLoader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
 
         $serviceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
-        $serviceManager->expects($this->once())->method('get')->willReturn($service);
+        $serviceManager->expects(static::once())->method('get')->willReturn($service);
 
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $block->expects($this->once())->method('getSettings')->willReturn([]);
+        $block->expects(static::once())->method('getSettings')->willReturn([]);
 
         $manager = new BlockContextManager($blockLoader, $serviceManager);
 
         $blockContext = $manager->get($block);
 
-        $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
+        static::assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
 
-        $this->assertSame([
+        static::assertSame([
             'use_cache' => true,
             'extra_cache_keys' => [],
             'attr' => [],
@@ -51,15 +51,15 @@ final class BlockContextManagerTest extends TestCase
     public function testGetWithSettings()
     {
         $service = $this->createMock('Sonata\BlockBundle\Block\Service\AbstractBlockService');
-        $service->expects($this->once())->method('configureSettings');
+        $service->expects(static::once())->method('configureSettings');
 
         $blockLoader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
 
         $serviceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
-        $serviceManager->expects($this->once())->method('get')->willReturn($service);
+        $serviceManager->expects(static::once())->method('get')->willReturn($service);
 
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $block->expects($this->once())->method('getSettings')->willReturn([]);
+        $block->expects(static::once())->method('getSettings')->willReturn([]);
 
         $blocksCache = [
             'by_class' => [ClassUtils::getClass($block) => 'my_cache.service.id'],
@@ -71,9 +71,9 @@ final class BlockContextManagerTest extends TestCase
 
         $blockContext = $manager->get($block, $settings);
 
-        $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
+        static::assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
 
-        $this->assertSame([
+        static::assertSame([
             'use_cache' => true,
             'extra_cache_keys' => [
                 BlockContextManager::CACHE_KEY => [
@@ -89,18 +89,18 @@ final class BlockContextManagerTest extends TestCase
     public function testWithInvalidSettings()
     {
         $logger = $this->createMock('Psr\Log\LoggerInterface');
-        $logger->expects($this->exactly(1))->method('error');
+        $logger->expects(static::exactly(1))->method('error');
 
         $service = $this->createMock('Sonata\BlockBundle\Block\Service\AbstractBlockService');
-        $service->expects($this->exactly(2))->method('configureSettings');
+        $service->expects(static::exactly(2))->method('configureSettings');
 
         $blockLoader = $this->createMock('Sonata\BlockBundle\Block\BlockLoaderInterface');
 
         $serviceManager = $this->createMock('Sonata\BlockBundle\Block\BlockServiceManagerInterface');
-        $serviceManager->expects($this->exactly(2))->method('get')->willReturn($service);
+        $serviceManager->expects(static::exactly(2))->method('get')->willReturn($service);
 
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $block->expects($this->once())->method('getSettings')->willReturn([
+        $block->expects(static::once())->method('getSettings')->willReturn([
             'template' => [],
         ]);
 
@@ -108,7 +108,7 @@ final class BlockContextManagerTest extends TestCase
 
         $blockContext = $manager->get($block);
 
-        $this->assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
+        static::assertInstanceOf('Sonata\BlockBundle\Block\BlockContextInterface', $blockContext);
     }
 
     //    @TODO: Think if the BlockContextManager should throw an exception if the resolver throw an exception

@@ -72,11 +72,11 @@ final class BlockExtensionTest extends TestCase
      */
     public function testFunction($name, $args, $expectedMethod)
     {
-        $this->blockHelper->expects($this->once())
+        $this->blockHelper->expects(static::once())
             ->method($expectedMethod);
 
         $func = $this->env->getFunction($name);
-        $this->assertInstanceOf(TwigFunction::class, $func);
+        static::assertInstanceOf(TwigFunction::class, $func);
         $func->getCallable()(...$args);
     }
 }

@@ -64,7 +64,7 @@ final class BlockHelperTest extends TestCase
         });
 
         $blockContextManager = $this->createMock(BlockContextManagerInterface::class);
-        $blockContextManager->expects($this->once())->method('get')
+        $blockContextManager->expects(static::once())->method('get')
             ->willReturn($blockContext);
 
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
@@ -77,7 +77,7 @@ final class BlockHelperTest extends TestCase
 
         $helper = new BlockHelper($blockServiceManager, [], $blockRenderer, $blockContextManager, $eventDispatcher, $cacheItemPool);
 
-        $this->assertSame('', $helper->render($block));
+        static::assertSame('', $helper->render($block));
     }
 
     public function testRenderEventWithNoListener(): void
@@ -86,7 +86,7 @@ final class BlockHelperTest extends TestCase
         $blockRenderer = $this->createMock(BlockRendererInterface::class);
         $blockContextManager = $this->createMock(BlockContextManagerInterface::class);
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $eventDispatcher->expects($this->once())->method('dispatch')->willReturnCallback(static function ($event, $name): BlockEvent {
+        $eventDispatcher->expects(static::once())->method('dispatch')->willReturnCallback(static function ($event, $name): BlockEvent {
             // NEXT_MAJOR: remove this check when dropping support for symfony/event-dispatcher 3.x
             if ($event instanceof BlockEvent) {
                 return $event;
@@ -98,7 +98,7 @@ final class BlockHelperTest extends TestCase
 
         $helper = new BlockHelper($blockServiceManager, [], $blockRenderer, $blockContextManager, $eventDispatcher);
 
-        $this->assertSame('', $helper->renderEvent('my.event'));
+        static::assertSame('', $helper->renderEvent('my.event'));
     }
 
     /**
@@ -107,28 +107,28 @@ final class BlockHelperTest extends TestCase
     public function testRenderEventWithListeners(): void
     {
         $blockService = $this->createMock(BlockServiceInterface::class);
-        $blockService->expects($this->once())->method('getJavascripts')->willReturn([
+        $blockService->expects(static::once())->method('getJavascripts')->willReturn([
             '/js/base.js',
         ]);
-        $blockService->expects($this->once())->method('getStylesheets')->willReturn([
+        $blockService->expects(static::once())->method('getStylesheets')->willReturn([
             '/css/base.css',
         ]);
 
         $blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
-        $blockServiceManager->expects($this->any())->method('get')->willReturn($blockService);
+        $blockServiceManager->expects(static::any())->method('get')->willReturn($blockService);
 
         $blockRenderer = $this->createMock(BlockRendererInterface::class);
-        $blockRenderer->expects($this->once())->method('render')->willReturn(new Response('<span>test</span>'));
+        $blockRenderer->expects(static::once())->method('render')->willReturn(new Response('<span>test</span>'));
 
         $blockContextManager = $this->createMock(BlockContextManagerInterface::class);
-        $blockContextManager->expects($this->once())->method('get')->willReturnCallback(static function (BlockInterface $block) {
+        $blockContextManager->expects(static::once())->method('get')->willReturnCallback(static function (BlockInterface $block) {
             $context = new BlockContext($block, $block->getSettings());
 
             return $context;
         });
 
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $eventDispatcher->expects($this->once())->method('dispatch')->willReturnCallback(static function ($event, $name): BlockEvent {
+        $eventDispatcher->expects(static::once())->method('dispatch')->willReturnCallback(static function ($event, $name): BlockEvent {
             $block = new Block();
             $block->setId(1);
             $block->setSettings([
@@ -151,12 +151,12 @@ final class BlockHelperTest extends TestCase
 
         $helper = new BlockHelper($blockServiceManager, [], $blockRenderer, $blockContextManager, $eventDispatcher);
 
-        $this->assertSame('<span>test</span>', $helper->renderEvent('my.event'));
+        static::assertSame('<span>test</span>', $helper->renderEvent('my.event'));
 
-        $this->assertSame(trim($helper->includeJavascripts('screen', '/application')), '<script src="/application/js/base.js" type="text/javascript"></script>');
-        $this->assertSame(trim($helper->includeJavascripts('screen', '')), '<script src="/js/base.js" type="text/javascript"></script>');
+        static::assertSame(trim($helper->includeJavascripts('screen', '/application')), '<script src="/application/js/base.js" type="text/javascript"></script>');
+        static::assertSame(trim($helper->includeJavascripts('screen', '')), '<script src="/js/base.js" type="text/javascript"></script>');
 
-        $this->assertSame(
+        static::assertSame(
             $helper->includeStylesheets('screen', '/application'),
             <<<'EXPECTED'
 <style type='text/css' media='screen'>
@@ -164,7 +164,7 @@ final class BlockHelperTest extends TestCase
 </style>
 EXPECTED
         );
-        $this->assertSame(
+        static::assertSame(
             $helper->includeStylesheets('screen', ''),
             <<<'EXPECTED'
 <style type='text/css' media='screen'>

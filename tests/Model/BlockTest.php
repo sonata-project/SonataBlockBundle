@@ -22,24 +22,24 @@ final class BlockTest extends TestCase
     {
         $block = new Block();
 
-        $this->assertFalse($block->hasChildren());
+        static::assertFalse($block->hasChildren());
 
         $child1 = $this->getMockBuilder('Sonata\BlockBundle\Model\Block')->getMock();
-        $child1->expects($this->once())->method('getTtl')->willReturn(100);
+        $child1->expects(static::once())->method('getTtl')->willReturn(100);
 
         $child2 = $this->getMockBuilder('Sonata\BlockBundle\Model\Block')->getMock();
-        $child2->expects($this->once())->method('getTtl')->willReturn(50);
+        $child2->expects(static::once())->method('getTtl')->willReturn(50);
 
         $child3 = $this->getMockBuilder('Sonata\BlockBundle\Model\Block')->getMock();
-        $child3->expects($this->once())->method('getTtl')->willReturn(65);
+        $child3->expects(static::once())->method('getTtl')->willReturn(65);
 
         $block->addChildren($child1);
         $block->addChildren($child2);
         $block->addChildren($child3);
 
-        $this->assertSame(50, $block->getTtl());
+        static::assertSame(50, $block->getTtl());
 
-        $this->assertTrue($block->hasChildren());
+        static::assertTrue($block->hasChildren());
     }
 
     public function testSetterGetter()
@@ -57,21 +57,21 @@ final class BlockTest extends TestCase
         $block->setType('foo.bar');
         $block->setParent($parent);
 
-        $this->assertSame('my.block.name', $block->getName());
-        $this->assertSame($time, $block->getCreatedAt());
-        $this->assertSame($time, $block->getUpdatedAt());
-        $this->assertTrue($block->getEnabled());
-        $this->assertSame(1, $block->getPosition());
-        $this->assertSame('foo.bar', $block->getType());
-        $this->assertSame($parent, $block->getParent());
+        static::assertSame('my.block.name', $block->getName());
+        static::assertSame($time, $block->getCreatedAt());
+        static::assertSame($time, $block->getUpdatedAt());
+        static::assertTrue($block->getEnabled());
+        static::assertSame(1, $block->getPosition());
+        static::assertSame('foo.bar', $block->getType());
+        static::assertSame($parent, $block->getParent());
     }
 
     public function testSetting()
     {
         $block = new Block();
         $block->setSetting('foo', 'bar');
-        $this->assertSame('void', $block->getSetting('fake', 'void'));
-        $this->assertNull($block->getSetting('fake'));
-        $this->assertSame('bar', $block->getSetting('foo'));
+        static::assertSame('void', $block->getSetting('fake', 'void'));
+        static::assertNull($block->getSetting('fake'));
+        static::assertSame('bar', $block->getSetting('foo'));
     }
 }
