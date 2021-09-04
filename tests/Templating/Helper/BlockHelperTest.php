@@ -34,13 +34,13 @@ final class BlockHelperTest extends TestCase
         $blockRenderer = $this->createMock(BlockRendererInterface::class);
         $blockContextManager = $this->createMock(BlockContextManagerInterface::class);
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $eventDispatcher->expects($this->once())->method('dispatch')->willReturnCallback(static function ($event): BlockEvent {
+        $eventDispatcher->expects(static::once())->method('dispatch')->willReturnCallback(static function ($event): BlockEvent {
             return $event;
         });
 
         $helper = new BlockHelper($blockServiceManager, [], $blockRenderer, $blockContextManager, $eventDispatcher);
 
-        $this->assertSame('', $helper->renderEvent('my.event'));
+        static::assertSame('', $helper->renderEvent('my.event'));
     }
 
     /**
@@ -51,18 +51,18 @@ final class BlockHelperTest extends TestCase
         $blockService = $this->createMock(BlockServiceInterface::class);
 
         $blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
-        $blockServiceManager->expects($this->any())->method('get')->willReturn($blockService);
+        $blockServiceManager->expects(static::any())->method('get')->willReturn($blockService);
 
         $blockRenderer = $this->createMock(BlockRendererInterface::class);
-        $blockRenderer->expects($this->once())->method('render')->willReturn(new Response('<span>test</span>'));
+        $blockRenderer->expects(static::once())->method('render')->willReturn(new Response('<span>test</span>'));
 
         $blockContextManager = $this->createMock(BlockContextManagerInterface::class);
-        $blockContextManager->expects($this->once())->method('get')->willReturnCallback(static function (BlockInterface $block) {
+        $blockContextManager->expects(static::once())->method('get')->willReturnCallback(static function (BlockInterface $block) {
             return new BlockContext($block, $block->getSettings());
         });
 
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $eventDispatcher->expects($this->once())->method('dispatch')->willReturnCallback(static function (BlockEvent $event): BlockEvent {
+        $eventDispatcher->expects(static::once())->method('dispatch')->willReturnCallback(static function (BlockEvent $event): BlockEvent {
             $block = new Block();
             $block->setId(1);
             $block->setSettings([
@@ -77,6 +77,6 @@ final class BlockHelperTest extends TestCase
 
         $helper = new BlockHelper($blockServiceManager, [], $blockRenderer, $blockContextManager, $eventDispatcher);
 
-        $this->assertSame('<span>test</span>', $helper->renderEvent('my.event'));
+        static::assertSame('<span>test</span>', $helper->renderEvent('my.event'));
     }
 }

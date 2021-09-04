@@ -72,9 +72,9 @@ final class BlockRendererTest extends TestCase
         // mock a block service that returns a response
         $response = $this->createMock(Response::class);
         $service = $this->createMock(BlockServiceInterface::class);
-        $service->expects($this->once())->method('load');
-        $service->expects($this->once())->method('execute')->willReturn($response);
-        $this->blockServiceManager->expects($this->once())->method('get')->willReturn($service);
+        $service->expects(static::once())->method('load');
+        $service->expects(static::once())->method('execute')->willReturn($response);
+        $this->blockServiceManager->expects(static::once())->method('get')->willReturn($service);
 
         // mock a block object
         $block = $this->createMock(BlockInterface::class);
@@ -84,7 +84,7 @@ final class BlockRendererTest extends TestCase
         $result = $this->renderer->render($blockContext);
 
         // THEN
-        $this->assertSame($response, $result, 'Should return the response from the block service');
+        static::assertSame($response, $result, 'Should return the response from the block service');
     }
 
     /**
@@ -96,26 +96,26 @@ final class BlockRendererTest extends TestCase
 
         // mock a block service that throws an user exception
         $service = $this->createMock(BlockServiceInterface::class);
-        $service->expects($this->once())->method('load');
+        $service->expects(static::once())->method('load');
 
         $exception = $this->createMock(\Exception::class);
-        $service->expects($this->once())
+        $service->expects(static::once())
             ->method('execute')
             ->willReturnCallback(static function () use ($exception): void {
                 throw $exception;
             });
 
-        $this->blockServiceManager->expects($this->once())->method('get')->willReturn($service);
+        $this->blockServiceManager->expects(static::once())->method('get')->willReturn($service);
 
         // mock the exception strategy manager to return a response when given the correct exception
         $response = $this->createMock(Response::class);
-        $this->exceptionStrategyManager->expects($this->once())
+        $this->exceptionStrategyManager->expects(static::once())
             ->method('handleException')
-            ->with($this->equalTo($exception))
+            ->with(static::equalTo($exception))
             ->willReturn($response);
 
         // mock the logger to ensure a crit message is logged
-        $this->logger->expects($this->once())->method('error');
+        $this->logger->expects(static::once())->method('error');
 
         // mock a block object
         $block = $this->createMock(BlockInterface::class);
@@ -125,6 +125,6 @@ final class BlockRendererTest extends TestCase
         $result = $this->renderer->render($blockContext);
 
         // THEN
-        $this->assertSame($response, $result, 'Should return the response provider by the exception manager');
+        static::assertSame($response, $result, 'Should return the response provider by the exception manager');
     }
 }

@@ -49,7 +49,7 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
      */
     public function testBuildEditForm(): void
     {
-        $this->menuRegistry->expects($this->once())->method('getAliasNames')
+        $this->menuRegistry->expects(static::once())->method('getAliasNames')
             ->willReturn([
                 'acme:demobundle:menu' => 'Test Menu',
             ]);
@@ -67,7 +67,7 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
             'Test Menu' => 'acme:demobundle:menu',
         ];
 
-        $formMapper->expects($this->once())->method('add')
+        $formMapper->expects(static::once())->method('add')
             ->with('settings', ImmutableArrayType::class, [
                 'keys' => [
                     ['title', TextType::class, [

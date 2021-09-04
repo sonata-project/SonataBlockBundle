@@ -39,7 +39,7 @@ final class IgnoreClassFilterTest extends TestCase
         $result = $filter->handle($exception, $block);
 
         // THEN
-        $this->assertFalse($result, 'Should NOT handle it since NotFoundHttpException inherits RuntimeException');
+        static::assertFalse($result, 'Should NOT handle it since NotFoundHttpException inherits RuntimeException');
     }
 
     /**
@@ -56,6 +56,6 @@ final class IgnoreClassFilterTest extends TestCase
         $result = $filter->handle($exception, $block);
 
         // THEN
-        $this->assertTrue($result, 'Should handle it since an \Exception does not inherit RuntimeException');
+        static::assertTrue($result, 'Should handle it since an \Exception does not inherit RuntimeException');
     }
 }

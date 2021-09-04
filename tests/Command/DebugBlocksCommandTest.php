@@ -44,7 +44,7 @@ final class DebugBlocksCommandTest extends TestCase
 
         $blockManager = $this->createMock(BlockServiceManagerInterface::class);
         $blockManager
-            ->expects($this->any())
+            ->expects(static::any())
             ->method('getServices')
             ->willReturn([]);
 
@@ -62,7 +62,7 @@ final class DebugBlocksCommandTest extends TestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute(['command' => 'debug:sonata:block']);
 
-        $this->assertSame("done!\n", $commandTester->getDisplay());
+        static::assertSame("done!\n", $commandTester->getDisplay());
     }
 
     /**
@@ -75,7 +75,7 @@ final class DebugBlocksCommandTest extends TestCase
 
         $blockManager = $this->createMock(BlockServiceManagerInterface::class);
         $blockManager
-            ->expects($this->any())
+            ->expects(static::any())
             ->method('getServices')
             ->willReturn([
                 'test.without_options' => new class($twig) extends AbstractBlockService {
@@ -135,6 +135,6 @@ done!
 
 EOF;
 
-        $this->assertSame($expected, $commandTester->getDisplay());
+        static::assertSame($expected, $commandTester->getDisplay());
     }
 }

@@ -51,7 +51,7 @@ final class TweakCompilerPassTest extends TestCase
         $blockDefinition->setAutoconfigured(true);
 
         $managerDefinition = $this->createMock(Definition::class);
-        $managerDefinition->expects($this->once())->method('addMethodCall')->with('add', ['acme.block.service', 'acme.block.service', []]);
+        $managerDefinition->expects(static::once())->method('addMethodCall')->with('add', ['acme.block.service', 'acme.block.service', []]);
 
         $this->container->setDefinition('acme.block.service', $blockDefinition);
         $this->container->setDefinition('sonata.block.manager', $managerDefinition);
@@ -67,7 +67,7 @@ final class TweakCompilerPassTest extends TestCase
         $blockDefinition->addTag('sonata.block');
 
         $managerDefinition = $this->createMock(Definition::class);
-        $managerDefinition->expects($this->once())->method('addMethodCall')->with('add', ['acme.block.service', 'acme.block.service', []]);
+        $managerDefinition->expects(static::once())->method('addMethodCall')->with('add', ['acme.block.service', 'acme.block.service', []]);
 
         $this->container->setDefinition('acme.block.service', $blockDefinition);
         $this->container->setDefinition('sonata.block.manager', $managerDefinition);
@@ -86,7 +86,7 @@ final class TweakCompilerPassTest extends TestCase
         $blockDefinition->addTag('sonata.block');
 
         $managerDefinition = $this->createMock(Definition::class);
-        $managerDefinition->expects($this->once())->method('addMethodCall')->with('add', ['acme.block.service', 'acme.block.service', []]);
+        $managerDefinition->expects(static::once())->method('addMethodCall')->with('add', ['acme.block.service', 'acme.block.service', []]);
 
         $this->container->setDefinition('acme.block.service', $blockDefinition);
         $this->container->setDefinition('sonata.block.manager', $managerDefinition);

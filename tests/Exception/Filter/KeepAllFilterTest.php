@@ -39,7 +39,7 @@ final class KeepAllFilterTest extends TestCase
         $result = $filter->handle($exception, $block);
 
         // THEN
-        $this->assertTrue($result, 'Should handle any exception');
+        static::assertTrue($result, 'Should handle any exception');
     }
 
     /**

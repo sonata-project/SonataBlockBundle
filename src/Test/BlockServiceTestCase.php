@@ -70,8 +70,8 @@ abstract class BlockServiceTestCase extends TestCase
      */
     protected function getBlockContext(BlockServiceInterface $blockService): BlockContextInterface
     {
-        $this->blockServiceManager->expects($this->once())->method('get')->willReturn($blockService);
-        $this->block->expects($this->once())->method('getSettings')->willReturn([]);
+        $this->blockServiceManager->expects(static::once())->method('get')->willReturn($blockService);
+        $this->block->expects(static::once())->method('getSettings')->willReturn([]);
 
         return $this->blockContextManager->get($this->block);
     }
@@ -95,6 +95,6 @@ abstract class BlockServiceTestCase extends TestCase
         $blockSettings = $blockContext->getSettings();
         ksort($blockSettings);
 
-        $this->assertSame($completeExpectedOptions, $blockSettings);
+        static::assertSame($completeExpectedOptions, $blockSettings);
     }
 }

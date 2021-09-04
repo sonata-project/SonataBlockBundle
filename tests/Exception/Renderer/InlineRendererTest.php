@@ -42,11 +42,11 @@ final class InlineRendererTest extends TestCase
 
         // mock the twig render() to return an html result
         $twig = $this->createMock(Environment::class);
-        $twig->expects($this->once())
+        $twig->expects(static::once())
             ->method('render')
             ->with(
-                $this->equalTo($template),
-                $this->equalTo([
+                static::equalTo($template),
+                static::equalTo([
                     'exception' => $exception,
                     'block' => $block, ])
             )
@@ -59,7 +59,7 @@ final class InlineRendererTest extends TestCase
         $response = $renderer->render($exception, $block);
 
         // THEN
-        $this->assertInstanceOf(Response::class, $response, 'Should return a Response');
-        $this->assertSame('html', $response->getContent(), 'Should contain the templating html result');
+        static::assertInstanceOf(Response::class, $response, 'Should return a Response');
+        static::assertSame('html', $response->getContent(), 'Should contain the templating html result');
     }
 }

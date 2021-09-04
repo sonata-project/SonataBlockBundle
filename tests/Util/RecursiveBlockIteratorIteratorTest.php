@@ -22,24 +22,24 @@ final class RecursiveBlockIteratorIteratorTest extends TestCase
     public function testInterface(): void
     {
         $block2 = $this->createMock(BlockInterface::class);
-        $block2->expects($this->any())->method('getType')->willReturn('block2');
-        $block2->expects($this->once())->method('hasChildren')->willReturn(false);
+        $block2->expects(static::any())->method('getType')->willReturn('block2');
+        $block2->expects(static::once())->method('hasChildren')->willReturn(false);
 
         $block3 = $this->createMock(BlockInterface::class);
-        $block3->expects($this->any())->method('getType')->willReturn('block3');
-        $block3->expects($this->once())->method('hasChildren')->willReturn(false);
+        $block3->expects(static::any())->method('getType')->willReturn('block3');
+        $block3->expects(static::once())->method('hasChildren')->willReturn(false);
 
         $block1 = $this->createMock(BlockInterface::class);
-        $block1->expects($this->any())->method('getType')->willReturn('block1');
-        $block1->expects($this->once())->method('hasChildren')->willReturn(true);
-        $block1->expects($this->any())->method('getChildren')->willReturn([
+        $block1->expects(static::any())->method('getType')->willReturn('block1');
+        $block1->expects(static::once())->method('hasChildren')->willReturn(true);
+        $block1->expects(static::any())->method('getChildren')->willReturn([
             $block2,
             $block3,
         ]);
 
         $block4 = $this->createMock(BlockInterface::class);
-        $block4->expects($this->any())->method('getType')->willReturn('block4');
-        $block4->expects($this->any())->method('hasChildren')->willReturn(false);
+        $block4->expects(static::any())->method('getType')->willReturn('block4');
+        $block4->expects(static::any())->method('hasChildren')->willReturn(false);
 
         $i = new RecursiveBlockIteratorIterator([$block1, $block4]);
 
@@ -48,6 +48,6 @@ final class RecursiveBlockIteratorIteratorTest extends TestCase
             $blocks[] = $block;
         }
 
-        $this->assertCount(4, $blocks);
+        static::assertCount(4, $blocks);
     }
 }

@@ -44,8 +44,8 @@ final class InlineDebugRendererTest extends TestCase
         $response = $renderer->render($exception, $block);
 
         // THEN
-        $this->assertInstanceOf(Response::class, $response, 'Should return a Response');
-        $this->assertEmpty($response->getContent(), 'Should have no content');
+        static::assertInstanceOf(Response::class, $response, 'Should return a Response');
+        static::assertEmpty($response->getContent(), 'Should have no content');
     }
 
     /**
@@ -65,13 +65,13 @@ final class InlineDebugRendererTest extends TestCase
 
         // mock the twig render() to return an html result
         $twig = $this->createMock(Environment::class);
-        $twig->expects($this->once())
+        $twig->expects(static::once())
             ->method('render')
             ->with(
-                $this->equalTo($template),
-                $this->logicalAnd(
-                    $this->arrayHasKey('exception'),
-                    $this->callback(static function ($subject) use ($block) {
+                static::equalTo($template),
+                static::logicalAnd(
+                    static::arrayHasKey('exception'),
+                    static::callback(static function ($subject) use ($block) {
                         $expected = [
                             'status_code' => 500,
                             'status_text' => 'Internal Server Error',
@@ -100,7 +100,7 @@ final class InlineDebugRendererTest extends TestCase
         $response = $renderer->render($exception, $block);
 
         // THEN
-        $this->assertInstanceOf(Response::class, $response, 'Should return a Response');
-        $this->assertSame('html', $response->getContent(), 'Should contain the templating html result');
+        static::assertInstanceOf(Response::class, $response, 'Should return a Response');
+        static::assertSame('html', $response->getContent(), 'Should contain the templating html result');
     }
 }

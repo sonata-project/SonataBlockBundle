@@ -41,7 +41,7 @@ final class TextBlockServiceTest extends BlockServiceTestCase
         $blockContext = new BlockContext($block, $optionResolver->resolve($block->getSettings()));
 
         $formMapper = $this->createMock(FormMapper::class);
-        $formMapper->expects($this->exactly(2))->method('add');
+        $formMapper->expects(static::exactly(2))->method('add');
 
         $service->configureCreateForm($formMapper, $block);
         $service->configureEditForm($formMapper, $block);
@@ -61,7 +61,7 @@ final class TextBlockServiceTest extends BlockServiceTestCase
         $blockContext->method('getBlock')
             ->willReturn($block);
 
-        $this->twig->expects($this->once())->method('render')
+        $this->twig->expects(static::once())->method('render')
             ->with('@SonataBlock/Block/block_core_text.html.twig', [
                'block' => $block,
                'settings' => ['content' => 'foo'],

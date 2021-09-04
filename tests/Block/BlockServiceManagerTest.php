@@ -26,16 +26,16 @@ final class BlockServiceManagerTest extends TestCase
         $service = $this->createMock(BlockServiceInterface::class);
 
         $container = $this->createMock(ContainerInterface::class);
-        $container->expects($this->once())->method('get')->willReturn($service);
+        $container->expects(static::once())->method('get')->willReturn($service);
 
         $manager = new BlockServiceManager($container);
 
         $manager->add('test', 'test');
 
         $block = $this->createMock(BlockInterface::class);
-        $block->expects($this->any())->method('getType')->willReturn('test');
+        $block->expects(static::any())->method('getType')->willReturn('test');
 
-        $this->assertInstanceOf(\get_class($service), $manager->get($block));
+        static::assertInstanceOf(\get_class($service), $manager->get($block));
     }
 
     public function testInvalidServiceType(): void
@@ -45,16 +45,16 @@ final class BlockServiceManagerTest extends TestCase
         $service = $this->createMock('stdClass');
 
         $container = $this->createMock(ContainerInterface::class);
-        $container->expects($this->once())->method('get')->willReturn($service);
+        $container->expects(static::once())->method('get')->willReturn($service);
 
         $manager = new BlockServiceManager($container);
 
         $manager->add('test', 'test');
 
         $block = $this->createMock(BlockInterface::class);
-        $block->expects($this->any())->method('getType')->willReturn('test');
+        $block->expects(static::any())->method('getType')->willReturn('test');
 
-        $this->assertInstanceOf(\get_class($service), $manager->get($block));
+        static::assertInstanceOf(\get_class($service), $manager->get($block));
     }
 
     public function testGetBlockServiceException(): void
@@ -66,7 +66,7 @@ final class BlockServiceManagerTest extends TestCase
         $manager = new BlockServiceManager($container);
 
         $block = $this->createMock(BlockInterface::class);
-        $block->expects($this->any())->method('getType')->willReturn('fakse');
+        $block->expects(static::any())->method('getType')->willReturn('fakse');
 
         $manager->get($block);
     }
@@ -80,7 +80,7 @@ final class BlockServiceManagerTest extends TestCase
 
         $manager->add('foo.bar', $service);
 
-        $this->assertEmpty($manager->getServicesByContext('fake'));
+        static::assertEmpty($manager->getServicesByContext('fake'));
     }
 
     public function testGetListFromValidContext(): void
@@ -92,6 +92,6 @@ final class BlockServiceManagerTest extends TestCase
 
         $manager->add('foo.bar', $service, ['fake']);
 
-        $this->assertNotEmpty($manager->getServicesByContext('fake'));
+        static::assertNotEmpty($manager->getServicesByContext('fake'));
     }
 }
