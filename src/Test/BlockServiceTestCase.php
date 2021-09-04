@@ -86,13 +86,13 @@ abstract class InternalBlockServiceTestCase extends TestCase
      */
     protected function getBlockContext(BlockServiceInterface $blockService): BlockContextInterface
     {
-        $this->blockServiceManager->expects($this->once())->method('get')->willReturn($blockService);
+        $this->blockServiceManager->expects(static::once())->method('get')->willReturn($blockService);
 
         $block = $this->createMock(BlockInterface::class);
-        $block->expects($this->once())->method('getSettings')->willReturn([]);
+        $block->expects(static::once())->method('getSettings')->willReturn([]);
 
         $blockContext = $this->blockContextManager->get($block);
-        $this->assertInstanceOf(BlockContextInterface::class, $blockContext);
+        static::assertInstanceOf(BlockContextInterface::class, $blockContext);
 
         return $blockContext;
     }
@@ -116,7 +116,7 @@ abstract class InternalBlockServiceTestCase extends TestCase
         $blockSettings = $blockContext->getSettings();
         ksort($blockSettings);
 
-        $this->assertSame($completeExpectedOptions, $blockSettings);
+        static::assertSame($completeExpectedOptions, $blockSettings);
     }
 }
 

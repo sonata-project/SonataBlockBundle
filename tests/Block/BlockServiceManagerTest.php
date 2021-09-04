@@ -23,16 +23,16 @@ final class BlockServiceManagerTest extends TestCase
         $service = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
 
         $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
-        $container->expects($this->once())->method('get')->willReturn($service);
+        $container->expects(static::once())->method('get')->willReturn($service);
 
         $manager = new BlockServiceManager($container, true);
 
         $manager->add('test', 'test');
 
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $block->expects($this->any())->method('getType')->willReturn('test');
+        $block->expects(static::any())->method('getType')->willReturn('test');
 
-        $this->assertInstanceOf(\get_class($service), $manager->get($block));
+        static::assertInstanceOf(\get_class($service), $manager->get($block));
     }
 
     public function testInvalidServiceType()
@@ -42,16 +42,16 @@ final class BlockServiceManagerTest extends TestCase
         $service = $this->createMock('stdClass');
 
         $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
-        $container->expects($this->once())->method('get')->willReturn($service);
+        $container->expects(static::once())->method('get')->willReturn($service);
 
         $manager = new BlockServiceManager($container, true);
 
         $manager->add('test', 'test');
 
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $block->expects($this->any())->method('getType')->willReturn('test');
+        $block->expects(static::any())->method('getType')->willReturn('test');
 
-        $this->assertInstanceOf(\get_class($service), $manager->get($block));
+        static::assertInstanceOf(\get_class($service), $manager->get($block));
     }
 
     public function testGetBlockServiceException()
@@ -63,7 +63,7 @@ final class BlockServiceManagerTest extends TestCase
         $manager = new BlockServiceManager($container, true);
 
         $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
-        $block->expects($this->any())->method('getType')->willReturn('fakse');
+        $block->expects(static::any())->method('getType')->willReturn('fakse');
 
         $manager->get($block);
     }
@@ -77,7 +77,7 @@ final class BlockServiceManagerTest extends TestCase
 
         $manager->add('foo.bar', $service);
 
-        $this->assertEmpty($manager->getServicesByContext('fake'));
+        static::assertEmpty($manager->getServicesByContext('fake'));
     }
 
     public function testGetListFromValidContext()
@@ -89,7 +89,7 @@ final class BlockServiceManagerTest extends TestCase
 
         $manager->add('foo.bar', $service, ['fake']);
 
-        $this->assertNotEmpty($manager->getServicesByContext('fake'));
+        static::assertNotEmpty($manager->getServicesByContext('fake'));
     }
 
     /**
@@ -101,21 +101,21 @@ final class BlockServiceManagerTest extends TestCase
         $manager = new BlockServiceManager($container, true);
 
         $serviceAbc = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
-        $serviceAbc->expects($this->any())->method('getName')->willReturn('GHI');
+        $serviceAbc->expects(static::any())->method('getName')->willReturn('GHI');
         $manager->add('ghi', $serviceAbc);
 
         $serviceAbc = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
-        $serviceAbc->expects($this->any())->method('getName')->willReturn('ABC');
+        $serviceAbc->expects(static::any())->method('getName')->willReturn('ABC');
         $manager->add('abc', $serviceAbc);
 
         $serviceAbc = $this->createMock('Sonata\BlockBundle\Block\BlockServiceInterface');
-        $serviceAbc->expects($this->any())->method('getName')->willReturn('DEF');
+        $serviceAbc->expects(static::any())->method('getName')->willReturn('DEF');
         $manager->add('def', $serviceAbc);
 
         $services = array_keys($manager->getServices());
 
-        $this->assertSame('abc', $services[0], 'After order, the first service should be "ABC"');
-        $this->assertSame('def', $services[1], 'After order, the second service should be "DEF"');
-        $this->assertSame('ghi', $services[2], 'After order, the third service should be "GHI"');
+        static::assertSame('abc', $services[0], 'After order, the first service should be "ABC"');
+        static::assertSame('def', $services[1], 'After order, the second service should be "DEF"');
+        static::assertSame('ghi', $services[2], 'After order, the third service should be "GHI"');
     }
 }

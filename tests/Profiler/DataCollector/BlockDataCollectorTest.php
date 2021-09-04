@@ -48,16 +48,16 @@ final class BlockDataCollectorTest extends TestCase
 
         $blockDataCollector->collect(new Request(), new Response());
 
-        $this->assertSame($expectedEvents, $blockDataCollector->getEvents());
-        $this->assertSame($expectedBlocks, $blockDataCollector->getBlocks());
-        $this->assertSame($expectedContainers, $blockDataCollector->getContainers());
-        $this->assertSame($expectedRealBlocks, $blockDataCollector->getRealBlocks());
+        static::assertSame($expectedEvents, $blockDataCollector->getEvents());
+        static::assertSame($expectedBlocks, $blockDataCollector->getBlocks());
+        static::assertSame($expectedContainers, $blockDataCollector->getContainers());
+        static::assertSame($expectedRealBlocks, $blockDataCollector->getRealBlocks());
 
         $blockDataCollector->reset();
 
-        $this->assertSame([], $blockDataCollector->getEvents());
-        $this->assertSame([], $blockDataCollector->getBlocks());
-        $this->assertSame([], $blockDataCollector->getContainers());
-        $this->assertSame([], $blockDataCollector->getRealBlocks());
+        static::assertSame([], $blockDataCollector->getEvents());
+        static::assertSame([], $blockDataCollector->getBlocks());
+        static::assertSame([], $blockDataCollector->getContainers());
+        static::assertSame([], $blockDataCollector->getRealBlocks());
     }
 }

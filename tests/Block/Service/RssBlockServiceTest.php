@@ -42,7 +42,7 @@ final class RssBlockServiceTest extends BlockServiceTestCase
         $blockContext = new BlockContext($block, $optionResolver->resolve());
 
         $formMapper = $this->createMock(FormMapper::class);
-        $formMapper->expects($this->exactly(2))->method('add');
+        $formMapper->expects(static::exactly(2))->method('add');
 
         $service->buildCreateForm($formMapper, $block);
         $service->buildEditForm($formMapper, $block);
@@ -73,7 +73,7 @@ final class RssBlockServiceTest extends BlockServiceTestCase
         $blockContext = new BlockContext($block, $optionResolver->resolve());
 
         $formMapper = $this->createMock(FormMapper::class);
-        $formMapper->expects($this->exactly(2))->method('add');
+        $formMapper->expects(static::exactly(2))->method('add');
 
         $service->buildCreateForm($formMapper, $block);
         $service->buildEditForm($formMapper, $block);

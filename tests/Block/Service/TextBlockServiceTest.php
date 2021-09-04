@@ -44,13 +44,13 @@ final class TextBlockServiceTest extends BlockServiceTestCase
         $formMapper = $this->getMockBuilder('Sonata\\AdminBundle\\Form\\FormMapper')
             ->disableOriginalConstructor()
             ->getMock();
-        $formMapper->expects($this->exactly(2))->method('add');
+        $formMapper->expects(static::exactly(2))->method('add');
 
         $service->buildCreateForm($formMapper, $block);
         $service->buildEditForm($formMapper, $block);
 
         $response = $service->execute($blockContext);
 
-        $this->assertSame('my text', $this->templating->parameters['settings']['content']);
+        static::assertSame('my text', $this->templating->parameters['settings']['content']);
     }
 }

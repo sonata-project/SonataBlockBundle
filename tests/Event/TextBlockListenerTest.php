@@ -26,18 +26,18 @@ final class TextBlockListenerTest extends TestCase
         $listener = new TextBlockListener();
         $listener->onBlock($event);
 
-        $this->assertCount(1, $event->getBlocks());
+        static::assertCount(1, $event->getBlocks());
 
         $blocks = $event->getBlocks();
 
-        $this->assertSame('This block is coming from inline event from the template', $blocks[0]->getSetting('content'));
+        static::assertSame('This block is coming from inline event from the template', $blocks[0]->getSetting('content'));
     }
 
     public function testEventWithAdmin()
     {
         $admin = $this->createMock('Sonata\AdminBundle\Admin\AdminInterface');
-        $admin->expects($this->once())->method('getSubject');
-        $admin->expects($this->once())->method('toString')->willReturn('fake object');
+        $admin->expects(static::once())->method('getSubject');
+        $admin->expects(static::once())->method('toString')->willReturn('fake object');
 
         $event = new BlockEvent([
             'admin' => $admin,
@@ -47,10 +47,10 @@ final class TextBlockListenerTest extends TestCase
         $listener = new TextBlockListener();
         $listener->onBlock($event);
 
-        $this->assertCount(1, $event->getBlocks());
+        static::assertCount(1, $event->getBlocks());
 
         $blocks = $event->getBlocks();
 
-        $this->assertSame('<p class=\'well\'>The admin subject is <strong>fake object</strong></p>', $blocks[0]->getSetting('content'));
+        static::assertSame('<p class=\'well\'>The admin subject is <strong>fake object</strong></p>', $blocks[0]->getSetting('content'));
     }
 }

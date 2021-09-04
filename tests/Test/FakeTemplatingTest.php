@@ -30,8 +30,8 @@ final class FakeTemplatingTest extends TestCase
             'foo' => 'bar',
         ]);
 
-        $this->assertSame('template.html.twig', $templating->name);
-        $this->assertSame([
+        static::assertSame('template.html.twig', $templating->name);
+        static::assertSame([
             'foo' => 'bar',
         ], $templating->parameters);
     }
@@ -45,17 +45,17 @@ final class FakeTemplatingTest extends TestCase
             'foo' => 'bar',
         ], $response);
 
-        $this->assertSame('template.html.twig', $templating->view);
-        $this->assertSame([
+        static::assertSame('template.html.twig', $templating->view);
+        static::assertSame([
             'foo' => 'bar',
         ], $templating->parameters);
-        $this->assertSame($response, $templating->response);
+        static::assertSame($response, $templating->response);
     }
 
     public function testSupports()
     {
         $templating = new FakeTemplating();
-        $this->assertTrue($templating->supports('foo'));
+        static::assertTrue($templating->supports('foo'));
     }
 
     /**
@@ -64,6 +64,6 @@ final class FakeTemplatingTest extends TestCase
     public function testExists()
     {
         $templating = new FakeTemplating();
-        $this->assertTrue($templating->exists('foo'));
+        static::assertTrue($templating->exists('foo'));
     }
 }

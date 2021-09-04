@@ -39,11 +39,11 @@ final class InlineRendererTest extends TestCase
 
         // mock the templating render() to return an html result
         $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $templating->expects($this->once())
+        $templating->expects(static::once())
             ->method('render')
             ->with(
-                $this->equalTo($template),
-                $this->equalTo([
+                static::equalTo($template),
+                static::equalTo([
                     'exception' => $exception,
                     'block' => $block, ])
             )
@@ -56,7 +56,7 @@ final class InlineRendererTest extends TestCase
         $response = $renderer->render($exception, $block);
 
         // THEN
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response, 'Should return a Response');
-        $this->assertSame('html', $response->getContent(), 'Should contain the templating html result');
+        static::assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response, 'Should return a Response');
+        static::assertSame('html', $response->getContent(), 'Should contain the templating html result');
     }
 }

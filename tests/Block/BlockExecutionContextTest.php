@@ -26,10 +26,10 @@ final class BlockExecutionContextTest extends TestCase
             'hello' => 'world',
         ]);
 
-        $this->assertSame('world', $blockContext->getSetting('hello'));
-        $this->assertSame(['hello' => 'world'], $blockContext->getSettings());
+        static::assertSame('world', $blockContext->getSetting('hello'));
+        static::assertSame(['hello' => 'world'], $blockContext->getSettings());
 
-        $this->assertSame($block, $blockContext->getBlock());
+        static::assertSame($block, $blockContext->getBlock());
     }
 
     public function testInvalidParameter()

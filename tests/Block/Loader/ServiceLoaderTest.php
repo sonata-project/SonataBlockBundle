@@ -35,8 +35,8 @@ final class ServiceLoaderTest extends TestCase
             'settings' => ['option2' => 23],
         ];
 
-        $this->assertTrue($loader->support($definition));
+        static::assertTrue($loader->support($definition));
 
-        $this->assertInstanceOf('Sonata\BlockBundle\Model\BlockInterface', $loader->load($definition));
+        static::assertInstanceOf('Sonata\BlockBundle\Model\BlockInterface', $loader->load($definition));
     }
 }
