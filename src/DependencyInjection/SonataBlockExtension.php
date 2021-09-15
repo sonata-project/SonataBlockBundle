@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\DependencyInjection;
 
 use Sonata\BlockBundle\Profiler\DataCollector\BlockDataCollector;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -27,7 +28,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 final class SonataBlockExtension extends Extension
 {
-    public function getConfiguration(array $config, ContainerBuilder $container)
+    public function getConfiguration(array $config, ContainerBuilder $container): ?ConfigurationInterface
     {
         $bundles = $container->getParameter('kernel.bundles');
 
@@ -223,7 +224,7 @@ final class SonataBlockExtension extends Extension
         $definition->addMethodCall('setDefaultRenderer', [$defaultRenderer]);
     }
 
-    public function getNamespace()
+    public function getNamespace(): string
     {
         return 'http://sonata-project.com/schema/dic/block';
     }

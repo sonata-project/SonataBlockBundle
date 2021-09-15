@@ -22,12 +22,12 @@ final class HttpCacheHandlerTest extends TestCase
     public function testComputeTtlWithPrivateResponse(): void
     {
         $handler = new HttpCacheHandler();
-        $handler->updateMetadata(Response::create()->setTtl(60));
-        $handler->updateMetadata(Response::create()->setTtl(55));
-        $handler->updateMetadata(Response::create()->setTtl(42));
-        $handler->updateMetadata(Response::create()->setTtl(55));
+        $handler->updateMetadata((new Response())->setTtl(60));
+        $handler->updateMetadata((new Response())->setTtl(55));
+        $handler->updateMetadata((new Response())->setTtl(42));
+        $handler->updateMetadata((new Response())->setTtl(55));
 
-        $handler->alterResponse($response = Response::create());
+        $handler->alterResponse($response = (new Response()));
 
         static::assertNull($response->getTtl());
     }
@@ -35,12 +35,12 @@ final class HttpCacheHandlerTest extends TestCase
     public function testComputeTtlWithPublicResponse(): void
     {
         $handler = new HttpCacheHandler();
-        $handler->updateMetadata(Response::create()->setTtl(60));
-        $handler->updateMetadata(Response::create()->setTtl(55));
-        $handler->updateMetadata(Response::create()->setTtl(42));
-        $handler->updateMetadata(Response::create()->setTtl(55));
+        $handler->updateMetadata((new Response())->setTtl(60));
+        $handler->updateMetadata((new Response())->setTtl(55));
+        $handler->updateMetadata((new Response())->setTtl(42));
+        $handler->updateMetadata((new Response())->setTtl(55));
 
-        $handler->alterResponse($response = Response::create()->setTtl(84));
+        $handler->alterResponse($response = (new Response())->setTtl(84));
 
         static::assertSame(42, $response->getTtl());
     }
@@ -49,7 +49,7 @@ final class HttpCacheHandlerTest extends TestCase
     {
         $handler = new HttpCacheHandler();
 
-        $handler->alterResponse($response = Response::create()->setTtl(84));
+        $handler->alterResponse($response = (new Response())->setTtl(84));
 
         static::assertSame(84, $response->getTtl());
     }

@@ -29,12 +29,12 @@ final class ServiceListType extends AbstractType
         $this->manager = $manager;
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sonata_block_service_choice';
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return ChoiceType::class;
     }

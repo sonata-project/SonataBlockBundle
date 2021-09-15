@@ -34,7 +34,7 @@ final class Configuration implements ConfigurationInterface
         $this->defaultContainerTemplates = $defaultContainerTemplates;
     }
 
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('sonata_block');
 

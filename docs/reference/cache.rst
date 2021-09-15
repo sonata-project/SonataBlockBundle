@@ -55,7 +55,7 @@ or you can use the `Response` object::
             $user = false;
         }
 
-        return Response::create(sprintf("your name is %s", $user->getUsername()))->setTtl(0)->setPrivate();
+        return new Response(sprintf("your name is %s", $user->getUsername()))->setTtl(0)->setPrivate();
     }
 
 Cache Keys
@@ -67,7 +67,7 @@ timestamp. Because these values change on every call from the Twig Helper,
 it is mandatory to overwrite the ``getCacheKeys`` function in your custom block class::
 
     namespace App\Block;
-    
+
     use Sonata\BlockBundle\Block\Service\AbstractBlockService;
     use Sonata\BlockBundle\Block\BlockContextInterface;
     use Sonata\BlockBundle\Model\BlockInterface;
