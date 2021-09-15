@@ -1,5 +1,7 @@
 framework:
     secret: secret
+    router:
+        utf8: true
 
 twig:
     paths:
