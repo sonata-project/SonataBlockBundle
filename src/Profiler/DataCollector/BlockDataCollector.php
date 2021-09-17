@@ -125,7 +125,7 @@ final class BlockDataCollector extends DataCollector
         return $this->data['realBlocks'];
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'block';
     }
