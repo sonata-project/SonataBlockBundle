@@ -18,40 +18,31 @@ use Sonata\BlockBundle\Exception\Filter\KeepNoneFilter;
 use Sonata\BlockBundle\Model\BlockInterface;
 
 /**
- * Test the keep all exception filter.
- *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 final class KeepNoneFilterTest extends TestCase
 {
     /**
-     * test the filter with an exception.
-     *
      * @dataProvider getExceptions
      */
     public function testFilter(\Exception $exception): void
     {
-        // GIVEN
         $block = $this->createMock(BlockInterface::class);
         $filter = new KeepNoneFilter();
 
-        // WHEN
         $result = $filter->handle($exception, $block);
 
-        // THEN
         static::assertFalse($result, 'Should handle no exceptions');
     }
 
     /**
-     * Returns exceptions to test.
-     *
-     * @return array
+     * @return iterable<array-key, array{\Exception}>
      */
-    public function getExceptions()
+    public function getExceptions(): iterable
     {
         return [
-            [$this->createMock(\Exception::class)],
-            [$this->createMock(\RuntimeException::class)],
+            [new \Exception()],
+            [new \RuntimeException()],
         ];
     }
 }

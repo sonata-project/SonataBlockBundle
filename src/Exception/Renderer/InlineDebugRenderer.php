@@ -55,7 +55,7 @@ final class InlineDebugRenderer implements RendererInterface
 
     public function render(\Exception $exception, BlockInterface $block, ?Response $response = null): Response
     {
-        $response = $response ?: new Response();
+        $response = $response ?? new Response();
 
         // enforce debug mode or ignore silently
         if (!$this->debug) {

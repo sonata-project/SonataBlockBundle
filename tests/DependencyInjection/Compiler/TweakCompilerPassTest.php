@@ -25,9 +25,6 @@ final class TweakCompilerPassTest extends TestCase
      */
     private $container;
 
-    /**
-     * Setup test object.
-     */
     protected function setUp(): void
     {
         $this->container = new ContainerBuilder();
@@ -62,7 +59,6 @@ final class TweakCompilerPassTest extends TestCase
 
     public function testProcessSameBlockId(): void
     {
-        /** @var Definition $blockDefinition */
         $blockDefinition = new Definition(null, ['acme.block.service']);
         $blockDefinition->addTag('sonata.block');
 
@@ -81,7 +77,6 @@ final class TweakCompilerPassTest extends TestCase
      */
     public function testProcessDifferentBlockId(): void
     {
-        /** @var Definition $blockDefinition */
         $blockDefinition = new Definition(null, ['acme.block.service.name']);
         $blockDefinition->addTag('sonata.block');
 

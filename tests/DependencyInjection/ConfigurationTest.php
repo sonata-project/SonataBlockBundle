@@ -20,9 +20,11 @@ use Symfony\Component\Config\Definition\Processor;
 final class ConfigurationTest extends TestCase
 {
     /**
+     * @param string[] $contexts
+     *
      * @dataProvider providerContexts
      */
-    public function testOptions($contexts): void
+    public function testOptions(array $contexts): void
     {
         $defaultTemplates = [
             '@SonataPage/Block/block_container.html.twig' => 'SonataPageBundle template',
@@ -101,7 +103,10 @@ final class ConfigurationTest extends TestCase
         static::assertSame($expected, $config);
     }
 
-    public function providerContexts()
+    /**
+     * @return iterable<array-key, array{array<string>}>
+     */
+    public function providerContexts(): iterable
     {
         return [
             [[]],

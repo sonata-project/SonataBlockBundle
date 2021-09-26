@@ -56,7 +56,7 @@ final class TweakCompilerPass implements CompilerPassInterface
 
         foreach ($container->findTaggedServiceIds('knp_menu.menu') as $serviceId => $tags) {
             foreach ($tags as $attributes) {
-                if (empty($attributes['alias'])) {
+                if (!isset($attributes['alias'])) {
                     throw new \InvalidArgumentException(sprintf('The alias is not defined in the "knp_menu.menu" tag for the service "%s"', $serviceId));
                 }
                 $registry->addMethodCall('add', [$attributes['alias']]);
@@ -118,7 +118,7 @@ final class TweakCompilerPass implements CompilerPassInterface
      */
     private function getContextFromTags(array $tags)
     {
-        return array_filter(array_map(static function (array $attribute) {
+        return array_filter(array_map(static function (array $attribute): ?string {
             if (\array_key_exists('context', $attribute) && \is_string($attribute['context'])) {
                 return $attribute['context'];
             }

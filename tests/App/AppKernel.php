@@ -61,12 +61,12 @@ final class AppKernel extends Kernel
      *
      * @param RoutingConfigurator|RouteCollectionBuilder $routes
      */
-    protected function configureRoutes($routes)
+    protected function configureRoutes($routes): void
     {
         $routes->import(__DIR__.'/Controller/');
     }
 
-    protected function configureContainer(ContainerBuilder $containerBuilder, LoaderInterface $loader)
+    protected function configureContainer(ContainerBuilder $containerBuilder, LoaderInterface $loader): void
     {
         $loader->load(__DIR__.'/config.yml');
     }

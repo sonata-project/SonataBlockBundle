@@ -18,40 +18,31 @@ use Sonata\BlockBundle\Exception\Filter\KeepAllFilter;
 use Sonata\BlockBundle\Model\BlockInterface;
 
 /**
- * Test the keep all exception filter.
- *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 final class KeepAllFilterTest extends TestCase
 {
     /**
-     * test the filter with an exception.
-     *
      * @dataProvider getExceptions
      */
     public function testFilter(\Exception $exception): void
     {
-        // GIVEN
         $block = $this->createMock(BlockInterface::class);
         $filter = new KeepAllFilter();
 
-        // WHEN
         $result = $filter->handle($exception, $block);
 
-        // THEN
         static::assertTrue($result, 'Should handle any exception');
     }
 
     /**
-     * Returns exceptions to test.
-     *
-     * @return array
+     * @return iterable<array-key, array{\Exception}>
      */
-    public function getExceptions()
+    public function getExceptions(): iterable
     {
         return [
-            [$this->createMock(\Exception::class)],
-            [$this->createMock(\RuntimeException::class)],
+            [new \Exception()],
+            [new \RuntimeException()],
         ];
     }
 }

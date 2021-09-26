@@ -53,7 +53,7 @@ final class DebugBlocksCommandTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->application = null;
+        unset($this->application);
     }
 
     public function testExecuteWithAlias(): void

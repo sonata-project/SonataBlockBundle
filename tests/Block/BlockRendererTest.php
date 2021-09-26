@@ -20,7 +20,6 @@ use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Block\BlockRenderer;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Block\Service\BlockServiceInterface;
-use Sonata\BlockBundle\Exception\Strategy\StrategyManager;
 use Sonata\BlockBundle\Exception\Strategy\StrategyManagerInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,7 +40,7 @@ final class BlockRendererTest extends TestCase
     private $logger;
 
     /**
-     * @var MockObject&StrategyManager
+     * @var MockObject&StrategyManagerInterface
      */
     private $exceptionStrategyManager;
 
@@ -67,8 +66,6 @@ final class BlockRendererTest extends TestCase
      */
     public function testRenderWithoutErrors(): void
     {
-        // GIVEN
-
         // mock a block service that returns a response
         $response = $this->createMock(Response::class);
         $service = $this->createMock(BlockServiceInterface::class);
@@ -80,10 +77,8 @@ final class BlockRendererTest extends TestCase
         $block = $this->createMock(BlockInterface::class);
         $blockContext = new BlockContext($block);
 
-        // WHEN
         $result = $this->renderer->render($blockContext);
 
-        // THEN
         static::assertSame($response, $result, 'Should return the response from the block service');
     }
 
@@ -92,8 +87,6 @@ final class BlockRendererTest extends TestCase
      */
     public function testRenderBlockWithException(): void
     {
-        // GIVEN
-
         // mock a block service that throws an user exception
         $service = $this->createMock(BlockServiceInterface::class);
         $service->expects(static::once())->method('load');
@@ -121,10 +114,8 @@ final class BlockRendererTest extends TestCase
         $block = $this->createMock(BlockInterface::class);
         $blockContext = new BlockContext($block);
 
-        // WHEN
         $result = $this->renderer->render($blockContext);
 
-        // THEN
         static::assertSame($response, $result, 'Should return the response provider by the exception manager');
     }
 }

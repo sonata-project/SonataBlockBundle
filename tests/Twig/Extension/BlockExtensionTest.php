@@ -11,11 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Sonata\BlockBundle\Twig\Extension;
+namespace Sonata\BlockBundle\Tests\Twig\Extension;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
+use Sonata\BlockBundle\Twig\Extension\BlockExtension;
 use Twig\Environment;
 use Twig\Loader\LoaderInterface;
 use Twig\RuntimeLoader\FactoryRuntimeLoader;
@@ -53,7 +54,10 @@ final class BlockExtensionTest extends TestCase
         ]));
     }
 
-    public function provideFunction()
+    /**
+     * @return iterable<array-key, array{string, array<mixed>, string}>
+     */
+    public function provideFunction(): iterable
     {
         return [
             ['sonata_block_exists', [
@@ -75,15 +79,19 @@ final class BlockExtensionTest extends TestCase
     }
 
     /**
+     * @param mixed[] $args
+     *
      * @dataProvider provideFunction
      */
-    public function testFunction($name, $args, $expectedMethod): void
+    public function testFunction(string $name, array $args, string $expectedMethod): void
     {
         $this->blockHelper->expects(static::once())
             ->method($expectedMethod)
             ->with(...$args);
 
+        /** @psalm-suppress InternalMethod */
         $func = $this->env->getFunction($name);
+
         static::assertInstanceOf(TwigFunction::class, $func);
         \call_user_func_array([$this->env->getRuntime(BlockHelper::class), $expectedMethod], $args);
     }

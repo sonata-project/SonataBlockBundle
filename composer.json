@@ -50,9 +50,13 @@
         "knplabs/knp-menu-bundle": "^3.0",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.12.29",
+        "phpstan/phpstan-phpunit": "^0.12.18",
+        "phpstan/phpstan-strict-rules": "^0.12.10",
         "phpstan/phpstan-symfony": "^0.12.10",
         "phpunit/phpunit": "^9.5",
+        "psalm/plugin-phpunit": "^0.16",
         "psalm/plugin-symfony": "^2.0",
         "symfony/browser-kit": "^4.4 || ^5.3 || ^6.0",
         "symfony/debug": "^4.4 || ^5.3 || ^6.0",
@@ -80,5 +84,13 @@
         "psr-4": {
             "Sonata\\BlockBundle\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || vendor/bin/simple-phpunit install"
+        ],
+        "post-update-cmd": [
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || vendor/bin/simple-phpunit install"
+        ]
     }
 }

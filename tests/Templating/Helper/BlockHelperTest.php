@@ -57,9 +57,11 @@ final class BlockHelperTest extends TestCase
         $blockRenderer->expects(static::once())->method('render')->willReturn(new Response('<span>test</span>'));
 
         $blockContextManager = $this->createMock(BlockContextManagerInterface::class);
-        $blockContextManager->expects(static::once())->method('get')->willReturnCallback(static function (BlockInterface $block) {
-            return new BlockContext($block, $block->getSettings());
-        });
+        $blockContextManager->expects(static::once())->method('get')->willReturnCallback(
+            static function (BlockInterface $block): BlockContext {
+                return new BlockContext($block, $block->getSettings());
+            }
+        );
 
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $eventDispatcher->expects(static::once())->method('dispatch')->willReturnCallback(static function (BlockEvent $event): BlockEvent {
