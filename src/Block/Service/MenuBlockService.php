@@ -87,7 +87,8 @@ class MenuBlockService extends AbstractBlockService implements EditableBlockServ
 
     public function validate(ErrorElement $errorElement, BlockInterface $block): void
     {
-        if (($name = $block->getSetting('menu_name')) && '' !== $name && !$this->menuProvider->has($name)) {
+        $name = $block->getSetting('menu_name');
+        if (null !== $name && '' !== $name && !$this->menuProvider->has($name)) {
             // If we specified a menu_name, check that it exists
             $errorElement->with('menu_name')
                 ->addViolation('sonata.block.menu.not_existing', ['%name%' => $name])

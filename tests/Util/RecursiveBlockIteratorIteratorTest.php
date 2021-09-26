@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Sonata\BlockBundle\Tests\Entity;
+namespace Sonata\BlockBundle\Tests\Util;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Model\BlockInterface;

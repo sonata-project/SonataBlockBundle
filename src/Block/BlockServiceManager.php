@@ -41,6 +41,9 @@ final class BlockServiceManager implements BlockServiceManagerInterface
      */
     private $contexts;
 
+    /**
+     * @psalm-suppress ContainerDependency
+     */
     public function __construct(ContainerInterface $container)
     {
         $this->services = [];
@@ -130,7 +133,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
      */
     public function validate(ErrorElement $errorElement, BlockInterface $block): void
     {
-        if (!$block->getId() && !$block->getType()) {
+        if (null === $block->getId() && null === $block->getType()) {
             return;
         }
 

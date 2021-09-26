@@ -16,6 +16,10 @@ namespace Sonata\BlockBundle\Model;
 use Sonata\Doctrine\Model\ManagerInterface;
 use Sonata\Doctrine\Model\PageableManagerInterface;
 
+/**
+ * @phpstan-template T of object
+ * @phpstan-extends ManagerInterface<T>
+ */
 interface BlockManagerInterface extends ManagerInterface, PageableManagerInterface
 {
 }

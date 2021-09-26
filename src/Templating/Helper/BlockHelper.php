@@ -154,14 +154,7 @@ class BlockHelper
     {
         $eventName = sprintf('sonata.block.event.%s', $name);
 
-        /**
-         * @psalm-suppress TooManyArguments
-         *
-         * @todo remove annotation when Symfony 4.4.x support is dropped
-         */
         $event = $this->eventDispatcher->dispatch(new BlockEvent($options), $eventName);
-
-        \assert($event instanceof BlockEvent);
 
         $content = '';
 
@@ -200,40 +193,37 @@ class BlockHelper
 
         $stats = [];
 
-        if ($this->stopwatch) {
+        if (null !== $this->stopwatch) {
             $stats = $this->startTracing($blockContext->getBlock());
         }
 
         $service = $this->blockServiceManager->get($blockContext->getBlock());
 
-        $useCache = $blockContext->getSetting('use_cache');
+        $useCache = true === $blockContext->getSetting('use_cache');
 
-        $cacheKeys = $response = false;
-        $cacheService = $useCache ? $this->getCacheService($blockContext->getBlock(), $stats) : false;
-        if ($cacheService) {
+        $cacheService = $useCache ? $this->getCacheService($blockContext->getBlock(), $stats) : null;
+        if (null !== $cacheService) {
             $cacheKeys = array_merge(
                 $service->getCacheKeys($blockContext->getBlock()),
                 $blockContext->getSetting('extra_cache_keys')
             );
 
-            if ($this->stopwatch) {
+            if (null !== $this->stopwatch) {
                 $stats['cache']['keys'] = $cacheKeys;
             }
 
             // Please note, some cache handler will always return true (js for instance)
-            // This will allows to have a non cacheable block, but the global page can still be cached by
+            // This will allow to have a non cacheable block, but the global page can still be cached by
             // a reverse proxy, as the generated page will never get the generated Response from the block.
             if ($cacheService->has($cacheKeys)) {
                 $cacheElement = $cacheService->get($cacheKeys);
 
-                if ($this->stopwatch) {
+                if (null !== $this->stopwatch) {
                     $stats['cache']['from_cache'] = false;
                 }
 
                 if (!$cacheElement->isExpired() && $cacheElement->getData() instanceof Response) {
-                    /* @var Response $response */
-
-                    if ($this->stopwatch) {
+                    if (null !== $this->stopwatch) {
                         $stats['cache']['from_cache'] = true;
                     }
 
@@ -242,9 +232,9 @@ class BlockHelper
             }
         }
 
-        if (!$response) {
+        if (!isset($response)) {
             $recorder = null;
-            if ($this->cacheManager) {
+            if (null !== $this->cacheManager) {
                 $recorder = $this->cacheManager->getRecorder();
 
                 $recorder->add($blockContext->getBlock());
@@ -252,30 +242,30 @@ class BlockHelper
             }
 
             $response = $this->blockRenderer->render($blockContext);
-            $contextualKeys = $recorder ? $recorder->pop() : [];
+            $contextualKeys = null !== $recorder ? $recorder->pop() : [];
 
-            if ($this->stopwatch) {
+            if (null !== $this->stopwatch) {
                 $stats['cache']['contextual_keys'] = $contextualKeys;
             }
 
-            if ($response->isCacheable() && $cacheKeys && $cacheService) {
+            if ($response->isCacheable() && isset($cacheKeys) && null !== $cacheService) {
                 $cacheService->set($cacheKeys, $response, (int) $response->getTtl(), $contextualKeys);
             }
         }
 
-        if ($this->stopwatch) {
+        if (null !== $this->stopwatch) {
             // avoid \DateTime because of serialize/unserialize issue in PHP7.3 (https://bugs.php.net/bug.php?id=77302)
             $stats['cache']['created_at'] = null === $response->getDate() ? null : $response->getDate()->getTimestamp();
-            $stats['cache']['ttl'] = $response->getTtl() ?: 0;
+            $stats['cache']['ttl'] = $response->getTtl() ?? 0;
             $stats['cache']['age'] = $response->getAge();
         }
 
         // update final ttl for the whole Response
-        if ($this->cacheHandler) {
+        if (null !== $this->cacheHandler) {
             $this->cacheHandler->updateMetadata($response, $blockContext);
         }
 
-        if ($this->stopwatch) {
+        if (null !== $this->stopwatch) {
             $this->stopTracing($blockContext->getBlock(), $stats);
         }
 
@@ -339,7 +329,7 @@ class BlockHelper
 
     private function getCacheService(BlockInterface $block, ?array &$stats = null): ?CacheAdapterInterface
     {
-        if (!$this->cacheManager) {
+        if (null === $this->cacheManager) {
             return null;
         }
 
@@ -356,7 +346,7 @@ class BlockHelper
             return null;
         }
 
-        if ($this->stopwatch) {
+        if (null !== $this->stopwatch) {
             $stats['cache']['handler'] = $cacheServiceId;
         }
 

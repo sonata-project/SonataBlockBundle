@@ -164,7 +164,7 @@ final class BlockContextManager implements BlockContextManagerInterface
      */
     private function setDefaultExtraCacheKeys(BlockContextInterface $blockContext, array $settings): void
     {
-        if (!$blockContext->getSetting('use_cache') || $blockContext->getSetting('ttl') <= 0) {
+        if (false === $blockContext->getSetting('use_cache') || $blockContext->getSetting('ttl') <= 0) {
             return;
         }
 

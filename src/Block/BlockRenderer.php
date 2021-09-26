@@ -68,7 +68,7 @@ final class BlockRenderer implements BlockRendererInterface
     {
         $block = $blockContext->getBlock();
 
-        if ($this->logger) {
+        if (null !== $this->logger) {
             $this->logger->info(sprintf('[cms::renderBlock] block.id=%d, block.type=%s ', $block->getId(), $block->getType()));
         }
 
@@ -80,7 +80,7 @@ final class BlockRenderer implements BlockRendererInterface
 
             $response = $this->addMetaInformation($response, $blockContext);
         } catch (\Throwable $exception) {
-            if ($this->logger) {
+            if (null !== $this->logger) {
                 $this->logger->error(sprintf(
                     '[cms::renderBlock] block.id=%d - error while rendering block - %s',
                     $block->getId(),
@@ -117,12 +117,12 @@ final class BlockRenderer implements BlockRendererInterface
     private function addMetaInformation(Response $response, BlockContextInterface $blockContext): Response
     {
         // a response exists, use it
-        if ($this->lastResponse && $this->lastResponse->isCacheable()) {
+        if (null !== $this->lastResponse && $this->lastResponse->isCacheable()) {
             if (null !== $this->lastResponse->getTtl()) {
                 $response->setTtl($this->lastResponse->getTtl());
             }
             $response->setPublic();
-        } elseif ($this->lastResponse) { // not cacheable
+        } elseif (null !== $this->lastResponse) { // not cacheable
             $response->setPrivate();
             $response->setTtl(0);
             $response->headers->removeCacheControlDirective('s-maxage');

@@ -20,27 +20,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
 /**
- * Test the inline exception renderer.
- *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 final class InlineRendererTest extends TestCase
 {
-    /**
-     * test the render() method.
-     */
     public function testRender(): void
     {
-        // GIVEN
         $template = 'test-template';
 
-        // mock an exception to render
         $exception = $this->createMock(\Exception::class);
-
-        // mock a block instance that provoked the exception
         $block = $this->createMock(BlockInterface::class);
 
-        // mock the twig render() to return an html result
         $twig = $this->createMock(Environment::class);
         $twig->expects(static::once())
             ->method('render')
@@ -52,13 +42,10 @@ final class InlineRendererTest extends TestCase
             )
             ->willReturn('html');
 
-        // create renderer to test
         $renderer = new InlineRenderer($twig, $template);
 
-        // WHEN
         $response = $renderer->render($exception, $block);
 
-        // THEN
         static::assertInstanceOf(Response::class, $response, 'Should return a Response');
         static::assertSame('html', $response->getContent(), 'Should contain the templating html result');
     }
