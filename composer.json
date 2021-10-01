@@ -6,7 +6,7 @@
         "sonata",
         "block"
     ],
-    "homepage": "https://sonata-project.org/bundles/block",
+    "homepage": "https://docs.sonata-project.org/projects/SonataBlockBundle",
     "license": "MIT",
     "authors": [
         {
