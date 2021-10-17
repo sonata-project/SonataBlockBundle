@@ -52,6 +52,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpstan/phpstan": "^0.12.29",
         "phpstan/phpstan-symfony": "^0.12.10",
+        "phpunit/phpunit": "^9.5",
         "psalm/plugin-symfony": "^2.0",
         "sonata-project/admin-bundle": "^3.28",
         "symfony/debug": "^4.4",
