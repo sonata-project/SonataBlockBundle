@@ -23,10 +23,13 @@ final class BlockContext implements BlockContextInterface
     private $block;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private $settings;
 
+    /**
+     * @param array<string, mixed> $settings
+     */
     public function __construct(BlockInterface $block, array $settings = [])
     {
         $this->block = $block;

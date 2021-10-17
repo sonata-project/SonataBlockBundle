@@ -25,8 +25,35 @@ use Sonata\Cache\CacheManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface as EventDispatcherComponentInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Stopwatch\Stopwatch;
+use Symfony\Component\Stopwatch\StopwatchEvent;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
+use function array_merge;
+
+/**
+ * @phpstan-type Trace = array{
+ *     name: string,
+ *     type: string,
+ *     duration: int|false,
+ *     memory_start: int|false,
+ *     memory_end: int|false,
+ *     memory_peak: int|false,
+ *     cache: array{
+ *         keys: array,
+ *         contextual_keys: array,
+ *         handler: false,
+ *         from_cache: false,
+ *         ttl: int,
+ *         created_at: false,
+ *         lifetime: int,
+ *         age: int,
+ *     },
+ *     assets: array{
+ *         js: string[],
+ *         css: string[],
+ *     }
+ * }
+ */
 class BlockHelper
 {
     /**
@@ -40,7 +67,7 @@ class BlockHelper
     private $cacheManager;
 
     /**
-     * @var array
+     * @var array{by_class?: array<class-string, string>, by_type?: array<string, string>}
      */
     private $cacheBlocks;
 
@@ -68,20 +95,29 @@ class BlockHelper
      * This property is a state variable holdings all assets used by the block for the current PHP request
      * It is used to correctly render the javascripts and stylesheets tags on the main layout.
      *
-     * @var array
+     * @var array{css: array<string>, js: array<string>}
      */
-    private $assets;
+    private $assets = ['css' => [], 'js' => []];
 
     /**
-     * @var array
+     * @var array<string, StopwatchEvent|array<string, mixed>>
+     * @phpstan-var array<string, StopwatchEvent|Trace>
      */
-    private $traces;
+    private $traces = [];
+
+    /**
+     * @var array<string, mixed>
+     */
+    private $eventTraces = [];
 
     /**
      * @var Stopwatch|null
      */
     private $stopwatch;
 
+    /**
+     * @param array{by_class?: array<class-string, string>, by_type?: array<string, string>} $cacheBlocks
+     */
     public function __construct(
         BlockServiceManagerInterface $blockServiceManager,
         array $cacheBlocks,
@@ -100,22 +136,13 @@ class BlockHelper
         $this->blockContextManager = $blockContextManager;
         $this->cacheHandler = $cacheHandler;
         $this->stopwatch = $stopwatch;
-
-        $this->assets = [
-            'js' => [],
-            'css' => [],
-        ];
-
-        $this->traces = [
-            '_events' => [],
-        ];
     }
 
     /**
      * @param string $media    Unused, only kept to not break existing code
      * @param string $basePath Base path to prepend to the stylesheet urls
      *
-     * @return array|string
+     * @return string
      */
     public function includeJavascripts($media, $basePath = '')
     {
@@ -131,7 +158,7 @@ class BlockHelper
      * @param string $media    The css media type to use: all|screen|...
      * @param string $basePath Base path to prepend to the stylesheet urls
      *
-     * @return array|string
+     * @return string
      */
     public function includeStylesheets($media, $basePath = '')
     {
@@ -150,6 +177,9 @@ class BlockHelper
         return $html;
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function renderEvent(string $name, array $options = []): string
     {
         $eventName = sprintf('sonata.block.event.%s', $name);
@@ -163,7 +193,7 @@ class BlockHelper
         }
 
         if (null !== $this->stopwatch) {
-            $this->traces['_events'][uniqid('', true)] = [
+            $this->eventTraces[uniqid('', true)] = [
                 'template_code' => $name,
                 'event_name' => $eventName,
                 'blocks' => $this->getEventBlocks($event),
@@ -185,7 +215,8 @@ class BlockHelper
     }
 
     /**
-     * @param mixed $block
+     * @param string|array<string, mixed>|BlockInterface $block
+     * @param array<string, mixed>                       $options
      */
     public function render($block, array $options = []): string
     {
@@ -274,12 +305,19 @@ class BlockHelper
 
     /**
      * Returns the rendering traces.
+     *
+     * @return array<string, mixed>
      */
     public function getTraces(): array
     {
-        return $this->traces;
+        return ['_events' => $this->eventTraces] + $this->traces;
     }
 
+    /**
+     * @param array<string, mixed> $stats
+     *
+     * @phpstan-param Trace $stats
+     */
     private function stopTracing(BlockInterface $block, array $stats): void
     {
         $e = $this->traces[$block->getId()]->stop();
@@ -293,6 +331,9 @@ class BlockHelper
         $this->traces[$block->getId()]['cache']['lifetime'] = $this->traces[$block->getId()]['cache']['age'] + $this->traces[$block->getId()]['cache']['ttl'];
     }
 
+    /**
+     * @return array<array{mixed, string}>
+     */
     private function getEventBlocks(BlockEvent $event): array
     {
         $results = [];
@@ -304,6 +345,9 @@ class BlockHelper
         return $results;
     }
 
+    /**
+     * @return string[]
+     */
     private function getEventListeners(string $eventName): array
     {
         $results = [];
@@ -327,6 +371,11 @@ class BlockHelper
         return $results;
     }
 
+    /**
+     * @param array<string, mixed>|null $stats
+     *
+     * @phpstan-param Trace|null $stats
+     */
     private function getCacheService(BlockInterface $block, ?array &$stats = null): ?CacheAdapterInterface
     {
         if (null === $this->cacheManager) {
@@ -350,9 +399,14 @@ class BlockHelper
             $stats['cache']['handler'] = $cacheServiceId;
         }
 
-        return $this->cacheManager->getCacheService((string) $cacheServiceId);
+        return $this->cacheManager->getCacheService($cacheServiceId);
     }
 
+    /**
+     * @return array<string, mixed>
+     *
+     * @phpstan-return Trace
+     */
     private function startTracing(BlockInterface $block): array
     {
         if (null !== $this->stopwatch) {

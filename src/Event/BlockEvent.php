@@ -19,7 +19,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 final class BlockEvent extends Event
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private $settings;
 
@@ -28,6 +28,9 @@ final class BlockEvent extends Event
      */
     private $blocks = [];
 
+    /**
+     * @param array<string, mixed> $settings
+     */
     public function __construct(array $settings = [])
     {
         $this->settings = $settings;
@@ -38,6 +41,9 @@ final class BlockEvent extends Event
         $this->blocks[] = $block;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getSettings(): array
     {
         return $this->settings;

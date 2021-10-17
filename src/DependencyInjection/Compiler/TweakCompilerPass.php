@@ -97,6 +97,12 @@ final class TweakCompilerPass implements CompilerPassInterface
         }
     }
 
+    /**
+     * @param array<array<string, mixed>> $tags
+     * @param string[]                    $defaultContexts
+     *
+     * @return array<string, mixed>
+     */
     private function createBlockSettings(array $tags = [], array $defaultContexts = []): array
     {
         $contexts = $this->getContextFromTags($tags);
@@ -114,6 +120,8 @@ final class TweakCompilerPass implements CompilerPassInterface
     }
 
     /**
+     * @param array<array<string, mixed>> $tags
+     *
      * @return string[]
      */
     private function getContextFromTags(array $tags)

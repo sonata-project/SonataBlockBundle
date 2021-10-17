@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 final class BlockServiceManager implements BlockServiceManagerInterface
 {
     /**
-     * @var array
+     * @var array<string, string|BlockServiceInterface>
      */
     private $services;
 
@@ -37,7 +37,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
     private $inValidate;
 
     /**
-     * @var array
+     * @var array<string, string[]>
      */
     private $contexts;
 
@@ -62,7 +62,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
         return $this->services[$block->getType()];
     }
 
-    public function getService($name): BlockServiceInterface
+    public function getService(string $name): BlockServiceInterface
     {
         return $this->load($name);
     }

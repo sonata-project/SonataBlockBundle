@@ -31,13 +31,13 @@ final class BlockDataCollector extends DataCollector
     private $blocksHelper;
 
     /**
-     * @var array
+     * @var string[]
      */
     private $containerTypes;
 
     /**
      * @param BlockHelper $blockHelper    Block renderer
-     * @param array       $containerTypes array of container types
+     * @param string[]    $containerTypes array of container types
      */
     public function __construct(BlockHelper $blockHelper, array $containerTypes)
     {
@@ -48,6 +48,8 @@ final class BlockDataCollector extends DataCollector
 
     /**
      * TODO: add type declaration for exception when dropping php 7.3 or Symfony 4.
+     *
+     * @param \Throwable|null $exception
      */
     public function collect(Request $request, Response $response, $exception = null): void
     {
@@ -88,7 +90,7 @@ final class BlockDataCollector extends DataCollector
     /**
      * Return the events used on the current page.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getEvents()
     {
@@ -98,7 +100,7 @@ final class BlockDataCollector extends DataCollector
     /**
      * Returns the block rendering history.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getBlocks()
     {
@@ -108,7 +110,7 @@ final class BlockDataCollector extends DataCollector
     /**
      * Returns the container blocks.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getContainers()
     {
@@ -118,7 +120,7 @@ final class BlockDataCollector extends DataCollector
     /**
      * Returns the real blocks (non-container).
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getRealBlocks()
     {

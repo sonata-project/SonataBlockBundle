@@ -23,10 +23,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class ContainerTemplateType extends AbstractType
 {
     /**
-     * @var array
+     * @var array<string, string>
      */
     private $templateChoices;
 
+    /**
+     * @param array<string, string> $templateChoices
+     */
     public function __construct(array $templateChoices)
     {
         $this->templateChoices = $templateChoices;

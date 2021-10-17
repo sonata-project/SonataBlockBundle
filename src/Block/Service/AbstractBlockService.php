@@ -36,6 +36,8 @@ abstract class AbstractBlockService implements BlockServiceInterface
 
     /**
      * Returns a Response object than can be cacheable.
+     *
+     * @param array<string, mixed> $parameters
      */
     public function renderResponse(string $view, array $parameters = [], ?Response $response = null): Response
     {
@@ -49,6 +51,8 @@ abstract class AbstractBlockService implements BlockServiceInterface
     /**
      * Returns a Response object that cannot be cacheable, this must be used if the Response is related to the user.
      * A good solution to make the page cacheable is to configure the block to be cached with javascript ...
+     *
+     * @param array<string, mixed> $parameters
      */
     public function renderPrivateResponse(string $view, array $parameters = [], ?Response $response = null): Response
     {

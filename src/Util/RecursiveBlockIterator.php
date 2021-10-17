@@ -32,6 +32,9 @@ final class RecursiveBlockIterator extends \RecursiveArrayIterator
         parent::__construct($array);
     }
 
+    /**
+     * @return RecursiveBlockIterator<mixed>
+     */
     public function getChildren(): self
     {
         return new self($this->current()->getChildren());
