@@ -146,7 +146,7 @@ class TweakCompilerPass implements CompilerPassInterface
 
         return empty($arguments) ||
             null === ($arguments[0]) ||
-            \is_string($arguments[0]) && 0 === \strlen($arguments[0]);
+            \is_string($arguments[0]) && '' === $arguments[0];
     }
 
     /**
