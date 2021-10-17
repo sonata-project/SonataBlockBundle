@@ -26,6 +26,7 @@ use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Twig\Environment;
@@ -121,6 +122,9 @@ class MenuBlockService extends AbstractBlockService implements EditableBlockServ
         ]);
     }
 
+    /**
+     * @return array<array{string, class-string<FormTypeInterface>, array<string, mixed>}>
+     */
     private function getFormSettingsKeys(): array
     {
         $choiceOptions = [
@@ -186,6 +190,10 @@ class MenuBlockService extends AbstractBlockService implements EditableBlockServ
 
     /**
      * Replaces setting keys with knp menu item options keys.
+     *
+     * @param array<string, mixed> $settings
+     *
+     * @return array<string, mixed>
      */
     private function getMenuOptions(array $settings): array
     {

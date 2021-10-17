@@ -25,10 +25,13 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 final class Configuration implements ConfigurationInterface
 {
     /**
-     * @var array
+     * @var array<string, string>
      */
     private $defaultContainerTemplates;
 
+    /**
+     * @param array<string, string> $defaultContainerTemplates
+     */
     public function __construct(array $defaultContainerTemplates)
     {
         $this->defaultContainerTemplates = $defaultContainerTemplates;
@@ -199,6 +202,8 @@ final class Configuration implements ConfigurationInterface
     }
 
     /**
+     * @param array<string, mixed> $config
+     *
      * @return Configuration
      */
     public function getConfiguration(array $config, ContainerBuilder $container)

@@ -24,7 +24,7 @@ abstract class BaseBlock implements BlockInterface
     protected $name;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     protected $settings;
 

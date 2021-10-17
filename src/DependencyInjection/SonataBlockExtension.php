@@ -28,6 +28,9 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 final class SonataBlockExtension extends Extension
 {
+    /**
+     * @param mixed[] $config
+     */
     public function getConfiguration(array $config, ContainerBuilder $container): ?ConfigurationInterface
     {
         $bundles = $container->getParameter('kernel.bundles');
@@ -87,6 +90,11 @@ final class SonataBlockExtension extends Extension
         $container->getDefinition('sonata.block.twig.global')->replaceArgument(0, $config['templates']);
     }
 
+    /**
+     * NEXT_MAJOR: Change visibility to private.
+     *
+     * @param array<string, mixed> $config
+     */
     public function configureBlockContainers(ContainerBuilder $container, array $config): void
     {
         $container->setParameter('sonata.block.container.types', $config['container']['types']);
@@ -94,6 +102,11 @@ final class SonataBlockExtension extends Extension
         $container->getDefinition('sonata.block.form.type.container_template')->replaceArgument(0, $config['container']['templates']);
     }
 
+    /**
+     * NEXT_MAJOR: Change visibility to private.
+     *
+     * @param array<string, mixed> $config
+     */
     public function configureContext(ContainerBuilder $container, array $config): void
     {
         $container->setParameter($this->getAlias().'.blocks', $config['blocks']);
@@ -102,6 +115,11 @@ final class SonataBlockExtension extends Extension
         $container->setAlias('sonata.block.context_manager', $config['context_manager']);
     }
 
+    /**
+     * NEXT_MAJOR: Change visibility to private.
+     *
+     * @param array<string, mixed> $config
+     */
     public function configureCache(ContainerBuilder $container, array $config): void
     {
         $container->setAlias('sonata.block.cache.handler', $config['http_cache']['handler']);
@@ -122,6 +140,11 @@ final class SonataBlockExtension extends Extension
         $container->setParameter($this->getAlias().'.cache_blocks', $cacheBlocks);
     }
 
+    /**
+     * NEXT_MAJOR: Change visibility to private.
+     *
+     * @param array<string, mixed> $config
+     */
     public function configureLoaderChain(ContainerBuilder $container, array $config): void
     {
         $types = [];
@@ -132,6 +155,11 @@ final class SonataBlockExtension extends Extension
         $container->setParameter('sonata_blocks.block_types', $types);
     }
 
+    /**
+     * NEXT_MAJOR: Change visibility to private.
+     *
+     * @param array<string, mixed> $config
+     */
     public function configureForm(ContainerBuilder $container, array $config): void
     {
         $defaults = $config['default_contexts'];
@@ -156,10 +184,9 @@ final class SonataBlockExtension extends Extension
     }
 
     /**
-     * Configures the block profiler.
+     * NEXT_MAJOR: Change visibility to private.
      *
-     * @param ContainerBuilder $container Container
-     * @param array            $config    Configuration
+     * @param array<string, mixed> $config
      */
     public function configureProfiler(ContainerBuilder $container, array $config): void
     {
@@ -180,10 +207,9 @@ final class SonataBlockExtension extends Extension
     }
 
     /**
-     * Configure the exception parameters.
+     * NEXT_MAJOR: Change visibility to private.
      *
-     * @param ContainerBuilder $container Container builder
-     * @param array            $config    An array of configuration
+     * @param array<string, mixed> $config
      */
     public function configureException(ContainerBuilder $container, array $config): void
     {

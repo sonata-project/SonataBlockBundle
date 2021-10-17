@@ -27,6 +27,9 @@ interface BlockServiceInterface
 
     public function load(BlockInterface $block): void;
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getCacheKeys(BlockInterface $block): array;
 
     /**
