@@ -28,8 +28,6 @@ use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-use function array_merge;
-
 /**
  * @phpstan-type Trace = array{
  *     name: string,
