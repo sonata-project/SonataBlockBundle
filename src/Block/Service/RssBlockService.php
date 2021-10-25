@@ -96,7 +96,7 @@ final class RssBlockService extends AbstractBlockService implements EditableBloc
         $settings = $blockContext->getSettings();
 
         $feeds = false;
-        if (is_string($settings['url'])) {
+        if (\is_string($settings['url'])) {
             $options = [
                 'http' => [
                     'user_agent' => 'Sonata/RSS Reader',
