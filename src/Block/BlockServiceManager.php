@@ -59,7 +59,10 @@ final class BlockServiceManager implements BlockServiceManagerInterface
 
         $this->load($block->getType());
 
-        return $this->services[$block->getType()];
+        $service = $this->services[$block->getType()];
+        \assert($service instanceof BlockServiceInterface);
+
+        return $service;
     }
 
     public function getService(string $name): BlockServiceInterface
@@ -104,7 +107,10 @@ final class BlockServiceManager implements BlockServiceManagerInterface
             }
         }
 
-        return $this->services;
+        /** @var BlockServiceInterface[] $services */
+        $services = $this->services;
+
+        return $services;
     }
 
     public function getServicesByContext(string $context, bool $includeContainers = true): array

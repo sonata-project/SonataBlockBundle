@@ -17,11 +17,17 @@ use Doctrine\Common\Collections\Collection;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * @phpstan-template TKey of array-key
+ * @phpstan-template T
+ * @phpstan-extends \RecursiveArrayIterator<TKey, T>
  */
 final class RecursiveBlockIterator extends \RecursiveArrayIterator
 {
     /**
      * @param Collection<array-key, mixed>|array<mixed> $array
+     *
+     * @phpstan-param Collection<TKey, T>|array<TKey, T> $array
      */
     public function __construct($array)
     {
@@ -33,7 +39,7 @@ final class RecursiveBlockIterator extends \RecursiveArrayIterator
     }
 
     /**
-     * @return RecursiveBlockIterator<mixed>
+     * @phpstan-return RecursiveBlockIterator<TKey, T>
      */
     public function getChildren(): self
     {

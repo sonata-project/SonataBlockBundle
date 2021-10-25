@@ -287,6 +287,7 @@ class BlockHelper
             $stats['cache']['created_at'] = null === $response->getDate() ? null : $response->getDate()->getTimestamp();
             $stats['cache']['ttl'] = $response->getTtl() ?? 0;
             $stats['cache']['age'] = $response->getAge();
+            $stats['cache']['lifetime'] = $stats['cache']['age'] + $stats['cache']['ttl'];
         }
 
         // update final ttl for the whole Response
@@ -325,8 +326,6 @@ class BlockHelper
             'memory_end' => memory_get_usage(true),
             'memory_peak' => memory_get_peak_usage(true),
         ]);
-
-        $this->traces[$block->getId()]['cache']['lifetime'] = $this->traces[$block->getId()]['cache']['age'] + $this->traces[$block->getId()]['cache']['ttl'];
     }
 
     /**
