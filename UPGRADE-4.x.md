@@ -1,6 +1,13 @@
 UPGRADE 4.x
 ===========
 
+UPGRADE FROM 4.7 to 4.x
+=======================
+
+### `sonata-project/doctrine-extensions` is optional
+
+By deprecating `Sonata\BlockBundle\Model\BlockManagerInterface`, the `sonata-project/doctrine-extensions` library is now optional.
+
 UPGRADE FROM 4.6 to 4.7
 =======================
 
