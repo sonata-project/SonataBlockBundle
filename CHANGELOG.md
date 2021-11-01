@@ -2,6 +2,20 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.8.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.7.0...4.8.0) - 2021-11-01
+### Added
+- [[#942](https://github.com/sonata-project/SonataBlockBundle/pull/942)] Support for Symfony 6. ([@jordisala1991](https://github.com/jordisala1991))
+
+### Changed
+- [[#971](https://github.com/sonata-project/SonataBlockBundle/pull/971)] `sonata-project/doctrine-extensions` is an optional dependency now ([@core23](https://github.com/core23))
+
+### Deprecated
+- [[#958](https://github.com/sonata-project/SonataBlockBundle/pull/958)] `Sonata\BlockBundle\Model\BlockManagerInterface` ([@core23](https://github.com/core23))
+
+### Fixed
+- [[#956](https://github.com/sonata-project/SonataBlockBundle/pull/956)] Some phpdoc ([@VincentLanglet](https://github.com/VincentLanglet))
+- [[#939](https://github.com/sonata-project/SonataBlockBundle/pull/939)] Deprecations triggered using Symfony 5.4 ([@franmomu](https://github.com/franmomu))
+
 ## [4.7.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.6.0...4.7.0) - 2021-08-06
 ### Changed
 - [[#899](https://github.com/sonata-project/SonataBlockBundle/pull/899)] `Sonata\BlockBundle\Form\Mapper\FormMapper` methods signature to be compatible with `Sonata\AdminBundle\Form\Mapper\FormMapper` ([@VincentLanglet](https://github.com/VincentLanglet))
