@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Sonata\BlockBundle\Twig\Extension;
+namespace Sonata\BlockBundle\Tests\Twig;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Twig\GlobalVariables;

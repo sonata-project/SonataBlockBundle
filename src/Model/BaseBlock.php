@@ -24,7 +24,7 @@ abstract class BaseBlock implements BlockInterface
     protected $name;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     protected $settings;
 
@@ -189,7 +189,7 @@ abstract class BaseBlock implements BlockInterface
 
     public function getTtl(): int
     {
-        if (!$this->getSetting('use_cache', true)) {
+        if (false === $this->getSetting('use_cache', true)) {
             return 0;
         }
 

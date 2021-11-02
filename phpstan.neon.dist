@@ -1,12 +1,13 @@
-parameters:
-    level: 3
+includes:
+    - phpstan-baseline.neon
 
+parameters:
+    level: 6
     paths:
         - src
-
-    excludes_analyse:
-        - src/Test/BlockServiceTestCase.php
-        - tests/bootstrap.php
-
-    ignoreErrors:
-        - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::fixXmlConfig\(\).#'
+        - tests
+    treatPhpDocTypesAsCertain: false
+    checkGenericClassInNonGenericObjectType: true
+    checkMissingIterableValueType: true
+    checkMissingVarTagTypehint: true
+    checkMissingTypehints: true

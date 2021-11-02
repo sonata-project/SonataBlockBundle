@@ -22,6 +22,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ServiceListType extends AbstractType
 {
+    /**
+     * @var BlockServiceManagerInterface
+     */
     private $manager;
 
     public function __construct(BlockServiceManagerInterface $manager)
@@ -50,7 +53,7 @@ final class ServiceListType extends AbstractType
         $resolver->setDefaults([
             'multiple' => false,
             'expanded' => false,
-            'choices' => static function (Options $options, $previousValue) use ($manager) {
+            'choices' => static function (Options $options, $previousValue) use ($manager): array {
                 $types = [];
                 foreach ($manager->getServicesByContext($options['context'], $options['include_containers']) as $code => $service) {
                     if ($service instanceof EditableBlockService) {
@@ -69,7 +72,7 @@ final class ServiceListType extends AbstractType
 
                 return $multiple || $expanded ? [] : '';
             },
-            'empty_value' => static function (Options $options, $previousValue) {
+            'empty_value' => static function (Options $options, $previousValue): ?string {
                 $multiple = isset($options['multiple']) && $options['multiple'];
                 $expanded = isset($options['expanded']) && $options['expanded'];
 

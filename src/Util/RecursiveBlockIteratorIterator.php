@@ -16,14 +16,14 @@ namespace Sonata\BlockBundle\Util;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * RecursiveBlockIteratorIterator.
- *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * @phpstan-extends \RecursiveIteratorIterator<RecursiveBlockIterator>
  */
 final class RecursiveBlockIteratorIterator extends \RecursiveIteratorIterator
 {
     /**
-     * @param Collection|array $array
+     * @param array<mixed>|Collection<array-key, mixed> $array
      */
     public function __construct($array)
     {

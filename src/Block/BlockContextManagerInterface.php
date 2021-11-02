@@ -23,21 +23,26 @@ interface BlockContextManagerInterface
     /**
      * Add settings for a block service.
      *
-     * @param string $type    block service
-     * @param bool   $replace replace existing settings
+     * @param string               $type     block service
+     * @param array<string, mixed> $settings
+     * @param bool                 $replace  replace existing settings
      */
     public function addSettingsByType(string $type, array $settings, bool $replace = false): void;
 
     /**
      * Add settings for a block class.
      *
-     * @param string $class   block class
-     * @param bool   $replace replace existing settings
+     * @param string               $class    block class
+     * @param array<string, mixed> $settings
+     * @param bool                 $replace  replace existing settings
+     *
+     * @phpstan-param class-string $class
      */
     public function addSettingsByClass(string $class, array $settings, bool $replace = false): void;
 
     /**
-     * @param string|array|BlockInterface $meta Data send to the loader to load a block, can be anything...
+     * @param string|array<string, mixed>|BlockInterface $meta     Data send to the loader to load a block, can be anything...
+     * @param array<string, mixed>                       $settings
      *
      * @throws BlockNotFoundException
      */

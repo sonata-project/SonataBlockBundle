@@ -34,17 +34,18 @@ final class BlockContextManager implements BlockContextManagerInterface
     private $blockService;
 
     /**
-     * @var array
+     * @var array<string, array<string, mixed>>
      */
     private $settingsByType;
 
     /**
-     * @var array
+     * @var array<string, array<string, mixed>>
+     * @phpstan-var array<class-string, array<string, mixed>>
      */
     private $settingsByClass;
 
     /**
-     * @var array
+     * @var array{by_class?: array<class-string, string>, by_type?: array<string, string>}
      */
     private $cacheBlocks;
 
@@ -53,6 +54,9 @@ final class BlockContextManager implements BlockContextManagerInterface
      */
     private $logger;
 
+    /**
+     * @param array{by_class?: array<class-string, string>, by_type?: array<string, string>} $cacheBlocks
+     */
     public function __construct(
         BlockLoaderInterface $blockLoader,
         BlockServiceManagerInterface $blockService,
@@ -161,10 +165,12 @@ final class BlockContextManager implements BlockContextManagerInterface
     /**
      * Adds context settings, to be able to rebuild a block context, to the
      * extra_cache_keys.
+     *
+     * @param array<string, mixed> $settings
      */
     private function setDefaultExtraCacheKeys(BlockContextInterface $blockContext, array $settings): void
     {
-        if (!$blockContext->getSetting('use_cache') || $blockContext->getSetting('ttl') <= 0) {
+        if (false === $blockContext->getSetting('use_cache') || $blockContext->getSetting('ttl') <= 0) {
             return;
         }
 
@@ -196,6 +202,11 @@ final class BlockContextManager implements BlockContextManagerInterface
         }
     }
 
+    /**
+     * @param array<string, mixed> $settings
+     *
+     * @return array<string, mixed>
+     */
     private function resolve(BlockInterface $block, array $settings): array
     {
         $optionsResolver = new OptionsResolver();

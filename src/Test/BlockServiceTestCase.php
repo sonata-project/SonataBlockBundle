@@ -28,11 +28,6 @@ use Twig\Environment;
  * Abstract test class for block service tests.
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
- *
- * @psalm-suppress UndefinedClass
- *
- * @todo the psalm-suppress annotation was added because phpunit/phpunit is not strictly a project dependency and will
- * be required dynamically when running tests
  */
 abstract class BlockServiceTestCase extends TestCase
 {
@@ -79,7 +74,7 @@ abstract class BlockServiceTestCase extends TestCase
     /**
      * Asserts that the block settings have the expected values.
      *
-     * @param array $expected Expected settings
+     * @param array<string, mixed> $expected Expected settings
      */
     protected function assertSettings(array $expected, BlockContextInterface $blockContext): void
     {

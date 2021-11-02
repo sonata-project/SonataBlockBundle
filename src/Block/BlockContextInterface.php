@@ -19,6 +19,9 @@ interface BlockContextInterface
 {
     public function getBlock(): BlockInterface;
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getSettings(): array;
 
     /**

@@ -21,6 +21,7 @@ interface BlockServiceManagerInterface
 {
     /**
      * @param BlockServiceInterface|string $service
+     * @param string[]                     $contexts
      */
     public function add(string $name, $service, array $contexts = []): void;
 
@@ -29,8 +30,14 @@ interface BlockServiceManagerInterface
      */
     public function get(BlockInterface $block): BlockServiceInterface;
 
+    /**
+     * @return BlockServiceInterface[]
+     */
     public function getServices(): array;
 
+    /**
+     * @return BlockServiceInterface[]
+     */
     public function getServicesByContext(string $context, bool $includeContainers = true): array;
 
     public function has(string $name): bool;

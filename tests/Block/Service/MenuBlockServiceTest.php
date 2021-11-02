@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Tests\Block\Service;
 
 use Knp\Menu\Provider\MenuProviderInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Sonata\BlockBundle\Block\Service\MenuBlockService;
 use Sonata\BlockBundle\Form\Mapper\FormMapper;
 use Sonata\BlockBundle\Menu\MenuRegistryInterface;
@@ -27,12 +28,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 final class MenuBlockServiceTest extends BlockServiceTestCase
 {
     /**
-     * @var MenuProviderInterface
+     * @var MenuProviderInterface&MockObject
      */
     private $menuProvider;
 
     /**
-     * @var MenuRegistryInterface
+     * @var MenuRegistryInterface&MockObject
      */
     private $menuRegistry;
 

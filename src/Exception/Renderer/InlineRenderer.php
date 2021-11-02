@@ -49,7 +49,7 @@ final class InlineRenderer implements RendererInterface
 
         $content = $this->twig->render($this->template, $parameters);
 
-        $response = $response ?: new Response();
+        $response = $response ?? new Response();
         $response->setContent($content);
 
         return $response;

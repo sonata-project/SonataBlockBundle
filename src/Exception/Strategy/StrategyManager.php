@@ -33,22 +33,22 @@ final class StrategyManager implements StrategyManagerInterface
     private $container;
 
     /**
-     * @var array
+     * @var array<string, string>
      */
     private $filters;
 
     /**
-     * @var array
+     * @var array<string, string>
      */
     private $renderers;
 
     /**
-     * @var array
+     * @var array<string, string>
      */
     private $blockFilters;
 
     /**
-     * @var array
+     * @var array<string, string>
      */
     private $blockRenderers;
 
@@ -63,14 +63,21 @@ final class StrategyManager implements StrategyManagerInterface
     private $defaultRenderer;
 
     /**
-     * @param ContainerInterface $container      Dependency injection container
-     * @param array              $filters        Filter definitions
-     * @param array              $renderers      Renderer definitions
-     * @param array              $blockFilters   Filter names for each block
-     * @param array              $blockRenderers Renderer names for each block
+     * @psalm-suppress ContainerDependency
+     *
+     * @param ContainerInterface    $container      Dependency injection container
+     * @param array<string, string> $filters        Filter definitions
+     * @param array<string, string> $renderers      Renderer definitions
+     * @param array<string, string> $blockFilters   Filter names for each block
+     * @param array<string, string> $blockRenderers Renderer names for each block
      */
-    public function __construct(ContainerInterface $container, array $filters, array $renderers, array $blockFilters, array $blockRenderers)
-    {
+    public function __construct(
+        ContainerInterface $container,
+        array $filters,
+        array $renderers,
+        array $blockFilters,
+        array $blockRenderers
+    ) {
         $this->container = $container;
         $this->filters = $filters;
         $this->renderers = $renderers;
@@ -108,7 +115,7 @@ final class StrategyManager implements StrategyManagerInterface
 
     public function handleException(\Throwable $exception, BlockInterface $block, ?Response $response = null): Response
     {
-        $response = $response ?: new Response();
+        $response = $response ?? new Response();
         $response->setPrivate();
 
         $filter = $this->getBlockFilter($block);

@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 final class BlockServiceManager implements BlockServiceManagerInterface
 {
     /**
-     * @var array
+     * @var array<string, string|BlockServiceInterface>
      */
     private $services;
 
@@ -37,10 +37,13 @@ final class BlockServiceManager implements BlockServiceManagerInterface
     private $inValidate;
 
     /**
-     * @var array
+     * @var array<string, string[]>
      */
     private $contexts;
 
+    /**
+     * @psalm-suppress ContainerDependency
+     */
     public function __construct(ContainerInterface $container)
     {
         $this->services = [];
@@ -56,10 +59,13 @@ final class BlockServiceManager implements BlockServiceManagerInterface
 
         $this->load($block->getType());
 
-        return $this->services[$block->getType()];
+        $service = $this->services[$block->getType()];
+        \assert($service instanceof BlockServiceInterface);
+
+        return $service;
     }
 
-    public function getService($name): BlockServiceInterface
+    public function getService(string $name): BlockServiceInterface
     {
         return $this->load($name);
     }
@@ -101,7 +107,10 @@ final class BlockServiceManager implements BlockServiceManagerInterface
             }
         }
 
-        return $this->services;
+        /** @var BlockServiceInterface[] $services */
+        $services = $this->services;
+
+        return $services;
     }
 
     public function getServicesByContext(string $context, bool $includeContainers = true): array
@@ -130,7 +139,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
      */
     public function validate(ErrorElement $errorElement, BlockInterface $block): void
     {
-        if (!$block->getId() && !$block->getType()) {
+        if (null === $block->getId() && null === $block->getType()) {
             return;
         }
 

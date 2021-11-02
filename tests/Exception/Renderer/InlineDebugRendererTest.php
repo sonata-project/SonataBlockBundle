@@ -20,18 +20,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
 /**
- * Test the inline debug exception renderer.
- *
  * @author Olivier Paradis <paradis.olivier@gmail.com>
  */
 final class InlineDebugRendererTest extends TestCase
 {
-    /**
-     * test the renderer without debug mode.
-     */
     public function testRenderWithoutDebug(): void
     {
-        // GIVEN
         $template = 'test-template';
         $debug = false;
         $exception = $this->createMock(\Exception::class);
@@ -40,30 +34,20 @@ final class InlineDebugRendererTest extends TestCase
 
         $renderer = new InlineDebugRenderer($twig, $template, $debug);
 
-        // WHEN
         $response = $renderer->render($exception, $block);
 
-        // THEN
         static::assertInstanceOf(Response::class, $response, 'Should return a Response');
         static::assertEmpty($response->getContent(), 'Should have no content');
     }
 
-    /**
-     * test the render() method with debug enabled.
-     */
     public function testRenderWithDebugEnabled(): void
     {
-        // GIVEN
         $template = 'test-template';
         $debug = true;
 
-        // mock an exception to render
         $exception = $this->createMock(\Exception::class);
-
-        // mock a block instance that provoked the exception
         $block = $this->createMock(BlockInterface::class);
 
-        // mock the twig render() to return an html result
         $twig = $this->createMock(Environment::class);
         $twig->expects(static::once())
             ->method('render')
@@ -71,7 +55,7 @@ final class InlineDebugRendererTest extends TestCase
                 static::equalTo($template),
                 static::logicalAnd(
                     static::arrayHasKey('exception'),
-                    static::callback(static function ($subject) use ($block) {
+                    static::callback(static function ($subject) use ($block): bool {
                         $expected = [
                             'status_code' => 500,
                             'status_text' => 'Internal Server Error',
@@ -93,13 +77,10 @@ final class InlineDebugRendererTest extends TestCase
             )
             ->willReturn('html');
 
-        // create renderer to test
         $renderer = new InlineDebugRenderer($twig, $template, $debug);
 
-        // WHEN
         $response = $renderer->render($exception, $block);
 
-        // THEN
         static::assertInstanceOf(Response::class, $response, 'Should return a Response');
         static::assertSame('html', $response->getContent(), 'Should contain the templating html result');
     }

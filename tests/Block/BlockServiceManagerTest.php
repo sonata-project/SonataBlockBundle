@@ -35,7 +35,7 @@ final class BlockServiceManagerTest extends TestCase
         $block = $this->createMock(BlockInterface::class);
         $block->expects(static::any())->method('getType')->willReturn('test');
 
-        static::assertInstanceOf(\get_class($service), $manager->get($block));
+        static::assertSame($service, $manager->get($block));
     }
 
     public function testInvalidServiceType(): void
@@ -54,7 +54,7 @@ final class BlockServiceManagerTest extends TestCase
         $block = $this->createMock(BlockInterface::class);
         $block->expects(static::any())->method('getType')->willReturn('test');
 
-        static::assertInstanceOf(\get_class($service), $manager->get($block));
+        $manager->get($block);
     }
 
     public function testGetBlockServiceException(): void

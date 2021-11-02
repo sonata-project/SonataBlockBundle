@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Tests\App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 final class DemoController extends AbstractController
@@ -21,7 +22,7 @@ final class DemoController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index()
+    public function index(): Response
     {
         return $this->render('index.html.twig');
     }

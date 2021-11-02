@@ -25,8 +25,33 @@ use Sonata\Cache\CacheManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface as EventDispatcherComponentInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Stopwatch\Stopwatch;
+use Symfony\Component\Stopwatch\StopwatchEvent;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
+/**
+ * @phpstan-type Trace = array{
+ *     name: string,
+ *     type: string,
+ *     duration: int|false,
+ *     memory_start: int|false,
+ *     memory_end: int|false,
+ *     memory_peak: int|false,
+ *     cache: array{
+ *         keys: array,
+ *         contextual_keys: array,
+ *         handler: false,
+ *         from_cache: false,
+ *         ttl: int,
+ *         created_at: false,
+ *         lifetime: int,
+ *         age: int,
+ *     },
+ *     assets: array{
+ *         js: string[],
+ *         css: string[],
+ *     }
+ * }
+ */
 class BlockHelper
 {
     /**
@@ -40,7 +65,7 @@ class BlockHelper
     private $cacheManager;
 
     /**
-     * @var array
+     * @var array{by_class?: array<class-string, string>, by_type?: array<string, string>}
      */
     private $cacheBlocks;
 
@@ -68,20 +93,29 @@ class BlockHelper
      * This property is a state variable holdings all assets used by the block for the current PHP request
      * It is used to correctly render the javascripts and stylesheets tags on the main layout.
      *
-     * @var array
+     * @var array{css: array<string>, js: array<string>}
      */
-    private $assets;
+    private $assets = ['css' => [], 'js' => []];
 
     /**
-     * @var array
+     * @var array<string, StopwatchEvent|array<string, mixed>>
+     * @phpstan-var array<string, StopwatchEvent|Trace>
      */
-    private $traces;
+    private $traces = [];
+
+    /**
+     * @var array<string, mixed>
+     */
+    private $eventTraces = [];
 
     /**
      * @var Stopwatch|null
      */
     private $stopwatch;
 
+    /**
+     * @param array{by_class?: array<class-string, string>, by_type?: array<string, string>} $cacheBlocks
+     */
     public function __construct(
         BlockServiceManagerInterface $blockServiceManager,
         array $cacheBlocks,
@@ -100,22 +134,13 @@ class BlockHelper
         $this->blockContextManager = $blockContextManager;
         $this->cacheHandler = $cacheHandler;
         $this->stopwatch = $stopwatch;
-
-        $this->assets = [
-            'js' => [],
-            'css' => [],
-        ];
-
-        $this->traces = [
-            '_events' => [],
-        ];
     }
 
     /**
      * @param string $media    Unused, only kept to not break existing code
      * @param string $basePath Base path to prepend to the stylesheet urls
      *
-     * @return array|string
+     * @return string
      */
     public function includeJavascripts($media, $basePath = '')
     {
@@ -131,7 +156,7 @@ class BlockHelper
      * @param string $media    The css media type to use: all|screen|...
      * @param string $basePath Base path to prepend to the stylesheet urls
      *
-     * @return array|string
+     * @return string
      */
     public function includeStylesheets($media, $basePath = '')
     {
@@ -150,18 +175,14 @@ class BlockHelper
         return $html;
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function renderEvent(string $name, array $options = []): string
     {
         $eventName = sprintf('sonata.block.event.%s', $name);
 
-        /**
-         * @psalm-suppress TooManyArguments
-         *
-         * @todo remove annotation when Symfony 4.4.x support is dropped
-         */
         $event = $this->eventDispatcher->dispatch(new BlockEvent($options), $eventName);
-
-        \assert($event instanceof BlockEvent);
 
         $content = '';
 
@@ -170,7 +191,7 @@ class BlockHelper
         }
 
         if (null !== $this->stopwatch) {
-            $this->traces['_events'][uniqid('', true)] = [
+            $this->eventTraces[uniqid('', true)] = [
                 'template_code' => $name,
                 'event_name' => $eventName,
                 'blocks' => $this->getEventBlocks($event),
@@ -192,7 +213,8 @@ class BlockHelper
     }
 
     /**
-     * @param mixed $block
+     * @param string|array<string, mixed>|BlockInterface $block
+     * @param array<string, mixed>                       $options
      */
     public function render($block, array $options = []): string
     {
@@ -200,40 +222,37 @@ class BlockHelper
 
         $stats = [];
 
-        if ($this->stopwatch) {
+        if (null !== $this->stopwatch) {
             $stats = $this->startTracing($blockContext->getBlock());
         }
 
         $service = $this->blockServiceManager->get($blockContext->getBlock());
 
-        $useCache = $blockContext->getSetting('use_cache');
+        $useCache = true === $blockContext->getSetting('use_cache');
 
-        $cacheKeys = $response = false;
-        $cacheService = $useCache ? $this->getCacheService($blockContext->getBlock(), $stats) : false;
-        if ($cacheService) {
+        $cacheService = $useCache ? $this->getCacheService($blockContext->getBlock(), $stats) : null;
+        if (null !== $cacheService) {
             $cacheKeys = array_merge(
                 $service->getCacheKeys($blockContext->getBlock()),
                 $blockContext->getSetting('extra_cache_keys')
             );
 
-            if ($this->stopwatch) {
+            if (null !== $this->stopwatch) {
                 $stats['cache']['keys'] = $cacheKeys;
             }
 
             // Please note, some cache handler will always return true (js for instance)
-            // This will allows to have a non cacheable block, but the global page can still be cached by
+            // This will allow to have a non cacheable block, but the global page can still be cached by
             // a reverse proxy, as the generated page will never get the generated Response from the block.
             if ($cacheService->has($cacheKeys)) {
                 $cacheElement = $cacheService->get($cacheKeys);
 
-                if ($this->stopwatch) {
+                if (null !== $this->stopwatch) {
                     $stats['cache']['from_cache'] = false;
                 }
 
                 if (!$cacheElement->isExpired() && $cacheElement->getData() instanceof Response) {
-                    /* @var Response $response */
-
-                    if ($this->stopwatch) {
+                    if (null !== $this->stopwatch) {
                         $stats['cache']['from_cache'] = true;
                     }
 
@@ -242,9 +261,9 @@ class BlockHelper
             }
         }
 
-        if (!$response) {
+        if (!isset($response)) {
             $recorder = null;
-            if ($this->cacheManager) {
+            if (null !== $this->cacheManager) {
                 $recorder = $this->cacheManager->getRecorder();
 
                 $recorder->add($blockContext->getBlock());
@@ -252,30 +271,31 @@ class BlockHelper
             }
 
             $response = $this->blockRenderer->render($blockContext);
-            $contextualKeys = $recorder ? $recorder->pop() : [];
+            $contextualKeys = null !== $recorder ? $recorder->pop() : [];
 
-            if ($this->stopwatch) {
+            if (null !== $this->stopwatch) {
                 $stats['cache']['contextual_keys'] = $contextualKeys;
             }
 
-            if ($response->isCacheable() && $cacheKeys && $cacheService) {
+            if ($response->isCacheable() && isset($cacheKeys) && null !== $cacheService) {
                 $cacheService->set($cacheKeys, $response, (int) $response->getTtl(), $contextualKeys);
             }
         }
 
-        if ($this->stopwatch) {
+        if (null !== $this->stopwatch) {
             // avoid \DateTime because of serialize/unserialize issue in PHP7.3 (https://bugs.php.net/bug.php?id=77302)
             $stats['cache']['created_at'] = null === $response->getDate() ? null : $response->getDate()->getTimestamp();
-            $stats['cache']['ttl'] = $response->getTtl() ?: 0;
+            $stats['cache']['ttl'] = $response->getTtl() ?? 0;
             $stats['cache']['age'] = $response->getAge();
+            $stats['cache']['lifetime'] = $stats['cache']['age'] + $stats['cache']['ttl'];
         }
 
         // update final ttl for the whole Response
-        if ($this->cacheHandler) {
+        if (null !== $this->cacheHandler) {
             $this->cacheHandler->updateMetadata($response, $blockContext);
         }
 
-        if ($this->stopwatch) {
+        if (null !== $this->stopwatch) {
             $this->stopTracing($blockContext->getBlock(), $stats);
         }
 
@@ -284,12 +304,19 @@ class BlockHelper
 
     /**
      * Returns the rendering traces.
+     *
+     * @return array<string, mixed>
      */
     public function getTraces(): array
     {
-        return $this->traces;
+        return ['_events' => $this->eventTraces] + $this->traces;
     }
 
+    /**
+     * @param array<string, mixed> $stats
+     *
+     * @phpstan-param Trace $stats
+     */
     private function stopTracing(BlockInterface $block, array $stats): void
     {
         $e = $this->traces[$block->getId()]->stop();
@@ -299,10 +326,11 @@ class BlockHelper
             'memory_end' => memory_get_usage(true),
             'memory_peak' => memory_get_peak_usage(true),
         ]);
-
-        $this->traces[$block->getId()]['cache']['lifetime'] = $this->traces[$block->getId()]['cache']['age'] + $this->traces[$block->getId()]['cache']['ttl'];
     }
 
+    /**
+     * @return array<array{mixed, string}>
+     */
     private function getEventBlocks(BlockEvent $event): array
     {
         $results = [];
@@ -314,6 +342,9 @@ class BlockHelper
         return $results;
     }
 
+    /**
+     * @return string[]
+     */
     private function getEventListeners(string $eventName): array
     {
         $results = [];
@@ -337,9 +368,14 @@ class BlockHelper
         return $results;
     }
 
+    /**
+     * @param array<string, mixed>|null $stats
+     *
+     * @phpstan-param Trace|null $stats
+     */
     private function getCacheService(BlockInterface $block, ?array &$stats = null): ?CacheAdapterInterface
     {
-        if (!$this->cacheManager) {
+        if (null === $this->cacheManager) {
             return null;
         }
 
@@ -356,13 +392,18 @@ class BlockHelper
             return null;
         }
 
-        if ($this->stopwatch) {
+        if (null !== $this->stopwatch) {
             $stats['cache']['handler'] = $cacheServiceId;
         }
 
-        return $this->cacheManager->getCacheService((string) $cacheServiceId);
+        return $this->cacheManager->getCacheService($cacheServiceId);
     }
 
+    /**
+     * @return array<string, mixed>
+     *
+     * @phpstan-return Trace
+     */
     private function startTracing(BlockInterface $block): array
     {
         if (null !== $this->stopwatch) {
