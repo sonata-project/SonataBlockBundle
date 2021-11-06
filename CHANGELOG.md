@@ -116,6 +116,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - internal test classes are now excluded from the autoloader
 - Removed `AbstractBlockServiceTest::$container`
 
+## [3.23.3](https://github.com/sonata-project/SonataBlockBundle/compare/3.23.2...3.23.3) - 2021-11-04
+### Fixed
+- [[#973](https://github.com/sonata-project/SonataBlockBundle/pull/973)] Fix phpdoc for `BlockServiceTestCase` ([@core23](https://github.com/core23))
+
 ## [3.23.2](https://github.com/sonata-project/SonataBlockBundle/compare/3.23.1...3.23.2) - 2021-07-20
 ### Fixed
 - [[#891](https://github.com/sonata-project/SonataBlockBundle/pull/891)] Fix inconsistencies in parameter names between interfaces and their implementations ([@greg0ire](https://github.com/greg0ire))
