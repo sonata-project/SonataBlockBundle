@@ -37,8 +37,8 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  *     memory_end: int|false,
  *     memory_peak: int|false,
  *     cache: array{
- *         keys: array,
- *         contextual_keys: array,
+ *         keys: mixed[],
+ *         contextual_keys: mixed[],
  *         handler: false,
  *         from_cache: false,
  *         ttl: int,

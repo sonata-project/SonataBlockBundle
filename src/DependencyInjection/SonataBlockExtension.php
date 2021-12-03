@@ -124,7 +124,7 @@ final class SonataBlockExtension extends Extension
     {
         $container->setAlias('sonata.block.cache.handler', $config['http_cache']['handler']);
 
-        if ($config['http_cache']['listener']) {
+        if (null !== $config['http_cache']['listener']) {
             $container->getDefinition($config['http_cache']['handler'])
                 ->addTag('kernel.event_listener', ['event' => 'kernel.response', 'method' => 'onKernelResponse']);
         }
@@ -192,7 +192,7 @@ final class SonataBlockExtension extends Extension
     {
         $container->setAlias('sonata.block.renderer', 'sonata.block.renderer.default');
 
-        if (!$config['profiler']['enabled']) {
+        if (false === $config['profiler']['enabled']) {
             return;
         }
 
