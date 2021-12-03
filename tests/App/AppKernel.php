@@ -21,7 +21,6 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-use Symfony\Component\Routing\RouteCollectionBuilder;
 
 final class AppKernel extends Kernel
 {
@@ -57,9 +56,9 @@ final class AppKernel extends Kernel
     }
 
     /**
-     * TODO: Drop RouteCollectionBuilder when support for Symfony < 5.1 is dropped.
+     * TODO: Add typehint when support for Symfony < 5.1 is dropped.
      *
-     * @param RoutingConfigurator|RouteCollectionBuilder $routes
+     * @param RoutingConfigurator $routes
      */
     protected function configureRoutes($routes): void
     {
