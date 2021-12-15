@@ -147,13 +147,19 @@ final class BlockContextManager implements BlockContextManagerInterface
             // NEXT_MAJOR: Remove bool.
             ->addAllowedTypes('template', ['null', 'string', 'bool'])
             // NEXT_MAJOR: Remove setDeprecated.
-            ->setDeprecated('template', 'sonata-project/block-bundle', '4.5.0', static function (Options $options, $value): string {
-                if (\is_bool($value)) {
-                    return 'Passing a boolean to option "template" is deprecated and will not be allowed in 5.0, pass a string or null instead.';
-                }
+            ->setDeprecated(
+                'template',
+                ...$this->deprecationParameters(
+                    '4.5.0',
+                    static function (Options $options, $value): string {
+                        if (\is_bool($value)) {
+                            return 'Passing a boolean to option "template" is deprecated and will not be allowed in 5.0, pass a string or null instead.';
+                        }
 
-                return '';
-            });
+                        return '';
+                    }
+                )
+            );
 
         // add type and class settings for block
         $class = ClassUtils::getClass($block);
@@ -217,5 +223,27 @@ final class BlockContextManager implements BlockContextManagerInterface
         $service->configureSettings($optionsResolver);
 
         return $optionsResolver->resolve($settings);
+    }
+
+    /**
+     * This class is a BC layer for deprecation messages for symfony/options-resolver < 5.1.
+     * Remove this class when dropping support for symfony/options-resolver < 5.1.
+     *
+     * @param string|\Closure $message
+     *
+     * @return mixed[]
+     */
+    private function deprecationParameters(string $version, $message): array
+    {
+        // @phpstan-ignore-next-line
+        if (method_exists(OptionsResolver::class, 'define')) {
+            return [
+                'sonata-project/block-bundle',
+                $version,
+                $message,
+            ];
+        }
+
+        return [$message];
     }
 }
