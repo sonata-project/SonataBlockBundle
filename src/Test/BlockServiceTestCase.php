@@ -78,13 +78,13 @@ abstract class BlockServiceTestCase extends TestCase
      */
     protected function assertSettings(array $expected, BlockContextInterface $blockContext): void
     {
-        $completeExpectedOptions = array_merge([
+        $completeExpectedOptions = $expected + [
             'use_cache' => true,
             'extra_cache_keys' => [],
             'attr' => [],
             'template' => null,
             'ttl' => 0,
-        ], $expected);
+        ];
 
         ksort($completeExpectedOptions);
         $blockSettings = $blockContext->getSettings();
