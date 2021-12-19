@@ -69,6 +69,11 @@ final class SonataBlockExtension extends Extension
         $loader->load('exception.xml');
         $loader->load('commands.xml');
 
+        // NEXT_MAJOR: Remove this check and the legacy_core.xml file.
+        if (class_exists(\Sonata\Cache\CacheManagerInterface::class)) {
+            $loader->load('legacy_core.xml');
+        }
+
         $this->configureBlockContainers($container, $config);
         $this->configureContext($container, $config);
         $this->configureLoaderChain($container, $config);

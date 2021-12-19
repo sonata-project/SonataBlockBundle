@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Templating\Helper;
 
 use Doctrine\Common\Util\ClassUtils;
+use Psr\Cache\CacheItemPoolInterface;
 use Sonata\BlockBundle\Block\BlockContextManagerInterface;
 use Sonata\BlockBundle\Block\BlockRendererInterface;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
@@ -60,9 +61,11 @@ class BlockHelper
     private $blockServiceManager;
 
     /**
-     * @var CacheManagerInterface|null
+     * NEXT_MAJOR: Restrict to CacheItemPoolInterface|null.
+     *
+     * @var CacheManagerInterface|CacheItemPoolInterface|null
      */
-    private $cacheManager;
+    private $cacheItemPool;
 
     /**
      * @var array{by_class?: array<class-string, string>, by_type?: array<string, string>}
@@ -114,7 +117,10 @@ class BlockHelper
     private $stopwatch;
 
     /**
+     * NEXT_MAJOR: Restrict $cacheItemPool to CacheItemPoolInterface|null and remove sonata/cache dependency.
+     *
      * @param array{by_class?: array<class-string, string>, by_type?: array<string, string>} $cacheBlocks
+     * @param CacheManagerInterface|CacheItemPoolInterface|null                              $cacheItemPool
      */
     public function __construct(
         BlockServiceManagerInterface $blockServiceManager,
@@ -122,7 +128,7 @@ class BlockHelper
         BlockRendererInterface $blockRenderer,
         BlockContextManagerInterface $blockContextManager,
         EventDispatcherInterface $eventDispatcher,
-        ?CacheManagerInterface $cacheManager = null,
+        $cacheItemPool = null,
         ?HttpCacheHandlerInterface $cacheHandler = null,
         ?Stopwatch $stopwatch = null
     ) {
@@ -130,7 +136,7 @@ class BlockHelper
         $this->cacheBlocks = $cacheBlocks;
         $this->blockRenderer = $blockRenderer;
         $this->eventDispatcher = $eventDispatcher;
-        $this->cacheManager = $cacheManager;
+        $this->cacheItemPool = $cacheItemPool;
         $this->blockContextManager = $blockContextManager;
         $this->cacheHandler = $cacheHandler;
         $this->stopwatch = $stopwatch;
@@ -228,57 +234,93 @@ class BlockHelper
 
         $service = $this->blockServiceManager->get($blockContext->getBlock());
 
-        $useCache = true === $blockContext->getSetting('use_cache');
+        $useCache = true === $blockContext->getSetting('use_cache')
+            && null !== $this->cacheItemPool;
 
-        $cacheService = $useCache ? $this->getCacheService($blockContext->getBlock(), $stats) : null;
-        if (null !== $cacheService) {
-            $cacheKeys = array_merge(
-                $service->getCacheKeys($blockContext->getBlock()),
-                $blockContext->getSetting('extra_cache_keys')
-            );
-
-            if (null !== $this->stopwatch) {
-                $stats['cache']['keys'] = $cacheKeys;
-            }
-
-            // Please note, some cache handler will always return true (js for instance)
-            // This will allow to have a non cacheable block, but the global page can still be cached by
-            // a reverse proxy, as the generated page will never get the generated Response from the block.
-            if ($cacheService->has($cacheKeys)) {
-                $cacheElement = $cacheService->get($cacheKeys);
-
+        if ($useCache) {
+            // NEXT_MAJOR: Keep only the if part.
+            if ($this->cacheItemPool instanceof CacheItemPoolInterface) {
+                $cacheKeys = $service->getCacheKeys($blockContext->getBlock());
                 if (null !== $this->stopwatch) {
-                    $stats['cache']['from_cache'] = false;
+                    $stats['cache']['keys'] = $cacheKeys;
                 }
 
-                if (!$cacheElement->isExpired() && $cacheElement->getData() instanceof Response) {
+                $cacheKey = $this->computeCacheKey($cacheKeys);
+                if ($this->cacheItemPool->hasItem($cacheKey)) {
+                    $cacheElement = $this->cacheItemPool->getItem($cacheKey);
+
                     if (null !== $this->stopwatch) {
-                        $stats['cache']['from_cache'] = true;
+                        $stats['cache']['from_cache'] = false;
                     }
 
-                    $response = $cacheElement->getData();
+                    if ($cacheElement->isHit() && $cacheElement->get() instanceof Response) {
+                        if (null !== $this->stopwatch) {
+                            $stats['cache']['from_cache'] = true;
+                        }
+
+                        $response = $cacheElement->get();
+                    }
+                }
+            } else {
+                $cacheKeys = array_merge(
+                    $service->getCacheKeys($blockContext->getBlock()),
+                    $blockContext->getSetting('extra_cache_keys')
+                );
+                if (null !== $this->stopwatch) {
+                    $stats['cache']['keys'] = $cacheKeys;
+                }
+
+                $cacheService = $this->getCacheService($blockContext->getBlock(), $stats);
+
+                // Please note, some cache handler will always return true (js for instance)
+                // This will allow to have a non cacheable block, but the global page can still be cached by
+                // a reverse proxy, as the generated page will never get the generated Response from the block.
+                if (null !== $cacheService && $cacheService->has($cacheKeys)) {
+                    $cacheElement = $cacheService->get($cacheKeys);
+
+                    if (null !== $this->stopwatch) {
+                        $stats['cache']['from_cache'] = false;
+                    }
+
+                    if (!$cacheElement->isExpired() && $cacheElement->getData() instanceof Response) {
+                        if (null !== $this->stopwatch) {
+                            $stats['cache']['from_cache'] = true;
+                        }
+
+                        $response = $cacheElement->getData();
+                    }
                 }
             }
         }
 
         if (!isset($response)) {
-            $recorder = null;
-            if (null !== $this->cacheManager) {
-                $recorder = $this->cacheManager->getRecorder();
-
-                $recorder->add($blockContext->getBlock());
-                $recorder->push();
-            }
-
             $response = $this->blockRenderer->render($blockContext);
-            $contextualKeys = null !== $recorder ? $recorder->pop() : [];
 
-            if (null !== $this->stopwatch) {
-                $stats['cache']['contextual_keys'] = $contextualKeys;
-            }
+            if ($response->isCacheable() && $useCache) {
+                // NEXT_MAJOR: Keep only the if part.
+                if ($this->cacheItemPool instanceof CacheItemPoolInterface) {
+                    $item = $this->cacheItemPool->getItem(
+                        $this->computeCacheKey($service->getCacheKeys($blockContext->getBlock()))
+                    );
+                    $item->set($response);
+                    $item->expiresAfter((int) $response->getTtl());
+                    $this->cacheItemPool->save($item);
+                } elseif (isset($cacheService)) {
+                    $recorder = null;
+                    if ($this->cacheItemPool instanceof CacheManagerInterface) {
+                        $recorder = $this->cacheItemPool->getRecorder();
 
-            if ($response->isCacheable() && isset($cacheKeys) && null !== $cacheService) {
-                $cacheService->set($cacheKeys, $response, (int) $response->getTtl(), $contextualKeys);
+                        $recorder->add($blockContext->getBlock());
+                        $recorder->push();
+                    }
+
+                    $contextualKeys = null !== $recorder ? $recorder->pop() : [];
+                    if (null !== $this->stopwatch) {
+                        $stats['cache']['contextual_keys'] = $contextualKeys;
+                    }
+
+                    $cacheService->set($cacheKeys, $response, (int) $response->getTtl(), $contextualKeys);
+                }
             }
         }
 
@@ -375,7 +417,7 @@ class BlockHelper
      */
     private function getCacheService(BlockInterface $block, ?array &$stats = null): ?CacheAdapterInterface
     {
-        if (null === $this->cacheManager) {
+        if (!$this->cacheItemPool instanceof CacheManagerInterface) {
             return null;
         }
 
@@ -396,7 +438,7 @@ class BlockHelper
             $stats['cache']['handler'] = $cacheServiceId;
         }
 
-        return $this->cacheManager->getCacheService($cacheServiceId);
+        return $this->cacheItemPool->getCacheService($cacheServiceId);
     }
 
     /**
@@ -434,5 +476,15 @@ class BlockHelper
                 'css' => [],
             ],
         ];
+    }
+
+    /**
+     * @param array<string, mixed> $keys
+     */
+    private function computeCacheKey(array $keys): string
+    {
+        ksort($keys);
+
+        return md5(serialize($keys));
     }
 }

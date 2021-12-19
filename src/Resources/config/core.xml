@@ -31,7 +31,7 @@
             <argument type="service" id="sonata.block.renderer"/>
             <argument type="service" id="sonata.block.context_manager"/>
             <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="sonata.cache.manager" on-invalid="ignore"/>
+            <argument type="service" id="TODO" on-invalid="ignore"/>
             <argument type="service" id="sonata.block.cache.handler.default" on-invalid="ignore"/>
             <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
         </service>
