@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.9.1](https://github.com/sonata-project/SonataBlockBundle/compare/4.9.0...4.9.1) - 2022-01-01
+### Fixed
+- [[#997](https://github.com/sonata-project/SonataBlockBundle/pull/997)] Wrong deprecation message in BlockContextManager with Symfony 4 ([@VincentLanglet](https://github.com/VincentLanglet))
+
 ## [4.9.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.8.0...4.9.0) - 2021-12-04
 ### Added
 - [[#990](https://github.com/sonata-project/SonataBlockBundle/pull/990)] Added support for `symfony/event-dispatcher-contracts` ^3.0. ([@jordisala1991](https://github.com/jordisala1991))
