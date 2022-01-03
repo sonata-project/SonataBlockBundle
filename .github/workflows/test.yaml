@@ -78,7 +78,7 @@ jobs:
                   branch: master
 
             - name: Install Composer dependencies (${{ matrix.dependencies }})
-              uses: ramsey/composer-install@v1
+              uses: ramsey/composer-install@v2
               with:
                   dependency-versions: ${{ matrix.dependencies }}
                   composer-options: --prefer-dist --prefer-stable
