@@ -21,7 +21,10 @@ final class SonataBlockExtensionTest extends AbstractExtensionTestCase
     public function testLoadDefault(): void
     {
         $this->setParameter('kernel.bundles', []);
-        $this->load();
+        $this->load([
+            // NEXT_MAJOR: remove argument for load method
+            'http_cache' => false,
+        ]);
 
         $this->assertContainerBuilderHasService('sonata.block.service.container');
         $this->assertContainerBuilderHasService('sonata.block.service.empty');
@@ -35,7 +38,10 @@ final class SonataBlockExtensionTest extends AbstractExtensionTestCase
     public function testLoadWithKnpMenuBundle(): void
     {
         $this->setParameter('kernel.bundles', ['KnpMenuBundle' => true]);
-        $this->load();
+        $this->load([
+            // NEXT_MAJOR: remove argument for load method
+            'http_cache' => false,
+        ]);
 
         $this->assertContainerBuilderHasService('sonata.block.service.menu');
     }

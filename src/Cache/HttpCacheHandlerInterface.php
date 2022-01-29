@@ -17,6 +17,9 @@ use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
+/**
+ * @deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.
+ */
 interface HttpCacheHandlerInterface
 {
     /**

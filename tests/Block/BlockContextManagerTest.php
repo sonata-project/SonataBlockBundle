@@ -56,6 +56,11 @@ final class BlockContextManagerTest extends TestCase
         ], $blockContext->getSettings());
     }
 
+    /**
+     * NEXT_MAJOR: remove legacy group.
+     *
+     * @group legacy
+     */
     public function testGetWithSettings(): void
     {
         $service = $this->createMock(AbstractBlockService::class);
@@ -75,6 +80,7 @@ final class BlockContextManagerTest extends TestCase
 
         $manager = new BlockContextManager($blockLoader, $serviceManager, $blocksCache);
 
+        // NEXT_MAJOR: remove ttl
         $settings = ['ttl' => 1, 'template' => 'custom.html.twig'];
 
         $blockContext = $manager->get($block, $settings);
@@ -90,6 +96,7 @@ final class BlockContextManagerTest extends TestCase
             ],
             'attr' => [],
             'template' => 'custom.html.twig',
+            // NEXT_MAJOR: remove ttl
             'ttl' => 1,
         ], $blockContext->getSettings());
     }
