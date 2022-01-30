@@ -41,7 +41,9 @@ final class BlockContextManagerTest extends TestCase
 
         $manager = new BlockContextManager($blockLoader, $serviceManager);
 
-        $blockContext = $manager->get($block);
+        $settings = ['template' => 'custom.html.twig'];
+
+        $blockContext = $manager->get($block, $settings);
 
         static::assertInstanceOf(BlockContextInterface::class, $blockContext);
 
@@ -49,7 +51,7 @@ final class BlockContextManagerTest extends TestCase
             'use_cache' => true,
             'extra_cache_keys' => [],
             'attr' => [],
-            'template' => null,
+            'template' => 'custom.html.twig',
             'ttl' => 0,
         ], $blockContext->getSettings());
     }
@@ -107,8 +109,10 @@ final class BlockContextManagerTest extends TestCase
 
         $block = $this->createMock(BlockInterface::class);
         $block->expects(static::once())->method('getSettings')->willReturn([
-            'template' => [],
+            'template' => 'custom.html.twig',
+            'attr' => 'shouldBeAnArray',
         ]);
+        $block->expects(static::once())->method('getSetting')->with('template')->willReturn('custom.html.twig');
 
         $manager = new BlockContextManager($blockLoader, $serviceManager, [], $logger);
 

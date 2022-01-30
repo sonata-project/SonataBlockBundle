@@ -75,7 +75,9 @@ final class BlockRendererTest extends TestCase
 
         // mock a block object
         $block = $this->createMock(BlockInterface::class);
-        $blockContext = new BlockContext($block);
+        $blockContext = new BlockContext($block, [
+            'template' => 'fake_template',
+        ]);
 
         $result = $this->renderer->render($blockContext);
 
@@ -112,7 +114,9 @@ final class BlockRendererTest extends TestCase
 
         // mock a block object
         $block = $this->createMock(BlockInterface::class);
-        $blockContext = new BlockContext($block);
+        $blockContext = new BlockContext($block, [
+            'template' => 'fake_template',
+        ]);
 
         $result = $this->renderer->render($blockContext);
 
