@@ -36,7 +36,7 @@ final class GlobalVariables
     /**
      * @return string[]
      */
-    public function getTemplates()
+    public function getTemplates(): array
     {
         return $this->templates;
     }
