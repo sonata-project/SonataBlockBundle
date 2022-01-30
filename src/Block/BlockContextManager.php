@@ -118,7 +118,7 @@ final class BlockContextManager implements BlockContextManagerInterface
                 $e->getMessage()
             ));
 
-            $settings = $this->resolve($block, $settings);
+            $settings = $this->resolve($block, $settings + ['template' => $block->getSetting('template')]);
         }
 
         $blockContext = new BlockContext($block, $settings);
@@ -135,7 +135,7 @@ final class BlockContextManager implements BlockContextManagerInterface
             'use_cache' => true,
             'extra_cache_keys' => [],
             'attr' => [],
-            'template' => null,
+            'template' => null, // NEXT_MAJOR: Remove the default value
             'ttl' => $block->getTtl(),
         ]);
 
@@ -144,7 +144,7 @@ final class BlockContextManager implements BlockContextManagerInterface
             ->addAllowedTypes('extra_cache_keys', 'array')
             ->addAllowedTypes('attr', 'array')
             ->addAllowedTypes('ttl', 'int')
-            // NEXT_MAJOR: Remove bool.
+            // NEXT_MAJOR: Remove bool and null.
             ->addAllowedTypes('template', ['null', 'string', 'bool'])
             // NEXT_MAJOR: Remove setDeprecated.
             ->setDeprecated(
@@ -153,7 +153,7 @@ final class BlockContextManager implements BlockContextManagerInterface
                     '4.5.0',
                     static function (Options $options, $value): string {
                         if (\is_bool($value)) {
-                            return 'Passing a boolean to option "template" is deprecated and will not be allowed in 5.0, pass a string or null instead.';
+                            return 'Not passing a string value to option "template" is deprecated and will not be allowed in 5.0.';
                         }
 
                         return '';
