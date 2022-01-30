@@ -75,6 +75,7 @@ abstract class BaseBlock implements BlockInterface
         $this->children = [];
     }
 
+    #[\ReturnTypeWillChange]
     public function __toString()
     {
         return sprintf('%s ~ #%s', $this->getName(), $this->getId());
