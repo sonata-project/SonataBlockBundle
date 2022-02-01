@@ -25,10 +25,15 @@ final class BlockExecutionContextTest extends TestCase
 
         $blockContext = new BlockContext($block, [
             'hello' => 'world',
+            'template' => 'fake_template',
         ]);
 
         static::assertSame('world', $blockContext->getSetting('hello'));
-        static::assertSame(['hello' => 'world'], $blockContext->getSettings());
+        static::assertSame('fake_template', $blockContext->getTemplate());
+        static::assertSame([
+            'hello' => 'world',
+            'template' => 'fake_template',
+        ], $blockContext->getSettings());
 
         static::assertSame($block, $blockContext->getBlock());
     }
@@ -39,7 +44,9 @@ final class BlockExecutionContextTest extends TestCase
 
         $block = $this->createMock(BlockInterface::class);
 
-        $blockContext = new BlockContext($block);
+        $blockContext = new BlockContext($block, [
+            'template' => 'fake_template',
+        ]);
 
         $blockContext->getSetting('fake');
     }

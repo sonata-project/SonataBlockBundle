@@ -52,7 +52,7 @@ final class BlockEvent extends Event
     /**
      * @return BlockInterface[]
      */
-    public function getBlocks()
+    public function getBlocks(): array
     {
         return $this->blocks;
     }

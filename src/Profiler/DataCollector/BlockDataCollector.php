@@ -79,10 +79,8 @@ final class BlockDataCollector extends DataCollector
 
     /**
      * Returns the number of block used.
-     *
-     * @return int
      */
-    public function getTotalBlock()
+    public function getTotalBlock(): int
     {
         return \count($this->data['realBlocks']) + \count($this->data['containers']);
     }
@@ -92,7 +90,7 @@ final class BlockDataCollector extends DataCollector
      *
      * @return array<string, mixed>
      */
-    public function getEvents()
+    public function getEvents(): array
     {
         return $this->data['events'];
     }
@@ -102,7 +100,7 @@ final class BlockDataCollector extends DataCollector
      *
      * @return array<string, mixed>
      */
-    public function getBlocks()
+    public function getBlocks(): array
     {
         return $this->data['blocks'];
     }
@@ -112,7 +110,7 @@ final class BlockDataCollector extends DataCollector
      *
      * @return array<string, mixed>
      */
-    public function getContainers()
+    public function getContainers(): array
     {
         return $this->data['containers'];
     }
@@ -122,7 +120,7 @@ final class BlockDataCollector extends DataCollector
      *
      * @return array<string, mixed>
      */
-    public function getRealBlocks()
+    public function getRealBlocks(): array
     {
         return $this->data['realBlocks'];
     }
