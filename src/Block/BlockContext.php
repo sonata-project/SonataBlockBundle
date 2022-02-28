@@ -34,7 +34,7 @@ final class BlockContext implements BlockContextInterface
     {
         if (!\array_key_exists('template', $settings)) {
             @trigger_error(
-                'Not providing a "template" setting is deprecated since sonata-project/block-bundle 4.x'
+                'Not providing a "template" setting is deprecated since sonata-project/block-bundle 4.10'
                 .' and will be throw an exception in version 5.0.',
                 \E_USER_DEPRECATED
             );
@@ -44,7 +44,7 @@ final class BlockContext implements BlockContextInterface
         } elseif (!\is_string($settings['template'])) {
             @trigger_error(
                 'Not providing a string value for the "template" setting is deprecated since'
-                .' sonata-project/block-bundle 4.x and will be throw an exception in version 5.0.',
+                .' sonata-project/block-bundle 4.10 and will be throw an exception in version 5.0.',
                 \E_USER_DEPRECATED
             );
 
