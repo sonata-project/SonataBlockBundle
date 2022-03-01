@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.10.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.9.1...4.10.0) - 2022-02-28
+### Deprecated
+- [[#1012](https://github.com/sonata-project/SonataBlockBundle/pull/1012)] Not passing a string value for the template setting of a BlockContext ([@VincentLanglet](https://github.com/VincentLanglet))
+
 ## [4.9.1](https://github.com/sonata-project/SonataBlockBundle/compare/4.9.0...4.9.1) - 2022-01-01
 ### Fixed
 - [[#997](https://github.com/sonata-project/SonataBlockBundle/pull/997)] Wrong deprecation message in BlockContextManager with Symfony 4 ([@VincentLanglet](https://github.com/VincentLanglet))
