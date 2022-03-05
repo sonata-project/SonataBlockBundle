@@ -67,16 +67,16 @@ final class ServiceListType extends AbstractType
             },
             'preferred_choices' => [],
             'empty_data' => static function (Options $options) {
-                $multiple = isset($options['multiple']) && $options['multiple'];
-                $expanded = isset($options['expanded']) && $options['expanded'];
+                $multiple = $options['multiple'] ?? false;
+                $expanded = $options['expanded'] ?? false;
 
-                return $multiple || $expanded ? [] : '';
+                return true === $multiple || true === $expanded ? [] : '';
             },
             'empty_value' => static function (Options $options, $previousValue): ?string {
-                $multiple = isset($options['multiple']) && $options['multiple'];
-                $expanded = isset($options['expanded']) && $options['expanded'];
+                $multiple = $options['multiple'] ?? false;
+                $expanded = $options['expanded'] ?? false;
 
-                return $multiple || $expanded || !isset($previousValue) ? null : '';
+                return true === $multiple || true === $expanded || !isset($previousValue) ? null : '';
             },
             'error_bubbling' => false,
             'include_containers' => false,
