@@ -33,6 +33,7 @@ final class SonataBlockExtension extends Extension
      */
     public function getConfiguration(array $config, ContainerBuilder $container): ?ConfigurationInterface
     {
+        /** @var array<string, mixed> $bundles */
         $bundles = $container->getParameter('kernel.bundles');
 
         $defaultTemplates = [];
@@ -51,6 +52,7 @@ final class SonataBlockExtension extends Extension
 
     public function load(array $configs, ContainerBuilder $container): void
     {
+        /** @var array<string, mixed> $bundles */
         $bundles = $container->getParameter('kernel.bundles');
 
         $processor = new Processor();
