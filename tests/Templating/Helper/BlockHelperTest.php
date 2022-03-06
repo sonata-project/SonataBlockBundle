@@ -34,11 +34,12 @@ final class BlockHelperTest extends TestCase
         $blockRenderer = $this->createMock(BlockRendererInterface::class);
         $blockContextManager = $this->createMock(BlockContextManagerInterface::class);
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $eventDispatcher->expects(static::once())->method('dispatch')->willReturnCallback(static function ($event): BlockEvent {
+        $eventDispatcher->expects(static::once())->method('dispatch')->willReturnCallback(static function (BlockEvent $event): BlockEvent {
             return $event;
         });
 
-        $helper = new BlockHelper($blockServiceManager, [], $blockRenderer, $blockContextManager, $eventDispatcher);
+        $cacheBlocks = ['by_class' => [], 'by_type' => []];
+        $helper = new BlockHelper($blockServiceManager, $cacheBlocks, $blockRenderer, $blockContextManager, $eventDispatcher);
 
         static::assertSame('', $helper->renderEvent('my.event'));
     }
@@ -77,7 +78,8 @@ final class BlockHelperTest extends TestCase
             return $event;
         });
 
-        $helper = new BlockHelper($blockServiceManager, [], $blockRenderer, $blockContextManager, $eventDispatcher);
+        $cacheBlocks = ['by_class' => [], 'by_type' => []];
+        $helper = new BlockHelper($blockServiceManager, $cacheBlocks, $blockRenderer, $blockContextManager, $eventDispatcher);
 
         static::assertSame('<span>test</span>', $helper->renderEvent('my.event'));
     }

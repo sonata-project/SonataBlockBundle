@@ -68,7 +68,10 @@ final class ContainerBlockService extends AbstractBlockService implements Editab
 
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
-        return $this->renderResponse($blockContext->getTemplate(), [
+        $template = $blockContext->getTemplate();
+        \assert(null !== $template);
+
+        return $this->renderResponse($template, [
             'block' => $blockContext->getBlock(),
             'decorator' => $this->getDecorator($blockContext->getSetting('layout')),
             'settings' => $blockContext->getSettings(),

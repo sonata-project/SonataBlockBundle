@@ -32,7 +32,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  * @phpstan-type Trace = array{
  *     name: string,
  *     type: string,
- *     duration: int|false,
+ *     duration: int|float|false,
  *     memory_start: int|false,
  *     memory_end: int|false,
  *     memory_peak: int|false,
@@ -65,7 +65,7 @@ class BlockHelper
     private $cacheManager;
 
     /**
-     * @var array{by_class?: array<class-string, string>, by_type?: array<string, string>}
+     * @var array{by_class: array<class-string, string>, by_type: array<string, string>}
      */
     private $cacheBlocks;
 
@@ -98,8 +98,8 @@ class BlockHelper
     private $assets = ['css' => [], 'js' => []];
 
     /**
-     * @var array<string, StopwatchEvent|array<string, mixed>>
-     * @phpstan-var array<string, StopwatchEvent|Trace>
+     * @var array<StopwatchEvent|array<string, mixed>>
+     * @phpstan-var array<StopwatchEvent|Trace>
      */
     private $traces = [];
 
@@ -114,7 +114,7 @@ class BlockHelper
     private $stopwatch;
 
     /**
-     * @param array{by_class?: array<class-string, string>, by_type?: array<string, string>} $cacheBlocks
+     * @param array{by_class: array<class-string, string>, by_type: array<string, string>} $cacheBlocks
      */
     public function __construct(
         BlockServiceManagerInterface $blockServiceManager,
@@ -284,7 +284,8 @@ class BlockHelper
 
         if (null !== $this->stopwatch) {
             // avoid \DateTime because of serialize/unserialize issue in PHP7.3 (https://bugs.php.net/bug.php?id=77302)
-            $stats['cache']['created_at'] = null === $response->getDate() ? null : $response->getDate()->getTimestamp();
+            $responseDate = $response->getDate();
+            $stats['cache']['created_at'] = null === $responseDate ? null : $responseDate->getTimestamp();
             $stats['cache']['ttl'] = $response->getTtl() ?? 0;
             $stats['cache']['age'] = $response->getAge();
             $stats['cache']['lifetime'] = $stats['cache']['age'] + $stats['cache']['ttl'];
@@ -319,24 +320,31 @@ class BlockHelper
      */
     private function stopTracing(BlockInterface $block, array $stats): void
     {
-        $e = $this->traces[$block->getId()]->stop();
+        $event = $this->traces[$block->getId() ?? ''];
+        if (!$event instanceof StopwatchEvent) {
+            throw new \InvalidArgumentException(
+                sprintf('The block %s has no stopwatch event to stop.', $block->getId() ?? '')
+            );
+        }
 
-        $this->traces[$block->getId()] = array_merge($stats, [
-            'duration' => $e->getDuration(),
+        $event->stop();
+
+        $this->traces[$block->getId() ?? ''] = [
+            'duration' => $event->getDuration(),
             'memory_end' => memory_get_usage(true),
             'memory_peak' => memory_get_peak_usage(true),
-        ]);
+        ] + $stats;
     }
 
     /**
-     * @return array<array{mixed, string}>
+     * @return array<array{string|int, string}>
      */
     private function getEventBlocks(BlockEvent $event): array
     {
         $results = [];
 
         foreach ($event->getBlocks() as $block) {
-            $results[] = [$block->getId(), $block->getType()];
+            $results[] = [$block->getId() ?? '', $block->getType() ?? ''];
         }
 
         return $results;
@@ -356,9 +364,9 @@ class BlockHelper
         foreach ($this->eventDispatcher->getListeners($eventName) as $listener) {
             if ($listener instanceof \Closure) {
                 $results[] = '{closure}()';
-            } elseif (\is_object($listener[0])) {
+            } elseif (\is_array($listener) && \is_object($listener[0])) {
                 $results[] = \get_class($listener[0]);
-            } elseif (\is_string($listener[0])) {
+            } elseif (\is_array($listener) && \is_string($listener[0])) {
                 $results[] = $listener[0];
             } else {
                 $results[] = 'Unknown type!';
@@ -385,7 +393,7 @@ class BlockHelper
 
         // type by block service
         if (null === $cacheServiceId) {
-            $cacheServiceId = $this->cacheBlocks['by_type'][$block->getType()] ?? null;
+            $cacheServiceId = $this->cacheBlocks['by_type'][$block->getType() ?? ''] ?? null;
         }
 
         if (null === $cacheServiceId) {
@@ -407,14 +415,19 @@ class BlockHelper
     private function startTracing(BlockInterface $block): array
     {
         if (null !== $this->stopwatch) {
-            $this->traces[$block->getId()] = $this->stopwatch->start(
-                sprintf('%s (id: %s, type: %s)', $block->getName(), $block->getId(), $block->getType())
+            $this->traces[$block->getId() ?? ''] = $this->stopwatch->start(
+                sprintf(
+                    '%s (id: %s, type: %s)',
+                    $block->getName() ?? '',
+                    $block->getId() ?? '',
+                    $block->getType() ?? ''
+                )
             );
         }
 
         return [
-            'name' => $block->getName(),
-            'type' => $block->getType(),
+            'name' => $block->getName() ?? '',
+            'type' => $block->getType() ?? '',
             'duration' => false,
             'memory_start' => memory_get_usage(true),
             'memory_end' => false,

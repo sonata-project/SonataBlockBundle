@@ -71,6 +71,7 @@ final class BlockContextManagerTest extends TestCase
 
         $blocksCache = [
             'by_class' => [ClassUtils::getClass($block) => 'my_cache.service.id'],
+            'by_type' => [],
         ];
 
         $manager = new BlockContextManager($blockLoader, $serviceManager, $blocksCache);
@@ -114,7 +115,8 @@ final class BlockContextManagerTest extends TestCase
         ]);
         $block->expects(static::once())->method('getSetting')->with('template')->willReturn('custom.html.twig');
 
-        $manager = new BlockContextManager($blockLoader, $serviceManager, [], $logger);
+        $cacheBlock = ['by_class' => [], 'by_type' => []];
+        $manager = new BlockContextManager($blockLoader, $serviceManager, $cacheBlock, $logger);
 
         $blockContext = $manager->get($block);
 
