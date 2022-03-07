@@ -34,7 +34,7 @@ final class BlockHelperCompilerPass implements CompilerPassInterface
         $hasCacheBlocks = false;
         foreach ($cacheBlocks as $blocks) {
             foreach ($blocks as $cacheType) {
-                $hasCacheBlocks = $hasCacheBlocks || $cacheType !== 'sonata.cache.noop';
+                $hasCacheBlocks = $hasCacheBlocks || 'sonata.cache.noop' !== $cacheType;
             }
         }
 
