@@ -172,24 +172,24 @@ final class BlockContextManager implements BlockContextManagerInterface
             ->setDeprecated(
                 'use_cache',
                 ...$this->deprecationParameters(
-                    '4.x',
-                    'Block option "use_cache" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
+                    '4.11',
+                    'Block option "use_cache" is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.'
                 )
             )
             // NEXT_MAJOR: Remove setDeprecated.
             ->setDeprecated(
                 'extra_cache_keys',
                 ...$this->deprecationParameters(
-                    '4.x',
-                    'Block option "extra_cache_keys" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
+                    '4.11',
+                    'Block option "extra_cache_keys" is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.'
                 )
             )
             // NEXT_MAJOR: Remove setDeprecated.
             ->setDeprecated(
                 'ttl',
                 ...$this->deprecationParameters(
-                    '4.x',
-                    'Block option "ttl" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
+                    '4.11',
+                    'Block option "ttl" is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.'
                 )
             );
 

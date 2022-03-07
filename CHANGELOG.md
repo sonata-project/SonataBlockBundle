@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.11.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.10.0...4.11.0) - 2022-03-07
+### Deprecated
+- [[#1011](https://github.com/sonata-project/SonataBlockBundle/pull/1011)] Integration with `SonataCacheBundle` has been deprecated ([@dmaicher](https://github.com/dmaicher))
+- [[#1011](https://github.com/sonata-project/SonataBlockBundle/pull/1011)] Interface `Sonata\BlockBundle\Cache\HttpCacheHandlerInterface` and it's implementations have been deprecated ([@dmaicher](https://github.com/dmaicher))
+- [[#1011](https://github.com/sonata-project/SonataBlockBundle/pull/1011)] Constructor Signature of `Sonata\BlockBundle\Templating\Helper\BlockHelper` changed: all caching related arguments should be removed ([@dmaicher](https://github.com/dmaicher))
+- [[#1011](https://github.com/sonata-project/SonataBlockBundle/pull/1011)] All caching configuration options have been deprecated and `sonata_block.http_cache` should be set to `false` ([@dmaicher](https://github.com/dmaicher))
+
+### Fixed
+- [[#1026](https://github.com/sonata-project/SonataBlockBundle/pull/1026)] Do not trigger a deprecation if a template setting is not provided in a block context `__construct`. ([@VincentLanglet](https://github.com/VincentLanglet))
+
 ## [4.10.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.9.1...4.10.0) - 2022-02-28
 ### Deprecated
 - [[#1012](https://github.com/sonata-project/SonataBlockBundle/pull/1012)] Not passing a string value for the template setting of a BlockContext ([@VincentLanglet](https://github.com/VincentLanglet))

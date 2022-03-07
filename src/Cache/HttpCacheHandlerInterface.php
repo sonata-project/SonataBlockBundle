@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 /**
- * @deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.
+ * @deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.
  */
 interface HttpCacheHandlerInterface
 {

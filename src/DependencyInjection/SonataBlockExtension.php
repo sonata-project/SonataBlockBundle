@@ -95,14 +95,14 @@ final class SonataBlockExtension extends Extension
 
         $container->getDefinition('sonata.block.cache.handler.default')
             ->setDeprecated(...$this->getDeprecationMessage(
-                'The "%service_id%" service is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.',
-                '4.x',
+                'The "%service_id%" service is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.',
+                '4.11',
             ));
 
         $container->getDefinition('sonata.block.cache.handler.noop')
             ->setDeprecated(...$this->getDeprecationMessage(
-                'The "%service_id%" service is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.',
-                '4.x',
+                'The "%service_id%" service is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.',
+                '4.11',
             ));
     }
 

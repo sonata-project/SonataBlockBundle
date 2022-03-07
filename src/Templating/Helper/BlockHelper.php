@@ -139,7 +139,7 @@ class BlockHelper
             $this->cacheBlocks = $blockRendererOrCacheBlocks;
             @trigger_error(
                 sprintf(
-                    'Passing an array as argument 2 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will change to "%s" in 5.0.',
+                    'Passing an array as argument 2 for method "%s" is deprecated since sonata-project/block-bundle 4.11. The argument will change to "%s" in 5.0.',
                     __METHOD__,
                     BlockRendererInterface::class
                 ),
@@ -161,7 +161,7 @@ class BlockHelper
             $this->blockRenderer = $blockContextManagerOrBlockRenderer;
             @trigger_error(
                 sprintf(
-                    'Passing an instance of "%s" as argument 3 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will change to "%s" in 5.0.',
+                    'Passing an instance of "%s" as argument 3 for method "%s" is deprecated since sonata-project/block-bundle 4.11. The argument will change to "%s" in 5.0.',
                     BlockRendererInterface::class,
                     __METHOD__,
                     BlockContextManagerInterface::class
@@ -185,7 +185,7 @@ class BlockHelper
             $this->blockContextManager = $eventDispatcherOrBlockContextManager;
             @trigger_error(
                 sprintf(
-                    'Passing an instance of "%s" as argument 4 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will change to "%s" in 5.0.',
+                    'Passing an instance of "%s" as argument 4 for method "%s" is deprecated since sonata-project/block-bundle 4.11. The argument will change to "%s" in 5.0.',
                     BlockContextManagerInterface::class,
                     __METHOD__,
                     EventDispatcherInterface::class
@@ -210,7 +210,7 @@ class BlockHelper
             $this->stopwatch = $stopwatch;
             @trigger_error(
                 sprintf(
-                    'Passing an instance of "%s" as argument 5 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will change to "%s" in 5.0.',
+                    'Passing an instance of "%s" as argument 5 for method "%s" is deprecated since sonata-project/block-bundle 4.11. The argument will change to "%s" in 5.0.',
                     EventDispatcherInterface::class,
                     __METHOD__,
                     Stopwatch::class
@@ -232,7 +232,7 @@ class BlockHelper
             $this->cacheManager = $cacheManager;
             @trigger_error(
                 sprintf(
-                    'Passing an instance of "%s" as argument 6 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will be removed in 5.0.',
+                    'Passing an instance of "%s" as argument 6 for method "%s" is deprecated since sonata-project/block-bundle 4.11. The argument will be removed in 5.0.',
                     CacheAdapterInterface::class,
                     __METHOD__
                 ),
@@ -244,7 +244,7 @@ class BlockHelper
             $this->cacheHandler = $cacheHandler;
             @trigger_error(
                 sprintf(
-                    'Passing an instance of "%s" as argument 7 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will be removed in 5.0.',
+                    'Passing an instance of "%s" as argument 7 for method "%s" is deprecated since sonata-project/block-bundle 4.11. The argument will be removed in 5.0.',
                     HttpCacheHandlerInterface::class,
                     __METHOD__
                 ),
