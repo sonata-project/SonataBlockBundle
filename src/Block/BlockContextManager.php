@@ -118,6 +118,7 @@ final class BlockContextManager implements BlockContextManagerInterface
                 $e->getMessage()
             ));
 
+            // NEXT_MAJOR: Only pass the template value if it's a string.
             $settings = $this->resolve($block, $settings + ['template' => $block->getSetting('template')]);
         }
 
