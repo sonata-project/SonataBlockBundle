@@ -93,6 +93,9 @@ final class BlockExtensionTest extends TestCase
         $func = $this->env->getFunction($name);
 
         static::assertInstanceOf(TwigFunction::class, $func);
-        \call_user_func_array([$this->env->getRuntime(BlockHelper::class), $expectedMethod], $args);
+
+        $callable = [$this->env->getRuntime(BlockHelper::class), $expectedMethod];
+        static::assertIsCallable($callable);
+        \call_user_func_array($callable, $args);
     }
 }

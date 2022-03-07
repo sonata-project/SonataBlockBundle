@@ -69,7 +69,7 @@ final class BlockContext implements BlockContextInterface
     public function getSetting(string $name)
     {
         if (!\array_key_exists($name, $this->settings)) {
-            throw new \RuntimeException(sprintf('Unable to find the option `%s` (%s) - define the option in the related BlockServiceInterface', $name, $this->block->getType()));
+            throw new \RuntimeException(sprintf('Unable to find the option `%s` (%s) - define the option in the related BlockServiceInterface', $name, $this->block->getType() ?? ''));
         }
 
         return $this->settings[$name];

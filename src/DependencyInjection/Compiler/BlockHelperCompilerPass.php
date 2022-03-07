@@ -28,13 +28,22 @@ final class BlockHelperCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
+        /** @var array{by_class: array<class-string, string>, by_type: array<string, string>} $cacheBlocks */
         $cacheBlocks = $container->getParameter('sonata_block.cache_blocks');
-        if (0 === \count($cacheBlocks)) {
+
+        $hasCacheBlocks = false;
+        foreach ($cacheBlocks as $blocks) {
+            foreach ($blocks as $cacheType) {
+                $hasCacheBlocks = $hasCacheBlocks || $cacheType !== 'sonata.cache.noop';
+            }
+        }
+
+        if (!$hasCacheBlocks) {
             return;
         }
 
         @trigger_error(
-            'Defining cache blocks is deprecated since sonata-project/block-bundle 4.x and will not be supported anymore in 5.0.',
+            'Defining cache blocks other than \'sonata.cache.noop\' is deprecated since sonata-project/block-bundle 4.x and will not be supported anymore in 5.0.',
             \E_USER_DEPRECATED
         );
 

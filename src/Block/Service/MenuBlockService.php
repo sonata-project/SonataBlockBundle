@@ -59,6 +59,9 @@ class MenuBlockService extends AbstractBlockService implements EditableBlockServ
 
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
+        $template = $blockContext->getTemplate();
+        \assert(null !== $template);
+
         $responseSettings = [
             'menu' => $this->getMenu($blockContext),
             'menu_options' => $this->getMenuOptions($blockContext->getSettings()),
@@ -67,10 +70,10 @@ class MenuBlockService extends AbstractBlockService implements EditableBlockServ
         ];
 
         if ('private' === $blockContext->getSetting('cache_policy')) {
-            return $this->renderPrivateResponse($blockContext->getTemplate(), $responseSettings, $response);
+            return $this->renderPrivateResponse($template, $responseSettings, $response);
         }
 
-        return $this->renderResponse($blockContext->getTemplate(), $responseSettings, $response);
+        return $this->renderResponse($template, $responseSettings, $response);
     }
 
     public function configureCreateForm(FormMapper $form, BlockInterface $block): void

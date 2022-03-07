@@ -57,6 +57,7 @@ final class SonataBlockExtension extends Extension
 
         $processor = new Processor();
         $configuration = $this->getConfiguration($configs, $container);
+        \assert(null !== $configuration);
         $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -146,7 +147,7 @@ final class SonataBlockExtension extends Extension
             }
         }
 
-        $cacheBlocks = [];
+        $cacheBlocks = ['by_class' => [], 'by_type' => []];
         foreach ($config['blocks'] as $service => $settings) {
             $cacheBlocks['by_type'][$service] = $settings['cache'];
         }

@@ -19,7 +19,7 @@ namespace Sonata\BlockBundle\Model;
 class Block extends BaseBlock
 {
     /**
-     * @var mixed
+     * @var string|int|null
      */
     protected $id;
 

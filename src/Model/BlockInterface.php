@@ -19,16 +19,16 @@ namespace Sonata\BlockBundle\Model;
 interface BlockInterface
 {
     /**
-     * Sets the block Id.
+     * Sets the block id.
      *
-     * @param mixed $id
+     * @param string|int $id
      */
     public function setId($id): void;
 
     /**
      * Returns the block id.
      *
-     * @return mixed void
+     * @return string|int|null
      */
     public function getId();
 

@@ -69,7 +69,9 @@ final class BlockRenderer implements BlockRendererInterface
         $block = $blockContext->getBlock();
 
         if (null !== $this->logger) {
-            $this->logger->info(sprintf('[cms::renderBlock] block.id=%d, block.type=%s ', $block->getId(), $block->getType()));
+            $this->logger->info(
+                sprintf('[cms::renderBlock] block.id=%d, block.type=%s', $block->getId() ?? '', $block->getType() ?? '')
+            );
         }
 
         try {
@@ -83,7 +85,7 @@ final class BlockRenderer implements BlockRendererInterface
             if (null !== $this->logger) {
                 $this->logger->error(sprintf(
                     '[cms::renderBlock] block.id=%d - error while rendering block - %s',
-                    $block->getId(),
+                    $block->getId() ?? '',
                     $exception->getMessage()
                 ), compact('exception'));
             }
@@ -118,8 +120,9 @@ final class BlockRenderer implements BlockRendererInterface
     {
         // a response exists, use it
         if (null !== $this->lastResponse && $this->lastResponse->isCacheable()) {
-            if (null !== $this->lastResponse->getTtl()) {
-                $response->setTtl($this->lastResponse->getTtl());
+            $lastResponseTtl = $this->lastResponse->getTtl();
+            if (null !== $lastResponseTtl) {
+                $response->setTtl($lastResponseTtl);
             }
             $response->setPublic();
         } elseif (null !== $this->lastResponse) { // not cacheable

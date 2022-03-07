@@ -36,16 +36,16 @@ final class BlockContextManager implements BlockContextManagerInterface
     /**
      * @var array<string, array<string, mixed>>
      */
-    private $settingsByType;
+    private $settingsByType = [];
 
     /**
      * @var array<string, array<string, mixed>>
      * @phpstan-var array<class-string, array<string, mixed>>
      */
-    private $settingsByClass;
+    private $settingsByClass = [];
 
     /**
-     * @var array{by_class?: array<class-string, string>, by_type?: array<string, string>}
+     * @var array{by_class: array<class-string, string>, by_type: array<string, string>}
      */
     private $cacheBlocks;
 
@@ -55,12 +55,12 @@ final class BlockContextManager implements BlockContextManagerInterface
     private $logger;
 
     /**
-     * @param array{by_class?: array<class-string, string>, by_type?: array<string, string>} $cacheBlocks
+     * @param array{by_class: array<class-string, string>, by_type: array<string, string>} $cacheBlocks
      */
     public function __construct(
         BlockLoaderInterface $blockLoader,
         BlockServiceManagerInterface $blockService,
-        array $cacheBlocks = [],
+        array $cacheBlocks = ['by_class' => [], 'by_type' => []],
         ?LoggerInterface $logger = null
     ) {
         $this->blockLoader = $blockLoader;
@@ -114,7 +114,7 @@ final class BlockContextManager implements BlockContextManagerInterface
         } catch (ExceptionInterface $e) {
             $this->logger->error(sprintf(
                 '[cms::blockContext] block.id=%s - error while resolving options - %s',
-                $block->getId(),
+                $block->getId() ?? '',
                 $e->getMessage()
             ));
 
@@ -194,7 +194,7 @@ final class BlockContextManager implements BlockContextManagerInterface
 
         // add type and class settings for block
         $class = ClassUtils::getClass($block);
-        $settingsByType = $this->settingsByType[$block->getType()] ?? [];
+        $settingsByType = $this->settingsByType[$block->getType() ?? ''] ?? [];
         $settingsByClass = $this->settingsByClass[$class] ?? [];
         $optionsResolver->setDefaults(array_merge($settingsByType, $settingsByClass));
     }
@@ -217,14 +217,14 @@ final class BlockContextManager implements BlockContextManagerInterface
 
         // type by block class
         $class = ClassUtils::getClass($block);
-        $cacheServiceId = $this->cacheBlocks['by_class'][$class] ?? false;
+        $cacheServiceId = $this->cacheBlocks['by_class'][$class] ?? null;
 
         // type by block service
-        if (!$cacheServiceId) {
-            $cacheServiceId = $this->cacheBlocks['by_type'][$block->getType()] ?? false;
+        if (null === $cacheServiceId) {
+            $cacheServiceId = $this->cacheBlocks['by_type'][$block->getType() ?? ''] ?? null;
         }
 
-        if (!$cacheServiceId) {
+        if (null === $cacheServiceId) {
             // no context cache needed
             return;
         }
