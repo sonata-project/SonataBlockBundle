@@ -1,8 +1,8 @@
 UPGRADE 4.x
 ===========
 
-UPGRADE FROM 4.10 to 4.x
-=======================
+UPGRADE FROM 4.10 to 4.11
+=========================
 
 ### Deprecated caching functionality
 

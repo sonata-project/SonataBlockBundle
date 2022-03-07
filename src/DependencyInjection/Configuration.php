@@ -67,7 +67,7 @@ final class Configuration implements ConfigurationInterface
                     // NEXT_MAJOR: remove this block
                     if (true !== $this->httpCacheDisabled) {
                         @trigger_error(
-                            'Not setting the "sonata_block.http_cache" config option to false is deprecated since sonata-project/block-bundle 4.x and will fail in 5.0.',
+                            'Not setting the "sonata_block.http_cache" config option to false is deprecated since sonata-project/block-bundle 4.11 and will fail in 5.0.',
                             \E_USER_DEPRECATED
                         );
                     } else {
@@ -167,8 +167,8 @@ final class Configuration implements ConfigurationInterface
                                 ->defaultValue('sonata.cache.noop')
                                 ->setDeprecated(
                                     ...$this->getDeprecationMessage(
-                                        'The "cache" option for configuring blocks is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.',
-                                        '4.x'
+                                        'The "cache" option for configuring blocks is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.',
+                                        '4.11'
                                     )
                                 )
                             ->end()
@@ -197,8 +197,8 @@ final class Configuration implements ConfigurationInterface
                                 ->defaultValue('sonata.cache.noop')
                                 ->setDeprecated(
                                     ...$this->getDeprecationMessage(
-                                        'The "cache" option for configuring blocks_by_class is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.',
-                                        '4.x'
+                                        'The "cache" option for configuring blocks_by_class is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.',
+                                        '4.11'
                                     )
                                 )
                             ->end()

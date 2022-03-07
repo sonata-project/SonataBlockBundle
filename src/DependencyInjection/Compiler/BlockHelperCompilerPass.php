@@ -43,7 +43,7 @@ final class BlockHelperCompilerPass implements CompilerPassInterface
         }
 
         @trigger_error(
-            'Defining cache blocks other than \'sonata.cache.noop\' is deprecated since sonata-project/block-bundle 4.x and will not be supported anymore in 5.0.',
+            'Defining cache blocks other than \'sonata.cache.noop\' is deprecated since sonata-project/block-bundle 4.11 and will not be supported anymore in 5.0.',
             \E_USER_DEPRECATED
         );
 

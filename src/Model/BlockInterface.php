@@ -95,7 +95,7 @@ interface BlockInterface
     /**
      * Returns the block cache TTL.
      *
-     * @deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.
+     * @deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.
      */
     public function getTtl(): int;
 
