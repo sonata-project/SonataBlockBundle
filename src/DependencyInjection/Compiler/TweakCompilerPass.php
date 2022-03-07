@@ -35,16 +35,16 @@ final class TweakCompilerPass implements CompilerPassInterface
         $blockTypes = $container->getParameter('sonata_blocks.block_types');
         /** @var array<string, mixed> $cacheBlocks */
         $cacheBlocks = $container->getParameter('sonata_block.cache_blocks');
-        /** @var string[] $defaultContexs */
-        $defaultContexs = $container->getParameter('sonata_blocks.default_contexts');
+        /** @var string[] $defaultContexts */
+        $defaultContexts = $container->getParameter('sonata_blocks.default_contexts');
 
         foreach ($container->findTaggedServiceIds('sonata.block') as $id => $tags) {
             $container->getDefinition($id)
                 ->setPublic(true);
 
-            $settings = $this->createBlockSettings($tags, $defaultContexs);
+            $settings = $this->createBlockSettings($tags, $defaultContexts);
 
-            // Register blocks dynamicaly
+            // Register blocks dynamically
             if (!\array_key_exists($id, $blocks)) {
                 $blocks[$id] = $settings;
             }
@@ -83,18 +83,25 @@ final class TweakCompilerPass implements CompilerPassInterface
     }
 
     /**
+     * NEXT_MAJOR: Change visibility to private.
+     *
      * Apply configurations to the context manager.
      */
     public function applyContext(ContainerBuilder $container): void
     {
         $definition = $container->findDefinition('sonata.block.context_manager');
 
-        foreach ($container->getParameter('sonata_block.blocks') as $service => $settings) {
+        /** @var array<string, array<string, mixed>> $blocks */
+        $blocks = $container->getParameter('sonata_block.blocks');
+        foreach ($blocks as $service => $settings) {
             if (\count($settings['settings']) > 0) {
                 $definition->addMethodCall('addSettingsByType', [$service, $settings['settings'], true]);
             }
         }
-        foreach ($container->getParameter('sonata_block.blocks_by_class') as $class => $settings) {
+
+        /** @var array<class-string, array<string, mixed>> $blocksByClass */
+        $blocksByClass = $container->getParameter('sonata_block.blocks_by_class');
+        foreach ($blocksByClass as $class => $settings) {
             if (\count($settings['settings']) > 0) {
                 $definition->addMethodCall('addSettingsByClass', [$class, $settings['settings'], true]);
             }

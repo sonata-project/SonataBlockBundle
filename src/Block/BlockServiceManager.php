@@ -34,7 +34,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
     /**
      * @var bool
      */
-    private $inValidate;
+    private $inValidate = false;
 
     /**
      * @var array<string, string[]>
@@ -53,13 +53,14 @@ final class BlockServiceManager implements BlockServiceManagerInterface
 
     public function get(BlockInterface $block): BlockServiceInterface
     {
-        if (null === $block->getType()) {
+        $blockType = $block->getType();
+        if (null === $blockType) {
             throw new \RuntimeException('The block service `` does not exist');
         }
 
-        $this->load($block->getType());
+        $this->load($blockType);
 
-        $service = $this->services[$block->getType()];
+        $service = $this->services[$blockType];
         \assert($service instanceof BlockServiceInterface);
 
         return $service;
@@ -121,6 +122,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
 
         $services = [];
 
+        /** @var string[] $containers */
         $containers = $this->container->getParameter('sonata.block.container.types');
 
         foreach ($this->contexts[$context] as $name) {
@@ -147,7 +149,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
             return;
         }
 
-        // As block can be nested, we only need to validate the main block, no the children
+        // As block can be nested, we only need to validate the main block, not the children
         try {
             $this->inValidate = true;
 
@@ -173,11 +175,12 @@ final class BlockServiceManager implements BlockServiceManagerInterface
         }
 
         if (!$this->services[$type] instanceof BlockServiceInterface) {
-            $this->services[$type] = $this->container->get($type);
-        }
+            $blockService = $this->container->get($type);
+            if (!$blockService instanceof BlockServiceInterface) {
+                throw new \RuntimeException(sprintf('The service %s does not implement BlockServiceInterface', $type));
+            }
 
-        if (!$this->services[$type] instanceof BlockServiceInterface) {
-            throw new \RuntimeException(sprintf('The service %s does not implement BlockServiceInterface', $type));
+            $this->services[$type] = $blockService;
         }
 
         return $this->services[$type];

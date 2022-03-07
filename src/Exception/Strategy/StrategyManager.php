@@ -53,12 +53,12 @@ final class StrategyManager implements StrategyManagerInterface
     private $blockRenderers;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $defaultFilter;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $defaultRenderer;
 
@@ -143,8 +143,21 @@ final class StrategyManager implements StrategyManagerInterface
     {
         $type = $block->getType();
         $name = $this->blockRenderers[$type] ?? $this->defaultRenderer;
+        if (null === $name) {
+            throw new \RuntimeException('No default renderer was set.');
+        }
 
-        return $this->getRendererService($name);
+        if (!isset($this->renderers[$name])) {
+            throw new \RuntimeException('The renderer "%s" does not exist.');
+        }
+
+        $service = $this->container->get($this->renderers[$name]);
+
+        if (!$service instanceof RendererInterface) {
+            throw new \InvalidArgumentException(sprintf('The service "%s" is not an exception renderer.', $name));
+        }
+
+        return $service;
     }
 
     /**
@@ -156,17 +169,10 @@ final class StrategyManager implements StrategyManagerInterface
     {
         $type = $block->getType();
         $name = $this->blockFilters[$type] ?? $this->defaultFilter;
+        if (null === $name) {
+            throw new \RuntimeException('No default filter was set.');
+        }
 
-        return $this->getFilterService($name);
-    }
-
-    /**
-     * Returns the filter service for given filter name.
-     *
-     * @throws \RuntimeException|\InvalidArgumentException
-     */
-    private function getFilterService(string $name): FilterInterface
-    {
         if (!isset($this->filters[$name])) {
             throw new \RuntimeException('The filter "%s" does not exist.');
         }
@@ -175,26 +181,6 @@ final class StrategyManager implements StrategyManagerInterface
 
         if (!$service instanceof FilterInterface) {
             throw new \InvalidArgumentException(sprintf('The service "%s" is not an exception filter.', $name));
-        }
-
-        return $service;
-    }
-
-    /**
-     * Returns the renderer service for given renderer name.
-     *
-     * @throws \RuntimeException|\InvalidArgumentException
-     */
-    private function getRendererService(string $name): RendererInterface
-    {
-        if (!isset($this->renderers[$name])) {
-            throw new \RuntimeException('The renderer "%s" does not exist.');
-        }
-
-        $service = $this->container->get($this->renderers[$name]);
-
-        if (!$service instanceof RendererInterface) {
-            throw new \InvalidArgumentException(sprintf('The service "%s" is not an exception renderer.', $name));
         }
 
         return $service;

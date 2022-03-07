@@ -42,7 +42,7 @@ final class BlockServiceManagerTest extends TestCase
     {
         $this->expectException(\RuntimeException::class);
 
-        $service = $this->createMock('stdClass');
+        $service = $this->createMock(\stdClass::class);
 
         $container = $this->createMock(ContainerInterface::class);
         $container->expects(static::once())->method('get')->willReturn($service);

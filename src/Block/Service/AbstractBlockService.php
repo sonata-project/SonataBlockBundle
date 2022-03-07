@@ -70,9 +70,11 @@ abstract class AbstractBlockService implements BlockServiceInterface
 
     public function getCacheKeys(BlockInterface $block): array
     {
+        $updatedAt = $block->getUpdatedAt();
+
         return [
             'block_id' => $block->getId(),
-            'updated_at' => null !== $block->getUpdatedAt() ? $block->getUpdatedAt()->format('U') : null,
+            'updated_at' => null !== $updatedAt ? $updatedAt->format('U') : null,
         ];
     }
 
@@ -82,7 +84,10 @@ abstract class AbstractBlockService implements BlockServiceInterface
 
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
-        return $this->renderResponse($blockContext->getTemplate(), [
+        $template = $blockContext->getTemplate();
+        \assert(null !== $template);
+
+        return $this->renderResponse($template, [
             'block_context' => $blockContext,
             'block' => $blockContext->getBlock(),
         ], $response);

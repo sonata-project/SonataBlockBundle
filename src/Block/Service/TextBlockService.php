@@ -31,7 +31,10 @@ final class TextBlockService extends AbstractBlockService implements EditableBlo
 {
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
-        return $this->renderResponse($blockContext->getTemplate(), [
+        $template = $blockContext->getTemplate();
+        \assert(null !== $template);
+
+        return $this->renderResponse($template, [
             'block' => $blockContext->getBlock(),
             'settings' => $blockContext->getSettings(),
         ], $response);
