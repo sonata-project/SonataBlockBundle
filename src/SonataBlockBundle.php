@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle;
 
+use Sonata\BlockBundle\DependencyInjection\Compiler\BlockHelperCompilerPass;
 use Sonata\BlockBundle\DependencyInjection\Compiler\GlobalVariablesCompilerPass;
 use Sonata\BlockBundle\DependencyInjection\Compiler\TweakCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -24,5 +25,6 @@ final class SonataBlockBundle extends Bundle
     {
         $container->addCompilerPass(new TweakCompilerPass());
         $container->addCompilerPass(new GlobalVariablesCompilerPass());
+        $container->addCompilerPass(new BlockHelperCompilerPass());
     }
 }

@@ -60,6 +60,8 @@ class BlockHelper
     private $blockServiceManager;
 
     /**
+     * NEXT_MAJOR: remove this member and all related code to usages within this class.
+     *
      * @var CacheManagerInterface|null
      */
     private $cacheManager;
@@ -114,26 +116,141 @@ class BlockHelper
     private $stopwatch;
 
     /**
-     * @param array{by_class: array<class-string, string>, by_type: array<string, string>} $cacheBlocks
+     * NEXT_MAJOR: remove the deprecated signature and cleanup the constructor.
+     *
+     * @param array{by_class: array<class-string, string>, by_type: array<string, string>}|BlockRendererInterface $blockRendererOrCacheBlocks
      */
     public function __construct(
         BlockServiceManagerInterface $blockServiceManager,
-        array $cacheBlocks,
-        BlockRendererInterface $blockRenderer,
-        BlockContextManagerInterface $blockContextManager,
-        EventDispatcherInterface $eventDispatcher,
+        $blockRendererOrCacheBlocks,
+        object $blockContextManagerOrBlockRenderer,
+        object $eventDispatcherOrBlockContextManager,
+        ?object $stopwatchOrEventDispatcher = null,
         ?CacheManagerInterface $cacheManager = null,
         ?HttpCacheHandlerInterface $cacheHandler = null,
         ?Stopwatch $stopwatch = null
     ) {
         $this->blockServiceManager = $blockServiceManager;
-        $this->cacheBlocks = $cacheBlocks;
-        $this->blockRenderer = $blockRenderer;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->cacheManager = $cacheManager;
-        $this->blockContextManager = $blockContextManager;
-        $this->cacheHandler = $cacheHandler;
-        $this->stopwatch = $stopwatch;
+
+        if ($blockRendererOrCacheBlocks instanceof BlockRendererInterface) {
+            $this->blockRenderer = $blockRendererOrCacheBlocks;
+            $this->cacheBlocks = ['by_class' => [], 'by_type' => []];
+        } elseif (\is_array($blockRendererOrCacheBlocks)) {
+            $this->cacheBlocks = $blockRendererOrCacheBlocks;
+            @trigger_error(
+                sprintf(
+                    'Passing an array as argument 2 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will change to "%s" in 5.0.',
+                    __METHOD__,
+                    BlockRendererInterface::class
+                ),
+                \E_USER_DEPRECATED
+            );
+        } else {
+            throw new \TypeError(
+                sprintf(
+                    'Argument 2 of method "%s" must be an array or an instance of "%s"',
+                    __METHOD__,
+                    BlockRendererInterface::class
+                )
+            );
+        }
+
+        if ($blockContextManagerOrBlockRenderer instanceof BlockContextManagerInterface) {
+            $this->blockContextManager = $blockContextManagerOrBlockRenderer;
+        } elseif ($blockContextManagerOrBlockRenderer instanceof BlockRendererInterface) {
+            $this->blockRenderer = $blockContextManagerOrBlockRenderer;
+            @trigger_error(
+                sprintf(
+                    'Passing an instance of "%s" as argument 3 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will change to "%s" in 5.0.',
+                    BlockRendererInterface::class,
+                    __METHOD__,
+                    BlockContextManagerInterface::class
+                ),
+                \E_USER_DEPRECATED
+            );
+        } else {
+            throw new \TypeError(
+                sprintf(
+                    'Argument 3 of method "%s" must be an instance of "%s" or "%s"',
+                    __METHOD__,
+                    BlockContextManagerInterface::class,
+                    BlockRendererInterface::class
+                )
+            );
+        }
+
+        if ($eventDispatcherOrBlockContextManager instanceof EventDispatcherInterface) {
+            $this->eventDispatcher = $eventDispatcherOrBlockContextManager;
+        } elseif ($eventDispatcherOrBlockContextManager instanceof BlockContextManagerInterface) {
+            $this->blockContextManager = $eventDispatcherOrBlockContextManager;
+            @trigger_error(
+                sprintf(
+                    'Passing an instance of "%s" as argument 4 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will change to "%s" in 5.0.',
+                    BlockContextManagerInterface::class,
+                    __METHOD__,
+                    EventDispatcherInterface::class
+                ),
+                \E_USER_DEPRECATED
+            );
+        } else {
+            throw new \TypeError(
+                sprintf(
+                    'Argument 4 of method "%s" must be an instance of "%s" or "%s"',
+                    __METHOD__,
+                    EventDispatcherInterface::class,
+                    BlockContextManagerInterface::class
+                )
+            );
+        }
+
+        if ($stopwatchOrEventDispatcher instanceof Stopwatch) {
+            $this->stopwatch = $stopwatchOrEventDispatcher;
+        } elseif ($stopwatchOrEventDispatcher instanceof EventDispatcherInterface) {
+            $this->eventDispatcher = $stopwatchOrEventDispatcher;
+            $this->stopwatch = $stopwatch;
+            @trigger_error(
+                sprintf(
+                    'Passing an instance of "%s" as argument 5 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will change to "%s" in 5.0.',
+                    EventDispatcherInterface::class,
+                    __METHOD__,
+                    Stopwatch::class
+                ),
+                \E_USER_DEPRECATED
+            );
+        } elseif (null !== $stopwatchOrEventDispatcher) {
+            throw new \TypeError(
+                sprintf(
+                    'Argument 5 of method "%s" must be "null" or an instance of "%s" or "%s"',
+                    __METHOD__,
+                    Stopwatch::class,
+                    EventDispatcherInterface::class
+                )
+            );
+        }
+
+        if (null !== $cacheManager) {
+            $this->cacheManager = $cacheManager;
+            @trigger_error(
+                sprintf(
+                    'Passing an instance of "%s" as argument 6 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will be removed in 5.0.',
+                    CacheAdapterInterface::class,
+                    __METHOD__
+                ),
+                \E_USER_DEPRECATED
+            );
+        }
+
+        if (null !== $cacheHandler) {
+            $this->cacheHandler = $cacheHandler;
+            @trigger_error(
+                sprintf(
+                    'Passing an instance of "%s" as argument 7 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will be removed in 5.0.',
+                    HttpCacheHandlerInterface::class,
+                    __METHOD__
+                ),
+                \E_USER_DEPRECATED
+            );
+        }
     }
 
     /**
@@ -228,6 +345,7 @@ class BlockHelper
 
         $service = $this->blockServiceManager->get($blockContext->getBlock());
 
+        // NEXT_MAJOR: simplify code and remove all cache-related usages
         $useCache = true === $blockContext->getSetting('use_cache');
 
         $cacheService = $useCache ? $this->getCacheService($blockContext->getBlock(), $stats) : null;

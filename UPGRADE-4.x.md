@@ -1,7 +1,20 @@
 UPGRADE 4.x
 ===========
 
-UPGRADE FROM 4.7 to 4.x
+UPGRADE FROM 4.10 to 4.x
+=======================
+
+### Deprecated caching functionality
+
+- The `Sonata\BlockBundle\Cache\HttpCacheHandlerInterface` interface and it's implementations have been deprecated
+- The integration with `SonataCacheBundle` has been deprecated
+
+To get rid of reported deprecations and to prepare your projects for version 5.0 you need to
+- remove dependency on `SonataCacheBundle` if you have it installed
+- set configuration option `sonata_block.http_cache` to `false`
+- remove all other caching related configuration
+
+UPGRADE FROM 4.7 to 4.8
 =======================
 
 ### `sonata-project/doctrine-extensions` is optional

@@ -193,6 +193,9 @@ abstract class BaseBlock implements BlockInterface
         return $this->getParent() instanceof self;
     }
 
+    /**
+     * @deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.
+     */
     public function getTtl(): int
     {
         if (false === $this->getSetting('use_cache', true)) {

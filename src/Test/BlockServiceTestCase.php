@@ -79,10 +79,14 @@ abstract class BlockServiceTestCase extends TestCase
     protected function assertSettings(array $expected, BlockContextInterface $blockContext): void
     {
         $completeExpectedOptions = $expected + [
+            // NEXT_MAJOR: remove
             'use_cache' => true,
+            // NEXT_MAJOR: remove
             'extra_cache_keys' => [],
             'attr' => [],
+            // NEXT_MAJOR: remove
             'template' => null,
+            // NEXT_MAJOR: remove
             'ttl' => 0,
         ];
 
