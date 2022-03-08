@@ -24,6 +24,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
@@ -80,13 +83,13 @@ final class RssBlockService extends AbstractBlockService implements EditableBloc
     {
         $errorElement
             ->with('settings[url]')
-                ->assertNotNull([])
-                ->assertNotBlank()
+                ->addConstraint(new NotNull())
+                ->addConstraint(new NotBlank())
             ->end()
             ->with('settings[title]')
-                ->assertNotNull([])
-                ->assertNotBlank()
-                ->assertLength(['max' => 50])
+                ->addConstraint(new NotNull())
+                ->addConstraint(new NotBlank())
+                ->addConstraint(new Length(['max' => 50]))
             ->end();
     }
 
@@ -107,7 +110,7 @@ final class RssBlockService extends AbstractBlockService implements EditableBloc
             // retrieve contents with a specific stream context to avoid php errors
             $content = @file_get_contents($settings['url'], false, stream_context_create($options));
 
-            if ($content) {
+            if (false !== $content && '' !== $content) {
                 // generate a simple xml element
                 try {
                     $feeds = new \SimpleXMLElement($content);
@@ -118,7 +121,10 @@ final class RssBlockService extends AbstractBlockService implements EditableBloc
             }
         }
 
-        return $this->renderResponse($blockContext->getTemplate(), [
+        $template = $blockContext->getTemplate();
+        \assert(null !== $template);
+
+        return $this->renderResponse($template, [
             'feeds' => $feeds,
             'block' => $blockContext->getBlock(),
             'settings' => $settings,

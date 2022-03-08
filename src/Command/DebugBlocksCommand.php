@@ -47,8 +47,9 @@ final class DebugBlocksCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output): int
     {
-        if (null !== $input->getOption('context')) {
-            $services = $this->blockManager->getServicesByContext((string) $input->getOption('context'));
+        $context = $input->getOption('context');
+        if (\is_string($context)) {
+            $services = $this->blockManager->getServicesByContext($context);
         } else {
             $services = $this->blockManager->getServices();
         }

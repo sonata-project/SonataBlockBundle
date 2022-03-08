@@ -83,7 +83,7 @@ abstract class BaseBlock implements BlockInterface
     #[\ReturnTypeWillChange]
     public function __toString()
     {
-        return sprintf('%s ~ #%s', $this->getName(), $this->getId());
+        return sprintf('%s ~ #%s', $this->getName() ?? '', $this->getId() ?? '');
     }
 
     public function setName(string $name): void
@@ -193,6 +193,9 @@ abstract class BaseBlock implements BlockInterface
         return $this->getParent() instanceof self;
     }
 
+    /**
+     * @deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.
+     */
     public function getTtl(): int
     {
         if (false === $this->getSetting('use_cache', true)) {

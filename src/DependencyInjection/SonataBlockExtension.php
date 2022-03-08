@@ -57,6 +57,7 @@ final class SonataBlockExtension extends Extension
 
         $processor = new Processor();
         $configuration = $this->getConfiguration($configs, $container);
+        \assert(null !== $configuration);
         $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -74,6 +75,7 @@ final class SonataBlockExtension extends Extension
         $this->configureBlockContainers($container, $config);
         $this->configureContext($container, $config);
         $this->configureLoaderChain($container, $config);
+        // NEXT_MAJOR: remove next line
         $this->configureCache($container, $config);
         $this->configureForm($container, $config);
         $this->configureProfiler($container, $config);
@@ -90,6 +92,18 @@ final class SonataBlockExtension extends Extension
         }
 
         $container->getDefinition('sonata.block.twig.global')->replaceArgument(0, $config['templates']);
+
+        $container->getDefinition('sonata.block.cache.handler.default')
+            ->setDeprecated(...$this->getDeprecationMessage(
+                'The "%service_id%" service is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.',
+                '4.11',
+            ));
+
+        $container->getDefinition('sonata.block.cache.handler.noop')
+            ->setDeprecated(...$this->getDeprecationMessage(
+                'The "%service_id%" service is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.',
+                '4.11',
+            ));
     }
 
     /**
@@ -118,20 +132,22 @@ final class SonataBlockExtension extends Extension
     }
 
     /**
-     * NEXT_MAJOR: Change visibility to private.
+     * NEXT_MAJOR: Remove this method.
      *
      * @param array<string, mixed> $config
      */
     public function configureCache(ContainerBuilder $container, array $config): void
     {
-        $container->setAlias('sonata.block.cache.handler', $config['http_cache']['handler']);
+        if (\is_array($config['http_cache'])) {
+            $container->setAlias('sonata.block.cache.handler', $config['http_cache']['handler']);
 
-        if (null !== $config['http_cache']['listener']) {
-            $container->getDefinition($config['http_cache']['handler'])
-                ->addTag('kernel.event_listener', ['event' => 'kernel.response', 'method' => 'onKernelResponse']);
+            if (true === $config['http_cache']['listener']) {
+                $container->getDefinition($config['http_cache']['handler'])
+                    ->addTag('kernel.event_listener', ['event' => 'kernel.response', 'method' => 'onKernelResponse']);
+            }
         }
 
-        $cacheBlocks = [];
+        $cacheBlocks = ['by_class' => [], 'by_type' => []];
         foreach ($config['blocks'] as $service => $settings) {
             $cacheBlocks['by_type'][$service] = $settings['cache'];
         }
@@ -255,5 +271,22 @@ final class SonataBlockExtension extends Extension
     public function getNamespace(): string
     {
         return 'http://sonata-project.com/schema/dic/block';
+    }
+
+    /**
+     * @return mixed[]
+     */
+    private function getDeprecationMessage(string $message, string $version): array
+    {
+        // @phpstan-ignore-next-line
+        if (method_exists(Definition::class, 'getDeprecation')) {
+            return [
+                'sonata-project/block-bundle',
+                $version,
+                $message,
+            ];
+        }
+
+        return [true, $message];
     }
 }

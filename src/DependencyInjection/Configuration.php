@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\BaseNode;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -28,6 +29,13 @@ final class Configuration implements ConfigurationInterface
      * @var array<string, string>
      */
     private $defaultContainerTemplates;
+
+    /**
+     * NEXT_MAJOR: remove this member.
+     *
+     * @var bool
+     */
+    private $httpCacheDisabled = false;
 
     /**
      * @param array<string, string> $defaultContainerTemplates
@@ -49,11 +57,21 @@ final class Configuration implements ConfigurationInterface
             ->fixXmlConfig('block')
             ->fixXmlConfig('block_by_class')
             ->validate()
-                ->always(static function ($value) {
-                    foreach ($value['blocks'] as $name => &$block) {
+                ->always(function (&$value) {
+                    foreach ($value['blocks'] as &$block) {
                         if (0 === \count($block['contexts'])) {
                             $block['contexts'] = $value['default_contexts'];
                         }
+                    }
+
+                    // NEXT_MAJOR: remove this block
+                    if (true !== $this->httpCacheDisabled) {
+                        @trigger_error(
+                            'Not setting the "sonata_block.http_cache" config option to false is deprecated since sonata-project/block-bundle 4.11 and will fail in 5.0.',
+                            \E_USER_DEPRECATED
+                        );
+                    } else {
+                        $value['http_cache'] = false;
                     }
 
                     return $value;
@@ -73,10 +91,24 @@ final class Configuration implements ConfigurationInterface
                 ->end()
 
                 ->scalarNode('context_manager')->defaultValue('sonata.block.context_manager.default')->end()
+                // NEXT_MAJOR: deprecate option and only allow setting it to false
                 ->arrayNode('http_cache')
                     ->addDefaultsIfNotSet()
+                    ->beforeNormalization()
+                        ->always(function ($v) {
+                            if (false === $v) {
+                                $this->httpCacheDisabled = true;
+
+                                return [];
+                            }
+
+                            return $v;
+                        })
+                    ->end()
                     ->children()
+                        // NEXT_MAJOR: remove option
                         ->scalarNode('handler')->defaultValue('sonata.block.cache.handler.default')->end()
+                        // NEXT_MAJOR: remove option
                         ->booleanNode('listener')->defaultTrue()->end()
                     ->end()
                 ->end()
@@ -130,7 +162,16 @@ final class Configuration implements ConfigurationInterface
                                     ->end()
                                 ->end()
                             ->end()
-                            ->scalarNode('cache')->defaultValue('sonata.cache.noop')->end()
+                            // NEXT_MAJOR: remove cache option
+                            ->scalarNode('cache')
+                                ->defaultValue('sonata.cache.noop')
+                                ->setDeprecated(
+                                    ...$this->getDeprecationMessage(
+                                        'The "cache" option for configuring blocks is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.',
+                                        '4.11'
+                                    )
+                                )
+                            ->end()
                             ->arrayNode('settings')
                                 ->info('default settings')
                                 ->useAttributeAsKey('id')
@@ -152,7 +193,15 @@ final class Configuration implements ConfigurationInterface
                     ->prototype('array')
                         ->fixXmlConfig('setting')
                         ->children()
-                            ->scalarNode('cache')->defaultValue('sonata.cache.noop')->end()
+                            ->scalarNode('cache')
+                                ->defaultValue('sonata.cache.noop')
+                                ->setDeprecated(
+                                    ...$this->getDeprecationMessage(
+                                        'The "cache" option for configuring blocks_by_class is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.',
+                                        '4.11'
+                                    )
+                                )
+                            ->end()
                             ->arrayNode('settings')
                                 ->info('default settings')
                                 ->useAttributeAsKey('id')
@@ -209,5 +258,22 @@ final class Configuration implements ConfigurationInterface
     public function getConfiguration(array $config, ContainerBuilder $container)
     {
         return new self([]);
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getDeprecationMessage(string $message, string $version): array
+    {
+        // @phpstan-ignore-next-line
+        if (method_exists(BaseNode::class, 'getDeprecation')) {
+            return [
+                'sonata-project/block-bundle',
+                $version,
+                $message,
+            ];
+        }
+
+        return [$message];
     }
 }

@@ -32,26 +32,6 @@ final class BlockContext implements BlockContextInterface
      */
     public function __construct(BlockInterface $block, array $settings = [])
     {
-        if (!\array_key_exists('template', $settings)) {
-            @trigger_error(
-                'Not providing a "template" setting is deprecated since sonata-project/block-bundle 4.10'
-                .' and will be throw an exception in version 5.0.',
-                \E_USER_DEPRECATED
-            );
-
-        // NEXT_MAJOR: Uncomment the exception instead.
-            // throw new \InvalidArgumentException('The "template" setting is required.');
-        } elseif (!\is_string($settings['template'])) {
-            @trigger_error(
-                'Not providing a string value for the "template" setting is deprecated since'
-                .' sonata-project/block-bundle 4.10 and will be throw an exception in version 5.0.',
-                \E_USER_DEPRECATED
-            );
-
-            // NEXT_MAJOR: Uncomment the exception instead.
-            // throw new \InvalidArgumentException('The "template" setting MUST be a string.');
-        }
-
         $this->block = $block;
         $this->settings = $settings;
     }
@@ -69,7 +49,7 @@ final class BlockContext implements BlockContextInterface
     public function getSetting(string $name)
     {
         if (!\array_key_exists($name, $this->settings)) {
-            throw new \RuntimeException(sprintf('Unable to find the option `%s` (%s) - define the option in the related BlockServiceInterface', $name, $this->block->getType()));
+            throw new \RuntimeException(sprintf('Unable to find the option `%s` (%s) - define the option in the related BlockServiceInterface', $name, $this->block->getType() ?? ''));
         }
 
         return $this->settings[$name];
@@ -91,6 +71,19 @@ final class BlockContext implements BlockContextInterface
      */
     public function getTemplate(): ?string
     {
-        return $this->getSetting('template');
+        $template = $this->getSetting('template');
+
+        if (!\is_string($template)) {
+            @trigger_error(
+                'Not providing a string value for the "template" setting is deprecated since'
+                .' sonata-project/block-bundle 4.10 and will be throw an exception in version 5.0.',
+                \E_USER_DEPRECATED
+            );
+
+            // NEXT_MAJOR: Uncomment the exception instead.
+            // throw new \InvalidArgumentException('The "template" setting MUST be a string.');
+        }
+
+        return $template;
     }
 }

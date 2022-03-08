@@ -19,16 +19,16 @@ namespace Sonata\BlockBundle\Model;
 interface BlockInterface
 {
     /**
-     * Sets the block Id.
+     * Sets the block id.
      *
-     * @param mixed $id
+     * @param string|int $id
      */
     public function setId($id): void;
 
     /**
      * Returns the block id.
      *
-     * @return mixed void
+     * @return string|int|null
      */
     public function getId();
 
@@ -94,6 +94,8 @@ interface BlockInterface
 
     /**
      * Returns the block cache TTL.
+     *
+     * @deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.
      */
     public function getTtl(): int;
 
