@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests\App;
 
+use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Sonata\BlockBundle\SonataBlockBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -36,6 +37,7 @@ final class AppKernel extends Kernel
         return [
             new FrameworkBundle(),
             new TwigBundle(),
+            new KnpMenuBundle(),
             new SonataBlockBundle(),
         ];
     }
