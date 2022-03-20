@@ -19,7 +19,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
@@ -60,17 +60,17 @@ final class SonataBlockExtension extends Extension
         \assert(null !== $configuration);
         $config = $processor->processConfiguration($configuration, $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('block.xml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('block.php');
 
         if (isset($bundles['KnpMenuBundle'])) {
-            $loader->load('knp_block.xml');
+            $loader->load('knp_block.php');
         }
 
-        $loader->load('form.xml');
-        $loader->load('core.xml');
-        $loader->load('exception.xml');
-        $loader->load('commands.xml');
+        $loader->load('form.php');
+        $loader->load('core.php');
+        $loader->load('exception.php');
+        $loader->load('commands.php');
 
         $this->configureBlockContainers($container, $config);
         $this->configureContext($container, $config);
