@@ -48,10 +48,13 @@ final class BlockContextManagerTest extends TestCase
         static::assertInstanceOf(BlockContextInterface::class, $blockContext);
 
         static::assertSame([
+            // NEXT_MAJOR: remove
             'use_cache' => true,
+            // NEXT_MAJOR: remove
             'extra_cache_keys' => [],
             'attr' => [],
             'template' => 'custom.html.twig',
+            // NEXT_MAJOR: remove
             'ttl' => 0,
         ], $blockContext->getSettings());
     }
@@ -74,6 +77,7 @@ final class BlockContextManagerTest extends TestCase
         $block = $this->createMock(BlockInterface::class);
         $block->expects(static::once())->method('getSettings')->willReturn([]);
 
+        // NEXT_MAJOR: remove
         $blocksCache = [
             'by_class' => [ClassUtils::getClass($block) => 'my_cache.service.id'],
             'by_type' => [],
@@ -89,7 +93,9 @@ final class BlockContextManagerTest extends TestCase
         static::assertInstanceOf(BlockContextInterface::class, $blockContext);
 
         static::assertSame([
+            // NEXT_MAJOR: remove
             'use_cache' => true,
+            // NEXT_MAJOR: remove
             'extra_cache_keys' => [
                 BlockContextManager::CACHE_KEY => [
                     'template' => 'custom.html.twig',
@@ -122,8 +128,7 @@ final class BlockContextManagerTest extends TestCase
         ]);
         $block->expects(static::once())->method('getSetting')->with('template')->willReturn('custom.html.twig');
 
-        $cacheBlock = ['by_class' => [], 'by_type' => []];
-        $manager = new BlockContextManager($blockLoader, $serviceManager, $cacheBlock, $logger);
+        $manager = new BlockContextManager($blockLoader, $serviceManager, $logger);
 
         $blockContext = $manager->get($block);
 

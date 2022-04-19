@@ -46,7 +46,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->args([
             new ReferenceConfigurator('sonata.block.loader.chain'),
             new ReferenceConfigurator('sonata.block.manager'),
-            '%sonata_block.cache_blocks%',
             (new ReferenceConfigurator('logger'))->nullOnInvalid(),
         ]);
 
