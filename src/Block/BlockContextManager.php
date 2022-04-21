@@ -45,9 +45,11 @@ final class BlockContextManager implements BlockContextManagerInterface
     private $settingsByClass = [];
 
     /**
+     * NEXT_MAJOR: remove.
+     *
      * @var array{by_class: array<class-string, string>, by_type: array<string, string>}
      */
-    private $cacheBlocks;
+    private $cacheBlocks = ['by_class' => [], 'by_type' => []];
 
     /**
      * @var LoggerInterface
@@ -55,18 +57,52 @@ final class BlockContextManager implements BlockContextManagerInterface
     private $logger;
 
     /**
-     * @param array{by_class: array<class-string, string>, by_type: array<string, string>} $cacheBlocks
+     * NEXT_MAJOR: remove $cacheBlocksOrLogger argument.
+     *
+     * @param array{by_class: array<class-string, string>, by_type: array<string, string>}|LoggerInterface|null $cacheBlocksOrLogger
      */
     public function __construct(
         BlockLoaderInterface $blockLoader,
         BlockServiceManagerInterface $blockService,
-        array $cacheBlocks = ['by_class' => [], 'by_type' => []],
+        $cacheBlocksOrLogger = null,
         ?LoggerInterface $logger = null
     ) {
         $this->blockLoader = $blockLoader;
         $this->blockService = $blockService;
-        $this->cacheBlocks = $cacheBlocks;
-        $this->logger = $logger ?? new NullLogger();
+
+        // NEXT_MAJOR: remove if/else block completely and uncomment following line
+        // $this->logger = $logger ?? new NullLogger();
+        if (\is_array($cacheBlocksOrLogger)) {
+            $this->cacheBlocks = $cacheBlocksOrLogger;
+            @trigger_error(
+                sprintf(
+                    'Passing an array as argument 3 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will change to "?%s" in 5.0.',
+                    __METHOD__,
+                    LoggerInterface::class
+                ),
+                \E_USER_DEPRECATED
+            );
+            $this->logger = new NullLogger();
+        } elseif ($cacheBlocksOrLogger instanceof LoggerInterface) {
+            $this->logger = $cacheBlocksOrLogger;
+        } elseif (null === $cacheBlocksOrLogger) {
+            $this->logger = new NullLogger();
+        } else {
+            throw new \TypeError('Argument 3 must be null|array|LoggerInterface');
+        }
+
+        // NEXT_MAJOR: remove
+        if (null !== $logger) {
+            $this->logger = $logger;
+            @trigger_error(
+                sprintf(
+                    'Passing an instance of "%s" as argument 4 to method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will be removed in 5.0.',
+                    LoggerInterface::class,
+                    __METHOD__
+                ),
+                \E_USER_DEPRECATED
+            );
+        }
     }
 
     public function addSettingsByType(string $type, array $settings, bool $replace = false): void

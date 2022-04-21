@@ -58,5 +58,13 @@ final class BlockHelperCompilerPass implements CompilerPassInterface
             new Reference('sonata.block.cache.handler', ContainerInterface::NULL_ON_INVALID_REFERENCE),
             new Reference('debug.stopwatch', ContainerInterface::NULL_ON_INVALID_REFERENCE),
         ]);
+
+        $blockContextManagerDefinition = $container->getDefinition('sonata.block.context_manager.default');
+        $blockContextManagerDefinition->setArguments([
+            new Reference('sonata.block.loader.chain'),
+            new Reference('sonata.block.manager'),
+            new Parameter('sonata_block.cache_blocks'),
+            new Reference('logger', ContainerInterface::NULL_ON_INVALID_REFERENCE),
+        ]);
     }
 }
