@@ -69,9 +69,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             new ReferenceConfigurator('sonata.block.renderer'),
             new ReferenceConfigurator('sonata.block.context_manager'),
             new ReferenceConfigurator('event_dispatcher'),
-            (new ReferenceConfigurator('debug.stopwatch'))->nullOnInvalid(),
-            (new ReferenceConfigurator('sonata.cache.manager'))->nullOnInvalid(),
-            (new ReferenceConfigurator('sonata.block.cache.handler'))->nullOnInvalid(),
+            (new ReferenceConfigurator('debug.stopwatch'))->nullOnInvalid()
         ]);
 
     $services->set('sonata.block.loader.chain', BlockLoaderChain::class)

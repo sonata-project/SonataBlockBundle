@@ -45,64 +45,18 @@ final class BlockContextManager implements BlockContextManagerInterface
     private $settingsByClass = [];
 
     /**
-     * NEXT_MAJOR: remove.
-     *
-     * @var array{by_class: array<class-string, string>, by_type: array<string, string>}
-     */
-    private $cacheBlocks = ['by_class' => [], 'by_type' => []];
-
-    /**
      * @var LoggerInterface
      */
     private $logger;
 
-    /**
-     * NEXT_MAJOR: remove $cacheBlocksOrLogger argument.
-     *
-     * @param array{by_class: array<class-string, string>, by_type: array<string, string>}|LoggerInterface|null $cacheBlocksOrLogger
-     */
     public function __construct(
         BlockLoaderInterface $blockLoader,
         BlockServiceManagerInterface $blockService,
-        $cacheBlocksOrLogger = null,
         ?LoggerInterface $logger = null
     ) {
         $this->blockLoader = $blockLoader;
         $this->blockService = $blockService;
-
-        // NEXT_MAJOR: remove if/else block completely and uncomment following line
-        // $this->logger = $logger ?? new NullLogger();
-        if (\is_array($cacheBlocksOrLogger)) {
-            $this->cacheBlocks = $cacheBlocksOrLogger;
-            @trigger_error(
-                sprintf(
-                    'Passing an array as argument 3 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will change to "?%s" in 5.0.',
-                    __METHOD__,
-                    LoggerInterface::class
-                ),
-                \E_USER_DEPRECATED
-            );
-            $this->logger = new NullLogger();
-        } elseif ($cacheBlocksOrLogger instanceof LoggerInterface) {
-            $this->logger = $cacheBlocksOrLogger;
-        } elseif (null === $cacheBlocksOrLogger) {
-            $this->logger = new NullLogger();
-        } else {
-            throw new \TypeError('Argument 3 must be null|array|LoggerInterface');
-        }
-
-        // NEXT_MAJOR: remove
-        if (null !== $logger) {
-            $this->logger = $logger;
-            @trigger_error(
-                sprintf(
-                    'Passing an instance of "%s" as argument 4 to method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will be removed in 5.0.',
-                    LoggerInterface::class,
-                    __METHOD__
-                ),
-                \E_USER_DEPRECATED
-            );
-        }
+        $this->logger = $logger ?? new NullLogger();
     }
 
     public function addSettingsByType(string $type, array $settings, bool $replace = false): void
@@ -143,8 +97,6 @@ final class BlockContextManager implements BlockContextManagerInterface
             $block = $meta;
         }
 
-        $originalSettings = $settings;
-
         try {
             $settings = $this->resolve($block, array_merge($block->getSettings(), $settings));
         } catch (ExceptionInterface $e) {
@@ -158,36 +110,19 @@ final class BlockContextManager implements BlockContextManagerInterface
             $settings = $this->resolve($block, $settings + ['template' => $block->getSetting('template')]);
         }
 
-        $blockContext = new BlockContext($block, $settings);
-
-        // NEXT_MAJOR: remove next line
-        $this->setDefaultExtraCacheKeys($blockContext, $originalSettings);
-
-        return $blockContext;
+        return new BlockContext($block, $settings);
     }
 
     private function configureSettings(OptionsResolver $optionsResolver, BlockInterface $block): void
     {
         // defaults for all blocks
         $optionsResolver->setDefaults([
-            // NEXT_MAJOR: remove
-            'use_cache' => true,
-            // NEXT_MAJOR: remove
-            'extra_cache_keys' => [],
             'attr' => [],
             'template' => null, // NEXT_MAJOR: Remove the default value
-            // NEXT_MAJOR: remove
-            'ttl' => $block->getTtl(),
         ]);
 
         $optionsResolver
-            // NEXT_MAJOR: remove
-            ->addAllowedTypes('use_cache', 'bool')
-            // NEXT_MAJOR: remove
-            ->addAllowedTypes('extra_cache_keys', 'array')
             ->addAllowedTypes('attr', 'array')
-            // NEXT_MAJOR: remove
-            ->addAllowedTypes('ttl', 'int')
             // NEXT_MAJOR: Remove bool and null.
             ->addAllowedTypes('template', ['null', 'string', 'bool'])
             // NEXT_MAJOR: Remove setDeprecated.
@@ -203,30 +138,6 @@ final class BlockContextManager implements BlockContextManagerInterface
                         return '';
                     }
                 )
-            )
-            // NEXT_MAJOR: Remove setDeprecated.
-            ->setDeprecated(
-                'use_cache',
-                ...$this->deprecationParameters(
-                    '4.11',
-                    'Block option "use_cache" is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.'
-                )
-            )
-            // NEXT_MAJOR: Remove setDeprecated.
-            ->setDeprecated(
-                'extra_cache_keys',
-                ...$this->deprecationParameters(
-                    '4.11',
-                    'Block option "extra_cache_keys" is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.'
-                )
-            )
-            // NEXT_MAJOR: Remove setDeprecated.
-            ->setDeprecated(
-                'ttl',
-                ...$this->deprecationParameters(
-                    '4.11',
-                    'Block option "ttl" is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.'
-                )
             );
 
         // add type and class settings for block
@@ -234,48 +145,6 @@ final class BlockContextManager implements BlockContextManagerInterface
         $settingsByType = $this->settingsByType[$block->getType() ?? ''] ?? [];
         $settingsByClass = $this->settingsByClass[$class] ?? [];
         $optionsResolver->setDefaults(array_merge($settingsByType, $settingsByClass));
-    }
-
-    /**
-     * // NEXT_MAJOR: remove this method.
-     *
-     * Adds context settings, to be able to rebuild a block context, to the
-     * extra_cache_keys.
-     *
-     * @param array<string, mixed> $settings
-     */
-    private function setDefaultExtraCacheKeys(BlockContextInterface $blockContext, array $settings): void
-    {
-        if (false === $blockContext->getSetting('use_cache') || $blockContext->getSetting('ttl') <= 0) {
-            return;
-        }
-
-        $block = $blockContext->getBlock();
-
-        // type by block class
-        $class = ClassUtils::getClass($block);
-        $cacheServiceId = $this->cacheBlocks['by_class'][$class] ?? null;
-
-        // type by block service
-        if (null === $cacheServiceId) {
-            $cacheServiceId = $this->cacheBlocks['by_type'][$block->getType() ?? ''] ?? null;
-        }
-
-        if (null === $cacheServiceId) {
-            // no context cache needed
-            return;
-        }
-
-        // do not add cache settings to extra_cache_keys
-        unset($settings['use_cache'], $settings['extra_cache_keys'], $settings['ttl']);
-
-        $extraCacheKeys = $blockContext->getSetting('extra_cache_keys');
-
-        // add context settings to extra_cache_keys
-        if (!isset($extraCacheKeys[self::CACHE_KEY])) {
-            $extraCacheKeys[self::CACHE_KEY] = $settings;
-            $blockContext->setSetting('extra_cache_keys', $extraCacheKeys);
-        }
     }
 
     /**

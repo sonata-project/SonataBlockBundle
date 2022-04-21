@@ -31,34 +31,6 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class BlockHelperTest extends TestCase
 {
-    /**
-     * @group legacy
-     * @doesNotPerformAssertions
-     *
-     * NEXT_MAJOR: remove this test.
-     */
-    public function testDeprecatedConstructorSignatures(): void
-    {
-        new BlockHelper(
-            $this->createMock(BlockServiceManagerInterface::class),
-            ['by_class' => [], 'by_type' => []],
-            $this->createMock(BlockRendererInterface::class),
-            $this->createMock(BlockContextManagerInterface::class),
-            $this->createMock(EventDispatcherInterface::class),
-            $this->createMock(CacheManagerInterface::class),
-            $this->createMock(HttpCacheHandlerInterface::class),
-            new Stopwatch()
-        );
-
-        new BlockHelper(
-            $this->createMock(BlockServiceManagerInterface::class),
-            $this->createMock(BlockRendererInterface::class),
-            $this->createMock(BlockContextManagerInterface::class),
-            $this->createMock(EventDispatcherInterface::class),
-            new Stopwatch()
-        );
-    }
-
     public function testRenderEventWithNoListener(): void
     {
         $blockRenderer = $this->createMock(BlockRendererInterface::class);
@@ -73,9 +45,6 @@ final class BlockHelperTest extends TestCase
         static::assertSame('', $helper->renderEvent('my.event'));
     }
 
-    /**
-     * @group legacy
-     */
     public function testRenderEventWithListeners(): void
     {
         $blockService = $this->createMock(BlockServiceInterface::class);
@@ -97,9 +66,6 @@ final class BlockHelperTest extends TestCase
         $eventDispatcher->expects(static::once())->method('dispatch')->willReturnCallback(static function (BlockEvent $event): BlockEvent {
             $block = new Block();
             $block->setId(1);
-            $block->setSettings([
-                'use_cache' => false,
-            ]);
             $block->setType('test');
 
             $event->addBlock($block);
@@ -107,8 +73,7 @@ final class BlockHelperTest extends TestCase
             return $event;
         });
 
-        $cacheBlocks = ['by_class' => [], 'by_type' => []];
-        $helper = new BlockHelper($blockServiceManager, $cacheBlocks, $blockRenderer, $blockContextManager, $eventDispatcher);
+        $helper = new BlockHelper($blockRenderer, $blockContextManager, $eventDispatcher);
 
         static::assertSame('<span>test</span>', $helper->renderEvent('my.event'));
     }
