@@ -37,7 +37,7 @@ final class BlockHelperTest extends TestCase
      *
      * NEXT_MAJOR: remove this test.
      */
-    public function testDeprecatedConstructorSignature(): void
+    public function testDeprecatedConstructorSignatures(): void
     {
         new BlockHelper(
             $this->createMock(BlockServiceManagerInterface::class),
@@ -49,11 +49,18 @@ final class BlockHelperTest extends TestCase
             $this->createMock(HttpCacheHandlerInterface::class),
             new Stopwatch()
         );
+
+        new BlockHelper(
+            $this->createMock(BlockServiceManagerInterface::class),
+            $this->createMock(BlockRendererInterface::class),
+            $this->createMock(BlockContextManagerInterface::class),
+            $this->createMock(EventDispatcherInterface::class),
+            new Stopwatch()
+        );
     }
 
     public function testRenderEventWithNoListener(): void
     {
-        $blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
         $blockRenderer = $this->createMock(BlockRendererInterface::class);
         $blockContextManager = $this->createMock(BlockContextManagerInterface::class);
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
@@ -61,7 +68,7 @@ final class BlockHelperTest extends TestCase
             return $event;
         });
 
-        $helper = new BlockHelper($blockServiceManager, $blockRenderer, $blockContextManager, $eventDispatcher);
+        $helper = new BlockHelper($blockRenderer, $blockContextManager, $eventDispatcher);
 
         static::assertSame('', $helper->renderEvent('my.event'));
     }

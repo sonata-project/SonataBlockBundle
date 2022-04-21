@@ -66,7 +66,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set('sonata.block.templating.helper', BlockHelper::class)
         ->tag('twig.runtime')
         ->args([
-            new ReferenceConfigurator('sonata.block.manager'),
             new ReferenceConfigurator('sonata.block.renderer'),
             new ReferenceConfigurator('sonata.block.context_manager'),
             new ReferenceConfigurator('event_dispatcher'),
