@@ -30,16 +30,6 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  *     memory_start: int|false,
  *     memory_end: int|false,
  *     memory_peak: int|false,
- *     cache: array{
- *         keys: mixed[],
- *         contextual_keys: mixed[],
- *         handler: false,
- *         from_cache: false,
- *         ttl: int,
- *         created_at: int|false|null,
- *         lifetime: int,
- *         age: int,
- *     },
  *     assets: array{
  *         js: string[],
  *         css: string[],
@@ -199,15 +189,6 @@ class BlockHelper
         $response = $this->blockRenderer->render($blockContext);
 
         if (null !== $this->stopwatch) {
-            // avoid \DateTime because of serialize/unserialize issue in PHP7.3 (https://bugs.php.net/bug.php?id=77302)
-            $responseDate = $response->getDate();
-            $stats['cache']['created_at'] = null === $responseDate ? null : $responseDate->getTimestamp();
-            $stats['cache']['ttl'] = $response->getTtl() ?? 0;
-            $stats['cache']['age'] = $response->getAge();
-            $stats['cache']['lifetime'] = $stats['cache']['age'] + $stats['cache']['ttl'];
-        }
-
-        if (null !== $this->stopwatch) {
             $this->stopTracing($blockContext->getBlock(), $stats);
         }
 
@@ -312,16 +293,6 @@ class BlockHelper
             'memory_start' => memory_get_usage(true),
             'memory_end' => false,
             'memory_peak' => false,
-            'cache' => [
-                'keys' => [],
-                'contextual_keys' => [],
-                'handler' => false,
-                'from_cache' => false,
-                'ttl' => 0,
-                'created_at' => false,
-                'lifetime' => 0,
-                'age' => 0,
-            ],
             'assets' => [
                 'js' => [],
                 'css' => [],
