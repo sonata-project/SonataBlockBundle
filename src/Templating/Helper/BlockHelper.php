@@ -123,6 +123,8 @@ class BlockHelper
      * NEXT_MAJOR: remove the deprecated signature and cleanup the constructor.
      *
      * @param array{by_class: array<class-string, string>, by_type: array<string, string>}|BlockContextManagerInterface|BlockRendererInterface $blockContextManagerOrBlockRendererOrCacheBlocks
+     *
+     * @internal
      */
     public function __construct(
         object $blockServiceManagerOrBlockRenderer,
