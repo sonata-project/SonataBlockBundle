@@ -87,6 +87,9 @@ class BlockHelper
      */
     private $stopwatch;
 
+    /**
+     * @internal
+     */
     public function __construct(
         BlockRendererInterface $blockRenderer,
         BlockContextManagerInterface $blockContextManager,
