@@ -36,7 +36,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  *         handler: false,
  *         from_cache: false,
  *         ttl: int,
- *         created_at: false,
+ *         created_at: int|false|null,
  *         lifetime: int,
  *         age: int,
  *     },
@@ -183,7 +183,7 @@ class BlockHelper
     {
         $blockContext = $this->blockContextManager->get($block, $options);
 
-        $stats = [];
+       $stats = [];
 
         if (null !== $this->stopwatch) {
             $stats = $this->startTracing($blockContext->getBlock());
@@ -201,6 +201,7 @@ class BlockHelper
         }
 
         if (null !== $this->stopwatch) {
+            /** @phpstan-var Trace $stats */
             $this->stopTracing($blockContext->getBlock(), $stats);
         }
 
