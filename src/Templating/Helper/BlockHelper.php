@@ -183,6 +183,10 @@ class BlockHelper
     {
         $blockContext = $this->blockContextManager->get($block, $options);
 
+        /**
+         * @var array<string, mixed>
+         * @phpstan-var Trace
+         */
         $stats = [];
 
         if (null !== $this->stopwatch) {
@@ -201,7 +205,6 @@ class BlockHelper
         }
 
         if (null !== $this->stopwatch) {
-            /* @phpstan-var Trace $stats */
             $this->stopTracing($blockContext->getBlock(), $stats);
         }
 
