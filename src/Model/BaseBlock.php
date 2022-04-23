@@ -63,15 +63,6 @@ abstract class BaseBlock implements BlockInterface
      */
     protected $type;
 
-    /**
-     * NEXT_MAJOR: remove.
-     *
-     * @deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0
-     *
-     * @var int|null
-     */
-    protected $ttl;
-
     public function __construct()
     {
         $this->settings = [];
@@ -195,24 +186,6 @@ abstract class BaseBlock implements BlockInterface
     public function hasParent(): bool
     {
         return $this->getParent() instanceof self;
-    }
-
-    /**
-     * @deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.
-     */
-    public function getTtl(): int
-    {
-        $ttl = $this->getSetting('ttl', 86400);
-
-        foreach ($this->getChildren() as $block) {
-            $blockTtl = $block->getTtl();
-
-            $ttl = ($blockTtl < $ttl) ? $blockTtl : $ttl;
-        }
-
-        $this->ttl = $ttl;
-
-        return $this->ttl;
     }
 
     public function hasChildren(): bool

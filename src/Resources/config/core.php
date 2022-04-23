@@ -16,8 +16,6 @@ use Sonata\BlockBundle\Block\BlockLoaderChain;
 use Sonata\BlockBundle\Block\BlockRenderer;
 use Sonata\BlockBundle\Block\BlockServiceManager;
 use Sonata\BlockBundle\Block\Loader\ServiceLoader;
-use Sonata\BlockBundle\Cache\HttpCacheHandler;
-use Sonata\BlockBundle\Cache\NoopHttpCacheHandler;
 use Sonata\BlockBundle\Menu\MenuRegistry;
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
 use Sonata\BlockBundle\Twig\Extension\BlockExtension;
@@ -87,10 +85,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->args([
             [], // templates
         ]);
-
-    $services->set('sonata.block.cache.handler.default', HttpCacheHandler::class);
-
-    $services->set('sonata.block.cache.handler.noop', NoopHttpCacheHandler::class);
 
     $services->alias(BlockHelper::class, 'sonata.block.templating.helper');
 };

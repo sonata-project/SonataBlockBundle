@@ -75,10 +75,6 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
                         'required' => false,
                         'label' => 'form.label_title',
                     ]],
-                    ['cache_policy', ChoiceType::class, [
-                        'label' => 'form.label_cache_policy',
-                        'choices' => ['public', 'private'],
-                    ]],
                     ['menu_name', ChoiceType::class, $choiceOptions],
                     ['safe_labels', CheckboxType::class, [
                         'required' => false,
@@ -123,7 +119,6 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
 
         $this->assertSettings([
             'title' => '',
-            'cache_policy' => 'public',
             'template' => '@SonataBlock/Block/block_core_menu.html.twig',
             'menu_name' => '',
             'safe_labels' => false,

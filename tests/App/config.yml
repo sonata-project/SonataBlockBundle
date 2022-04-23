@@ -18,7 +18,3 @@ services:
     Sonata\BlockBundle\Tests\App\Controller\DemoController:
         tags:
             - controller.service_arguments
-
-# NEXT_MAJOR: remove this block
-sonata_block:
-    http_cache: false
