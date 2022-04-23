@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests\Block;
 
-use Doctrine\Common\Util\ClassUtils;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Sonata\BlockBundle\Block\BlockContextInterface;
@@ -48,22 +47,11 @@ final class BlockContextManagerTest extends TestCase
         static::assertInstanceOf(BlockContextInterface::class, $blockContext);
 
         static::assertSame([
-            // NEXT_MAJOR: remove
-            'use_cache' => true,
-            // NEXT_MAJOR: remove
-            'extra_cache_keys' => [],
             'attr' => [],
             'template' => 'custom.html.twig',
-            // NEXT_MAJOR: remove
-            'ttl' => 0,
         ], $blockContext->getSettings());
     }
 
-    /**
-     * NEXT_MAJOR: remove legacy group.
-     *
-     * @group legacy
-     */
     public function testGetWithSettings(): void
     {
         $service = $this->createMock(AbstractBlockService::class);
@@ -77,34 +65,17 @@ final class BlockContextManagerTest extends TestCase
         $block = $this->createMock(BlockInterface::class);
         $block->expects(static::once())->method('getSettings')->willReturn([]);
 
-        // NEXT_MAJOR: remove
-        $blocksCache = [
-            'by_class' => [ClassUtils::getClass($block) => 'my_cache.service.id'],
-            'by_type' => [],
-        ];
+        $manager = new BlockContextManager($blockLoader, $serviceManager);
 
-        $manager = new BlockContextManager($blockLoader, $serviceManager, $blocksCache);
-
-        // NEXT_MAJOR: remove ttl
-        $settings = ['ttl' => 1, 'template' => 'custom.html.twig'];
+        $settings = ['template' => 'custom.html.twig'];
 
         $blockContext = $manager->get($block, $settings);
 
         static::assertInstanceOf(BlockContextInterface::class, $blockContext);
 
         static::assertSame([
-            // NEXT_MAJOR: remove
-            'use_cache' => true,
-            // NEXT_MAJOR: remove
-            'extra_cache_keys' => [
-                BlockContextManager::CACHE_KEY => [
-                    'template' => 'custom.html.twig',
-                ],
-            ],
             'attr' => [],
             'template' => 'custom.html.twig',
-            // NEXT_MAJOR: remove ttl
-            'ttl' => 1,
         ], $blockContext->getSettings());
     }
 

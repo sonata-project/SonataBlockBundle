@@ -202,10 +202,6 @@ abstract class BaseBlock implements BlockInterface
      */
     public function getTtl(): int
     {
-        if (false === $this->getSetting('use_cache', true)) {
-            return 0;
-        }
-
         $ttl = $this->getSetting('ttl', 86400);
 
         foreach ($this->getChildren() as $block) {

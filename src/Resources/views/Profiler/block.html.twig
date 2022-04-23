@@ -96,9 +96,6 @@
         {% for id, block in blocks %}
 
             {% set rowspan = 1 %}
-            {% if block.cache.handler %}
-                {% set rowspan = rowspan + 1 %}
-            {% endif %}
 
             {% if block.assets.js|length > 0 or block.assets.css|length > 0 %}
                 {% set rowspan = rowspan + 1 %}
@@ -111,21 +108,6 @@
                 <td>{{ (block.memory_peak/1000)|number_format(0) }} Kb</td>
                 <td>{{ block.duration|number_format(2) }} ms</td>
             </tr>
-
-            {% if block.cache.handler %}
-                <tr style="vertical-align: top">
-                    <td colspan="3">
-                        Cache Keys: <pre>{{ block.cache.keys|json_encode() }}</pre> <br />
-                        Contextual Keys: <pre>{{ block.cache.contextual_keys|json_encode() }}</pre>
-                    </td>
-                    <td colspan="2">
-                        TTL: {{ block.cache.ttl }}s. <br />
-                        Lifetime: {{ block.cache.lifetime }}s. <br />
-                        Backend: {{ block.cache.handler }} <br />
-                        Loading from cache: {% if block.cache.from_cache %}YES{% else %}NO{% endif %} <br />
-                    </td>
-                </tr>
-            {% endif %}
 
             {% if block.assets.js|length > 0 or block.assets.css|length > 0  %}
                 <tr>
@@ -161,30 +143,6 @@
                 <th>Mem. diff / Mem. peak / Duration</th>
                 <td>{{ ((block.memory_end-block.memory_start)/1000)|number_format(0) }} Kb / {{ (block.memory_peak/1000)|number_format(0) }} Kb / {{ block.duration|number_format(2) }} ms</td>
             </tr>
-
-            {% if block.cache.handler %}
-                <tr>
-                    <th>Cache backend</th>
-                    <td>
-                        {{ block.cache.handler }} - Loading from cache: {% if block.cache.from_cache %}YES{% else %}NO{% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <th>Cache TTL / Lifetime</th>
-                    <td>
-                        {{ block.cache.ttl }}s. / {{ block.cache.lifetime }}s
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        Cache Informations
-                    </th>
-                    <td>
-                        Cache Keys: <pre>{{ block.cache.keys|json_encode() }}</pre> <br />
-                        Contextual Keys: <pre>{{ block.cache.contextual_keys|json_encode() }}</pre> <br />
-                    </td>
-                </tr>
-            {% endif %}
 
             {% if block.assets.js|length > 0 or block.assets.css|length > 0  %}
                 <tr>
