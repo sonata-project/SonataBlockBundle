@@ -93,13 +93,6 @@ interface BlockInterface
     public function getUpdatedAt(): ?\DateTime;
 
     /**
-     * Returns the block cache TTL.
-     *
-     * @deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.
-     */
-    public function getTtl(): int;
-
-    /**
      * Sets the block settings.
      *
      * @param array<string, mixed> $settings An array of key/value

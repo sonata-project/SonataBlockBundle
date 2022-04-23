@@ -75,8 +75,6 @@ final class SonataBlockExtension extends Extension
         $this->configureBlockContainers($container, $config);
         $this->configureContext($container, $config);
         $this->configureLoaderChain($container, $config);
-        // NEXT_MAJOR: remove next line
-        $this->configureCache($container, $config);
         $this->configureForm($container, $config);
         $this->configureProfiler($container, $config);
         $this->configureException($container, $config);
@@ -92,18 +90,6 @@ final class SonataBlockExtension extends Extension
         }
 
         $container->getDefinition('sonata.block.twig.global')->replaceArgument(0, $config['templates']);
-
-        $container->getDefinition('sonata.block.cache.handler.default')
-            ->setDeprecated(...$this->getDeprecationMessage(
-                'The "%service_id%" service is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.',
-                '4.11',
-            ));
-
-        $container->getDefinition('sonata.block.cache.handler.noop')
-            ->setDeprecated(...$this->getDeprecationMessage(
-                'The "%service_id%" service is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.',
-                '4.11',
-            ));
     }
 
     /**
@@ -129,33 +115,6 @@ final class SonataBlockExtension extends Extension
         $container->setParameter($this->getAlias().'.blocks_by_class', $config['blocks_by_class']);
 
         $container->setAlias('sonata.block.context_manager', $config['context_manager']);
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this method.
-     *
-     * @param array<string, mixed> $config
-     */
-    public function configureCache(ContainerBuilder $container, array $config): void
-    {
-        if (\is_array($config['http_cache'])) {
-            $container->setAlias('sonata.block.cache.handler', $config['http_cache']['handler']);
-
-            if (true === $config['http_cache']['listener']) {
-                $container->getDefinition($config['http_cache']['handler'])
-                    ->addTag('kernel.event_listener', ['event' => 'kernel.response', 'method' => 'onKernelResponse']);
-            }
-        }
-
-        $cacheBlocks = ['by_class' => [], 'by_type' => []];
-        foreach ($config['blocks'] as $service => $settings) {
-            $cacheBlocks['by_type'][$service] = $settings['cache'];
-        }
-        foreach ($config['blocks_by_class'] as $class => $settings) {
-            $cacheBlocks['by_class'][$class] = $settings['cache'];
-        }
-
-        $container->setParameter($this->getAlias().'.cache_blocks', $cacheBlocks);
     }
 
     /**

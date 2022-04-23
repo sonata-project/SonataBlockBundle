@@ -50,10 +50,6 @@
         <source>form.label_class</source>
         <target>CSS Klasse</target>
       </trans-unit>
-      <trans-unit id="form.label_cache_policy">
-        <source>form.label_cache_policy</source>
-        <target>Cache Policy</target>
-      </trans-unit>
       <trans-unit id="form.label_safe_labels">
         <source>form.label_safe_labels</source>
         <target>Sichere Bezeichner</target>
