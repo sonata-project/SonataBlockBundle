@@ -69,6 +69,7 @@ class MenuBlockService extends AbstractBlockService implements EditableBlockServ
             'context' => $blockContext,
         ];
 
+        // NEXT_MAJOR: remove
         if ('private' === $blockContext->getSetting('cache_policy')) {
             return $this->renderPrivateResponse($template, $responseSettings, $response);
         }
@@ -104,6 +105,7 @@ class MenuBlockService extends AbstractBlockService implements EditableBlockServ
     {
         $resolver->setDefaults([
             'title' => '',
+            // NEXT_MAJOR: Remove.
             'cache_policy' => 'public',
             'template' => '@SonataBlock/Block/block_core_menu.html.twig',
             'menu_name' => '',
@@ -116,6 +118,15 @@ class MenuBlockService extends AbstractBlockService implements EditableBlockServ
             'children_class' => 'list-group-item',
             'menu_template' => null,
         ]);
+
+        // NEXT_MAJOR: Remove setDeprecated.
+        $resolver->setDeprecated(
+            'cache_policy',
+            ...$this->deprecationParameters(
+                '4.x',
+                'Option "cache_policy" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
+            )
+        );
     }
 
     public function getMetadata(): MetadataInterface
@@ -217,5 +228,27 @@ class MenuBlockService extends AbstractBlockService implements EditableBlockServ
         }
 
         return $options;
+    }
+
+    /**
+     * This class is a BC layer for deprecation messages for symfony/options-resolver < 5.1.
+     * Remove this class when dropping support for symfony/options-resolver < 5.1.
+     *
+     * @param string|\Closure $message
+     *
+     * @return mixed[]
+     */
+    private function deprecationParameters(string $version, $message): array
+    {
+        // @phpstan-ignore-next-line
+        if (method_exists(OptionsResolver::class, 'define')) {
+            return [
+                'sonata-project/block-bundle',
+                $version,
+                $message,
+            ];
+        }
+
+        return [$message];
     }
 }
