@@ -66,7 +66,7 @@ abstract class BaseBlock implements BlockInterface
     /**
      * NEXT_MAJOR: remove.
      *
-     * @deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0
+     * @deprecated since sonata-project/block-bundle 4.12 and will be removed in 5.0
      *
      * @var int|null
      */

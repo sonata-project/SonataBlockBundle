@@ -76,7 +76,7 @@ final class BlockContextManager implements BlockContextManagerInterface
             $this->cacheBlocks = $cacheBlocksOrLogger;
             @trigger_error(
                 sprintf(
-                    'Passing an array as argument 3 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will change to "?%s" in 5.0.',
+                    'Passing an array as argument 3 for method "%s" is deprecated since sonata-project/block-bundle 4.12. The argument will change to "?%s" in 5.0.',
                     __METHOD__,
                     LoggerInterface::class
                 ),
@@ -96,7 +96,7 @@ final class BlockContextManager implements BlockContextManagerInterface
             $this->logger = $logger;
             @trigger_error(
                 sprintf(
-                    'Passing an instance of "%s" as argument 4 to method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will be removed in 5.0.',
+                    'Passing an instance of "%s" as argument 4 to method "%s" is deprecated since sonata-project/block-bundle 4.12. The argument will be removed in 5.0.',
                     LoggerInterface::class,
                     __METHOD__
                 ),

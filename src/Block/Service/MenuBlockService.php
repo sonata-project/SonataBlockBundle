@@ -123,8 +123,8 @@ class MenuBlockService extends AbstractBlockService implements EditableBlockServ
         $resolver->setDeprecated(
             'cache_policy',
             ...$this->deprecationParameters(
-                '4.x',
-                'Option "cache_policy" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
+                '4.12',
+                'Option "cache_policy" is deprecated since sonata-project/block-bundle 4.12 and will be removed in 5.0.'
             )
         );
     }
