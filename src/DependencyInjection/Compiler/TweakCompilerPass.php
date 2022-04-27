@@ -77,11 +77,9 @@ final class TweakCompilerPass implements CompilerPassInterface
     }
 
     /**
-     * NEXT_MAJOR: Change visibility to private.
-     *
      * Apply configurations to the context manager.
      */
-    public function applyContext(ContainerBuilder $container): void
+    private function applyContext(ContainerBuilder $container): void
     {
         $definition = $container->findDefinition('sonata.block.context_manager');
 

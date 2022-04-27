@@ -22,9 +22,6 @@ final class ConfigurationTest extends TestCase
     /**
      * @param string[] $contexts
      *
-     * @group legacy
-     * NEXT_MAJOR: remove group legacy annotation
-     *
      * @dataProvider providerContexts
      */
     public function testOptions(array $contexts): void

@@ -92,12 +92,15 @@ final class SonataBlockExtension extends Extension
         $container->getDefinition('sonata.block.twig.global')->replaceArgument(0, $config['templates']);
     }
 
+    public function getNamespace(): string
+    {
+        return 'http://sonata-project.com/schema/dic/block';
+    }
+
     /**
-     * NEXT_MAJOR: Change visibility to private.
-     *
      * @param array<string, mixed> $config
      */
-    public function configureBlockContainers(ContainerBuilder $container, array $config): void
+    private function configureBlockContainers(ContainerBuilder $container, array $config): void
     {
         $container->setParameter('sonata.block.container.types', $config['container']['types']);
 
@@ -105,11 +108,9 @@ final class SonataBlockExtension extends Extension
     }
 
     /**
-     * NEXT_MAJOR: Change visibility to private.
-     *
      * @param array<string, mixed> $config
      */
-    public function configureContext(ContainerBuilder $container, array $config): void
+    private function configureContext(ContainerBuilder $container, array $config): void
     {
         $container->setParameter($this->getAlias().'.blocks', $config['blocks']);
         $container->setParameter($this->getAlias().'.blocks_by_class', $config['blocks_by_class']);
@@ -118,11 +119,9 @@ final class SonataBlockExtension extends Extension
     }
 
     /**
-     * NEXT_MAJOR: Change visibility to private.
-     *
      * @param array<string, mixed> $config
      */
-    public function configureLoaderChain(ContainerBuilder $container, array $config): void
+    private function configureLoaderChain(ContainerBuilder $container, array $config): void
     {
         $types = [];
         foreach ($config['blocks'] as $service => $settings) {
@@ -133,11 +132,9 @@ final class SonataBlockExtension extends Extension
     }
 
     /**
-     * NEXT_MAJOR: Change visibility to private.
-     *
      * @param array<string, mixed> $config
      */
-    public function configureForm(ContainerBuilder $container, array $config): void
+    private function configureForm(ContainerBuilder $container, array $config): void
     {
         $defaults = $config['default_contexts'];
 
@@ -161,11 +158,9 @@ final class SonataBlockExtension extends Extension
     }
 
     /**
-     * NEXT_MAJOR: Change visibility to private.
-     *
      * @param array<string, mixed> $config
      */
-    public function configureProfiler(ContainerBuilder $container, array $config): void
+    private function configureProfiler(ContainerBuilder $container, array $config): void
     {
         $container->setAlias('sonata.block.renderer', 'sonata.block.renderer.default');
 
@@ -184,11 +179,9 @@ final class SonataBlockExtension extends Extension
     }
 
     /**
-     * NEXT_MAJOR: Change visibility to private.
-     *
      * @param array<string, mixed> $config
      */
-    public function configureException(ContainerBuilder $container, array $config): void
+    private function configureException(ContainerBuilder $container, array $config): void
     {
         // retrieve available filters
         $filters = [];
@@ -225,11 +218,6 @@ final class SonataBlockExtension extends Extension
         $defaultRenderer = $config['exception']['default']['renderer'];
         $definition->addMethodCall('setDefaultFilter', [$defaultFilter]);
         $definition->addMethodCall('setDefaultRenderer', [$defaultRenderer]);
-    }
-
-    public function getNamespace(): string
-    {
-        return 'http://sonata-project.com/schema/dic/block';
     }
 
     /**
