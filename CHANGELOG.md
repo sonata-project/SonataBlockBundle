@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.12.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.11.0...4.12.0) - 2022-04-27
+### Changed
+- [[#1042](https://github.com/sonata-project/SonataBlockBundle/pull/1042)] Marked `BlockHelper::__construct` as `@internal` ([@dmaicher](https://github.com/dmaicher))
+
+### Deprecated
+- [[#1045](https://github.com/sonata-project/SonataBlockBundle/pull/1045)] Deprecated method `AbstractBlockService::renderPrivateResponse()` ([@dmaicher](https://github.com/dmaicher))
+- [[#1045](https://github.com/sonata-project/SonataBlockBundle/pull/1045)] Deprecated option `cache_policy` on `MenuBlockService` ([@dmaicher](https://github.com/dmaicher))
+- [[#1042](https://github.com/sonata-project/SonataBlockBundle/pull/1042)] Deprecated passing an instance of `BlockServiceManagerInterface` as first argument for `BlockHelper::__construct` ([@dmaicher](https://github.com/dmaicher))
+- [[#1042](https://github.com/sonata-project/SonataBlockBundle/pull/1042)] Deprecated `BaseBlock::$ttl` ([@dmaicher](https://github.com/dmaicher))
+- [[#1039](https://github.com/sonata-project/SonataBlockBundle/pull/1039)] Deprecated passing array `$cacheBlocks` as 3rd argument for `BlockContextManager::__construct` ([@dmaicher](https://github.com/dmaicher))
+- [[#1039](https://github.com/sonata-project/SonataBlockBundle/pull/1039)] Deprecated `BlockContextManagerInterface::CACHE_KEY` ([@dmaicher](https://github.com/dmaicher))
+
 ## [4.11.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.10.0...4.11.0) - 2022-03-07
 ### Deprecated
 - [[#1011](https://github.com/sonata-project/SonataBlockBundle/pull/1011)] Integration with `SonataCacheBundle` has been deprecated ([@dmaicher](https://github.com/dmaicher))

@@ -52,7 +52,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
      * Returns a Response object that cannot be cacheable, this must be used if the Response is related to the user.
      * A good solution to make the page cacheable is to configure the block to be cached with javascript ...
      *
-     * @deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.
+     * @deprecated since sonata-project/block-bundle 4.12 and will be removed in 5.0.
      *
      * NEXT_MAJOR: remove
      *
@@ -62,7 +62,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
     {
         @trigger_error(
             sprintf(
-                'Method "%s" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.',
+                'Method "%s" is deprecated since sonata-project/block-bundle 4.12 and will be removed in 5.0.',
                 __METHOD__
             ),
             \E_USER_DEPRECATED
