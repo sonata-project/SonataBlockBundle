@@ -70,13 +70,7 @@ abstract class BaseBlock implements BlockInterface
         $this->children = [];
     }
 
-    /**
-     * NEXT_MAJOR: Add return typehint.
-     *
-     * @return string
-     */
-    #[\ReturnTypeWillChange]
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf('%s ~ #%s', $this->getName() ?? '', $this->getId() ?? '');
     }

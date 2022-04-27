@@ -80,8 +80,6 @@ abstract class BlockServiceTestCase extends TestCase
     {
         $completeExpectedOptions = $expected + [
             'attr' => [],
-            // NEXT_MAJOR: remove
-            'template' => null,
         ];
 
         ksort($completeExpectedOptions);

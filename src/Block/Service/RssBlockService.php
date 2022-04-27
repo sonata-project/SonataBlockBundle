@@ -122,7 +122,6 @@ final class RssBlockService extends AbstractBlockService implements EditableBloc
         }
 
         $template = $blockContext->getTemplate();
-        \assert(null !== $template);
 
         return $this->renderResponse($template, [
             'feeds' => $feeds,

@@ -31,7 +31,6 @@ final class TemplateBlockService extends AbstractBlockService implements Editabl
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
         $template = $blockContext->getTemplate();
-        \assert(null !== $template);
 
         return $this->renderResponse($template, [
             'block' => $blockContext->getBlock(),

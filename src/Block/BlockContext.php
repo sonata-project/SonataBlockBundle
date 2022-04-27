@@ -66,22 +66,12 @@ final class BlockContext implements BlockContextInterface
         return $this;
     }
 
-    /**
-     * NEXT_MAJOR: Restrict typehint to string.
-     */
-    public function getTemplate(): ?string
+    public function getTemplate(): string
     {
         $template = $this->getSetting('template');
 
         if (!\is_string($template)) {
-            @trigger_error(
-                'Not providing a string value for the "template" setting is deprecated since'
-                .' sonata-project/block-bundle 4.10 and will be throw an exception in version 5.0.',
-                \E_USER_DEPRECATED
-            );
-
-            // NEXT_MAJOR: Uncomment the exception instead.
-            // throw new \InvalidArgumentException('The "template" setting MUST be a string.');
+            throw new \InvalidArgumentException('The "template" setting MUST be a string.');
         }
 
         return $template;

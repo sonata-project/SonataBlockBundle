@@ -34,8 +34,5 @@ interface BlockContextInterface
      */
     public function setSetting(string $name, $value): self;
 
-    /**
-     * NEXT_MAJOR: Restrict typehint to string.
-     */
-    public function getTemplate(): ?string;
+    public function getTemplate(): string;
 }

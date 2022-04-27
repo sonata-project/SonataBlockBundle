@@ -72,7 +72,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
         $template = $blockContext->getTemplate();
-        \assert(null !== $template);
 
         return $this->renderResponse($template, [
             'block_context' => $blockContext,

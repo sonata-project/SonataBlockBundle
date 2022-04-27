@@ -60,7 +60,6 @@ class MenuBlockService extends AbstractBlockService implements EditableBlockServ
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
         $template = $blockContext->getTemplate();
-        \assert(null !== $template);
 
         $responseSettings = [
             'menu' => $this->getMenu($blockContext),

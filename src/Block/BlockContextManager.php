@@ -18,7 +18,6 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
-use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class BlockContextManager implements BlockContextManagerInterface
@@ -106,8 +105,12 @@ final class BlockContextManager implements BlockContextManagerInterface
                 $e->getMessage()
             ));
 
-            // NEXT_MAJOR: Only pass the template value if it's a string.
-            $settings = $this->resolve($block, $settings + ['template' => $block->getSetting('template')]);
+            $template = $block->getSetting('template');
+
+            $settings = $this->resolve(
+                $block,
+                $settings + (\is_string($template) ? ['template' => $template] : [])
+            );
         }
 
         return new BlockContext($block, $settings);
@@ -118,27 +121,13 @@ final class BlockContextManager implements BlockContextManagerInterface
         // defaults for all blocks
         $optionsResolver->setDefaults([
             'attr' => [],
-            'template' => null, // NEXT_MAJOR: Remove the default value
         ]);
+
+        $optionsResolver->setDefined('template');
 
         $optionsResolver
             ->addAllowedTypes('attr', 'array')
-            // NEXT_MAJOR: Remove bool and null.
-            ->addAllowedTypes('template', ['null', 'string', 'bool'])
-            // NEXT_MAJOR: Remove setDeprecated.
-            ->setDeprecated(
-                'template',
-                ...$this->deprecationParameters(
-                    '4.5.0',
-                    static function (Options $options, $value): string {
-                        if (\is_bool($value)) {
-                            return 'Not passing a string value to option "template" is deprecated and will not be allowed in 5.0.';
-                        }
-
-                        return '';
-                    }
-                )
-            );
+            ->addAllowedTypes('template', 'string');
 
         // add type and class settings for block
         $class = ClassUtils::getClass($block);
@@ -162,27 +151,5 @@ final class BlockContextManager implements BlockContextManagerInterface
         $service->configureSettings($optionsResolver);
 
         return $optionsResolver->resolve($settings);
-    }
-
-    /**
-     * This class is a BC layer for deprecation messages for symfony/options-resolver < 5.1.
-     * Remove this class when dropping support for symfony/options-resolver < 5.1.
-     *
-     * @param string|\Closure $message
-     *
-     * @return mixed[]
-     */
-    private function deprecationParameters(string $version, $message): array
-    {
-        // @phpstan-ignore-next-line
-        if (method_exists(OptionsResolver::class, 'define')) {
-            return [
-                'sonata-project/block-bundle',
-                $version,
-                $message,
-            ];
-        }
-
-        return [$message];
     }
 }
