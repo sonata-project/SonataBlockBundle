@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -38,7 +39,10 @@ final class TweakCompilerPass implements CompilerPassInterface
         /** @var string[] $defaultContexts */
         $defaultContexts = $container->getParameter('sonata_blocks.default_contexts');
 
+        /** @var array<string, Reference> $blockServiceReferences */
+        $blockServiceReferences = [];
         foreach ($container->findTaggedServiceIds('sonata.block') as $id => $tags) {
+            // NEXT_MAJOR: remove and do not make them public
             $container->getDefinition($id)
                 ->setPublic(true);
 
@@ -56,7 +60,11 @@ final class TweakCompilerPass implements CompilerPassInterface
             }
 
             $manager->addMethodCall('add', [$id, $id, $settings['contexts']]);
+
+            $blockServiceReferences[$id] = new Reference($id);
         }
+
+        $manager->setArgument(0, ServiceLocatorTagPass::register($container, $blockServiceReferences));
 
         foreach ($container->findTaggedServiceIds('knp_menu.menu') as $serviceId => $tags) {
             foreach ($tags as $attributes) {

@@ -31,12 +31,12 @@ interface BlockServiceManagerInterface
     public function get(BlockInterface $block): BlockServiceInterface;
 
     /**
-     * @return BlockServiceInterface[]
+     * @return array<string, BlockServiceInterface>
      */
     public function getServices(): array;
 
     /**
-     * @return BlockServiceInterface[]
+     * @return array<string, BlockServiceInterface>
      */
     public function getServicesByContext(string $context, bool $includeContainers = true): array;
 
