@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Block;
 
+use Psr\Container\ContainerInterface;
 use Sonata\BlockBundle\Block\Service\BlockServiceInterface;
 use Sonata\BlockBundle\Block\Service\EditableBlockService;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Validator\ErrorElement;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface as DependencyInjectionContainerInterface;
 
 final class BlockServiceManager implements BlockServiceManagerInterface
 {
@@ -42,13 +43,45 @@ final class BlockServiceManager implements BlockServiceManagerInterface
     private $contexts;
 
     /**
-     * @psalm-suppress ContainerDependency
+     * @var string[]
      */
-    public function __construct(ContainerInterface $container)
+    private $containerTypes;
+
+    /**
+     * NEXT_MAJOR: make $containerTypes not nullable.
+     *
+     * @param string[]|null $containerTypes
+     */
+    public function __construct(ContainerInterface $container, ?array $containerTypes = null)
     {
         $this->services = [];
         $this->contexts = [];
         $this->container = $container;
+
+        if (null === $containerTypes) {
+            @trigger_error(
+                sprintf(
+                    'Not Passing an array as argument 2 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will be required in 5.0.',
+                    __METHOD__
+                ),
+                \E_USER_DEPRECATED
+            );
+
+            if ($container instanceof DependencyInjectionContainerInterface) {
+                /** @var string[] $containerTypes */
+                $containerTypes = $container->getParameter('sonata.block.container.types');
+            } else {
+                throw new \LogicException(
+                    sprintf(
+                        "Argument 1 for method '%s' needs to be an instance of '%s' in case the containerTypes are not passed as the second argument.",
+                        __METHOD__,
+                        DependencyInjectionContainerInterface::class
+                    )
+                );
+            }
+        }
+
+        $this->containerTypes = $containerTypes;
     }
 
     public function get(BlockInterface $block): BlockServiceInterface
@@ -102,13 +135,13 @@ final class BlockServiceManager implements BlockServiceManagerInterface
 
     public function getServices(): array
     {
-        foreach ($this->services as $name => $id) {
+        foreach ($this->services as $id) {
             if (\is_string($id)) {
                 $this->load($id);
             }
         }
 
-        /** @var BlockServiceInterface[] $services */
+        /** @var array<string, BlockServiceInterface> $services */
         $services = $this->services;
 
         return $services;
@@ -122,11 +155,8 @@ final class BlockServiceManager implements BlockServiceManagerInterface
 
         $services = [];
 
-        /** @var string[] $containers */
-        $containers = $this->container->getParameter('sonata.block.container.types');
-
         foreach ($this->contexts[$context] as $name) {
-            if (!$includeContainers && \in_array($name, $containers, true)) {
+            if (!$includeContainers && \in_array($name, $this->containerTypes, true)) {
                 continue;
             }
 
