@@ -138,9 +138,6 @@ class BlockHelper
     {
         $eventName = sprintf('sonata.block.event.%s', $name);
 
-        /**
-         * @psalm-var BlockEvent
-         */
         $event = $this->eventDispatcher->dispatch(new BlockEvent($options), $eventName);
 
         $content = '';
@@ -150,6 +147,11 @@ class BlockHelper
         }
 
         if (null !== $this->stopwatch) {
+            /**
+             * @psalm-suppress ArgumentTypeCoercion
+             *
+             * @see https://github.com/psalm/psalm-plugin-symfony/pull/254
+             */
             $this->eventTraces[uniqid('', true)] = [
                 'template_code' => $name,
                 'event_name' => $eventName,
