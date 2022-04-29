@@ -31,9 +31,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set('sonata.block.manager', BlockServiceManager::class)
         ->public()
         ->args([
-            new ReferenceConfigurator('service_container'),
-            '%kernel.debug%',
-            (new ReferenceConfigurator('logger'))->nullOnInvalid(),
+            null, // replaced in compiler pass
+            '%sonata.block.container.types%',
         ]);
 
     $services->set('sonata.block.menu.registry', MenuRegistry::class)

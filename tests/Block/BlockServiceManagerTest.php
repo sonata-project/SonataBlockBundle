@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockServiceManager;
 use Sonata\BlockBundle\Block\Service\BlockServiceInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Container;
 
 final class BlockServiceManagerTest extends TestCase
 {
@@ -25,11 +25,10 @@ final class BlockServiceManagerTest extends TestCase
     {
         $service = $this->createMock(BlockServiceInterface::class);
 
-        $container = $this->createMock(ContainerInterface::class);
-        $container->expects(static::once())->method('get')->willReturn($service);
+        $container = new Container();
+        $container->set('test', $service);
 
-        $manager = new BlockServiceManager($container);
-
+        $manager = new BlockServiceManager($container, []);
         $manager->add('test', 'test');
 
         $block = $this->createMock(BlockInterface::class);
@@ -44,10 +43,10 @@ final class BlockServiceManagerTest extends TestCase
 
         $service = $this->createMock(\stdClass::class);
 
-        $container = $this->createMock(ContainerInterface::class);
-        $container->expects(static::once())->method('get')->willReturn($service);
+        $container = new Container();
+        $container->set('test', $service);
 
-        $manager = new BlockServiceManager($container);
+        $manager = new BlockServiceManager($container, []);
 
         $manager->add('test', 'test');
 
@@ -61,9 +60,7 @@ final class BlockServiceManagerTest extends TestCase
     {
         $this->expectException(\RuntimeException::class);
 
-        $container = $this->createMock(ContainerInterface::class);
-
-        $manager = new BlockServiceManager($container);
+        $manager = new BlockServiceManager(new Container(), []);
 
         $block = $this->createMock(BlockInterface::class);
         $block->expects(static::any())->method('getType')->willReturn('fakse');
@@ -73,8 +70,7 @@ final class BlockServiceManagerTest extends TestCase
 
     public function testGetEmptyListFromInvalidContext(): void
     {
-        $container = $this->createMock(ContainerInterface::class);
-        $manager = new BlockServiceManager($container);
+        $manager = new BlockServiceManager(new Container(), []);
 
         $service = $this->createMock(BlockServiceInterface::class);
 
@@ -85,13 +81,50 @@ final class BlockServiceManagerTest extends TestCase
 
     public function testGetListFromValidContext(): void
     {
-        $container = $this->createMock(ContainerInterface::class);
-        $manager = new BlockServiceManager($container);
+        $manager = new BlockServiceManager(new Container(), []);
 
         $service = $this->createMock(BlockServiceInterface::class);
 
         $manager->add('foo.bar', $service, ['fake']);
 
         static::assertNotEmpty($manager->getServicesByContext('fake'));
+    }
+
+    /**
+     * NEXT_MAJOR: remove test.
+     *
+     * @group legacy
+     */
+    public function testGetServicesByContextWithoutContainersDeprecated(): void
+    {
+        $service = $this->createMock(BlockServiceInterface::class);
+
+        $container = new Container();
+        $container->set('test', $service);
+        $container->setParameter('sonata.block.container.types', ['foo']);
+
+        $manager = new BlockServiceManager($container);
+
+        $service = $this->createMock(BlockServiceInterface::class);
+
+        $manager->add('foo.bar', $service, ['bar']);
+
+        static::assertEmpty($manager->getServicesByContext('fake', false));
+    }
+
+    public function testGetServicesByContextWithoutContainers(): void
+    {
+        $service = $this->createMock(BlockServiceInterface::class);
+
+        $container = new Container();
+        $container->set('test', $service);
+
+        $manager = new BlockServiceManager($container, ['foo']);
+
+        $service = $this->createMock(BlockServiceInterface::class);
+
+        $manager->add('foo.bar', $service, ['bar']);
+
+        static::assertEmpty($manager->getServicesByContext('fake', false));
     }
 }
