@@ -1,5 +1,6 @@
 includes:
     - phpstan-baseline.neon
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
 
 parameters:
     level: 8
@@ -8,6 +9,8 @@ parameters:
         - tests
     treatPhpDocTypesAsCertain: false
     checkGenericClassInNonGenericObjectType: true
+    checkInternalClassCaseSensitivity: true
     checkMissingIterableValueType: true
     checkMissingVarTagTypehint: true
     checkMissingTypehints: true
+    checkUninitializedProperties: true

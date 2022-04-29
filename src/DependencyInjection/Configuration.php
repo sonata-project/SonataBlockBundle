@@ -38,6 +38,11 @@ final class Configuration implements ConfigurationInterface
         $this->defaultContainerTemplates = $defaultContainerTemplates;
     }
 
+    /**
+     * @psalm-suppress PossiblyUndefinedMethod
+     *
+     * @see https://github.com/psalm/psalm-plugin-symfony/issues/174
+     */
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('sonata_block');
@@ -50,7 +55,7 @@ final class Configuration implements ConfigurationInterface
             ->fixXmlConfig('block')
             ->fixXmlConfig('block_by_class')
             ->validate()
-                ->always(static function (&$value) {
+                ->always(static function (array &$value): array {
                     foreach ($value['blocks'] as &$block) {
                         if (0 === \count($block['contexts'])) {
                             $block['contexts'] = $value['default_contexts'];
