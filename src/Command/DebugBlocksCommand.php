@@ -26,10 +26,7 @@ final class DebugBlocksCommand extends Command
 {
     protected static $defaultName = 'debug:sonata:block';
 
-    /**
-     * @var BlockServiceManagerInterface
-     */
-    private $blockManager;
+    private BlockServiceManagerInterface $blockManager;
 
     public function __construct(BlockServiceManagerInterface $blockManager)
     {
@@ -68,7 +65,7 @@ final class DebugBlocksCommand extends Command
 
             try {
                 foreach ($resolver->resolve() as $key => $val) {
-                    $output->writeln(sprintf('    %-30s%s', $key, json_encode($val)));
+                    $output->writeln(sprintf('    %-30s%s', $key, json_encode($val, \JSON_THROW_ON_ERROR)));
                 }
             } catch (MissingOptionsException $e) {
                 foreach ($resolver->getDefinedOptions() as $option) {

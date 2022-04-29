@@ -18,30 +18,18 @@ namespace Sonata\BlockBundle\Meta;
  */
 final class Metadata implements MetadataInterface
 {
-    /**
-     * @var string
-     */
-    private $title;
+    private string $title;
 
-    /**
-     * @var string|null
-     */
-    private $description;
+    private ?string $description;
 
-    /**
-     * @var string|null
-     */
-    private $image;
+    private ?string $image;
 
-    /**
-     * @var string|null
-     */
-    private $domain;
+    private ?string $domain;
 
     /**
      * @var array<string, mixed>
      */
-    private $options;
+    private array $options;
 
     /**
      * @param array<string, mixed> $options

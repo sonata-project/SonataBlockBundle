@@ -23,33 +23,27 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class BlockContextManager implements BlockContextManagerInterface
 {
-    /**
-     * @var BlockLoaderInterface
-     */
-    private $blockLoader;
+    private BlockLoaderInterface $blockLoader;
 
-    /**
-     * @var BlockServiceManagerInterface
-     */
-    private $blockService;
+    private BlockServiceManagerInterface $blockService;
 
     /**
      * @var array<string, array<string, mixed>>
      */
-    private $settingsByType = [];
+    private array $settingsByType = [];
 
     /**
      * @var array<string, array<string, mixed>>
      * @phpstan-var array<class-string, array<string, mixed>>
      */
-    private $settingsByClass = [];
+    private array $settingsByClass = [];
 
     /**
      * NEXT_MAJOR: remove.
      *
      * @var array{by_class: array<class-string, string>, by_type: array<string, string>}
      */
-    private $cacheBlocks = ['by_class' => [], 'by_type' => []];
+    private array $cacheBlocks = ['by_class' => [], 'by_type' => []];
 
     /**
      * @var LoggerInterface

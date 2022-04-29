@@ -24,15 +24,9 @@ use Twig\Environment;
  */
 final class InlineRenderer implements RendererInterface
 {
-    /**
-     * @var string
-     */
-    private $template;
+    private string $template;
 
-    /**
-     * @var Environment
-     */
-    private $twig;
+    private Environment $twig;
 
     public function __construct(Environment $twig, string $template)
     {
@@ -49,7 +43,7 @@ final class InlineRenderer implements RendererInterface
 
         $content = $this->twig->render($this->template, $parameters);
 
-        $response = $response ?? new Response();
+        $response ??= new Response();
         $response->setContent($content);
 
         return $response;

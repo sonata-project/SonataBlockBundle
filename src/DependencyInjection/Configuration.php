@@ -28,14 +28,12 @@ final class Configuration implements ConfigurationInterface
     /**
      * @var array<string, string>
      */
-    private $defaultContainerTemplates;
+    private array $defaultContainerTemplates;
 
     /**
      * NEXT_MAJOR: remove this member.
-     *
-     * @var bool
      */
-    private $httpCacheDisabled = false;
+    private bool $httpCacheDisabled = false;
 
     /**
      * @param array<string, string> $defaultContainerTemplates

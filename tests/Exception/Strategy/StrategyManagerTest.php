@@ -29,10 +29,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class StrategyManagerTest extends TestCase
 {
-    /**
-     * @var StrategyManager
-     */
-    private $manager;
+    private StrategyManager $manager;
 
     /**
      * @var MockObject&ContainerInterface
@@ -42,22 +39,22 @@ final class StrategyManagerTest extends TestCase
     /**
      * @var array<string, string>
      */
-    private $filters = [];
+    private array $filters = [];
 
     /**
      * @var array<string, string>
      */
-    private $renderers = [];
+    private array $renderers = [];
 
     /**
      * @var array<string, string>
      */
-    private $blockFilters = [];
+    private array $blockFilters = [];
 
     /**
      * @var array<string, string>
      */
-    private $blockRenderers = [];
+    private array $blockRenderers = [];
 
     /**
      * @var MockObject&RendererInterface

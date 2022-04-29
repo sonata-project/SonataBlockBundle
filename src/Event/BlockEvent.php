@@ -21,12 +21,12 @@ final class BlockEvent extends Event
     /**
      * @var array<string, mixed>
      */
-    private $settings;
+    private array $settings;
 
     /**
      * @var BlockInterface[]
      */
-    private $blocks = [];
+    private array $blocks = [];
 
     /**
      * @param array<string, mixed> $settings

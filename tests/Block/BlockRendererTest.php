@@ -44,10 +44,7 @@ final class BlockRendererTest extends TestCase
      */
     private $exceptionStrategyManager;
 
-    /**
-     * @var BlockRenderer
-     */
-    private $renderer;
+    private BlockRenderer $renderer;
 
     /**
      * Setup test object.
