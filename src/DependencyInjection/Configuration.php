@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\BaseNode;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -83,10 +82,9 @@ final class Configuration implements ConfigurationInterface
                 ->booleanNode('http_cache')
                     ->defaultFalse()
                     ->setDeprecated(
-                        ...$this->getDeprecationMessage(
-                            'The "http_cache" option is deprecated and not doing anything anymore since sonata-project/block-bundle 5.0. It will be removed in 6.0.',
-                            '5.0'
-                        )
+                        'sonata-project/block-bundle',
+                        '5.0',
+                        'The "http_cache" option is deprecated and not doing anything anymore since sonata-project/block-bundle 5.0. It will be removed in 6.0.',
                     )
                 ->end()
                 ->arrayNode('templates')
@@ -216,22 +214,5 @@ final class Configuration implements ConfigurationInterface
     public function getConfiguration(array $config, ContainerBuilder $container)
     {
         return new self([]);
-    }
-
-    /**
-     * @return string[]
-     */
-    private function getDeprecationMessage(string $message, string $version): array
-    {
-        // @phpstan-ignore-next-line
-        if (method_exists(BaseNode::class, 'getDeprecation')) {
-            return [
-                'sonata-project/block-bundle',
-                $version,
-                $message,
-            ];
-        }
-
-        return [$message];
     }
 }

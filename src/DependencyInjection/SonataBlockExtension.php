@@ -219,21 +219,4 @@ final class SonataBlockExtension extends Extension
         $definition->addMethodCall('setDefaultFilter', [$defaultFilter]);
         $definition->addMethodCall('setDefaultRenderer', [$defaultRenderer]);
     }
-
-    /**
-     * @return mixed[]
-     */
-    private function getDeprecationMessage(string $message, string $version): array
-    {
-        // @phpstan-ignore-next-line
-        if (method_exists(Definition::class, 'getDeprecation')) {
-            return [
-                'sonata-project/block-bundle',
-                $version,
-                $message,
-            ];
-        }
-
-        return [true, $message];
-    }
 }
