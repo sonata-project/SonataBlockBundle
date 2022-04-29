@@ -40,10 +40,6 @@ final class TweakCompilerPass implements CompilerPassInterface
         /** @var array<string, Reference> $blockServiceReferences */
         $blockServiceReferences = [];
         foreach ($container->findTaggedServiceIds('sonata.block') as $id => $tags) {
-            // NEXT_MAJOR: remove and do not make them public
-            $container->getDefinition($id)
-                ->setPublic(true);
-
             $settings = $this->createBlockSettings($tags, $defaultContexts);
 
             // Register blocks dynamically
