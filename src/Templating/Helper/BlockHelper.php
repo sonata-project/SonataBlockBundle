@@ -138,6 +138,9 @@ class BlockHelper
     {
         $eventName = sprintf('sonata.block.event.%s', $name);
 
+        /**
+         * @psalm-var BlockEvent
+         */
         $event = $this->eventDispatcher->dispatch(new BlockEvent($options), $eventName);
 
         $content = '';
