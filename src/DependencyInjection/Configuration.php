@@ -38,6 +38,11 @@ final class Configuration implements ConfigurationInterface
         $this->defaultContainerTemplates = $defaultContainerTemplates;
     }
 
+    /**
+     * @psalm-suppress PossiblyNullReference, PossiblyUndefinedMethod
+     *
+     * @see https://github.com/psalm/psalm-plugin-symfony/issues/174
+     */
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('sonata_block');
