@@ -21,18 +21,19 @@ use Sonata\BlockBundle\Templating\Helper\BlockHelper;
 use Sonata\BlockBundle\Twig\Extension\BlockExtension;
 use Sonata\BlockBundle\Twig\GlobalVariables;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
+
+use function Symfony\Component\DependencyInjection\Loader\Configurator\abstract_arg;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "service" function for creating references to services when dropping support for Symfony 4.4
-    // Use "param" function for creating references to parameters when dropping support for Symfony 5.1
     $services = $containerConfigurator->services();
 
     $services->set('sonata.block.manager', BlockServiceManager::class)
         ->public()
         ->args([
-            null, // replaced in compiler pass
-            '%sonata.block.container.types%',
+            abstract_arg('container of block services'),
+            param('sonata.block.container.types'),
         ]);
 
     $services->set('sonata.block.menu.registry', MenuRegistry::class)
@@ -41,48 +42,48 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set('sonata.block.context_manager.default', BlockContextManager::class)
         ->public()
         ->args([
-            new ReferenceConfigurator('sonata.block.loader.chain'),
-            new ReferenceConfigurator('sonata.block.manager'),
-            (new ReferenceConfigurator('logger'))->nullOnInvalid(),
+            service('sonata.block.loader.chain'),
+            service('sonata.block.manager'),
+            service('logger')->nullOnInvalid(),
         ]);
 
     $services->set('sonata.block.renderer.default', BlockRenderer::class)
         ->public()
         ->args([
-            new ReferenceConfigurator('sonata.block.manager'),
-            new ReferenceConfigurator('sonata.block.exception.strategy.manager'),
-            (new ReferenceConfigurator('logger'))->nullOnInvalid(),
+            service('sonata.block.manager'),
+            service('sonata.block.exception.strategy.manager'),
+            service('logger')->nullOnInvalid(),
         ]);
 
     $services->set('sonata.block.twig.extension', BlockExtension::class)
         ->tag('twig.extension')
         ->args([
-            new ReferenceConfigurator('sonata.block.templating.helper'),
+            service('sonata.block.templating.helper'),
         ]);
 
     $services->set('sonata.block.templating.helper', BlockHelper::class)
         ->tag('twig.runtime')
         ->args([
-            new ReferenceConfigurator('sonata.block.renderer'),
-            new ReferenceConfigurator('sonata.block.context_manager'),
-            new ReferenceConfigurator('event_dispatcher'),
-            (new ReferenceConfigurator('debug.stopwatch'))->nullOnInvalid(),
+            service('sonata.block.renderer'),
+            service('sonata.block.context_manager'),
+            service('event_dispatcher'),
+            (service('debug.stopwatch'))->nullOnInvalid(),
         ]);
 
     $services->set('sonata.block.loader.chain', BlockLoaderChain::class)
         ->args([
-            [], // loaders
+            abstract_arg('loaders array'),
         ]);
 
     $services->set('sonata.block.loader.service', ServiceLoader::class)
         ->tag('sonata.block.loader')
         ->args([
-            [], // types
+            abstract_arg('types array'),
         ]);
 
     $services->set('sonata.block.twig.global', GlobalVariables::class)
         ->args([
-            [], // templates
+            abstract_arg('templates array'),
         ]);
 
     $services->alias(BlockHelper::class, 'sonata.block.templating.helper');
