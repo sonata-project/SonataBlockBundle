@@ -56,44 +56,28 @@ class BlockHelper
 {
     /**
      * NEXT_MAJOR: remove.
-     *
-     * @var BlockServiceManagerInterface|null
      */
-    private $blockServiceManager;
+    private ?BlockServiceManagerInterface $blockServiceManager = null;
 
     /**
      * NEXT_MAJOR: remove this member and all related code to usages within this class.
-     *
-     * @var CacheManagerInterface|null
      */
-    private $cacheManager;
+    private ?CacheManagerInterface $cacheManager = null;
 
     /**
      * NEXT_MAJOR: remove.
      *
      * @var array{by_class: array<class-string, string>, by_type: array<string, string>}
      */
-    private $cacheBlocks = ['by_class' => [], 'by_type' => []];
+    private array $cacheBlocks = ['by_class' => [], 'by_type' => []];
 
-    /**
-     * @var BlockRendererInterface
-     */
-    private $blockRenderer;
+    private BlockRendererInterface $blockRenderer;
 
-    /**
-     * @var BlockContextManagerInterface
-     */
-    private $blockContextManager;
+    private BlockContextManagerInterface $blockContextManager;
 
-    /**
-     * @var HttpCacheHandlerInterface|null
-     */
-    private $cacheHandler;
+    private ?HttpCacheHandlerInterface $cacheHandler = null;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
     /**
      * This property is a state variable holdings all assets used by the block for the current PHP request
@@ -101,23 +85,20 @@ class BlockHelper
      *
      * @var array{css: array<string>, js: array<string>}
      */
-    private $assets = ['css' => [], 'js' => []];
+    private array $assets = ['css' => [], 'js' => []];
 
     /**
      * @var array<StopwatchEvent|array<string, mixed>>
      * @phpstan-var array<StopwatchEvent|Trace>
      */
-    private $traces = [];
+    private array $traces = [];
 
     /**
      * @var array<string, mixed>
      */
-    private $eventTraces = [];
+    private array $eventTraces = [];
 
-    /**
-     * @var Stopwatch|null
-     */
-    private $stopwatch;
+    private ?Stopwatch $stopwatch = null;
 
     /**
      * NEXT_MAJOR: remove the deprecated signature and cleanup the constructor.

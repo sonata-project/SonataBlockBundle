@@ -22,10 +22,7 @@ use Symfony\Component\HttpKernel\Event\ResponseEvent;
  */
 final class HttpCacheHandler implements HttpCacheHandlerInterface
 {
-    /**
-     * @var int|null
-     */
-    private $currentTtl;
+    private ?int $currentTtl = null;
 
     public function alterResponse(Response $response): void
     {

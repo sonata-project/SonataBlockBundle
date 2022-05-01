@@ -26,28 +26,17 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class BlockRenderer implements BlockRendererInterface
 {
-    /**
-     * @var BlockServiceManagerInterface
-     */
-    private $blockServiceManager;
+    private BlockServiceManagerInterface $blockServiceManager;
 
-    /**
-     * @var StrategyManagerInterface
-     */
-    private $exceptionStrategyManager;
+    private StrategyManagerInterface $exceptionStrategyManager;
 
-    /**
-     * @var LoggerInterface|null
-     */
-    private $logger;
+    private ?LoggerInterface $logger;
 
     /**
      * This property hold the last response available from the child or sibling block
      * The cacheable attributes must be cascaded to the parent.
-     *
-     * @var Response|null
      */
-    private $lastResponse;
+    private ?Response $lastResponse = null;
 
     /**
      * @param BlockServiceManagerInterface $blockServiceManager      Block service manager

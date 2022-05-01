@@ -17,15 +17,12 @@ use Sonata\BlockBundle\Model\BlockInterface;
 
 final class BlockContext implements BlockContextInterface
 {
-    /**
-     * @var BlockInterface
-     */
-    private $block;
+    private BlockInterface $block;
 
     /**
      * @var array<string, mixed>
      */
-    private $settings;
+    private array $settings;
 
     /**
      * @param array<string, mixed> $settings
