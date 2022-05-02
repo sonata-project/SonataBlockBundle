@@ -62,6 +62,7 @@ jobs:
 
             - name: Psalm
               run: vendor/bin/psalm --no-progress --show-info=false --stats --output-format=github --threads=$(nproc) --shepherd --php-version=8.1
+
     rector:
         name: Rector
 
