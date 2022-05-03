@@ -21,7 +21,7 @@ final class BlockLoaderChain implements BlockLoaderInterface
     /**
      * @var BlockLoaderInterface[]
      */
-    private $loaders;
+    private array $loaders;
 
     /**
      * @param BlockLoaderInterface[] $loaders

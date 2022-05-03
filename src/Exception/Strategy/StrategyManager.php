@@ -27,40 +27,31 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class StrategyManager implements StrategyManagerInterface
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
+    private ContainerInterface $container;
 
     /**
      * @var array<string, string>
      */
-    private $filters;
+    private array $filters;
 
     /**
      * @var array<string, string>
      */
-    private $renderers;
+    private array $renderers;
 
     /**
      * @var array<string, string>
      */
-    private $blockFilters;
+    private array $blockFilters;
 
     /**
      * @var array<string, string>
      */
-    private $blockRenderers;
+    private array $blockRenderers;
 
-    /**
-     * @var string|null
-     */
-    private $defaultFilter;
+    private ?string $defaultFilter = null;
 
-    /**
-     * @var string|null
-     */
-    private $defaultRenderer;
+    private ?string $defaultRenderer = null;
 
     /**
      * @psalm-suppress ContainerDependency
@@ -115,7 +106,7 @@ final class StrategyManager implements StrategyManagerInterface
 
     public function handleException(\Throwable $exception, BlockInterface $block, ?Response $response = null): Response
     {
-        $response = $response ?? new Response();
+        $response ??= new Response();
         $response->setPrivate();
 
         $filter = $this->getBlockFilter($block);

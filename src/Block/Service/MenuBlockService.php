@@ -36,15 +36,9 @@ use Twig\Environment;
  */
 class MenuBlockService extends AbstractBlockService implements EditableBlockService
 {
-    /**
-     * @var MenuProviderInterface
-     */
-    private $menuProvider;
+    private MenuProviderInterface $menuProvider;
 
-    /**
-     * @var MenuRegistryInterface
-     */
-    private $menuRegistry;
+    private MenuRegistryInterface $menuRegistry;
 
     public function __construct(
         Environment $twig,

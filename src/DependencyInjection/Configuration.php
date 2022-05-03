@@ -28,7 +28,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @var array<string, string>
      */
-    private $defaultContainerTemplates;
+    private array $defaultContainerTemplates;
 
     /**
      * @param array<string, string> $defaultContainerTemplates

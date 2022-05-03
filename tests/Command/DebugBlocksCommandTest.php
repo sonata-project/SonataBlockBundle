@@ -33,10 +33,7 @@ use Twig\Environment;
  */
 final class DebugBlocksCommandTest extends TestCase
 {
-    /**
-     * @var Application
-     */
-    private $application;
+    private Application $application;
 
     protected function setUp(): void
     {

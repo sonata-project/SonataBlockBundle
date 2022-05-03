@@ -21,7 +21,7 @@ final class MenuRegistry implements MenuRegistryInterface
     /**
      * @var string[]
      */
-    private $names = [];
+    private array $names = [];
 
     public function add(string $name): void
     {

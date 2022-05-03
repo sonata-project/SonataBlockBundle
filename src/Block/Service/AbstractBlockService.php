@@ -24,10 +24,7 @@ use Twig\Environment;
  */
 abstract class AbstractBlockService implements BlockServiceInterface
 {
-    /**
-     * @var Environment
-     */
-    private $twig;
+    private Environment $twig;
 
     public function __construct(Environment $twig)
     {
@@ -41,7 +38,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
      */
     public function renderResponse(string $view, array $parameters = [], ?Response $response = null): Response
     {
-        $response = $response ?? new Response();
+        $response ??= new Response();
 
         $response->setContent($this->twig->render($view, $parameters));
 

@@ -20,10 +20,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 final class TweakCompilerPassTest extends TestCase
 {
-    /**
-     * @var ContainerBuilder
-     */
-    private $container;
+    private ContainerBuilder $container;
 
     protected function setUp(): void
     {

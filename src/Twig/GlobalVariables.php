@@ -23,7 +23,7 @@ final class GlobalVariables
     /**
      * @var string[]
      */
-    private $templates;
+    private array $templates;
 
     /**
      * @param string[] $templates

@@ -22,7 +22,7 @@ final class ServiceLoader implements BlockLoaderInterface
     /**
      * @var string[]
      */
-    private $types;
+    private array $types;
 
     /**
      * @param string[] $types

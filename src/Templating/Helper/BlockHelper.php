@@ -38,20 +38,11 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  */
 class BlockHelper
 {
-    /**
-     * @var BlockRendererInterface
-     */
-    private $blockRenderer;
+    private BlockRendererInterface $blockRenderer;
 
-    /**
-     * @var BlockContextManagerInterface
-     */
-    private $blockContextManager;
+    private BlockContextManagerInterface $blockContextManager;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
     /**
      * This property is a state variable holdings all assets used by the block for the current PHP request
@@ -59,23 +50,20 @@ class BlockHelper
      *
      * @var array{css: array<string>, js: array<string>}
      */
-    private $assets = ['css' => [], 'js' => []];
+    private array $assets = ['css' => [], 'js' => []];
 
     /**
      * @var array<StopwatchEvent|array<string, mixed>>
      * @phpstan-var array<StopwatchEvent|Trace>
      */
-    private $traces = [];
+    private array $traces = [];
 
     /**
      * @var array<string, mixed>
      */
-    private $eventTraces = [];
+    private array $eventTraces = [];
 
-    /**
-     * @var Stopwatch|null
-     */
-    private $stopwatch;
+    private ?Stopwatch $stopwatch = null;
 
     /**
      * @internal

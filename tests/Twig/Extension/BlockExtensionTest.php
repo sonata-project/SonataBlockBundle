@@ -29,15 +29,9 @@ final class BlockExtensionTest extends TestCase
      */
     private $blockHelper;
 
-    /**
-     * @var BlockExtension
-     */
-    private $blockExtension;
+    private BlockExtension $blockExtension;
 
-    /**
-     * @var Environment
-     */
-    private $env;
+    private Environment $env;
 
     protected function setUp(): void
     {
@@ -48,9 +42,7 @@ final class BlockExtensionTest extends TestCase
         $this->env = new Environment($this->createMock(LoaderInterface::class));
         $this->env->addExtension($this->blockExtension);
         $this->env->addRuntimeLoader(new FactoryRuntimeLoader([
-            BlockHelper::class => function (): BlockHelper {
-                return $this->blockHelper;
-            },
+            BlockHelper::class => fn (): BlockHelper => $this->blockHelper,
         ]));
     }
 

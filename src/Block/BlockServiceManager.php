@@ -24,27 +24,21 @@ final class BlockServiceManager implements BlockServiceManagerInterface
     /**
      * @var array<string, string|BlockServiceInterface>
      */
-    private $services;
+    private array $services;
 
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
+    private ContainerInterface $container;
 
-    /**
-     * @var bool
-     */
-    private $inValidate = false;
+    private bool $inValidate = false;
 
     /**
      * @var array<string, string[]>
      */
-    private $contexts;
+    private array $contexts;
 
     /**
      * @var string[]
      */
-    private $containerTypes;
+    private array $containerTypes;
 
     /**
      * @param string[] $containerTypes

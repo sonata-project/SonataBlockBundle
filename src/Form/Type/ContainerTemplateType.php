@@ -25,7 +25,7 @@ final class ContainerTemplateType extends AbstractType
     /**
      * @var array<string, string>
      */
-    private $templateChoices;
+    private array $templateChoices;
 
     /**
      * @param array<string, string> $templateChoices
