@@ -20,9 +20,8 @@ use Sonata\BlockBundle\Menu\MenuRegistry;
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
 use Sonata\BlockBundle\Twig\Extension\BlockExtension;
 use Sonata\BlockBundle\Twig\GlobalVariables;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-
 use function Symfony\Component\DependencyInjection\Loader\Configurator\abstract_arg;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 

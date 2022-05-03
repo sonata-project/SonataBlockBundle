@@ -20,9 +20,8 @@ use Sonata\BlockBundle\Exception\Renderer\InlineDebugRenderer;
 use Sonata\BlockBundle\Exception\Renderer\InlineRenderer;
 use Sonata\BlockBundle\Exception\Renderer\MonkeyThrowRenderer;
 use Sonata\BlockBundle\Exception\Strategy\StrategyManager;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-
 use function Symfony\Component\DependencyInjection\Loader\Configurator\abstract_arg;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
