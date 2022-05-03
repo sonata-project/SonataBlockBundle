@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
 use Sonata\BlockBundle\Block\Service\ContainerBlockService;
 use Sonata\BlockBundle\Block\Service\EmptyBlockService;
 use Sonata\BlockBundle\Block\Service\RssBlockService;
 use Sonata\BlockBundle\Block\Service\TemplateBlockService;
 use Sonata\BlockBundle\Block\Service\TextBlockService;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();

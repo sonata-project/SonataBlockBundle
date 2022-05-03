@@ -11,6 +11,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
 use Sonata\BlockBundle\Exception\BlockExceptionInterface;
 use Sonata\BlockBundle\Exception\Filter\DebugOnlyFilter;
 use Sonata\BlockBundle\Exception\Filter\IgnoreClassFilter;
@@ -20,10 +22,6 @@ use Sonata\BlockBundle\Exception\Renderer\InlineDebugRenderer;
 use Sonata\BlockBundle\Exception\Renderer\InlineRenderer;
 use Sonata\BlockBundle\Exception\Renderer\MonkeyThrowRenderer;
 use Sonata\BlockBundle\Exception\Strategy\StrategyManager;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\abstract_arg;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();

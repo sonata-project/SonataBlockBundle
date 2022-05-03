@@ -11,6 +11,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
 use Sonata\BlockBundle\Block\BlockContextManager;
 use Sonata\BlockBundle\Block\BlockLoaderChain;
 use Sonata\BlockBundle\Block\BlockRenderer;
@@ -20,10 +22,6 @@ use Sonata\BlockBundle\Menu\MenuRegistry;
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
 use Sonata\BlockBundle\Twig\Extension\BlockExtension;
 use Sonata\BlockBundle\Twig\GlobalVariables;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\abstract_arg;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
