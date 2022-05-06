@@ -16,7 +16,7 @@ namespace Sonata\BlockBundle\Model;
 /**
  * Base abstract Block class that provides a default implementation of the block interface.
  */
-abstract class BaseBlock implements BlockInterface
+abstract class BaseBlock implements BlockInterface, \Stringable
 {
     /**
      * @var string|null

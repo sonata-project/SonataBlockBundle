@@ -22,11 +22,8 @@ use Sonata\BlockBundle\Model\BlockInterface;
  */
 final class DebugOnlyFilter implements FilterInterface
 {
-    private bool $debug;
-
-    public function __construct(bool $debug)
+    public function __construct(private bool $debug)
     {
-        $this->debug = $debug;
     }
 
     public function handle(\Throwable $exception, BlockInterface $block): bool

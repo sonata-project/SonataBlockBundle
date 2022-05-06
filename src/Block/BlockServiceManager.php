@@ -24,31 +24,22 @@ final class BlockServiceManager implements BlockServiceManagerInterface
     /**
      * @var array<string, string|BlockServiceInterface>
      */
-    private array $services;
-
-    private ContainerInterface $container;
+    private array $services = [];
 
     private bool $inValidate = false;
 
     /**
      * @var array<string, string[]>
      */
-    private array $contexts;
-
-    /**
-     * @var string[]
-     */
-    private array $containerTypes;
+    private array $contexts = [];
 
     /**
      * @param string[] $containerTypes
      */
-    public function __construct(ContainerInterface $container, array $containerTypes)
-    {
-        $this->services = [];
-        $this->contexts = [];
-        $this->container = $container;
-        $this->containerTypes = $containerTypes;
+    public function __construct(
+        private ContainerInterface $container,
+        private array $containerTypes
+    ) {
     }
 
     public function get(BlockInterface $block): BlockServiceInterface
@@ -86,7 +77,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
                 'Argument 2 passed to %s() must be of type string or an object implementing %s, %s given',
                 __METHOD__,
                 BlockServiceInterface::class,
-                \is_object($service) ? \get_class($service) : \gettype($service)
+                get_debug_type($service)
             ));
         }
         $this->services[$name] = $service;
@@ -157,7 +148,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
             }
 
             $this->inValidate = false;
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             $this->inValidate = false;
         }
     }

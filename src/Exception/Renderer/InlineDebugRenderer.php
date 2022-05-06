@@ -25,20 +25,12 @@ use Twig\Environment;
  */
 final class InlineDebugRenderer implements RendererInterface
 {
-    private string $template;
-
-    private bool $forceStyle;
-
-    private bool $debug;
-
-    private Environment $twig;
-
-    public function __construct(Environment $twig, string $template, bool $debug, bool $forceStyle = true)
-    {
-        $this->twig = $twig;
-        $this->template = $template;
-        $this->debug = $debug;
-        $this->forceStyle = $forceStyle;
+    public function __construct(
+        private Environment $twig,
+        private string $template,
+        private bool $debug,
+        private bool $forceStyle = true
+    ) {
     }
 
     public function render(\Exception $exception, BlockInterface $block, ?Response $response = null): Response

@@ -23,16 +23,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class ContainerTemplateType extends AbstractType
 {
     /**
-     * @var array<string, string>
-     */
-    private array $templateChoices;
-
-    /**
      * @param array<string, string> $templateChoices
      */
-    public function __construct(array $templateChoices)
+    public function __construct(private array $templateChoices)
     {
-        $this->templateChoices = $templateChoices;
     }
 
     public function getBlockPrefix(): string
