@@ -25,21 +25,14 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
  */
 final class BlockDataCollector extends DataCollector
 {
-    private BlockHelper $blocksHelper;
-
     /**
-     * @var string[]
-     */
-    private array $containerTypes;
-
-    /**
-     * @param BlockHelper $blockHelper    Block renderer
+     * @param BlockHelper $blocksHelper   Block renderer
      * @param string[]    $containerTypes array of container types
      */
-    public function __construct(BlockHelper $blockHelper, array $containerTypes)
-    {
-        $this->blocksHelper = $blockHelper;
-        $this->containerTypes = $containerTypes;
+    public function __construct(
+        private BlockHelper $blocksHelper,
+        private array $containerTypes
+    ) {
         $this->reset();
     }
 

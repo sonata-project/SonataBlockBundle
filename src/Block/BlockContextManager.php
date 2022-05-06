@@ -22,10 +22,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class BlockContextManager implements BlockContextManagerInterface
 {
-    private BlockLoaderInterface $blockLoader;
-
-    private BlockServiceManagerInterface $blockService;
-
     /**
      * @var array<string, array<string, mixed>>
      */
@@ -40,12 +36,10 @@ final class BlockContextManager implements BlockContextManagerInterface
     private LoggerInterface $logger;
 
     public function __construct(
-        BlockLoaderInterface $blockLoader,
-        BlockServiceManagerInterface $blockService,
+        private BlockLoaderInterface $blockLoader,
+        private BlockServiceManagerInterface $blockService,
         ?LoggerInterface $logger = null
     ) {
-        $this->blockLoader = $blockLoader;
-        $this->blockService = $blockService;
         $this->logger = $logger ?? new NullLogger();
     }
 

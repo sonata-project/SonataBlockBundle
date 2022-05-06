@@ -22,20 +22,11 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class BlockRenderer implements BlockRendererInterface
 {
-    private BlockServiceManagerInterface $blockServiceManager;
-
-    private StrategyManagerInterface $exceptionStrategyManager;
-
-    private ?LoggerInterface $logger;
-
     public function __construct(
-        BlockServiceManagerInterface $blockServiceManager,
-        StrategyManagerInterface $exceptionStrategyManager,
-        ?LoggerInterface $logger = null
+        private BlockServiceManagerInterface $blockServiceManager,
+        private StrategyManagerInterface $exceptionStrategyManager,
+        private ?LoggerInterface $logger = null
     ) {
-        $this->blockServiceManager = $blockServiceManager;
-        $this->exceptionStrategyManager = $exceptionStrategyManager;
-        $this->logger = $logger;
     }
 
     public function render(BlockContextInterface $blockContext, ?Response $response = null): Response

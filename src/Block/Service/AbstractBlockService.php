@@ -24,11 +24,8 @@ use Twig\Environment;
  */
 abstract class AbstractBlockService implements BlockServiceInterface
 {
-    private Environment $twig;
-
-    public function __construct(Environment $twig)
+    public function __construct(private Environment $twig)
     {
-        $this->twig = $twig;
     }
 
     /**

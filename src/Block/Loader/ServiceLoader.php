@@ -20,16 +20,10 @@ use Sonata\BlockBundle\Model\BlockInterface;
 final class ServiceLoader implements BlockLoaderInterface
 {
     /**
-     * @var string[]
-     */
-    private array $types;
-
-    /**
      * @param string[] $types
      */
-    public function __construct(array $types)
+    public function __construct(private array $types)
     {
-        $this->types = $types;
     }
 
     /**
@@ -48,7 +42,7 @@ final class ServiceLoader implements BlockLoaderInterface
             throw new \TypeError(sprintf(
                 'Argument 1 passed to %s must be of type string or array, %s given',
                 __METHOD__,
-                \is_object($configuration) ? 'object of type '.\get_class($configuration) : \gettype($configuration)
+                \is_object($configuration) ? 'object of type '.$configuration::class : \gettype($configuration)
             ));
         }
 
@@ -82,7 +76,7 @@ final class ServiceLoader implements BlockLoaderInterface
             throw new \TypeError(sprintf(
                 'Argument 1 passed to %s must be of type string or array, %s given',
                 __METHOD__,
-                \is_object($configuration) ? 'object of type '.\get_class($configuration) : \gettype($configuration)
+                \is_object($configuration) ? 'object of type '.$configuration::class : \gettype($configuration)
             ));
         }
 

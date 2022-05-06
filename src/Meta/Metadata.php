@@ -18,34 +18,16 @@ namespace Sonata\BlockBundle\Meta;
  */
 final class Metadata implements MetadataInterface
 {
-    private string $title;
-
-    private ?string $description;
-
-    private ?string $image;
-
-    private ?string $domain;
-
-    /**
-     * @var array<string, mixed>
-     */
-    private array $options;
-
     /**
      * @param array<string, mixed> $options
      */
     public function __construct(
-        string $title,
-        ?string $description = null,
-        ?string $image = null,
-        ?string $domain = null,
-        array $options = []
+        private string $title,
+        private ?string $description = null,
+        private ?string $image = null,
+        private ?string $domain = null,
+        private array $options = []
     ) {
-        $this->title = $title;
-        $this->description = $description;
-        $this->image = $image;
-        $this->domain = $domain;
-        $this->options = $options;
     }
 
     public function getTitle(): string

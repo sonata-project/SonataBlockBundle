@@ -36,19 +36,12 @@ use Twig\Environment;
  */
 class MenuBlockService extends AbstractBlockService implements EditableBlockService
 {
-    private MenuProviderInterface $menuProvider;
-
-    private MenuRegistryInterface $menuRegistry;
-
     public function __construct(
         Environment $twig,
-        MenuProviderInterface $menuProvider,
-        MenuRegistryInterface $menuRegistry
+        private MenuProviderInterface $menuProvider,
+        private MenuRegistryInterface $menuRegistry
     ) {
         parent::__construct($twig);
-
-        $this->menuProvider = $menuProvider;
-        $this->menuRegistry = $menuRegistry;
     }
 
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
@@ -165,10 +158,8 @@ class MenuBlockService extends AbstractBlockService implements EditableBlockServ
 
     /**
      * Gets the menu to render.
-     *
-     * @return ItemInterface|string
      */
-    private function getMenu(BlockContextInterface $blockContext)
+    private function getMenu(BlockContextInterface $blockContext): ItemInterface | string
     {
         $settings = $blockContext->getSettings();
 

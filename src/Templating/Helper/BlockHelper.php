@@ -38,12 +38,6 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  */
 class BlockHelper
 {
-    private BlockRendererInterface $blockRenderer;
-
-    private BlockContextManagerInterface $blockContextManager;
-
-    private EventDispatcherInterface $eventDispatcher;
-
     /**
      * This property is a state variable holdings all assets used by the block for the current PHP request
      * It is used to correctly render the javascripts and stylesheets tags on the main layout.
@@ -63,21 +57,15 @@ class BlockHelper
      */
     private array $eventTraces = [];
 
-    private ?Stopwatch $stopwatch = null;
-
     /**
      * @internal
      */
     public function __construct(
-        BlockRendererInterface $blockRenderer,
-        BlockContextManagerInterface $blockContextManager,
-        EventDispatcherInterface $eventDispatcher,
-        ?Stopwatch $stopwatch = null
+        private BlockRendererInterface $blockRenderer,
+        private BlockContextManagerInterface $blockContextManager,
+        private EventDispatcherInterface $eventDispatcher,
+        private ?Stopwatch $stopwatch = null
     ) {
-        $this->blockRenderer = $blockRenderer;
-        $this->blockContextManager = $blockContextManager;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->stopwatch = $stopwatch;
     }
 
     /**
@@ -165,7 +153,7 @@ class BlockHelper
      * @param string|array<string, mixed>|BlockInterface $block
      * @param array<string, mixed>                       $options
      */
-    public function render($block, array $options = []): string
+    public function render(string | array | BlockInterface $block, array $options = []): string
     {
         $blockContext = $this->blockContextManager->get($block, $options);
 
@@ -250,7 +238,7 @@ class BlockHelper
             if ($listener instanceof \Closure) {
                 $results[] = '{closure}()';
             } elseif (\is_array($listener) && \is_object($listener[0])) {
-                $results[] = \get_class($listener[0]);
+                $results[] = $listener[0]::class;
             } elseif (\is_array($listener) && \is_string($listener[0])) {
                 $results[] = $listener[0];
             } else {

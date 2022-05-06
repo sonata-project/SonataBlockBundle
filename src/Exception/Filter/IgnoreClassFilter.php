@@ -23,11 +23,8 @@ use Sonata\BlockBundle\Model\BlockInterface;
  */
 final class IgnoreClassFilter implements FilterInterface
 {
-    private string $class;
-
-    public function __construct(string $class)
+    public function __construct(private string $class)
     {
-        $this->class = $class;
     }
 
     public function handle(\Throwable $exception, BlockInterface $block): bool

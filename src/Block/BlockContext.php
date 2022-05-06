@@ -17,20 +17,13 @@ use Sonata\BlockBundle\Model\BlockInterface;
 
 final class BlockContext implements BlockContextInterface
 {
-    private BlockInterface $block;
-
-    /**
-     * @var array<string, mixed>
-     */
-    private array $settings;
-
     /**
      * @param array<string, mixed> $settings
      */
-    public function __construct(BlockInterface $block, array $settings = [])
-    {
-        $this->block = $block;
-        $this->settings = $settings;
+    public function __construct(
+        private BlockInterface $block,
+        private array $settings = []
+    ) {
     }
 
     public function getBlock(): BlockInterface
