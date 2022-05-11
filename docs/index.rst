@@ -14,7 +14,6 @@ Block Bundle
    reference/profiler
    reference/exceptions
    reference/advanced_usage
-   reference/cache
    reference/events
    reference/testing
 
