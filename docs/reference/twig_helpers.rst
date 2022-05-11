@@ -24,15 +24,6 @@ Render a block  by providing the block's type and options:
         'url': 'https://sonata-project.org/blog/archive.rss'
     }) }}
 
-Render a block by providing the block's cache options:
-
-.. code-block:: twig
-
-    {{ sonata_block_render(block, {
-        'use_cache': use_cache,
-        'extra_cache_key': extra_cache_key
-    }) }}
-
 Render a block by calling an event:
 
 .. code-block:: twig

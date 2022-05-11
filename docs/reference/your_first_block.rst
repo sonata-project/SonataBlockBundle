@@ -187,5 +187,3 @@ Then, add the service to Sonata configuration:
         sonata_block:
             blocks:
                 sonata.block.service.rss: ~
-
-If you want to set up caching, take a look at the SonataCacheBundle support documentation: :doc:`cache`.
