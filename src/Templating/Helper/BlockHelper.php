@@ -123,11 +123,6 @@ class BlockHelper
         }
 
         if (null !== $this->stopwatch) {
-            /**
-             * @psalm-suppress ArgumentTypeCoercion
-             *
-             * @see https://github.com/psalm/psalm-plugin-symfony/pull/254
-             */
             $this->eventTraces[uniqid('', true)] = [
                 'template_code' => $name,
                 'event_name' => $eventName,
