@@ -22,6 +22,10 @@ use Symfony\Component\Form\FormTypeInterface;
 interface FormMapper
 {
     /**
+     * NEXT_MAJOR: Remove this method.
+     *
+     * @deprecated since sonata-project/block-bundle 4.x. To be removed in 5.0.
+     *
      * @param class-string<FormTypeInterface>|null $type
      * @param array<string, mixed>                 $options
      */
