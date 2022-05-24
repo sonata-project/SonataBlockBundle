@@ -55,7 +55,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
         if (null === $containerTypes) {
             @trigger_error(
                 sprintf(
-                    'Not Passing an array as argument 2 for method "%s" is deprecated since sonata-project/block-bundle 4.x. The argument will be required in 5.0.',
+                    'Not Passing an array as argument 2 for method "%s" is deprecated since sonata-project/block-bundle 4.13. The argument will be required in 5.0.',
                     __METHOD__
                 ),
                 \E_USER_DEPRECATED

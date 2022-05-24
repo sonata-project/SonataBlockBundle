@@ -24,7 +24,7 @@ interface FormMapper
     /**
      * NEXT_MAJOR: Remove this method.
      *
-     * @deprecated since sonata-project/block-bundle 4.x. To be removed in 5.0.
+     * @deprecated since sonata-project/block-bundle 4.13. To be removed in 5.0.
      *
      * @param class-string<FormTypeInterface>|null $type
      * @param array<string, mixed>                 $options
