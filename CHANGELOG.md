@@ -2,6 +2,20 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.13.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.12.0...4.13.0) - 2022-05-24
+### Added
+- [[#1055](https://github.com/sonata-project/SonataBlockBundle/pull/1055)] Add explicit dependency on `psr/container` and `psr/log`. ([@jordisala1991](https://github.com/jordisala1991))
+
+### Changed
+- [[#1051](https://github.com/sonata-project/SonataBlockBundle/pull/1051)] Block services are now accessed via service locator within `BlockServiceManager` ([@dmaicher](https://github.com/dmaicher))
+
+### Deprecated
+- [[#1068](https://github.com/sonata-project/SonataBlockBundle/pull/1068)] FormMapper::create() method. ([@VincentLanglet](https://github.com/VincentLanglet))
+- [[#1051](https://github.com/sonata-project/SonataBlockBundle/pull/1051)] Deprecated not passing container types as second argument to `BlockServiceManager::__construct` ([@dmaicher](https://github.com/dmaicher))
+
+### Removed
+- [[#1055](https://github.com/sonata-project/SonataBlockBundle/pull/1055)] Remove dependency on `sonata-project/twig-extensions` since it wasn't used. ([@jordisala1991](https://github.com/jordisala1991))
+
 ## [4.12.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.11.0...4.12.0) - 2022-04-27
 ### Changed
 - [[#1042](https://github.com/sonata-project/SonataBlockBundle/pull/1042)] Marked `BlockHelper::__construct` as `@internal` ([@dmaicher](https://github.com/dmaicher))
