@@ -148,7 +148,7 @@ class BlockHelper
      * @param string|array<string, mixed>|BlockInterface $block
      * @param array<string, mixed>                       $options
      */
-    public function render(string | array | BlockInterface $block, array $options = []): string
+    public function render(string|array|BlockInterface $block, array $options = []): string
     {
         $blockContext = $this->blockContextManager->get($block, $options);
 
