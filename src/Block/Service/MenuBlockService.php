@@ -159,7 +159,7 @@ class MenuBlockService extends AbstractBlockService implements EditableBlockServ
     /**
      * Gets the menu to render.
      */
-    private function getMenu(BlockContextInterface $blockContext): ItemInterface | string
+    private function getMenu(BlockContextInterface $blockContext): ItemInterface|string
     {
         $settings = $blockContext->getSettings();
 
