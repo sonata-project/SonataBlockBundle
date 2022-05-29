@@ -2,6 +2,7 @@ framework:
     secret: secret
     router:
         utf8: true
+    http_method_override: false
 
 twig:
     paths:
