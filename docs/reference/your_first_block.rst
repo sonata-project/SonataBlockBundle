@@ -31,7 +31,7 @@ Default settings
 
 A `block service` needs settings to work properly, so to ensure consistency, the service should define a ``configureOptions`` method::
 
-    public function configureSettings(OptionsResolver $resolver)
+    public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'url' => false,
@@ -51,7 +51,7 @@ Form Editing
 
 You can define an editing config the following way::
 
-    public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
+    public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
     {
         $formMapper
             ->add('settings', 'sonata_type_immutable_array', [
@@ -65,7 +65,7 @@ You can define an editing config the following way::
 
 The validation is done at runtime through a ``validateBlock`` method. You can call any Symfony assertions, like::
 
-    public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
+    public function validateBlock(ErrorElement $errorElement, BlockInterface $block): void
     {
         $errorElement
             ->with('settings.url')
@@ -87,7 +87,7 @@ Execute
 
 The next step is to implement the `execute` method. This method must return a ``Response`` object, which is used to render the block::
 
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, Response $response = null): Reponse
     {
         // merge settings
         $settings = $blockContext->getSettings();
