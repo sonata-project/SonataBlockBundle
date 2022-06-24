@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.14.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.13.0...4.14.0) - 2022-06-23
+### Fixed
+- [[#1075](https://github.com/sonata-project/SonataBlockBundle/pull/1075)] Command deprecations using Symfony 6.1 ([@franmomu](https://github.com/franmomu))
+
+### Removed
+- [[#1075](https://github.com/sonata-project/SonataBlockBundle/pull/1075)] Support of Symfony 5.3 ([@franmomu](https://github.com/franmomu))
+
 ## [4.13.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.12.0...4.13.0) - 2022-05-24
 ### Added
 - [[#1055](https://github.com/sonata-project/SonataBlockBundle/pull/1055)] Add explicit dependency on `psr/container` and `psr/log`. ([@jordisala1991](https://github.com/jordisala1991))
