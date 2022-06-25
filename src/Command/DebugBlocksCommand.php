@@ -15,6 +15,7 @@ namespace Sonata\BlockBundle\Command;
 
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Block\Service\EditableBlockService;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -22,6 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+#[AsCommand(name: 'debug:sonata:block', description: 'Debug all blocks available, show default settings of each block')]
 final class DebugBlocksCommand extends Command
 {
     public function __construct(private BlockServiceManagerInterface $blockManager)
@@ -32,8 +34,6 @@ final class DebugBlocksCommand extends Command
     public function configure(): void
     {
         $this
-            ->setName('debug:sonata:block')
-            ->setDescription('Debug all blocks available, show default settings of each block')
             ->addOption('context', 'c', InputOption::VALUE_REQUIRED, 'display service for the specified context');
     }
 
