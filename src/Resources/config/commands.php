@@ -20,7 +20,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->set('sonata.block.command.debug_blocks', DebugBlocksCommand::class)
-        ->tag('console.command', ['command' => 'debug:sonata:block'])
+        ->tag('console.command')
         ->args([
             new ReferenceConfigurator('sonata.block.manager'),
         ]);
