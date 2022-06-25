@@ -18,6 +18,9 @@ use Sonata\BlockBundle\Model\Block;
 
 final class BlockTest extends TestCase
 {
+    /**
+     * @group legacy
+     */
     public function testGetTtl(): void
     {
         $block = new Block();
