@@ -57,7 +57,7 @@
         "phpunit/phpunit": "^9.5.13",
         "psalm/plugin-phpunit": "^0.16",
         "psalm/plugin-symfony": "^3.0",
-        "rector/rector": "^0.12",
+        "rector/rector": "^0.13",
         "sonata-project/doctrine-extensions": "^1.10.1",
         "symfony/browser-kit": "^4.4 || ^5.4 || ^6.0",
         "symfony/debug": "^4.4 || ^5.4 || ^6.0",
