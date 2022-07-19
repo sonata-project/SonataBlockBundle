@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
  * Base abstract Block class that provides a default implementation of the block interface.
  */
@@ -44,7 +46,9 @@ abstract class BaseBlock implements BlockInterface
     protected $parent;
 
     /**
-     * @var BlockInterface[]
+     * NEXT_MAJOR: Restrict typehint to Collection.
+     *
+     * @var Collection<int, BlockInterface>|array<BlockInterface>
      */
     protected $children;
 
@@ -170,14 +174,32 @@ abstract class BaseBlock implements BlockInterface
         return $this->updatedAt;
     }
 
+    public function addChild(BlockInterface $child): void
+    {
+        $this->children[] = $child;
+
+        $child->setParent($this);
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method.
+     */
     public function addChildren(BlockInterface $children): void
     {
+        @trigger_error(
+            sprintf(
+                'Method "%s" is deprecated since sonata-project/block-bundle 4.x. Use "addChild" instead.',
+                __METHOD__
+            ),
+            \E_USER_DEPRECATED
+        );
+
         $this->children[] = $children;
 
         $children->setParent($this);
     }
 
-    public function getChildren(): array
+    public function getChildren(): iterable
     {
         return $this->children;
     }
@@ -219,8 +241,24 @@ abstract class BaseBlock implements BlockInterface
         return $this->ttl;
     }
 
+    public function hasChild(): bool
+    {
+        return \count($this->children) > 0;
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method.
+     */
     public function hasChildren(): bool
     {
+        @trigger_error(
+            sprintf(
+                'Method "%s" is deprecated since sonata-project/block-bundle 4.x. Use "hasChild" instead.',
+                __METHOD__
+            ),
+            \E_USER_DEPRECATED
+        );
+
         return \count($this->children) > 0;
     }
 }
