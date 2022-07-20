@@ -14,116 +14,67 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Model;
 
 /**
- * Interface of Block.
+ * @method void addChild(self $child)
+ * @method bool hasChild()
  */
 interface BlockInterface
 {
     /**
-     * Sets the block id.
-     *
      * @param string|int $id
      */
     public function setId($id): void;
 
     /**
-     * Returns the block id.
-     *
      * @return string|int|null
      */
     public function getId();
 
-    /**
-     * Sets the name.
-     */
     public function setName(string $name): void;
 
-    /**
-     * Returns the name.
-     */
     public function getName(): ?string;
 
-    /**
-     * Sets the type.
-     */
     public function setType(string $type): void;
 
-    /**
-     * Returns the type.
-     */
     public function getType(): ?string;
 
-    /**
-     * Sets whether or not this block is enabled.
-     */
     public function setEnabled(bool $enabled): void;
 
-    /**
-     * Returns whether or not this block is enabled.
-     */
     public function getEnabled(): bool;
 
-    /**
-     * Set the block ordered position.
-     */
     public function setPosition(int $position): void;
 
-    /**
-     * Returns the block ordered position.
-     */
     public function getPosition(): ?int;
 
-    /**
-     * Sets the creation date and time.
-     */
     public function setCreatedAt(?\DateTime $createdAt = null): void;
 
-    /**
-     * Returns the creation date and time.
-     */
     public function getCreatedAt(): ?\DateTime;
 
-    /**
-     * Set the last update date and time.
-     */
     public function setUpdatedAt(?\DateTime $updatedAt = null): void;
 
-    /**
-     * Returns the last update date and time.
-     */
     public function getUpdatedAt(): ?\DateTime;
 
     /**
-     * Returns the block cache TTL.
-     *
      * @deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.
      */
     public function getTtl(): int;
 
     /**
-     * Sets the block settings.
-     *
      * @param array<string, mixed> $settings An array of key/value
      */
     public function setSettings(array $settings = []): void;
 
     /**
-     * Returns the block settings.
-     *
      * @return array<string, mixed>
      */
     public function getSettings(): array;
 
     /**
-     * Sets one block setting.
-     *
      * @param string $name  Key name
      * @param mixed  $value Value
      */
     public function setSetting(string $name, $value): void;
 
     /**
-     * Returns one block setting or the given default value if no value is found.
-     *
      * @param string     $name    Key name
      * @param mixed|null $default Default value
      *
@@ -132,34 +83,29 @@ interface BlockInterface
     public function getSetting(string $name, $default = null);
 
     /**
-     * Add one child block.
+     * NEXT_MAJOR: Rename addChild().
+     *
+     * @deprecated since sonata-project/block-bundle 4.x. Use addChild() instead.
      */
     public function addChildren(self $children): void;
 
     /**
-     * Returns child blocks.
+     * NEXT_MAJOR: Restrict typehint to Collection.
      *
-     * @return BlockInterface[] $children
+     * @return iterable<BlockInterface> $children
      */
-    public function getChildren(): array;
+    public function getChildren(): iterable;
 
     /**
-     * Returns whether or not this block has children.
+     * NEXT_MAJOR: Rename hasChild().
+     *
+     * @deprecated since sonata-project/block-bundle 4.x. Use hasChild() instead.
      */
     public function hasChildren(): bool;
 
-    /**
-     * Set the parent block.
-     */
     public function setParent(?self $parent = null): void;
 
-    /**
-     * Returns the parent block.
-     */
     public function getParent(): ?self;
 
-    /**
-     * Returns whether or not this block has a parent.
-     */
     public function hasParent(): bool;
 }
