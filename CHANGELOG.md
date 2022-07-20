@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.16.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.15.0...4.16.0) - 2022-07-20
+### Added
+- [[#1087](https://github.com/sonata-project/SonataBlockBundle/pull/1087)] BlockInterface::addChild() ([@VincentLanglet](https://github.com/VincentLanglet))
+- [[#1087](https://github.com/sonata-project/SonataBlockBundle/pull/1087)] BlockInterface::hasChild() ([@VincentLanglet](https://github.com/VincentLanglet))
+
+### Changed
+- [[#1087](https://github.com/sonata-project/SonataBlockBundle/pull/1087)] BlockInterface::getChildren() now returns iterable ([@VincentLanglet](https://github.com/VincentLanglet))
+
+### Deprecated
+- [[#1087](https://github.com/sonata-project/SonataBlockBundle/pull/1087)] BlockInterface::addChildren() ([@VincentLanglet](https://github.com/VincentLanglet))
+- [[#1087](https://github.com/sonata-project/SonataBlockBundle/pull/1087)] BlockInterface::hasChildren() ([@VincentLanglet](https://github.com/VincentLanglet))
+
 ## [4.15.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.14.0...4.15.0) - 2022-07-18
 ### Added
 - [[#1080](https://github.com/sonata-project/SonataBlockBundle/pull/1080)] Add lazy description to commands. ([@jordisala1991](https://github.com/jordisala1991))
