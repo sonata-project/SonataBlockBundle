@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
@@ -46,9 +47,7 @@ abstract class BaseBlock implements BlockInterface, \Stringable
     protected $parent;
 
     /**
-     * NEXT_MAJOR: Restrict typehint to Collection.
-     *
-     * @var Collection<int, BlockInterface>|array<BlockInterface>
+     * @var Collection<int, BlockInterface>
      */
     protected $children;
 
@@ -71,7 +70,7 @@ abstract class BaseBlock implements BlockInterface, \Stringable
     {
         $this->settings = [];
         $this->enabled = false;
-        $this->children = [];
+        $this->children = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -166,25 +165,7 @@ abstract class BaseBlock implements BlockInterface, \Stringable
         $child->setParent($this);
     }
 
-    /**
-     * NEXT_MAJOR: Remove this method.
-     */
-    public function addChildren(BlockInterface $children): void
-    {
-        @trigger_error(
-            sprintf(
-                'Method "%s" is deprecated since sonata-project/block-bundle 4.x. Use "addChild" instead.',
-                __METHOD__
-            ),
-            \E_USER_DEPRECATED
-        );
-
-        $this->children[] = $children;
-
-        $children->setParent($this);
-    }
-
-    public function getChildren(): iterable
+    public function getChildren(): Collection
     {
         return $this->children;
     }
@@ -206,22 +187,6 @@ abstract class BaseBlock implements BlockInterface, \Stringable
 
     public function hasChild(): bool
     {
-        return \count($this->children) > 0;
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this method.
-     */
-    public function hasChildren(): bool
-    {
-        @trigger_error(
-            sprintf(
-                'Method "%s" is deprecated since sonata-project/block-bundle 4.x. Use "hasChild" instead.',
-                __METHOD__
-            ),
-            \E_USER_DEPRECATED
-        );
-
         return \count($this->children) > 0;
     }
 }
