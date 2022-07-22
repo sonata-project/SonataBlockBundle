@@ -165,7 +165,7 @@ abstract class BaseBlock implements BlockInterface, \Stringable
         $child->setParent($this);
     }
 
-    public function getChildren(): iterable
+    public function getChildren(): Collection
     {
         return $this->children;
     }
