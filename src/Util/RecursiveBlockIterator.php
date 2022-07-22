@@ -31,7 +31,7 @@ final class RecursiveBlockIterator extends \RecursiveArrayIterator
      */
     public function __construct($array)
     {
-        if (\is_object($array)) {
+        if ($array instanceof Collection) {
             $array = $array->toArray();
         }
 
