@@ -78,7 +78,7 @@ interface BlockInterface
     public function addChild(self $child): void;
 
     /**
-     * @return Collection<BlockInterface> $children
+     * @return Collection<int, BlockInterface>
      */
     public function getChildren(): Collection;
 

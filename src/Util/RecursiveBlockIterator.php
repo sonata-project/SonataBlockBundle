@@ -14,20 +14,17 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Util;
 
 use Doctrine\Common\Collections\Collection;
+use Sonata\BlockBundle\Model\BlockInterface;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
- * @phpstan-template TKey of array-key
- * @phpstan-template T
- * @phpstan-extends \RecursiveArrayIterator<TKey, T>
+ * @phpstan-extends \RecursiveArrayIterator<array-key, BlockInterface>
  */
 final class RecursiveBlockIterator extends \RecursiveArrayIterator
 {
     /**
-     * @param Collection<array-key, mixed>|array<mixed> $array
-     *
-     * @phpstan-param Collection<TKey, T>|array<TKey, T> $array
+     * @param Collection<array-key, BlockInterface>|array<BlockInterface> $array
      */
     public function __construct($array)
     {
@@ -39,7 +36,7 @@ final class RecursiveBlockIterator extends \RecursiveArrayIterator
     }
 
     /**
-     * @phpstan-return RecursiveBlockIterator<TKey, T>
+     * @phpstan-return RecursiveBlockIterator
      */
     public function getChildren(): self
     {
@@ -48,6 +45,6 @@ final class RecursiveBlockIterator extends \RecursiveArrayIterator
 
     public function hasChildren(): bool
     {
-        return $this->current()->hasChildren();
+        return $this->current()->hasChild();
     }
 }
