@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
  * @method void addChild(self $child)
  * @method bool hasChild()
@@ -92,9 +94,9 @@ interface BlockInterface
     /**
      * NEXT_MAJOR: Restrict typehint to Collection.
      *
-     * @return iterable<BlockInterface> $children
+     * @return Collection<int, BlockInterface>|array<BlockInterface> $children
      */
-    public function getChildren(): iterable;
+    public function getChildren();
 
     /**
      * NEXT_MAJOR: Rename hasChild().
