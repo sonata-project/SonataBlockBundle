@@ -199,7 +199,7 @@ abstract class BaseBlock implements BlockInterface
         $children->setParent($this);
     }
 
-    public function getChildren(): iterable
+    public function getChildren()
     {
         return $this->children;
     }
