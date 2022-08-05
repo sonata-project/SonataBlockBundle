@@ -16,7 +16,7 @@ namespace Sonata\BlockBundle\Model;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * @method void addChild(self $child)
+ * @method void addChild(BlockInterface $child)
  * @method bool hasChild()
  */
 interface BlockInterface
