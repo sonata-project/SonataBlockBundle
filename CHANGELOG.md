@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.16.1](https://github.com/sonata-project/SonataBlockBundle/compare/4.16.0...4.16.1) - 2022-08-05
+### Changed
+- [[#1093](https://github.com/sonata-project/SonataBlockBundle/pull/1093)] Change typehint of `addChild` to `BlockInterface` instead of `self`. ([@jordisala1991](https://github.com/jordisala1991))
+
+### Fixed
+- [[#1090](https://github.com/sonata-project/SonataBlockBundle/pull/1090)] Avoid deprecation for the `hasChildren` method. ([@jordisala1991](https://github.com/jordisala1991))
+
 ## [4.16.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.15.0...4.16.0) - 2022-07-20
 ### Added
 - [[#1087](https://github.com/sonata-project/SonataBlockBundle/pull/1087)] BlockInterface::addChild() ([@VincentLanglet](https://github.com/VincentLanglet))
