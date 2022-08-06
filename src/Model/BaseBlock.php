@@ -108,12 +108,12 @@ abstract class BaseBlock implements BlockInterface, \Stringable
         return $this->settings;
     }
 
-    public function setSetting(string $name, $value): void
+    public function setSetting(string $name, mixed $value): void
     {
         $this->settings[$name] = $value;
     }
 
-    public function getSetting(string $name, $default = null)
+    public function getSetting(string $name, mixed $default = null): mixed
     {
         return $this->settings[$name] ?? $default;
     }

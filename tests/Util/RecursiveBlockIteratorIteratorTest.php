@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests\Util;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Util\RecursiveBlockIteratorIterator;
