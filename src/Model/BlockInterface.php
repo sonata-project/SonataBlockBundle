@@ -61,19 +61,9 @@ interface BlockInterface
      */
     public function getSettings(): array;
 
-    /**
-     * @param string $name  Key name
-     * @param mixed  $value Value
-     */
-    public function setSetting(string $name, $value): void;
+    public function setSetting(string $name, mixed $value): void;
 
-    /**
-     * @param string     $name    Key name
-     * @param mixed|null $default Default value
-     *
-     * @return mixed
-     */
-    public function getSetting(string $name, $default = null);
+    public function getSetting(string $name, mixed $default = null): mixed;
 
     public function addChild(self $child): void;
 

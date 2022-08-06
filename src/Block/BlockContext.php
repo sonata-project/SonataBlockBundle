@@ -36,7 +36,7 @@ final class BlockContext implements BlockContextInterface
         return $this->settings;
     }
 
-    public function getSetting(string $name)
+    public function getSetting(string $name): mixed
     {
         if (!\array_key_exists($name, $this->settings)) {
             throw new \RuntimeException(sprintf('Unable to find the option `%s` (%s) - define the option in the related BlockServiceInterface', $name, $this->block->getType() ?? ''));
@@ -45,7 +45,7 @@ final class BlockContext implements BlockContextInterface
         return $this->settings[$name];
     }
 
-    public function setSetting(string $name, $value): BlockContextInterface
+    public function setSetting(string $name, mixed $value): BlockContextInterface
     {
         if (!\array_key_exists($name, $this->settings)) {
             throw new \RuntimeException(sprintf('It\'s not possible add non existing setting `%s`.', $name));

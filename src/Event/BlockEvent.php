@@ -51,12 +51,7 @@ final class BlockEvent extends Event
         return $this->blocks;
     }
 
-    /**
-     * @param mixed $default
-     *
-     * @return mixed
-     */
-    public function getSetting(string $name, $default = null)
+    public function getSetting(string $name, mixed $default = null): mixed
     {
         return $this->settings[$name] ?? $default;
     }

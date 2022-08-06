@@ -24,15 +24,9 @@ interface BlockContextInterface
      */
     public function getSettings(): array;
 
-    /**
-     * @return mixed
-     */
-    public function getSetting(string $name);
+    public function getSetting(string $name): mixed;
 
-    /**
-     * @param mixed $value
-     */
-    public function setSetting(string $name, $value): self;
+    public function setSetting(string $name, mixed $value): self;
 
     public function getTemplate(): string;
 }
