@@ -119,18 +119,18 @@ final class DebugBlocksCommandTest extends TestCase
 
         $expected = <<<EOF
 
->> test.without_options
+            >> test.without_options
 
->> test.with_simple_option
-    limit                         150
+            >> test.with_simple_option
+                limit                         150
 
->> test.with_required_option
-    limit
+            >> test.with_required_option
+                limit
 
->> test.with_metadata (My block title)
-done!
+            >> test.with_metadata (My block title)
+            done!
 
-EOF;
+            EOF;
 
         static::assertSame($expected, $commandTester->getDisplay());
     }
