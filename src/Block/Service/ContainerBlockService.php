@@ -41,8 +41,6 @@ final class ContainerBlockService extends AbstractBlockService implements Editab
 
     public function configureEditForm(FormMapper $form, BlockInterface $block): void
     {
-        $form->add('enabled');
-
         $form->add('settings', ImmutableArrayType::class, [
             'keys' => [
                 ['code', TextType::class, [
