@@ -28,6 +28,9 @@ final class RecursiveBlockIteratorIteratorTest extends TestCase
 
         $block1->addChild($block2);
         $block1->addChild($block3);
+        $block1->removeChild($block3);
+        $block1->removeChild($block4);
+        $block1->addChild($block3);
 
         $i = new RecursiveBlockIteratorIterator([$block1, $block4]);
 

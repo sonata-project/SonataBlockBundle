@@ -41,10 +41,11 @@ interface FormMapper
     /**
      * @param class-string<FormTypeInterface>|null $type
      * @param array<string, mixed>                 $options
+     * @param array<string, mixed>                 $fieldDescriptionOptions
      *
      * @return static
      */
-    public function add(string $name, ?string $type = null, array $options = []);
+    public function add(string $name, ?string $type = null, array $options = [], array $fieldDescriptionOptions = []);
 
     /**
      * @return static
