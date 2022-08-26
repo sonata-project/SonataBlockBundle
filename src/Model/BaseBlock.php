@@ -199,6 +199,26 @@ abstract class BaseBlock implements BlockInterface
         $children->setParent($this);
     }
 
+    public function removeChild(BlockInterface $child): void
+    {
+        // NEXT_MAJOR: Remove this condition, children will be a Collection.
+        if (\is_array($this->children)) {
+            $key = array_search($child, $this->children, true);
+
+            if (false === $key) {
+                return;
+            }
+
+            unset($this->children[$key]);
+
+            return;
+        }
+
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+        }
+    }
+
     public function getChildren()
     {
         return $this->children;

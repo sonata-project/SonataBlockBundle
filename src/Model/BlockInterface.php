@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\Collection;
 
 /**
  * @method void addChild(BlockInterface $child)
+ * @method void removeChild(BlockInterface $child)
  * @method bool hasChild()
  */
 interface BlockInterface
