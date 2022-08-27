@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.17.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.16.2...4.17.0) - 2022-08-27
+### Added
+- [[#1100](https://github.com/sonata-project/SonataBlockBundle/pull/1100)] Add `removeChild` to be consistent with `addChild` for Block Model. ([@jordisala1991](https://github.com/jordisala1991))
+
 ## [4.16.2](https://github.com/sonata-project/SonataBlockBundle/compare/4.16.1...4.16.2) - 2022-08-12
 ### Removed
 - [[#1098](https://github.com/sonata-project/SonataBlockBundle/pull/1098)] Remove `editable` field from `ContainerBlockService`, it was added twice. ([@jordisala1991](https://github.com/jordisala1991))
