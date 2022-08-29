@@ -13,16 +13,13 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests\Functional;
 
-use Sonata\BlockBundle\Tests\App\AppKernel;
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class FunctionalTest extends WebTestCase
 {
     public function testRenderBlock(): void
     {
-        $kernel = new AppKernel();
-        $client = new KernelBrowser($kernel);
+        $client = static::createClient();
         $client->request('GET', '/');
 
         static::assertSame(200, $client->getResponse()->getStatusCode());
