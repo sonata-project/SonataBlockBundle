@@ -33,6 +33,7 @@ final class BlockHelperTest extends TestCase
 {
     /**
      * @group legacy
+     *
      * @doesNotPerformAssertions
      *
      * NEXT_MAJOR: remove this test.
