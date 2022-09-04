@@ -67,6 +67,8 @@ interface BlockInterface
 
     public function addChild(self $child): void;
 
+    public function removeChild(self $child): void;
+
     /**
      * @return Collection<int, BlockInterface>
      */

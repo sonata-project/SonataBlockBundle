@@ -29,6 +29,7 @@ final class BlockContextManager implements BlockContextManagerInterface
 
     /**
      * @var array<string, array<string, mixed>>
+     *
      * @phpstan-var array<class-string, array<string, mixed>>
      */
     private array $settingsByClass = [];

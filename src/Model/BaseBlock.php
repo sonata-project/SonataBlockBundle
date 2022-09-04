@@ -165,6 +165,13 @@ abstract class BaseBlock implements BlockInterface, \Stringable
         $child->setParent($this);
     }
 
+    public function removeChild(BlockInterface $child): void
+    {
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+        }
+    }
+
     public function getChildren(): Collection
     {
         return $this->children;

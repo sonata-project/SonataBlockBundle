@@ -32,11 +32,6 @@ final class AppKernel extends Kernel
 {
     use MicroKernelTrait;
 
-    public function __construct()
-    {
-        parent::__construct('test', false);
-    }
-
     public function registerBundles(): iterable
     {
         return [

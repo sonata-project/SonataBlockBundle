@@ -48,6 +48,7 @@ class BlockHelper
 
     /**
      * @var array<StopwatchEvent|array<string, mixed>>
+     *
      * @phpstan-var array<StopwatchEvent|Trace>
      */
     private array $traces = [];
