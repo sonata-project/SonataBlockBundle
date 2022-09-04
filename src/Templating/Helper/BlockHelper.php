@@ -155,6 +155,7 @@ class BlockHelper
 
         /**
          * @var array<string, mixed>
+         *
          * @phpstan-var Trace
          */
         $stats = [];
