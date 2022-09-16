@@ -14,8 +14,11 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Block;
 
 use Psr\Log\LoggerInterface;
+use Sonata\BlockBundle\Exception\BlockNotFoundException;
 use Sonata\BlockBundle\Exception\Strategy\StrategyManagerInterface;
+use Sonata\BlockBundle\Model\Block;
 use Symfony\Component\HttpFoundation\Response;
+use Twig\Error\RuntimeError;
 
 /**
  * Handles the execution and rendering of a block.
@@ -77,6 +80,10 @@ final class BlockRenderer implements BlockRendererInterface
                     $block->getId() ?? '',
                     $exception->getMessage()
                 ), compact('exception'));
+            }
+
+            if ($exception instanceof RuntimeError && !empty($exception->getPrevious()) && $exception->getPrevious() instanceof BlockNotFoundException) {
+                return new Response();
             }
 
             // reseting the state object

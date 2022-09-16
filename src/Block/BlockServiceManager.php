@@ -16,6 +16,7 @@ namespace Sonata\BlockBundle\Block;
 use Psr\Container\ContainerInterface;
 use Sonata\BlockBundle\Block\Service\BlockServiceInterface;
 use Sonata\BlockBundle\Block\Service\EditableBlockService;
+use Sonata\BlockBundle\Exception\BlockNotFoundException;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\DependencyInjection\ContainerInterface as DependencyInjectionContainerInterface;
@@ -82,7 +83,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
     {
         $blockType = $block->getType();
         if (null === $blockType) {
-            throw new \RuntimeException('The block service `` does not exist');
+            throw new BlockNotFoundException('The block service `` does not exist');
         }
 
         $this->load($blockType);
@@ -190,12 +191,11 @@ final class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
-     * @throws \RuntimeException
      */
     private function load(string $type): BlockServiceInterface
     {
         if (!$this->has($type)) {
-            throw new \RuntimeException(sprintf('The block service `%s` does not exist', $type));
+            throw new BlockNotFoundException(sprintf('The block service `%s` does not exist', $type));
         }
 
         if (!$this->services[$type] instanceof BlockServiceInterface) {
@@ -203,7 +203,6 @@ final class BlockServiceManager implements BlockServiceManagerInterface
             if (!$blockService instanceof BlockServiceInterface) {
                 throw new \RuntimeException(sprintf('The service %s does not implement BlockServiceInterface', $type));
             }
-
             $this->services[$type] = $blockService;
         }
 

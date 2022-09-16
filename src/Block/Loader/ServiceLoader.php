@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Block\Loader;
 
 use Sonata\BlockBundle\Block\BlockLoaderInterface;
+use Sonata\BlockBundle\Exception\BlockNotFoundException;
 use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Model\BlockInterface;
 
@@ -59,7 +60,7 @@ final class ServiceLoader implements BlockLoaderInterface
         }
 
         if (!\in_array($configuration['type'], $this->types, true)) {
-            throw new \RuntimeException(sprintf(
+            throw new BlockNotFoundException(sprintf(
                 'The block type "%s" does not exist',
                 $configuration['type']
             ));
