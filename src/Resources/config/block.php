@@ -23,6 +23,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Use "service" function for creating references to services when dropping support for Symfony 4.4
     $services = $containerConfigurator->services();
 
+    // NEXT_MAJOR: Remove this service.
     $services->set('sonata.block.service.container', ContainerBlockService::class)
         ->tag('sonata.block')
         ->args([

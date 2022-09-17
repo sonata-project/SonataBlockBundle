@@ -28,9 +28,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Render children pages.
- *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * NEXT_MAJOR: Remove this class.
+ *
+ * @deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.
  */
 final class ContainerBlockService extends AbstractBlockService implements EditableBlockService
 {
@@ -45,20 +47,20 @@ final class ContainerBlockService extends AbstractBlockService implements Editab
             'keys' => [
                 ['code', TextType::class, [
                     'required' => false,
-                    'label' => 'form.label_code',
+                    'label' => 'form.label_code', // NEXT_MAJOR: Remove the translations.
                     'translation_domain' => 'SonataBlockBundle',
                 ]],
                 ['layout', TextareaType::class, [
-                    'label' => 'form.label_layout',
+                    'label' => 'form.label_layout', // NEXT_MAJOR: Remove the translations.
                     'translation_domain' => 'SonataBlockBundle',
                 ]],
                 ['class', TextType::class, [
                     'required' => false,
-                    'label' => 'form.label_class',
+                    'label' => 'form.label_class', // NEXT_MAJOR: Remove the translations.
                     'translation_domain' => 'SonataBlockBundle',
                 ]],
                 ['template', ContainerTemplateType::class, [
-                    'label' => 'form.label_template',
+                    'label' => 'form.label_template', // NEXT_MAJOR: Remove the translations.
                     'translation_domain' => 'SonataBlockBundle',
                 ]],
             ],
@@ -96,6 +98,7 @@ final class ContainerBlockService extends AbstractBlockService implements Editab
 
     public function getMetadata(): MetadataInterface
     {
+        // NEXT_MAJOR: Remove the related translations.
         return new Metadata('sonata.block.service.container', null, null, 'SonataBlockBundle', [
             'class' => 'fa fa-square-o',
         ]);
