@@ -21,6 +21,7 @@ use Sonata\BlockBundle\Meta\MetadataInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Twig\Environment;
 
@@ -63,7 +64,40 @@ class MenuBlockService extends AbstractMenuBlockService implements EditableBlock
 
         $resolver->setDefaults([
             'menu_name' => '',
+            // NEXT_MAJOR: Remove.
+            'current_uri' => null,
+            // NEXT_MAJOR: Remove.
+            'menu_class' => 'list-group',
+            // NEXT_MAJOR: Remove.
+            'children_class' => 'list-group-item',
         ]);
+
+        // NEXT_MAJOR: Remove setDeprecated.
+        $resolver->setDeprecated(
+            'current_uri',
+            ...$this->deprecationParameters(
+                '4.x',
+                'Option "current_uri" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
+            )
+        );
+
+        // NEXT_MAJOR: Remove setDeprecated.
+        $resolver->setDeprecated(
+            'menu_class',
+            ...$this->deprecationParameters(
+                '4.x',
+                'Option "menu_class" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
+            )
+        );
+
+        // NEXT_MAJOR: Remove setDeprecated.
+        $resolver->setDeprecated(
+            'children_class',
+            ...$this->deprecationParameters(
+                '4.x',
+                'Option "children_class" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
+            )
+        );
     }
 
     public function getMetadata(): MetadataInterface
@@ -85,7 +119,19 @@ class MenuBlockService extends AbstractMenuBlockService implements EditableBlock
 
         return array_merge(
             parent::getFormSettingsKeys(),
-            [['menu_name', ChoiceType::class, $choiceOptions]]
+            [
+                ['menu_name', ChoiceType::class, $choiceOptions],
+                // NEXT_MAJOR: Remove this and the related translations.
+                ['menu_class', TextType::class, [
+                    'required' => false,
+                    'label' => 'form.label_menu_class',
+                ]],
+                // NEXT_MAJOR: Remove this and the related translations.
+                ['children_class', TextType::class, [
+                    'required' => false,
+                    'label' => 'form.label_children_class',
+                ]],
+            ]
         );
     }
 
@@ -94,5 +140,27 @@ class MenuBlockService extends AbstractMenuBlockService implements EditableBlock
         $settings = $blockContext->getSettings();
 
         return $settings['menu_name'];
+    }
+
+    /**
+     * This class is a BC layer for deprecation messages for symfony/options-resolver < 5.1.
+     * Remove this class when dropping support for symfony/options-resolver < 5.1.
+     *
+     * @param string|\Closure $message
+     *
+     * @return mixed[]
+     */
+    private function deprecationParameters(string $version, $message): array
+    {
+        // @phpstan-ignore-next-line
+        if (method_exists(OptionsResolver::class, 'define')) {
+            return [
+                'sonata-project/block-bundle',
+                $version,
+                $message,
+            ];
+        }
+
+        return [$message];
     }
 }

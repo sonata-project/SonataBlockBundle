@@ -94,12 +94,6 @@ abstract class AbstractMenuBlockService extends AbstractBlockService implements 
             'current_class' => 'active',
             'first_class' => false,
             'last_class' => false,
-            // NEXT_MAJOR: Remove.
-            'current_uri' => null,
-            // NEXT_MAJOR: Remove.
-            'menu_class' => 'list-group',
-            // NEXT_MAJOR: Remove.
-            'children_class' => 'list-group-item',
             'menu_template' => null,
         ]);
 
@@ -109,33 +103,6 @@ abstract class AbstractMenuBlockService extends AbstractBlockService implements 
             ...$this->deprecationParameters(
                 '4.12',
                 'Option "cache_policy" is deprecated since sonata-project/block-bundle 4.12 and will be removed in 5.0.'
-            )
-        );
-
-        // NEXT_MAJOR: Remove setDeprecated.
-        $resolver->setDeprecated(
-            'current_uri',
-            ...$this->deprecationParameters(
-                '4.x',
-                'Option "current_uri" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
-            )
-        );
-
-        // NEXT_MAJOR: Remove setDeprecated.
-        $resolver->setDeprecated(
-            'menu_class',
-            ...$this->deprecationParameters(
-                '4.x',
-                'Option "menu_class" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
-            )
-        );
-
-        // NEXT_MAJOR: Remove setDeprecated.
-        $resolver->setDeprecated(
-            'children_class',
-            ...$this->deprecationParameters(
-                '4.x',
-                'Option "children_class" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
             )
         );
     }
@@ -169,16 +136,6 @@ abstract class AbstractMenuBlockService extends AbstractBlockService implements 
             ['last_class', TextType::class, [
                 'required' => false,
                 'label' => 'form.label_last_class',
-            ]],
-            // NEXT_MAJOR: Remove.
-            ['menu_class', TextType::class, [
-                'required' => false,
-                'label' => 'form.label_menu_class',
-            ]],
-            // NEXT_MAJOR: Remove.
-            ['children_class', TextType::class, [
-                'required' => false,
-                'label' => 'form.label_children_class',
             ]],
             ['menu_template', TextType::class, [
                 'required' => false,
