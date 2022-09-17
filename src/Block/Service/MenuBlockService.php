@@ -34,7 +34,7 @@ use Twig\Environment;
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class MenuBlockService extends AbstractBlockService implements EditableBlockService
+class MenuBlockService extends AbstractBlockService implements MetadataAwareBlockServiceInterface, EditableBlockService
 {
     private MenuProviderInterface $menuProvider;
 

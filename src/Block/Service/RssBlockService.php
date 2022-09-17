@@ -31,7 +31,7 @@ use Symfony\Component\Validator\Constraints\NotNull;
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-final class RssBlockService extends AbstractBlockService implements EditableBlockService
+final class RssBlockService extends AbstractBlockService implements MetadataAwareBlockServiceInterface, EditableBlockService
 {
     public function configureSettings(OptionsResolver $resolver): void
     {

@@ -27,7 +27,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-final class TextBlockService extends AbstractBlockService implements EditableBlockService
+final class TextBlockService extends AbstractBlockService implements MetadataAwareBlockServiceInterface, EditableBlockService
 {
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {

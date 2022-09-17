@@ -32,7 +32,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-final class ContainerBlockService extends AbstractBlockService implements EditableBlockService
+final class ContainerBlockService extends AbstractBlockService implements MetadataAwareBlockServiceInterface, EditableBlockService
 {
     public function configureCreateForm(FormMapper $form, BlockInterface $block): void
     {

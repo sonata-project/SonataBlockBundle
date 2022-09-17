@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Command;
 
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
-use Sonata\BlockBundle\Block\Service\EditableBlockService;
+use Sonata\BlockBundle\Block\Service\MetadataAwareBlockServiceInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -62,7 +62,7 @@ final class DebugBlocksCommand extends Command
             $output->writeln('');
 
             $title = '';
-            if ($service instanceof EditableBlockService) {
+            if ($service instanceof MetadataAwareBlockServiceInterface) {
                 $title = sprintf(' (<comment>%s</comment>)', $service->getMetadata()->getTitle());
             }
             $output->writeln(sprintf('<info>>> %s</info>%s', $code, $title));
