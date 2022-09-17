@@ -79,7 +79,6 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
                         'label' => 'form.label_cache_policy',
                         'choices' => ['public', 'private'],
                     ]],
-                    ['menu_name', ChoiceType::class, $choiceOptions],
                     ['safe_labels', CheckboxType::class, [
                         'required' => false,
                         'label' => 'form.label_safe_labels',
@@ -108,6 +107,7 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
                         'required' => false,
                         'label' => 'form.label_menu_template',
                     ]],
+                    ['menu_name', ChoiceType::class, $choiceOptions],
                 ],
                 'translation_domain' => 'SonataBlockBundle',
             ]);

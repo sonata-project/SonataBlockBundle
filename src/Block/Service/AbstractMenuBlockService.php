@@ -16,8 +16,11 @@ namespace Sonata\BlockBundle\Block\Service;
 use Knp\Menu\ItemInterface;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Form\Mapper\FormMapper;
+use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\BlockBundle\Meta\MetadataInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Type\ImmutableArrayType;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -26,7 +29,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Twig\Environment;
 
-abstract class AbstractMenuBlockService extends AbstractBlockService
+abstract class AbstractMenuBlockService extends AbstractBlockService implements EditableBlockService
 {
     public function __construct(Environment $twig)
     {
@@ -66,6 +69,20 @@ abstract class AbstractMenuBlockService extends AbstractBlockService
         ]);
     }
 
+    public function validate(ErrorElement $errorElement, BlockInterface $block): void
+    {
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method.
+     */
+    public function getMetadata(): MetadataInterface
+    {
+        return new Metadata('sonata.block.service.menu', null, null, 'SonataBlockBundle', [
+            'class' => 'fa fa-bars',
+        ]);
+    }
+
     public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -77,8 +94,11 @@ abstract class AbstractMenuBlockService extends AbstractBlockService
             'current_class' => 'active',
             'first_class' => false,
             'last_class' => false,
+            // NEXT_MAJOR: Remove.
             'current_uri' => null,
+            // NEXT_MAJOR: Remove.
             'menu_class' => 'list-group',
+            // NEXT_MAJOR: Remove.
             'children_class' => 'list-group-item',
             'menu_template' => null,
         ]);
@@ -89,6 +109,33 @@ abstract class AbstractMenuBlockService extends AbstractBlockService
             ...$this->deprecationParameters(
                 '4.12',
                 'Option "cache_policy" is deprecated since sonata-project/block-bundle 4.12 and will be removed in 5.0.'
+            )
+        );
+
+        // NEXT_MAJOR: Remove setDeprecated.
+        $resolver->setDeprecated(
+            'current_uri',
+            ...$this->deprecationParameters(
+                '4.x',
+                'Option "current_uri" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
+            )
+        );
+
+        // NEXT_MAJOR: Remove setDeprecated.
+        $resolver->setDeprecated(
+            'menu_class',
+            ...$this->deprecationParameters(
+                '4.x',
+                'Option "menu_class" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
+            )
+        );
+
+        // NEXT_MAJOR: Remove setDeprecated.
+        $resolver->setDeprecated(
+            'children_class',
+            ...$this->deprecationParameters(
+                '4.x',
+                'Option "children_class" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
             )
         );
     }
@@ -123,10 +170,12 @@ abstract class AbstractMenuBlockService extends AbstractBlockService
                 'required' => false,
                 'label' => 'form.label_last_class',
             ]],
+            // NEXT_MAJOR: Remove.
             ['menu_class', TextType::class, [
                 'required' => false,
                 'label' => 'form.label_menu_class',
             ]],
+            // NEXT_MAJOR: Remove.
             ['children_class', TextType::class, [
                 'required' => false,
                 'label' => 'form.label_children_class',
