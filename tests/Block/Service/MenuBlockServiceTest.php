@@ -95,6 +95,11 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
                         'required' => false,
                         'label' => 'form.label_last_class',
                     ]],
+                    ['menu_template', TextType::class, [
+                        'required' => false,
+                        'label' => 'form.label_menu_template',
+                    ]],
+                    ['menu_name', ChoiceType::class, $choiceOptions],
                     ['menu_class', TextType::class, [
                         'required' => false,
                         'label' => 'form.label_menu_class',
@@ -103,11 +108,6 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
                         'required' => false,
                         'label' => 'form.label_children_class',
                     ]],
-                    ['menu_template', TextType::class, [
-                        'required' => false,
-                        'label' => 'form.label_menu_template',
-                    ]],
-                    ['menu_name', ChoiceType::class, $choiceOptions],
                 ],
                 'translation_domain' => 'SonataBlockBundle',
             ]);
