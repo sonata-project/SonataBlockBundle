@@ -60,7 +60,7 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
 
         $choiceOptions = [
             'required' => false,
-            'label' => 'form.label_url',
+            'label' => 'form.label_menu_name',
             'choice_translation_domain' => 'SonataBlockBundle',
         ];
 
