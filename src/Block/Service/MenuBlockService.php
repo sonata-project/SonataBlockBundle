@@ -112,7 +112,7 @@ class MenuBlockService extends AbstractMenuBlockService implements EditableBlock
         $choiceOptions = [
             'required' => false,
             'label' => 'form.label_menu_name',
-            'choice_translation_domain' => 'SonataBlockBundle',
+            'translation_domain' => 'SonataBlockBundle',
         ];
 
         $choiceOptions['choices'] = array_flip($this->menuRegistry->getAliasNames());
@@ -125,11 +125,13 @@ class MenuBlockService extends AbstractMenuBlockService implements EditableBlock
                 ['menu_class', TextType::class, [
                     'required' => false,
                     'label' => 'form.label_menu_class',
+                    'translation_domain' => 'SonataBlockBundle',
                 ]],
                 // NEXT_MAJOR: Remove this and the related translations.
                 ['children_class', TextType::class, [
                     'required' => false,
                     'label' => 'form.label_children_class',
+                    'translation_domain' => 'SonataBlockBundle',
                 ]],
             ]
         );

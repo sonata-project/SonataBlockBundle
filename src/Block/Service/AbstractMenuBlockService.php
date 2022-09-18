@@ -116,30 +116,37 @@ abstract class AbstractMenuBlockService extends AbstractBlockService implements 
             ['title', TextType::class, [
                 'required' => false,
                 'label' => 'form.label_title',
+                'translation_domain' => 'SonataBlockBundle',
             ]],
             ['cache_policy', ChoiceType::class, [
                 'label' => 'form.label_cache_policy',
+                'translation_domain' => 'SonataBlockBundle',
                 'choices' => ['public', 'private'],
             ]],
             ['safe_labels', CheckboxType::class, [
                 'required' => false,
                 'label' => 'form.label_safe_labels',
+                'translation_domain' => 'SonataBlockBundle',
             ]],
             ['current_class', TextType::class, [
                 'required' => false,
                 'label' => 'form.label_current_class',
+                'translation_domain' => 'SonataBlockBundle',
             ]],
             ['first_class', TextType::class, [
                 'required' => false,
                 'label' => 'form.label_first_class',
+                'translation_domain' => 'SonataBlockBundle',
             ]],
             ['last_class', TextType::class, [
                 'required' => false,
                 'label' => 'form.label_last_class',
+                'translation_domain' => 'SonataBlockBundle',
             ]],
             ['menu_template', TextType::class, [
                 'required' => false,
                 'label' => 'form.label_menu_template',
+                'translation_domain' => 'SonataBlockBundle',
             ]],
         ];
     }
