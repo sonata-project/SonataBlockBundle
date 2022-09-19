@@ -83,7 +83,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
     {
         $blockType = $block->getType();
         if (null === $blockType) {
-            throw new BlockNotFoundException('The block service `` does not exist');
+            throw new \RuntimeException('The block service `` does not exist');
         }
 
         $this->load($blockType);
