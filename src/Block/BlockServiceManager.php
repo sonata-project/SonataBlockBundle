@@ -205,8 +205,8 @@ final class BlockServiceManager implements BlockServiceManagerInterface
             if (!$blockService instanceof BlockServiceInterface) {
                 throw new \RuntimeException(sprintf('The service %s does not implement BlockServiceInterface', $type));
             }
+
             $this->services[$type] = $blockService;
-            
         }
 
         return $this->services[$type];
