@@ -191,6 +191,8 @@ final class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
+     * @throws \RuntimeException
+     * @throws BlockNotFoundException
      */
     private function load(string $type): BlockServiceInterface
     {
