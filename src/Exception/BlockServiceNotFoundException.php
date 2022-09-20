@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Exception;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
-final class BlockServiceNotFoundException extends NotFoundHttpException
+final class BlockServiceNotFoundException extends \Exception implements BlockExceptionInterface
 {
 }
