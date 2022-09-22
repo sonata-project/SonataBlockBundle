@@ -284,8 +284,12 @@ final class BlockContextManager implements BlockContextManagerInterface
 
         $this->configureSettings($optionsResolver, $block);
 
-        $service = $this->blockService->get($block);
-        $service->configureSettings($optionsResolver);
+        try {
+            $service = $this->blockService->get($block);
+            $service->configureSettings($optionsResolver);
+        } catch (\Exception $e) {
+            // Nothing to configure when the service doesn't exist
+        }
 
         return $optionsResolver->resolve($settings);
     }

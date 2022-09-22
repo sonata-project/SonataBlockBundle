@@ -19,6 +19,7 @@ use Sonata\BlockBundle\Block\BlockRendererInterface;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Cache\HttpCacheHandlerInterface;
 use Sonata\BlockBundle\Event\BlockEvent;
+use Sonata\BlockBundle\Exception\BlockNotFoundException;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Cache\CacheAdapterInterface;
 use Sonata\Cache\CacheManagerInterface;
@@ -384,6 +385,8 @@ class BlockHelper
     /**
      * @param string|array<string, mixed>|BlockInterface $block
      * @param array<string, mixed>                       $options
+     *
+     * @throws BlockNotFoundException
      */
     public function render($block, array $options = []): string
     {

@@ -27,6 +27,8 @@ interface BlockServiceManagerInterface
 
     /**
      * Return the block service linked to the link.
+     *
+     * @throws \RuntimeException when the block service is not found
      */
     public function get(BlockInterface $block): BlockServiceInterface;
 
@@ -42,6 +44,9 @@ interface BlockServiceManagerInterface
 
     public function has(string $name): bool;
 
+    /**
+     * @throws \RuntimeException when the block service is not found
+     */
     public function getService(string $name): BlockServiceInterface;
 
     public function validate(ErrorElement $errorElement, BlockInterface $block): void;
