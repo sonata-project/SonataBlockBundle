@@ -13,6 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Exception;
 
-final class BlockServiceNotFoundException extends \Exception implements BlockExceptionInterface
+final class BlockServiceNotFoundException extends \RuntimeException implements BlockExceptionInterface
 {
 }
