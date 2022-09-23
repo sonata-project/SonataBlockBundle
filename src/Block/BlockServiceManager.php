@@ -191,7 +191,6 @@ final class BlockServiceManager implements BlockServiceManagerInterface
     }
 
     /**
-     * @throws \RuntimeException
      * @throws BlockServiceNotFoundException
      */
     private function load(string $type): BlockServiceInterface
@@ -203,7 +202,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
         if (!$this->services[$type] instanceof BlockServiceInterface) {
             $blockService = $this->container->get($type);
             if (!$blockService instanceof BlockServiceInterface) {
-                throw new \RuntimeException(sprintf('The service %s does not implement BlockServiceInterface', $type));
+                throw new BlockServiceNotFoundException(sprintf('The service %s does not implement BlockServiceInterface', $type));
             }
 
             $this->services[$type] = $blockService;
