@@ -40,7 +40,7 @@ final class BlockServiceManagerTest extends TestCase
 
     public function testInvalidServiceType(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(BlockServiceNotFoundException::class);
 
         $service = $this->createMock(\stdClass::class);
 
