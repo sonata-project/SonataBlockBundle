@@ -16,6 +16,7 @@ namespace Sonata\BlockBundle\Tests\Block;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockServiceManager;
 use Sonata\BlockBundle\Block\Service\BlockServiceInterface;
+use Sonata\BlockBundle\Exception\BlockServiceNotFoundException;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\DependencyInjection\Container;
 
@@ -39,7 +40,7 @@ final class BlockServiceManagerTest extends TestCase
 
     public function testInvalidServiceType(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(BlockServiceNotFoundException::class);
 
         $service = $this->createMock(\stdClass::class);
 
@@ -58,7 +59,7 @@ final class BlockServiceManagerTest extends TestCase
 
     public function testGetBlockServiceException(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(BlockServiceNotFoundException::class);
 
         $manager = new BlockServiceManager(new Container(), []);
 
