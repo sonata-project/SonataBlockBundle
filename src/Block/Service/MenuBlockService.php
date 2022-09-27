@@ -148,11 +148,9 @@ class MenuBlockService extends AbstractMenuBlockService implements EditableBlock
      * This class is a BC layer for deprecation messages for symfony/options-resolver < 5.1.
      * Remove this class when dropping support for symfony/options-resolver < 5.1.
      *
-     * @param string|\Closure $message
-     *
      * @return mixed[]
      */
-    private function deprecationParameters(string $version, $message): array
+    private function deprecationParameters(string $version, string $message): array
     {
         // @phpstan-ignore-next-line
         if (method_exists(OptionsResolver::class, 'define')) {

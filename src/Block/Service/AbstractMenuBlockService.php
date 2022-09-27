@@ -16,8 +16,6 @@ namespace Sonata\BlockBundle\Block\Service;
 use Knp\Menu\ItemInterface;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Form\Mapper\FormMapper;
-use Sonata\BlockBundle\Meta\Metadata;
-use Sonata\BlockBundle\Meta\MetadataInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Type\ImmutableArrayType;
 use Sonata\Form\Validator\ErrorElement;
@@ -71,16 +69,6 @@ abstract class AbstractMenuBlockService extends AbstractBlockService implements 
 
     public function validate(ErrorElement $errorElement, BlockInterface $block): void
     {
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this method.
-     */
-    public function getMetadata(): MetadataInterface
-    {
-        return new Metadata('sonata.block.service.menu', null, null, 'SonataBlockBundle', [
-            'class' => 'fa fa-bars',
-        ]);
     }
 
     public function configureSettings(OptionsResolver $resolver): void
@@ -190,11 +178,9 @@ abstract class AbstractMenuBlockService extends AbstractBlockService implements 
      * This class is a BC layer for deprecation messages for symfony/options-resolver < 5.1.
      * Remove this class when dropping support for symfony/options-resolver < 5.1.
      *
-     * @param string|\Closure $message
-     *
      * @return mixed[]
      */
-    private function deprecationParameters(string $version, $message): array
+    private function deprecationParameters(string $version, string $message): array
     {
         // @phpstan-ignore-next-line
         if (method_exists(OptionsResolver::class, 'define')) {
