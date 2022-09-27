@@ -29,11 +29,6 @@ use Twig\Environment;
 
 abstract class AbstractMenuBlockService extends AbstractBlockService implements EditableBlockService
 {
-    public function __construct(Environment $twig)
-    {
-        parent::__construct($twig);
-    }
-
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
         $template = $blockContext->getTemplate();
