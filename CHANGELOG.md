@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.18.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.17.0...4.18.0) - 2022-09-28
+### Added
+- [[#1112](https://github.com/sonata-project/SonataBlockBundle/pull/1112)] AbstractMenuBlockService ([@VincentLanglet](https://github.com/VincentLanglet))
+- [[#1111](https://github.com/sonata-project/SonataBlockBundle/pull/1111)] Final annotation to MenuBlockService ([@VincentLanglet](https://github.com/VincentLanglet))
+
+### Changed
+- [[#1115](https://github.com/sonata-project/SonataBlockBundle/pull/1115)] BlockServiceManager::load throw a BlockServiceNotFoundException when the block is not found. ([@JeromeEngelnAdeliom](https://github.com/JeromeEngelnAdeliom))
+
+### Deprecated
+- [[#1112](https://github.com/sonata-project/SonataBlockBundle/pull/1112)] MenuBlockService current_uri option ([@VincentLanglet](https://github.com/VincentLanglet))
+- [[#1112](https://github.com/sonata-project/SonataBlockBundle/pull/1112)] MenuBlockService menu_class option ([@VincentLanglet](https://github.com/VincentLanglet))
+- [[#1112](https://github.com/sonata-project/SonataBlockBundle/pull/1112)] MenuBlockService children_class option ([@VincentLanglet](https://github.com/VincentLanglet))
+
 ## [4.17.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.16.2...4.17.0) - 2022-08-27
 ### Added
 - [[#1100](https://github.com/sonata-project/SonataBlockBundle/pull/1100)] Add `removeChild` to be consistent with `addChild` for Block Model. ([@jordisala1991](https://github.com/jordisala1991))

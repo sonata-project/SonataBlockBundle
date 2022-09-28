@@ -188,7 +188,7 @@ abstract class BaseBlock implements BlockInterface
     {
         @trigger_error(
             sprintf(
-                'Method "%s" is deprecated since sonata-project/block-bundle 4.x. Use "addChild" instead.',
+                'Method "%s" is deprecated since sonata-project/block-bundle 4.18. Use "addChild" instead.',
                 __METHOD__
             ),
             \E_USER_DEPRECATED
@@ -273,7 +273,7 @@ abstract class BaseBlock implements BlockInterface
     {
         @trigger_error(
             sprintf(
-                'Method "%s" is deprecated since sonata-project/block-bundle 4.x. Use "hasChild" instead.',
+                'Method "%s" is deprecated since sonata-project/block-bundle 4.18. Use "hasChild" instead.',
                 __METHOD__
             ),
             \E_USER_DEPRECATED
