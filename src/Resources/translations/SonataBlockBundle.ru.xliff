@@ -22,6 +22,42 @@
         <source>sonata.block.template</source>
         <target>Шаблон</target>
       </trans-unit>
+      <trans-unit id="form.label_url">
+        <source>form.label_url</source>
+        <target>URL</target>
+      </trans-unit>
+      <trans-unit id="form.label_title">
+        <source>form.label_title</source>
+        <target>Заголовок</target>
+      </trans-unit>
+      <trans-unit id="form.label_class">
+        <source>form.label_class</source>
+        <target>CSS-класс</target>
+      </trans-unit>
+      <trans-unit id="form.label_menu_name">
+        <source>form.label_menu_name</source>
+        <target>Меню</target>
+      </trans-unit>
+      <trans-unit id="form.label_safe_labels">
+        <source>form.label_safe_labels</source>
+        <target>Безопасные заголовки</target>
+      </trans-unit>
+      <trans-unit id="form.label_current_class">
+        <source>form.label_current_class</source>
+        <target>CSS-класс "текущий"</target>
+      </trans-unit>
+      <trans-unit id="form.label_first_class">
+        <source>form.label_first_class</source>
+        <target>CSS-класс "первый"</target>
+      </trans-unit>
+      <trans-unit id="form.label_last_class">
+        <source>form.label_last_class</source>
+        <target>CSS-класс "последний"</target>
+      </trans-unit>
+      <trans-unit id="form.label_menu_template">
+        <source>form.label_menu_template</source>
+        <target>Шаблон меню</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

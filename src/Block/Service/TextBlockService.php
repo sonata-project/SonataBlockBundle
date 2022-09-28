@@ -50,6 +50,7 @@ final class TextBlockService extends AbstractBlockService implements EditableBlo
             'keys' => [
                 ['content', TextareaType::class, [
                     'label' => 'form.label_content',
+                    'translation_domain' => 'SonataBlockBundle',
                 ]],
             ],
             'translation_domain' => 'SonataBlockBundle',

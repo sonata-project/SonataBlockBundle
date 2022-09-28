@@ -50,6 +50,10 @@
         <source>form.label_class</source>
         <target>Classe CSS</target>
       </trans-unit>
+      <trans-unit id="form.label_menu_name">
+        <source>form.label_menu_name</source>
+        <target>Menù</target>
+      </trans-unit>
       <trans-unit id="form.label_safe_labels">
         <source>form.label_safe_labels</source>
         <target>Label sicure</target>
@@ -65,14 +69,6 @@
       <trans-unit id="form.label_last_class">
         <source>form.label_last_class</source>
         <target>Classe CSS ultimo el.</target>
-      </trans-unit>
-      <trans-unit id="form.label_menu_class">
-        <source>form.label_menu_class</source>
-        <target>Classe CSS menu</target>
-      </trans-unit>
-      <trans-unit id="form.label_children_class">
-        <source>form.label_children_class</source>
-        <target>Classe CSS figli</target>
       </trans-unit>
       <trans-unit id="form.label_menu_template">
         <source>form.label_menu_template</source>

@@ -49,6 +49,7 @@ final class TemplateBlockService extends AbstractBlockService implements Editabl
             'keys' => [
                 ['template', null, [
                     'label' => 'form.label_template',
+                    'translation_domain' => 'SonataBlockBundle',
                 ]],
             ],
             'translation_domain' => 'SonataBlockBundle',
