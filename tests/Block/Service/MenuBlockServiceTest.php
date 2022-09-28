@@ -60,8 +60,8 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
 
         $choiceOptions = [
             'required' => false,
-            'label' => 'form.label_url',
-            'choice_translation_domain' => 'SonataBlockBundle',
+            'label' => 'form.label_menu_name',
+            'translation_domain' => 'SonataBlockBundle',
         ];
 
         $choiceOptions['choices'] = [
@@ -74,39 +74,48 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
                     ['title', TextType::class, [
                         'required' => false,
                         'label' => 'form.label_title',
+                        'translation_domain' => 'SonataBlockBundle',
                     ]],
                     ['cache_policy', ChoiceType::class, [
                         'label' => 'form.label_cache_policy',
+                        'translation_domain' => 'SonataBlockBundle',
                         'choices' => ['public', 'private'],
                     ]],
-                    ['menu_name', ChoiceType::class, $choiceOptions],
                     ['safe_labels', CheckboxType::class, [
                         'required' => false,
                         'label' => 'form.label_safe_labels',
+                        'translation_domain' => 'SonataBlockBundle',
                     ]],
                     ['current_class', TextType::class, [
                         'required' => false,
                         'label' => 'form.label_current_class',
+                        'translation_domain' => 'SonataBlockBundle',
                     ]],
                     ['first_class', TextType::class, [
                         'required' => false,
                         'label' => 'form.label_first_class',
+                        'translation_domain' => 'SonataBlockBundle',
                     ]],
                     ['last_class', TextType::class, [
                         'required' => false,
                         'label' => 'form.label_last_class',
-                    ]],
-                    ['menu_class', TextType::class, [
-                        'required' => false,
-                        'label' => 'form.label_menu_class',
-                    ]],
-                    ['children_class', TextType::class, [
-                        'required' => false,
-                        'label' => 'form.label_children_class',
+                        'translation_domain' => 'SonataBlockBundle',
                     ]],
                     ['menu_template', TextType::class, [
                         'required' => false,
                         'label' => 'form.label_menu_template',
+                        'translation_domain' => 'SonataBlockBundle',
+                    ]],
+                    ['menu_name', ChoiceType::class, $choiceOptions],
+                    ['menu_class', TextType::class, [
+                        'required' => false,
+                        'label' => 'form.label_menu_class',
+                        'translation_domain' => 'SonataBlockBundle',
+                    ]],
+                    ['children_class', TextType::class, [
+                        'required' => false,
+                        'label' => 'form.label_children_class',
+                        'translation_domain' => 'SonataBlockBundle',
                     ]],
                 ],
                 'translation_domain' => 'SonataBlockBundle',

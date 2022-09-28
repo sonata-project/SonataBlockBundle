@@ -57,21 +57,26 @@ final class RssBlockService extends AbstractBlockService implements EditableBloc
                 ['url', UrlType::class, [
                     'required' => false,
                     'label' => 'form.label_url',
+                    'translation_domain' => 'SonataBlockBundle',
                 ]],
                 ['title', TextType::class, [
                     'label' => 'form.label_title',
+                    'translation_domain' => 'SonataBlockBundle',
                     'required' => false,
                 ]],
                 ['translation_domain', TextType::class, [
                     'label' => 'form.label_translation_domain',
+                    'translation_domain' => 'SonataBlockBundle',
                     'required' => false,
                 ]],
                 ['icon', TextType::class, [
                     'label' => 'form.label_icon',
+                    'translation_domain' => 'SonataBlockBundle',
                     'required' => false,
                 ]],
                 ['class', TextType::class, [
                     'label' => 'form.label_class',
+                    'translation_domain' => 'SonataBlockBundle',
                     'required' => false,
                 ]],
             ],
