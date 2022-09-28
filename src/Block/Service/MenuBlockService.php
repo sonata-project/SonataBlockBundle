@@ -28,7 +28,7 @@ use Twig\Environment;
 /**
  * @author Hugo Briand <briand@ekino.com>
  *
- * @final since sonata-project/block-bundle 4.x
+ * @final since sonata-project/block-bundle 4.18
  */
 class MenuBlockService extends AbstractMenuBlockService implements EditableBlockService
 {
@@ -76,8 +76,8 @@ class MenuBlockService extends AbstractMenuBlockService implements EditableBlock
         $resolver->setDeprecated(
             'current_uri',
             ...$this->deprecationParameters(
-                '4.x',
-                'Option "current_uri" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
+                '4.18',
+                'Option "current_uri" is deprecated since sonata-project/block-bundle 4.18 and will be removed in 5.0.'
             )
         );
 
@@ -85,8 +85,8 @@ class MenuBlockService extends AbstractMenuBlockService implements EditableBlock
         $resolver->setDeprecated(
             'menu_class',
             ...$this->deprecationParameters(
-                '4.x',
-                'Option "menu_class" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
+                '4.18',
+                'Option "menu_class" is deprecated since sonata-project/block-bundle 4.18 and will be removed in 5.0.'
             )
         );
 
@@ -94,8 +94,8 @@ class MenuBlockService extends AbstractMenuBlockService implements EditableBlock
         $resolver->setDeprecated(
             'children_class',
             ...$this->deprecationParameters(
-                '4.x',
-                'Option "children_class" is deprecated since sonata-project/block-bundle 4.x and will be removed in 5.0.'
+                '4.18',
+                'Option "children_class" is deprecated since sonata-project/block-bundle 4.18 and will be removed in 5.0.'
             )
         );
     }

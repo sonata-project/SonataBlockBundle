@@ -88,7 +88,7 @@ interface BlockInterface
     /**
      * NEXT_MAJOR: Rename addChild().
      *
-     * @deprecated since sonata-project/block-bundle 4.x. Use addChild() instead.
+     * @deprecated since sonata-project/block-bundle 4.18. Use addChild() instead.
      */
     public function addChildren(self $children): void;
 
@@ -102,7 +102,7 @@ interface BlockInterface
     /**
      * NEXT_MAJOR: Rename hasChild().
      *
-     * @deprecated since sonata-project/block-bundle 4.x. Use hasChild() instead.
+     * @deprecated since sonata-project/block-bundle 4.18. Use hasChild() instead.
      */
     public function hasChildren(): bool;
 
