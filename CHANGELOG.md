@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.19.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.18.0...4.19.0) - 2022-10-10
+### Added
+- [[#1122](https://github.com/sonata-project/SonataBlockBundle/pull/1122)] Support for doctrine/collections 2 ([@VincentLanglet](https://github.com/VincentLanglet))
+
 ## [4.18.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.17.0...4.18.0) - 2022-09-28
 ### Added
 - [[#1112](https://github.com/sonata-project/SonataBlockBundle/pull/1112)] AbstractMenuBlockService ([@VincentLanglet](https://github.com/VincentLanglet))
