@@ -59,7 +59,7 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
         $block = $this->createMock(BlockInterface::class);
 
         $choiceOptions = [
-            'required' => false,
+            'required' => true,
             'label' => 'form.label_menu_name',
             'translation_domain' => 'SonataBlockBundle',
         ];
