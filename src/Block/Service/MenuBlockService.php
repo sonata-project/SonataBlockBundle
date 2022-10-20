@@ -110,7 +110,7 @@ class MenuBlockService extends AbstractMenuBlockService implements EditableBlock
     protected function getFormSettingsKeys(): array
     {
         $choiceOptions = [
-            'required' => false,
+            'required' => true,
             'label' => 'form.label_menu_name',
             'translation_domain' => 'SonataBlockBundle',
         ];
