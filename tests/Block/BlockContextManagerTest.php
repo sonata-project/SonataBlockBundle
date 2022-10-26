@@ -20,6 +20,7 @@ use Sonata\BlockBundle\Block\BlockContextManager;
 use Sonata\BlockBundle\Block\BlockLoaderInterface;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
+use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Model\BlockInterface;
 
 final class BlockContextManagerTest extends TestCase
@@ -45,6 +46,40 @@ final class BlockContextManagerTest extends TestCase
         $blockContext = $manager->get($block, $settings);
 
         static::assertInstanceOf(BlockContextInterface::class, $blockContext);
+
+        static::assertSame([
+            'attr' => [],
+            'template' => 'custom.html.twig',
+        ], $blockContext->getSettings());
+    }
+
+    public function testGetWithBlockMeta(): void
+    {
+        $service = $this->createMock(AbstractBlockService::class);
+
+        $service->expects(static::once())->method('configureSettings');
+
+        $blockLoader = $this->createMock(BlockLoaderInterface::class);
+        $blockLoader->expects(static::once())->method('load')->willReturn($block = new Block());
+
+        $serviceManager = $this->createMock(BlockServiceManagerInterface::class);
+        $serviceManager->expects(static::once())->method('get')->willReturn($service);
+
+        $blockMeta = [
+            'type' => 'some_block_id',
+        ];
+
+        $manager = new BlockContextManager($blockLoader, $serviceManager);
+
+        $settings = ['template' => 'custom.html.twig'];
+
+        $blockContext = $manager->get($blockMeta, $settings);
+
+        static::assertInstanceOf(BlockContextInterface::class, $blockContext);
+
+        static::assertSame([
+            'template' => 'custom.html.twig',
+        ], $block->getSettings());
 
         static::assertSame([
             'attr' => [],

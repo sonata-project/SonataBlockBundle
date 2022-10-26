@@ -78,6 +78,8 @@ final class BlockContextManager implements BlockContextManagerInterface
                 // merge user settings
                 $settings = array_merge($meta['settings'], $settings);
             }
+
+            $block->setSettings($settings);
         } else {
             $block = $meta;
         }

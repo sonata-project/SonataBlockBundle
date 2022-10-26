@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.19.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.18.0...4.19.0) - 2022-10-25
+### Added
+- [[#1122](https://github.com/sonata-project/SonataBlockBundle/pull/1122)] Support for doctrine/collections 2 ([@VincentLanglet](https://github.com/VincentLanglet))
+
+### Changed
+- [[#1124](https://github.com/sonata-project/SonataBlockBundle/pull/1124)] Changed Menu name settings `required` field from `false` to `true` in `getFormSettingsKeys` ([@eerison](https://github.com/eerison))
+
+### Fixed
+- [[#1121](https://github.com/sonata-project/SonataBlockBundle/pull/1121)] Fix init of block settings ([@core23](https://github.com/core23))
+
 ## [4.18.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.17.0...4.18.0) - 2022-09-28
 ### Added
 - [[#1112](https://github.com/sonata-project/SonataBlockBundle/pull/1112)] AbstractMenuBlockService ([@VincentLanglet](https://github.com/VincentLanglet))
