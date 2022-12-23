@@ -34,7 +34,7 @@ final class StrategyManagerTest extends TestCase
     /**
      * @var MockObject&ContainerInterface
      */
-    private $container;
+    private ContainerInterface $container;
 
     /**
      * @var array<string, string>
@@ -59,22 +59,22 @@ final class StrategyManagerTest extends TestCase
     /**
      * @var MockObject&RendererInterface
      */
-    private $renderer1;
+    private RendererInterface $renderer1;
 
     /**
      * @var MockObject&RendererInterface
      */
-    private $renderer2;
+    private RendererInterface $renderer2;
 
     /**
      * @var MockObject&FilterInterface
      */
-    private $filter1;
+    private FilterInterface $filter1;
 
     /**
      * @var MockObject&FilterInterface
      */
-    private $filter2;
+    private FilterInterface $filter2;
 
     protected function setUp(): void
     {

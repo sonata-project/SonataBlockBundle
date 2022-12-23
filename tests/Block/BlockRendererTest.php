@@ -32,17 +32,17 @@ final class BlockRendererTest extends TestCase
     /**
      * @var MockObject&BlockServiceManagerInterface
      */
-    private $blockServiceManager;
+    private BlockServiceManagerInterface $blockServiceManager;
 
     /**
      * @var MockObject&LoggerInterface
      */
-    private $logger;
+    private LoggerInterface $logger;
 
     /**
      * @var MockObject&StrategyManagerInterface
      */
-    private $exceptionStrategyManager;
+    private StrategyManagerInterface $exceptionStrategyManager;
 
     private BlockRenderer $renderer;
 
