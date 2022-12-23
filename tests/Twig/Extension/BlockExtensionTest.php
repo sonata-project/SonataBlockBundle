@@ -27,7 +27,7 @@ final class BlockExtensionTest extends TestCase
     /**
      * @var MockObject&BlockHelper
      */
-    private $blockHelper;
+    private BlockHelper $blockHelper;
 
     private BlockExtension $blockExtension;
 
