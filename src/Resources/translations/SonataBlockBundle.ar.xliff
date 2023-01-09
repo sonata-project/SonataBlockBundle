@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="ar" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="sonata.block.service.container">
+        <source>sonata.block.service.container</source>
+        <target>الحاوية</target>
+      </trans-unit>
+      <trans-unit id="sonata.block.service.text">
+        <source>sonata.block.service.text</source>
+        <target>نص عادي</target>
+      </trans-unit>
+      <trans-unit id="sonata.block.service.rss">
+        <source>sonata.block.service.rss</source>
+        <target>تغذية RSS</target>
+      </trans-unit>
+      <trans-unit id="sonata.block.service.menu">
+        <source>sonata.block.service.menu</source>
+        <target>قائمة</target>
+      </trans-unit>
+      <trans-unit id="sonata.block.service.template">
+        <source>sonata.block.service.template</source>
+        <target>قالب</target>
+      </trans-unit>
+      <trans-unit id="form.label_template">
+        <source>form.label_template</source>
+        <target>قالب</target>
+      </trans-unit>
+      <trans-unit id="form.label_content">
+        <source>form.label_content</source>
+        <target>محتوى</target>
+      </trans-unit>
+      <trans-unit id="form.label_url">
+        <source>form.label_url</source>
+        <target>رابط</target>
+      </trans-unit>
+      <trans-unit id="form.label_title">
+        <source>form.label_title</source>
+        <target>عنوان</target>
+      </trans-unit>
+      <trans-unit id="form.label_code">
+        <source>form.label_code</source>
+        <target>نص برمجي</target>
+      </trans-unit>
+      <trans-unit id="form.label_layout">
+        <source>form.label_layout</source>
+        <target>تَخطِيط</target>
+      </trans-unit>
+      <trans-unit id="form.label_class">
+        <source>form.label_class</source>
+        <target>معرف CSS</target>
+      </trans-unit>
+      <trans-unit id="form.label_cache_policy">
+        <source>form.label_cache_policy</source>
+        <target>سياسة ذاكرة التخزين المؤقت</target>
+      </trans-unit>
+      <trans-unit id="form.label_menu_name">
+        <source>form.label_menu_name</source>
+        <target>قائمة</target>
+      </trans-unit>
+      <trans-unit id="form.label_safe_labels">
+        <source>form.label_safe_labels</source>
+        <target>تسميات آمنة</target>
+      </trans-unit>
+      <trans-unit id="form.label_current_class">
+        <source>form.label_current_class</source>
+        <target>معرف ال CSS الحالي</target>
+      </trans-unit>
+      <trans-unit id="form.label_first_class">
+        <source>form.label_first_class</source>
+        <target>أول معرف CSS</target>
+      </trans-unit>
+      <trans-unit id="form.label_last_class">
+        <source>form.label_last_class</source>
+        <target>آخر معرف CSS</target>
+      </trans-unit>
+      <trans-unit id="form.label_menu_class">
+        <source>form.label_menu_class</source>
+        <target>معرف ال CSS للقائمة</target>
+      </trans-unit>
+      <trans-unit id="form.label_children_class">
+        <source>form.label_children_class</source>
+        <target>معرف ال CSS للأبناء</target>
+      </trans-unit>
+      <trans-unit id="form.label_menu_template">
+        <source>form.label_menu_template</source>
+        <target>قالب القائمة</target>
+      </trans-unit>
+      <trans-unit id="form.label_translation_domain">
+        <source>form.label_translation_domain</source>
+        <target>مجال الترجمة</target>
+      </trans-unit>
+      <trans-unit id="form.label_icon">
+        <source>form.label_icon</source>
+        <target>أيقونة</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

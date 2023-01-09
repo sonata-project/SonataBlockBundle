@@ -30,12 +30,12 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
     /**
      * @var MenuProviderInterface&MockObject
      */
-    private $menuProvider;
+    private MenuProviderInterface $menuProvider;
 
     /**
      * @var MenuRegistryInterface&MockObject
      */
-    private $menuRegistry;
+    private MenuRegistryInterface $menuRegistry;
 
     protected function setUp(): void
     {
