@@ -38,7 +38,7 @@ final class KeepAllFilterTest extends TestCase
     /**
      * @return iterable<array-key, array{\Exception}>
      */
-    public function getExceptions(): iterable
+    public static function getExceptions(): iterable
     {
         return [
             [new \Exception()],

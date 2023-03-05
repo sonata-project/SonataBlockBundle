@@ -19,12 +19,12 @@ use Sonata\BlockBundle\Model\BlockInterface;
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
- * @phpstan-extends \RecursiveArrayIterator<array-key, BlockInterface>
+ * @phpstan-extends \RecursiveArrayIterator<int, BlockInterface>
  */
 final class RecursiveBlockIterator extends \RecursiveArrayIterator
 {
     /**
-     * @param Collection<array-key, BlockInterface>|array<BlockInterface> $array
+     * @param Collection<int, BlockInterface>|array<BlockInterface> $array
      */
     public function __construct($array)
     {

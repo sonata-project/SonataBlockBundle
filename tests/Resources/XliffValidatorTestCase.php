@@ -55,7 +55,7 @@ abstract class XliffValidatorTestCase extends TestCase
     /**
      * @return iterable<array-key, array{string}>
      */
-    abstract public function getXliffPaths(): iterable;
+    abstract public static function getXliffPaths(): iterable;
 
     /**
      * @param string $file The path to the xliff file

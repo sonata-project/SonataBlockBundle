@@ -49,7 +49,7 @@ final class BlockExtensionTest extends TestCase
     /**
      * @return iterable<array-key, array{string, array<mixed>, string}>
      */
-    public function provideFunction(): iterable
+    public static function provideFunction(): iterable
     {
         return [
             ['sonata_block_exists', [

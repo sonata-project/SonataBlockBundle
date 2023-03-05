@@ -153,13 +153,6 @@ class BlockHelper
     {
         $blockContext = $this->blockContextManager->get($block, $options);
 
-        /**
-         * @var array<string, mixed>
-         *
-         * @phpstan-var Trace
-         */
-        $stats = [];
-
         if (null !== $this->stopwatch) {
             $stats = $this->startTracing($blockContext->getBlock());
         }
@@ -167,6 +160,9 @@ class BlockHelper
         $response = $this->blockRenderer->render($blockContext);
 
         if (null !== $this->stopwatch) {
+            /**
+             * @psalm-suppress PossiblyUndefinedVariable
+             */
             $this->stopTracing($blockContext->getBlock(), $stats);
         }
 
