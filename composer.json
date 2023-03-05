@@ -21,7 +21,7 @@
     "homepage": "https://docs.sonata-project.org/projects/SonataBlockBundle",
     "require": {
         "php": "^8.0",
-        "doctrine/collections": "^2.0",
+        "doctrine/collections": "^1.6 || ^2.0",
         "doctrine/common": "^3.0",
         "psr/container": "^1.0 || ^2.0",
         "psr/log": "^2.0 || ^3.0",
