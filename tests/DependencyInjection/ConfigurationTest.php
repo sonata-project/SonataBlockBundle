@@ -101,7 +101,7 @@ final class ConfigurationTest extends TestCase
     /**
      * @return iterable<array-key, array{array<string>}>
      */
-    public function providerContexts(): iterable
+    public static function providerContexts(): iterable
     {
         return [
             [[]],
