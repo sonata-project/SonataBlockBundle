@@ -28,8 +28,6 @@ final class BlockServiceManager implements BlockServiceManagerInterface
      */
     private array $services;
 
-    private ContainerInterface $container;
-
     private bool $inValidate = false;
 
     /**
@@ -47,11 +45,12 @@ final class BlockServiceManager implements BlockServiceManagerInterface
      *
      * @param string[]|null $containerTypes
      */
-    public function __construct(ContainerInterface $container, ?array $containerTypes = null)
-    {
+    public function __construct(
+        private ContainerInterface $container,
+        ?array $containerTypes = null
+    ) {
         $this->services = [];
         $this->contexts = [];
-        $this->container = $container;
 
         if (null === $containerTypes) {
             @trigger_error(
@@ -114,7 +113,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
                 'Argument 2 passed to %s() must be of type string or an object implementing %s, %s given',
                 __METHOD__,
                 BlockServiceInterface::class,
-                \is_object($service) ? \get_class($service) : \gettype($service)
+                get_debug_type($service)
             ));
         }
         $this->services[$name] = $service;
@@ -185,7 +184,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
             }
 
             $this->inValidate = false;
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             $this->inValidate = false;
         }
     }

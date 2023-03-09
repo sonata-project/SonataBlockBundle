@@ -26,11 +26,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 final class Configuration implements ConfigurationInterface
 {
     /**
-     * @var array<string, string>
-     */
-    private array $defaultContainerTemplates;
-
-    /**
      * NEXT_MAJOR: remove this member.
      */
     private bool $httpCacheDisabled = false;
@@ -38,9 +33,8 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param array<string, string> $defaultContainerTemplates
      */
-    public function __construct(array $defaultContainerTemplates)
+    public function __construct(private array $defaultContainerTemplates)
     {
-        $this->defaultContainerTemplates = $defaultContainerTemplates;
     }
 
     public function getConfigTreeBuilder(): TreeBuilder

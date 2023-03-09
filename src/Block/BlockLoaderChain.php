@@ -19,16 +19,10 @@ use Sonata\BlockBundle\Model\BlockInterface;
 final class BlockLoaderChain implements BlockLoaderInterface
 {
     /**
-     * @var BlockLoaderInterface[]
-     */
-    private array $loaders;
-
-    /**
      * @param BlockLoaderInterface[] $loaders
      */
-    public function __construct(array $loaders)
+    public function __construct(private array $loaders)
     {
-        $this->loaders = $loaders;
     }
 
     /**
@@ -53,7 +47,7 @@ final class BlockLoaderChain implements BlockLoaderInterface
             throw new \TypeError(sprintf(
                 'Argument 1 passed to %s must be of type string or array, %s given',
                 __METHOD__,
-                \is_object($configuration) ? 'object of type '.\get_class($configuration) : \gettype($configuration)
+                \is_object($configuration) ? 'object of type '.$configuration::class : \gettype($configuration)
             ));
         }
 
@@ -72,7 +66,7 @@ final class BlockLoaderChain implements BlockLoaderInterface
             throw new \TypeError(sprintf(
                 'Argument 1 passed to %s must be of type string or array, %s given',
                 __METHOD__,
-                \is_object($configuration) ? 'object of type '.\get_class($configuration) : \gettype($configuration)
+                \is_object($configuration) ? 'object of type '.$configuration::class : \gettype($configuration)
             ));
         }
 

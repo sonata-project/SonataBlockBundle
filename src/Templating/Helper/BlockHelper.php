@@ -385,7 +385,7 @@ class BlockHelper
      * @param string|array<string, mixed>|BlockInterface $block
      * @param array<string, mixed>                       $options
      */
-    public function render($block, array $options = []): string
+    public function render(string|array|BlockInterface $block, array $options = []): string
     {
         $blockContext = $this->blockContextManager->get($block, $options);
 
@@ -543,7 +543,7 @@ class BlockHelper
             if ($listener instanceof \Closure) {
                 $results[] = '{closure}()';
             } elseif (\is_array($listener) && \is_object($listener[0])) {
-                $results[] = \get_class($listener[0]);
+                $results[] = $listener[0]::class;
             } elseif (\is_array($listener) && \is_string($listener[0])) {
                 $results[] = $listener[0];
             } else {

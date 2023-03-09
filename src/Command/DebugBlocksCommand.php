@@ -30,12 +30,8 @@ final class DebugBlocksCommand extends Command
     protected static $defaultName = 'debug:sonata:block';
     protected static $defaultDescription = 'Debug all blocks available, show default settings of each block';
 
-    private BlockServiceManagerInterface $blockManager;
-
-    public function __construct(BlockServiceManagerInterface $blockManager)
+    public function __construct(private BlockServiceManagerInterface $blockManager)
     {
-        $this->blockManager = $blockManager;
-
         parent::__construct();
     }
 
@@ -74,7 +70,7 @@ final class DebugBlocksCommand extends Command
                 foreach ($resolver->resolve() as $key => $val) {
                     $output->writeln(sprintf('    %-30s%s', $key, json_encode($val, \JSON_THROW_ON_ERROR)));
                 }
-            } catch (MissingOptionsException $e) {
+            } catch (MissingOptionsException) {
                 foreach ($resolver->getDefinedOptions() as $option) {
                     $output->writeln(sprintf('    %s', $option));
                 }

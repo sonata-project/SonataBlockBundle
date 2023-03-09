@@ -120,7 +120,7 @@ final class RssBlockService extends AbstractBlockService implements EditableBloc
                 try {
                     $feeds = new \SimpleXMLElement($content);
                     $feeds = $feeds->channel->item;
-                } catch (\Exception $e) {
+                } catch (\Exception) {
                     // silently fail error
                 }
             }

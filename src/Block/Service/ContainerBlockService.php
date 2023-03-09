@@ -109,7 +109,7 @@ final class ContainerBlockService extends AbstractBlockService implements Editab
     private function getDecorator(string $layout): array
     {
         $key = '{{ CONTENT }}';
-        if (false === strpos($layout, $key)) {
+        if (!str_contains($layout, $key)) {
             return [];
         }
 
