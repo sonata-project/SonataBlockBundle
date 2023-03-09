@@ -62,6 +62,7 @@
         "symfony/browser-kit": "^4.4 || ^5.4 || ^6.2",
         "symfony/debug": "^4.4 || ^5.4 || ^6.2",
         "symfony/phpunit-bridge": "^6.2",
+        "symfony/routing": "^4.4.12 || ^5.4 || ^6.2",
         "symfony/stopwatch": "^4.4 || ^5.4 || ^6.2",
         "symfony/yaml": "^4.4 || ^5.4 || ^6.2",
         "vimeo/psalm": "^4.1"
