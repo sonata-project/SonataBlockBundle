@@ -24,40 +24,49 @@ abstract class BaseBlock implements BlockInterface, \Stringable
      * @var string|null
      */
     protected $name;
+
     /**
      * @var array<string, mixed>
      */
     protected $settings;
+
     /**
      * @var bool
      */
     protected $enabled;
+
     /**
      * @var int|null
      */
     protected $position;
+
     /**
      * @var BlockInterface|null
      */
     protected $parent;
+
     /**
      * NEXT_MAJOR: Restrict typehint to Collection.
      *
      * @var Collection<int, BlockInterface>|array<BlockInterface>
      */
     protected $children;
+
     /**
      * @var \DateTime|null
      */
     protected $createdAt;
+
     /**
      * @var \DateTime|null
      */
     protected $updatedAt;
+
     /**
      * @var string|null
      */
     protected $type;
+
     /**
      * NEXT_MAJOR: remove.
      *
@@ -78,7 +87,7 @@ abstract class BaseBlock implements BlockInterface, \Stringable
      * NEXT_MAJOR: Add return typehint.
      */
     #[\ReturnTypeWillChange]
-    public function __toString(): string
+    public function __toString()
     {
         return sprintf('%s ~ #%s', $this->getName() ?? '', $this->getId() ?? '');
     }
