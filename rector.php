@@ -21,6 +21,7 @@ use Rector\Config\RectorConfig;
 use Rector\Php70\Rector\FunctionLike\ExceptionHandlerTypehintRector;
 use Rector\Php71\Rector\FuncCall\CountOnNullRector;
 use Rector\Set\ValueObject\LevelSetList;
+use Rector\TypeDeclaration\Rector\FunctionLike\UnionTypesRector;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
@@ -30,6 +31,12 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->sets([
         LevelSetList::UP_TO_PHP_80,
+    ]);
+
+    $rectorConfig->skip([
+        UnionTypesRector::class => [
+            __DIR__ . '/src/Templating/Helper/BlockHelper.php',
+        ],
     ]);
 
     $rectorConfig->importNames();
