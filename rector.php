@@ -39,7 +39,7 @@ return static function (RectorConfig $rectorConfig): void {
         CountOnNullRector::class,
         ExceptionHandlerTypehintRector::class,
         UnionTypesRector::class => [
-            __DIR__ . '/src/Templating/Helper/BlockHelper.php',
+            __DIR__.'/src/Templating/Helper/BlockHelper.php',
         ],
     ]);
 };
