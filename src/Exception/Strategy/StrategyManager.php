@@ -27,28 +27,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class StrategyManager implements StrategyManagerInterface
 {
-    private ContainerInterface $container;
-
-    /**
-     * @var array<string, string>
-     */
-    private array $filters;
-
-    /**
-     * @var array<string, string>
-     */
-    private array $renderers;
-
-    /**
-     * @var array<string, string>
-     */
-    private array $blockFilters;
-
-    /**
-     * @var array<string, string>
-     */
-    private array $blockRenderers;
-
     private ?string $defaultFilter = null;
 
     private ?string $defaultRenderer = null;
@@ -63,17 +41,12 @@ final class StrategyManager implements StrategyManagerInterface
      * @param array<string, string> $blockRenderers Renderer names for each block
      */
     public function __construct(
-        ContainerInterface $container,
-        array $filters,
-        array $renderers,
-        array $blockFilters,
-        array $blockRenderers
+        private ContainerInterface $container,
+        private array $filters,
+        private array $renderers,
+        private array $blockFilters,
+        private array $blockRenderers
     ) {
-        $this->container = $container;
-        $this->filters = $filters;
-        $this->renderers = $renderers;
-        $this->blockFilters = $blockFilters;
-        $this->blockRenderers = $blockRenderers;
     }
 
     /**

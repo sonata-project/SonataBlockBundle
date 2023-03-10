@@ -543,7 +543,7 @@ class BlockHelper
             if ($listener instanceof \Closure) {
                 $results[] = '{closure}()';
             } elseif (\is_array($listener) && \is_object($listener[0])) {
-                $results[] = \get_class($listener[0]);
+                $results[] = $listener[0]::class;
             } elseif (\is_array($listener) && \is_string($listener[0])) {
                 $results[] = $listener[0];
             } else {

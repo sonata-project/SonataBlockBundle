@@ -22,11 +22,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ServiceListType extends AbstractType
 {
-    private BlockServiceManagerInterface $manager;
-
-    public function __construct(BlockServiceManagerInterface $manager)
+    public function __construct(private BlockServiceManagerInterface $manager)
     {
-        $this->manager = $manager;
     }
 
     public function getBlockPrefix(): string

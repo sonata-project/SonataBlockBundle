@@ -23,10 +23,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class BlockContextManager implements BlockContextManagerInterface
 {
-    private BlockLoaderInterface $blockLoader;
-
-    private BlockServiceManagerInterface $blockService;
-
     /**
      * @var array<string, array<string, mixed>>
      */
@@ -46,10 +42,7 @@ final class BlockContextManager implements BlockContextManagerInterface
      */
     private array $cacheBlocks = ['by_class' => [], 'by_type' => []];
 
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
+    private LoggerInterface $logger;
 
     /**
      * NEXT_MAJOR: remove $cacheBlocksOrLogger argument.
@@ -57,14 +50,11 @@ final class BlockContextManager implements BlockContextManagerInterface
      * @param array{by_class: array<class-string, string>, by_type: array<string, string>}|LoggerInterface|null $cacheBlocksOrLogger
      */
     public function __construct(
-        BlockLoaderInterface $blockLoader,
-        BlockServiceManagerInterface $blockService,
+        private BlockLoaderInterface $blockLoader,
+        private BlockServiceManagerInterface $blockService,
         $cacheBlocksOrLogger = null,
         ?LoggerInterface $logger = null
     ) {
-        $this->blockLoader = $blockLoader;
-        $this->blockService = $blockService;
-
         // NEXT_MAJOR: remove if/else block completely and uncomment following line
         // $this->logger = $logger ?? new NullLogger();
         if (\is_array($cacheBlocksOrLogger)) {
@@ -296,11 +286,9 @@ final class BlockContextManager implements BlockContextManagerInterface
      * This class is a BC layer for deprecation messages for symfony/options-resolver < 5.1.
      * Remove this class when dropping support for symfony/options-resolver < 5.1.
      *
-     * @param string|\Closure $message
-     *
      * @return mixed[]
      */
-    private function deprecationParameters(string $version, $message): array
+    private function deprecationParameters(string $version, string|\Closure $message): array
     {
         // @phpstan-ignore-next-line
         if (method_exists(OptionsResolver::class, 'define')) {

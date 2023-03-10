@@ -32,19 +32,12 @@ use Twig\Environment;
  */
 class MenuBlockService extends AbstractMenuBlockService implements EditableBlockService
 {
-    private MenuProviderInterface $menuProvider;
-
-    private MenuRegistryInterface $menuRegistry;
-
     public function __construct(
         Environment $twig,
-        MenuProviderInterface $menuProvider,
-        MenuRegistryInterface $menuRegistry
+        private MenuProviderInterface $menuProvider,
+        private MenuRegistryInterface $menuRegistry
     ) {
         parent::__construct($twig);
-
-        $this->menuProvider = $menuProvider;
-        $this->menuRegistry = $menuRegistry;
     }
 
     public function validate(ErrorElement $errorElement, BlockInterface $block): void

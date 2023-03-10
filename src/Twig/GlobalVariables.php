@@ -21,16 +21,10 @@ namespace Sonata\BlockBundle\Twig;
 final class GlobalVariables
 {
     /**
-     * @var string[]
-     */
-    private array $templates;
-
-    /**
      * @param string[] $templates
      */
-    public function __construct(array $templates)
+    public function __construct(private array $templates)
     {
-        $this->templates = $templates;
     }
 
     /**

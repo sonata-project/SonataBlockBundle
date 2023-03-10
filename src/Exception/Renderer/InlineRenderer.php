@@ -24,14 +24,10 @@ use Twig\Environment;
  */
 final class InlineRenderer implements RendererInterface
 {
-    private string $template;
-
-    private Environment $twig;
-
-    public function __construct(Environment $twig, string $template)
-    {
-        $this->twig = $twig;
-        $this->template = $template;
+    public function __construct(
+        private Environment $twig,
+        private string $template
+    ) {
     }
 
     public function render(\Exception $exception, BlockInterface $block, ?Response $response = null): Response

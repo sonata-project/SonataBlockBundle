@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * Base abstract Block class that provides a default implementation of the block interface.
  */
-abstract class BaseBlock implements BlockInterface
+abstract class BaseBlock implements BlockInterface, \Stringable
 {
     /**
      * @var string|null
@@ -85,8 +85,6 @@ abstract class BaseBlock implements BlockInterface
 
     /**
      * NEXT_MAJOR: Add return typehint.
-     *
-     * @return string
      */
     #[\ReturnTypeWillChange]
     public function __toString()
