@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.20.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.19.0...4.20.0) - 2023-03-10
+### Added
+- [[#1129](https://github.com/sonata-project/SonataBlockBundle/pull/1129)] Src/Resources/translations/SonataBlockBundle.ar.xliff ([@nalabdou](https://github.com/nalabdou))
+
+### Fixed
+- [[#1142](https://github.com/sonata-project/SonataBlockBundle/pull/1142)] Allow covariance for parameters of RecursiveBlockIterator ([@VincentLanglet](https://github.com/VincentLanglet))
+
+### Removed
+- [[#1140](https://github.com/sonata-project/SonataBlockBundle/pull/1140)] Support for PHP 7.4
+- [[#1140](https://github.com/sonata-project/SonataBlockBundle/pull/1140)] Support for Symfony 6.0 and 6.1
+
 ## [4.19.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.18.0...4.19.0) - 2022-10-25
 ### Added
 - [[#1122](https://github.com/sonata-project/SonataBlockBundle/pull/1122)] Support for doctrine/collections 2 ([@VincentLanglet](https://github.com/VincentLanglet))
