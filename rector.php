@@ -33,16 +33,13 @@ return static function (RectorConfig $rectorConfig): void {
         LevelSetList::UP_TO_PHP_80,
     ]);
 
-    $rectorConfig->skip([
-        UnionTypesRector::class => [
-            __DIR__ . '/src/Templating/Helper/BlockHelper.php',
-        ],
-    ]);
-
     $rectorConfig->importNames();
     $rectorConfig->importShortClasses(false);
     $rectorConfig->skip([
         CountOnNullRector::class,
         ExceptionHandlerTypehintRector::class,
+        UnionTypesRector::class => [
+            __DIR__ . '/src/Templating/Helper/BlockHelper.php',
+        ],
     ]);
 };
