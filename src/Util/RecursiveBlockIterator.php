@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Util;
 
-use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ReadableCollection;
 use Sonata\BlockBundle\Model\BlockInterface;
 
 /**
@@ -24,11 +24,11 @@ use Sonata\BlockBundle\Model\BlockInterface;
 final class RecursiveBlockIterator extends \RecursiveArrayIterator
 {
     /**
-     * @param Collection<int, BlockInterface>|array<BlockInterface> $array
+     * @param ReadableCollection<int, BlockInterface>|array<BlockInterface> $array
      */
     public function __construct($array)
     {
-        if ($array instanceof Collection) {
+        if ($array instanceof ReadableCollection) {
             $array = $array->toArray();
         }
 

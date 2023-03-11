@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Util;
 
-use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ReadableCollection;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
@@ -23,7 +23,7 @@ use Doctrine\Common\Collections\Collection;
 final class RecursiveBlockIteratorIterator extends \RecursiveIteratorIterator
 {
     /**
-     * @param array<mixed>|Collection<array-key, mixed> $array
+     * @param array<mixed>|ReadableCollection<array-key, mixed> $array
      */
     public function __construct($array)
     {
