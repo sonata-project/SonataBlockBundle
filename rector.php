@@ -36,5 +36,6 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->importShortClasses(false);
     $rectorConfig->skip([
         CountOnNullRector::class,
-        ExceptionHandlerTypehintRector::class,    ]);
+        ExceptionHandlerTypehintRector::class,
+    ]);
 };
