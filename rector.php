@@ -20,8 +20,7 @@ declare(strict_types=1);
 use Rector\Config\RectorConfig;
 use Rector\Php70\Rector\FunctionLike\ExceptionHandlerTypehintRector;
 use Rector\Php71\Rector\FuncCall\CountOnNullRector;
-use Rector\Php80\Rector\FunctionLike\UnionTypesRector;
-use Rector\Set\ValueObject\LevelSetList;
+use Rector\Php80\Rector\FunctionLike\UnionTypesRector;use Rector\Set\ValueObject\LevelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
@@ -37,9 +36,7 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->importShortClasses(false);
     $rectorConfig->skip([
         CountOnNullRector::class,
-        ExceptionHandlerTypehintRector::class,
-        UnionTypesRector::class => [
+        ExceptionHandlerTypehintRector::class,        UnionTypesRector::class => [
             __DIR__.'/src/Templating/Helper/BlockHelper.php',
-        ],
-    ]);
+        ],    ]);
 };
