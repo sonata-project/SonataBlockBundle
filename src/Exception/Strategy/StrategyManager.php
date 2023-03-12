@@ -88,7 +88,6 @@ final class StrategyManager implements StrategyManagerInterface
 
             // Convert throwable to exception
             if (!$exception instanceof \Exception) {
-                /** @psalm-suppress InvalidScalarArgument */
                 $exception = new \Exception($exception->getMessage(), $exception->getCode(), $exception);
             }
 

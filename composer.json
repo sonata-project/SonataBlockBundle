@@ -55,8 +55,8 @@
         "phpstan/phpstan-strict-rules": "^1.0",
         "phpstan/phpstan-symfony": "^1.0",
         "phpunit/phpunit": "^9.5.13",
-        "psalm/plugin-phpunit": "^0.16",
-        "psalm/plugin-symfony": "^4.0",
+        "psalm/plugin-phpunit": "^0.18",
+        "psalm/plugin-symfony": "^4.0 || ^5.0",
         "rector/rector": "^0.15",
         "sonata-project/doctrine-extensions": "^1.10.1",
         "symfony/browser-kit": "^4.4 || ^5.4 || ^6.2",
@@ -65,7 +65,7 @@
         "symfony/routing": "^4.4.12 || ^5.4 || ^6.2",
         "symfony/stopwatch": "^4.4 || ^5.4 || ^6.2",
         "symfony/yaml": "^4.4 || ^5.4 || ^6.2",
-        "vimeo/psalm": "^4.1"
+        "vimeo/psalm": "^4.1 || ^5.8.0"
     },
     "conflict": {
         "doctrine/annotations": "<1.7",

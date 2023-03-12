@@ -389,7 +389,7 @@ class BlockHelper
     {
         $blockContext = $this->blockContextManager->get($block, $options);
 
-        $stats = [];
+        $stats = null;
 
         if (null !== $this->stopwatch) {
             $stats = $this->startTracing($blockContext->getBlock());
@@ -578,7 +578,7 @@ class BlockHelper
             return null;
         }
 
-        if (null !== $this->stopwatch) {
+        if (null !== $stats) {
             $stats['cache']['handler'] = $cacheServiceId;
         }
 

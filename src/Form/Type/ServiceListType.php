@@ -20,6 +20,9 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @psalm-suppress MissingTemplateParam
+ */
 final class ServiceListType extends AbstractType
 {
     public function __construct(private BlockServiceManagerInterface $manager)
