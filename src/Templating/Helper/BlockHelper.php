@@ -39,10 +39,10 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  *     cache: array{
  *         keys: mixed[],
  *         contextual_keys: mixed[],
- *         handler: false,
- *         from_cache: false,
+ *         handler: string|false,
+ *         from_cache: bool,
  *         ttl: int,
- *         created_at: false,
+ *         created_at: int|false,
  *         lifetime: int,
  *         age: int,
  *     },
@@ -415,7 +415,7 @@ class BlockHelper
                 $blockContext->getSetting('extra_cache_keys')
             );
 
-            if (null !== $this->stopwatch) {
+            if (null !== $stats) {
                 $stats['cache']['keys'] = $cacheKeys;
             }
 
@@ -425,16 +425,17 @@ class BlockHelper
             if ($cacheService->has($cacheKeys)) {
                 $cacheElement = $cacheService->get($cacheKeys);
 
-                if (null !== $this->stopwatch) {
+                if (null !== $stats) {
                     $stats['cache']['from_cache'] = false;
                 }
 
-                if (!$cacheElement->isExpired() && $cacheElement->getData() instanceof Response) {
-                    if (null !== $this->stopwatch) {
+                $cacheData = $cacheElement->getData();
+                if (!$cacheElement->isExpired() && $cacheData instanceof Response) {
+                    if (null !== $stats) {
                         $stats['cache']['from_cache'] = true;
                     }
 
-                    $response = $cacheElement->getData();
+                    $response = $cacheData;
                 }
             }
         }
@@ -451,7 +452,7 @@ class BlockHelper
             $response = $this->blockRenderer->render($blockContext);
             $contextualKeys = null !== $recorder ? $recorder->pop() : [];
 
-            if (null !== $this->stopwatch) {
+            if (null !== $stats) {
                 $stats['cache']['contextual_keys'] = $contextualKeys;
             }
 
@@ -460,10 +461,10 @@ class BlockHelper
             }
         }
 
-        if (null !== $this->stopwatch) {
+        if (null !== $stats) {
             // avoid \DateTime because of serialize/unserialize issue in PHP7.3 (https://bugs.php.net/bug.php?id=77302)
             $responseDate = $response->getDate();
-            $stats['cache']['created_at'] = null === $responseDate ? null : $responseDate->getTimestamp();
+            $stats['cache']['created_at'] = null === $responseDate ? false : $responseDate->getTimestamp();
             $stats['cache']['ttl'] = $response->getTtl() ?? 0;
             $stats['cache']['age'] = $response->getAge();
             $stats['cache']['lifetime'] = $stats['cache']['age'] + $stats['cache']['ttl'];
@@ -474,7 +475,8 @@ class BlockHelper
             $this->cacheHandler->updateMetadata($response, $blockContext);
         }
 
-        if (null !== $this->stopwatch) {
+        if (null !== $stats) {
+            /** @psalm-suppress ArgumentTypeCoercion https://github.com/vimeo/psalm/issues/9150 */
             $this->stopTracing($blockContext->getBlock(), $stats);
         }
 
