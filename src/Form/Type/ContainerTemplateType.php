@@ -19,6 +19,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
+ *
+ * @psalm-suppress MissingTemplateParam
  */
 final class ContainerTemplateType extends AbstractType
 {
