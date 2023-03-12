@@ -24,7 +24,7 @@ use Sonata\BlockBundle\Model\BlockInterface;
 final class RecursiveBlockIterator extends \RecursiveArrayIterator
 {
     /**
-     * @param ReadableCollection<array-key, BlockInterface>|array<BlockInterface> $array
+     * @param ReadableCollection<int, BlockInterface>|array<BlockInterface> $array
      */
     public function __construct($array)
     {
