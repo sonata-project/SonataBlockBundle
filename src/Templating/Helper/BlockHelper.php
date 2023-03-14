@@ -153,16 +153,15 @@ class BlockHelper
     {
         $blockContext = $this->blockContextManager->get($block, $options);
 
+        $stats = null;
+
         if (null !== $this->stopwatch) {
             $stats = $this->startTracing($blockContext->getBlock());
         }
 
         $response = $this->blockRenderer->render($blockContext);
 
-        if (null !== $this->stopwatch) {
-            /**
-             * @psalm-suppress PossiblyUndefinedVariable
-             */
+        if (null !== $stats) {
             $this->stopTracing($blockContext->getBlock(), $stats);
         }
 

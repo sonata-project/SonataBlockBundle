@@ -23,7 +23,7 @@ use Doctrine\Common\Collections\ReadableCollection;
 final class RecursiveBlockIteratorIterator extends \RecursiveIteratorIterator
 {
     /**
-     * @param array<mixed>|ReadableCollection<array-key, mixed> $array
+     * @param array<mixed>|ReadableCollection<int, mixed> $array
      */
     public function __construct($array)
     {

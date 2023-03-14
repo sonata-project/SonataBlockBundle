@@ -60,7 +60,7 @@
         "symfony/error-handler": "^5.4 || ^6.2",
         "symfony/phpunit-bridge": "^6.2",
         "symfony/stopwatch": "^5.4 || ^6.2",
-        "vimeo/psalm": "^5.0"
+        "vimeo/psalm": "^5.8"
     },
     "conflict": {
         "knplabs/knp-menu-bundle": "<3.0"
