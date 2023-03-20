@@ -238,8 +238,7 @@ final class BlockContextManager implements BlockContextManagerInterface
         $block = $blockContext->getBlock();
 
         // type by block class
-        $class = ClassUtils::getClass($block);
-        $cacheServiceId = $this->cacheBlocks['by_class'][$class] ?? null;
+        $cacheServiceId = $this->cacheBlocks['by_class'][$block::class] ?? null;
 
         // type by block service
         if (null === $cacheServiceId) {
