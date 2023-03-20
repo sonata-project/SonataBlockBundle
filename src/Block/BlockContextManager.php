@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Block;
 
-use Doctrine\Common\Util\ClassUtils;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -217,9 +216,8 @@ final class BlockContextManager implements BlockContextManagerInterface
             );
 
         // add type and class settings for block
-        $class = ClassUtils::getClass($block);
         $settingsByType = $this->settingsByType[$block->getType() ?? ''] ?? [];
-        $settingsByClass = $this->settingsByClass[$class] ?? [];
+        $settingsByClass = $this->settingsByClass[$block::class] ?? [];
         $optionsResolver->setDefaults(array_merge($settingsByType, $settingsByClass));
     }
 
