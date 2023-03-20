@@ -67,7 +67,6 @@
         "vimeo/psalm": "^4.1 || ^5.8.0"
     },
     "conflict": {
-        "doctrine/annotations": "<1.7",
         "knplabs/knp-menu-bundle": "<3.0"
     },
     "suggest": {
