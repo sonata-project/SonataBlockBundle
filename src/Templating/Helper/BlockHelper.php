@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Templating\Helper;
 
-use Doctrine\Common\Util\ClassUtils;
 use Sonata\BlockBundle\Block\BlockContextManagerInterface;
 use Sonata\BlockBundle\Block\BlockRendererInterface;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
@@ -568,8 +567,7 @@ class BlockHelper
         }
 
         // type by block class
-        $class = ClassUtils::getClass($block);
-        $cacheServiceId = $this->cacheBlocks['by_class'][$class] ?? null;
+        $cacheServiceId = $this->cacheBlocks['by_class'][$block::class] ?? null;
 
         // type by block service
         if (null === $cacheServiceId) {
