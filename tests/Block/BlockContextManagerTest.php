@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests\Block;
 
-use Doctrine\Common\Util\ClassUtils;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Sonata\BlockBundle\Block\BlockContextInterface;
@@ -120,7 +119,7 @@ final class BlockContextManagerTest extends TestCase
 
         // NEXT_MAJOR: remove
         $blocksCache = [
-            'by_class' => [ClassUtils::getClass($block) => 'my_cache.service.id'],
+            'by_class' => [$block::class => 'my_cache.service.id'],
             'by_type' => [],
         ];
 
