@@ -26,8 +26,8 @@ interface FormMapper
      *
      * @deprecated since sonata-project/block-bundle 4.13. To be removed in 5.0.
      *
-     * @param class-string<FormTypeInterface>|null $type
-     * @param array<string, mixed>                 $options
+     * @param class-string<FormTypeInterface<mixed>>|null $type
+     * @param array<string, mixed>                        $options
      */
     public function create(string $name, ?string $type = null, array $options = []): FormBuilderInterface;
 
@@ -39,8 +39,8 @@ interface FormMapper
     public function reorder(array $keys);
 
     /**
-     * @param class-string<FormTypeInterface>|null $type
-     * @param array<string, mixed>                 $options
+     * @param class-string<FormTypeInterface<mixed>>|null $type
+     * @param array<string, mixed>                        $options
      *
      * @return static
      */

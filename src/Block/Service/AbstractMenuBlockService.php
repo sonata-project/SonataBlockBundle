@@ -90,7 +90,7 @@ abstract class AbstractMenuBlockService extends AbstractBlockService implements 
     }
 
     /**
-     * @return array<array{string, class-string<FormTypeInterface>, array<string, mixed>}>
+     * @return array<array{string, class-string<FormTypeInterface<mixed>>, array<string, mixed>}>
      */
     protected function getFormSettingsKeys(): array
     {

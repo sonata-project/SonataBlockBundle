@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Hugo Briand <briand@ekino.com>
  *
- * @psalm-suppress MissingTemplateParam
+ * @extends AbstractType<mixed>
  */
 final class ContainerTemplateType extends AbstractType
 {

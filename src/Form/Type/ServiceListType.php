@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @psalm-suppress MissingTemplateParam
+ * @extends AbstractType<mixed>
  */
 final class ServiceListType extends AbstractType
 {
