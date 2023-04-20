@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Hugo Briand <briand@ekino.com>
  *
- * @extends AbstractType<mixed>
+ * @extends AbstractType<string|array<string>>
  */
 final class ContainerTemplateType extends AbstractType
 {

@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @extends AbstractType<mixed>
+ * @extends AbstractType<string|array<string>>
  */
 final class ServiceListType extends AbstractType
 {
