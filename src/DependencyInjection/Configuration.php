@@ -32,7 +32,7 @@ final class Configuration implements ConfigurationInterface
     }
 
     /**
-     * @psalm-suppress PossiblyUndefinedMethod
+     * @psalm-suppress UndefinedMethod
      *
      * @see https://github.com/psalm/psalm-plugin-symfony/issues/174
      */
