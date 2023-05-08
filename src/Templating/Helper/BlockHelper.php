@@ -476,7 +476,6 @@ class BlockHelper
         }
 
         if (null !== $stats) {
-            /** @psalm-suppress ArgumentTypeCoercion https://github.com/vimeo/psalm/issues/9150 */
             $this->stopTracing($blockContext->getBlock(), $stats);
         }
 
