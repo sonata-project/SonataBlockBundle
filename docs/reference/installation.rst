@@ -28,17 +28,15 @@ Configuration
 
 To use the ``BlockBundle``, add the following lines to your application configuration file:
 
-.. configuration-block::
+.. code-block:: yaml
 
-    .. code-block:: yaml
+    # config/packages/sonata_block.yaml
 
-        # config/packages/sonata_block.yaml
-
-        sonata_block:
-            default_contexts: [sonata_page_bundle]
-            blocks:
-                # Some block with different templates
-                #acme.demo.block.demo:
-                #    templates:
-                #       - { name: 'Simple', template: '@AcmeDemo/Block/demo_simple.html.twig' }
-                #       - { name: 'Big',    template: '@AcmeDemo/Block/demo_big.html.twig' }
+    sonata_block:
+        default_contexts: [sonata_page_bundle]
+        blocks:
+            # Some block with different templates
+            #acme.demo.block.demo:
+            #    templates:
+            #       - { name: 'Simple', template: '@AcmeDemo/Block/demo_simple.html.twig' }
+            #       - { name: 'Big',    template: '@AcmeDemo/Block/demo_big.html.twig' }

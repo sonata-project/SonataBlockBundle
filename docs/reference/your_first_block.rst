@@ -151,39 +151,25 @@ Service
 
 We are almost done! Now, just declare the block as a service:
 
-.. configuration-block::
+.. code-block:: yaml
 
-    .. code-block:: yaml
+    # config/services.yaml
 
-        # config/services.yaml
-
-        services:
-            sonata.block.service.rss:
-                class: Sonata\BlockBundle\Block\Service\RssBlockService
-                arguments:
-                    - ~
-                    - '@twig'
-                tags:
-                    - { name: sonata.block }
-
-    .. code-block:: xml
-
-        <!-- config/services.xml -->
-
-        <service id="sonata.block.service.rss" class="Sonata\BlockBundle\Block\Service\RssBlockService">
-            <tag name="sonata.block"/>
-            <argument/>
-            <argument type="service" id="twig"/>
-        </service>
+    services:
+        sonata.block.service.rss:
+            class: Sonata\BlockBundle\Block\Service\RssBlockService
+            arguments:
+                - ~
+                - '@twig'
+            tags:
+                - { name: sonata.block }
 
 Then, add the service to Sonata configuration:
 
-.. configuration-block::
+.. code-block:: yaml
 
-    .. code-block:: yaml
+    # config/packages/sonata_block.yaml
 
-        # config/packages/sonata_block.yaml
-
-        sonata_block:
-            blocks:
-                sonata.block.service.rss: ~
+    sonata_block:
+        blocks:
+            sonata.block.service.rss: ~

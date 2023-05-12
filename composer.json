@@ -68,6 +68,8 @@
     "suggest": {
         "knplabs/knp-menu-bundle": "Required to use the menu block"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Sonata\\BlockBundle\\": "src/"

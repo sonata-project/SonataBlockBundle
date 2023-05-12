@@ -35,13 +35,11 @@ This block service displays a KNP Menu.
 
 Defining a menu could be done by inserting the ``knp_menu.menu`` tag.
 
-.. configuration-block::
+.. code-block:: xml
 
-    .. code-block:: xml
-
-        <service id="sonata.block.menu.main" class="Sonata\BlockBundle\Menu\MainMenu">
-            <tag name="knp_menu.menu" alias="sonata.main"/>
-        </service>
+    <service id="sonata.block.menu.main" class="Sonata\BlockBundle\Menu\MainMenu">
+        <tag name="knp_menu.menu" alias="sonata.main"/>
+    </service>
 
 Upon configuration, you may set some rendering options (see KNP Doc for those).
 
