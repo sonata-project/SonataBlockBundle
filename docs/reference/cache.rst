@@ -112,17 +112,15 @@ The ``HttpCacheHandler::updateMetadata`` is called by the twig extension when th
 
 The service can be configured using the ``http_cache_handler`` key.
 
-.. configuration-block::
+.. code-block:: yaml
 
-    .. code-block:: yaml
+    # config/packages/sonata_block.yaml
 
-        # config/packages/sonata_block.yaml
-
-        sonata_block:
-            http_cache:
-                handler: sonata.block.cache.handler.noop    # no cache alteration
-                handler: sonata.block.cache.handler.default # default value
-                listener: true                              # default to true, register or not the event listener to alter the final response
+    sonata_block:
+        http_cache:
+            handler: sonata.block.cache.handler.noop    # no cache alteration
+            handler: sonata.block.cache.handler.default # default value
+            listener: true                              # default to true, register or not the event listener to alter the final response
 
 Cache Backends
 ~~~~~~~~~~~~~~
@@ -139,28 +137,24 @@ Cache configuration
 
 The configuration is defined per `block service`, so if you want to use `memcached` for a block type ``sonata.page.block.container`` then use the following configuration:
 
-.. configuration-block::
+.. code-block:: yaml
 
-    .. code-block:: yaml
+    # config/packages/sonata_block.yaml
 
-        # config/packages/sonata_block.yaml
-
-        sonata_block:
-            blocks:
-                sonata.page.block.container:
-                    cache: sonata.cache.memcached
+    sonata_block:
+        blocks:
+            sonata.page.block.container:
+                cache: sonata.cache.memcached
 
 Also, make sure the memcached backend is configured in the ``sonata_cache`` definition:
 
-.. configuration-block::
+.. code-block:: yaml
 
-    .. code-block:: yaml
+    # config/packages/sonata_cache.yaml
 
-        # config/packages/sonata_cache.yaml
-
-        sonata_cache:
-            caches:
-                memcached:
-                    prefix: test # prefix to ensure there is no clash between instances
-                    servers:
-                        - { host: 127.0.0.1, port: 11211, weight: 0 }
+    sonata_cache:
+        caches:
+            memcached:
+                prefix: test # prefix to ensure there is no clash between instances
+                servers:
+                    - { host: 127.0.0.1, port: 11211, weight: 0 }

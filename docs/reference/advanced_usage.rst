@@ -29,7 +29,7 @@ Block Context Manager - context cache
 
 When using ``Varnish``, ``Ssi`` or ``Js`` cache, the settings passed here are lost:
 
-.. code-block:: twig
+.. code-block:: html+twig
 
     {{ sonata_block_render({ 'type': 'sonata.block.service.rss' }, {
         'title': 'Sonata Project\'s Feeds',

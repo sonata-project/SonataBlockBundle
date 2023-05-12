@@ -11,13 +11,13 @@ Twig Helpers
 
 Render a block from its instance:
 
-.. code-block:: twig
+.. code-block:: html+twig
 
     {{ sonata_block_render(block) }}
 
 Render a block  by providing the block's type and options:
 
-.. code-block:: twig
+.. code-block:: html+twig
 
     {{ sonata_block_render({ 'type': 'sonata.block.service.rss' }, {
         'title': 'Sonata Project\'s Feeds',
@@ -26,7 +26,7 @@ Render a block  by providing the block's type and options:
 
 Render a block by providing the block's cache options:
 
-.. code-block:: twig
+.. code-block:: html+twig
 
     {{ sonata_block_render(block, {
         'use_cache': use_cache,
@@ -35,7 +35,7 @@ Render a block by providing the block's cache options:
 
 Render a block by calling an event:
 
-.. code-block:: twig
+.. code-block:: html+twig
 
     {{ sonata_block_render_event('node.comment', {
         'target': post
@@ -47,7 +47,7 @@ Render a block by calling an event:
 
 Rendering a block related to javascripts and stylesheets for the current page implies the helpers to be called at the end of the page:
 
-.. code-block:: twig
+.. code-block:: html+twig
 
     {{ sonata_block_include_stylesheets('screen', app.request.basePath) }}
     {{ sonata_block_include_javascripts('screen', app.request.basePath) }}

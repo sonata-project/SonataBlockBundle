@@ -11,7 +11,7 @@ As part of a full stack solution, you don't know which solution is going to be u
 
 The `Event mechanism` implemented in the ``SonataBlockBundle`` tries to address this situation, and to provide a clean syntax:
 
-.. code-block:: twig
+.. code-block:: html+twig
 
     {# post.twig.html #}
 
@@ -29,23 +29,15 @@ Implementation
 You can register a service to listen to the service ``blog.comment``. The actual name for the ``EventDispatcher`` must be prefixed by ``sonata.block.event``.
 So, the current the name will be ``sonata.block.event.blog.comment``.
 
-.. configuration-block::
+.. code-block:: yaml
 
-    .. code-block:: yaml
+    # config/services.yaml
 
-        # config/services.yaml
-
-        services:
-            disqus.comment:
-                class: Sonata\CommentBundle\Event\Disqus"
-                tags:
-                    - { name: kernel.event_listener, event: sonata.block.event.blog.comment, method: onBlock }
-
-    .. code-block:: xml
-
-        <service id="disqus.comment" class="Sonata\CommentBundle\Event\Discus">
-            <tag name="kernel.event_listener" event="sonata.block.event.blog.comment" method="onBlock"/>
-        </service>
+    services:
+        disqus.comment:
+            class: Sonata\CommentBundle\Event\Disqus"
+            tags:
+                - { name: kernel.event_listener, event: sonata.block.event.blog.comment, method: onBlock }
 
 The `event listener` must push one or some ``BlockInterface`` instances into ``BlockEvent`` passed in so the rendering workflow will work properly::
 
