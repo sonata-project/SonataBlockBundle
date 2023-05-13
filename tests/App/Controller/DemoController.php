@@ -22,6 +22,7 @@ final class DemoController extends AbstractController
     /**
      * @Route("/", name="home")
      */
+    #[Route('/', name: 'home')]
     public function index(): Response
     {
         return $this->render('index.html.twig');
