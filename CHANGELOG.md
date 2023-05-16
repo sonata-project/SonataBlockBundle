@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.21.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.20.0...4.21.0) - 2023-05-13
+### Added
+- [[#1172](https://github.com/sonata-project/SonataBlockBundle/pull/1172)] Support for `sonata-project/form-extensions` 2.0 ([@jordisala1991](https://github.com/jordisala1991))
+
 ## [4.20.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.19.0...4.20.0) - 2023-03-10
 ### Added
 - [[#1129](https://github.com/sonata-project/SonataBlockBundle/pull/1129)] Src/Resources/translations/SonataBlockBundle.ar.xliff ([@nalabdou](https://github.com/nalabdou))
