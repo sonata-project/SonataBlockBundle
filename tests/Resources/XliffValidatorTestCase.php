@@ -36,6 +36,8 @@ abstract class XliffValidatorTestCase extends TestCase
 
     /**
      * @dataProvider getXliffPaths
+     *
+     * @phpstan-param non-empty-string $path
      */
     public function testXliff(string $path): void
     {
@@ -54,6 +56,8 @@ abstract class XliffValidatorTestCase extends TestCase
 
     /**
      * @return iterable<array-key, array{string}>
+     *
+     * @phpstan-return iterable<array-key, array{non-empty-string}>
      */
     abstract public static function getXliffPaths(): iterable;
 
@@ -72,6 +76,8 @@ abstract class XliffValidatorTestCase extends TestCase
 
     /**
      * @param string $path The path to lookup for Xliff file
+     *
+     * @phpstan-param non-empty-string $path
      */
     protected function validatePath(string $path): void
     {
