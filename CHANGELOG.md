@@ -2,6 +2,22 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.0-alpha-1](https://github.com/sonata-project/SonataBlockBundle/compare/4.x...5.0.0-alpha-1) - 2023-06-02
+### Added
+- [[#1159](https://github.com/sonata-project/SonataBlockBundle/pull/1159)] Add return types to `FormMapper`. ([@jordisala1991](https://github.com/jordisala1991))
+
+### Changed
+- [[#1054](https://github.com/sonata-project/SonataBlockBundle/pull/1054)] Block services tagged with `sonata.block` are not made public anymore ([@dmaicher](https://github.com/dmaicher))
+
+### Removed
+- [[#1139](https://github.com/sonata-project/SonataBlockBundle/pull/1139)] Drop support for Symfony 6.0 and 6.1. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#1158](https://github.com/sonata-project/SonataBlockBundle/pull/1158)] Remove block serializer configuration ([@jordisala1991](https://github.com/jordisala1991))
+- [[#1064](https://github.com/sonata-project/SonataBlockBundle/pull/1064)] Drop support for PHP 7. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#1060](https://github.com/sonata-project/SonataBlockBundle/pull/1060)] Remove support for Symfony ^4.4 and 5.3.x ([@jordisala1991](https://github.com/jordisala1991))
+- [[#1060](https://github.com/sonata-project/SonataBlockBundle/pull/1060)] Remove support for Twig ^2 ([@jordisala1991](https://github.com/jordisala1991))
+- [[#1060](https://github.com/sonata-project/SonataBlockBundle/pull/1060)] Remove support for `doctrine/common` ^2 ([@jordisala1991](https://github.com/jordisala1991))
+- [[#1056](https://github.com/sonata-project/SonataBlockBundle/pull/1056)] Remove `BlockManagerInterface` deprecated class. ([@jordisala1991](https://github.com/jordisala1991))
+
 ## [4.21.0](https://github.com/sonata-project/SonataBlockBundle/compare/4.20.0...4.21.0) - 2023-05-13
 ### Added
 - [[#1172](https://github.com/sonata-project/SonataBlockBundle/pull/1172)] Support for `sonata-project/form-extensions` 2.0 ([@jordisala1991](https://github.com/jordisala1991))
