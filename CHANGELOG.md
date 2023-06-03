@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 - [[#1158](https://github.com/sonata-project/SonataBlockBundle/pull/1158)] Remove block serializer configuration ([@jordisala1991](https://github.com/jordisala1991))
-- [[#1060](https://github.com/sonata-project/SonataBlockBundle/pull/1060)] Remove support for Symfony ^4.4 and 5.3.x ([@jordisala1991](https://github.com/jordisala1991))
+- [[#1060](https://github.com/sonata-project/SonataBlockBundle/pull/1060)] Remove support for Symfony ^4.4 ([@jordisala1991](https://github.com/jordisala1991))
 - [[#1060](https://github.com/sonata-project/SonataBlockBundle/pull/1060)] Remove support for Twig ^2 ([@jordisala1991](https://github.com/jordisala1991))
 - [[#1060](https://github.com/sonata-project/SonataBlockBundle/pull/1060)] Remove support for `doctrine/common` ^2 ([@jordisala1991](https://github.com/jordisala1991))
 - [[#1056](https://github.com/sonata-project/SonataBlockBundle/pull/1056)] Remove `BlockManagerInterface` deprecated class. ([@jordisala1991](https://github.com/jordisala1991))
