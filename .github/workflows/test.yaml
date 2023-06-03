@@ -11,6 +11,7 @@ on:
         branches:
             - 4.x
             - 5.x
+            - 6.x
     pull_request:
 
 permissions:
