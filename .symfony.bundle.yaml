@@ -5,15 +5,17 @@
 branches:
     - 4.x
     - 5.x
+    - 6.x
 
 maintained_branches:
     - 4.x
     - 5.x
+    - 6.x
 
 doc_dir: 'docs/'
 
-current_branch: 4.x
+current_branch: 5.x
 
-dev_branch: 5.x
+dev_branch: 6.x
 
 # dev_branch_alias:
