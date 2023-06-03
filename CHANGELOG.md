@@ -10,9 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - [[#1054](https://github.com/sonata-project/SonataBlockBundle/pull/1054)] Block services tagged with `sonata.block` are not made public anymore ([@dmaicher](https://github.com/dmaicher))
 
 ### Removed
-- [[#1139](https://github.com/sonata-project/SonataBlockBundle/pull/1139)] Drop support for Symfony 6.0 and 6.1. ([@jordisala1991](https://github.com/jordisala1991))
 - [[#1158](https://github.com/sonata-project/SonataBlockBundle/pull/1158)] Remove block serializer configuration ([@jordisala1991](https://github.com/jordisala1991))
-- [[#1064](https://github.com/sonata-project/SonataBlockBundle/pull/1064)] Drop support for PHP 7. ([@jordisala1991](https://github.com/jordisala1991))
 - [[#1060](https://github.com/sonata-project/SonataBlockBundle/pull/1060)] Remove support for Symfony ^4.4 and 5.3.x ([@jordisala1991](https://github.com/jordisala1991))
 - [[#1060](https://github.com/sonata-project/SonataBlockBundle/pull/1060)] Remove support for Twig ^2 ([@jordisala1991](https://github.com/jordisala1991))
 - [[#1060](https://github.com/sonata-project/SonataBlockBundle/pull/1060)] Remove support for `doctrine/common` ^2 ([@jordisala1991](https://github.com/jordisala1991))
