@@ -54,14 +54,6 @@
         <source>form.label_last_class</source>
         <target>CSS-класс "последний"</target>
       </trans-unit>
-      <trans-unit id="form.label_menu_class">
-        <source>form.label_menu_class</source>
-        <target>CSS-класс меню</target>
-      </trans-unit>
-      <trans-unit id="form.label_children_class">
-        <source>form.label_children_class</source>
-        <target>Класс CSS для дочених элементов</target>
-      </trans-unit>
       <trans-unit id="form.label_menu_template">
         <source>form.label_menu_template</source>
         <target>Шаблон меню</target>

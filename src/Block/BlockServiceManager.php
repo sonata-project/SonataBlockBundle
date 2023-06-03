@@ -19,63 +19,28 @@ use Sonata\BlockBundle\Block\Service\EditableBlockService;
 use Sonata\BlockBundle\Exception\BlockServiceNotFoundException;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Validator\ErrorElement;
-use Symfony\Component\DependencyInjection\ContainerInterface as DependencyInjectionContainerInterface;
 
 final class BlockServiceManager implements BlockServiceManagerInterface
 {
     /**
      * @var array<string, string|BlockServiceInterface>
      */
-    private array $services;
+    private array $services = [];
 
     private bool $inValidate = false;
 
     /**
      * @var array<string, string[]>
      */
-    private array $contexts;
+    private array $contexts = [];
 
     /**
-     * @var string[]
-     */
-    private array $containerTypes;
-
-    /**
-     * NEXT_MAJOR: make $containerTypes not nullable.
-     *
-     * @param string[]|null $containerTypes
+     * @param string[] $containerTypes
      */
     public function __construct(
         private ContainerInterface $container,
-        ?array $containerTypes = null
+        private array $containerTypes
     ) {
-        $this->services = [];
-        $this->contexts = [];
-
-        if (null === $containerTypes) {
-            @trigger_error(
-                sprintf(
-                    'Not Passing an array as argument 2 for method "%s" is deprecated since sonata-project/block-bundle 4.13. The argument will be required in 5.0.',
-                    __METHOD__
-                ),
-                \E_USER_DEPRECATED
-            );
-
-            if ($container instanceof DependencyInjectionContainerInterface) {
-                /** @var string[] $containerTypes */
-                $containerTypes = $container->getParameter('sonata.block.container.types');
-            } else {
-                throw new \LogicException(
-                    sprintf(
-                        "Argument 1 for method '%s' needs to be an instance of '%s' in case the containerTypes are not passed as the second argument.",
-                        __METHOD__,
-                        DependencyInjectionContainerInterface::class
-                    )
-                );
-            }
-        }
-
-        $this->containerTypes = $containerTypes;
     }
 
     public function get(BlockInterface $block): BlockServiceInterface

@@ -22,9 +22,6 @@ final class ConfigurationTest extends TestCase
     /**
      * @param string[] $contexts
      *
-     * @group legacy
-     * NEXT_MAJOR: remove group legacy annotation
-     *
      * @dataProvider providerContexts
      */
     public function testOptions(array $contexts): void
@@ -50,13 +47,11 @@ final class ConfigurationTest extends TestCase
                 'my.block.type' => [
                     'contexts' => $contexts,
                     'templates' => [],
-                    'cache' => 'sonata.cache.noop',
                     'settings' => [],
                 ],
                 'my.block_with_context.type' => [
                     'contexts' => ['custom'],
                     'templates' => [],
-                    'cache' => 'sonata.cache.noop',
                     'settings' => [],
                 ],
             ],
@@ -65,11 +60,7 @@ final class ConfigurationTest extends TestCase
                 'template' => '@SonataBlock/Profiler/block.html.twig',
             ],
             'context_manager' => 'sonata.block.context_manager.default',
-            // NEXT_MAJOR: change default options for http_cache
-            'http_cache' => [
-                'handler' => 'sonata.block.cache.handler.default',
-                'listener' => true,
-            ],
+            'http_cache' => false,
             'templates' => [
                 'block_base' => null,
                 'block_container' => null,
@@ -110,7 +101,7 @@ final class ConfigurationTest extends TestCase
     /**
      * @return iterable<array-key, array{array<string>}>
      */
-    public function providerContexts(): iterable
+    public static function providerContexts(): iterable
     {
         return [
             [[]],

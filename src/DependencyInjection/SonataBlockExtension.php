@@ -75,8 +75,6 @@ final class SonataBlockExtension extends Extension
         $this->configureBlockContainers($container, $config);
         $this->configureContext($container, $config);
         $this->configureLoaderChain($container, $config);
-        // NEXT_MAJOR: remove next line
-        $this->configureCache($container, $config);
         $this->configureForm($container, $config);
         $this->configureProfiler($container, $config);
         $this->configureException($container, $config);
@@ -92,26 +90,17 @@ final class SonataBlockExtension extends Extension
         }
 
         $container->getDefinition('sonata.block.twig.global')->replaceArgument(0, $config['templates']);
+    }
 
-        $container->getDefinition('sonata.block.cache.handler.default')
-            ->setDeprecated(...$this->getDeprecationMessage(
-                'The "%service_id%" service is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.',
-                '4.11',
-            ));
-
-        $container->getDefinition('sonata.block.cache.handler.noop')
-            ->setDeprecated(...$this->getDeprecationMessage(
-                'The "%service_id%" service is deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.',
-                '4.11',
-            ));
+    public function getNamespace(): string
+    {
+        return 'http://sonata-project.com/schema/dic/block';
     }
 
     /**
-     * NEXT_MAJOR: Change visibility to private.
-     *
      * @param array<string, mixed> $config
      */
-    public function configureBlockContainers(ContainerBuilder $container, array $config): void
+    private function configureBlockContainers(ContainerBuilder $container, array $config): void
     {
         $container->setParameter('sonata.block.container.types', $config['container']['types']);
 
@@ -119,11 +108,9 @@ final class SonataBlockExtension extends Extension
     }
 
     /**
-     * NEXT_MAJOR: Change visibility to private.
-     *
      * @param array<string, mixed> $config
      */
-    public function configureContext(ContainerBuilder $container, array $config): void
+    private function configureContext(ContainerBuilder $container, array $config): void
     {
         $container->setParameter($this->getAlias().'.blocks', $config['blocks']);
         $container->setParameter($this->getAlias().'.blocks_by_class', $config['blocks_by_class']);
@@ -132,38 +119,9 @@ final class SonataBlockExtension extends Extension
     }
 
     /**
-     * NEXT_MAJOR: Remove this method.
-     *
      * @param array<string, mixed> $config
      */
-    public function configureCache(ContainerBuilder $container, array $config): void
-    {
-        if (\is_array($config['http_cache'])) {
-            $container->setAlias('sonata.block.cache.handler', $config['http_cache']['handler']);
-
-            if (true === $config['http_cache']['listener']) {
-                $container->getDefinition($config['http_cache']['handler'])
-                    ->addTag('kernel.event_listener', ['event' => 'kernel.response', 'method' => 'onKernelResponse']);
-            }
-        }
-
-        $cacheBlocks = ['by_class' => [], 'by_type' => []];
-        foreach ($config['blocks'] as $service => $settings) {
-            $cacheBlocks['by_type'][$service] = $settings['cache'];
-        }
-        foreach ($config['blocks_by_class'] as $class => $settings) {
-            $cacheBlocks['by_class'][$class] = $settings['cache'];
-        }
-
-        $container->setParameter($this->getAlias().'.cache_blocks', $cacheBlocks);
-    }
-
-    /**
-     * NEXT_MAJOR: Change visibility to private.
-     *
-     * @param array<string, mixed> $config
-     */
-    public function configureLoaderChain(ContainerBuilder $container, array $config): void
+    private function configureLoaderChain(ContainerBuilder $container, array $config): void
     {
         $types = [];
         foreach ($config['blocks'] as $service => $settings) {
@@ -174,11 +132,9 @@ final class SonataBlockExtension extends Extension
     }
 
     /**
-     * NEXT_MAJOR: Change visibility to private.
-     *
      * @param array<string, mixed> $config
      */
-    public function configureForm(ContainerBuilder $container, array $config): void
+    private function configureForm(ContainerBuilder $container, array $config): void
     {
         $defaults = $config['default_contexts'];
 
@@ -202,11 +158,9 @@ final class SonataBlockExtension extends Extension
     }
 
     /**
-     * NEXT_MAJOR: Change visibility to private.
-     *
      * @param array<string, mixed> $config
      */
-    public function configureProfiler(ContainerBuilder $container, array $config): void
+    private function configureProfiler(ContainerBuilder $container, array $config): void
     {
         $container->setAlias('sonata.block.renderer', 'sonata.block.renderer.default');
 
@@ -225,11 +179,9 @@ final class SonataBlockExtension extends Extension
     }
 
     /**
-     * NEXT_MAJOR: Change visibility to private.
-     *
      * @param array<string, mixed> $config
      */
-    public function configureException(ContainerBuilder $container, array $config): void
+    private function configureException(ContainerBuilder $container, array $config): void
     {
         // retrieve available filters
         $filters = [];
@@ -266,27 +218,5 @@ final class SonataBlockExtension extends Extension
         $defaultRenderer = $config['exception']['default']['renderer'];
         $definition->addMethodCall('setDefaultFilter', [$defaultFilter]);
         $definition->addMethodCall('setDefaultRenderer', [$defaultRenderer]);
-    }
-
-    public function getNamespace(): string
-    {
-        return 'http://sonata-project.com/schema/dic/block';
-    }
-
-    /**
-     * @return mixed[]
-     */
-    private function getDeprecationMessage(string $message, string $version): array
-    {
-        // @phpstan-ignore-next-line
-        if (method_exists(Definition::class, 'getDeprecation')) {
-            return [
-                'sonata-project/block-bundle',
-                $version,
-                $message,
-            ];
-        }
-
-        return [true, $message];
     }
 }

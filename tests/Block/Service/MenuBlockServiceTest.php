@@ -76,11 +76,6 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
                         'label' => 'form.label_title',
                         'translation_domain' => 'SonataBlockBundle',
                     ]],
-                    ['cache_policy', ChoiceType::class, [
-                        'label' => 'form.label_cache_policy',
-                        'translation_domain' => 'SonataBlockBundle',
-                        'choices' => ['public', 'private'],
-                    ]],
                     ['safe_labels', CheckboxType::class, [
                         'required' => false,
                         'label' => 'form.label_safe_labels',
@@ -107,16 +102,6 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
                         'translation_domain' => 'SonataBlockBundle',
                     ]],
                     ['menu_name', ChoiceType::class, $choiceOptions],
-                    ['menu_class', TextType::class, [
-                        'required' => false,
-                        'label' => 'form.label_menu_class',
-                        'translation_domain' => 'SonataBlockBundle',
-                    ]],
-                    ['children_class', TextType::class, [
-                        'required' => false,
-                        'label' => 'form.label_children_class',
-                        'translation_domain' => 'SonataBlockBundle',
-                    ]],
                 ],
                 'translation_domain' => 'SonataBlockBundle',
             ]);
@@ -132,16 +117,12 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
 
         $this->assertSettings([
             'title' => '',
-            'cache_policy' => 'public',
             'template' => '@SonataBlock/Block/block_core_menu.html.twig',
             'menu_name' => '',
             'safe_labels' => false,
             'current_class' => 'active',
             'first_class' => false,
             'last_class' => false,
-            'current_uri' => null,
-            'menu_class' => 'list-group',
-            'children_class' => 'list-group-item',
             'menu_template' => null,
         ], $blockContext);
     }

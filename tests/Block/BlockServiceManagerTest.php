@@ -91,28 +91,6 @@ final class BlockServiceManagerTest extends TestCase
         static::assertNotEmpty($manager->getServicesByContext('fake'));
     }
 
-    /**
-     * NEXT_MAJOR: remove test.
-     *
-     * @group legacy
-     */
-    public function testGetServicesByContextWithoutContainersDeprecated(): void
-    {
-        $service = $this->createMock(BlockServiceInterface::class);
-
-        $container = new Container();
-        $container->set('test', $service);
-        $container->setParameter('sonata.block.container.types', ['foo']);
-
-        $manager = new BlockServiceManager($container);
-
-        $service = $this->createMock(BlockServiceInterface::class);
-
-        $manager->add('foo.bar', $service, ['bar']);
-
-        static::assertEmpty($manager->getServicesByContext('fake', false));
-    }
-
     public function testGetServicesByContextWithoutContainers(): void
     {
         $service = $this->createMock(BlockServiceInterface::class);

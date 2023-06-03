@@ -22,34 +22,17 @@ use Symfony\Component\Form\FormTypeInterface;
 interface FormMapper
 {
     /**
-     * NEXT_MAJOR: Remove this method.
-     *
-     * @deprecated since sonata-project/block-bundle 4.13. To be removed in 5.0.
-     *
-     * @param class-string<FormTypeInterface>|null $type
-     * @param array<string, mixed>                 $options
-     */
-    public function create(string $name, ?string $type = null, array $options = []): FormBuilderInterface;
-
-    /**
      * @param string[] $keys
-     *
-     * @return static
      */
-    public function reorder(array $keys);
+    public function reorder(array $keys): static;
 
     /**
      * @param class-string<FormTypeInterface>|null $type
      * @param array<string, mixed>                 $options
-     *
-     * @return static
      */
-    public function add(string $name, ?string $type = null, array $options = []);
+    public function add(string $name, ?string $type = null, array $options = []): static;
 
-    /**
-     * @return static
-     */
-    public function remove(string $key);
+    public function remove(string $key): static;
 
     public function has(string $key): bool;
 

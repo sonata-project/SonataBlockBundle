@@ -36,7 +36,7 @@ final class BlockContext implements BlockContextInterface
         return $this->settings;
     }
 
-    public function getSetting(string $name)
+    public function getSetting(string $name): mixed
     {
         if (!\array_key_exists($name, $this->settings)) {
             throw new \RuntimeException(sprintf('Unable to find the option `%s` (%s) - define the option in the related BlockServiceInterface', $name, $this->block->getType() ?? ''));
@@ -45,7 +45,7 @@ final class BlockContext implements BlockContextInterface
         return $this->settings[$name];
     }
 
-    public function setSetting(string $name, $value): BlockContextInterface
+    public function setSetting(string $name, mixed $value): BlockContextInterface
     {
         if (!\array_key_exists($name, $this->settings)) {
             throw new \RuntimeException(sprintf('It\'s not possible add non existing setting `%s`.', $name));
@@ -56,22 +56,12 @@ final class BlockContext implements BlockContextInterface
         return $this;
     }
 
-    /**
-     * NEXT_MAJOR: Restrict typehint to string.
-     */
-    public function getTemplate(): ?string
+    public function getTemplate(): string
     {
         $template = $this->getSetting('template');
 
         if (!\is_string($template)) {
-            @trigger_error(
-                'Not providing a string value for the "template" setting is deprecated since'
-                .' sonata-project/block-bundle 4.10 and will be throw an exception in version 5.0.',
-                \E_USER_DEPRECATED
-            );
-
-            // NEXT_MAJOR: Uncomment the exception instead.
-            // throw new \InvalidArgumentException('The "template" setting MUST be a string.');
+            throw new \InvalidArgumentException('The "template" setting MUST be a string.');
         }
 
         return $template;

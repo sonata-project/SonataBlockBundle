@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Exception\Renderer;
 
 use Sonata\BlockBundle\Model\BlockInterface;
-use Symfony\Component\Debug\Exception\FlattenException;
+use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 

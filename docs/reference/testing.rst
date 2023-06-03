@@ -11,7 +11,7 @@ Given the following block service::
 
     class CustomBlockService extends AbstractBlockService
     {
-        public function execute(BlockContextInterface $blockContext, Response $response = null)
+        public function execute(BlockContextInterface $blockContext, Response $response = null): Response
         {
             return $this->renderResponse($blockContext->getTemplate(), [
                 'context' => $blockContext,
@@ -20,7 +20,7 @@ Given the following block service::
             ], $response);
         }
 
-        public function configureSettings(OptionsResolver $resolver)
+        public function configureSettings(OptionsResolver $resolver): array
         {
             $resolver->setDefaults([
                 'foo' => 'bar',
@@ -36,7 +36,7 @@ You can write unit tests for block services with the following code::
 
     class CustomBlockServiceTest extends AbstractBlockServiceTestCase
     {
-        public function testDefaultSettings()
+        public function testDefaultSettings(): void
         {
             $blockService = new CustomBlockService('foo', $this->twig);
             $blockContext = $this->getBlockContext($blockService);
@@ -48,7 +48,7 @@ You can write unit tests for block services with the following code::
             ], $blockContext);
         }
 
-        public function testExecute()
+        public function testExecute(): void
         {
             $blockService = new CustomBlockService('foo', $this->twig);
             $blockContext = $this->getBlockContext($blockService);

@@ -50,10 +50,6 @@
         <source>form.label_class</source>
         <target>CSS osztály</target>
       </trans-unit>
-      <trans-unit id="form.label_cache_policy">
-        <source>form.label_cache_policy</source>
-        <target>Gyorsítótár politika</target>
-      </trans-unit>
       <trans-unit id="form.label_menu_name">
         <source>form.label_menu_name</source>
         <target>Menü</target>

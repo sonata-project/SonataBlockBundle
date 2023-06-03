@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @psalm-suppress MissingTemplateParam
+ * @psalm-suppress MissingTemplateParam https://github.com/phpstan/phpstan-symfony/issues/320
  */
 final class ServiceListType extends AbstractType
 {
@@ -50,7 +50,7 @@ final class ServiceListType extends AbstractType
         $resolver->setDefaults([
             'multiple' => false,
             'expanded' => false,
-            'choices' => static function (Options $options, $previousValue) use ($manager): array {
+            'choices' => static function (Options $options) use ($manager): array {
                 $types = [];
                 foreach ($manager->getServicesByContext($options['context'], $options['include_containers']) as $code => $service) {
                     if ($service instanceof EditableBlockService) {
@@ -69,7 +69,7 @@ final class ServiceListType extends AbstractType
 
                 return true === $multiple || true === $expanded ? [] : '';
             },
-            'empty_value' => static function (Options $options, $previousValue): ?string {
+            'empty_value' => static function (Options $options, mixed $previousValue): ?string {
                 $multiple = $options['multiple'] ?? false;
                 $expanded = $options['expanded'] ?? false;
 

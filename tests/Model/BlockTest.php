@@ -18,33 +18,6 @@ use Sonata\BlockBundle\Model\Block;
 
 final class BlockTest extends TestCase
 {
-    /**
-     * @group legacy
-     */
-    public function testGetTtl(): void
-    {
-        $block = new Block();
-
-        static::assertFalse($block->hasChildren());
-
-        $child1 = $this->createMock(Block::class);
-        $child1->expects(static::once())->method('getTtl')->willReturn(100);
-
-        $child2 = $this->createMock(Block::class);
-        $child2->expects(static::once())->method('getTtl')->willReturn(50);
-
-        $child3 = $this->createMock(Block::class);
-        $child3->expects(static::once())->method('getTtl')->willReturn(65);
-
-        $block->addChildren($child1);
-        $block->addChildren($child2);
-        $block->addChildren($child3);
-
-        static::assertSame(50, $block->getTtl());
-
-        static::assertTrue($block->hasChildren());
-    }
-
     public function testSetterGetter(): void
     {
         $time = new \DateTime();

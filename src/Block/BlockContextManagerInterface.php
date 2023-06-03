@@ -19,13 +19,6 @@ use Sonata\BlockBundle\Model\BlockInterface;
 interface BlockContextManagerInterface
 {
     /**
-     * NEXT_MAJOR: remove.
-     *
-     * @deprecated
-     */
-    public const CACHE_KEY = 'context';
-
-    /**
      * Add settings for a block service.
      *
      * @param string               $type     block service

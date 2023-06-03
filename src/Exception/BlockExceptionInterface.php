@@ -16,6 +16,6 @@ namespace Sonata\BlockBundle\Exception;
 /**
  * Interface to implement exception identified as block-specific exceptions.
  */
-interface BlockExceptionInterface
+interface BlockExceptionInterface extends \Throwable
 {
 }

@@ -26,10 +26,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 #[AsCommand(name: 'debug:sonata:block', description: 'Debug all blocks available, show default settings of each block')]
 final class DebugBlocksCommand extends Command
 {
-    // TODO: Remove static properties when support for Symfony < 5.4 is dropped.
-    protected static $defaultName = 'debug:sonata:block';
-    protected static $defaultDescription = 'Debug all blocks available, show default settings of each block';
-
     public function __construct(private BlockServiceManagerInterface $blockManager)
     {
         parent::__construct();
@@ -37,11 +33,7 @@ final class DebugBlocksCommand extends Command
 
     public function configure(): void
     {
-        \assert(null !== static::$defaultDescription);
-
         $this
-            // TODO: Remove setDescription when support for Symfony < 5.4 is dropped.
-            ->setDescription(static::$defaultDescription)
             ->addOption('context', 'c', InputOption::VALUE_REQUIRED, 'display service for the specified context');
     }
 

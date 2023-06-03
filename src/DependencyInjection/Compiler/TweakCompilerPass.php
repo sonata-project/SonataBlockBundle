@@ -34,18 +34,12 @@ final class TweakCompilerPass implements CompilerPassInterface
         $blocks = $container->getParameter('sonata_block.blocks');
         /** @var array<string, mixed> $blockTypes */
         $blockTypes = $container->getParameter('sonata_blocks.block_types');
-        /** @var array<string, mixed> $cacheBlocks */
-        $cacheBlocks = $container->getParameter('sonata_block.cache_blocks');
         /** @var string[] $defaultContexts */
         $defaultContexts = $container->getParameter('sonata_blocks.default_contexts');
 
         /** @var array<string, Reference> $blockServiceReferences */
         $blockServiceReferences = [];
         foreach ($container->findTaggedServiceIds('sonata.block') as $id => $tags) {
-            // NEXT_MAJOR: remove and do not make them public
-            $container->getDefinition($id)
-                ->setPublic(true);
-
             $settings = $this->createBlockSettings($tags, $defaultContexts);
 
             // Register blocks dynamically
@@ -54,9 +48,6 @@ final class TweakCompilerPass implements CompilerPassInterface
             }
             if (!\in_array($id, $blockTypes, true)) {
                 $blockTypes[] = $id;
-            }
-            if (isset($cacheBlocks['by_type']) && !\array_key_exists($id, $cacheBlocks['by_type'])) {
-                $cacheBlocks['by_type'][$id] = $settings['cache'];
             }
 
             $manager->addMethodCall('add', [$id, $id, $settings['contexts']]);
@@ -82,7 +73,6 @@ final class TweakCompilerPass implements CompilerPassInterface
 
         $container->setParameter('sonata_block.blocks', $blocks);
         $container->setParameter('sonata_blocks.block_types', $blockTypes);
-        $container->setParameter('sonata_block.cache_blocks', $cacheBlocks);
 
         $container->getDefinition('sonata.block.loader.service')->replaceArgument(0, $blockTypes);
         $container->getDefinition('sonata.block.loader.chain')->replaceArgument(0, $services);
@@ -91,11 +81,9 @@ final class TweakCompilerPass implements CompilerPassInterface
     }
 
     /**
-     * NEXT_MAJOR: Change visibility to private.
-     *
      * Apply configurations to the context manager.
      */
-    public function applyContext(ContainerBuilder $container): void
+    private function applyContext(ContainerBuilder $container): void
     {
         $definition = $container->findDefinition('sonata.block.context_manager');
 
@@ -133,7 +121,6 @@ final class TweakCompilerPass implements CompilerPassInterface
         return [
             'contexts' => $contexts,
             'templates' => [],
-            'cache' => 'sonata.cache.noop',
             'settings' => [],
         ];
     }

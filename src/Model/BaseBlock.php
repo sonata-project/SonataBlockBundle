@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
@@ -46,9 +47,7 @@ abstract class BaseBlock implements BlockInterface, \Stringable
     protected $parent;
 
     /**
-     * NEXT_MAJOR: Restrict typehint to Collection.
-     *
-     * @var Collection<int, BlockInterface>|array<BlockInterface>
+     * @var Collection<int, BlockInterface>
      */
     protected $children;
 
@@ -67,27 +66,14 @@ abstract class BaseBlock implements BlockInterface, \Stringable
      */
     protected $type;
 
-    /**
-     * NEXT_MAJOR: remove.
-     *
-     * @deprecated since sonata-project/block-bundle 4.12 and will be removed in 5.0
-     *
-     * @var int|null
-     */
-    protected $ttl;
-
     public function __construct()
     {
         $this->settings = [];
         $this->enabled = false;
-        $this->children = [];
+        $this->children = new ArrayCollection();
     }
 
-    /**
-     * NEXT_MAJOR: Add return typehint.
-     */
-    #[\ReturnTypeWillChange]
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf('%s ~ #%s', $this->getName() ?? '', $this->getId() ?? '');
     }
@@ -122,12 +108,12 @@ abstract class BaseBlock implements BlockInterface, \Stringable
         return $this->settings;
     }
 
-    public function setSetting(string $name, $value): void
+    public function setSetting(string $name, mixed $value): void
     {
         $this->settings[$name] = $value;
     }
 
-    public function getSetting(string $name, $default = null)
+    public function getSetting(string $name, mixed $default = null): mixed
     {
         return $this->settings[$name] ?? $default;
     }
@@ -179,45 +165,14 @@ abstract class BaseBlock implements BlockInterface, \Stringable
         $child->setParent($this);
     }
 
-    /**
-     * NEXT_MAJOR: Remove this method.
-     */
-    public function addChildren(BlockInterface $children): void
-    {
-        @trigger_error(
-            sprintf(
-                'Method "%s" is deprecated since sonata-project/block-bundle 4.18. Use "addChild" instead.',
-                __METHOD__
-            ),
-            \E_USER_DEPRECATED
-        );
-
-        $this->children[] = $children;
-
-        $children->setParent($this);
-    }
-
     public function removeChild(BlockInterface $child): void
     {
-        // NEXT_MAJOR: Remove this condition, children will be a Collection.
-        if (\is_array($this->children)) {
-            $key = array_search($child, $this->children, true);
-
-            if (false === $key) {
-                return;
-            }
-
-            unset($this->children[$key]);
-
-            return;
-        }
-
         if ($this->children->contains($child)) {
             $this->children->removeElement($child);
         }
     }
 
-    public function getChildren()
+    public function getChildren(): Collection
     {
         return $this->children;
     }
@@ -237,46 +192,8 @@ abstract class BaseBlock implements BlockInterface, \Stringable
         return $this->getParent() instanceof self;
     }
 
-    /**
-     * @deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.
-     */
-    public function getTtl(): int
-    {
-        if (false === $this->getSetting('use_cache', true)) {
-            return 0;
-        }
-
-        $ttl = $this->getSetting('ttl', 86400);
-
-        foreach ($this->getChildren() as $block) {
-            $blockTtl = $block->getTtl();
-
-            $ttl = ($blockTtl < $ttl) ? $blockTtl : $ttl;
-        }
-
-        $this->ttl = $ttl;
-
-        return $this->ttl;
-    }
-
     public function hasChild(): bool
     {
-        return \count($this->children) > 0;
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this method.
-     */
-    public function hasChildren(): bool
-    {
-        @trigger_error(
-            sprintf(
-                'Method "%s" is deprecated since sonata-project/block-bundle 4.18. Use "hasChild" instead.',
-                __METHOD__
-            ),
-            \E_USER_DEPRECATED
-        );
-
         return \count($this->children) > 0;
     }
 }

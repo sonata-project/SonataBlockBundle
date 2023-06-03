@@ -43,31 +43,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
     }
 
     /**
-     * Returns a Response object that cannot be cacheable, this must be used if the Response is related to the user.
-     * A good solution to make the page cacheable is to configure the block to be cached with javascript ...
-     *
-     * @deprecated since sonata-project/block-bundle 4.12 and will be removed in 5.0.
-     *
-     * NEXT_MAJOR: remove
-     *
-     * @param array<string, mixed> $parameters
-     */
-    public function renderPrivateResponse(string $view, array $parameters = [], ?Response $response = null): Response
-    {
-        @trigger_error(
-            sprintf(
-                'Method "%s" is deprecated since sonata-project/block-bundle 4.12 and will be removed in 5.0.',
-                __METHOD__
-            ),
-            \E_USER_DEPRECATED
-        );
-
-        return $this->renderResponse($view, $parameters, $response)
-            ->setTtl(0)
-            ->setPrivate();
-    }
-
-    /**
      * Define the default options for the block.
      */
     public function configureSettings(OptionsResolver $resolver): void
@@ -91,7 +66,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
         $template = $blockContext->getTemplate();
-        \assert(null !== $template);
 
         return $this->renderResponse($template, [
             'block_context' => $blockContext,

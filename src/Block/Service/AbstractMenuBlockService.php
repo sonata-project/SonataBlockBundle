@@ -20,7 +20,6 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Type\ImmutableArrayType;
 use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +30,6 @@ abstract class AbstractMenuBlockService extends AbstractBlockService implements 
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
         $template = $blockContext->getTemplate();
-        \assert(null !== $template);
 
         $responseSettings = [
             'menu' => $this->getMenu($blockContext),
@@ -39,11 +37,6 @@ abstract class AbstractMenuBlockService extends AbstractBlockService implements 
             'block' => $blockContext->getBlock(),
             'context' => $blockContext,
         ];
-
-        // NEXT_MAJOR: remove
-        if ('private' === $blockContext->getSetting('cache_policy')) {
-            return $this->renderPrivateResponse($template, $responseSettings, $response);
-        }
 
         return $this->renderResponse($template, $responseSettings, $response);
     }
@@ -69,8 +62,6 @@ abstract class AbstractMenuBlockService extends AbstractBlockService implements 
     {
         $resolver->setDefaults([
             'title' => '',
-            // NEXT_MAJOR: Remove.
-            'cache_policy' => 'public',
             'template' => '@SonataBlock/Block/block_core_menu.html.twig',
             'safe_labels' => false,
             'current_class' => 'active',
@@ -78,15 +69,6 @@ abstract class AbstractMenuBlockService extends AbstractBlockService implements 
             'last_class' => false,
             'menu_template' => null,
         ]);
-
-        // NEXT_MAJOR: Remove setDeprecated.
-        $resolver->setDeprecated(
-            'cache_policy',
-            ...$this->deprecationParameters(
-                '4.12',
-                'Option "cache_policy" is deprecated since sonata-project/block-bundle 4.12 and will be removed in 5.0.'
-            )
-        );
     }
 
     /**
@@ -99,11 +81,6 @@ abstract class AbstractMenuBlockService extends AbstractBlockService implements 
                 'required' => false,
                 'label' => 'form.label_title',
                 'translation_domain' => 'SonataBlockBundle',
-            ]],
-            ['cache_policy', ChoiceType::class, [
-                'label' => 'form.label_cache_policy',
-                'translation_domain' => 'SonataBlockBundle',
-                'choices' => ['public', 'private'],
             ]],
             ['safe_labels', CheckboxType::class, [
                 'required' => false,
@@ -135,10 +112,8 @@ abstract class AbstractMenuBlockService extends AbstractBlockService implements 
 
     /**
      * Gets the menu to render.
-     *
-     * @return ItemInterface|string
      */
-    abstract protected function getMenu(BlockContextInterface $blockContext);
+    abstract protected function getMenu(BlockContextInterface $blockContext): ItemInterface|string;
 
     /**
      * Replaces setting keys with knp menu item options keys.
@@ -166,25 +141,5 @@ abstract class AbstractMenuBlockService extends AbstractBlockService implements 
         }
 
         return $options;
-    }
-
-    /**
-     * This class is a BC layer for deprecation messages for symfony/options-resolver < 5.1.
-     * Remove this class when dropping support for symfony/options-resolver < 5.1.
-     *
-     * @return mixed[]
-     */
-    private function deprecationParameters(string $version, string $message): array
-    {
-        // @phpstan-ignore-next-line
-        if (method_exists(OptionsResolver::class, 'define')) {
-            return [
-                'sonata-project/block-bundle',
-                $version,
-                $message,
-            ];
-        }
-
-        return [$message];
     }
 }

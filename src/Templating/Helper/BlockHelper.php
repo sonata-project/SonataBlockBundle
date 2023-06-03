@@ -13,17 +13,11 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Templating\Helper;
 
-use Doctrine\Common\Util\ClassUtils;
 use Sonata\BlockBundle\Block\BlockContextManagerInterface;
 use Sonata\BlockBundle\Block\BlockRendererInterface;
-use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
-use Sonata\BlockBundle\Cache\HttpCacheHandlerInterface;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\Cache\CacheAdapterInterface;
-use Sonata\Cache\CacheManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface as EventDispatcherComponentInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
@@ -36,16 +30,6 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  *     memory_start: int|false,
  *     memory_end: int|false,
  *     memory_peak: int|false,
- *     cache: array{
- *         keys: mixed[],
- *         contextual_keys: mixed[],
- *         handler: string|false,
- *         from_cache: bool,
- *         ttl: int,
- *         created_at: int|false,
- *         lifetime: int,
- *         age: int,
- *     },
  *     assets: array{
  *         js: string[],
  *         css: string[],
@@ -54,31 +38,6 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  */
 class BlockHelper
 {
-    /**
-     * NEXT_MAJOR: remove.
-     */
-    private ?BlockServiceManagerInterface $blockServiceManager = null;
-
-    /**
-     * NEXT_MAJOR: remove this member and all related code to usages within this class.
-     */
-    private ?CacheManagerInterface $cacheManager = null;
-
-    /**
-     * NEXT_MAJOR: remove.
-     *
-     * @var array{by_class: array<class-string, string>, by_type: array<string, string>}
-     */
-    private array $cacheBlocks = ['by_class' => [], 'by_type' => []];
-
-    private BlockRendererInterface $blockRenderer;
-
-    private BlockContextManagerInterface $blockContextManager;
-
-    private ?HttpCacheHandlerInterface $cacheHandler = null;
-
-    private EventDispatcherInterface $eventDispatcher;
-
     /**
      * This property is a state variable holdings all assets used by the block for the current PHP request
      * It is used to correctly render the javascripts and stylesheets tags on the main layout.
@@ -99,210 +58,15 @@ class BlockHelper
      */
     private array $eventTraces = [];
 
-    private ?Stopwatch $stopwatch = null;
-
     /**
-     * NEXT_MAJOR: remove the deprecated signature and cleanup the constructor.
-     *
-     * @param array{by_class: array<class-string, string>, by_type: array<string, string>}|BlockContextManagerInterface|BlockRendererInterface $blockContextManagerOrBlockRendererOrCacheBlocks
-     *
      * @internal
      */
     public function __construct(
-        object $blockServiceManagerOrBlockRenderer,
-        $blockContextManagerOrBlockRendererOrCacheBlocks,
-        object $eventDispatcherOrBlockContextManagerOrBlockRenderer,
-        ?object $stopWatchOrEventDispatcherOrBlockContextManager = null,
-        ?object $stopwatchOrEventDispatcher = null,
-        ?CacheManagerInterface $cacheManager = null,
-        ?HttpCacheHandlerInterface $cacheHandler = null,
-        ?Stopwatch $stopwatch = null
+        private BlockRendererInterface $blockRenderer,
+        private BlockContextManagerInterface $blockContextManager,
+        private EventDispatcherInterface $eventDispatcher,
+        private ?Stopwatch $stopwatch = null
     ) {
-        if ($blockServiceManagerOrBlockRenderer instanceof BlockServiceManagerInterface) {
-            $this->blockServiceManager = $blockServiceManagerOrBlockRenderer;
-            @trigger_error(
-                sprintf(
-                    'Passing an instance of "%s" as argument 1 for method "%s" is deprecated since sonata-project/block-bundle 4.12. The argument will change to "%s" in 5.0.',
-                    BlockServiceManagerInterface::class,
-                    __METHOD__,
-                    BlockRendererInterface::class
-                ),
-                \E_USER_DEPRECATED
-            );
-        } elseif ($blockServiceManagerOrBlockRenderer instanceof BlockRendererInterface) {
-            $this->blockRenderer = $blockServiceManagerOrBlockRenderer;
-        } else {
-            throw new \TypeError(
-                sprintf(
-                    'Argument 1 of method "%s" must be an instance of "%s" or "%s"',
-                    __METHOD__,
-                    BlockRendererInterface::class,
-                    BlockServiceManagerInterface::class
-                )
-            );
-        }
-
-        if ($blockContextManagerOrBlockRendererOrCacheBlocks instanceof BlockContextManagerInterface) {
-            $this->blockContextManager = $blockContextManagerOrBlockRendererOrCacheBlocks;
-        } elseif ($blockContextManagerOrBlockRendererOrCacheBlocks instanceof BlockRendererInterface) {
-            $this->blockRenderer = $blockContextManagerOrBlockRendererOrCacheBlocks;
-            @trigger_error(
-                sprintf(
-                    'Passing an instance of "%s" as argument 2 for method "%s" is deprecated since sonata-project/block-bundle 4.12. The argument will change to "%s" in 5.0.',
-                    BlockRendererInterface::class,
-                    __METHOD__,
-                    BlockContextManagerInterface::class
-                ),
-                \E_USER_DEPRECATED
-            );
-        } elseif (\is_array($blockContextManagerOrBlockRendererOrCacheBlocks)) {
-            $this->cacheBlocks = $blockContextManagerOrBlockRendererOrCacheBlocks;
-            @trigger_error(
-                sprintf(
-                    'Passing an array as argument 2 for method "%s" is deprecated since sonata-project/block-bundle 4.11. The argument will change to "%s" in 5.0.',
-                    __METHOD__,
-                    BlockContextManagerInterface::class
-                ),
-                \E_USER_DEPRECATED
-            );
-        } else {
-            throw new \TypeError(
-                sprintf(
-                    'Argument 2 of method "%s" must be an array or an instance of "%s" or "%s"',
-                    __METHOD__,
-                    BlockRendererInterface::class,
-                    BlockContextManagerInterface::class
-                )
-            );
-        }
-
-        if ($eventDispatcherOrBlockContextManagerOrBlockRenderer instanceof EventDispatcherInterface) {
-            $this->eventDispatcher = $eventDispatcherOrBlockContextManagerOrBlockRenderer;
-        } elseif ($eventDispatcherOrBlockContextManagerOrBlockRenderer instanceof BlockContextManagerInterface) {
-            $this->blockContextManager = $eventDispatcherOrBlockContextManagerOrBlockRenderer;
-            @trigger_error(
-                sprintf(
-                    'Passing an instance of "%s" as argument 3 for method "%s" is deprecated since sonata-project/block-bundle 4.12. The argument will change to "%s" in 5.0.',
-                    BlockContextManagerInterface::class,
-                    __METHOD__,
-                    EventDispatcherInterface::class
-                ),
-                \E_USER_DEPRECATED
-            );
-        } elseif ($eventDispatcherOrBlockContextManagerOrBlockRenderer instanceof BlockRendererInterface) {
-            $this->blockRenderer = $eventDispatcherOrBlockContextManagerOrBlockRenderer;
-            @trigger_error(
-                sprintf(
-                    'Passing an instance of "%s" as argument 3 for method "%s" is deprecated since sonata-project/block-bundle 4.11. The argument will change to "%s" in 5.0.',
-                    BlockRendererInterface::class,
-                    __METHOD__,
-                    EventDispatcherInterface::class
-                ),
-                \E_USER_DEPRECATED
-            );
-        } else {
-            throw new \TypeError(
-                sprintf(
-                    'Argument 3 of method "%s" must be an instance of "%s" or "%s" or "%s"',
-                    __METHOD__,
-                    EventDispatcherInterface::class,
-                    BlockContextManagerInterface::class,
-                    BlockRendererInterface::class
-                )
-            );
-        }
-
-        if ($stopWatchOrEventDispatcherOrBlockContextManager instanceof Stopwatch || null === $stopWatchOrEventDispatcherOrBlockContextManager) {
-            $this->stopwatch = $stopWatchOrEventDispatcherOrBlockContextManager;
-        } elseif ($stopWatchOrEventDispatcherOrBlockContextManager instanceof EventDispatcherInterface) {
-            $this->eventDispatcher = $stopWatchOrEventDispatcherOrBlockContextManager;
-            @trigger_error(
-                sprintf(
-                    'Passing an instance of "%s" as argument 4 for method "%s" is deprecated since sonata-project/block-bundle 4.12. The argument will change to "?%s" in 5.0.',
-                    EventDispatcherInterface::class,
-                    __METHOD__,
-                    Stopwatch::class
-                ),
-                \E_USER_DEPRECATED
-            );
-        } elseif ($stopWatchOrEventDispatcherOrBlockContextManager instanceof BlockContextManagerInterface) {
-            $this->blockContextManager = $stopWatchOrEventDispatcherOrBlockContextManager;
-            @trigger_error(
-                sprintf(
-                    'Passing an instance of "%s" as argument 4 for method "%s" is deprecated since sonata-project/block-bundle 4.11. The argument will change to "?%s" in 5.0.',
-                    BlockContextManagerInterface::class,
-                    __METHOD__,
-                    Stopwatch::class
-                ),
-                \E_USER_DEPRECATED
-            );
-        } else {
-            throw new \TypeError(
-                sprintf(
-                    'Argument 4 of method "%s" must be an instance of "%s" or "%s" or "%s" or null',
-                    __METHOD__,
-                    Stopwatch::class,
-                    EventDispatcherInterface::class,
-                    BlockContextManagerInterface::class
-                )
-            );
-        }
-
-        if ($stopwatchOrEventDispatcher instanceof Stopwatch) {
-            $this->stopwatch = $stopwatchOrEventDispatcher;
-            @trigger_error(
-                sprintf(
-                    'Passing an instance of "%s" as argument 5 for method "%s" is deprecated since sonata-project/block-bundle 4.12. The argument will be removed in 5.0.',
-                    Stopwatch::class,
-                    __METHOD__,
-                ),
-                \E_USER_DEPRECATED
-            );
-        } elseif ($stopwatchOrEventDispatcher instanceof EventDispatcherInterface) {
-            $this->eventDispatcher = $stopwatchOrEventDispatcher;
-            $this->stopwatch = $stopwatch;
-            @trigger_error(
-                sprintf(
-                    'Passing an instance of "%s" as argument 5 for method "%s" is deprecated since sonata-project/block-bundle 4.11. The argument will be removed in 5.0.',
-                    EventDispatcherInterface::class,
-                    __METHOD__,
-                ),
-                \E_USER_DEPRECATED
-            );
-        } elseif (null !== $stopwatchOrEventDispatcher) {
-            throw new \TypeError(
-                sprintf(
-                    'Argument 5 of method "%s" must be "null" or an instance of "%s" or "%s"',
-                    __METHOD__,
-                    Stopwatch::class,
-                    EventDispatcherInterface::class
-                )
-            );
-        }
-
-        if (null !== $cacheManager) {
-            $this->cacheManager = $cacheManager;
-            @trigger_error(
-                sprintf(
-                    'Passing an instance of "%s" as argument 6 for method "%s" is deprecated since sonata-project/block-bundle 4.11. The argument will be removed in 5.0.',
-                    CacheAdapterInterface::class,
-                    __METHOD__
-                ),
-                \E_USER_DEPRECATED
-            );
-        }
-
-        if (null !== $cacheHandler) {
-            $this->cacheHandler = $cacheHandler;
-            @trigger_error(
-                sprintf(
-                    'Passing an instance of "%s" as argument 7 for method "%s" is deprecated since sonata-project/block-bundle 4.11. The argument will be removed in 5.0.',
-                    HttpCacheHandlerInterface::class,
-                    __METHOD__
-                ),
-                \E_USER_DEPRECATED
-            );
-        }
     }
 
     /**
@@ -385,7 +149,7 @@ class BlockHelper
      * @param string|array<string, mixed>|BlockInterface $block
      * @param array<string, mixed>                       $options
      */
-    public function render($block, array $options = []): string
+    public function render(string|array|BlockInterface $block, array $options = []): string
     {
         $blockContext = $this->blockContextManager->get($block, $options);
 
@@ -395,85 +159,7 @@ class BlockHelper
             $stats = $this->startTracing($blockContext->getBlock());
         }
 
-        // NEXT_MAJOR: simplify code and remove all cache-related usages
-        $useCache = true === $blockContext->getSetting('use_cache');
-
-        $cacheService = $useCache ? $this->getCacheService($blockContext->getBlock(), $stats) : null;
-        if (null !== $cacheService) {
-            if (null === $this->blockServiceManager) {
-                throw new \LogicException(
-                    sprintf(
-                        'For caching functionality an instance of "%s" needs to be passed as first argument for "%s::__construct"',
-                        BlockContextManagerInterface::class,
-                        self::class
-                    )
-                );
-            }
-            $service = $this->blockServiceManager->get($blockContext->getBlock());
-            $cacheKeys = array_merge(
-                $service->getCacheKeys($blockContext->getBlock()),
-                $blockContext->getSetting('extra_cache_keys')
-            );
-
-            if (null !== $stats) {
-                $stats['cache']['keys'] = $cacheKeys;
-            }
-
-            // Please note, some cache handler will always return true (js for instance)
-            // This will allow to have a non cacheable block, but the global page can still be cached by
-            // a reverse proxy, as the generated page will never get the generated Response from the block.
-            if ($cacheService->has($cacheKeys)) {
-                $cacheElement = $cacheService->get($cacheKeys);
-
-                if (null !== $stats) {
-                    $stats['cache']['from_cache'] = false;
-                }
-
-                $cacheData = $cacheElement->getData();
-                if (!$cacheElement->isExpired() && $cacheData instanceof Response) {
-                    if (null !== $stats) {
-                        $stats['cache']['from_cache'] = true;
-                    }
-
-                    $response = $cacheData;
-                }
-            }
-        }
-
-        if (!isset($response)) {
-            $recorder = null;
-            if (null !== $this->cacheManager) {
-                $recorder = $this->cacheManager->getRecorder();
-
-                $recorder->add($blockContext->getBlock());
-                $recorder->push();
-            }
-
-            $response = $this->blockRenderer->render($blockContext);
-            $contextualKeys = null !== $recorder ? $recorder->pop() : [];
-
-            if (null !== $stats) {
-                $stats['cache']['contextual_keys'] = $contextualKeys;
-            }
-
-            if ($response->isCacheable() && isset($cacheKeys) && null !== $cacheService) {
-                $cacheService->set($cacheKeys, $response, (int) $response->getTtl(), $contextualKeys);
-            }
-        }
-
-        if (null !== $stats) {
-            // avoid \DateTime because of serialize/unserialize issue in PHP7.3 (https://bugs.php.net/bug.php?id=77302)
-            $responseDate = $response->getDate();
-            $stats['cache']['created_at'] = null === $responseDate ? false : $responseDate->getTimestamp();
-            $stats['cache']['ttl'] = $response->getTtl() ?? 0;
-            $stats['cache']['age'] = $response->getAge();
-            $stats['cache']['lifetime'] = $stats['cache']['age'] + $stats['cache']['ttl'];
-        }
-
-        // update final ttl for the whole Response
-        if (null !== $this->cacheHandler) {
-            $this->cacheHandler->updateMetadata($response, $blockContext);
-        }
+        $response = $this->blockRenderer->render($blockContext);
 
         if (null !== $stats) {
             $this->stopTracing($blockContext->getBlock(), $stats);
@@ -556,37 +242,6 @@ class BlockHelper
     }
 
     /**
-     * @param array<string, mixed>|null $stats
-     *
-     * @phpstan-param Trace|null $stats
-     */
-    private function getCacheService(BlockInterface $block, ?array &$stats = null): ?CacheAdapterInterface
-    {
-        if (null === $this->cacheManager) {
-            return null;
-        }
-
-        // type by block class
-        $class = ClassUtils::getClass($block);
-        $cacheServiceId = $this->cacheBlocks['by_class'][$class] ?? null;
-
-        // type by block service
-        if (null === $cacheServiceId) {
-            $cacheServiceId = $this->cacheBlocks['by_type'][$block->getType() ?? ''] ?? null;
-        }
-
-        if (null === $cacheServiceId) {
-            return null;
-        }
-
-        if (null !== $stats) {
-            $stats['cache']['handler'] = $cacheServiceId;
-        }
-
-        return $this->cacheManager->getCacheService($cacheServiceId);
-    }
-
-    /**
      * @return array<string, mixed>
      *
      * @phpstan-return Trace
@@ -611,16 +266,6 @@ class BlockHelper
             'memory_start' => memory_get_usage(true),
             'memory_end' => false,
             'memory_peak' => false,
-            'cache' => [
-                'keys' => [],
-                'contextual_keys' => [],
-                'handler' => false,
-                'from_cache' => false,
-                'ttl' => 0,
-                'created_at' => false,
-                'lifetime' => 0,
-                'age' => 0,
-            ],
             'assets' => [
                 'js' => [],
                 'css' => [],

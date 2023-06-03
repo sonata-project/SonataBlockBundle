@@ -15,11 +15,6 @@ namespace Sonata\BlockBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @method void addChild(BlockInterface $child)
- * @method void removeChild(BlockInterface $child)
- * @method bool hasChild()
- */
 interface BlockInterface
 {
     /**
@@ -57,11 +52,6 @@ interface BlockInterface
     public function getUpdatedAt(): ?\DateTime;
 
     /**
-     * @deprecated since sonata-project/block-bundle 4.11 and will be removed in 5.0.
-     */
-    public function getTtl(): int;
-
-    /**
      * @param array<string, mixed> $settings An array of key/value
      */
     public function setSettings(array $settings = []): void;
@@ -71,40 +61,20 @@ interface BlockInterface
      */
     public function getSettings(): array;
 
-    /**
-     * @param string $name  Key name
-     * @param mixed  $value Value
-     */
-    public function setSetting(string $name, $value): void;
+    public function setSetting(string $name, mixed $value): void;
+
+    public function getSetting(string $name, mixed $default = null): mixed;
+
+    public function addChild(self $child): void;
+
+    public function removeChild(self $child): void;
 
     /**
-     * @param string     $name    Key name
-     * @param mixed|null $default Default value
-     *
-     * @return mixed
+     * @return Collection<int, BlockInterface>
      */
-    public function getSetting(string $name, $default = null);
+    public function getChildren(): Collection;
 
-    /**
-     * NEXT_MAJOR: Rename addChild().
-     *
-     * @deprecated since sonata-project/block-bundle 4.18. Use addChild() instead.
-     */
-    public function addChildren(self $children): void;
-
-    /**
-     * NEXT_MAJOR: Restrict typehint to Collection.
-     *
-     * @return Collection<int, BlockInterface>|array<BlockInterface> $children
-     */
-    public function getChildren();
-
-    /**
-     * NEXT_MAJOR: Rename hasChild().
-     *
-     * @deprecated since sonata-project/block-bundle 4.18. Use hasChild() instead.
-     */
-    public function hasChildren(): bool;
+    public function hasChild(): bool;
 
     public function setParent(?self $parent = null): void;
 
