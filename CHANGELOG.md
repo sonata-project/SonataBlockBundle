@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.0](https://github.com/sonata-project/SonataBlockBundle/compare/5.0.0-alpha-1...5.0.0) - 2023-07-08
+- No significant changes
+
 ## [5.0.0-alpha-1](https://github.com/sonata-project/SonataBlockBundle/compare/4.x...5.0.0-alpha-1) - 2023-06-03
 ### Added
 - [[#1159](https://github.com/sonata-project/SonataBlockBundle/pull/1159)] Add return types to `FormMapper`. ([@jordisala1991](https://github.com/jordisala1991))
