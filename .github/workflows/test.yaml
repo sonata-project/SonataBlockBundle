@@ -9,7 +9,6 @@ on:
         - cron: '30 0 * * *'
     push:
         branches:
-            - 4.x
             - 5.x
             - 6.x
     pull_request:
@@ -43,10 +42,6 @@ jobs:
                       dependencies: lowest
                       allowed-to-fail: false
                       variant: normal
-                    - php-version: '8.2'
-                      dependencies: highest
-                      allowed-to-fail: false
-                      variant: sonata-project/form-extensions:"2.0.0-alpha-1"
                     - php-version: '8.2'
                       dependencies: highest
                       allowed-to-fail: false

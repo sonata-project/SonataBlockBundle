@@ -7,7 +7,6 @@ name: Auto merge DevKit PRs
 on:
     pull_request_target:
         branches:
-            - 4.x
             - 5.x
             - 6.x
         types: [labeled]

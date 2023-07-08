@@ -9,7 +9,6 @@ on:
         - cron: '30 0 * * *'
     push:
         branches:
-            - 4.x
             - 5.x
             - 6.x
     pull_request:
