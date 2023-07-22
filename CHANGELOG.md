@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.1](https://github.com/sonata-project/SonataBlockBundle/compare/5.0.0...5.0.1) - 2023-07-22
+### Fixed
+- [[#1187](https://github.com/sonata-project/SonataBlockBundle/pull/1187)] Italian translation keys from `sonata.block.*` to `sonata.block.service.*` ([@gremo](https://github.com/gremo))
+- [[#1188](https://github.com/sonata-project/SonataBlockBundle/pull/1188)] Translation keys for nl and ru ([@gremo](https://github.com/gremo))
+
 ## [5.0.0](https://github.com/sonata-project/SonataBlockBundle/compare/5.0.0-alpha-1...5.0.0) - 2023-07-20
 - No significant changes
 
