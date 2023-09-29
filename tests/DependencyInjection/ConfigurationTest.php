@@ -22,7 +22,7 @@ final class ConfigurationTest extends TestCase
     /**
      * @param string[] $contexts
      *
-     * @dataProvider providerContexts
+     * @dataProvider provideOptionsCases
      */
     public function testOptions(array $contexts): void
     {
@@ -101,12 +101,10 @@ final class ConfigurationTest extends TestCase
     /**
      * @return iterable<array-key, array{array<string>}>
      */
-    public static function providerContexts(): iterable
+    public static function provideOptionsCases(): iterable
     {
-        return [
-            [[]],
-            [['cms']],
-            [['cms', 'sonata_page_bundle']],
-        ];
+        yield [[]];
+        yield [['cms']];
+        yield [['cms', 'sonata_page_bundle']];
     }
 }
