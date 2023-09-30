@@ -49,31 +49,29 @@ final class BlockExtensionTest extends TestCase
     /**
      * @return iterable<array-key, array{string, array<mixed>, string}>
      */
-    public static function provideFunction(): iterable
+    public static function provideFunctionCases(): iterable
     {
-        return [
-            ['sonata_block_exists', [
-                'block_name',    // arguments
-            ], 'exists'],
-            ['sonata_block_render', [
-                'foobar', ['bar' => 'foo'],    // arguments
-            ], 'render'],
-            ['sonata_block_include_javascripts', [
-                'screen',                         // arguments
-            ], 'includeJavascripts'],
-            ['sonata_block_include_stylesheets', [
-                'foo',                            // arguments
-            ], 'includeStylesheets'],
-            ['sonata_block_render_event', [
-                'event.name', [],            // arguments
-            ], 'renderEvent'],
-        ];
+        yield ['sonata_block_exists', [
+            'block_name',    // arguments
+        ], 'exists'];
+        yield ['sonata_block_render', [
+            'foobar', ['bar' => 'foo'],    // arguments
+        ], 'render'];
+        yield ['sonata_block_include_javascripts', [
+            'screen',                         // arguments
+        ], 'includeJavascripts'];
+        yield ['sonata_block_include_stylesheets', [
+            'foo',                            // arguments
+        ], 'includeStylesheets'];
+        yield ['sonata_block_render_event', [
+            'event.name', [],            // arguments
+        ], 'renderEvent'];
     }
 
     /**
      * @param mixed[] $args
      *
-     * @dataProvider provideFunction
+     * @dataProvider provideFunctionCases
      */
     public function testFunction(string $name, array $args, string $expectedMethod): void
     {

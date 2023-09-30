@@ -23,7 +23,7 @@ use Sonata\BlockBundle\Model\BlockInterface;
 final class KeepAllFilterTest extends TestCase
 {
     /**
-     * @dataProvider getExceptions
+     * @dataProvider provideFilterCases
      */
     public function testFilter(\Exception $exception): void
     {
@@ -38,11 +38,9 @@ final class KeepAllFilterTest extends TestCase
     /**
      * @return iterable<array-key, array{\Exception}>
      */
-    public static function getExceptions(): iterable
+    public static function provideFilterCases(): iterable
     {
-        return [
-            [new \Exception()],
-            [new \RuntimeException()],
-        ];
+        yield [new \Exception()];
+        yield [new \RuntimeException()];
     }
 }
