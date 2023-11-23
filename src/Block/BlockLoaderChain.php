@@ -47,7 +47,7 @@ final class BlockLoaderChain implements BlockLoaderInterface
             throw new \TypeError(sprintf(
                 'Argument 1 passed to %s must be of type string or array, %s given',
                 __METHOD__,
-                \is_object($configuration) ? 'object of type '.$configuration::class : \gettype($configuration)
+                \gettype($configuration)
             ));
         }
 
@@ -66,7 +66,7 @@ final class BlockLoaderChain implements BlockLoaderInterface
             throw new \TypeError(sprintf(
                 'Argument 1 passed to %s must be of type string or array, %s given',
                 __METHOD__,
-                \is_object($configuration) ? 'object of type '.$configuration::class : \gettype($configuration)
+                \gettype($configuration)
             ));
         }
 
