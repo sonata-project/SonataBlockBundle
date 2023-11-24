@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.1.0](https://github.com/sonata-project/SonataBlockBundle/compare/5.0.1...5.1.0) - 2023-11-23
+### Added
+- [[#1193](https://github.com/sonata-project/SonataBlockBundle/pull/1193)] Symfony 7 support ([@VincentLanglet](https://github.com/VincentLanglet))
+
 ## [5.0.1](https://github.com/sonata-project/SonataBlockBundle/compare/5.0.0...5.0.1) - 2023-07-22
 ### Fixed
 - [[#1187](https://github.com/sonata-project/SonataBlockBundle/pull/1187)] Italian translation keys from `sonata.block.*` to `sonata.block.service.*` ([@gremo](https://github.com/gremo))
