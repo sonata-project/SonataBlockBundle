@@ -31,7 +31,7 @@ final class SonataBlockExtension extends Extension
     /**
      * @param mixed[] $config
      */
-    public function getConfiguration(array $config, ContainerBuilder $container): ?ConfigurationInterface
+    public function getConfiguration(array $config, ContainerBuilder $container): ConfigurationInterface
     {
         /** @var array<string, mixed> $bundles */
         $bundles = $container->getParameter('kernel.bundles');
