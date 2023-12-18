@@ -31,7 +31,7 @@ final class SonataBlockExtension extends Extension
     /**
      * @param mixed[] $config
      */
-    public function getConfiguration(array $config, ContainerBuilder $container): ?ConfigurationInterface
+    public function getConfiguration(array $config, ContainerBuilder $container): ConfigurationInterface
     {
         /** @var array<string, mixed> $bundles */
         $bundles = $container->getParameter('kernel.bundles');
@@ -57,7 +57,6 @@ final class SonataBlockExtension extends Extension
 
         $processor = new Processor();
         $configuration = $this->getConfiguration($configs, $container);
-        \assert(null !== $configuration);
         $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
