@@ -55,7 +55,7 @@
         "phpunit/phpunit": "^9.5.13",
         "psalm/plugin-phpunit": "^0.18",
         "psalm/plugin-symfony": "^5.0",
-        "rector/rector": "^0.18",
+        "rector/rector": "^0.19",
         "symfony/browser-kit": "^5.4 || ^6.2 || ^7.0",
         "symfony/error-handler": "^5.4 || ^6.2 || ^7.0",
         "symfony/phpunit-bridge": "^6.2 || ^7.0",
