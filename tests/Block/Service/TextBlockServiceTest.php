@@ -63,8 +63,8 @@ final class TextBlockServiceTest extends BlockServiceTestCase
 
         $this->twig->expects(static::once())->method('render')
             ->with('@SonataBlock/Block/block_core_text.html.twig', [
-               'block' => $block,
-               'settings' => ['content' => 'foo'],
+                'block' => $block,
+                'settings' => ['content' => 'foo'],
             ]);
 
         $service = new TextBlockService($this->twig);

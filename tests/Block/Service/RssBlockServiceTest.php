@@ -69,12 +69,12 @@ final class RssBlockServiceTest extends BlockServiceTestCase
 
         $this->twig->expects(static::once())->method('render')
             ->with('@SonataBlock/Block/block_core_rss.html.twig', [
-               'feeds' => false,
-               'block' => $block,
-               'settings' => [
-                   'title' => 'foo',
-                   'url' => 'http://example.com',
-               ],
+                'feeds' => false,
+                'block' => $block,
+                'settings' => [
+                    'title' => 'foo',
+                    'url' => 'http://example.com',
+                ],
             ]);
 
         $service = new RssBlockService($this->twig);
