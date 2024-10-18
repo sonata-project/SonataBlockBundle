@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.1.1](https://github.com/sonata-project/SonataBlockBundle/compare/5.1.0...5.1.1) - 2024-10-18
+### Fixed
+- [[#1212](https://github.com/sonata-project/SonataBlockBundle/pull/1212)] Symfony 7.1 deprecation about `Symfony\Component\HttpKernel\DependencyInjection\Extension` usage ([@VincentLanglet](https://github.com/VincentLanglet))
+
 ## [5.1.0](https://github.com/sonata-project/SonataBlockBundle/compare/5.0.1...5.1.0) - 2023-11-23
 ### Added
 - [[#1193](https://github.com/sonata-project/SonataBlockBundle/pull/1193)] Symfony 7 support ([@VincentLanglet](https://github.com/VincentLanglet))

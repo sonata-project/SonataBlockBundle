@@ -26,7 +26,7 @@ final class Metadata implements MetadataInterface
         private ?string $description = null,
         private ?string $image = null,
         private ?string $domain = null,
-        private array $options = []
+        private array $options = [],
     ) {
     }
 

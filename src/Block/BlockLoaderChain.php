@@ -44,7 +44,7 @@ final class BlockLoaderChain implements BlockLoaderInterface
     public function load($configuration): BlockInterface
     {
         if (!\is_string($configuration) && !\is_array($configuration)) {
-            throw new \TypeError(sprintf(
+            throw new \TypeError(\sprintf(
                 'Argument 1 passed to %s must be of type string or array, %s given',
                 __METHOD__,
                 \gettype($configuration)
@@ -63,7 +63,7 @@ final class BlockLoaderChain implements BlockLoaderInterface
     public function support($configuration): bool
     {
         if (!\is_string($configuration) && !\is_array($configuration)) {
-            throw new \TypeError(sprintf(
+            throw new \TypeError(\sprintf(
                 'Argument 1 passed to %s must be of type string or array, %s given',
                 __METHOD__,
                 \gettype($configuration)

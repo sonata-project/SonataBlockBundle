@@ -65,7 +65,7 @@ class BlockHelper
         private BlockRendererInterface $blockRenderer,
         private BlockContextManagerInterface $blockContextManager,
         private EventDispatcherInterface $eventDispatcher,
-        private ?Stopwatch $stopwatch = null
+        private ?Stopwatch $stopwatch = null,
     ) {
     }
 
@@ -79,7 +79,7 @@ class BlockHelper
     {
         $html = '';
         foreach ($this->assets['js'] as $javascript) {
-            $html .= "\n".sprintf('<script src="%s%s" type="text/javascript"></script>', $basePath, $javascript);
+            $html .= "\n".\sprintf('<script src="%s%s" type="text/javascript"></script>', $basePath, $javascript);
         }
 
         return $html;
@@ -97,10 +97,10 @@ class BlockHelper
             return '';
         }
 
-        $html = sprintf("<style type='text/css' media='%s'>", $media);
+        $html = \sprintf("<style type='text/css' media='%s'>", $media);
 
         foreach ($this->assets['css'] as $stylesheet) {
-            $html .= "\n".sprintf('@import url(%s%s);', $basePath, $stylesheet);
+            $html .= "\n".\sprintf('@import url(%s%s);', $basePath, $stylesheet);
         }
 
         $html .= "\n</style>";
@@ -113,7 +113,7 @@ class BlockHelper
      */
     public function renderEvent(string $name, array $options = []): string
     {
-        $eventName = sprintf('sonata.block.event.%s', $name);
+        $eventName = \sprintf('sonata.block.event.%s', $name);
 
         $event = $this->eventDispatcher->dispatch(new BlockEvent($options), $eventName);
 
@@ -188,7 +188,7 @@ class BlockHelper
         $event = $this->traces[$block->getId() ?? ''];
         if (!$event instanceof StopwatchEvent) {
             throw new \InvalidArgumentException(
-                sprintf('The block %s has no stopwatch event to stop.', $block->getId() ?? '')
+                \sprintf('The block %s has no stopwatch event to stop.', $block->getId() ?? '')
             );
         }
 
@@ -250,7 +250,7 @@ class BlockHelper
     {
         if (null !== $this->stopwatch) {
             $this->traces[$block->getId() ?? ''] = $this->stopwatch->start(
-                sprintf(
+                \sprintf(
                     '%s (id: %s, type: %s)',
                     $block->getName() ?? '',
                     $block->getId() ?? '',

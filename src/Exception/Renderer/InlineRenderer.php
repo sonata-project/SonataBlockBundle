@@ -26,7 +26,7 @@ final class InlineRenderer implements RendererInterface
 {
     public function __construct(
         private Environment $twig,
-        private string $template
+        private string $template,
     ) {
     }
 

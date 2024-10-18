@@ -29,7 +29,7 @@ final class InlineDebugRenderer implements RendererInterface
         private Environment $twig,
         private string $template,
         private bool $debug,
-        private bool $forceStyle = true
+        private bool $forceStyle = true,
     ) {
     }
 
