@@ -31,7 +31,7 @@ final class BlockDataCollector extends DataCollector
      */
     public function __construct(
         private BlockHelper $blocksHelper,
-        private array $containerTypes
+        private array $containerTypes,
     ) {
         $this->reset();
     }

@@ -45,7 +45,7 @@ final class StrategyManager implements StrategyManagerInterface
         private array $filters,
         private array $renderers,
         private array $blockFilters,
-        private array $blockRenderers
+        private array $blockRenderers,
     ) {
     }
 
@@ -57,7 +57,7 @@ final class StrategyManager implements StrategyManagerInterface
     public function setDefaultFilter(string $name): void
     {
         if (!\array_key_exists($name, $this->filters)) {
-            throw new \InvalidArgumentException(sprintf('Cannot set default exception filter "%s". It does not exist.', $name));
+            throw new \InvalidArgumentException(\sprintf('Cannot set default exception filter "%s". It does not exist.', $name));
         }
 
         $this->defaultFilter = $name;
@@ -71,7 +71,7 @@ final class StrategyManager implements StrategyManagerInterface
     public function setDefaultRenderer(string $name): void
     {
         if (!\array_key_exists($name, $this->renderers)) {
-            throw new \InvalidArgumentException(sprintf('Cannot set default exception renderer "%s". It does not exist.', $name));
+            throw new \InvalidArgumentException(\sprintf('Cannot set default exception renderer "%s". It does not exist.', $name));
         }
 
         $this->defaultRenderer = $name;
@@ -119,7 +119,7 @@ final class StrategyManager implements StrategyManagerInterface
         $service = $this->container->get($this->renderers[$name]);
 
         if (!$service instanceof RendererInterface) {
-            throw new \InvalidArgumentException(sprintf('The service "%s" is not an exception renderer.', $name));
+            throw new \InvalidArgumentException(\sprintf('The service "%s" is not an exception renderer.', $name));
         }
 
         return $service;
@@ -145,7 +145,7 @@ final class StrategyManager implements StrategyManagerInterface
         $service = $this->container->get($this->filters[$name]);
 
         if (!$service instanceof FilterInterface) {
-            throw new \InvalidArgumentException(sprintf('The service "%s" is not an exception filter.', $name));
+            throw new \InvalidArgumentException(\sprintf('The service "%s" is not an exception filter.', $name));
         }
 
         return $service;

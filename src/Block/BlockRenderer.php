@@ -25,7 +25,7 @@ final class BlockRenderer implements BlockRendererInterface
     public function __construct(
         private BlockServiceManagerInterface $blockServiceManager,
         private StrategyManagerInterface $exceptionStrategyManager,
-        private ?LoggerInterface $logger = null
+        private ?LoggerInterface $logger = null,
     ) {
     }
 
@@ -35,7 +35,7 @@ final class BlockRenderer implements BlockRendererInterface
 
         if (null !== $this->logger) {
             $this->logger->info(
-                sprintf('[cms::renderBlock] block.id=%d, block.type=%s', $block->getId() ?? '', $block->getType() ?? '')
+                \sprintf('[cms::renderBlock] block.id=%d, block.type=%s', $block->getId() ?? '', $block->getType() ?? '')
             );
         }
 
@@ -46,7 +46,7 @@ final class BlockRenderer implements BlockRendererInterface
             $response = $service->execute($blockContext, $response ?? new Response());
         } catch (\Throwable $exception) {
             if (null !== $this->logger) {
-                $this->logger->error(sprintf(
+                $this->logger->error(\sprintf(
                     '[cms::renderBlock] block.id=%d - error while rendering block - %s',
                     $block->getId() ?? '',
                     $exception->getMessage()

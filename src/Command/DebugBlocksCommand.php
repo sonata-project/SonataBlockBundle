@@ -51,20 +51,20 @@ final class DebugBlocksCommand extends Command
 
             $title = '';
             if ($service instanceof EditableBlockService) {
-                $title = sprintf(' (<comment>%s</comment>)', $service->getMetadata()->getTitle());
+                $title = \sprintf(' (<comment>%s</comment>)', $service->getMetadata()->getTitle());
             }
-            $output->writeln(sprintf('<info>>> %s</info>%s', $code, $title));
+            $output->writeln(\sprintf('<info>>> %s</info>%s', $code, $title));
 
             $resolver = new OptionsResolver();
             $service->configureSettings($resolver);
 
             try {
                 foreach ($resolver->resolve() as $key => $val) {
-                    $output->writeln(sprintf('    %-30s%s', $key, json_encode($val, \JSON_THROW_ON_ERROR)));
+                    $output->writeln(\sprintf('    %-30s%s', $key, json_encode($val, \JSON_THROW_ON_ERROR)));
                 }
             } catch (MissingOptionsException) {
                 foreach ($resolver->getDefinedOptions() as $option) {
-                    $output->writeln(sprintf('    %s', $option));
+                    $output->writeln(\sprintf('    %s', $option));
                 }
             }
         }

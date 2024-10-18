@@ -39,7 +39,7 @@ final class ServiceLoader implements BlockLoaderInterface
     public function load($configuration): BlockInterface
     {
         if (!\is_string($configuration) && !\is_array($configuration)) {
-            throw new \TypeError(sprintf(
+            throw new \TypeError(\sprintf(
                 'Argument 1 passed to %s must be of type string or array, %s given',
                 __METHOD__,
                 \gettype($configuration)
@@ -53,7 +53,7 @@ final class ServiceLoader implements BlockLoaderInterface
         }
 
         if (!\in_array($configuration['type'], $this->types, true)) {
-            throw new \RuntimeException(sprintf(
+            throw new \RuntimeException(\sprintf(
                 'The block type "%s" does not exist',
                 $configuration['type']
             ));
@@ -73,7 +73,7 @@ final class ServiceLoader implements BlockLoaderInterface
     public function support($configuration): bool
     {
         if (!\is_string($configuration) && !\is_array($configuration)) {
-            throw new \TypeError(sprintf(
+            throw new \TypeError(\sprintf(
                 'Argument 1 passed to %s must be of type string or array, %s given',
                 __METHOD__,
                 \gettype($configuration)

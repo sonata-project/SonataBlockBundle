@@ -39,7 +39,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
      */
     public function __construct(
         private ContainerInterface $container,
-        private array $containerTypes
+        private array $containerTypes,
     ) {
     }
 
@@ -74,7 +74,7 @@ final class BlockServiceManager implements BlockServiceManagerInterface
     public function add(string $name, $service, array $contexts = []): void
     {
         if (!\is_string($service) && !$service instanceof BlockServiceInterface) {
-            throw new \TypeError(sprintf(
+            throw new \TypeError(\sprintf(
                 'Argument 2 passed to %s() must be of type string or an object implementing %s, %s given',
                 __METHOD__,
                 BlockServiceInterface::class,
@@ -160,13 +160,13 @@ final class BlockServiceManager implements BlockServiceManagerInterface
     private function load(string $type): BlockServiceInterface
     {
         if (!$this->has($type)) {
-            throw new BlockServiceNotFoundException(sprintf('The block service `%s` does not exist', $type));
+            throw new BlockServiceNotFoundException(\sprintf('The block service `%s` does not exist', $type));
         }
 
         if (!$this->services[$type] instanceof BlockServiceInterface) {
             $blockService = $this->container->get($type);
             if (!$blockService instanceof BlockServiceInterface) {
-                throw new BlockServiceNotFoundException(sprintf('The service %s does not implement BlockServiceInterface', $type));
+                throw new BlockServiceNotFoundException(\sprintf('The service %s does not implement BlockServiceInterface', $type));
             }
 
             $this->services[$type] = $blockService;

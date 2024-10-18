@@ -54,9 +54,9 @@ final class ServiceListType extends AbstractType
                 $types = [];
                 foreach ($manager->getServicesByContext($options['context'], $options['include_containers']) as $code => $service) {
                     if ($service instanceof EditableBlockService) {
-                        $types[sprintf('%s - %s', $service->getMetadata()->getTitle(), $code)] = $code;
+                        $types[\sprintf('%s - %s', $service->getMetadata()->getTitle(), $code)] = $code;
                     } else {
-                        $types[sprintf('%s', $code)] = $code;
+                        $types[\sprintf('%s', $code)] = $code;
                     }
                 }
 
