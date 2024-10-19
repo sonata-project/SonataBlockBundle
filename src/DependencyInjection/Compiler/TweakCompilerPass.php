@@ -60,7 +60,7 @@ final class TweakCompilerPass implements CompilerPassInterface
         foreach ($container->findTaggedServiceIds('knp_menu.menu') as $serviceId => $tags) {
             foreach ($tags as $attributes) {
                 if (!isset($attributes['alias'])) {
-                    throw new \InvalidArgumentException(sprintf('The alias is not defined in the "knp_menu.menu" tag for the service "%s"', $serviceId));
+                    throw new \InvalidArgumentException(\sprintf('The alias is not defined in the "knp_menu.menu" tag for the service "%s"', $serviceId));
                 }
                 $registry->addMethodCall('add', [$attributes['alias']]);
             }

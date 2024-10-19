@@ -39,7 +39,7 @@ final class BlockContextManager implements BlockContextManagerInterface
     public function __construct(
         private BlockLoaderInterface $blockLoader,
         private BlockServiceManagerInterface $blockService,
-        ?LoggerInterface $logger = null
+        ?LoggerInterface $logger = null,
     ) {
         $this->logger = $logger ?? new NullLogger();
     }
@@ -87,7 +87,7 @@ final class BlockContextManager implements BlockContextManagerInterface
         try {
             $settings = $this->resolve($block, array_merge($block->getSettings(), $settings));
         } catch (ExceptionInterface $e) {
-            $this->logger->error(sprintf(
+            $this->logger->error(\sprintf(
                 '[cms::blockContext] block.id=%s - error while resolving options - %s',
                 $block->getId() ?? '',
                 $e->getMessage()
