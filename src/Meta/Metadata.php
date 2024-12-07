@@ -22,10 +22,10 @@ final class Metadata implements MetadataInterface
      * @param array<string, mixed> $options
      */
     public function __construct(
-        private readonly string $title,
-        private readonly ?string $description = null,
-        private readonly ?string $image = null,
-        private readonly ?string $domain = null,
+        private string $title,
+        private ?string $description = null,
+        private ?string $image = null,
+        private ?string $domain = null,
         private array $options = [],
     ) {
     }

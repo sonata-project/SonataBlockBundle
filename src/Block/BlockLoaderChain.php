@@ -21,7 +21,7 @@ final class BlockLoaderChain implements BlockLoaderInterface
     /**
      * @param BlockLoaderInterface[] $loaders
      */
-    public function __construct(private readonly array $loaders)
+    public function __construct(private array $loaders)
     {
     }
 

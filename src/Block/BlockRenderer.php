@@ -23,9 +23,9 @@ use Symfony\Component\HttpFoundation\Response;
 final class BlockRenderer implements BlockRendererInterface
 {
     public function __construct(
-        private readonly BlockServiceManagerInterface $blockServiceManager,
-        private readonly StrategyManagerInterface $exceptionStrategyManager,
-        private readonly ?LoggerInterface $logger = null,
+        private BlockServiceManagerInterface $blockServiceManager,
+        private StrategyManagerInterface $exceptionStrategyManager,
+        private ?LoggerInterface $logger = null,
     ) {
     }
 
