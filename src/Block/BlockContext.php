@@ -21,7 +21,7 @@ final class BlockContext implements BlockContextInterface
      * @param array<string, mixed> $settings
      */
     public function __construct(
-        private BlockInterface $block,
+        private readonly BlockInterface $block,
         private array $settings = [],
     ) {
     }

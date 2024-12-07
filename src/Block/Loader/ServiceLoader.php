@@ -22,7 +22,7 @@ final class ServiceLoader implements BlockLoaderInterface
     /**
      * @param string[] $types
      */
-    public function __construct(private array $types)
+    public function __construct(private readonly array $types)
     {
     }
 

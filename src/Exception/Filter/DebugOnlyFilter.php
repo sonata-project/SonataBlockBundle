@@ -22,7 +22,7 @@ use Sonata\BlockBundle\Model\BlockInterface;
  */
 final class DebugOnlyFilter implements FilterInterface
 {
-    public function __construct(private bool $debug)
+    public function __construct(private readonly bool $debug)
     {
     }
 

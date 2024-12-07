@@ -26,10 +26,10 @@ use Twig\Environment;
 final class InlineDebugRenderer implements RendererInterface
 {
     public function __construct(
-        private Environment $twig,
-        private string $template,
-        private bool $debug,
-        private bool $forceStyle = true,
+        private readonly Environment $twig,
+        private readonly string $template,
+        private readonly bool $debug,
+        private readonly bool $forceStyle = true,
     ) {
     }
 

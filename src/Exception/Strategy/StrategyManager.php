@@ -41,7 +41,7 @@ final class StrategyManager implements StrategyManagerInterface
      * @param array<string, string> $blockRenderers Renderer names for each block
      */
     public function __construct(
-        private ContainerInterface $container,
+        private readonly ContainerInterface $container,
         private array $filters,
         private array $renderers,
         private array $blockFilters,
