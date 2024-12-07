@@ -34,14 +34,11 @@ final class BlockContextManager implements BlockContextManagerInterface
      */
     private array $settingsByClass = [];
 
-    private LoggerInterface $logger;
-
     public function __construct(
         private BlockLoaderInterface $blockLoader,
         private BlockServiceManagerInterface $blockService,
-        ?LoggerInterface $logger = null,
+        private LoggerInterface $logger = new NullLogger(),
     ) {
-        $this->logger = $logger ?? new NullLogger();
     }
 
     public function addSettingsByType(string $type, array $settings, bool $replace = false): void
