@@ -27,7 +27,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @param array<string, string> $defaultContainerTemplates
      */
-    public function __construct(private array $defaultContainerTemplates)
+    public function __construct(private readonly array $defaultContainerTemplates)
     {
     }
 

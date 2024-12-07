@@ -23,7 +23,7 @@ final class GlobalVariables
     /**
      * @param string[] $templates
      */
-    public function __construct(private array $templates)
+    public function __construct(private readonly array $templates)
     {
     }
 

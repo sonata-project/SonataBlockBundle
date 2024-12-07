@@ -62,10 +62,10 @@ class BlockHelper
      * @internal
      */
     public function __construct(
-        private BlockRendererInterface $blockRenderer,
-        private BlockContextManagerInterface $blockContextManager,
-        private EventDispatcherInterface $eventDispatcher,
-        private ?Stopwatch $stopwatch = null,
+        private readonly BlockRendererInterface $blockRenderer,
+        private readonly BlockContextManagerInterface $blockContextManager,
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly ?Stopwatch $stopwatch = null,
     ) {
     }
 

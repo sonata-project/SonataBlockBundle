@@ -25,8 +25,8 @@ use Twig\Environment;
 final class InlineRenderer implements RendererInterface
 {
     public function __construct(
-        private Environment $twig,
-        private string $template,
+        private readonly Environment $twig,
+        private readonly string $template,
     ) {
     }
 
