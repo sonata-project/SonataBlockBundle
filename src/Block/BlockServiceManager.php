@@ -38,8 +38,8 @@ final class BlockServiceManager implements BlockServiceManagerInterface
      * @param string[] $containerTypes
      */
     public function __construct(
-        private readonly ContainerInterface $container,
-        private readonly array $containerTypes,
+        private ContainerInterface $container,
+        private array $containerTypes,
     ) {
     }
 

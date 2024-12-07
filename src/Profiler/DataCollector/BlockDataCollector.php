@@ -30,8 +30,8 @@ final class BlockDataCollector extends DataCollector
      * @param string[]    $containerTypes array of container types
      */
     public function __construct(
-        private readonly BlockHelper $blocksHelper,
-        private readonly array $containerTypes,
+        private BlockHelper $blocksHelper,
+        private array $containerTypes,
     ) {
         $this->reset();
     }

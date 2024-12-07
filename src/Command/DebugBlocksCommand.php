@@ -26,7 +26,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 #[AsCommand(name: 'debug:sonata:block', description: 'Debug all blocks available, show default settings of each block')]
 final class DebugBlocksCommand extends Command
 {
-    public function __construct(private readonly BlockServiceManagerInterface $blockManager)
+    public function __construct(private BlockServiceManagerInterface $blockManager)
     {
         parent::__construct();
     }

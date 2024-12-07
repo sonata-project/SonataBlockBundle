@@ -32,8 +32,8 @@ final class MenuBlockService extends AbstractMenuBlockService
 {
     public function __construct(
         Environment $twig,
-        private readonly MenuProviderInterface $menuProvider,
-        private readonly MenuRegistryInterface $menuRegistry,
+        private MenuProviderInterface $menuProvider,
+        private MenuRegistryInterface $menuRegistry,
     ) {
         parent::__construct($twig);
     }
