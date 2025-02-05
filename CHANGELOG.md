@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.1.2](https://github.com/sonata-project/SonataBlockBundle/compare/5.1.1...5.1.2) - 2025-02-05
+### Fixed
+- [[#1218](https://github.com/sonata-project/SonataBlockBundle/pull/1218)] Fix: form validations are by passed when an Exception is thrown ([@sad270](https://github.com/sad270))
+
 ## [5.1.1](https://github.com/sonata-project/SonataBlockBundle/compare/5.1.0...5.1.1) - 2024-10-18
 ### Fixed
 - [[#1212](https://github.com/sonata-project/SonataBlockBundle/pull/1212)] Symfony 7.1 deprecation about `Symfony\Component\HttpKernel\DependencyInjection\Extension` usage ([@VincentLanglet](https://github.com/VincentLanglet))
