@@ -149,8 +149,10 @@ final class BlockServiceManager implements BlockServiceManagerInterface
             }
 
             $this->inValidate = false;
-        } catch (\Exception) {
+        } catch (\Exception $exception) {
             $this->inValidate = false;
+
+            throw $exception;
         }
     }
 
