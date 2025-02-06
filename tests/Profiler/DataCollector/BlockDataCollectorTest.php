@@ -26,7 +26,7 @@ final class BlockDataCollectorTest extends TestCase
 {
     public function testBlockDataCollector(): void
     {
-        $blockHelper = $this->createStub(BlockHelper::class);
+        $blockHelper = static::createStub(BlockHelper::class);
         $objectForBlock = new \DateTime();
 
         $blockDataCollector = new BlockDataCollector($blockHelper, ['container']);
