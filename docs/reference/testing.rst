@@ -32,9 +32,9 @@ Given the following block service::
 
 You can write unit tests for block services with the following code::
 
-    use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
+    use Sonata\BlockBundle\Test\BlockServiceTestCase;
 
-    class CustomBlockServiceTest extends AbstractBlockServiceTestCase
+    class CustomBlockServiceTest extends BlockServiceTestCase
     {
         public function testDefaultSettings(): void
         {
@@ -46,18 +46,5 @@ You can write unit tests for block services with the following code::
                 'attr' => [],
                 'template' => false,
             ], $blockContext);
-        }
-
-        public function testExecute(): void
-        {
-            $blockService = new CustomBlockService('foo', $this->twig);
-            $blockContext = $this->getBlockContext($blockService);
-
-            $blockService->execute($blockContext);
-
-            $this->assertSame($blockContext, $this->templating->parameters['context']);
-            $this->assertInternalType('array', $this->templating->parameters['settings']);
-            $this->assertInstanceOf('Sonata\BlockBundle\Model\BlockInterface', $this->templating->parameters['block']);
-            $this->assertSame('bar', $this->templating->parameters['foo']);
         }
     }
