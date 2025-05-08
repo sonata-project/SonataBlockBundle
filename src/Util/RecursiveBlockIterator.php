@@ -40,11 +40,17 @@ final class RecursiveBlockIterator extends \RecursiveArrayIterator
      */
     public function getChildren(): self
     {
-        return new self($this->current()->getChildren());
+        $current = $this->current();
+        \assert(null !== $current);
+
+        return new self($current->getChildren());
     }
 
     public function hasChildren(): bool
     {
-        return $this->current()->hasChild();
+        $current = $this->current();
+        \assert(null !== $current);
+
+        return $current->hasChild();
     }
 }
