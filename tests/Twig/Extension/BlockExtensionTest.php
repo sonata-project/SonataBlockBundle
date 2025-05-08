@@ -47,7 +47,7 @@ final class BlockExtensionTest extends TestCase
     }
 
     /**
-     * @return iterable<array-key, array{string, array<mixed>, string}>
+     * @return iterable<array-key, array{string, list<mixed>, string}>
      */
     public static function provideFunctionCases(): iterable
     {
@@ -69,7 +69,7 @@ final class BlockExtensionTest extends TestCase
     }
 
     /**
-     * @param mixed[] $args
+     * @param list<mixed> $args
      *
      * @dataProvider provideFunctionCases
      */
@@ -80,7 +80,7 @@ final class BlockExtensionTest extends TestCase
             ->with(...$args);
 
         /** @psalm-suppress InternalMethod */
-        $func = $this->env->getFunction($name);
+        $func = $this->env->getFunction($name); // @phpstan-ignore method.internal
 
         static::assertInstanceOf(TwigFunction::class, $func);
 
