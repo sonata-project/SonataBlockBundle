@@ -35,6 +35,10 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  *         css: string[],
  *     }
  * }
+ *
+ * NEXT_MAJOR: Change this class to final.
+ *
+ * @final since 5.2.0
  */
 class BlockHelper
 {
