@@ -48,7 +48,7 @@ final class BlockExtensionTest extends TestCase
     }
 
     /**
-     * @return iterable<array-key, array{string, list<mixed>, string}>
+     * @return iterable<array-key, array{string, list<mixed>, non-empty-string}>
      */
     public static function provideFunctionCases(): iterable
     {
@@ -70,7 +70,8 @@ final class BlockExtensionTest extends TestCase
     }
 
     /**
-     * @param list<mixed> $args
+     * @param list<mixed>      $args
+     * @param non-empty-string $expectedMethod
      */
     #[DataProvider('provideFunctionCases')]
     public function testFunction(string $name, array $args, string $expectedMethod): void
