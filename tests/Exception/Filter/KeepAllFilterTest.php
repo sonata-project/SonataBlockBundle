@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests\Exception\Renderer;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Filter\KeepAllFilter;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -22,9 +23,7 @@ use Sonata\BlockBundle\Model\BlockInterface;
  */
 final class KeepAllFilterTest extends TestCase
 {
-    /**
-     * @dataProvider provideFilterCases
-     */
+    #[DataProvider('provideFilterCases')]
     public function testFilter(\Exception $exception): void
     {
         $block = $this->createMock(BlockInterface::class);

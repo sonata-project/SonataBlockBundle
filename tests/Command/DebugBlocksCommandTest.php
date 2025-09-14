@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests\Command;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
@@ -62,9 +63,7 @@ final class DebugBlocksCommandTest extends TestCase
         static::assertSame("done!\n", $commandTester->getDisplay());
     }
 
-    /**
-     * @group legacy
-     */
+    #[Group('legacy')]
     public function testDebugBlocks(): void
     {
         $this->application = new Application();

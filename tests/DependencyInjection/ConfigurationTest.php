@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\Processor;
@@ -21,9 +22,8 @@ final class ConfigurationTest extends TestCase
 {
     /**
      * @param string[] $contexts
-     *
-     * @dataProvider provideOptionsCases
      */
+    #[DataProvider('provideOptionsCases')]
     public function testOptions(array $contexts): void
     {
         $defaultTemplates = [

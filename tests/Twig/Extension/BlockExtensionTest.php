@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests\Twig\Extension;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
@@ -70,9 +71,8 @@ final class BlockExtensionTest extends TestCase
 
     /**
      * @param list<mixed> $args
-     *
-     * @dataProvider provideFunctionCases
      */
+    #[DataProvider('provideFunctionCases')]
     public function testFunction(string $name, array $args, string $expectedMethod): void
     {
         $this->blockHelper->expects(static::once())
