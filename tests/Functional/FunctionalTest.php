@@ -23,5 +23,7 @@ final class FunctionalTest extends WebTestCase
         $client->request('GET', '/');
 
         static::assertSame(200, $client->getResponse()->getStatusCode());
+
+        restore_exception_handler();
     }
 }

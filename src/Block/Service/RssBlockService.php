@@ -118,7 +118,7 @@ final class RssBlockService extends AbstractBlockService implements EditableBloc
             if (false !== $content && '' !== $content) {
                 // generate a simple xml element
                 try {
-                    $feeds = new \SimpleXMLElement($content);
+                    $feeds = @new \SimpleXMLElement($content);
                     $feeds = $feeds->channel->item;
                 } catch (\Exception) {
                     // silently fail error

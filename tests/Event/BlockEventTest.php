@@ -13,15 +13,14 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\BlockInterface;
 
 final class BlockEventTest extends TestCase
 {
-    /**
-     * @group legacy
-     */
+    #[Group('legacy')]
     public function testBlockEvent(): void
     {
         $blockEvent = new BlockEvent();
