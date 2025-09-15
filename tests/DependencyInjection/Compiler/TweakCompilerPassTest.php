@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests\DependencyInjection\Compiler;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\DependencyInjection\Compiler\TweakCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -69,9 +70,7 @@ final class TweakCompilerPassTest extends TestCase
         $pass->process($this->container);
     }
 
-    /**
-     * @group legacy
-     */
+    #[Group('legacy')]
     public function testProcessDifferentBlockId(): void
     {
         $blockDefinition = new Definition(null, ['acme.block.service.name']);

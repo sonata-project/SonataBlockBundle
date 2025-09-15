@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Tests\Block\Service;
 
 use Knp\Menu\Provider\MenuProviderInterface;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use Sonata\BlockBundle\Block\Service\MenuBlockService;
 use Sonata\BlockBundle\Form\Mapper\FormMapper;
@@ -45,9 +46,7 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
         $this->menuRegistry = $this->createMock(MenuRegistryInterface::class);
     }
 
-    /**
-     * @group legacy
-     */
+    #[Group('legacy')]
     public function testBuildEditForm(): void
     {
         $this->menuRegistry->expects(static::once())->method('getAliasNames')

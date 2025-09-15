@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests\Form\Type;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Block\Service\BlockServiceInterface;
@@ -47,9 +48,7 @@ final class ServiceListTypeTest extends TestCase
         $resolver->resolve();
     }
 
-    /**
-     * @group legacy
-     */
+    #[Group('legacy')]
     public function testOptionWithValidContext(): void
     {
         $blockService = $this->createMock(BlockServiceInterface::class);
