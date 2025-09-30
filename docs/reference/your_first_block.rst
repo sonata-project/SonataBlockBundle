@@ -24,7 +24,6 @@ The current RSS block will extend this base class. The other `use` statements ar
     use Sonata\BlockBundle\Block\Service\AbstractBlockService;
     use Sonata\BlockBundle\Mapper\FormMapper;
     use Sonata\BlockBundle\Model\BlockInterface;
-    use Sonata\Form\Validator\ErrorElement;
 
 Default settings
 ----------------
@@ -60,23 +59,6 @@ You can define an editing config the following way::
                     ['title', 'text', ['required' => false]],
                 ]
             ])
-        ;
-    }
-
-The validation is done at runtime through a ``validateBlock`` method. You can call any Symfony assertions, like::
-
-    public function validateBlock(ErrorElement $errorElement, BlockInterface $block): void
-    {
-        $errorElement
-            ->with('settings.url')
-                ->assertNotNull([])
-                ->assertNotBlank()
-            ->end()
-            ->with('settings.title')
-                ->assertNotNull([])
-                ->assertNotBlank()
-                ->assertMaxLength(['limit' => 50])
-            ->end()
         ;
     }
 
