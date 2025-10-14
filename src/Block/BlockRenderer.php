@@ -35,7 +35,7 @@ final class BlockRenderer implements BlockRendererInterface
 
         if (null !== $this->logger) {
             $this->logger->info(
-                \sprintf('[cms::renderBlock] block.id=%d, block.type=%s', $block->getId() ?? '', $block->getType() ?? '')
+                \sprintf('[cms::renderBlock] block.id=%s, block.type=%s', $block->getId() ?? '', $block->getType() ?? '')
             );
         }
 
@@ -47,7 +47,7 @@ final class BlockRenderer implements BlockRendererInterface
         } catch (\Throwable $exception) {
             if (null !== $this->logger) {
                 $this->logger->error(\sprintf(
-                    '[cms::renderBlock] block.id=%d - error while rendering block - %s',
+                    '[cms::renderBlock] block.id=%s - error while rendering block - %s',
                     $block->getId() ?? '',
                     $exception->getMessage()
                 ), compact('exception'));
