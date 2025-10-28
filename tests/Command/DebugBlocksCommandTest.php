@@ -46,7 +46,10 @@ final class DebugBlocksCommandTest extends TestCase
             ->method('getServices')
             ->willReturn([]);
 
-        $this->application->add(new DebugBlocksCommand($blockManager));
+        /** @phpstan-ignore function.impossibleType */
+        $method = method_exists($this->application, 'addCommand') ? 'addCommand' : 'add';
+        /* @phpstan-ignore method.notFound,method.dynamicName */
+        $this->application->{$method}(new DebugBlocksCommand($blockManager));
     }
 
     protected function tearDown(): void
@@ -110,7 +113,10 @@ final class DebugBlocksCommandTest extends TestCase
                 },
             ]);
 
-        $this->application->add(new DebugBlocksCommand($blockManager));
+        /** @phpstan-ignore function.impossibleType */
+        $method = method_exists($this->application, 'addCommand') ? 'addCommand' : 'add';
+        /* @phpstan-ignore method.notFound,method.dynamicName */
+        $this->application->{$method}(new DebugBlocksCommand($blockManager));
 
         $command = $this->application->find('debug:sonata:block');
         $commandTester = new CommandTester($command);
