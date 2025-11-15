@@ -65,6 +65,11 @@ final class AppKernel extends Kernel
     protected function configureContainer(ContainerBuilder $containerBuilder, LoaderInterface $loader): void
     {
         $loader->load(__DIR__.'/config.yml');
+
+        // TODO: move to config.yml once we drop support for Symfony < 7.3
+        if (Kernel::VERSION_ID >= 70300) {
+            $containerBuilder->loadFromExtension('framework', ['property_info' => ['with_constructor_extractor' => true]]);
+        }
     }
 
     private function getBaseDir(): string
