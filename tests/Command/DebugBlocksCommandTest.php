@@ -46,7 +46,7 @@ final class DebugBlocksCommandTest extends TestCase
             ->method('getServices')
             ->willReturn([]);
 
-        /** @phpstan-ignore function.impossibleType */
+        /** @phpstan-ignore function.alreadyNarrowedType */
         $method = method_exists($this->application, 'addCommand') ? 'addCommand' : 'add';
         /* @phpstan-ignore method.notFound,method.dynamicName */
         $this->application->{$method}(new DebugBlocksCommand($blockManager));
@@ -113,7 +113,7 @@ final class DebugBlocksCommandTest extends TestCase
                 },
             ]);
 
-        /** @phpstan-ignore function.impossibleType */
+        /** @phpstan-ignore function.alreadyNarrowedType */
         $method = method_exists($this->application, 'addCommand') ? 'addCommand' : 'add';
         /* @phpstan-ignore method.notFound,method.dynamicName */
         $this->application->{$method}(new DebugBlocksCommand($blockManager));

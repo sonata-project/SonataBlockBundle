@@ -32,8 +32,6 @@ final class StrategyManager implements StrategyManagerInterface
     private ?string $defaultRenderer = null;
 
     /**
-     * @psalm-suppress ContainerDependency
-     *
      * @param ContainerInterface    $container      Dependency injection container
      * @param array<string, string> $filters        Filter definitions
      * @param array<string, string> $renderers      Renderer definitions
@@ -88,7 +86,6 @@ final class StrategyManager implements StrategyManagerInterface
 
             // Convert throwable to exception
             if (!$exception instanceof \Exception) {
-                /** @psalm-suppress PossiblyInvalidArgument */
                 $exception = new \Exception($exception->getMessage(), $exception->getCode(), $exception);
             }
 
@@ -106,8 +103,7 @@ final class StrategyManager implements StrategyManagerInterface
      */
     public function getBlockRenderer(BlockInterface $block): RendererInterface
     {
-        $type = $block->getType();
-        $name = $this->blockRenderers[$type] ?? $this->defaultRenderer;
+        $name = $this->blockRenderers[(string) $block->getType()] ?? $this->defaultRenderer;
         if (null === $name) {
             throw new \RuntimeException('No default renderer was set.');
         }
@@ -132,8 +128,7 @@ final class StrategyManager implements StrategyManagerInterface
      */
     public function getBlockFilter(BlockInterface $block): FilterInterface
     {
-        $type = $block->getType();
-        $name = $this->blockFilters[$type] ?? $this->defaultFilter;
+        $name = $this->blockFilters[(string) $block->getType()] ?? $this->defaultFilter;
         if (null === $name) {
             throw new \RuntimeException('No default filter was set.');
         }

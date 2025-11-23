@@ -17,13 +17,17 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class FunctionalTest extends WebTestCase
 {
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        restore_exception_handler();
+    }
+
     public function testRenderBlock(): void
     {
         $client = static::createClient();
         $client->request('GET', '/');
 
         static::assertSame(200, $client->getResponse()->getStatusCode());
-
-        restore_exception_handler();
     }
 }
