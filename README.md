@@ -10,7 +10,6 @@ Symfony SonataBlockBundle
 
 [![Latest Stable Version](https://poser.pugx.org/sonata-project/block-bundle/v/stable)](https://packagist.org/packages/sonata-project/block-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/sonata-project/block-bundle/v/unstable)](https://packagist.org/packages/sonata-project/block-bundle)
-[![Psalm Type Coverage][shepherd_stable_badge]][shepherd_stable_link]
 [![License](https://poser.pugx.org/sonata-project/block-bundle/license)](https://packagist.org/packages/sonata-project/block-bundle)
 
 [![Total Downloads](https://poser.pugx.org/sonata-project/block-bundle/downloads)](https://packagist.org/packages/sonata-project/block-bundle)
