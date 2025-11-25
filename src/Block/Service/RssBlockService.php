@@ -94,7 +94,7 @@ final class RssBlockService extends AbstractBlockService implements EditableBloc
             ->with('settings[title]')
                 ->addConstraint(new NotNull())
                 ->addConstraint(new NotBlank())
-                ->addConstraint(new Length(['max' => 50]))
+                ->addConstraint(new Length(max: 50))
             ->end();
     }
 
