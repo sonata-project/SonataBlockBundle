@@ -56,6 +56,7 @@ final class RssBlockService extends AbstractBlockService implements EditableBloc
             'keys' => [
                 ['url', UrlType::class, [
                     'required' => false,
+                    'default_protocol' => 'https',
                     'label' => 'form.label_url',
                     'translation_domain' => 'SonataBlockBundle',
                 ]],
