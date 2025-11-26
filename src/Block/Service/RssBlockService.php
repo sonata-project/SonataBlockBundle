@@ -56,6 +56,7 @@ final class RssBlockService extends AbstractBlockService implements EditableBloc
             'keys' => [
                 ['url', UrlType::class, [
                     'required' => false,
+                    'default_protocol' => 'https',
                     'label' => 'form.label_url',
                     'translation_domain' => 'SonataBlockBundle',
                 ]],
@@ -94,7 +95,7 @@ final class RssBlockService extends AbstractBlockService implements EditableBloc
             ->with('settings[title]')
                 ->addConstraint(new NotNull())
                 ->addConstraint(new NotBlank())
-                ->addConstraint(new Length(['max' => 50]))
+                ->addConstraint(new Length(max: 50))
             ->end();
     }
 
