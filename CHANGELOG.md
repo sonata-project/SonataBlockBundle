@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.3.0](https://github.com/sonata-project/SonataBlockBundle/compare/5.2.0...5.3.0) - 2025-11-27
+### Added
+- [[#1247](https://github.com/sonata-project/SonataBlockBundle/pull/1247)] Added `default_protocol` equals `true` for UrlType` at `src/Block/Service/RssBlockService.php` ([@eerison](https://github.com/eerison))
+
+### Changed
+- [[#1247](https://github.com/sonata-project/SonataBlockBundle/pull/1247)] Changed passing `array` to `named` argument for `Length` validation constraint in `src/Block/Service/RssBlockService.php` ([@eerison](https://github.com/eerison))
+
+### Fixed
+- [[#1240](https://github.com/sonata-project/SonataBlockBundle/pull/1240)] Symfony 7.4 deprecations ([@dmaicher](https://github.com/dmaicher))
+
+### Removed
+- [[#1241](https://github.com/sonata-project/SonataBlockBundle/pull/1241)] Support for `sonata-project/form-extensions` v1 ([@dmaicher](https://github.com/dmaicher))
+
 ## [5.2.0](https://github.com/sonata-project/SonataBlockBundle/compare/5.1.2...5.2.0) - 2025-05-16
 ### Deprecated
 - [[#1232](https://github.com/sonata-project/SonataBlockBundle/pull/1232)] Extending BlockHelper ([@VincentLanglet](https://github.com/VincentLanglet))
