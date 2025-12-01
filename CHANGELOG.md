@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.4.0](https://github.com/sonata-project/SonataBlockBundle/compare/5.3.0...5.4.0) - 2025-11-30
+### Added
+- [[#1245](https://github.com/sonata-project/SonataBlockBundle/pull/1245)] Support for Symfony 8 ([@dmaicher](https://github.com/dmaicher))
+
+### Removed
+- [[#1245](https://github.com/sonata-project/SonataBlockBundle/pull/1245)] Support for PHP 8.1 ([@dmaicher](https://github.com/dmaicher))
+- [[#1245](https://github.com/sonata-project/SonataBlockBundle/pull/1245)] Support for Symfony 7.1 and 7.2 ([@dmaicher](https://github.com/dmaicher))
+
 ## [5.3.0](https://github.com/sonata-project/SonataBlockBundle/compare/5.2.0...5.3.0) - 2025-11-27
 ### Added
 - [[#1247](https://github.com/sonata-project/SonataBlockBundle/pull/1247)] Added `default_protocol` equals `true` for UrlType` at `src/Block/Service/RssBlockService.php` ([@eerison](https://github.com/eerison))

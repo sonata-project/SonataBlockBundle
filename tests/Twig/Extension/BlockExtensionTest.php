@@ -80,7 +80,6 @@ final class BlockExtensionTest extends TestCase
             ->method($expectedMethod)
             ->with(...$args);
 
-        /** @psalm-suppress InternalMethod */
         $func = $this->env->getFunction($name); // @phpstan-ignore method.internal
 
         static::assertInstanceOf(TwigFunction::class, $func);
