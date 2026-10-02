@@ -22,6 +22,6 @@ final class GlobalVariablesTest extends TestCase
     {
         $variables = new GlobalVariables([]);
 
-        static::assertEmpty($variables->getTemplates());
+        static::assertSame([], $variables->getTemplates());
     }
 }
