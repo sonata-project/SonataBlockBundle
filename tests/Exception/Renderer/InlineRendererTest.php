@@ -28,8 +28,8 @@ final class InlineRendererTest extends TestCase
     {
         $template = 'test-template';
 
-        $exception = $this->createMock(\Exception::class);
-        $block = $this->createMock(BlockInterface::class);
+        $exception = static::createStub(\Exception::class);
+        $block = static::createStub(BlockInterface::class);
 
         $twig = $this->createMock(Environment::class);
         $twig->expects(static::once())

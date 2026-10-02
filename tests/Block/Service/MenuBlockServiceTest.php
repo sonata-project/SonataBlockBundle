@@ -29,11 +29,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 final class MenuBlockServiceTest extends BlockServiceTestCase
 {
     /**
-     * @var MenuProviderInterface&MockObject
-     */
-    private MenuProviderInterface $menuProvider;
-
-    /**
      * @var MenuRegistryInterface&MockObject
      */
     private MenuRegistryInterface $menuRegistry;
@@ -41,8 +36,6 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->menuProvider = $this->createMock(MenuProviderInterface::class);
         $this->menuRegistry = $this->createMock(MenuRegistryInterface::class);
     }
 
@@ -55,7 +48,7 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
             ]);
 
         $formMapper = $this->createMock(FormMapper::class);
-        $block = $this->createMock(BlockInterface::class);
+        $block = static::createStub(BlockInterface::class);
 
         $choiceOptions = [
             'required' => true,
@@ -105,13 +98,13 @@ final class MenuBlockServiceTest extends BlockServiceTestCase
                 'translation_domain' => 'SonataBlockBundle',
             ]);
 
-        $blockService = new MenuBlockService($this->twig, $this->menuProvider, $this->menuRegistry);
+        $blockService = new MenuBlockService($this->twig, static::createStub(MenuProviderInterface::class), $this->menuRegistry);
         $blockService->configureEditForm($formMapper, $block);
     }
 
     public function testDefaultSettings(): void
     {
-        $blockService = new MenuBlockService($this->twig, $this->menuProvider, $this->menuRegistry);
+        $blockService = new MenuBlockService($this->twig, static::createStub(MenuProviderInterface::class), $this->menuRegistry);
         $blockContext = $this->getBlockContext($blockService);
 
         $this->assertSettings([

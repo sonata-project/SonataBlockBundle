@@ -21,7 +21,7 @@ final class BlockTest extends TestCase
     public function testSetterGetter(): void
     {
         $time = new \DateTime();
-        $parent = $this->createMock(Block::class);
+        $parent = static::createStub(Block::class);
 
         $block = new Block();
         $block->setName('my.block.name');

@@ -64,14 +64,14 @@ final class BlockRendererTest extends TestCase
     public function testRenderWithoutErrors(): void
     {
         // mock a block service that returns a response
-        $response = $this->createMock(Response::class);
+        $response = static::createStub(Response::class);
         $service = $this->createMock(BlockServiceInterface::class);
         $service->expects(static::once())->method('load');
         $service->expects(static::once())->method('execute')->willReturn($response);
         $this->blockServiceManager->expects(static::once())->method('get')->willReturn($service);
 
         // mock a block object
-        $block = $this->createMock(BlockInterface::class);
+        $block = static::createStub(BlockInterface::class);
         $blockContext = new BlockContext($block, [
             'template' => 'fake_template',
         ]);
@@ -90,7 +90,7 @@ final class BlockRendererTest extends TestCase
         $service = $this->createMock(BlockServiceInterface::class);
         $service->expects(static::once())->method('load');
 
-        $exception = $this->createMock(\Exception::class);
+        $exception = static::createStub(\Exception::class);
         $service->expects(static::once())
             ->method('execute')
             ->willReturnCallback(static function () use ($exception): void {
@@ -100,7 +100,7 @@ final class BlockRendererTest extends TestCase
         $this->blockServiceManager->expects(static::once())->method('get')->willReturn($service);
 
         // mock the exception strategy manager to return a response when given the correct exception
-        $response = $this->createMock(Response::class);
+        $response = static::createStub(Response::class);
         $this->exceptionStrategyManager->expects(static::once())
             ->method('handleException')
             ->with(static::equalTo($exception))
@@ -110,7 +110,7 @@ final class BlockRendererTest extends TestCase
         $this->logger->expects(static::once())->method('error');
 
         // mock a block object
-        $block = $this->createMock(BlockInterface::class);
+        $block = static::createStub(BlockInterface::class);
         $blockContext = new BlockContext($block, [
             'template' => 'fake_template',
         ]);

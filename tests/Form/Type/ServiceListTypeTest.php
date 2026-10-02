@@ -27,7 +27,7 @@ final class ServiceListTypeTest extends TestCase
     public function testFormType(): void
     {
         $type = new ServiceListType(
-            $this->createMock(BlockServiceManagerInterface::class)
+            static::createStub(BlockServiceManagerInterface::class)
         );
 
         static::assertSame('sonata_block_service_choice', $type->getBlockPrefix());
@@ -39,7 +39,7 @@ final class ServiceListTypeTest extends TestCase
         $this->expectException(MissingOptionsException::class);
 
         $type = new ServiceListType(
-            $this->createMock(BlockServiceManagerInterface::class)
+            static::createStub(BlockServiceManagerInterface::class)
         );
 
         $resolver = new OptionsResolver();
@@ -51,7 +51,7 @@ final class ServiceListTypeTest extends TestCase
     #[Group('legacy')]
     public function testOptionWithValidContext(): void
     {
-        $blockService = $this->createMock(BlockServiceInterface::class);
+        $blockService = static::createStub(BlockServiceInterface::class);
 
         $blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
         $blockServiceManager

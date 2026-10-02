@@ -53,9 +53,8 @@ abstract class BlockServiceTestCase extends TestCase
 
     protected function setUp(): void
     {
-        $blockLoader = $this->createMock(BlockLoaderInterface::class);
         $this->blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
-        $this->blockContextManager = new BlockContextManager($blockLoader, $this->blockServiceManager);
+        $this->blockContextManager = new BlockContextManager(static::createStub(BlockLoaderInterface::class), $this->blockServiceManager);
         $this->twig = $this->createMock(Environment::class);
         $this->block = $this->createMock(BlockInterface::class);
     }
