@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests\Block\Service;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\Service\TextBlockService;
@@ -23,6 +24,7 @@ use Sonata\BlockBundle\Test\BlockServiceTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TextBlockServiceTest extends BlockServiceTestCase
 {
     public function testService(): void
@@ -53,7 +55,7 @@ final class TextBlockServiceTest extends BlockServiceTestCase
     {
         $block = static::createStub(BlockInterface::class);
 
-        $blockContext = $this->createMock(BlockContextInterface::class);
+        $blockContext = static::createStub(BlockContextInterface::class);
         $blockContext->method('getTemplate')
             ->willReturn('@SonataBlock/Block/block_core_text.html.twig');
         $blockContext->method('getSettings')

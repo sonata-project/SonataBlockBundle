@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests\Exception\Strategy;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Filter\FilterInterface;
@@ -30,35 +29,8 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class StrategyManagerTest extends TestCase
 {
-    private StrategyManager $manager;
-
     /**
-     * @var MockObject&ContainerInterface
-     */
-    private ContainerInterface $container;
-
-    /**
-     * @var array<string, string>
-     */
-    private array $filters = [];
-
-    /**
-     * @var array<string, string>
-     */
-    private array $renderers = [];
-
-    /**
-     * @var array<string, string>
-     */
-    private array $blockFilters = [];
-
-    /**
-     * @var array<string, string>
-     */
-    private array $blockRenderers = [];
-
-    /**
-     * @var MockObject&RendererInterface
+     * @var Stub&RendererInterface
      */
     private RendererInterface $renderer1;
 
@@ -68,7 +40,7 @@ final class StrategyManagerTest extends TestCase
     private RendererInterface $renderer2;
 
     /**
-     * @var MockObject&FilterInterface
+     * @var Stub&FilterInterface
      */
     private FilterInterface $filter1;
 
@@ -79,75 +51,58 @@ final class StrategyManagerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->renderer1 = $this->createMock(RendererInterface::class);
+        $this->renderer1 = static::createStub(RendererInterface::class);
         $this->renderer2 = static::createStub(RendererInterface::class);
-        $this->filter1 = $this->createMock(FilterInterface::class);
+        $this->filter1 = static::createStub(FilterInterface::class);
         $this->filter2 = static::createStub(FilterInterface::class);
-
-        $this->container = $this->getMockContainer([
-            'service.renderer1' => $this->renderer1,
-            'service.renderer2' => $this->renderer2,
-            'service.filter1' => $this->filter1,
-            'service.filter2' => $this->filter2,
-        ]);
-
-        $this->renderers = [];
-        $this->renderers['renderer1'] = 'service.renderer1';
-        $this->renderers['renderer2'] = 'service.renderer2';
-
-        $this->filters = [];
-        $this->filters['filter1'] = 'service.filter1';
-        $this->filters['filter2'] = 'service.filter2';
-
-        $this->blockFilters = ['block.type1' => 'filter2'];
-        $this->blockRenderers = ['block.type1' => 'renderer2'];
-
-        $this->manager = new StrategyManager($this->container, $this->filters, $this->renderers, $this->blockFilters, $this->blockRenderers);
-
-        $this->manager->setDefaultFilter('filter1');
-        $this->manager->setDefaultRenderer('renderer1');
     }
 
     public function testGetBlockRendererWithExisting(): void
     {
-        $block = $this->getMockBlock('block.type1');
+        $block = $this->createBlock('block.type1');
 
-        $renderer = $this->manager->getBlockRenderer($block);
+        $renderer = $this->createManager()->getBlockRenderer($block);
         static::assertSame($this->renderer2, $renderer, 'Should return the block type1 renderer');
     }
 
     public function testGetBlockRendererWithNonExisting(): void
     {
-        $block = $this->getMockBlock('block.other_type');
+        $block = $this->createBlock('block.other_type');
 
-        $renderer = $this->manager->getBlockRenderer($block);
+        $renderer = $this->createManager()->getBlockRenderer($block);
         static::assertSame($this->renderer1, $renderer, 'Should return the default renderer');
     }
 
     public function testGetBlockFilterWithExisting(): void
     {
-        $block = $this->getMockBlock('block.type1');
+        $block = $this->createBlock('block.type1');
 
-        $filter = $this->manager->getBlockFilter($block);
+        $filter = $this->createManager()->getBlockFilter($block);
         static::assertSame($this->filter2, $filter, 'Should return the block type1 filter');
     }
 
     public function testGetBlockFilterWithNonExisting(): void
     {
-        $block = $this->getMockBlock('block.other_type');
+        $block = $this->createBlock('block.other_type');
 
-        $filter = $this->manager->getBlockFilter($block);
+        $filter = $this->createManager()->getBlockFilter($block);
         static::assertSame($this->filter1, $filter, 'Should return the default filter');
     }
 
     public function testHandleExceptionWithKeepNoneFilter(): void
     {
-        $this->filter1->expects(static::once())->method('handle')->willReturn(false);
+        $filter1 = $this->createMock(FilterInterface::class);
+        $filter1->expects(static::once())->method('handle')->willReturn(false);
+        $this->filter1 = $filter1;
+
+        $renderer1 = $this->createMock(RendererInterface::class);
+        $renderer1->expects(static::never())->method('render');
+        $this->renderer1 = $renderer1;
 
         $exception = new \Exception();
-        $block = $this->getMockBlock('block.other_type');
+        $block = $this->createBlock('block.other_type');
 
-        $response = $this->manager->handleException($exception, $block);
+        $response = $this->createManager()->handleException($exception, $block);
         static::assertInstanceOf(Response::class, $response, 'should return a response object');
     }
 
@@ -156,45 +111,73 @@ final class StrategyManagerTest extends TestCase
         $rendererResponse = new Response();
         $rendererResponse->setContent('renderer response');
 
-        $this->filter1->expects(static::once())->method('handle')->willReturn(true);
-        $this->renderer1->expects(static::once())->method('render')->willReturn($rendererResponse);
+        $filter1 = $this->createMock(FilterInterface::class);
+        $filter1->expects(static::once())->method('handle')->willReturn(true);
+        $this->filter1 = $filter1;
+
+        $renderer1 = $this->createMock(RendererInterface::class);
+        $renderer1->expects(static::once())->method('render')->willReturn($rendererResponse);
+        $this->renderer1 = $renderer1;
 
         $exception = new \Exception();
-        $block = $this->getMockBlock('block.other_type');
+        $block = $this->createBlock('block.other_type');
 
-        $response = $this->manager->handleException($exception, $block);
+        $response = $this->createManager()->handleException($exception, $block);
         static::assertSame('renderer response', $response->getContent(), 'should return the renderer response');
     }
 
-    /**
-     * Returns a mock block model with given type.
-     *
-     * @return BlockInterface&MockObject
-     */
-    private function getMockBlock(string $type): BlockInterface
+    private function createManager(): StrategyManager
     {
-        $block = $this->createMock(BlockInterface::class);
-        $block->expects(static::any())->method('getType')->willReturn($type);
+        $container = $this->createContainer([
+            'service.renderer1' => $this->renderer1,
+            'service.renderer2' => $this->renderer2,
+            'service.filter1' => $this->filter1,
+            'service.filter2' => $this->filter2,
+        ]);
+
+        $manager = new StrategyManager(
+            $container,
+            ['filter1' => 'service.filter1', 'filter2' => 'service.filter2'],
+            ['renderer1' => 'service.renderer1', 'renderer2' => 'service.renderer2'],
+            ['block.type1' => 'filter2'],
+            ['block.type1' => 'renderer2']
+        );
+
+        $manager->setDefaultFilter('filter1');
+        $manager->setDefaultRenderer('renderer1');
+
+        return $manager;
+    }
+
+    /**
+     * Returns a block model stub with given type.
+     *
+     * @return BlockInterface&Stub
+     */
+    private function createBlock(string $type): BlockInterface
+    {
+        $block = static::createStub(BlockInterface::class);
+        $block->method('getType')->willReturn($type);
 
         return $block;
     }
 
     /**
-     * Returns a mock container with defined services.
+     * Returns a container stub with defined services.
      *
      * @param array<string, mixed> $services
      *
-     * @return ContainerInterface&MockObject
+     * @return ContainerInterface&Stub
      */
-    private function getMockContainer(array $services = []): ContainerInterface
+    private function createContainer(array $services = []): ContainerInterface
     {
         $map = [];
         foreach ($services as $name => $service) {
             $map[] = [$name, ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $service];
         }
 
-        $container = $this->createMock(ContainerInterface::class);
-        $container->expects(static::any())->method('get')->willReturnMap($map);
+        $container = static::createStub(ContainerInterface::class);
+        $container->method('get')->willReturnMap($map);
 
         return $container;
     }

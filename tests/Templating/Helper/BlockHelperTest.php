@@ -17,8 +17,6 @@ use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Block\BlockContextManagerInterface;
 use Sonata\BlockBundle\Block\BlockRendererInterface;
-use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
-use Sonata\BlockBundle\Block\Service\BlockServiceInterface;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -42,11 +40,6 @@ final class BlockHelperTest extends TestCase
 
     public function testRenderEventWithListeners(): void
     {
-        $blockService = static::createStub(BlockServiceInterface::class);
-
-        $blockServiceManager = $this->createMock(BlockServiceManagerInterface::class);
-        $blockServiceManager->expects(static::any())->method('get')->willReturn($blockService);
-
         $blockRenderer = $this->createMock(BlockRendererInterface::class);
         $blockRenderer->expects(static::once())->method('render')->willReturn(new Response('<span>test</span>'));
 
