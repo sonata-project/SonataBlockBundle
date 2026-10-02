@@ -37,7 +37,7 @@ final class InlineDebugRendererTest extends TestCase
         $response = $renderer->render($exception, $block);
 
         static::assertInstanceOf(Response::class, $response, 'Should return a Response');
-        static::assertEmpty($response->getContent(), 'Should have no content');
+        static::assertSame('', $response->getContent(), 'Should have no content');
     }
 
     public function testRenderWithDebugEnabled(): void

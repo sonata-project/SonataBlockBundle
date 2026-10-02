@@ -77,7 +77,7 @@ final class BlockServiceManagerTest extends TestCase
 
         $manager->add('foo.bar', $service);
 
-        static::assertEmpty($manager->getServicesByContext('fake'));
+        static::assertSame([], $manager->getServicesByContext('fake'));
     }
 
     public function testGetListFromValidContext(): void
@@ -88,7 +88,7 @@ final class BlockServiceManagerTest extends TestCase
 
         $manager->add('foo.bar', $service, ['fake']);
 
-        static::assertNotEmpty($manager->getServicesByContext('fake'));
+        static::assertSame(['foo.bar' => $service], $manager->getServicesByContext('fake'));
     }
 
     public function testGetServicesByContextWithoutContainers(): void
@@ -104,6 +104,6 @@ final class BlockServiceManagerTest extends TestCase
 
         $manager->add('foo.bar', $service, ['bar']);
 
-        static::assertEmpty($manager->getServicesByContext('fake', false));
+        static::assertSame([], $manager->getServicesByContext('fake', false));
     }
 }

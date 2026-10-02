@@ -25,7 +25,7 @@ final class BlockEventTest extends TestCase
     {
         $blockEvent = new BlockEvent();
 
-        static::assertEmpty($blockEvent->getSettings());
+        static::assertSame([], $blockEvent->getSettings());
 
         $blockEvent->addBlock($this->createMock(BlockInterface::class));
 
