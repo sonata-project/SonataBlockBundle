@@ -70,6 +70,10 @@ final class BlockRendererTest extends TestCase
         $service->expects(static::once())->method('execute')->willReturn($response);
         $this->blockServiceManager->expects(static::once())->method('get')->willReturn($service);
 
+        // no exception handling and no error logging
+        $this->exceptionStrategyManager->expects(static::never())->method('handleException');
+        $this->logger->expects(static::never())->method('error');
+
         // mock a block object
         $block = static::createStub(BlockInterface::class);
         $blockContext = new BlockContext($block, [

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Tests\Block\Service;
 
 use Knp\Menu\Provider\MenuProviderInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use Sonata\BlockBundle\Block\Service\MenuBlockService;
@@ -26,6 +27,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+#[AllowMockObjectsWithoutExpectations]
 final class MenuBlockServiceTest extends BlockServiceTestCase
 {
     /**

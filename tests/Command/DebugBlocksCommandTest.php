@@ -40,9 +40,8 @@ final class DebugBlocksCommandTest extends TestCase
     {
         $this->application = new Application();
 
-        $blockManager = $this->createMock(BlockServiceManagerInterface::class);
+        $blockManager = static::createStub(BlockServiceManagerInterface::class);
         $blockManager
-            ->expects(static::any())
             ->method('getServices')
             ->willReturn([]);
 
@@ -72,9 +71,8 @@ final class DebugBlocksCommandTest extends TestCase
         $this->application = new Application();
         $twig = static::createStub(Environment::class);
 
-        $blockManager = $this->createMock(BlockServiceManagerInterface::class);
+        $blockManager = static::createStub(BlockServiceManagerInterface::class);
         $blockManager
-            ->expects(static::any())
             ->method('getServices')
             ->willReturn([
                 'test.without_options' => new class($twig) extends AbstractBlockService {

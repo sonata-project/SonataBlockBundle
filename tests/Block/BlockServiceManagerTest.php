@@ -32,8 +32,8 @@ final class BlockServiceManagerTest extends TestCase
         $manager = new BlockServiceManager($container, []);
         $manager->add('test', 'test');
 
-        $block = $this->createMock(BlockInterface::class);
-        $block->expects(static::any())->method('getType')->willReturn('test');
+        $block = static::createStub(BlockInterface::class);
+        $block->method('getType')->willReturn('test');
 
         static::assertSame($service, $manager->get($block));
     }
@@ -51,8 +51,8 @@ final class BlockServiceManagerTest extends TestCase
 
         $manager->add('test', 'test');
 
-        $block = $this->createMock(BlockInterface::class);
-        $block->expects(static::any())->method('getType')->willReturn('test');
+        $block = static::createStub(BlockInterface::class);
+        $block->method('getType')->willReturn('test');
 
         $manager->get($block);
     }
@@ -63,8 +63,8 @@ final class BlockServiceManagerTest extends TestCase
 
         $manager = new BlockServiceManager(new Container(), []);
 
-        $block = $this->createMock(BlockInterface::class);
-        $block->expects(static::any())->method('getType')->willReturn('fakse');
+        $block = static::createStub(BlockInterface::class);
+        $block->method('getType')->willReturn('fakse');
 
         $manager->get($block);
     }
