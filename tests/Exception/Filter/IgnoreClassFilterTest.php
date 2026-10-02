@@ -25,8 +25,8 @@ final class IgnoreClassFilterTest extends TestCase
 {
     public function testWithInheritedException(): void
     {
-        $exception = $this->createMock(NotFoundHttpException::class);
-        $block = $this->createMock(BlockInterface::class);
+        $exception = static::createStub(NotFoundHttpException::class);
+        $block = static::createStub(BlockInterface::class);
         $filter = new IgnoreClassFilter(\RuntimeException::class);
 
         $result = $filter->handle($exception, $block);
@@ -36,8 +36,8 @@ final class IgnoreClassFilterTest extends TestCase
 
     public function testWithNonInheritedException(): void
     {
-        $exception = $this->createMock(\Exception::class);
-        $block = $this->createMock(BlockInterface::class);
+        $exception = static::createStub(\Exception::class);
+        $block = static::createStub(BlockInterface::class);
         $filter = new IgnoreClassFilter(\RuntimeException::class);
 
         $result = $filter->handle($exception, $block);

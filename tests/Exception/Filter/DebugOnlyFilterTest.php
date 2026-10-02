@@ -24,8 +24,8 @@ final class DebugOnlyFilterTest extends TestCase
 {
     public function testWithDebugEnabled(): void
     {
-        $exception = $this->createMock(\Exception::class);
-        $block = $this->createMock(BlockInterface::class);
+        $exception = static::createStub(\Exception::class);
+        $block = static::createStub(BlockInterface::class);
         $filter = new DebugOnlyFilter(true);
 
         $result = $filter->handle($exception, $block);
@@ -35,8 +35,8 @@ final class DebugOnlyFilterTest extends TestCase
 
     public function testWithDebugDisabled(): void
     {
-        $exception = $this->createMock(\Exception::class);
-        $block = $this->createMock(BlockInterface::class);
+        $exception = static::createStub(\Exception::class);
+        $block = static::createStub(BlockInterface::class);
         $filter = new DebugOnlyFilter(false);
 
         $result = $filter->handle($exception, $block);

@@ -70,7 +70,7 @@ final class DebugBlocksCommandTest extends TestCase
     public function testDebugBlocks(): void
     {
         $this->application = new Application();
-        $twig = $this->createMock(Environment::class);
+        $twig = static::createStub(Environment::class);
 
         $blockManager = $this->createMock(BlockServiceManagerInterface::class);
         $blockManager

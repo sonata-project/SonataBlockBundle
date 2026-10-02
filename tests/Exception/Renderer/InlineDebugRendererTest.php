@@ -28,9 +28,9 @@ final class InlineDebugRendererTest extends TestCase
     {
         $template = 'test-template';
         $debug = false;
-        $exception = $this->createMock(\Exception::class);
-        $block = $this->createMock(BlockInterface::class);
-        $twig = $this->createMock(Environment::class);
+        $exception = static::createStub(\Exception::class);
+        $block = static::createStub(BlockInterface::class);
+        $twig = static::createStub(Environment::class);
 
         $renderer = new InlineDebugRenderer($twig, $template, $debug);
 
@@ -45,8 +45,8 @@ final class InlineDebugRendererTest extends TestCase
         $template = 'test-template';
         $debug = true;
 
-        $exception = $this->createMock(\Exception::class);
-        $block = $this->createMock(BlockInterface::class);
+        $exception = static::createStub(\Exception::class);
+        $block = static::createStub(BlockInterface::class);
 
         $twig = $this->createMock(Environment::class);
         $twig->expects(static::once())

@@ -27,7 +27,7 @@ final class MonkeyThrowRendererTest extends TestCase
         $this->expectException(\Exception::class);
 
         $exception = new \Exception();
-        $block = $this->createMock(BlockInterface::class);
+        $block = static::createStub(BlockInterface::class);
         $renderer = new MonkeyThrowRenderer();
 
         $renderer->render($exception, $block);
@@ -38,7 +38,7 @@ final class MonkeyThrowRendererTest extends TestCase
         $this->expectException(\RuntimeException::class);
 
         $exception = new \RuntimeException();
-        $block = $this->createMock(BlockInterface::class);
+        $block = static::createStub(BlockInterface::class);
         $renderer = new MonkeyThrowRenderer();
 
         $renderer->render($exception, $block);

@@ -40,7 +40,7 @@ final class BlockExtensionTest extends TestCase
 
         $this->blockExtension = new BlockExtension();
 
-        $this->env = new Environment($this->createMock(LoaderInterface::class));
+        $this->env = new Environment(static::createStub(LoaderInterface::class));
         $this->env->addExtension($this->blockExtension);
         $this->env->addRuntimeLoader(new FactoryRuntimeLoader([
             BlockHelper::class => fn (): BlockHelper => $this->blockHelper,

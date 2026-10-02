@@ -145,9 +145,7 @@ final class SonataBlockExtension extends Extension
             }
 
             foreach ($settings['contexts'] as $context) {
-                if (!isset($contexts[$context])) {
-                    $contexts[$context] = [];
-                }
+                $contexts[$context] ??= [];
 
                 $contexts[$context][] = $service;
             }

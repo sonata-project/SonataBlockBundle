@@ -21,7 +21,7 @@ final class BlockExecutionContextTest extends TestCase
 {
     public function testBasicFeature(): void
     {
-        $block = $this->createMock(BlockInterface::class);
+        $block = static::createStub(BlockInterface::class);
 
         $blockContext = new BlockContext($block, [
             'hello' => 'world',
@@ -42,7 +42,7 @@ final class BlockExecutionContextTest extends TestCase
     {
         $this->expectException(\RuntimeException::class);
 
-        $block = $this->createMock(BlockInterface::class);
+        $block = static::createStub(BlockInterface::class);
 
         $blockContext = new BlockContext($block, [
             'template' => 'fake_template',

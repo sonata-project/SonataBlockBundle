@@ -31,7 +31,7 @@ final class BlockContextManagerTest extends TestCase
 
         $service->expects(static::once())->method('configureSettings');
 
-        $blockLoader = $this->createMock(BlockLoaderInterface::class);
+        $blockLoader = static::createStub(BlockLoaderInterface::class);
 
         $serviceManager = $this->createMock(BlockServiceManagerInterface::class);
         $serviceManager->expects(static::once())->method('get')->willReturn($service);
@@ -92,7 +92,7 @@ final class BlockContextManagerTest extends TestCase
         $service = $this->createMock(AbstractBlockService::class);
         $service->expects(static::once())->method('configureSettings');
 
-        $blockLoader = $this->createMock(BlockLoaderInterface::class);
+        $blockLoader = static::createStub(BlockLoaderInterface::class);
 
         $serviceManager = $this->createMock(BlockServiceManagerInterface::class);
         $serviceManager->expects(static::once())->method('get')->willReturn($service);
@@ -122,7 +122,7 @@ final class BlockContextManagerTest extends TestCase
         $service = $this->createMock(AbstractBlockService::class);
         $service->expects(static::exactly(2))->method('configureSettings');
 
-        $blockLoader = $this->createMock(BlockLoaderInterface::class);
+        $blockLoader = static::createStub(BlockLoaderInterface::class);
 
         $serviceManager = $this->createMock(BlockServiceManagerInterface::class);
         $serviceManager->expects(static::exactly(2))->method('get')->willReturn($service);

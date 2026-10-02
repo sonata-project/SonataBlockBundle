@@ -27,11 +27,11 @@ final class BlockEventTest extends TestCase
 
         static::assertSame([], $blockEvent->getSettings());
 
-        $blockEvent->addBlock($this->createMock(BlockInterface::class));
+        $blockEvent->addBlock(static::createStub(BlockInterface::class));
 
         static::assertCount(1, $blockEvent->getBlocks());
 
-        $blockEvent->addBlock($this->createMock(BlockInterface::class));
+        $blockEvent->addBlock(static::createStub(BlockInterface::class));
         static::assertCount(2, $blockEvent->getBlocks());
 
         static::assertNull($blockEvent->getSetting('fake'));

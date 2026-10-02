@@ -31,7 +31,7 @@ final class BlockLoaderChainTest extends TestCase
 
     public function testLoaderWithSupportedLoader(): void
     {
-        $block = $this->createMock(BlockInterface::class);
+        $block = static::createStub(BlockInterface::class);
 
         $loader = $this->createMock(BlockLoaderInterface::class);
         $loader->expects(static::once())->method('support')->willReturn(true);

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\BlockBundle\Tests\Exception\Strategy;
 
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Exception\Filter\FilterInterface;
 use Sonata\BlockBundle\Exception\Renderer\RendererInterface;
@@ -62,7 +63,7 @@ final class StrategyManagerTest extends TestCase
     private RendererInterface $renderer1;
 
     /**
-     * @var MockObject&RendererInterface
+     * @var Stub&RendererInterface
      */
     private RendererInterface $renderer2;
 
@@ -72,16 +73,16 @@ final class StrategyManagerTest extends TestCase
     private FilterInterface $filter1;
 
     /**
-     * @var MockObject&FilterInterface
+     * @var Stub&FilterInterface
      */
     private FilterInterface $filter2;
 
     protected function setUp(): void
     {
         $this->renderer1 = $this->createMock(RendererInterface::class);
-        $this->renderer2 = $this->createMock(RendererInterface::class);
+        $this->renderer2 = static::createStub(RendererInterface::class);
         $this->filter1 = $this->createMock(FilterInterface::class);
-        $this->filter2 = $this->createMock(FilterInterface::class);
+        $this->filter2 = static::createStub(FilterInterface::class);
 
         $this->container = $this->getMockContainer([
             'service.renderer1' => $this->renderer1,

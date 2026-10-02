@@ -51,7 +51,7 @@ final class TextBlockServiceTest extends BlockServiceTestCase
 
     public function testExecute(): void
     {
-        $block = $this->createMock(BlockInterface::class);
+        $block = static::createStub(BlockInterface::class);
 
         $blockContext = $this->createMock(BlockContextInterface::class);
         $blockContext->method('getTemplate')
