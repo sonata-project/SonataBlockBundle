@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests\Block;
 
+use Doctrine\Persistence\Mapping\ProxyClassNameResolver;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Sonata\BlockBundle\Block\BlockContextInterface;
@@ -22,6 +23,7 @@ use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\BlockBundle\Tests\Fixtures\Proxy\Block as ProxyBlock;
 
 final class BlockContextManagerTest extends TestCase
 {
@@ -39,7 +41,9 @@ final class BlockContextManagerTest extends TestCase
         $block = $this->createMock(BlockInterface::class);
         $block->expects(static::once())->method('getSettings')->willReturn([]);
 
-        $manager = new BlockContextManager($blockLoader, $serviceManager);
+        $classNameResolver = $this->createStub(ProxyClassNameResolver::class);
+
+        $manager = new BlockContextManager($blockLoader, $serviceManager, $classNameResolver);
 
         $settings = ['template' => 'custom.html.twig'];
 
@@ -65,11 +69,13 @@ final class BlockContextManagerTest extends TestCase
         $serviceManager = $this->createMock(BlockServiceManagerInterface::class);
         $serviceManager->expects(static::once())->method('get')->willReturn($service);
 
+        $classNameResolver = $this->createStub(ProxyClassNameResolver::class);
+
         $blockMeta = [
             'type' => 'some_block_id',
         ];
 
-        $manager = new BlockContextManager($blockLoader, $serviceManager);
+        $manager = new BlockContextManager($blockLoader, $serviceManager, $classNameResolver);
 
         $settings = ['template' => 'custom.html.twig'];
 
@@ -100,7 +106,9 @@ final class BlockContextManagerTest extends TestCase
         $block = $this->createMock(BlockInterface::class);
         $block->expects(static::once())->method('getSettings')->willReturn([]);
 
-        $manager = new BlockContextManager($blockLoader, $serviceManager);
+        $classNameResolver = $this->createStub(ProxyClassNameResolver::class);
+
+        $manager = new BlockContextManager($blockLoader, $serviceManager, $classNameResolver);
 
         $settings = ['template' => 'custom.html.twig'];
 
@@ -134,10 +142,41 @@ final class BlockContextManagerTest extends TestCase
         ]);
         $block->expects(static::once())->method('getSetting')->with('template')->willReturn('custom.html.twig');
 
-        $manager = new BlockContextManager($blockLoader, $serviceManager, $logger);
+        $classNameResolver = $this->createStub(ProxyClassNameResolver::class);
+
+        $manager = new BlockContextManager($blockLoader, $serviceManager, $classNameResolver, $logger);
 
         $blockContext = $manager->get($block);
 
         static::assertInstanceOf(BlockContextInterface::class, $blockContext);
+    }
+
+    public function testWithProxyClass(): void
+    {
+        $service = $this->createMock(AbstractBlockService::class);
+        $service->expects(static::once())->method('configureSettings');
+
+        $blockLoader = $this->createMock(BlockLoaderInterface::class);
+        $blockLoader->expects(static::once())->method('load')->willReturn(new ProxyBlock());
+
+        $serviceManager = $this->createMock(BlockServiceManagerInterface::class);
+        $serviceManager->expects(static::once())->method('get')->willReturn($service);
+
+        $classNameResolver = $this->createMock(ProxyClassNameResolver::class);
+        $classNameResolver->expects(static::once())->method('resolveClassName')
+          ->with(ProxyBlock::class)
+          ->willReturn(Block::class);
+
+        $manager = new BlockContextManager($blockLoader, $serviceManager, $classNameResolver);
+        $manager->addSettingsByClass(Block::class, ['foo' => 'bar']);
+
+        $blockContext = $manager->get('proxy_block');
+
+        static::assertInstanceOf(BlockContextInterface::class, $blockContext);
+
+        static::assertSame([
+          'foo' => 'bar',
+          'attr' => [],
+        ], $blockContext->getSettings());
     }
 }

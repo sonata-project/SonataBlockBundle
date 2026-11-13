@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Block;
 
-use Doctrine\Common\Util\ClassUtils;
+use Doctrine\Persistence\Mapping\ProxyClassNameResolver;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -37,6 +37,7 @@ final class BlockContextManager implements BlockContextManagerInterface
     public function __construct(
         private BlockLoaderInterface $blockLoader,
         private BlockServiceManagerInterface $blockService,
+        private ProxyClassNameResolver $classNameResolver,
         private LoggerInterface $logger = new NullLogger(),
     ) {
     }
@@ -114,8 +115,10 @@ final class BlockContextManager implements BlockContextManagerInterface
             ->addAllowedTypes('attr', 'array')
             ->addAllowedTypes('template', 'string');
 
+        // Resolve class name even with proxy.
+        $class = $this->classNameResolver->resolveClassName($block::class);
+
         // add type and class settings for block
-        $class = ClassUtils::getClass($block);
         $settingsByType = $this->settingsByType[$block->getType() ?? ''] ?? [];
         $settingsByClass = $this->settingsByClass[$class] ?? [];
         $optionsResolver->setDefaults(array_merge($settingsByType, $settingsByClass));
