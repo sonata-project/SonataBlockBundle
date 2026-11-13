@@ -22,6 +22,7 @@ use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\BlockBundle\Tests\Fixtures\Proxy\__CG__\Sonata\BlockBundle\Model\Block as ProxyBlock;
 
 final class BlockContextManagerTest extends TestCase
 {
@@ -139,5 +140,29 @@ final class BlockContextManagerTest extends TestCase
         $blockContext = $manager->get($block);
 
         static::assertInstanceOf(BlockContextInterface::class, $blockContext);
+    }
+
+    public function testWithProxyClass(): void
+    {
+        $service = $this->createMock(AbstractBlockService::class);
+        $service->expects(static::once())->method('configureSettings');
+
+        $blockLoader = $this->createMock(BlockLoaderInterface::class);
+        $blockLoader->expects(static::once())->method('load')->willReturn(new ProxyBlock());
+
+        $serviceManager = $this->createMock(BlockServiceManagerInterface::class);
+        $serviceManager->expects(static::once())->method('get')->willReturn($service);
+
+        $manager = new BlockContextManager($blockLoader, $serviceManager);
+        $manager->addSettingsByClass(Block::class, ['foo' => 'bar']);
+
+        $blockContext = $manager->get('proxy_block');
+
+        static::assertInstanceOf(BlockContextInterface::class, $blockContext);
+
+        static::assertSame([
+          'foo' => 'bar',
+          'attr' => [],
+        ], $blockContext->getSettings());
     }
 }
