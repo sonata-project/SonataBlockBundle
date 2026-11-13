@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Sonata\BlockBundle\Tests\Fixtures\Proxy\__CG__\Sonata\BlockBundle\Model;
+namespace Sonata\BlockBundle\Tests\Fixtures\Proxy;
 
 class Block extends \Sonata\BlockBundle\Model\Block
 {
