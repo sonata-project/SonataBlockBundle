@@ -55,7 +55,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
 
         return [
             'block_id' => $block->getId(),
-            'updated_at' => null !== $updatedAt ? $updatedAt->format('U') : null,
+            'updated_at' => $updatedAt?->format('U'),
         ];
     }
 
