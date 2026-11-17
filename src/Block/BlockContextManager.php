@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Block;
 
-use Doctrine\Common\Util\ClassUtils;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -115,7 +114,12 @@ final class BlockContextManager implements BlockContextManagerInterface
             ->addAllowedTypes('template', 'string');
 
         // add type and class settings for block
-        $class = ClassUtils::getClass($block);
+        $class = $block::class;
+        // Legacy Doctrine proxies prepend a namespace ending in "\\__CG__\\" to the original class name.
+        $proxyMarker = strrpos($class, '\\__CG__\\');
+        if (false !== $proxyMarker) {
+            $class = substr($class, $proxyMarker + \strlen('\\__CG__\\'));
+        }
         $settingsByType = $this->settingsByType[$block->getType() ?? ''] ?? [];
         $settingsByClass = $this->settingsByClass[$class] ?? [];
         $optionsResolver->setDefaults(array_merge($settingsByType, $settingsByClass));
