@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.6.0](https://github.com/sonata-project/SonataBlockBundle/compare/5.5.0...5.6.0) - 2026-11-21
+### Removed
+- [[#1263](https://github.com/sonata-project/SonataBlockBundle/pull/1263)] Dependency on `doctrine/common` ([@andreybolonin](https://github.com/andreybolonin))
+- [[#1262](https://github.com/sonata-project/SonataBlockBundle/pull/1262)] Support for Symfony 7.3 and 8.0 ([@dmaicher](https://github.com/dmaicher))
+
 ## [5.5.0](https://github.com/sonata-project/SonataBlockBundle/compare/5.4.0...5.5.0) - 2026-10-02
 ### Added
 - [[#1253](https://github.com/sonata-project/SonataBlockBundle/pull/1253)] Support for `doctrine/collections` 3 ([@dmaicher](https://github.com/dmaicher))
