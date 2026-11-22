@@ -60,6 +60,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set('sonata.block.templating.helper', BlockHelper::class)
         ->tag('twig.runtime')
+        ->tag('kernel.reset', ['method' => 'reset'])
         ->args([
             service('sonata.block.renderer'),
             service('sonata.block.context_manager'),
