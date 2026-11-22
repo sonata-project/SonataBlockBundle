@@ -72,6 +72,7 @@ final class SonataBlockExtension extends Extension
         $loader->load('commands.php');
 
         $this->configureBlockContainers($container, $config);
+        $this->configureTemplateBlock($container, $config);
         $this->configureContext($container, $config);
         $this->configureLoaderChain($container, $config);
         $this->configureForm($container, $config);
@@ -104,6 +105,21 @@ final class SonataBlockExtension extends Extension
         $container->setParameter('sonata.block.container.types', $config['container']['types']);
 
         $container->getDefinition('sonata.block.form.type.container_template')->replaceArgument(0, $config['container']['templates']);
+    }
+
+    /**
+     * Restricts the templates of the template block to the configured ones, if any.
+     *
+     * @param array<string, mixed> $config
+     */
+    private function configureTemplateBlock(ContainerBuilder $container, array $config): void
+    {
+        $templates = [];
+        foreach ($config['blocks']['sonata.block.service.template']['templates'] ?? [] as $template) {
+            $templates[$template['name']] = $template['template'];
+        }
+
+        $container->getDefinition('sonata.block.service.template')->setArgument(1, $templates);
     }
 
     /**
