@@ -41,4 +41,21 @@ final class RecursiveBlockIteratorIteratorTest extends TestCase
 
         static::assertCount(4, $blocks);
     }
+
+    public function testCyclicBlocksAreNotIteratedForever(): void
+    {
+        $block1 = new Block();
+        $block2 = new Block();
+        $block1->addChild($block2);
+        $block2->addChild($block1);
+
+        $steps = 0;
+        $iterator = new RecursiveBlockIteratorIterator([$block1]);
+        // the step limit is a safety net, so the test does not run forever when the cycle is not detected
+        for ($iterator->rewind(); $iterator->valid() && $steps <= 100; $iterator->next()) {
+            ++$steps;
+        }
+
+        static::assertLessThan(10, $steps);
+    }
 }

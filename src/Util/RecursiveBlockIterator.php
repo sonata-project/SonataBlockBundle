@@ -24,6 +24,13 @@ use Sonata\BlockBundle\Model\BlockInterface;
 final class RecursiveBlockIterator extends \RecursiveArrayIterator
 {
     /**
+     * Object ids of the parent blocks of the current level, used to detect cycles.
+     *
+     * @var list<int>
+     */
+    private array $ancestors = [];
+
+    /**
      * @param ReadableCollection<int, BlockInterface>|array<BlockInterface> $array
      */
     public function __construct($array)
@@ -43,7 +50,10 @@ final class RecursiveBlockIterator extends \RecursiveArrayIterator
         $current = $this->current();
         \assert(null !== $current);
 
-        return new self($current->getChildren());
+        $children = new self($current->getChildren());
+        $children->ancestors = [...$this->ancestors, spl_object_id($current)];
+
+        return $children;
     }
 
     public function hasChildren(): bool
@@ -51,6 +61,7 @@ final class RecursiveBlockIterator extends \RecursiveArrayIterator
         $current = $this->current();
         \assert(null !== $current);
 
-        return $current->hasChild();
+        // do not descend into a block that is one of its own ancestors, it would never end
+        return $current->hasChild() && !\in_array(spl_object_id($current), $this->ancestors, true);
     }
 }

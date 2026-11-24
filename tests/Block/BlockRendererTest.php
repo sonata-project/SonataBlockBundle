@@ -17,10 +17,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Sonata\BlockBundle\Block\BlockContext;
+use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\BlockRenderer;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 use Sonata\BlockBundle\Block\Service\BlockServiceInterface;
 use Sonata\BlockBundle\Exception\Strategy\StrategyManagerInterface;
+use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -122,5 +124,59 @@ final class BlockRendererTest extends TestCase
         $result = $this->renderer->render($blockContext);
 
         static::assertSame($response, $result, 'Should return the response provider by the exception manager');
+    }
+
+    public function testBlockRenderedInsideItselfIsStopped(): void
+    {
+        $calls = 0;
+        $service = static::createStub(BlockServiceInterface::class);
+        $service->method('execute')->willReturnCallback(function (BlockContextInterface $blockContext) use (&$calls): Response {
+            // safety net, so the test does not crash when the recursion is not stopped
+            if (++$calls > 20) {
+                throw new \LogicException('Recursion was not stopped.');
+            }
+
+            return new Response('outer '.$this->renderer->render($blockContext)->getContent());
+        });
+        $this->blockServiceManager->expects(static::once())->method('get')->willReturn($service);
+        $this->logger->expects(static::once())->method('error');
+
+        $this->exceptionStrategyManager->expects(static::once())->method('handleException')
+            ->willReturn(new Response('stopped'));
+
+        $block = new Block();
+        $block->setType('test.block');
+
+        $response = $this->renderer->render(new BlockContext($block, ['template' => 'fake_template']));
+
+        static::assertSame(1, $calls);
+        static::assertSame('outer stopped', $response->getContent());
+    }
+
+    public function testDeeplyNestedBlocksAreStopped(): void
+    {
+        $calls = 0;
+        $service = static::createStub(BlockServiceInterface::class);
+        $service->method('execute')->willReturnCallback(function () use (&$calls): Response {
+            // safety net, so the test does not crash when the nesting is not limited
+            if (++$calls > 500) {
+                throw new \LogicException('Nesting was not limited.');
+            }
+
+            // every level renders a new block object, e.g. blocks created from an array configuration
+            $child = new Block();
+            $child->setType('test.block');
+
+            return $this->renderer->render(new BlockContext($child, ['template' => 'fake_template']));
+        });
+        $this->blockServiceManager->expects(static::exactly(50))->method('get')->willReturn($service);
+        $this->exceptionStrategyManager->expects(static::once())->method('handleException')->willReturn(new Response());
+        $this->logger->expects(static::once())->method('error');
+
+        $block = new Block();
+        $block->setType('test.block');
+        $this->renderer->render(new BlockContext($block, ['template' => 'fake_template']));
+
+        static::assertSame(50, $calls);
     }
 }
