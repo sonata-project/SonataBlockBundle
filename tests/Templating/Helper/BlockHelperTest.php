@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Tests\Templating\Helper;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Block\BlockContextManagerInterface;
@@ -22,6 +23,7 @@ use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Templating\Helper\BlockHelper;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class BlockHelperTest extends TestCase
@@ -62,5 +64,51 @@ final class BlockHelperTest extends TestCase
         $helper = new BlockHelper($blockRenderer, $blockContextManager, $eventDispatcher);
 
         static::assertSame('<span>test</span>', $helper->renderEvent('my.event'));
+    }
+
+    /**
+     * @return iterable<string, array{int|string|null, int|string|null}>
+     */
+    public static function provideNestedBlocksAreTracedCases(): iterable
+    {
+        yield 'blocks without id' => [null, null];
+        yield 'blocks with the same id' => [5, 5];
+        yield 'blocks with different ids' => [1, 2];
+    }
+
+    #[DataProvider('provideNestedBlocksAreTracedCases')]
+    public function testNestedBlocksAreTraced(int|string|null $parentId, int|string|null $childId): void
+    {
+        $parent = new Block();
+        $parent->setType('parent');
+        $child = new Block();
+        $child->setType('child');
+        if (null !== $parentId) {
+            $parent->setId($parentId);
+        }
+        if (null !== $childId) {
+            $child->setId($childId);
+        }
+
+        $blockContextManager = static::createStub(BlockContextManagerInterface::class);
+        $blockContextManager->method('get')->willReturnCallback(
+            static fn (BlockInterface $block): BlockContext => new BlockContext($block)
+        );
+
+        $blockRenderer = static::createStub(BlockRendererInterface::class);
+        $helper = new BlockHelper($blockRenderer, $blockContextManager, static::createStub(EventDispatcherInterface::class), new Stopwatch());
+
+        $blockRenderer->method('render')->willReturnCallback(
+            static function (BlockContext $blockContext) use ($helper, $child): Response {
+                // the parent renders its child, like a container block does in its template
+                if ('parent' === $blockContext->getBlock()->getType()) {
+                    return new Response('parent('.$helper->render($child).')');
+                }
+
+                return new Response('child');
+            }
+        );
+
+        static::assertSame('parent(child)', $helper->render($parent));
     }
 }

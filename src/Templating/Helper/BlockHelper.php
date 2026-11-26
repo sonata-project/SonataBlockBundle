@@ -51,11 +51,21 @@ class BlockHelper
     private array $assets = ['css' => [], 'js' => []];
 
     /**
-     * @var array<StopwatchEvent|array<string, mixed>>
+     * @var array<array<string, mixed>>
      *
-     * @phpstan-var array<StopwatchEvent|Trace>
+     * @phpstan-var array<Trace>
      */
     private array $traces = [];
+
+    /**
+     * Stopwatch events of the blocks that are currently being rendered, the innermost block last.
+     *
+     * A stack is used instead of indexing the events by block id, because nested blocks can share
+     * the same id (e.g. blocks that are not saved yet have no id at all).
+     *
+     * @var list<StopwatchEvent>
+     */
+    private array $runningTraces = [];
 
     /**
      * @var array<string, mixed>
@@ -163,10 +173,12 @@ class BlockHelper
             $stats = $this->startTracing($blockContext->getBlock());
         }
 
-        $response = $this->blockRenderer->render($blockContext);
-
-        if (null !== $stats) {
-            $this->stopTracing($blockContext->getBlock(), $stats);
+        try {
+            $response = $this->blockRenderer->render($blockContext);
+        } finally {
+            if (null !== $stats) {
+                $this->stopTracing($blockContext->getBlock(), $stats);
+            }
         }
 
         return (string) $response->getContent();
@@ -189,7 +201,7 @@ class BlockHelper
      */
     private function stopTracing(BlockInterface $block, array $stats): void
     {
-        $event = $this->traces[$block->getId() ?? ''];
+        $event = array_pop($this->runningTraces);
         if (!$event instanceof StopwatchEvent) {
             throw new \InvalidArgumentException(
                 \sprintf('The block %s has no stopwatch event to stop.', $block->getId() ?? '')
@@ -253,7 +265,7 @@ class BlockHelper
     private function startTracing(BlockInterface $block): array
     {
         if (null !== $this->stopwatch) {
-            $this->traces[$block->getId() ?? ''] = $this->stopwatch->start(
+            $this->runningTraces[] = $this->stopwatch->start(
                 \sprintf(
                     '%s (id: %s, type: %s)',
                     $block->getName() ?? '',
