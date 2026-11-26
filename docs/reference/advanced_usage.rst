@@ -25,3 +25,16 @@ Empty block
 
 By default, the loader interface expects the exception ``Sonata\BlockBundle\Exception\BlockNotFoundException`` if a block is not found.
 Return an empty block from your loader class if the default behavior for your blocks is to always return content.
+
+Disabled blocks
+---------------
+
+``SonataBlockBundle`` does not check the ``enabled`` flag of a block. ``sonata_block_render`` renders a
+block even if ``BlockInterface::getEnabled()`` returns ``false``, and the default container template
+also renders disabled children.
+
+If you store blocks and use the flag to hide them (for example for drafts), you have to check it yourself
+before rendering, like ``SonataPageBundle`` does in its own render helper.
+
+Keep in mind that a new ``Sonata\BlockBundle\Model\Block`` is disabled by default. Blocks you create in
+code, for example in an event listener, are rendered anyway.
