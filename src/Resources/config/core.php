@@ -65,6 +65,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             service('sonata.block.context_manager'),
             service('event_dispatcher'),
             service('debug.stopwatch')->nullOnInvalid(),
+            service('sonata.block.exception.strategy.manager'),
+            service('logger')->nullOnInvalid(),
         ]);
 
     $services->set('sonata.block.loader.chain', BlockLoaderChain::class)
