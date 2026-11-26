@@ -183,6 +183,19 @@ class BlockHelper
     }
 
     /**
+     * Clears the state collected during a request.
+     *
+     * Called through the "kernel.reset" tag, so long-running processes (FrankenPHP worker mode,
+     * RoadRunner, Messenger workers, ...) don't keep the traces of all previous requests in memory.
+     */
+    public function reset(): void
+    {
+        $this->assets = ['css' => [], 'js' => []];
+        $this->traces = [];
+        $this->eventTraces = [];
+    }
+
+    /**
      * @param array<string, mixed> $stats
      *
      * @phpstan-param Trace $stats
