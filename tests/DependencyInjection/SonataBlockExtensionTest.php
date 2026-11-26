@@ -40,6 +40,24 @@ final class SonataBlockExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('sonata.block.service.menu');
     }
 
+    public function testTemplateBlockGetsConfiguredTemplates(): void
+    {
+        $this->setParameter('kernel.bundles', []);
+        $this->load(['blocks' => [
+            'sonata.block.service.template' => [
+                'templates' => [
+                    ['name' => 'Teaser', 'template' => '@App/Block/teaser.html.twig'],
+                    ['name' => 'Banner', 'template' => '@App/Block/banner.html.twig'],
+                ],
+            ],
+        ]]);
+
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument('sonata.block.service.template', 1, [
+            'Teaser' => '@App/Block/teaser.html.twig',
+            'Banner' => '@App/Block/banner.html.twig',
+        ]);
+    }
+
     protected function getContainerExtensions(): array
     {
         return [

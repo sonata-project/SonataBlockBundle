@@ -6,6 +6,10 @@
         <source>sonata.block.menu.not_existing</source>
         <target>Menü %name% ist nicht vorhanden.</target>
       </trans-unit>
+      <trans-unit id="sonata.block.template.not_allowed">
+        <source>sonata.block.template.not_allowed</source>
+        <target>Dieses Template ist für diesen Block nicht verfügbar.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
