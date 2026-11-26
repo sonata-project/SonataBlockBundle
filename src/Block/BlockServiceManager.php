@@ -147,12 +147,9 @@ final class BlockServiceManager implements BlockServiceManagerInterface
             if ($blockService instanceof EditableBlockService) {
                 $blockService->validate($errorElement, $block);
             }
-
+        } finally {
+            // also reset the flag on \Error (e.g. a TypeError), otherwise all following validations are skipped
             $this->inValidate = false;
-        } catch (\Exception $exception) {
-            $this->inValidate = false;
-
-            throw $exception;
         }
     }
 

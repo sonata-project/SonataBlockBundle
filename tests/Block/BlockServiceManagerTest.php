@@ -16,8 +16,11 @@ namespace Sonata\BlockBundle\Tests\Block;
 use PHPUnit\Framework\TestCase;
 use Sonata\BlockBundle\Block\BlockServiceManager;
 use Sonata\BlockBundle\Block\Service\BlockServiceInterface;
+use Sonata\BlockBundle\Block\Service\EditableBlockService;
 use Sonata\BlockBundle\Exception\BlockServiceNotFoundException;
+use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\DependencyInjection\Container;
 
 final class BlockServiceManagerTest extends TestCase
@@ -105,5 +108,40 @@ final class BlockServiceManagerTest extends TestCase
         $manager->add('foo.bar', $service, ['bar']);
 
         static::assertSame([], $manager->getServicesByContext('fake', false));
+    }
+
+    public function testValidationStillWorksAfterAnError(): void
+    {
+        $failingService = static::createStubForIntersectionOfInterfaces([BlockServiceInterface::class, EditableBlockService::class]);
+        $failingService->method('validate')->willThrowException(new \TypeError('Simulated type error in validate()'));
+
+        $service = $this->createMockForIntersectionOfInterfaces([BlockServiceInterface::class, EditableBlockService::class]);
+        $service->expects(static::exactly(2))->method('validate');
+
+        $manager = new BlockServiceManager(new Container(), []);
+        $manager->add('failing', $failingService);
+        $manager->add('service', $service);
+
+        $errorElement = (new \ReflectionClass(ErrorElement::class))->newInstanceWithoutConstructor();
+
+        $manager->validate($errorElement, self::createBlock('service'));
+
+        try {
+            $manager->validate($errorElement, self::createBlock('failing'));
+            static::fail('The error of the block service should be thrown.');
+        } catch (\TypeError) {
+        }
+
+        // this block must still be validated, even after the error above
+        $manager->validate($errorElement, self::createBlock('service'));
+    }
+
+    private static function createBlock(string $type): Block
+    {
+        $block = new Block();
+        $block->setId(1);
+        $block->setType($type);
+
+        return $block;
     }
 }
