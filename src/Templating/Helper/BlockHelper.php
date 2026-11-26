@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace Sonata\BlockBundle\Templating\Helper;
 
+use Psr\Log\LoggerInterface;
 use Sonata\BlockBundle\Block\BlockContextManagerInterface;
 use Sonata\BlockBundle\Block\BlockRendererInterface;
 use Sonata\BlockBundle\Event\BlockEvent;
+use Sonata\BlockBundle\Exception\Strategy\StrategyManagerInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface as EventDispatcherComponentInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -70,6 +72,8 @@ class BlockHelper
         private BlockContextManagerInterface $blockContextManager,
         private EventDispatcherInterface $eventDispatcher,
         private ?Stopwatch $stopwatch = null,
+        private ?StrategyManagerInterface $exceptionStrategyManager = null,
+        private ?LoggerInterface $logger = null,
     ) {
     }
 
@@ -155,7 +159,24 @@ class BlockHelper
      */
     public function render(string|array|BlockInterface $block, array $options = []): string
     {
-        $blockContext = $this->blockContextManager->get($block, $options);
+        try {
+            $blockContext = $this->blockContextManager->get($block, $options);
+        } catch (\Throwable $exception) {
+            // A stored block can be broken (e.g. its block service was removed). Handle it like any other
+            // error of a block instead of failing the whole page. Blocks configured in a template are
+            // written by developers, their errors are still thrown.
+            if (!$block instanceof BlockInterface || null === $this->exceptionStrategyManager) {
+                throw $exception;
+            }
+
+            $this->logger?->error(\sprintf(
+                '[cms::renderBlock] block.id=%s - error while loading block - %s',
+                $block->getId() ?? '',
+                $exception->getMessage()
+            ), ['exception' => $exception]);
+
+            return (string) $this->exceptionStrategyManager->handleException($exception, $block)->getContent();
+        }
 
         $stats = null;
 
